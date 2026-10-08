@@ -35,11 +35,39 @@
     },
     {
       "id": "L-09",
-      "item": "Fold CIs use five folds (t, df 4). They are wide (about \u00b10.007 at q=0.02), so differences of ~0.001 between arms are not resolved."
+      "item": "Fold CIs use five folds (t, df 4). They are wide (about ±0.007 at q=0.02), so differences of ~0.001 between arms are not resolved."
     },
     {
       "id": "L-10",
       "item": "Protocol deviation: this lane built its own copies of the validator (now deleted, replaced by the template's scripts/validate_submission.py) and of the writer and metric (src/gems53/core.py). The shared template's src/submission_io.py and scripts/validate_submission.py are the reference. Reconciliation of core.py to the template is not finished (remaining work)."
+    },
+    {
+      "id": "L-11",
+      "item": "No organizer score exists for any file in this repository. Nothing here is ORGANIZER-CONFIRMED, and no leaderboard data was re-read this session (DrivenData Terms of Use: no scraping or monitoring without prior consent)."
+    },
+    {
+      "id": "L-12",
+      "item": "Budget: three experiments (E1 design-A exploration, E2 design-B selection and confirmation, E3 build). H2 (magnetic ridges), H5 (thermal and paleo-geothermal evidence) and H6 (regional trend prior) are untested. Remaining work, not claims."
+    },
+    {
+      "id": "L-13",
+      "item": "Holdout truth is the catalogue (proximity-dominated, IR-53-24). A non-catalogue validation population is not available in this session, so holdout gains are upper bounds for new-fault performance, not estimates."
+    },
+    {
+      "id": "L-14",
+      "item": "Egress allow-list (github.com, codeload, api.github.com, pypi.org, files.pythonhosted.org, registry.npmjs.org). USGS, ScienceBase, OSTI, GDR and DrivenData are not reachable; external layers come only from GitHub mirrors with pinned commits."
+    },
+    {
+      "id": "L-15",
+      "item": "Compute: 2 vCPU, 3.9 GB RAM, no GPU. The shared template's CNN pipeline was not run; every model here is a gradient-boosted classifier on 19 bands (plus H1 where stated)."
+    },
+    {
+      "id": "L-16",
+      "item": "One negative-sampling seed (53) and one model configuration. Fold CIs describe fold-to-fold spread only, not seed-to-seed Monte-Carlo variance."
+    },
+    {
+      "id": "L-17",
+      "item": "Uniqueness is checked against the GEMSDOE* repositories as they stood on 2026-10-08 (tips at fetch time). Later submissions by other teams are not covered."
     }
   ]
 }

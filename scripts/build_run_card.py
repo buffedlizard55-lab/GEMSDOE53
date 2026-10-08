@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Compose the RUN CARD (protocol item 5) from the evidence JSON files. No numbers are typed in by hand.
+"""Compose evidence/run_card.json (one JSON run card) from the evidence files. No number is typed by hand.
 
-Writes evidence/run_card.json. Labels follow protocol item 3:
-  HOLDOUT-DTI  = our own hide-and-recover proxy (evaluator version, withheld positives, 95% CI)
-  ORGANIZER-CONFIRMED = only from a submission-page receipt (none exists in this repo yet)
+Reads: evidence/e1_h1_thin_holdout.json (design A, reference), evidence/e2_leakfree_holdouts.json (design B),
+evidence/candidate_<name>.json (E3 receipt, name from docs/submissions/CURRENT.json),
+evidence/uniqueness_gate_<name>.json, evidence/gemsdoe32_measured.json, registry/*.json, evidence/timeline.txt.
 """
 from __future__ import annotations
 
@@ -14,111 +14,138 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def load(p):
-    return json.loads(Path(p).read_text())
+def J(rel):
+    return json.loads((ROOT / rel).read_text())
 
 
 def main() -> int:
-    exp1 = load(ROOT / "evidence" / "exp1_leakage_canary.json")
-    exp2 = load(ROOT / "evidence" / "exp2_holdout_arms.json")
-    chosen = load(ROOT / "evidence" / "selection.json")
-    receipt = load(ROOT / "evidence" / "candidates" / f"{chosen['submission_name']}.receipt.json")
-    tmpl_log = (ROOT / "evidence" / "candidates" / "template_validator_nan.txt").read_text()
-    overlap = load(ROOT / "evidence" / "overlap_baseline.json")
-    uniq = load(ROOT / "evidence" / "uniqueness_check.json")
+    cur = J("docs/submissions/CURRENT.json")
+    e1 = J("evidence/e1_h1_thin_holdout.json")
+    e2 = J("evidence/e2_leakfree_holdouts.json")
+    e3 = J(cur["receipt"])
+    gate = J(f"evidence/uniqueness_gate_{cur['name']}.json")
+    g32 = J("evidence/gemsdoe32_measured.json")
+    irr = J("registry/irregularities.json")["items"]
+    lim = J("registry/limitations.json")["items"]
+    sp = e2.get("spatial_confirmation", {})
+    stage1 = e2.get("segment_selection", {})
+    base_B = e2["baseline_design_B"]
+    cd = e2["canary_design_B"]
+    variants = e2["segment_folds"]["variants"]
 
-    arm, q = chosen["arm"], chosen["q"]
-    pooled = exp2["arms"][arm]["pooled"][str(q)]
-    prim = receipt["files"][f"{chosen['submission_name']}-nan.tif"]
+    def v(name):
+        return variants.get(name)
+
     card = {
-        "schema": "gems53.run_card.v1",
-        "lane": "GEMSDOE29 leakage diagnosis + leak-free learn-predict separation",
-        "hypothesis": ("Distance-to-known-faults features built from the training labels leak the target "
-                       "(a deterministic label function). Recomputing them with learn-predict separation and "
-                       "scoring with whole-segment hide-and-recover removes the inflation without losing "
-                       "the legitimate spatial signal."),
-        "mechanism": ("Feature = log1p(min(distance to known-fault pixels, 60)). Built from the same labels it is "
-                      "trained on, it is exactly 0 on every positive (Exp 1: 60,988/60,988) and >= 0.6931 (distance >= 1 px) on background, "
-                      "so separability is 1.0."),
-        "named_non_fault_process_that_could_mimic_it": (
-            "Mapping bias: the catalogue traces faults that were already mapped, so proximity to a mapped trace "
-            "reflects where mappers worked (survey density, road access, outcrop), not where faults are. "
-            "This is a non-fault process that the holdout cannot separate from fault signal."),
+        "schema": "gems53.run_card.v2",
+        "session_branch": "arena/0efb644e-gemsdoe53",
+        "date_utc": e3["finished_utc"][:10],
+        "lane": "Formal diagnosis of GEMSDOE29 catalogue-distance leakage; one unique candidate under the parallel-run protocol",
+        "pre_registration": {"file": "docs/research/preregistration-2026-10-08.md",
+                             "amendment": "DEV-1 (section 8), written before the design-B run"},
         "budget": {
-            "experiments": 3,
-            "note": ("Exp 2 was re-run once on a corrected footprint (IR-53-05). The discarded run is not reported "
-                     "as a result. Wall-clock time was not logged precisely; the 2-hour guardrail was likely exceeded (disclosed, not hidden)."),
+            "experiments_limit": 3,
+            "experiments_used": 3,
+            "experiments": ["E1 design A (exploration, stopped as a design error)",
+                            "E2 design B (stage 1 selection on segment folds; stage 2 spatial confirmation)",
+                            "E3 build, validation, uniqueness and label (not a holdout experiment)"],
+            "wall_clock_limit_hours": 2,
+            "experiment_start_utc": e1.get("started_utc"),
+            "experiment_end_utc": e3["finished_utc"],
+            "note": "wall clock is read from the experiment receipts (started_utc, finished_utc), not estimated",
+        },
+        "label": e3["label"],
+        "submission": {
+            "name": cur["name"], "file": cur["file"], "sha256": cur["sha256"], "pixel_sha256": cur["pixel_sha256"],
+            "bytes": e3["bytes"], "note": cur["note"], "note_chars": len(cur["note"]),
+            "candidate": cur["spec"], "decision": cur["decision"],
+            "submitted": False, "submission_slot_used": False, "organizer_score": None,
+        },
+        "gates": e3["gates"],
+        "validators": {
+            "template_validate_submission_exit": e3["validators"]["final_template_validate_submission"]["exit"],
+            "template_validate_conformant_exit": e3["validators"]["final_validate_conformant"]["exit"],
+            "inlane": e3["inlane"],
         },
         "holdout": {
-            "label_type": "HOLDOUT-DTI (proxy: withheld known-fault segments; NOT organizer-scored)",
-            "evaluator": exp2["evaluator"],
-            "design": "5 whole-segment folds (seed 53), 1 km buffer, visible faults masked pixel-exactly",
-            "arm": arm,
-            "q_fraction_of_footprint": q,
-            "pooled_DTI": pooled["pooled_DTI"],
-            "per_fold_DTI": pooled["per_fold_DTI"],
-            "CI95_t_df4_on_fold_mean": pooled["CI95_t_df4_on_fold_mean"],
-            "withheld_fault_px_total": pooled["withheld_fault_px_total"],
-            "withheld_segments_total": pooled["n_withheld_segments_total"],
-            "caveat": "Truth is catalogue segments, not new faults. Cannot show a leaderboard gain (IR-53-03).",
-        },
-        "leaky_ablation_for_contrast": {
-            "label_type": "HOLDOUT-DTI (leaky, demonstration only)",
-            "pooled_DTI": exp2["arms"]["leaky_ablate"]["pooled"][str(q)]["pooled_DTI"]
-            if "leaky_ablate" in exp2["arms"] else None,
-        },
-        "correlation_overlap_vs_registry": {
-            "any_drift_flag": uniq["any_drift_flag"],
-            "max_spearman_rho_sample": uniq["max_spearman_rho"],
-            "max_our_dots_within_3px_of_registry_dots": uniq["max_dot_overlap_within_3px"],
-            "registry_files_checked": uniq["n_registry_files"],
-            "thresholds": uniq["thresholds"],
-            "receipt": "evidence/uniqueness_check.json",
-        },
-        "raster_sha256": {
-            "primary_nan_outside": prim["sha256"],
-        },
-        "validator_output": {
-            "shared_template_validator": {
-                "command": "python scripts/validate_submission.py --pred <file> --sample sample_submission.tif --train training_features.tif",
-                "template_repo": "buffedlizard55-lab/GEMSDOE",
-                "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
-                "passed": "Validation PASSED" in tmpl_log,
-                "log": "evidence/candidates/template_validator_nan.txt",
+            "label_type": "HOLDOUT-DTI (proxy: withheld known-fault segments and spatial super-regions; NOT organizer-scored)",
+            "evaluator": {"name": "gems53.core.dti", "version": "1.0.0",
+                          "parity_with_template_src_metrics_py": e1.get("metric_parity_vs_template")},
+            "design_B": {
+                "definition": e2["design"],
+                "baseline_bands_top_q0p02": {"pooled_DTI": base_B["pooled_DTI"], "CI95_t_df4": base_B["CI95"],
+                                             "withheld_positives": base_B["withheld_positives"]},
+                "stage1_selected": stage1.get("selected"),
+                "stage1_selection_rule": stage1.get("rule"),
+                "stage1_qualifying_count": len(stage1.get("qualifying", [])),
+                "stage2": {"status": sp.get("status"), "baseline": sp.get("baseline"),
+                           "selected": sp.get("selected_result"), "paired_difference": sp.get("paired_difference"),
+                           "acceptance": sp.get("acceptance"), "withheld_positives_total": sp.get("withheld_positives_total"),
+                           "withheld_segments_total": sp.get("withheld_segments_total")},
+                "selected_variant_segment_folds": (v(f"{stage1['selected']['arm']}:{stage1['selected']['variant']}")
+                                                   if stage1.get("selected") else None),
             },
-            "in_lane_checks": prim["checks"],
-            "in_lane_counts": prim["counts"],
+            "design_A_reference_not_used_for_decisions": {
+                "reason": "negative pool depended on withheld labels (IR-53-19)",
+                "bands_top_q0p02_pooled_DTI": e1["arms"]["bands"]["top_q0p02"]["pooled_DTI"],
+                "bands_top_q0p02_CI95": e1["arms"]["bands"]["top_q0p02"]["CI95_t_df4_on_fold_mean"],
+                "h1_top_q0p02_pooled_DTI": e1["arms"]["h1"]["top_q0p02"]["pooled_DTI"],
+                "reproduction_of_exp2": e1["reproduction_check_vs_exp2"]["pass"],
+            },
         },
-        "submission": {
-            "name": chosen["submission_name"],
-            "note": chosen["note"],
-            "note_chars": len(chosen["note"]),
-            "file": chosen["files"][0],
-            "status": chosen["status"],
-            "submitted": False,
-            "location_of_files": chosen.get("location"),
+        "leakage": {
+            "canary_design_B": {"bands_max_separability": cd["bands_max_over_all"], "bands_flag": cd["bands_flag"],
+                                "h1_max_separability": cd["h1_max_separability"], "h1_flag": cd["h1_flag"],
+                                "gate": cd["gate"], "background": cd["background"]},
+            "canary_design_A_reference": {"h1_mean": e1["canary_H1_feature_alone"]["separability_mean"],
+                                          "h1_max": e1["canary_H1_feature_alone"]["separability_max"],
+                                          "note": "buffered background (withheld-derived), inflated"},
+            "gemsdoe29": "docs/leakage-review.md (negative verdict; mechanism = full-label distance feature in build_repo_candidate.py)",
         },
-        "overlap_chance_baseline": {
-            "max_lift": overlap["max_lift"],
-            "file": "evidence/overlap_baseline.json",
-            "reading": "lift >> 1 means our dots sit near the other file's dots more than random placement at that density would",
+        "uniqueness": {
+            "thresholds": gate["thresholds"],
+            "registry_unique_on_grid": gate["registry_unique_on_grid"],
+            "registry_skipped": gate["registry_skipped"],
+            "any_drift_flag": gate["any_drift_flag"],
+            "n_flagged": gate["n_flagged"],
+            "max": gate["max"],
+            "top_by_overlap_final": [{k: r[k] for k in r if k in ("file", "overlap_final", "overlap_pre", "rho_final",
+                                                                 "rho_surface", "lift_over_chance", "chance_coverage_footprint",
+                                                                 "reg_dots", "drift_flag")}
+                                     for r in gate["top_by_overlap_final"][:8]],
+            "receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
         },
-        "hypothesis_status": {
-            "H1_segment_exact": "ranked 1, NOT run (budget exhausted before the experiment)",
-            "H2_magnetic_ridges": "not run",
-            "H3_fault_parallel_strain": "not run",
-            "H4_qfaults_label_source": "rejected (rules name USGS quaternary maps as a label source)",
-        },
-        "gemsdoe32_0p2778": "see docs/research/gemsdoe32.md (owner claims, not verified)",
-        "limitations": "registry/limitations.json",
+        "gemsdoe32": {"measured_file": "evidence/gemsdoe32_measured.json",
+                      "nan_variant": {k: g32["files"]["nan"][k] for k in
+                                      ("dots", "dots_within_2px_of_catalogue", "dots_within_3px_of_catalogue",
+                                       "nearest_dot_distance_quantiles_px", "in_catalogue_DTI_diagnostic")},
+                      "zeros_variant_finite_px": g32["files"]["zeros"]["finite_px"],
+                      "score_link": "NOT ESTABLISHED (IR-53-02): no receipt links the 0.2778 row to this file"},
+        "leaderboard_snapshot_repo": {"1": 0.3774, "7": 0.3195, "13": 0.2778,
+                                      "note": "from the repository's earlier snapshot (S2); not re-read this session (IR-53-01)"},
+        "hypotheses": {"file": "docs/research/hypotheses.md",
+                       "H1": "tested (design B, stage 1 and stage 2)", "M1": "thinning tested (design B)",
+                       "H2": "not tested (budget)", "H3": "BLOCKED: strain orientation not in public data (IR-53-22)",
+                       "H4": "rejected (labels)", "H5": "not tested (budget); data present in pinned mirror (S20, S22)",
+                       "H6": "not tested (budget)"},
+        "irregularities_open": [i["id"] for i in irr if str(i.get("status", "")).startswith("open")],
+        "irregularities_total": len(irr),
+        "limitations": [i["id"] for i in lim],
+        "verdict": e3["label"],
         "organizer_score": None,
-        "verdict": chosen["verdict"],
-        "verdict_reason": chosen["verdict_reason"],
+        "files": {"preregistration": "docs/research/preregistration-2026-10-08.md",
+                  "e1": "evidence/e1_h1_thin_holdout.json", "e2": "evidence/e2_leakfree_holdouts.json",
+                  "e3_receipt": cur["receipt"], "uniqueness_receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
+                  "measured_gemsdoe32": "evidence/gemsdoe32_measured.json", "current_submission": "docs/submissions/CURRENT.json",
+                  "tests": "tests/test_h1_thin.py, tests/test_metric.py, tests/test_submission.py"},
+        "environment": {"python": "3.11.2 (venv: numpy 2.4.6, scipy 1.17.1, scikit-learn 1.9.1, rasterio 1.4.4, pyproj 3.7.2)",
+                        "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+                        "jklinck_mirror_commit": "56d78de7a989c12e2dce50cd65a4095df57030d2",
+                        "fetch": "scripts/fetch_data.py (sha256 pins from the template manifest, verified)"},
     }
-    assert len(card["submission"]["note"]) <= 140, "submission note must be at most 140 characters"
     out = ROOT / "evidence" / "run_card.json"
-    out.write_text(json.dumps(card, indent=2))
-    print("wrote", out, "| verdict:", card["verdict"])
+    out.write_text(json.dumps(card, indent=2, default=str))
+    print("wrote", out, len(out.read_text()), "bytes")
     return 0
 
 

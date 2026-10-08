@@ -144,6 +144,78 @@
       "subject": "Hypothesis H1 was pre-registered but not run",
       "detail": "The top-ranked hypothesis needed a 4th experiment, beyond the 3-experiment budget.",
       "action": "Decide whether to spend budget on H1 before any new candidate is built."
+    },
+    {
+      "id": "IR-53-19",
+      "severity": "high",
+      "status": "open-corrected",
+      "subject": "Negative-pool side channel in the design-A holdout (exp2 and E1)",
+      "detail": "The design-A training pool was fp & ~cat & ~buf, and the 10 px buffer is defined from the WITHHELD faults. The buffer removed 371,176 to 390,883 negative pixels per fold (7.3% to 7.6% of the pool), all within 10 px of a withheld fault. Measured effect on fold 0 of the bands top-q 0.02 arm: 0.0266 (design A) vs 0.0106 (design B). The design-A H1 canary used the same buffered background, so its separability is also inflated. This is the pattern the GEMSDOE29 audit flagged (docs/leakage-review.md).",
+      "action": "Corrected to design B (negatives = every footprint pixel that is not a visible fault). Pre-registration amendment DEV-1 (docs/research/preregistration-2026-10-08.md section 8) is committed before the design-B run. Design-A numbers (evidence/exp2_holdout_arms.json, evidence/e1_h1_thin_holdout.json) are kept as reference only and are not used for any decision."
+    },
+    {
+      "id": "IR-53-20",
+      "severity": "high",
+      "status": "open",
+      "subject": "Verbatim user prompt is not stored in the workspace",
+      "detail": "README.md states that the verbatim user message is not stored. This session has only a condensed record of the requirements. The README requirements block is therefore recorded in the user's terms and is not a verbatim copy.",
+      "action": "Not fabricated. The user should paste the verbatim prompt into README.md (section 'Verbatim prompt'). Until then the README says so explicitly."
+    },
+    {
+      "id": "IR-53-21",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Protocol names two shared tools that do not exist in the template",
+      "detail": "The parallel-run protocol names evaluate_holdout.py and submission_writer.py. At template commit dcbbb19 (fetched 2026-10-08) neither file exists. The nearest shared tools are src/blocks.py with scripts/block_holdout_eval.py (holdout), src/submission_io.py (writer), scripts/validate_submission.py and python -m src.submission_io validate-conformant (validators), and src/metrics.py (DTI).",
+      "action": "Mapping recorded in the pre-registration section 3. This session imports the template modules by file path and does not copy them. Any fix belongs in the template, not in a fork."
+    },
+    {
+      "id": "IR-53-22",
+      "severity": "high",
+      "status": "open",
+      "subject": "H3 (fault-parallel strain orientation) is not testable with the public strain data",
+      "detail": "The geodetic strain CSV in the INGENIOUS mirror (jklinck/geothermal_research commit 56d78de7, geodetics_INGENIOUS_regional_data/geodetic_strain_rate_csv.csv) has only the columns long_wgs84, lat_wgs84, second_inv_strainrate_10e-9, dilationrate_10e-9, shearrate_10e-9. The NBMG README gives the principal rates and derived scalars only. Orientation needs the full tensor or the principal azimuths, which are not in the stack or in this CSV.",
+      "action": "H3 is marked BLOCKED in docs/research/hypotheses.md. Retrieving the tensor would need the NBMG or GDR submission 1391, which the sandbox cannot reach (egress allow-list)."
+    },
+    {
+      "id": "IR-53-23",
+      "severity": "medium",
+      "status": "open",
+      "subject": "GEMSDOE32 'zeros' variant fills the whole grid with 0 (not NaN outside the footprint)",
+      "detail": "Measured on the registry copy of gemsdoe32-h33-h33-2-b2 (zeros variant): 12,279,160 finite pixels, the whole 3730 x 3292 grid. The rules say outside the bounds must be null or NaN. The NaN variant of the same file has 5,167,373 finite pixels (the footprint). Which variant the owner submitted is unknown (no receipt, IR-53-02).",
+      "action": "Recorded as a fact about the registry file. No claim is made about the portal outcome of the zeros variant."
+    },
+    {
+      "id": "IR-53-24",
+      "severity": "high",
+      "status": "open",
+      "subject": "The holdout rewards proximity to visible catalogue faults; the target is new faults",
+      "detail": "Withheld faults are catalogue faults. The H1 feature (distance to visible faults) has single-feature separability 0.77 under design B (fold 0 = 0.768), so the holdout rewards proximity to known faults. The competition scores faults absent from the public catalogue (problem page; IR-53-03, IR-53-08). Gains on this proxy may not carry over, and the competition's new faults may be systematically farther from known faults.",
+      "action": "Flagged in every holdout number. No leaderboard or organizer claim is made. A non-catalogue validation population is listed as remaining work (docs/research/hypotheses.md, L-12)."
+    },
+    {
+      "id": "IR-53-25",
+      "severity": "medium",
+      "status": "resolved-by-rebuild",
+      "subject": "The uniqueness registry used by the previous receipt is not on disk and was incomplete",
+      "detail": "The earlier receipt compared 138 files from /tmp, which no longer exists. This session rebuilt the registry from the GEMSDOE* repositories at their default-branch tips (63 repositories, 907 .tif entries, 628 unique sha256, 621 unique on the official grid). Per-file sha256 values are recorded in evidence/uniqueness_gate_*.json.",
+      "action": "The earlier 138-file receipt is superseded for the new candidate. The rebuilt registry is not committed (it is about 1.3 GB). The fetch script is in the run card."
+    },
+    {
+      "id": "IR-53-26",
+      "severity": "low",
+      "status": "open",
+      "subject": "INGENIOUS 2 m temperature-probe data licence is not stated in its README",
+      "detail": "The mirror README for 2m_temperature_probe_INGENIOUS_regional_data describes the columns and the survey groups but gives no licence. The INGENIOUS dataset is listed as CC BY 4.0 by the template data catalogue (GDR submission 1391), but that licence was not verified for this sub-file.",
+      "action": "Verify the licence before any use beyond internal analysis (rules: data must permit use and sharing with the sponsor)."
+    },
+    {
+      "id": "IR-53-27",
+      "severity": "high",
+      "status": "resolved-with-superseded-record",
+      "subject": "E2 stage-2 baseline computed from the selected arm's model (code bug, first design-B run)",
+      "detail": "When the stage-1 selection is the h1 arm, the first design-B run computed the stage-2 'baseline' (pre-registered: bands top-q 0.02 from the bands model) from the h1 model. The run's stage-2 acceptance was therefore a comparison of two h1 variants, not the pre-registered comparison. Stage 1 of that run is valid. The bug was found by reading the code before any stage-2 result was used.",
+      "action": "Fixed in scripts/e2_leakfree_holdouts.py (run_stage2 / fit_predict_fold). Stage 2 re-run with --stage2-only. The buggy stage-2 output is kept as evidence/superseded/e2_stage2_BUGGY_baseline_from_h1_model.json and is not used for any label. Logged as DEV-1b (pre-registration section 9)."
     }
   ]
 }

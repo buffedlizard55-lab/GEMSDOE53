@@ -118,3 +118,13 @@ negative-pool side channel that the GEMSDOE29 audit flagged (docs/leakage-review
   are the two holdout experiments. E3 is the build. The 3-experiment limit is respected.
 - Removed: `scripts/e2_spatial_block_confirm.py` (design A, written but never run) is deleted in the same commit. Its
   content is superseded by `scripts/e2_leakfree_holdouts.py`.
+
+## 9. Deviation log
+
+- **DEV-1 (section 8):** negative pool changed from design A to design B before any design-B run. Recorded and committed.
+- **DEV-1b (bug fix, no rule change):** the first design-B run computed the stage-2 baseline from the selected arm's model.
+  When the selected arm is h1, that is not the pre-registered baseline (bands top-q 0.02 from the bands model). The first
+  run's stage-2 output is kept, labelled superseded, in `evidence/superseded/e2_stage2_BUGGY_baseline_from_h1_model.json`.
+  Stage 1 of that run is valid and is reused unchanged. Stage 2 was re-run with the corrected code
+  (`python scripts/e2_leakfree_holdouts.py --stage2-only`). The rule, the fold design and the acceptance rule are unchanged.
+  Logged as IR-53-27.

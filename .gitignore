@@ -4,3 +4,7 @@ __pycache__/
 *.tif
 *.tiff
 *.zip
+
+# Submission files shipped on purpose (explicit exception, session 2026-10-08): the GEMS53 candidate
+!docs/submissions/
+!docs/submissions/*.tif

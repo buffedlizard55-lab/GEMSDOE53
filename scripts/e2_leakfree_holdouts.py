@@ -126,6 +126,8 @@ def main() -> int:
     ap.add_argument("--template-root", default="/tmp/gems-template")
     ap.add_argument("--out", default=str(ROOT / "evidence" / "e2_leakfree_holdouts.json"))
     ap.add_argument("--smoke", action="store_true", help="one fold per stage, few bands (code-path test only)")
+    ap.add_argument("--stage2-only", action="store_true",
+                    help="reuse stage-1 results already in --out and re-run stage 2 (used after the baseline fix)")
     args = ap.parse_args()
     fold_list = [0] if args.smoke else list(range(K_FOLDS))
     band_list = [1, 2] if args.smoke else list(range(1, 20))
@@ -143,6 +145,19 @@ def main() -> int:
         "footprint_px": fp_px,
     }
     L_all, _ = ndimage.label(inp.cat, structure=np.ones((3, 3), dtype=int))
+
+    if args.stage2_only:
+        prev = json.loads(Path(args.out).read_text())
+        report = dict(prev)
+        report["stage2_rerun_utc"] = started
+        selected = report["segment_selection"]["selected"]
+        base = report["segment_folds"]["variants"][f"bands:{BASE_KEY}"]
+        fold_grid = None
+        if selected is None:
+            raise SystemExit("stage 1 selected nothing; nothing to confirm")
+        fold_list = list(range(K_FOLDS))
+        run_stage2(inp, L_all, selected, args, report, fold_list, started, t0)
+        return 0
 
     # ----------------------------------------------------------- Stage 1: segment folds ------------
     fold_grid, n_seg, L = segment_folds(inp.cat, K=K_FOLDS, seed=SEED)
@@ -246,73 +261,82 @@ def main() -> int:
     }
 
     # ----------------------------------------------------------- Stage 2: spatial confirmation ------
+    run_stage2(inp, L_all, selected, args, report, fold_list, started, t0)
+    return 0
+
+
+def run_stage2(inp, L_all, selected, args, report, fold_list, started, t0):
+    """Stage 2 (pre-registered section 5, DEV-1): spatial contiguous super-regions.
+
+    Baseline = bands top-q 0.02 from the BANDS model, always (not from the selected arm's model).
+    Selected = the stage-1 variant from its own arm's model. Both models use the same design-B rules and
+    the same negatives per fold (one generator per arm, advanced identically).
+    """
+    fp_px = int(inp.fp.sum())
     if selected is None:
         report["spatial_confirmation"] = {"status": "NOT RUN: no variant qualified in Stage 1"}
-    else:
-        blocks = load_template_module("blocks", args.template_root)
-        shape = (inp.H, inp.W)
-        tbl = blocks.block_table(shape, BLOCK_PX, valid=inp.fp, labels=inp.cat)
-        fold_of = blocks.assign_folds(tbl, n_folds=K_FOLDS, seed=SEED, mode="contiguous")
-        bid = blocks.block_id_map(shape, BLOCK_PX)
-        cents = ndimage.center_of_mass(inp.cat, L_all, index=np.arange(1, L_all.max() + 1))
-        seg_fold = np.array([fold_of[int(bid[int(round(y)), int(round(x))])] for (y, x) in cents], dtype=np.int64)
-        sp_grid = np.full(inp.cat.shape, -1, dtype=np.int8)
-        m_ = L_all > 0
-        sp_grid[m_] = seg_fold[L_all[m_] - 1].astype(np.int8)
-        part = blocks.describe_partition(shape, BLOCK_PX, K_FOLDS, SEED, tbl, fold_of, buffer_px=10,
-                                         labels=inp.cat, valid=inp.fp, mode="contiguous")
-        sel_arm, sel_name = selected["arm"], selected["variant"]
-        sel_kind = ("top" if sel_name.startswith("top_q") else ("thin_p" if sel_name.startswith("thin_p") else "thin_bin"))
-        sel_q = float(sel_name.rsplit("_q", 1)[1].replace("p", "."))
-        rows = []
-        rng = np.random.default_rng(SEED)
-        for k in fold_list:
-            t1 = time.time()
-            hidden = inp.cat & (sp_grid == k)
-            visible = inp.cat & (sp_grid != k)
-            F, pos_rows, neg_pool_rows, buf = fold_inputs(inp, visible, hidden, L_all, sel_arm)
-            neg_rows = neg_pool_rows[rng.choice(neg_pool_rows.size, min(N_NEG, neg_pool_rows.size), replace=False)]
-            rows_tr = np.r_[pos_rows, neg_rows]
-            y = np.r_[np.ones(pos_rows.size), np.zeros(neg_rows.size)]
-            model = hgb()
-            model.fit(F[rows_tr], y)
-            p_full = np.zeros((inp.H, inp.W), dtype=np.float32)
-            p_full[inp.fp] = predict_chunked(model, F)
-            p_full[visible] = 0.0
-            cand = inp.fp & ~visible
-            want = [("baseline", "top", 0.02), ("selected", sel_kind, sel_q)]
-            res = variants_for(p_full, cand, hidden, inp, fp_px, want)
-            rows.append(dict(fold=k, withheld_px=int(hidden.sum()),
-                             withheld_segments=int(len(np.unique(L_all[hidden]))),
-                             train_pos=int(pos_rows.size), train_neg=int(neg_rows.size),
-                             baseline=res["baseline"], selected=res["selected"]))
-            print(f"[spatial] fold {k}: baseline {res['baseline']['DTI']:.6f} selected "
-                  f"{res['selected']['DTI']:.6f} ({round(time.time() - t1, 1)}s)", flush=True)
-            del p_full, model, F
-        pb, Pb = pooled_from([r["baseline"] for r in rows])
-        ps, Ps = pooled_from([r["selected"] for r in rows])
-        d = np.array([r["selected"]["DTI"] - r["baseline"]["DTI"] for r in rows])
-        m = float(d.mean())
-        half = float(T_CRIT_DF4 * d.std(ddof=1) / np.sqrt(len(d)))
-        lower = m - half
-        report["spatial_confirmation"] = dict(
-            status="COMPLETED",
-            partition={k: part[k] for k in part if k not in ("per_fold_blocks",)} if isinstance(part, dict) else str(part),
-            selected=dict(arm=sel_arm, variant=sel_name),
-            baseline=dict(name="bands top_q0p02 (design B)", pooled_DTI=round(float(pb), 6),
-                          pooled_TP_w=round(Pb["TP_w"], 4), pooled_FP_w=round(Pb["FP_w"], 4),
-                          pooled_FN_w=round(Pb["FN_w"], 4)),
-            selected_result=dict(name=f"{sel_arm} {sel_name}", pooled_DTI=round(float(ps), 6),
-                                 pooled_TP_w=round(Ps["TP_w"], 4), pooled_FP_w=round(Ps["FP_w"], 4),
-                                 pooled_FN_w=round(Ps["FN_w"], 4)),
-            per_fold=rows,
-            paired_difference=dict(mean_fold_diff=round(m, 6), half_width_t_df4=round(half, 6),
-                                   CI95=[round(lower, 6), round(m + half, 6)]),
-            acceptance=dict(rule="accept iff the 95% t-interval lower bound of the paired fold difference is above 0",
-                            accepted=bool(lower > 0)),
-            withheld_positives_total=int(sum(r["withheld_px"] for r in rows)),
-            withheld_segments_total=int(sum(r["withheld_segments"] for r in rows)),
-        )
+        return
+    blocks = load_template_module("blocks", args.template_root)
+    shape = (inp.H, inp.W)
+    tbl = blocks.block_table(shape, BLOCK_PX, valid=inp.fp, labels=inp.cat)
+    fold_of = blocks.assign_folds(tbl, n_folds=K_FOLDS, seed=SEED, mode="contiguous")
+    bid = blocks.block_id_map(shape, BLOCK_PX)
+    cents = ndimage.center_of_mass(inp.cat, L_all, index=np.arange(1, L_all.max() + 1))
+    seg_fold = np.array([fold_of[int(bid[int(round(y)), int(round(x))])] for (y, x) in cents], dtype=np.int64)
+    sp_grid = np.full(inp.cat.shape, -1, dtype=np.int8)
+    m_ = L_all > 0
+    sp_grid[m_] = seg_fold[L_all[m_] - 1].astype(np.int8)
+    part = blocks.describe_partition(shape, BLOCK_PX, K_FOLDS, SEED, tbl, fold_of, buffer_px=10,
+                                     labels=inp.cat, valid=inp.fp, mode="contiguous")
+    sel_arm, sel_name = selected["arm"], selected["variant"]
+    sel_kind = ("top" if sel_name.startswith("top_q") else ("thin_p" if sel_name.startswith("thin_p") else "thin_bin"))
+    sel_q = float(sel_name.rsplit("_q", 1)[1].replace("p", "."))
+    rows = []
+    rng_b = np.random.default_rng(SEED)
+    rng_s = np.random.default_rng(SEED)
+    for k in fold_list:
+        t1 = time.time()
+        hidden = inp.cat & (sp_grid == k)
+        visible = inp.cat & (sp_grid != k)
+        p_b, n_b = fit_predict_fold(inp, visible, hidden, L_all, "bands", rng_b)
+        res_b = variants_for(p_b, inp.fp & ~visible, hidden, inp, fp_px, [("baseline", "top", 0.02)])
+        if sel_arm == "bands":
+            p_s, n_s = p_b, n_b
+        else:
+            p_s, n_s = fit_predict_fold(inp, visible, hidden, L_all, sel_arm, rng_s)
+        res_s = variants_for(p_s, inp.fp & ~visible, hidden, inp, fp_px, [("selected", sel_kind, sel_q)])
+        rows.append(dict(fold=k, withheld_px=int(hidden.sum()),
+                         withheld_segments=int(len(np.unique(L_all[hidden]))),
+                         train_pos=int(n_s["pos"]), train_neg=int(n_s["neg"]),
+                         baseline=res_b["baseline"], selected=res_s["selected"]))
+        print(f"[spatial] fold {k}: baseline(bands top-0.02) {res_b['baseline']['DTI']:.6f} "
+              f"selected({sel_arm} {sel_name}) {res_s['selected']['DTI']:.6f} ({round(time.time() - t1, 1)}s)", flush=True)
+        del p_b, p_s
+    pb, Pb = pooled_from([r["baseline"] for r in rows])
+    ps, Ps = pooled_from([r["selected"] for r in rows])
+    d = np.array([r["selected"]["DTI"] - r["baseline"]["DTI"] for r in rows])
+    m = float(d.mean())
+    half = float(T_CRIT_DF4 * d.std(ddof=1) / np.sqrt(len(d)))
+    lower = m - half
+    report["spatial_confirmation"] = dict(
+        status="COMPLETED",
+        partition={k: part[k] for k in part if k not in ("per_fold_blocks",)} if isinstance(part, dict) else str(part),
+        selected=dict(arm=sel_arm, variant=sel_name),
+        baseline=dict(name="bands top_q0p02 (design B, bands model)", pooled_DTI=round(float(pb), 6),
+                      pooled_TP_w=round(Pb["TP_w"], 4), pooled_FP_w=round(Pb["FP_w"], 4),
+                      pooled_FN_w=round(Pb["FN_w"], 4)),
+        selected_result=dict(name=f"{sel_arm} {sel_name}", pooled_DTI=round(float(ps), 6),
+                             pooled_TP_w=round(Ps["TP_w"], 4), pooled_FP_w=round(Ps["FP_w"], 4),
+                             pooled_FN_w=round(Ps["FN_w"], 4)),
+        per_fold=rows,
+        paired_difference=dict(mean_fold_diff=round(m, 6), half_width_t_df4=round(half, 6),
+                               CI95=[round(lower, 6), round(m + half, 6)]),
+        acceptance=dict(rule="accept iff the 95% t-interval lower bound of the paired fold difference is above 0",
+                        accepted=bool(lower > 0)),
+        withheld_positives_total=int(sum(r["withheld_px"] for r in rows)),
+        withheld_segments_total=int(sum(r["withheld_segments"] for r in rows)),
+        stage2_code="baseline from bands model (fixed after the first run, see run card)",
+    )
     report["status"] = "COMPLETED"
     report["runtime_s"] = round(time.time() - t0, 1)
     report["finished_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
@@ -320,8 +344,22 @@ def main() -> int:
     Path(args.out).write_text(json.dumps(report, indent=2, default=_jsonable))
     print("wrote", args.out, flush=True)
     print(json.dumps({"baseline_B": report["baseline_design_B"], "selection": report["segment_selection"]["selected"],
-                      "spatial": report.get("spatial_confirmation", {}).get("acceptance")}, indent=2, default=_jsonable))
-    return 0
+                      "spatial": report["spatial_confirmation"]["acceptance"]}, indent=2, default=_jsonable))
+
+
+def fit_predict_fold(inp, visible, hidden, L, arm, rng):
+    """Design-B model for one fold and arm. Returns (p_full with visible faults zeroed, counts)."""
+    F, pos_rows, neg_pool_rows, buf = fold_inputs(inp, visible, hidden, L, arm)
+    neg_rows = neg_pool_rows[rng.choice(neg_pool_rows.size, min(N_NEG, neg_pool_rows.size), replace=False)]
+    rows_tr = np.r_[pos_rows, neg_rows]
+    y = np.r_[np.ones(pos_rows.size), np.zeros(neg_rows.size)]
+    model = hgb()
+    model.fit(F[rows_tr], y)
+    p_full = np.zeros((inp.H, inp.W), dtype=np.float32)
+    p_full[inp.fp] = predict_chunked(model, F)
+    p_full[visible] = 0.0
+    del F, model
+    return p_full, {"pos": int(pos_rows.size), "neg": int(neg_rows.size)}
 
 
 if __name__ == "__main__":
