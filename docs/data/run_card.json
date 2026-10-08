@@ -106,5 +106,5 @@
   "limitations": "registry/limitations.json",
   "organizer_score": null,
   "verdict": "negative",
-  "verdict_reason": "Blocked before any submission slot. Rank correlation is low (max rho 0.164) but 77% of our dots sit within 3 px of GEMSDOE27/28 dots (lift 4.2x over random placement), above the 70% protocol threshold. Stopped per the parallel-run protocol. Holdout proxy 0.0352 is not an organizer score and is not comparable to the leaderboard."
+  "verdict_reason": "Blocked before any submission slot. Rank correlation is low (max rho 0.164). But up to 79.5% of our dots sit within 3 px of one public file's dots (GEMSDOE22; 75.7% for GEMSDOE27/28, lift 4.2x over random placement), above the 70% protocol threshold. Stopped per the parallel-run protocol. Holdout proxy 0.0352 is not an organizer score and is not comparable to the leaderboard."
 }

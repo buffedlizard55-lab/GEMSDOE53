@@ -101,8 +101,8 @@ def main() -> int:
     # ---------------------------------------------------------------- index.html (executive summary)
     body = f"""
 <section>
-  <div class="banner">Status: no file is offered for submission. The one candidate built is blocked by the parallel-run drift flag
-  (protocol item 2). Nothing has been submitted, and no organizer score exists.</div>
+  <div class="banner"><b>Research-only / DO NOT SUBMIT.</b> No file is offered for submission. The one candidate built is blocked by the
+  parallel-run drift flag (protocol item 2). Nothing has been submitted, and no organizer score exists.</div>
   <h1>Executive summary</h1>
   <p>This project tried to build a unique, valid GeoTIFF for the GEMS Prize (DrivenData competition 306) that beats the public
   bar, to explain leakage in the GEMSDOE29 file, to explain the high-scoring GEMSDOE32 file, and to test new geological hypotheses.
@@ -178,7 +178,8 @@ def main() -> int:
         f"<td>{vn['all_checks_passed']} (in-lane); template validator: {tmpl_pass}</td><td>{cn['footprint_px']:,} / {cn['finite_px']:,}</td><td>{cn['nonzero_px']:,}</td></tr>")
     body = f"""
 <section>
-  <div class="banner">Not offered for download. The file is blocked by the protocol's 3-px overlap flag and quarantined outside the repository.</div>
+  <div class="banner"><b>Research-only / DO NOT SUBMIT.</b> Not offered for download. The file is blocked by the protocol's 3-px overlap flag
+  and quarantined outside the repository. The label "Validated / OK to submit" is not applied: the release gates have not all passed.</div>
   <h1>Submission file</h1>
   <p>Method (candidate): gradient-boosted classifier (sklearn HistGradientBoosting, 200 iterations) trained on the 19 label-free feature bands
   (arm <code>{esc(arm)}</code>), with 300,000 sampled negatives and {exp1['known_fault_px_in_footprint']:,} known-fault positives. The top q={q:.0%} of the official
