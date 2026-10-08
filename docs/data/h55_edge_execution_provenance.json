@@ -1,0 +1,75 @@
+{
+  "receipt_version": "1.0",
+  "receipt_scope": "Provenance for the frozen H55-EDGE artifact and pre-merge validation implementation; this receipt does not rerun or reinterpret the experiment.",
+  "artifact": {
+    "file": "gems52-h55-grav-rtp-logedge-37654-c4b8c10205da-zeros.tif",
+    "sha256": "f0732d40d57b92d3f082eb2b910b6e6951b7238e7616f9e6e9c6c22ee9f1c7f8",
+    "decoded_prediction_sha256": "c4b8c10205dab5a311ea5ae43e566448a999c0a154c928c0e90df5037a6f8a9e",
+    "feature_manifest_sha256": "b4e9cfb155d04676f3b0873b410553eb3c23075d77371e30b5f1e5bd6eff3a5a",
+    "preregistration_sha256": "12b678d62269589c42b4009ec07e38f53f325b8a4ece5e42da888f9c8e01c401"
+  },
+  "execution_snapshot": {
+    "snapshot_commit": "709ac3b376e9f4d102de41865ae30f4a3dd0b728",
+    "snapshot_commit_message": "H55 edge: publish audited research-only result",
+    "snapshot_parent_checkout_commit": "a381eb2f57ffbfc90dafce5692f05c571ddc211b",
+    "note": "The run was executed from the modified working tree based on the parent checkout; commit 709ac3b records that exact pre-merge source snapshot and the resulting receipts/artifact. Paths were subsequently namespaced as H55-EDGE during integration. The current shared H55/R2 modules may differ after merging origin/main; do not treat a rerun of the post-merge tree as the original execution.",
+    "source_files": {
+      "scripts/validate_h55.py": {
+        "sha256": "afe9d8a8119074094901c303f4d7e583be797a8be516d840d494e9765387e065",
+        "bytes": 39220
+      },
+      "src/gems52/h55.py": {
+        "sha256": "a76d934a9eb6bde4782c2c3ca62abdc843bd4c834b8c839a8e0490364c1cf665",
+        "bytes": 5671
+      },
+      "scripts/run_structural_pipeline.py": {
+        "sha256": "55c46db89514e1cbee2c0a1f54ebbe6ecbcad1cb0c3bb47b4409c36b6c94b8b3",
+        "bytes": 30937
+      },
+      "src/gems52/structural.py": {
+        "sha256": "a1c29532e14c6edfc93bd5e4faa76810cb0a87727da39e6e1529e9d0ca9a8993",
+        "bytes": 11721
+      },
+      "src/gems52/spatial.py": {
+        "sha256": "3776a6be457268a548b7d9931263bc6b5c1e5a431cb1ee727a22caacffc17c34",
+        "bytes": 7295
+      },
+      "src/gems52/features.py": {
+        "sha256": "446441210df35cbbf24f2991d2c3fd2814d225db30c76da1a7babbdd0242a771",
+        "bytes": 6956
+      },
+      "src/gems52/gates.py": {
+        "sha256": "dc9824bb29e0bae6e3fabd2b53071d8d17e05fbb4c680d6c6e834dd9992af9c6",
+        "bytes": 10766
+      },
+      "src/gems52/metric.py": {
+        "sha256": "3d454119edfcec3cc2a83278c2015d7e41d39d8c1142fca12311409a18ce7d1a",
+        "bytes": 7002
+      },
+      "requirements-r2.txt": {
+        "sha256": "3df21ae38a08041f7a23e1f2ad79f4f331823fdb9f0b626e93b08dd1cc68f4d0",
+        "bytes": 263
+      },
+      "registry/h55_preregistration.json": {
+        "sha256": "12b678d62269589c42b4009ec07e38f53f325b8a4ece5e42da888f9c8e01c401",
+        "bytes": 3494
+      }
+    }
+  },
+  "reproducibility_boundary": {
+    "source_code_snapshot_preserved_in_git": true,
+    "full_feature_manifest_bytes_preserved": false,
+    "large_training_inputs_and_derived_arrays_committed": false,
+    "feature_manifest_hash_retained_in_result_receipts": true,
+    "owner_side_input_hash_pins_reported": true,
+    "organizer_byte_authentication": false,
+    "note": "The ignored local training cube, review inputs, and derived feature cache are not included in this small audit archive. The recorded source and receipt hashes support provenance checks, but exact independent rerun requires the matching owner-side input bytes and feature manifest."
+  },
+  "release_status": {
+    "promotion_gate_passed": false,
+    "strict_support_novelty_gate_passed": false,
+    "weekly_slots_used": 0,
+    "official_score": null,
+    "current_global_incumbent_changed_by_this_result": false
+  }
+}

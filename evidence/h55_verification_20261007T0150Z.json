@@ -1,0 +1,514 @@
+{
+ "generated_utc": "2026-10-07T02:18:44Z",
+ "tag": "20261007T0150Z",
+ "shipped_file": {
+  "file": "gems52-h55-btherm-greedy-37654px-20261007T0150Z-zeros.tif",
+  "profile": {
+   "driver": "GTiff",
+   "count": 1,
+   "dtype": "float32",
+   "crs": "EPSG:32611",
+   "width": 3292,
+   "height": 3730,
+   "transform": [
+    100.0,
+    0.0,
+    243350.0,
+    0.0,
+    -100.0,
+    4508550.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "nodata": null
+  },
+  "checks": {
+   "path_exists": true,
+   "sha256_matches_record": true,
+   "bytes_match_record": true,
+   "single_band": true,
+   "dtype_float32": true,
+   "crs_epsg32611": true,
+   "width_3292": true,
+   "height_3730": true,
+   "transform_matches_pinned": true,
+   "no_nan": true,
+   "values_within_0_1": true,
+   "values_are_binary": true,
+   "positive_px_matches_record": true,
+   "zero_on_every_catalogue_pixel": true,
+   "zero_outside_footprint": true,
+   "positive_px_all_inside_footprint": true,
+   "all_emitted_pixels_8_isolated": true,
+   "coverage_efficiency_recorded": true,
+   "format_gate_ok": true,
+   "format_gate_no_problems": true,
+   "uniqueness_gate_ok": true,
+   "not_identical_to_any_prior": true,
+   "not_merely_the_union": true
+  },
+  "all_ok": true,
+  "failed": [],
+  "uniqueness": {
+   "ok": true,
+   "relation": "strictly-novel-and-selective",
+   "novel_px": 22625,
+   "novel_fraction": 0.6008657778722049,
+   "priors_checked": 25,
+   "prior_px_dropped": 1147945
+  },
+  "geometry": {
+   "S": 37654,
+   "A": 331924.09375,
+   "A_per_S": 8.815108454613055,
+   "n_components": 37654,
+   "max_component": 1,
+   "isolated": true,
+   "spacing_efficiency": 0.9397471842245796
+  }
+ },
+ "independence": {
+  "hide": {
+   "mode": "hide",
+   "n_folds": 4,
+   "abandon_threshold": 0.6,
+   "blocks_per_instrument": 62,
+   "budget": 37654,
+   "test_could_fire": true,
+   "n_folds_where_test_could_fire": 4,
+   "per_fold": [
+    {
+     "fold": 0,
+     "n_neg": 4628182,
+     "n_blocks": 62,
+     "mean_overprediction": {
+      "usable_blocks": 40,
+      "n_blocks": 40,
+      "pearson_r": 0.5833085956676167,
+      "spearman_rho": 0.6341463414634146,
+      "abandon": true,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof"
+     },
+     "far_at_budget": {
+      "usable_blocks": 40,
+      "budget": 37654,
+      "n_blocks": 40,
+      "pearson_r": 0.15288350028115424,
+      "spearman_rho": 0.1401504815324602,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof",
+      "dispersion_A": 0.02364078049661237,
+      "dispersion_B": 0.003648031052383256,
+      "cv_A": 3.0285746550713113,
+      "cv_B": 0.7835366625497707
+     }
+    },
+    {
+     "fold": 1,
+     "n_neg": 4604333,
+     "n_blocks": 62,
+     "mean_overprediction": {
+      "usable_blocks": 40,
+      "n_blocks": 40,
+      "pearson_r": -0.11064959274552182,
+      "spearman_rho": -0.11575984990619138,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof"
+     },
+     "far_at_budget": {
+      "usable_blocks": 40,
+      "budget": 37654,
+      "n_blocks": 40,
+      "pearson_r": -0.14537942484474894,
+      "spearman_rho": -0.17407810081155076,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof",
+      "dispersion_A": 0.0053735508603405275,
+      "dispersion_B": 0.004981169335310946,
+      "cv_A": 1.3467214853120366,
+      "cv_B": 1.1781618453235134
+     }
+    },
+    {
+     "fold": 2,
+     "n_neg": 4620308,
+     "n_blocks": 62,
+     "mean_overprediction": {
+      "usable_blocks": 40,
+      "n_blocks": 40,
+      "pearson_r": 0.6631462754171984,
+      "spearman_rho": 0.7624765478424016,
+      "abandon": true,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof"
+     },
+     "far_at_budget": {
+      "usable_blocks": 40,
+      "budget": 37654,
+      "n_blocks": 40,
+      "pearson_r": -0.1738552803869588,
+      "spearman_rho": -0.013278713476324434,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof",
+      "dispersion_A": 0.10727619493933868,
+      "dispersion_B": 0.003945088879965918,
+      "cv_A": 4.839176589066242,
+      "cv_B": 0.9405567924514737
+     }
+    },
+    {
+     "fold": 3,
+     "n_neg": 4639856,
+     "n_blocks": 62,
+     "mean_overprediction": {
+      "usable_blocks": 40,
+      "n_blocks": 40,
+      "pearson_r": 0.4841119214469341,
+      "spearman_rho": 0.5575984990619137,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof"
+     },
+     "far_at_budget": {
+      "usable_blocks": 40,
+      "budget": 37654,
+      "n_blocks": 40,
+      "pearson_r": -0.19041276448741296,
+      "spearman_rho": 0.12629204939011568,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof",
+      "dispersion_A": 0.15389588863653578,
+      "dispersion_B": 0.0037070579373677443,
+      "cv_A": 5.220228127680022,
+      "cv_B": 0.8351713786541176
+     }
+    }
+   ],
+   "pooled": {
+    "mean_overprediction_pearson": {
+     "values": [
+      0.5833,
+      -0.1106,
+      0.6631,
+      0.4841
+     ],
+     "mean": 0.405,
+     "n": 4,
+     "folds_exceeding_abandon_threshold": 1,
+     "abandon_r": 0.6
+    },
+    "mean_overprediction_spearman": {
+     "values": [
+      0.6341,
+      -0.1158,
+      0.7625,
+      0.5576
+     ],
+     "mean": 0.4596,
+     "n": 4,
+     "folds_exceeding_abandon_threshold": 2,
+     "abandon_r": 0.6
+    },
+    "far_pearson": {
+     "values": [
+      0.1529,
+      -0.1454,
+      -0.1739,
+      -0.1904
+     ],
+     "mean": -0.0892,
+     "n": 4,
+     "folds_exceeding_abandon_threshold": 0,
+     "abandon_r": 0.6
+    },
+    "far_spearman": {
+     "values": [
+      0.1402,
+      -0.1741,
+      -0.0133,
+      0.1263
+     ],
+     "mean": 0.0198,
+     "n": 4,
+     "folds_exceeding_abandon_threshold": 0,
+     "abandon_r": 0.6
+    }
+   },
+   "verdict": "REFUTED at the pre-registered threshold: |Spearman| reaches 0.7625 >= 0.6. Abandon co-training."
+  },
+  "tip": {
+   "mode": "tip",
+   "n_folds": 4,
+   "abandon_threshold": 0.6,
+   "blocks_per_instrument": 62,
+   "budget": 37654,
+   "test_could_fire": true,
+   "n_folds_where_test_could_fire": 4,
+   "per_fold": [
+    {
+     "fold": 0,
+     "n_neg": 4639261,
+     "n_blocks": 62,
+     "mean_overprediction": {
+      "usable_blocks": 40,
+      "n_blocks": 40,
+      "pearson_r": 0.5841374920029131,
+      "spearman_rho": 0.6033771106941839,
+      "abandon": true,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof"
+     },
+     "far_at_budget": {
+      "usable_blocks": 40,
+      "budget": 37654,
+      "n_blocks": 40,
+      "pearson_r": -0.020588797810634323,
+      "spearman_rho": 0.09966892131074671,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof",
+      "dispersion_A": 0.022910324217632668,
+      "dispersion_B": 0.0034415069592641672,
+      "cv_A": 2.887681921013702,
+      "cv_B": 0.7540438018323802
+     }
+    },
+    {
+     "fold": 1,
+     "n_neg": 4628087,
+     "n_blocks": 62,
+     "mean_overprediction": {
+      "usable_blocks": 40,
+      "n_blocks": 40,
+      "pearson_r": 0.29126791951642456,
+      "spearman_rho": 0.40018761726078805,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof"
+     },
+     "far_at_budget": {
+      "usable_blocks": 40,
+      "budget": 37654,
+      "n_blocks": 40,
+      "pearson_r": -0.19291615320542194,
+      "spearman_rho": -0.21645917666709974,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof",
+      "dispersion_A": 0.025397701308687265,
+      "dispersion_B": 0.004140647963660521,
+      "cv_A": 3.2280889571878655,
+      "cv_B": 0.9551740792068497
+     }
+    },
+    {
+     "fold": 2,
+     "n_neg": 4636646,
+     "n_blocks": 62,
+     "mean_overprediction": {
+      "usable_blocks": 40,
+      "n_blocks": 40,
+      "pearson_r": 0.651945047962279,
+      "spearman_rho": 0.7106941838649157,
+      "abandon": true,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof"
+     },
+     "far_at_budget": {
+      "usable_blocks": 40,
+      "budget": 37654,
+      "n_blocks": 40,
+      "pearson_r": -0.19025067211389896,
+      "spearman_rho": 0.0005783536191209791,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof",
+      "dispersion_A": 0.11489085609751472,
+      "dispersion_B": 0.00371145121825749,
+      "cv_A": 4.93352421894855,
+      "cv_B": 0.8522857958961731
+     }
+    },
+    {
+     "fold": 3,
+     "n_neg": 4645601,
+     "n_blocks": 62,
+     "mean_overprediction": {
+      "usable_blocks": 40,
+      "n_blocks": 40,
+      "pearson_r": 0.5137959638898961,
+      "spearman_rho": 0.5836772983114447,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof"
+     },
+     "far_at_budget": {
+      "usable_blocks": 40,
+      "budget": 37654,
+      "n_blocks": 40,
+      "pearson_r": -0.1970925591614388,
+      "spearman_rho": 0.18725184619961874,
+      "abandon": false,
+      "threshold": 0.6,
+      "measured": true,
+      "reason": "proxy diagnostic, not proof",
+      "dispersion_A": 0.13535651845098112,
+      "dispersion_B": 0.0036005219153956436,
+      "cv_A": 5.124488594140449,
+      "cv_B": 0.8096492474572283
+     }
+    }
+   ],
+   "pooled": {
+    "mean_overprediction_pearson": {
+     "values": [
+      0.5841,
+      0.2913,
+      0.6519,
+      0.5138
+     ],
+     "mean": 0.5103,
+     "n": 4,
+     "folds_exceeding_abandon_threshold": 1,
+     "abandon_r": 0.6
+    },
+    "mean_overprediction_spearman": {
+     "values": [
+      0.6034,
+      0.4002,
+      0.7107,
+      0.5837
+     ],
+     "mean": 0.5745,
+     "n": 4,
+     "folds_exceeding_abandon_threshold": 2,
+     "abandon_r": 0.6
+    },
+    "far_pearson": {
+     "values": [
+      -0.0206,
+      -0.1929,
+      -0.1903,
+      -0.1971
+     ],
+     "mean": -0.1502,
+     "n": 4,
+     "folds_exceeding_abandon_threshold": 0,
+     "abandon_r": 0.6
+    },
+    "far_spearman": {
+     "values": [
+      0.0997,
+      -0.2165,
+      0.0006,
+      0.1873
+     ],
+     "mean": 0.0178,
+     "n": 4,
+     "folds_exceeding_abandon_threshold": 0,
+     "abandon_r": 0.6
+    }
+   },
+   "verdict": "REFUTED at the pre-registered threshold: |Spearman| reaches 0.7107 >= 0.6. Abandon co-training."
+  }
+ },
+ "union_audit": {
+  "budget": 37654,
+  "emitted_px": 37654,
+  "comparisons": [
+   {
+    "name": "top-K of View A alone",
+    "px": 37654,
+    "in_both": 307,
+    "frac_of_shipped": 0.008153184256652679,
+    "shipped_is_subset": false,
+    "shipped_equals": false
+   },
+   {
+    "name": "top-K of View B alone",
+    "px": 37654,
+    "in_both": 1836,
+    "frac_of_shipped": 0.048759759919264886,
+    "shipped_is_subset": false,
+    "shipped_equals": false
+   },
+   {
+    "name": "union of the two views' top-K",
+    "px": 74099,
+    "in_both": 2095,
+    "frac_of_shipped": 0.05563817921070802,
+    "shipped_is_subset": false,
+    "shipped_equals": false
+   },
+   {
+    "name": "coverage-greedy of View A alone",
+    "px": 37654,
+    "in_both": 428,
+    "frac_of_shipped": 0.011366654273118395,
+    "shipped_is_subset": false,
+    "shipped_equals": false
+   },
+   {
+    "name": "coverage-greedy of View B alone",
+    "px": 37654,
+    "in_both": 6578,
+    "frac_of_shipped": 0.17469591544059065,
+    "shipped_is_subset": false,
+    "shipped_equals": false
+   },
+   {
+    "name": "union of the two views' coverage-greedy emissions",
+    "px": 74760,
+    "in_both": 6902,
+    "frac_of_shipped": 0.18330057895575502,
+    "shipped_is_subset": false,
+    "shipped_equals": false
+   }
+  ],
+  "verdict": "NOT the union of the two views. The shipped set shares 5.6% of its pixels with the union of the two views' top-K sets and 18.3% with the union of their coverage-greedy emissions, and is equal to no set in the table. It is View B's own coverage-greedy emission with a thermal rank bonus. View A contributes nothing to this emission: A_only mean DTI is 0.02979 vs matched random 0.03948 on hide and 0.02894 vs 0.02477 on tip; its fold wins are 1/4 and 2/4, so it does not pass the pre-registered \u22653/4-per-instrument gate. The registered conditional-independence test is refuted at its pre-registered threshold on both instruments (evidence/h55_verification_20261007T0150Z.json), so co-training is abandoned. These are separate findings; the fold-vs-random result is not a conditional-independence test."
+ },
+ "all_ok": true,
+ "independence_summary": {
+  "hide": {
+   "test_could_fire": true,
+   "usable_blocks_per_fold": 40,
+   "blocks_available": 62,
+   "max_abs_spearman_mean_overprediction": 0.7625,
+   "max_abs_spearman_far_at_budget": 0.1741,
+   "abandon_threshold": 0.6,
+   "verdict": "REFUTED at the pre-registered threshold: |Spearman| reaches 0.7625 >= 0.6. Abandon co-training."
+  },
+  "tip": {
+   "test_could_fire": true,
+   "usable_blocks_per_fold": 40,
+   "blocks_available": 62,
+   "max_abs_spearman_mean_overprediction": 0.7107,
+   "max_abs_spearman_far_at_budget": 0.2165,
+   "abandon_threshold": 0.6,
+   "verdict": "REFUTED at the pre-registered threshold: |Spearman| reaches 0.7107 >= 0.6. Abandon co-training."
+  }
+ },
+ "review_note": "2026-10-07 text-only correction: the previous union_audit.verdict incorrectly said A_only was below matched random on both instruments. The unchanged sweep values show below on hide (0.02979 vs 0.03948), above on tip (0.02894 vs 0.02477), and only 1/4 and 2/4 fold wins. No raster, hash, fold score, or uniqueness measurement was changed or recomputed in this correction."
+}

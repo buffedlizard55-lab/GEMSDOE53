@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sources — GEMSDOE52</title><link rel="stylesheet" href="style.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap"><div class="brand">GEMS<span>DOE</span>52</div>
+<nav class="top"><a href="index.html">Overview</a><a href="executive-summary.html">Executive&nbsp;summary</a>
+<a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a>
+<a href="validation.html">Validation</a><a href="feed.html">Data&nbsp;feed</a>
+<a href="irregularities.html">Irregularities</a><a href="sources.html" aria-current="page">Official&nbsp;links</a></nav></div></header><main id="main">
+
+<h1>Official links for manual review</h1>
+<p class="small muted">What a human needs to re-check anything on this site. Each row says whether it was
+fetched this session.</p>
+<h2><span class="num">1</span> Competition and rules</h2>
+<table><thead><tr><th>item</th><th>link</th><th>what it settles</th><th>this session</th></tr></thead><tbody>
+<tr><td>Competition page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">drivendata.org/competitions/306</a></td><td>rounds, slot limits, submission flow</td><td>fetched</td></tr>
+<tr><td>Rules / evaluation</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967</a></td><td>the DTI formula, α=0.2, β=0.8, R=300 m=3 px, the format list (single band, float32, [0,1], EPSG:32611, 100 m, identical bounds, null outside footprint) and the worked example</td><td>fetched; re-implemented and unit-tested against the worked example</td></tr>
+<tr><td>Public leaderboard</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a></td><td>#1 = 0.3774; group 0.2778 at #13 of 16 visible</td><td>fetched 2026-10-06; re-fetched on schedule by the workflow</td></tr>
+<tr><td>Data tab</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data</a></td><td>training cube, labels, sample submission</td><td>login-walled; the files are pinned by sha256 in <code>registry/data_manifest.json</code></td></tr>
+<tr><td>Masking / new-truth clarification (staff, chrisk-dd, Sep 21)</td><td><a href="https://community.drivendata.org/t/discussion-on-evaluation-masking-and-new-fault-truth/11516">thread 11516</a></td><td>pixel-exact mask; masked pixels pay no penalty; only <i>new</i> fault truth counts; new truth <b>can</b> lie within 300 m of a known trace and such corrections are a stated goal</td><td>fetched — the most load-bearing source on this site</td></tr>
+<tr><td>Test-set construction (staff, Sep 23)</td><td><a href="https://community.drivendata.org/t/what-will-the-final-test-set-look-like/11527">thread 11527</a></td><td>the Phase-2 pool uses a set updated by expert review of Phase-1 submissions → per-candidate reasoning carries option value</td><td>fetched</td></tr>
+<tr><td>Programme rules (NLR)</td><td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a></td><td>programme-level rules</td><td>fetched; the brief's <code>docs.nlr.gov</code> host is stale (IR-52-011)</td></tr>
+</tbody></table>
+<h2><span class="num">2</span> Method references</h2>
+<table><thead><tr><th>item</th><th>link</th></tr></thead><tbody>
+<tr><td>Blum &amp; Mitchell, <i>Combining labeled and unlabeled data with co-training</i>, COLT '98 — the conditional-independence premise tested here</td><td><a href="https://doi.org/10.1145/279943.279962">doi:10.1145/279943.279962</a></td></tr>
+<tr><td>Official reference solution (UNet + mixture-of-costs; no scoring code published)</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a></td></tr>
+<tr><td>Independent competitor DTI reimplementation with a held-out-segment protocol and a 3 px exclusion buffer — our parity cross-check</td><td><a href="https://github.com/Gameassassin777/gems-eval">github.com/Gameassassin777/gems-eval</a></td></tr>
+</tbody></table>
+<h2><span class="num">3</span> Free / official data considered</h2>
+<table><thead><tr><th>source</th><th>link</th><th>licence as published</th><th>used here?</th></tr></thead><tbody>
+<tr><td>USGS Geologic Data Repository — QFaults-v2, spring occurrences, volcanic vents</td><td><a href="https://www.sciencebase.gov/catalog/item/57c80074d45281cf44e8763f">sciencebase GDR faults record</a> · <a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS Quaternary faults</a></td><td>public domain, US Government work; redistribution permitted</td><td>only as <b>derived, unverified</b> local CSVs — blocked as a mass-moving input (IR-52-009)</td></tr>
+<tr><td>OpenTopography 1 m LiDAR DEMs</td><td><a href="https://opentopography.org/">opentopography.org</a></td><td>per dataset, commonly CC0/CC-BY with acknowledgement; some restricted</td><td>not fetched — host unreachable from this sandbox, and a licence claim is not something to assert from memory</td></tr>
+</tbody></table>
+<p class="small">Rule applied to every row: free, official, <em>confirmed obtainable from here</em>, and
+licence-clear for sharing with the sponsor. Anything failing one of those is documented and is not
+allowed to move mass.</p>
+</main><footer><div class="wrap">GEMSDOE52 · tables render from <code>docs/data/*.json</code>, regenerated by <code>scripts/refresh_feed.py</code> · <a href="sources.html">official links</a> · <a href="irregularities.html">irregularities</a></div></footer><script src="site.js"></script><script src="tables.js"></script></body></html>

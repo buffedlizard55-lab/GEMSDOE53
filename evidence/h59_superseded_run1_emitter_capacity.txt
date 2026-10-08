@@ -1,0 +1,52 @@
+[h59 02:43:56] verified 23 input SHA/byte pins in /home/user/GEMSDOE52/work/h59_pinned; owner-mirror pins, not organizer authentication
+[h59 02:44:57] footprint=5,165,840 px; sample domain=5,167,373; catalogue=60,894; permitted=4,861,555
+[h59 02:44:57] layer stack built in 0 s: 84 layers; View A 48 features, View B 36 features
+[h59 02:45:06] OOF-A/f0: fit 30,515 pos / 60,000 neg; 48 features, |coef|=15.7531
+[h59 02:45:13] OOF-B/f0: fit 30,515 pos / 60,000 neg; 36 features, |coef|=17.6711
+[h59 02:45:19] OOF-A/f1: fit 47,186 pos / 60,000 neg; 48 features, |coef|=10.0537
+[h59 02:45:26] OOF-B/f1: fit 47,186 pos / 60,000 neg; 36 features, |coef|=17.0025
+[h59 02:45:32] OOF-A/f2: fit 50,434 pos / 60,000 neg; 48 features, |coef|=7.3559
+[h59 02:45:38] OOF-B/f2: fit 50,434 pos / 60,000 neg; 36 features, |coef|=18.8778
+[h59 02:45:45] OOF-A/f3: fit 50,149 pos / 60,000 neg; 48 features, |coef|=8.0659
+[h59 02:45:51] OOF-B/f3: fit 50,149 pos / 60,000 neg; 36 features, |coef|=19.0392
+[h59 02:45:51] OOF coverage: 5,165,840 / 5,165,840 valid px
+[h59 02:45:54] independence: measured=True allow_exchange=True max|r|=0.14329101215179843 pixel r=0.016740534122331986
+[h59 02:45:57] strata {'allowed': 4860040, 'a_only': 349974, 'b_only': 200462, 'concordant': 160179, 'neither': 4149425}; median depth {'a_only': 358.33917236328125, 'b_only': 132.3140106201172, 'concordant': 203.42752075195312, 'permitted': 315.9007568359375}
+[h59 02:46:05] pseudo B->A: 1998 px / 124 segments; AUC skipped
+[h59 02:46:12] pseudo A->B: 1382 px / 48 segments; AUC skipped
+[h59 02:46:23] A/hide0: fit 20,499 pos / 60,000 neg; 48 features, |coef|=14.0465
+[h59 02:46:29] B/hide0: fit 20,499 pos / 60,000 neg; 36 features, |coef|=15.4950
+[h59 02:46:59] hide fold 0: view_A=0.02065, view_B=0.04881, union=0.04696, product=0.04668, vetoB=0.04652, basestep=0.00000, seismicity=0.03687, a_only_stratum=0.00541, random=0.04013
+[h59 02:47:05] A/hide1: fit 34,735 pos / 60,000 neg; 48 features, |coef|=11.3761
+[h59 02:47:11] B/hide1: fit 34,735 pos / 60,000 neg; 36 features, |coef|=14.3941
+[h59 02:47:41] hide fold 1: view_A=0.01531, view_B=0.06817, union=0.06928, product=0.06597, vetoB=0.06585, basestep=0.00113, seismicity=0.00631, a_only_stratum=0.00188, random=0.03725
+[h59 02:47:48] A/hide2: fit 38,919 pos / 60,000 neg; 48 features, |coef|=11.3519
+[h59 02:47:54] B/hide2: fit 38,919 pos / 60,000 neg; 36 features, |coef|=18.1285
+[h59 02:48:22] hide fold 2: view_A=0.02203, view_B=0.04450, union=0.04208, product=0.04513, vetoB=0.04229, basestep=0.00029, seismicity=0.05819, a_only_stratum=0.01553, random=0.04689
+[h59 02:48:28] A/hide3: fit 38,026 pos / 60,000 neg; 48 features, |coef|=8.5203
+[h59 02:48:34] B/hide3: fit 38,026 pos / 60,000 neg; 36 features, |coef|=17.7632
+[h59 02:49:02] hide fold 3: view_A=0.01388, view_B=0.05876, union=0.05584, product=0.05656, vetoB=0.05559, basestep=0.00028, seismicity=0.05128, a_only_stratum=0.01230, random=0.04320
+[h59 02:49:13] A/block0: fit 20,322 pos / 60,000 neg; 48 features, |coef|=13.1875
+[h59 02:49:18] B/block0: fit 20,322 pos / 60,000 neg; 36 features, |coef|=16.2831
+[h59 02:49:30] block fold 0: view_A=0.01689, view_B=0.04774, union=0.04727, product=0.04577, vetoB=0.04738, basestep=0.00000, seismicity=0.03938, a_only_stratum=0.00446, random=0.04265
+[h59 02:49:37] A/block1: fit 34,234 pos / 60,000 neg; 48 features, |coef|=12.9107
+[h59 02:49:43] B/block1: fit 34,234 pos / 60,000 neg; 36 features, |coef|=15.0299
+[h59 02:49:53] block fold 1: view_A=0.01662, view_B=0.06918, union=0.06812, product=0.07155, vetoB=0.06240, basestep=0.00113, seismicity=0.01144, a_only_stratum=0.00084, random=0.03921
+[h59 02:49:59] A/block2: fit 38,581 pos / 60,000 neg; 48 features, |coef|=11.5330
+[h59 02:50:05] B/block2: fit 38,581 pos / 60,000 neg; 36 features, |coef|=18.8700
+[h59 02:50:12] block fold 2: view_A=0.01889, view_B=0.04736, union=0.04678, product=0.04102, vetoB=0.04561, basestep=0.00000, seismicity=0.01829, a_only_stratum=0.01429, random=0.05118
+[h59 02:50:18] A/block3: fit 37,756 pos / 60,000 neg; 48 features, |coef|=8.6512
+[h59 02:50:24] B/block3: fit 37,756 pos / 60,000 neg; 36 features, |coef|=17.7134
+[h59 02:50:32] block fold 3: view_A=0.01618, view_B=0.06416, union=0.06037, product=0.05964, vetoB=0.06041, basestep=0.00125, seismicity=0.04564, a_only_stratum=0.01394, random=0.04424
+[h59 02:50:32] shipped field: view_B (eligible: ['view_B', 'union', 'product', 'vetoB']; beats single view strongly: False)
+Traceback (most recent call last):
+  File "/home/user/GEMSDOE52/scripts/run_h59.py", line 702, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/user/GEMSDOE52/scripts/run_h59.py", line 597, in main
+    artifact = build_artifact(decision["shipped_field"], ctx, pool, catalogue, valid,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE52/scripts/run_h59.py", line 444, in build_artifact
+    raise RuntimeError(f"emission shortfall: {n} != {h59.BUDGET_PRIMARY}")
+RuntimeError: emission shortfall: 27905 != 37654
+EXIT=1

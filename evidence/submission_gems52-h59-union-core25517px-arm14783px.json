@@ -1,0 +1,62 @@
+{
+ "round": "H59",
+ "file": "gems52-h59-union-core25517px-arm14783px.tif",
+ "sha256": "8c4945ce170b702495057176fe61b892ee4b1af975b11f978920387216cf968d",
+ "bytes": 157138,
+ "nonzero_px": 40300,
+ "core_px": 25517,
+ "arm_px": 14783,
+ "submission_name": "gems52-h59-union-core25517px-arm14783px-8c4945ce-zeros",
+ "note": "H59 union arm 14783px outside all prior support + 25,517px credited core; all finite binary [0,1]; 200m ring excluded; not a verified fault map",
+ "approved_for_weekly_slot": false,
+ "verdict": "RESEARCH ONLY \u2014 DOWNLOAD OK FOR REVIEW; DO NOT SPEND A WEEKLY SLOT",
+ "format": {
+  "path": "/home/user/GEMSDOE52/submission/gems52-h59-union-core25517px-arm14783px.tif",
+  "bytes": 157138,
+  "sha256": "8c4945ce170b702495057176fe61b892ee4b1af975b11f978920387216cf968d",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "width": 3292,
+  "height": 3730,
+  "bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "ref_bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": null,
+  "blocksize": [
+   256,
+   256
+  ],
+  "fixture_grid": false,
+  "has_validity_mask": false,
+  "nan_pixels": 0,
+  "infinity_pixels": 0,
+  "n_nan": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "mean": 0.00328198354691267,
+  "n_nonzero": 40300,
+  "mass": 40300.0,
+  "mass_outside_footprint": 0,
+  "problems": [],
+  "ok": true,
+  "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+ }
+}

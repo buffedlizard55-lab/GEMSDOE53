@@ -1,0 +1,79 @@
+{
+  "n_hidden_segment_pixels": 8250,
+  "n_buried_hidden_segment_pixels": 2252,
+  "budget_dots_matched": 12000,
+  "models": {
+    "single_view_A_geophysical_t0": {
+      "auc_all_hidden_segments": 0.54358,
+      "auc_buried_hidden_segments": 0.45447,
+      "dti_all_hidden_segments": 0.02383,
+      "dti_buried_hidden_segments": 0.01981,
+      "tp_credit_all_hidden": 215.01,
+      "tp_credit_buried_hidden": 48.3,
+      "emitted_dots": 12000
+    },
+    "single_view_B_surface_t0": {
+      "auc_all_hidden_segments": 0.67703,
+      "auc_buried_hidden_segments": 0.44237,
+      "dti_all_hidden_segments": 0.07771,
+      "dti_buried_hidden_segments": 0.0,
+      "tp_credit_all_hidden": 703.87,
+      "tp_credit_buried_hidden": 0.0,
+      "emitted_dots": 12000
+    },
+    "naive_union_A_or_B_t0": {
+      "auc_all_hidden_segments": 0.62535,
+      "auc_buried_hidden_segments": 0.40151,
+      "dti_all_hidden_segments": 0.04284,
+      "dti_buried_hidden_segments": 0.00837,
+      "tp_credit_all_hidden": 385.95,
+      "tp_credit_buried_hidden": 18.86,
+      "emitted_dots": 12000
+    },
+    "early_fusion_single_learner": {
+      "auc_all_hidden_segments": 0.67849,
+      "auc_buried_hidden_segments": 0.45136,
+      "dti_all_hidden_segments": 0.07234,
+      "dti_buried_hidden_segments": 0.00232,
+      "tp_credit_all_hidden": 654.02,
+      "tp_credit_buried_hidden": 4.29,
+      "emitted_dots": 12000
+    },
+    "cotrained_view_A_round2": {
+      "auc_all_hidden_segments": 0.55871,
+      "auc_buried_hidden_segments": 0.45763,
+      "dti_all_hidden_segments": 0.02481,
+      "dti_buried_hidden_segments": 0.0186,
+      "tp_credit_all_hidden": 223.86,
+      "tp_credit_buried_hidden": 42.83,
+      "emitted_dots": 12000
+    },
+    "cotrained_view_B_round2": {
+      "auc_all_hidden_segments": 0.67336,
+      "auc_buried_hidden_segments": 0.45139,
+      "dti_all_hidden_segments": 0.07686,
+      "dti_buried_hidden_segments": 0.0,
+      "tp_credit_all_hidden": 695.57,
+      "tp_credit_buried_hidden": 0.0,
+      "emitted_dots": 12000
+    },
+    "cotrained_discovery_round1": {
+      "auc_all_hidden_segments": 0.67713,
+      "auc_buried_hidden_segments": 0.44535,
+      "dti_all_hidden_segments": 0.08077,
+      "dti_buried_hidden_segments": 0.00133,
+      "tp_credit_all_hidden": 729.07,
+      "tp_credit_buried_hidden": 2.49,
+      "emitted_dots": 12000
+    },
+    "cotrained_discovery_round2_final": {
+      "auc_all_hidden_segments": 0.67561,
+      "auc_buried_hidden_segments": 0.4482,
+      "dti_all_hidden_segments": 0.07886,
+      "dti_buried_hidden_segments": 0.00269,
+      "tp_credit_all_hidden": 711.72,
+      "tp_credit_buried_hidden": 5.05,
+      "emitted_dots": 12000
+    }
+  }
+}

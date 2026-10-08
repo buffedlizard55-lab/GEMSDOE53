@@ -1,0 +1,112 @@
+{
+  "file": "gems52-h55-profile-37654-7fd28c25b51a-research.tif",
+  "name": "GEMSDOE52-H55-PairedProfile-7fd28c25",
+  "note": "H55 paired-normal profile | 37,654 metric-placed pixels | spatial holdout failed | research only; not approved for upload.",
+  "sha256": "920b89b94288f55a4808d59d9710a72f069007eb66eb3cc8ed039b99c8f7a261",
+  "bytes": 137085,
+  "format_ok": true,
+  "format": {
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "min": 0.0,
+    "max": 1.0,
+    "nan_pixels": 0,
+    "n_nonzero": 37654
+  },
+  "research_only": true,
+  "weekly_slot_approved": false,
+  "holdout": {
+    "folds": 4,
+    "baseline_surface_dti": [
+      0.1772761701468489,
+      0.2730665027732986,
+      0.13804704633464823,
+      0.1902937919358104
+    ],
+    "surface_plus_profile_dti": [
+      0.17854762589927162,
+      0.27150449790238035,
+      0.13618430215488248,
+      0.18914859387387167
+    ],
+    "structural_profile_dti": [
+      0.15824088698603012,
+      0.2742188186656,
+      0.14028228804101744,
+      0.21514350654933806
+    ],
+    "mean_profile_dti": 0.1969713750604964,
+    "mean_best_comparable_baseline_dti": 0.19467087779765155,
+    "best_comparable_baseline": "view_B",
+    "mean_lift": 0.0023004972628448764,
+    "positive_folds": 3,
+    "approved_for_slot": false,
+    "reason": "preregistered candidate did not beat the strongest comparable baseline by the required lift/fold support; do not spend a weekly slot"
+  },
+  "uniqueness": {
+    "n_priors_checked": 27,
+    "canonical_pattern_unique": true,
+    "equals_literal_prior_union": false,
+    "research_publication_ok": true,
+    "support_novelty_gate_ok": true,
+    "novel_vs_all_priors": 15400,
+    "novel_fraction": 0.40898709300472724,
+    "prior_px_dropped": 1163345,
+    "relation_to_union": "strictly-novel-and-selective",
+    "scope": "Only the supplied, aligned accessible inventory; not a proof against all private/unlinked submissions"
+  },
+  "view_comparison": {
+    "view_A": {
+      "equal": false,
+      "intersection": 1797
+    },
+    "view_B": {
+      "equal": false,
+      "intersection": 4859
+    },
+    "union": {
+      "equal": false,
+      "union_pixels": 74561,
+      "novel_vs_view_union": 31147,
+      "view_union_pixels_dropped": 68054
+    },
+    "matched_budget_max_union": {
+      "equal": false,
+      "emitted": 37654,
+      "intersection": 4801,
+      "novel_vs_matched_max_union": 32853,
+      "matched_max_union_pixels_dropped": 32853,
+      "placement": {
+        "emitted": 37654,
+        "requested_budget": 37654,
+        "pool": 400000,
+        "pool_restricted": true,
+        "bar": 0.0,
+        "dti_projected": 0.0,
+        "marginal_first": 2.965055465698242,
+        "marginal_last": 0.14557449519634247,
+        "total_expected_credit": 12144.38170196116,
+        "rejects_at_stop": 0,
+        "lazy_updates": 733801,
+        "density_sum": 68477.90625,
+        "false_positive_discount": "unused: fixed matched budget",
+        "objective": "expected triangular max-coverage surrogate; not expected DTI"
+      }
+    },
+    "not_merely_union": true
+  },
+  "a_only_emitted_pixels_with_reasoning": 916,
+  "official_score": null,
+  "organizer_upload_acceptance": null
+}

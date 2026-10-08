@@ -1,0 +1,105 @@
+{
+ "features": {
+  "path": "data/training_features.tif",
+  "bytes": 418912844,
+  "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+  "bands": 19,
+  "dtype": "float32",
+  "height": 3730,
+  "width": 3292,
+  "crs": "EPSG:32611",
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "res": [
+   100.0,
+   100.0
+  ],
+  "nodata": -3.4028234663852886e+38,
+  "nodata_repr": "-3.4028234663852886e+38",
+  "finite_pixels": 12279160,
+  "min": -3.4028234663852886e+38,
+  "max": 2109.447509765625,
+  "positive_pixels": 1490289,
+  "nonzero_in_footprint": 1490289,
+  "unique_values": 4925614
+ },
+ "labels": {
+  "path": "data/labels.tif",
+  "bytes": 425830,
+  "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+  "bands": 1,
+  "dtype": "int8",
+  "height": 3730,
+  "width": 3292,
+  "crs": "EPSG:32611",
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "res": [
+   100.0,
+   100.0
+  ],
+  "nodata": -1.0,
+  "nodata_repr": "-1.0",
+  "finite_pixels": 12279160,
+  "min": -1.0,
+  "max": 1.0,
+  "positive_pixels": 60988,
+  "nonzero_in_footprint": 60988,
+  "unique_values": 3
+ },
+ "sample_submission": {
+  "path": "data/sample_submission.tif",
+  "bytes": 1599597,
+  "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "bands": 1,
+  "dtype": "float32",
+  "height": 3730,
+  "width": 3292,
+  "crs": "EPSG:32611",
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "res": [
+   100.0,
+   100.0
+  ],
+  "nodata": NaN,
+  "nodata_repr": "nan",
+  "finite_pixels": 5167373,
+  "min": 0.0,
+  "max": 1.0,
+  "positive_pixels": 60988,
+  "nonzero_in_footprint": 60988,
+  "unique_values": 2
+ },
+ "labels_values": {
+  "-1": 7111787,
+  "0": 5106385,
+  "1": 60988
+ },
+ "labels_positive_px": 60988,
+ "footprint_candidates": {
+  "band1_finite": 5165852,
+  "all_bands_finite": 5165840,
+  "sample_submission_finite": 5167373
+ },
+ "sample_submission_ones_on_labels": 60988,
+ "sample_submission_positive_px": 60988
+}

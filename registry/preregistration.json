@@ -1,0 +1,36 @@
+{
+ "version": "GEMSDOE52-prereg-1",
+ "written_utc": "2026-10-06T21:14:53Z",
+ "hypotheses": [
+  "H1 A-only stratum = range-front fault buried under fan/gravel cover: recoverable from potential fields, invisible to LiDAR, therefore absent from the catalogue",
+  "H2 concordant stratum (both views agree) is precision mass already mostly catalogued; its value is off-trace continuation, not the trace itself",
+  "H3 B-only stratum = surface artefact (roads, canal levees, erosion, quarry scarps); down-weighted, not deleted, because its measured precision is the evidence",
+  "H4 co-training gain requires conditional independence of the two views' errors given the catalogue label; if |r| >= 0.60 on blocked out-of-fold errors the whole method is void",
+  "H5 emission must obey the metric's marginal acceptance rule k > alpha*DTI, so the budget is chosen on prevalence-matched folds and never inherited from a sibling project"
+ ],
+ "primary_metric": "official DTI (gems52.metric.official_dti) on blocked folds, catalogue-masked",
+ "acceptance_rule": "emission accept iff gain(x) > alpha*DTI/(1-alpha*DTI) * (1 - wmax(x))",
+ "gates": {
+  "independence_abs_pearson_max": 0.6,
+  "fold_dti_must_beat_union_baseline_by": 0.01,
+  "pooled_dti_must_beat_sibling_best": 0.05,
+  "min_fold_uplift_pct": 25,
+  "fold_support_min": 3
+ },
+ "abstain_q": 0.6,
+ "conf_quantile": 0.995,
+ "w_b_only": 0.25,
+ "prevalence_used": 0.002,
+ "budget_grid": [
+  8000,
+  15000,
+  25000,
+  37654
+ ],
+ "field_weights": {
+  "A": 0.55,
+  "B": 0.2,
+  "concordance": 0.25,
+  "A_only_bonus": 0.3
+ }
+}

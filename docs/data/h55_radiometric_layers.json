@@ -1,0 +1,119 @@
+{
+  "R_tc_step900": {
+    "file": "R_tc_step900.npy",
+    "rank_file": "R_tc_step900__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 0.05577348545193672,
+    "p50": 1.668929100036621,
+    "max": 35.789703369140625
+  },
+  "R_tc_edge": {
+    "file": "R_tc_edge.npy",
+    "rank_file": "R_tc_edge__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 3.130028289888287e-06,
+    "p50": 0.0036155306734144688,
+    "max": 0.2944474220275879
+  },
+  "R_tc_line": {
+    "file": "R_tc_line.npy",
+    "rank_file": "R_tc_line__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 2.7432150995210236e-10,
+    "p50": 0.00031578383641317487,
+    "max": 0.01670064777135849
+  },
+  "R_tc_rank": {
+    "file": "R_tc_rank.npy",
+    "rank_file": "R_tc_rank__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 2.9534237384796143,
+    "p50": 18.482406616210938,
+    "max": 88.56654357910156
+  },
+  "R_thk_step900": {
+    "file": "R_thk_step900.npy",
+    "rank_file": "R_thk_step900__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 0.0,
+    "p50": 17.884614944458008,
+    "max": 255.0
+  },
+  "R_uk_step900": {
+    "file": "R_uk_step900.npy",
+    "rank_file": "R_uk_step900__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 0.0,
+    "p50": 26.089740753173828,
+    "max": 250.83038330078125
+  },
+  "R_thk_edge": {
+    "file": "R_thk_edge.npy",
+    "rank_file": "R_thk_edge__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 0.0,
+    "p50": 0.09962429851293564,
+    "max": 3.819999933242798
+  },
+  "R_uk_edge": {
+    "file": "R_uk_edge.npy",
+    "rank_file": "R_uk_edge__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 0.0,
+    "p50": 0.1520690619945526,
+    "max": 4.054999828338623
+  },
+  "L_step_max": {
+    "file": "L_step_max.npy",
+    "rank_file": "L_step_max__rank.npy",
+    "finite_px": 5164566,
+    "coverage": 0.999753379895622,
+    "min": 1.0,
+    "p50": 60.0,
+    "max": 255.0
+  },
+  "L_ex_max": {
+    "file": "L_ex_max.npy",
+    "rank_file": "L_ex_max__rank.npy",
+    "finite_px": 5164566,
+    "coverage": 0.999753379895622,
+    "min": 1.0,
+    "p50": 77.0,
+    "max": 255.0
+  },
+  "L_coh100": {
+    "file": "L_coh100.npy",
+    "rank_file": "L_coh100__rank.npy",
+    "finite_px": 5154319,
+    "coverage": 0.9977697721958094,
+    "min": 1.0,
+    "p50": 170.0,
+    "max": 255.0
+  },
+  "L_relief": {
+    "file": "L_relief.npy",
+    "rank_file": "L_relief__rank.npy",
+    "finite_px": 5164566,
+    "coverage": 0.999753379895622,
+    "min": 1.0,
+    "p50": 44.0,
+    "max": 218.0
+  },
+  "L_cover": {
+    "file": "L_cover.npy",
+    "rank_file": "L_cover__rank.npy",
+    "finite_px": 5165840,
+    "coverage": 1.0,
+    "min": 0.0,
+    "p50": 1.0,
+    "max": 1.0
+  }
+}

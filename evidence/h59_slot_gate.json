@@ -1,0 +1,124 @@
+{
+ "shipped_field": "clf_union",
+ "gates": {
+  "clf_union": {
+   "promotes_over_union": false,
+   "mean_lift_vs_random_at_37654": {
+    "tip": 0.003843,
+    "hide": 0.004631
+   },
+   "folds_won_vs_random_at_37654": {
+    "tip": 4,
+    "hide": 4
+   },
+   "slot_bar_met": false
+  }
+ },
+ "slot_bar_met": false,
+ "promotion_decisions": {
+  "clf_union": {
+   "promotes_over_union": false,
+   "mean_lift_vs_random_at_37654": {
+    "tip": 0.003843,
+    "hide": 0.004631
+   },
+   "folds_won_vs_random_at_37654": {
+    "tip": 4,
+    "hide": 4
+   },
+   "slot_bar_met": false
+  },
+  "clf_view_A": {
+   "promotes_over_union": false,
+   "mean_lift_vs_random_at_37654": {
+    "tip": 0.002208,
+    "hide": 0.002285
+   },
+   "folds_won_vs_random_at_37654": {
+    "tip": 4,
+    "hide": 4
+   },
+   "slot_bar_met": false
+  },
+  "clf_view_B": {
+   "promotes_over_union": false,
+   "mean_lift_vs_random_at_37654": {
+    "tip": 0.003712,
+    "hide": 0.004603
+   },
+   "folds_won_vs_random_at_37654": {
+    "tip": 4,
+    "hide": 4
+   },
+   "slot_bar_met": false
+  },
+  "H59A_corroborated": {
+   "promotes_over_union": false,
+   "mean_lift_vs_random_at_37654": {
+    "tip": 0.003533,
+    "hide": 0.004246
+   },
+   "folds_won_vs_random_at_37654": {
+    "tip": 4,
+    "hide": 4
+   },
+   "slot_bar_met": false
+  },
+  "H59B_artifact_suppressed": {
+   "promotes_over_union": false,
+   "mean_lift_vs_random_at_37654": {
+    "tip": 0.003701,
+    "hide": 0.004518
+   },
+   "folds_won_vs_random_at_37654": {
+    "tip": 4,
+    "hide": 4
+   },
+   "slot_bar_met": false
+  },
+  "H59C_strain_lineament": {
+   "promotes_over_union": false,
+   "mean_lift_vs_random_at_37654": {
+    "tip": 0.002266,
+    "hide": 0.003065
+   },
+   "folds_won_vs_random_at_37654": {
+    "tip": 4,
+    "hide": 4
+   },
+   "slot_bar_met": false
+  },
+  "H59E_geoconj": {
+   "promotes_over_union": false,
+   "mean_lift_vs_random_at_37654": {
+    "tip": 0.003747,
+    "hide": 0.004522
+   },
+   "folds_won_vs_random_at_37654": {
+    "tip": 4,
+    "hide": 4
+   },
+   "slot_bar_met": false
+  }
+ },
+ "halo_pool": {
+  "tip_at_37654_halo": 0.003974,
+  "tip_at_37654_fullpool": 0.00506,
+  "halo_wins": false,
+  "note": "H59-D promotes iff the core-annulus pool beats the same field's full legal pool on the tip instrument at the 37,654 budget (registered rule)"
+ },
+ "checks": {
+  "R4 format gate (single band, float32, EPSG:32611, 3730x3292, transform, all finite, [0,1], no nodata)": true,
+  "R5 decoded pattern differs from every accessible aligned prior": true,
+  "R5 support novelty gate (>=20%)": true,
+  "R6 artefact is not the union of two named priors": true,
+  "R6 artefact is not merely the top-k of the plain union of the two views": false,
+  "R3 nothing emitted inside the <=200 m catalogue ring": true,
+  "R2 block-buffered OOF independence measured and non-degenerate": true,
+  "R7 one written geological reasoning per emitted arm pixel": true,
+  "R7b every A-only candidate segment in the permitted pool has written reasoning (registered cap 5,000; actual coverage all segments)": true
+ },
+ "checks_pass": false,
+ "verdict": "RESEARCH ONLY \u2014 DOWNLOAD OK FOR REVIEW; DO NOT SPEND A WEEKLY SLOT",
+ "note": "No organizer-authenticated score-to-file mapping exists; every leaderboard number quoted in this repository is owner-reported; the holdout simulator is a relative instrument, not a leaderboard proxy."
+}

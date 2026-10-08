@@ -1,0 +1,74 @@
+{
+  "reviewed_utc": "2026-10-07T15:39:00Z",
+  "scope": "H54 audit/pointer correction, H55-1 preregistered holdout, submission/feed/site publishing, README preservation",
+  "passes": [
+    {
+      "pass": 1,
+      "type": "implementation",
+      "summary": "Added fail-closed H55 input/protocol checks and a matched View-B refit runner; kept H55 output research-only; separated H54_RESEARCH_LATEST from the H53 incumbent pointer; repaired A-only docs from evidence; surfaced H54/H55 audit status in README/site/feed."
+    },
+    {
+      "pass": 2,
+      "type": "independent review and correction",
+      "summary": "Reviewed the changed generators and frozen protocol before fitting. Caught and corrected a malformed Python f-string in the publisher and a logger callback signature mismatch in the H55 feature build; both were fixed before the completed H55 holdout. Corrected stale score/file wording, added fail-closed repeat-run behavior, and ensured failed gates cannot imply slot approval."
+    },
+    {
+      "pass": 3,
+      "type": "re-check",
+      "summary": "Re-ran syntax compilation, essential Ruff checks, full tests, H55 protocol preflight/idempotency, feed/site regeneration, site link/JSON/download checker, and exact H54 raster/A-only coordinate read-back."
+    }
+  ],
+  "h55_protocol": {
+    "preflight": "READY_FOR_PREREGISTERED_HOLDOUT_ONLY; all three restored core files matched pinned byte counts/SHA-256 and the sample grid",
+    "provenance_limit": "Owner-supplied mirror pins; organizer input-byte authentication remains false",
+    "result": {
+      "matched_view_B_mean_dti": 0.19467087779765155,
+      "h55_paired_shoulders_mean_dti": 0.1970317574426225,
+      "mean_paired_lift": 0.002360879644970948,
+      "positive_folds": "4/4",
+      "required_mean_lift": 0.005,
+      "scientific_gate_pass": false
+    },
+    "disposition": "No H55 TIFF built; no weekly slot approved or used; repeat-run guard reused the receipt without refitting."
+  },
+  "h54_readback": {
+    "sha256": "15210d91fa0c939b254d058876b47268e650176e08bf0eed10437ced8d476e36",
+    "single_band_float32": true,
+    "shape": [
+      3730,
+      3292
+    ],
+    "epsg": 32611,
+    "values": [
+      0.0,
+      1.0
+    ],
+    "positive_pixels": 50517,
+    "short_audit_download": "docs/downloads/h54-audit-only.tif",
+    "short_download_sha256_matches_canonical": true,
+    "a_only_json_and_csv_rows": 11996,
+    "all_a_only_coordinates_match_emitted_pixels": true,
+    "slot_approval": false,
+    "global_decoded_uniqueness": "unknown; only 23 historical local rasters compared"
+  },
+  "checks": {
+    "py_compile": "passed",
+    "ruff": "passed essential checks E9/F63/F7/F82/F401 on touched Python files",
+    "pytest": {
+      "passed": 100,
+      "warnings": 42,
+      "warning_note": "38 rasterio affine PendingDeprecationWarnings plus 4 existing synthetic structure-tensor overflow/invalid-divide stress-test warnings; tests pass."
+    },
+    "site_check": "passed; 13 pages/73 data files, H54 banner/status, H55 failed gate, links, strict JSON, byte-exact TIFF response",
+    "browser_check": "not completed: optional Playwright package and work/browser-check/browser.json configuration are absent. The check script was updated and syntax/lint checked; no real Chromium interaction is claimed."
+  },
+  "score_mapping_authenticated": false,
+  "organizer_acceptance_verified": false,
+  "weekly_slots_used": 0,
+  "public_score_forecast": null,
+  "interpretation_note": "The three passes and checks above were recorded before rebasing onto origin/main. They are historical evidence for the pre-merge H54/H55-1 work and do not certify the integration with main. See post_integration_review once the merged-tree checks complete.",
+  "post_integration_review": {
+    "status": "pending",
+    "note": "Complete only after conflict resolution and checks against origin/main."
+  }
+}

@@ -1,0 +1,64 @@
+{
+ "file": "gems52-h56-consensus-core-continuation-40517px-04c86e1888a8-zeros.tif",
+ "bytes": 153815,
+ "sha256": "1308083dcf09b4c6fb656589ce79b3c392f5a0dd315e2ed31c8d36a47fc1d52d",
+ "count": 1,
+ "dtype": "float32",
+ "shape": [
+  3730,
+  3292
+ ],
+ "crs": "EPSG:32611",
+ "transform": [
+  100.0,
+  0.0,
+  243350.0,
+  0.0,
+  -100.0,
+  4508550.0
+ ],
+ "nodata": null,
+ "min": 0.0,
+ "max": 1.0,
+ "nan": 0,
+ "inf": 0,
+ "unique_values": [
+  0.0,
+  1.0
+ ],
+ "all_in_0_1": true,
+ "all_finite": true,
+ "emitted": 40517,
+ "outside_footprint": 0,
+ "on_catalogue": 0,
+ "min_dist_to_catalogue_m": 223.60679774997897,
+ "px_within_200m": 0,
+ "min_NN_separation_ok": false,
+ "n_components_8conn": 40517,
+ "largest_component": 1,
+ "priors_checked": 33,
+ "identical_to_any_prior": [],
+ "novel_px": 12941,
+ "novel_fraction": 0.3193967964064467,
+ "prior_px_dropped": 1200306,
+ "novel_arm_px": 15000,
+ "h54_novel_arm_px": 25000,
+ "novel_arm_overlap_with_h54": 569,
+ "P1_is_a_subset_of_the_file": true,
+ "nn_px": {
+  "min": 2.8284271247461903,
+  "p5": 2.8284271247461903,
+  "p50": 3.605551275463989,
+  "p99": 13.038404810405298,
+  "frac_lt_2": 0.0,
+  "note": "Euclidean nearest-neighbour distance between emitted cells, pixels"
+ },
+ "separation_decomposition": {
+  "P1_internal_min_NN_px": 2.8284271247461903,
+  "P1_internal_median_NN_px": 4.12,
+  "novel_internal_min_NN_px": 3.1622776601683795,
+  "novel_internal_median_NN_px": 4.24,
+  "novel_to_any_emitted_min_px": 3.1622776601683795,
+  "pre_registered_rule": "novel arm >= 3 px minimum separation (knowledge/15 section 2.2) - satisfied; the 2.83 px global pair is inherited inside the core set P1 = A & C"
+ }
+}

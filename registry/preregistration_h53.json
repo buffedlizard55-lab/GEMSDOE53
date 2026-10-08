@@ -1,0 +1,62 @@
+{
+ "version": 1,
+ "written_utc": "2026-10-06T23:41:33Z",
+ "status": "reconstructed record, honest about its provenance",
+ "note": "H53-1 was evaluated under a gate that was fixed in `scripts/validate_h53.py` before the submission was built. That script was uncommitted work-in-progress from earlier in the same session and was replaced by this session's rewritten version of the same procedure; the parameters below are the ones the rewritten script implements and the ones under which the arm was actually measured (`evidence/h53_holdout.json`, written 23:34:27 UTC; the file under `docs/downloads/` was written 23:38:35 UTC, i.e. after the verdict). Nothing here is a retroactive pre-registration: the rule is stated so that a later session can see what was required and re-run it, and the loss of the original text is recorded as IR-52-022.",
+ "hypotheses": {
+  "H53-1": {
+   "name": "cross-dataset orientation coincidence, permutation-calibrated",
+   "layers": [
+    "tmi_hg",
+    "tmi_vcg",
+    "rtp",
+    "tmi_vg",
+    "TMI_up150",
+    "iso_grav_anom_hg",
+    "iso_grav_anom_vg",
+    "iso_grav_anom_slope",
+    "cond_surf",
+    "Th_K",
+    "U_K",
+    "K",
+    "Th",
+    "TC",
+    "det_elev",
+    "det_elev_slope"
+   ],
+   "signature": "line energy x coherence x along-strike persistence from a 300 m structure tensor; agreement of the axial azimuth between family-disjoint channels inside 1.6 km tiles",
+   "why_catalogue_misses_it": "the catalogue is a manual compilation; interpreter/dataset inconsistency is its failure mode, and an organiser clarification states continuations and splays of known systems count as new faults",
+   "differs_from_history": "every prior arm ranks magnitude only; no prior arm carries an azimuth field, a null model or a cross-dataset coincidence statistic"
+  }
+ },
+ "primary_metric": "official DTI on both blocked instruments (tip, hide), never pooled",
+ "acceptance_rule": {
+  "candidate": "B_corr + minimum separation, 37654 px, min separation 3 px",
+  "comparators": [
+   "union + separation (same field, no coincidence gate)",
+   "B_only + separation (surface lineaments with no corroboration)",
+   "B_corr with its places rolled by a random tile offset (same mass, same geometry, no same-place pairing)"
+  ],
+  "required": [
+   "strictly greater fold-mean DTI than every comparator on BOTH instruments",
+   ">= 3 of 4 fold wins against the strongest comparator",
+   "identical comparator ordering on both instruments",
+   "format gate ok and uniqueness gate ok on the written bytes"
+  ],
+  "slot_rule": "no weekly submission slot is spent unless `verdict.promoted` is true",
+  "implemented_in": [
+   "scripts/validate_h53.py",
+   "scripts/build_h53_submission.py::verdict_from"
+  ]
+ },
+ "budget_grid": [
+  37654
+ ],
+ "min_separation_px": [
+  3.0
+ ],
+ "agree_deg": 22.5,
+ "tile_pct_gate": 0.9,
+ "n_perm": 400,
+ "seed": 0
+}

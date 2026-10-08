@@ -1,0 +1,265 @@
+{
+  "verified_against": "registry/data_manifest.json",
+  "all_ok": true,
+  "files": [
+    {
+      "id": "training_features",
+      "dest": "data/training_features.tif",
+      "bytes": 418912844,
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE",
+      "source_ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0",
+      "source_path": [
+        "data/bridge/gems-geodawn-numerical-features.tif.part-000",
+        "data/bridge/gems-geodawn-numerical-features.tif.part-001",
+        "data/bridge/gems-geodawn-numerical-features.tif.part-002",
+        "data/bridge/gems-geodawn-numerical-features.tif.part-003",
+        "data/bridge/gems-geodawn-numerical-features.tif.part-004"
+      ],
+      "provenance": "owner-supplied mirror of a DrivenData competition file (login-walled at https://www.drivendata.org/competitions/306/competition-doe-gems/data/); integrity-pinned, NOT organizer-authenticated; 19 float32 bands, nodata -3.4028234663852886e+38"
+    },
+    {
+      "id": "labels",
+      "dest": "data/labels.tif",
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/bridge/labels.tif",
+      "provenance": "owner-supplied mirror of a DrivenData competition file (login-walled at https://www.drivendata.org/competitions/306/competition-doe-gems/data/); integrity-pinned, NOT organizer-authenticated"
+    },
+    {
+      "id": "sample_submission",
+      "dest": "data/sample_submission.tif",
+      "bytes": 1599597,
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/bridge/sample_submission.tif",
+      "provenance": "owner-supplied mirror of a DrivenData competition file (login-walled at https://www.drivendata.org/competitions/306/competition-doe-gems/data/); integrity-pinned, NOT organizer-authenticated; used ONLY as the grid/footprint template (its 60,988 pixels equal to 1 sit on the labelled faults, unlike the page's 'total fault absence' wording)"
+    },
+    {
+      "id": "ext_derived_sgmc_faults_100m_u8",
+      "dest": "data/external/derived_sgmc_faults_100m_u8.tif",
+      "bytes": 198602,
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/external/derived_sgmc_faults_100m_u8.tif",
+      "provenance": "derived from USGS SGMC geologic-map faults (proxy only; not used in the factorial)"
+    },
+    {
+      "id": "ext_lidar_scarp_features_u8",
+      "dest": "data/external/lidar_scarp_features_u8.tif",
+      "bytes": 36943606,
+      "sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/external/lidar_scarp_features_u8.tif",
+      "provenance": "derived by the owner's CI from USGS 3DEP 1 m DEM tiles (706 of 716 tiles; tile list OCR-recovered from the competition PDF); USGS 3DEP carries no use restrictions per the owner's receipt"
+    },
+    {
+      "id": "ext_geodawn_rad_u8",
+      "dest": "data/external/geodawn_rad_u8.tif",
+      "bytes": 26612970,
+      "sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/external/geodawn_rad_u8.tif",
+      "provenance": "derived from the USGS GeoDAWN data release (DOI 10.5066/P93LGLVQ) K/Th/U/TC grids, uint8-quantised 1st-99th percentile"
+    },
+    {
+      "id": "ext_geodawn_extensions_u8",
+      "dest": "data/external/geodawn_extensions_u8.tif",
+      "bytes": 27132925,
+      "sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/external/geodawn_extensions_u8.tif",
+      "provenance": "derived from the USGS GeoDAWN data release (DOI 10.5066/P93LGLVQ): Th/K, U/K, U/Th ratios and TMI upward-continued 150 m"
+    },
+    {
+      "id": "ext_gdr_qfaults_traces",
+      "dest": "data/external/gdr_qfaults_traces.csv",
+      "bytes": 126177,
+      "sha256": "9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/external/gdr_qfaults_traces.csv",
+      "provenance": "GDR 1391 INGENIOUS Quaternary fault traces (attributes only)"
+    },
+    {
+      "id": "ext_gdr_wellspring_in_footprint",
+      "dest": "data/external/gdr_wellspring_in_footprint.csv",
+      "bytes": 2146771,
+      "sha256": "122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/external/gdr_wellspring_in_footprint.csv",
+      "provenance": "GDR 1391 'Well and Spring Temperature and Chemistry' (DOI 10.15121/1881483, CC BY 4.0) points inside the footprint; its dist_known_fault_px column is label-derived and is NOT used"
+    },
+    {
+      "id": "ext_gdr_volcanic_vents_in_footprint",
+      "dest": "data/external/gdr_volcanic_vents_in_footprint.csv",
+      "bytes": 672,
+      "sha256": "f91bafbaccaaf2754e71d60434fc0f9eb2c7b880c6e714883f4974542ff6a0bf",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "data/external/gdr_volcanic_vents_in_footprint.csv",
+      "provenance": "GDR 1391 Quaternary volcanic vents in the footprint"
+    },
+    {
+      "id": "scored_h19_5",
+      "dest": "data/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+      "bytes": 1712322,
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+      "provenance": "owner-reported 0.1922"
+    },
+    {
+      "id": "scored_h19_4",
+      "dest": "data/scored/gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan.tif",
+      "bytes": 1716768,
+      "sha256": "89109a3bd2cd3b12e7a0f388113c519843acfc9c4f46825affefc3e63dd99b22",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan.tif",
+      "provenance": "owner-reported 0.1894"
+    },
+    {
+      "id": "scored_h16_1",
+      "dest": "data/scored/gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
+      "bytes": 1718028,
+      "sha256": "055309694ed499ca3d87e76b3f5e81c292aef6e39c418d33ff5a817aa1309bea",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
+      "provenance": "owner-reported 0.1855"
+    },
+    {
+      "id": "scored_d15_scored",
+      "dest": "data/scored/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "bytes": 1632732,
+      "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "provenance": "owner-mirrored raster labelled 0.2477; user/owner-reported DTI claim is unverified, and no organizer leaderboard page or receipt was accessed"
+    },
+    {
+      "id": "scored_d28_unscored",
+      "dest": "data/scored/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "bytes": 1603424,
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "provenance": "unscored alternate"
+    },
+    {
+      "id": "scored_gems27_tgc_v2_d15",
+      "dest": "data/scored/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+      "bytes": 1635084,
+      "sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE27",
+      "source_ref": "main",
+      "source_path": "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+      "provenance": "owner-supplied scored-artifact mirror (GEMSDOE27 primary candidate manifest, generated_utc 2026-10-03T00:32:37Z); UNSCORED on the leaderboard; added 2026-10-04 because scripts/run_pipeline.py required it and it was absent from this manifest, which made the documented reproduce command abort (IR-32-MANIFEST-01)"
+    },
+    {
+      "id": "calib_13gems_20261001_r13-lattice-s5_v2_nan-ou",
+      "dest": "data/scored/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "bytes": 1706456,
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/calibration/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "provenance": "calibration raster copied unchanged from the owner siblings"
+    },
+    {
+      "id": "calib_8GEMSDOE_Hedge-v2_submission",
+      "dest": "data/scored/8GEMSDOE_Hedge-v2_submission.tif",
+      "bytes": 736494,
+      "sha256": "052688eafbc7a55d90caab72252a50304fe5caa8ecf973f8e791b4ae910f0792",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/calibration/8GEMSDOE_Hedge-v2_submission.tif",
+      "provenance": "calibration raster copied unchanged from the owner siblings"
+    },
+    {
+      "id": "calib_gems10-h25-ctx-ridge-20260927T2329477041",
+      "dest": "data/scored/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+      "bytes": 1772935,
+      "sha256": "1381e784fb8b8340beffd0e735ac9eea89ad35d1a807f8a9bab5506e3fc8275e",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/calibration/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+      "provenance": "calibration raster copied unchanged from the owner siblings"
+    },
+    {
+      "id": "calib_gems10-h28-dotted-ridge-20260928T0202562",
+      "dest": "data/scored/gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+      "bytes": 1620739,
+      "sha256": "7637b72d4c6c3e10226bf46bd72a20272d62ccbe29743062632d10b158b49c58",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/calibration/gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+      "provenance": "calibration raster copied unchanged from the owner siblings"
+    },
+    {
+      "id": "calib_gemsdoe-ens12-adopted-7f00890a",
+      "dest": "data/scored/gemsdoe-ens12-adopted-7f00890a.tif",
+      "bytes": 570890,
+      "sha256": "7f00890a62878d612fb5eef67a9a364a2df819433dde74b6762ce4fc0fc4fe15",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/calibration/gemsdoe-ens12-adopted-7f00890a.tif",
+      "provenance": "calibration raster copied unchanged from the owner siblings"
+    },
+    {
+      "id": "calib_gemsdoe9-PLACEHOLDER-2314b599",
+      "dest": "data/scored/gemsdoe9-PLACEHOLDER-2314b599.tif",
+      "bytes": 439456,
+      "sha256": "2314b59920bfeeaf6a592d4868b25eca62212825620f9945723c2f6d0a2e5b22",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+      "source_path": "inputs/calibration/gemsdoe9-PLACEHOLDER-2314b599.tif",
+      "provenance": "calibration raster copied unchanged from the owner siblings"
+    },
+    {
+      "id": "ref_h33_2_b2",
+      "dest": "data/reference/h33-2-b2-zeros.tif",
+      "bytes": 219065,
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "matches_pin": true,
+      "source_repo": "buffedlizard55-lab/GEMSDOE32",
+      "source_ref": "main",
+      "source_path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "provenance": "the reported-0.2778 flank-pruned arm; the 13th LATI observation and the only direct catalogue-flank ablation in the whole 44-repository collection. Its score is attribution-conflicted (IR-47-002), which is why scripts/flank_sensitivity.py reports a break-even rather than a conclusion."
+    }
+  ]
+}

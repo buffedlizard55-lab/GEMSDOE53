@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "round": "H58",
+  "candidate": "H58-A",
+  "review_utc": "2026-10-08T00:03:04Z",
+  "execution": {
+    "commit": "b475f46bbe6228017b16cb4f7940ea9101a38e52",
+    "command": "PYTHONPATH=src .venv/bin/python scripts/run_h58.py --data-root work/h58_pinned --work-dir work/h58",
+    "exit_code": 0,
+    "run_result": "evidence/h58_result.json",
+    "holdout_result": "evidence/h58_holdout.json",
+    "code_hashes": {
+      "scripts/run_h58.py": "e86aa15a3d9768dfc5268230ddbd7fc6873def9d30e1adddd01836e909b31a4b",
+      "src/gems52/h58.py": "f8cfc7ea451c45e7e33a93ef6dea9ebb63165ed1395d63d0f3fad8fce7e63e23",
+      "src/gems52/h57.py": "f667fc689c254f49b00617236e22d394150b71b4c18b21d95ffe15a2b8fa8df2",
+      "src/gems52/spatial.py": "3776a6be457268a548b7d9931263bc6b5c1e5a431cb1ee727a22caacffc17c34",
+      "src/gems52/metric.py": "3d454119edfcec3cc2a83278c2015d7e41d39d8c1142fca12311409a18ce7d1a"
+    }
+  },
+  "verified_run_facts": {
+    "owner_mirror_manifest_pins_passed": 23,
+    "source_rasters_grid_checked": 6,
+    "unique_qualified_h58_a_sites": 20,
+    "positive_f_geo_support_pixels": 123173,
+    "sample_template_format_gate_passed": true,
+    "decoded_pattern_unique_against_accessible_priors": true,
+    "accessible_prior_rasters_checked": 29,
+    "per_candidate_reasoning_rows": 22,
+    "unique_tiff": "submission/gems52-h58-coldgeo-consensus-22px-a55b0dee38-research.tif",
+    "tiff_sha256": "130c242e33aef398c44b22cdf247e8a9357d8b402f43f17f0a2da30f2ede1fc7",
+    "tiff_nonzero_pixels": 22,
+    "requested_primary_budget": 37654,
+    "support_shortfall": 37632,
+    "candidate_support_capacity_gate_passed": false,
+    "hide_mean_lift_vs_strongest_same_fold_baseline": -0.05655644147490592,
+    "hide_folds_won": 0,
+    "hide_all_primary_folds_budget_comparable": false,
+    "block_mean_lift_vs_strongest_same_fold_baseline": -0.058306342285100676,
+    "block_folds_won": 0,
+    "block_all_primary_folds_budget_comparable": false,
+    "local_research_gate_passed": false,
+    "weekly_slot_approved": false,
+    "weekly_slots_used": 0,
+    "organizer_authenticated_performance": false
+  },
+  "review_findings": [
+    {
+      "id": "IR-H58-002",
+      "finding": "The frozen F_geo field has ample positive support, but the registered 5-pixel square local-maximum prefilter in the shared emitter leaves only 22 output cells before the 3-pixel Euclidean spacing pass. The support-capacity and all-fold budget-comparability gates therefore fail.",
+      "interpretation": "The negative recorded DTI differences are not valid matched-budget performance estimates. This run fails the registered emission/gate configuration; it does not establish that cold geothermometers have no geological value.",
+      "action": "No zero-score fill, threshold change, post-result rerun, or promotion. A future emitter correction would require a separately frozen protocol and complete new run."
+    },
+    {
+      "id": "IR-H58-003",
+      "finding": "The pseudo-AUC catalogue clearance used five iterations of scipy.ndimage.binary_dilation with its default cross connectivity. This does not exclude every pixel within a 500 m Euclidean radius (for example offset (3,3) is about 424 m but remains outside the cross-shaped mask).",
+      "interpretation": "The recorded pseudo-AUC values are exploratory and do not meet the exact preregistered negative-mask definition. They must not support a co-training conclusion. This issue does not alter the primary hide/block comparisons, which already fail budget comparability.",
+      "action": "Preserve raw values with this caveat; do not retrofit or rerun the opened H58 result. A future diagnostic requires a newly frozen Euclidean-clearance implementation."
+    },
+    {
+      "finding": "The initial H58 publisher/checker expected holdout.modes, while the frozen runner records holdout.mode_summary.",
+      "interpretation": "This was a post-run site-integration issue, not a model or scoring change.",
+      "action": "Fixed only in the publication/checker layer. The runner and fitted results remain bound to the hashes above."
+    }
+  ],
+  "publication_and_slot_status": {
+    "candidate_status": "research-only; not approved to submit",
+    "global_submission_pointer": "gems52-h57-union-novel-core25517px-arm14804px.tif",
+    "candidate_promoted": false,
+    "portal_uploaded": false,
+    "competition_slot_used": false,
+    "organizer_provenance_blocker": "IR-H58-001 remains open and critical; owner-mirror hashes do not authenticate organizer bytes"
+  },
+  "scope_note": "This is a post-run audit record, not a preregistration amendment. The H58 protocol and result receipt are preserved unchanged. The unique TIFF is available for local inspection only; do not upload it."
+}

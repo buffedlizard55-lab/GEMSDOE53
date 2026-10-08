@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Every H59 measurement, gate and receipt for the two-view co-training artifact."><title>H59 audit · co-training round on pinned bytes · GEMSDOE52</title>
+<link rel="stylesheet" href="style.css"><script src="site.js" defer></script></head>
+<body><a class="skip" href="#main">Skip to evidence</a><header><nav><a class="brand" href="index.html">GEMS / DOE 52</a><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="h59.html">H59 audit</a><a href="irregularities.html">Limitations</a><a href="sources.html">Sources</a><a href="downloads/index.html">Downloads</a></nav></header>
+<main id="main"><div class="eyebrow">H59 · full audit · RESEARCH ONLY — OK TO DOWNLOAD FOR REVIEW · DO NOT SPEND A WEEKLY SLOT</div>
+<h1>The whole round,<br>receipt by receipt.</h1>
+<h2>Inputs</h2>
+<p class="small">Root <code>work/h59_pinned</code> · 23/23
+manifest pins match (fail-closed verifier <code>gems52.h58.verify_manifest</code>) ·
+SHA/byte verification of owner-mirror pins proves mirror integrity, NOT organizer authentication; the DrivenData data tab is login-walled. Tracked <code>data/*.tif</code> measured and excluded: their hashes are
+in the <a href="data/h59_preflight_integrity.json">preflight receipt</a>; the tracked feature
+raster is a 19-band all-zero stub.</p>
+<h2>Co-training</h2>
+<div class="table-wrap"><table><thead><tr><th>fold</th><th>fit px</th><th>region px</th>
+<th>cat px in fit</th><th>truth px</th><th>negatives</th><th>blocks</th></tr></thead>
+<tbody><tr><td>0</td><td class="number">4,154,522</td><td class="number">928,474</td><td class="number">47,162</td><td class="number">10,356</td><td class="number">794,525</td><td class="number">411</td></tr><tr><td>1</td><td class="number">3,018,130</td><td class="number">2,083,233</td><td class="number">33,682</td><td class="number">10,275</td><td class="number">1,810,485</td><td class="number">878</td></tr><tr><td>2</td><td class="number">3,580,169</td><td class="number">1,519,535</td><td class="number">42,992</td><td class="number">10,345</td><td class="number">1,340,906</td><td class="number">639</td></tr><tr><td>3</td><td class="number">4,436,740</td><td class="number">634,598</td><td class="number">54,040</td><td class="number">5,332</td><td class="number">573,244</td><td class="number">272</td></tr></tbody></table></div>
+<p class="small">Independence: {"n_blocks": 2200, "max_abs_correlation": 0.1071166506385325, "measured": true, "allow_exchange": true, "reason": "weak proxy negative-error correlation; not proof of conditional feature independence"}; pixel-level
+n=4,519,160, Pearson 0.05975405735663741, Spearman
+0.04086892567189061. Pseudo-labels: {"ran": true, "n_pseudo_px": 1999, "n_segments": 89, "auc_view_A_before": 0.48668834447449094, "auc_view_A_after": 0.48559162181746063, "delta_auc": -0.0010967226570303135}.
+Strata counts: {"allowed": 4861502, "a_only": 183553, "b_only": 197898, "concordant": 47183, "neither": 4432868}; median depth to basement (m):
+{"a_only": 419.2230224609375, "b_only": 155.02029418945312, "concordant": 208.33055114746094, "permitted": 315.98773193359375}.</p>
+<h2>Ranking fields — fold-mean DTI, both instruments, both budgets</h2>
+<div class="table-wrap"><table><thead><tr><th>cell</th><th>clf_union</th><th>H59E_geoconj</th><th>clf_view_B</th><th>H59B_artifact_suppressed</th><th>H59A_corroborated</th><th>H59C_strain_lineament</th><th>clf_view_A</th><th>random</th></tr></thead>
+<tbody><tr><td>hide@15000</td><td class="number">0.005322</td><td class="number">0.005230</td><td class="number">0.004997</td><td class="number">0.004892</td><td class="number">0.004201</td><td class="number">0.004112</td><td class="number">0.003016</td><td class="number">0.000988</td></tr><tr><td>hide@37654</td><td class="number">0.006548</td><td class="number">0.006520</td><td class="number">0.006439</td><td class="number">0.006435</td><td class="number">0.006162</td><td class="number">0.004982</td><td class="number">0.004201</td><td class="number">0.001917</td></tr><tr><td>tip@15000</td><td class="number">0.004767</td><td class="number">0.004699</td><td class="number">0.004579</td><td class="number">0.004485</td><td class="number">0.004007</td><td class="number">0.003735</td><td class="number">0.003074</td><td class="number">0.001130</td></tr><tr><td>tip@37654</td><td class="number">0.005370</td><td class="number">0.005274</td><td class="number">0.005238</td><td class="number">0.005228</td><td class="number">0.005060</td><td class="number">0.003793</td><td class="number">0.003735</td><td class="number">0.001527</td></tr></tbody></table></div>
+<p class="small">Registered decision: promotion only on a 4/4-cell win vs the incumbent union field;
+slot bar +0.005 mean lift vs matched random on both instruments at 37,654 and ≥ 3/4 folds. Field
+promoted for the shipped arm: <code>clf_union</code>. H59-D halo rule:
+<code>False</code> (0.003974 vs 0.005060).</p>
+<h2>Artifact gates</h2>
+<div class="table-wrap"><table><thead><tr><th>check</th><th>verdict</th></tr></thead>
+<tbody><tr><td>R4 format gate (single band, float32, EPSG:32611, 3730x3292, transform, all finite, [0,1], no nodata)</td><td><span class="pill ok">PASS</span></td></tr><tr><td>R5 decoded pattern differs from every accessible aligned prior</td><td><span class="pill ok">PASS</span></td></tr><tr><td>R5 support novelty gate (&gt;=20%)</td><td><span class="pill ok">PASS</span></td></tr><tr><td>R6 artefact is not the union of two named priors</td><td><span class="pill ok">PASS</span></td></tr><tr><td>R6 artefact is not merely the top-k of the plain union of the two views</td><td><span class="pill no">FAIL</span></td></tr><tr><td>R3 nothing emitted inside the &lt;=200 m catalogue ring</td><td><span class="pill ok">PASS</span></td></tr><tr><td>R2 block-buffered OOF independence measured and non-degenerate</td><td><span class="pill ok">PASS</span></td></tr><tr><td>R7 one written geological reasoning per emitted arm pixel</td><td><span class="pill ok">PASS</span></td></tr><tr><td>R7b every A-only candidate segment in the permitted pool has written reasoning (registered cap 5,000; actual coverage all segments)</td><td><span class="pill ok">PASS</span></td></tr></tbody></table></div>
+<h2>Set relations and budget</h2>
+<p class="small">{
+"arm_px": 14783,
+"arm_outside_prior_support_px": 14783,
+"arm_outside_prior_support_frac": 1.0,
+"arm_outside_union_topk_px": 0,
+"arm_outside_union_topk_frac": 0.0,
+"field_shipped": "clf_union",
+"field_is_plain_union": true,
+"halo_rule_shipped": false,
+"arm_on_A_only_pixels_px": 781,
+"arm_on_B_only_pixels_px": 5084,
+"arm_in_halo_px": 6367,
+"file_equals_prior_A": false,
+"file_equals_prior_B": false,
+"file_equals_prior_C": false,
+"file_equals_prior_E": false,
+"file_equals_union_AB": false,
+"file_equals_union_AC": false,
+"strata_counts_recomputed": {
+"allowed": 4861502,
+"a_only": 183553,
+"b_only": 197898,
+"concordant": 47183,
+"neither": 4432868
+}
+}</p>
+<p class="small">Budget rule (conditional on owner-reported scores):
+{"n_novel": 45000, "total": 70517, "novel_fraction": 0.6381, "p_win": 0.583, "mean_dti": 0.3358, "worst_dti": 0.2175, "best_dti": 0.4541, "dti_at_central_rho": 0.3358}. Projection by
+arm density ρ: {"rho_0.03": 0.2658, "rho_0.05": 0.2811, "rho_0.07": 0.2964, "rho_0.09": 0.3117, "rho_0.12": 0.3347, "rho_0.14": 0.35} — an arm's ρ is a prior, not a
+measurement; a required-novel arm cannot be scored by this simulator at all.</p>
+<h2>Receipts</h2>
+<p class="small"><a href="data/h59_preflight_integrity.json">preflight</a> ·
+<a href="data/h59_cotrain.json">co-training</a> ·
+<a href="data/h59_validation.json">validation</a> ·
+<a href="data/h59_build.json">build</a> ·
+<a href="data/h59_format_gate.json">format</a> ·
+<a href="data/h59_uniqueness.json">uniqueness</a> ·
+<a href="data/h59_slot_gate.json">slot gate</a> ·
+<a href="data/submission_h59.json">submission receipt</a> ·
+downloads: <a href="downloads/gems52-h59-union-core25517px-arm14783px.tif" download>canonical TIFF</a> ·
+<a href="downloads/gems52-h59-union-core25517px-arm14783px.zip" download>ZIP</a> ·
+<a href="downloads/gems52-h59-40300px-candidate-geology.csv" download>per-pixel reasoning CSV</a> ·
+<a href="downloads/gems52-h59-a-only-candidate-segments.csv" download>A-only segment dossier</a></p>
+<div class="status"><strong>RESEARCH ONLY — DOWNLOAD OK FOR REVIEW; DO NOT SPEND A WEEKLY SLOT</strong> No organizer-authenticated score-to-file mapping exists; every leaderboard number quoted in this repository is owner-reported; the holdout simulator is a relative instrument, not a leaderboard proxy.</div></main><footer>DOE GEMS competition 306 · Reproducible local research · Predictions are not verified faults or geothermal discoveries. <a href="irregularities.html">Limitations</a> · <a href="sources.html">Sources</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE52">Code and evidence</a></footer></body></html>

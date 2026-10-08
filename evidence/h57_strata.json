@@ -1,0 +1,646 @@
+{
+ "round": "H57-strata",
+ "seed": 20261007,
+ "runtime_s": 238.6,
+ "protocol": {
+  "budgets": [
+   15000
+  ],
+  "q_conf": 0.6,
+  "q_abstain": 0.4,
+  "emitter": "iso_select, min_px=3, nms_px=5",
+  "candidate_pool": "fold region & permitted & ~dilate(visible catalogue, 2 px); truth is the held-out catalogue",
+  "strata_definition": "h57.disagreement on the out-of-fold View A and View B probabilities"
+ },
+ "strata_px": {
+  "allowed": 4861502,
+  "a_only": 179254,
+  "b_only": 201837,
+  "concordant": 46293,
+  "neither": 4434118
+ },
+ "results": [
+  {
+   "mode": "tip",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "random",
+   "dti": 0.001013,
+   "emitted": 15000,
+   "n_truth": 3947
+  },
+  {
+   "mode": "tip",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "view_A",
+   "dti": 0.004037,
+   "emitted": 12628,
+   "n_truth": 3947
+  },
+  {
+   "mode": "tip",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "view_B",
+   "dti": 0.004379,
+   "emitted": 15000,
+   "n_truth": 3947
+  },
+  {
+   "mode": "tip",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "union",
+   "dti": 0.004595,
+   "emitted": 15000,
+   "n_truth": 3947
+  },
+  {
+   "mode": "tip",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "S_a_only",
+   "dti": 0.001306,
+   "emitted": 2322,
+   "n_truth": 3947
+  },
+  {
+   "mode": "tip",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "S_b_only",
+   "dti": 0.002697,
+   "emitted": 7368,
+   "n_truth": 3947
+  },
+  {
+   "mode": "tip",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "S_concordant",
+   "dti": 0.000822,
+   "emitted": 1795,
+   "n_truth": 3947
+  },
+  {
+   "mode": "tip",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "S_neither",
+   "dti": 0.003864,
+   "emitted": 15000,
+   "n_truth": 3947
+  },
+  {
+   "mode": "tip",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "random",
+   "dti": 0.001492,
+   "emitted": 15000,
+   "n_truth": 8339
+  },
+  {
+   "mode": "tip",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "view_A",
+   "dti": 0.005043,
+   "emitted": 12628,
+   "n_truth": 8339
+  },
+  {
+   "mode": "tip",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "view_B",
+   "dti": 0.006267,
+   "emitted": 15000,
+   "n_truth": 8339
+  },
+  {
+   "mode": "tip",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "union",
+   "dti": 0.006323,
+   "emitted": 15000,
+   "n_truth": 8339
+  },
+  {
+   "mode": "tip",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "S_a_only",
+   "dti": 0.000973,
+   "emitted": 2322,
+   "n_truth": 8339
+  },
+  {
+   "mode": "tip",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "S_b_only",
+   "dti": 0.003498,
+   "emitted": 7368,
+   "n_truth": 8339
+  },
+  {
+   "mode": "tip",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "S_concordant",
+   "dti": 0.000778,
+   "emitted": 1795,
+   "n_truth": 8339
+  },
+  {
+   "mode": "tip",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "S_neither",
+   "dti": 0.006405,
+   "emitted": 15000,
+   "n_truth": 8339
+  },
+  {
+   "mode": "tip",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "random",
+   "dti": 0.001051,
+   "emitted": 15000,
+   "n_truth": 5210
+  },
+  {
+   "mode": "tip",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "view_A",
+   "dti": 0.00406,
+   "emitted": 12628,
+   "n_truth": 5210
+  },
+  {
+   "mode": "tip",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "view_B",
+   "dti": 0.00565,
+   "emitted": 15000,
+   "n_truth": 5210
+  },
+  {
+   "mode": "tip",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "union",
+   "dti": 0.005721,
+   "emitted": 15000,
+   "n_truth": 5210
+  },
+  {
+   "mode": "tip",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "S_a_only",
+   "dti": 0.001175,
+   "emitted": 2322,
+   "n_truth": 5210
+  },
+  {
+   "mode": "tip",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "S_b_only",
+   "dti": 0.003284,
+   "emitted": 7368,
+   "n_truth": 5210
+  },
+  {
+   "mode": "tip",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "S_concordant",
+   "dti": 0.002071,
+   "emitted": 1795,
+   "n_truth": 5210
+  },
+  {
+   "mode": "tip",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "S_neither",
+   "dti": 0.004337,
+   "emitted": 15000,
+   "n_truth": 5210
+  },
+  {
+   "mode": "tip",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "random",
+   "dti": 0.000866,
+   "emitted": 15000,
+   "n_truth": 1687
+  },
+  {
+   "mode": "tip",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "view_A",
+   "dti": 0.002025,
+   "emitted": 12628,
+   "n_truth": 1687
+  },
+  {
+   "mode": "tip",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "view_B",
+   "dti": 0.002246,
+   "emitted": 15000,
+   "n_truth": 1687
+  },
+  {
+   "mode": "tip",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "union",
+   "dti": 0.002188,
+   "emitted": 15000,
+   "n_truth": 1687
+  },
+  {
+   "mode": "tip",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "S_a_only",
+   "dti": 0.0,
+   "emitted": 2322,
+   "n_truth": 1687
+  },
+  {
+   "mode": "tip",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "S_b_only",
+   "dti": 0.002588,
+   "emitted": 7368,
+   "n_truth": 1687
+  },
+  {
+   "mode": "tip",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "S_concordant",
+   "dti": 0.0,
+   "emitted": 1795,
+   "n_truth": 1687
+  },
+  {
+   "mode": "tip",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "S_neither",
+   "dti": 0.001231,
+   "emitted": 15000,
+   "n_truth": 1687
+  },
+  {
+   "mode": "hide",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "random",
+   "dti": 0.001062,
+   "emitted": 15000,
+   "n_truth": 10360
+  },
+  {
+   "mode": "hide",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "view_A",
+   "dti": 0.004357,
+   "emitted": 12628,
+   "n_truth": 10360
+  },
+  {
+   "mode": "hide",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "view_B",
+   "dti": 0.00441,
+   "emitted": 15000,
+   "n_truth": 10360
+  },
+  {
+   "mode": "hide",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "union",
+   "dti": 0.004498,
+   "emitted": 15000,
+   "n_truth": 10360
+  },
+  {
+   "mode": "hide",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "S_a_only",
+   "dti": 0.000948,
+   "emitted": 2322,
+   "n_truth": 10360
+  },
+  {
+   "mode": "hide",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "S_b_only",
+   "dti": 0.002322,
+   "emitted": 7368,
+   "n_truth": 10360
+  },
+  {
+   "mode": "hide",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "S_concordant",
+   "dti": 0.000626,
+   "emitted": 1795,
+   "n_truth": 10360
+  },
+  {
+   "mode": "hide",
+   "fold": 0,
+   "budget": 15000,
+   "arm": "S_neither",
+   "dti": 0.00381,
+   "emitted": 15000,
+   "n_truth": 10360
+  },
+  {
+   "mode": "hide",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "random",
+   "dti": 0.001071,
+   "emitted": 15000,
+   "n_truth": 10341
+  },
+  {
+   "mode": "hide",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "view_A",
+   "dti": 0.004387,
+   "emitted": 12628,
+   "n_truth": 10341
+  },
+  {
+   "mode": "hide",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "view_B",
+   "dti": 0.005506,
+   "emitted": 15000,
+   "n_truth": 10341
+  },
+  {
+   "mode": "hide",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "union",
+   "dti": 0.00544,
+   "emitted": 15000,
+   "n_truth": 10341
+  },
+  {
+   "mode": "hide",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "S_a_only",
+   "dti": 0.000788,
+   "emitted": 2322,
+   "n_truth": 10341
+  },
+  {
+   "mode": "hide",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "S_b_only",
+   "dti": 0.002044,
+   "emitted": 7368,
+   "n_truth": 10341
+  },
+  {
+   "mode": "hide",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "S_concordant",
+   "dti": 0.001034,
+   "emitted": 1795,
+   "n_truth": 10341
+  },
+  {
+   "mode": "hide",
+   "fold": 1,
+   "budget": 15000,
+   "arm": "S_neither",
+   "dti": 0.005295,
+   "emitted": 15000,
+   "n_truth": 10341
+  },
+  {
+   "mode": "hide",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "random",
+   "dti": 0.000994,
+   "emitted": 15000,
+   "n_truth": 10334
+  },
+  {
+   "mode": "hide",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "view_A",
+   "dti": 0.003839,
+   "emitted": 12628,
+   "n_truth": 10334
+  },
+  {
+   "mode": "hide",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "view_B",
+   "dti": 0.006741,
+   "emitted": 15000,
+   "n_truth": 10334
+  },
+  {
+   "mode": "hide",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "union",
+   "dti": 0.006663,
+   "emitted": 15000,
+   "n_truth": 10334
+  },
+  {
+   "mode": "hide",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "S_a_only",
+   "dti": 0.001016,
+   "emitted": 2322,
+   "n_truth": 10334
+  },
+  {
+   "mode": "hide",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "S_b_only",
+   "dti": 0.003656,
+   "emitted": 7368,
+   "n_truth": 10334
+  },
+  {
+   "mode": "hide",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "S_concordant",
+   "dti": 0.001481,
+   "emitted": 1795,
+   "n_truth": 10334
+  },
+  {
+   "mode": "hide",
+   "fold": 2,
+   "budget": 15000,
+   "arm": "S_neither",
+   "dti": 0.005299,
+   "emitted": 15000,
+   "n_truth": 10334
+  },
+  {
+   "mode": "hide",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "random",
+   "dti": 0.0009,
+   "emitted": 15000,
+   "n_truth": 5341
+  },
+  {
+   "mode": "hide",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "view_A",
+   "dti": 0.003055,
+   "emitted": 12628,
+   "n_truth": 5341
+  },
+  {
+   "mode": "hide",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "view_B",
+   "dti": 0.003782,
+   "emitted": 15000,
+   "n_truth": 5341
+  },
+  {
+   "mode": "hide",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "union",
+   "dti": 0.003575,
+   "emitted": 15000,
+   "n_truth": 5341
+  },
+  {
+   "mode": "hide",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "S_a_only",
+   "dti": 6.6e-05,
+   "emitted": 2322,
+   "n_truth": 5341
+  },
+  {
+   "mode": "hide",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "S_b_only",
+   "dti": 0.003022,
+   "emitted": 7368,
+   "n_truth": 5341
+  },
+  {
+   "mode": "hide",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "S_concordant",
+   "dti": 0.0,
+   "emitted": 1795,
+   "n_truth": 5341
+  },
+  {
+   "mode": "hide",
+   "fold": 3,
+   "budget": 15000,
+   "arm": "S_neither",
+   "dti": 0.002407,
+   "emitted": 15000,
+   "n_truth": 5341
+  }
+ ],
+ "summary": {
+  "tip": {
+   "random": 0.001106,
+   "view_A": 0.003791,
+   "view_B": 0.004635,
+   "union": 0.004707,
+   "S_a_only": 0.000864,
+   "S_b_only": 0.003017,
+   "S_concordant": 0.000918,
+   "S_neither": 0.003959
+  },
+  "hide": {
+   "random": 0.001007,
+   "view_A": 0.003909,
+   "view_B": 0.00511,
+   "union": 0.005044,
+   "S_a_only": 0.000705,
+   "S_b_only": 0.002761,
+   "S_concordant": 0.000785,
+   "S_neither": 0.004203
+  }
+ },
+ "combined": {
+  "random": 0.001057,
+  "view_A": 0.00385,
+  "view_B": 0.004873,
+  "union": 0.004875,
+  "S_a_only": 0.000785,
+  "S_b_only": 0.002889,
+  "S_concordant": 0.000852,
+  "S_neither": 0.004081
+ },
+ "folds_better_than_random": {
+  "random": "0/8",
+  "view_A": "8/8",
+  "view_B": "8/8",
+  "union": "8/8",
+  "S_a_only": "3/8",
+  "S_b_only": "8/8",
+  "S_concordant": "2/8",
+  "S_neither": "8/8"
+ },
+ "caveats": [
+  "Held-out-catalogue credit is not unmapped-fault credit. A stratum can win here and still be the wrong arm population for faults nobody has mapped.",
+  "knowledge/10 section 5: Spearman(reported score, simulated DTI) = -0.1045 (p=0.734, n=13). Relative instrument only."
+ ]
+}

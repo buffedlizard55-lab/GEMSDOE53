@@ -1,0 +1,292 @@
+{
+  "hypotheses": {
+    "H53-1_rtp-conductivity-cross-gradient": {
+      "HOLDOUT-DTI": 0.005618631047104977,
+      "95%_CI": [
+        0.002224799289043464,
+        0.009379595622313067
+      ],
+      "withheld_positives": 60988,
+      "n_segments": 838,
+      "n_folds": 5,
+      "feature_auc": 0.5,
+      "leakage_canary_pass": true
+    },
+    "H53-2_multiscale-elevation-curvature": {
+      "HOLDOUT-DTI": 0.005618631047104977,
+      "95%_CI": [
+        0.002224799289043464,
+        0.009379595622313067
+      ],
+      "withheld_positives": 60988,
+      "n_segments": 838,
+      "n_folds": 5,
+      "feature_auc": 0.5,
+      "leakage_canary_pass": true
+    },
+    "H53-3_total-count-edge-curvature": {
+      "HOLDOUT-DTI": 0.005618631047104977,
+      "95%_CI": [
+        0.002224799289043464,
+        0.009379595622313067
+      ],
+      "withheld_positives": 60988,
+      "n_segments": 838,
+      "n_folds": 5,
+      "feature_auc": 0.5,
+      "leakage_canary_pass": true
+    }
+  },
+  "selected": "H53-1_rtp-conductivity-cross-gradient",
+  "data_integrity": {
+    "all_feature_bands_constant": true,
+    "band_ranges": {
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "7": 0.0,
+      "8": 0.0,
+      "9": 0.0,
+      "10": 0.0,
+      "11": 0.0,
+      "12": 0.0,
+      "13": 0.0,
+      "14": 0.0,
+      "15": 0.0,
+      "16": 0.0,
+      "17": 0.0,
+      "18": 0.0,
+      "19": 0.0
+    },
+    "impact": "Holdout is non-informative; candidate is format-test only"
+  },
+  "raster": "gemsdoe53-h53-1-crossgradient-37654px-20261008-research-only.tif",
+  "sha256": "065f1684bab44f56005aad5ce7a5fca2fc7f73edef8c0106948f3abb290a9b44",
+  "validator": {
+    "no_NaN_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_shape_transform_match": true,
+    "positive_pixels": 37654
+  },
+  "registry": {
+    "max_abs_rank_correlation": 0.014275693994139372,
+    "max_dots_within_3px_fraction": 0.3297392043342009,
+    "comparisons": [
+      {
+        "raster": "gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+        "rank_correlation": 0.005719492282433137,
+        "dots_within_3px_fraction": 0.0372337600254953
+      },
+      {
+        "raster": "gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+        "rank_correlation": 0.0004446277670041558,
+        "dots_within_3px_fraction": 0.14282679131035214
+      },
+      {
+        "raster": "gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+        "rank_correlation": -0.005136499652045593,
+        "dots_within_3px_fraction": 0.07807935411908429
+      },
+      {
+        "raster": "gems52-h55-btherm-greedy-37654px-20261007T0150Z-zeros.tif",
+        "rank_correlation": -0.0007592367982203531,
+        "dots_within_3px_fraction": 0.1386306899665374
+      },
+      {
+        "raster": "gems52-h55-grav-rtp-logedge-37654-c4b8c10205da-zeros.tif",
+        "rank_correlation": -0.006082993431102143,
+        "dots_within_3px_fraction": 0.02392840070112073
+      },
+      {
+        "raster": "gems52-h55-profile-37654-7fd28c25b51a-research.tif",
+        "rank_correlation": -0.00659129180308583,
+        "dots_within_3px_fraction": 0.014819142720560896
+      },
+      {
+        "raster": "gems52-h56-consensus-core-continuation-40517px-04c86e1888a8-zeros.tif",
+        "rank_correlation": -0.0026891638988687443,
+        "dots_within_3px_fraction": 0.10357465342327508
+      },
+      {
+        "raster": "gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros.tif",
+        "rank_correlation": 0.0005248854046857915,
+        "dots_within_3px_fraction": 0.12402400807351145
+      },
+      {
+        "raster": "gems52-h57-union-novel-core25517px-arm14804px.tif",
+        "rank_correlation": -0.0011071451271325262,
+        "dots_within_3px_fraction": 0.15135178201519095
+      },
+      {
+        "raster": "gems52-h58-coldgeo-consensus-22px-a55b0dee38-research.tif",
+        "rank_correlation": -0.0001767812215031385,
+        "dots_within_3px_fraction": 0.0
+      },
+      {
+        "raster": "gems52-h59-cotrain-view_B-37654px-20261008T033705Z-54debe0d-zeros.tif",
+        "rank_correlation": 0.0017287499699103384,
+        "dots_within_3px_fraction": 0.1725181919583577
+      },
+      {
+        "raster": "gems52-h59-edge-coh-cotrain-37654px-20261008T022050Z-0f0984928454.tif",
+        "rank_correlation": -0.006511034165404227,
+        "dots_within_3px_fraction": 0.01439422106549105
+      },
+      {
+        "raster": "gems52-h59-union-core25517px-arm14783px.tif",
+        "rank_correlation": -0.0009741428736500435,
+        "dots_within_3px_fraction": 0.15451213682477294
+      },
+      {
+        "raster": "gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",
+        "rank_correlation": -0.006564539257191939,
+        "dots_within_3px_fraction": 0.0147394699102353
+      },
+      {
+        "raster": "gems52-r3-h1-paired-profile-37654-e42677141dbc-research-only.tif",
+        "rank_correlation": -0.0021771217305958765,
+        "dots_within_3px_fraction": 0.09571360280448292
+      },
+      {
+        "raster": "gems52-r4-B_only-37654px-b-only-research.tif",
+        "rank_correlation": 0.014275693994139372,
+        "dots_within_3px_fraction": 0.07486588410261857
+      },
+      {
+        "raster": "gems57-h57-credit-core25517-plus-novel8000-33517px-zeros.tif",
+        "rank_correlation": -0.0027560178035624795,
+        "dots_within_3px_fraction": 0.08599351994476019
+      },
+      {
+        "raster": "gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+        "rank_correlation": 0.005719492282433137,
+        "dots_within_3px_fraction": 0.0372337600254953
+      },
+      {
+        "raster": "gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+        "rank_correlation": 0.0004446277670041558,
+        "dots_within_3px_fraction": 0.14282679131035214
+      },
+      {
+        "raster": "gems52-h53-revealed-core-strike-continuation-50517px-r1.tif",
+        "rank_correlation": -0.005136499652045613,
+        "dots_within_3px_fraction": 0.07576884261964201
+      },
+      {
+        "raster": "gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+        "rank_correlation": -0.005136499652045593,
+        "dots_within_3px_fraction": 0.07807935411908429
+      },
+      {
+        "raster": "gems52-h55-btherm-greedy-37654px-20261007T0150Z-zeros.tif",
+        "rank_correlation": -0.0007592367982203531,
+        "dots_within_3px_fraction": 0.1386306899665374
+      },
+      {
+        "raster": "gems52-h55-grav-rtp-logedge-37654-c4b8c10205da-zeros.tif",
+        "rank_correlation": -0.006082993431102143,
+        "dots_within_3px_fraction": 0.02392840070112073
+      },
+      {
+        "raster": "gems52-h55-profile-37654-7fd28c25b51a-research.tif",
+        "rank_correlation": -0.00659129180308583,
+        "dots_within_3px_fraction": 0.014819142720560896
+      },
+      {
+        "raster": "gems52-h56-consensus-core-continuation-40517px-04c86e1888a8-zeros.tif",
+        "rank_correlation": -0.0026891638988687443,
+        "dots_within_3px_fraction": 0.10357465342327508
+      },
+      {
+        "raster": "gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros.tif",
+        "rank_correlation": 0.0005248854046857915,
+        "dots_within_3px_fraction": 0.12402400807351145
+      },
+      {
+        "raster": "gems52-h57-union-novel-core25517px-arm14804px.tif",
+        "rank_correlation": -0.0011071451271325262,
+        "dots_within_3px_fraction": 0.15135178201519095
+      },
+      {
+        "raster": "gems52-h58-coldgeo-consensus-22px-a55b0dee38-research.tif",
+        "rank_correlation": -0.0001767812215031385,
+        "dots_within_3px_fraction": 0.0
+      },
+      {
+        "raster": "gems52-h59-cotrain-view_B-37654px-20261008T033705Z-54debe0d-zeros.tif",
+        "rank_correlation": 0.0017287499699103384,
+        "dots_within_3px_fraction": 0.1725181919583577
+      },
+      {
+        "raster": "gems52-h59-edge-coh-cotrain-37654px-20261008T022050Z-0f0984928454.tif",
+        "rank_correlation": -0.006511034165404227,
+        "dots_within_3px_fraction": 0.01439422106549105
+      },
+      {
+        "raster": "gems52-h59-union-core25517px-arm14783px.tif",
+        "rank_correlation": -0.0009741428736500435,
+        "dots_within_3px_fraction": 0.15451213682477294
+      },
+      {
+        "raster": "gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",
+        "rank_correlation": -0.006564539257191939,
+        "dots_within_3px_fraction": 0.0147394699102353
+      },
+      {
+        "raster": "gems52-r3-h1-paired-profile-37654-e42677141dbc-research-only.tif",
+        "rank_correlation": -0.0021771217305958765,
+        "dots_within_3px_fraction": 0.09571360280448292
+      },
+      {
+        "raster": "gems57-h57-credit-core25517-plus-novel8000-33517px-zeros.tif",
+        "rank_correlation": -0.0027560178035624795,
+        "dots_within_3px_fraction": 0.08599351994476019
+      },
+      {
+        "raster": "gemsdoe52-cotrain-anchored-hybrid-20261006-zeros.tif",
+        "rank_correlation": -0.0013797048307503208,
+        "dots_within_3px_fraction": 0.12524565783183725
+      },
+      {
+        "raster": "gemsdoe52-cotrain-disagree-submodular-20261006-nan.tif",
+        "rank_correlation": 0.007337062812971501,
+        "dots_within_3px_fraction": 0.3297392043342009
+      },
+      {
+        "raster": "gemsdoe52-cotrain-disagree-submodular-20261006-zeros.tif",
+        "rank_correlation": 0.007337062812971501,
+        "dots_within_3px_fraction": 0.3297392043342009
+      },
+      {
+        "raster": "h54-audit-only.tif",
+        "rank_correlation": -0.005136499652045593,
+        "dots_within_3px_fraction": 0.07807935411908429
+      },
+      {
+        "raster": "h56-candidate.tif",
+        "rank_correlation": -0.0026891638988687443,
+        "dots_within_3px_fraction": 0.10357465342327508
+      },
+      {
+        "raster": "h57-candidate.tif",
+        "rank_correlation": -0.0011071451271325262,
+        "dots_within_3px_fraction": 0.15135178201519095
+      },
+      {
+        "raster": "h58-candidate.tif",
+        "rank_correlation": -0.0001767812215031385,
+        "dots_within_3px_fraction": 0.0
+      },
+      {
+        "raster": "h59-candidate.tif",
+        "rank_correlation": -0.0009741428736500435,
+        "dots_within_3px_fraction": 0.15451213682477294
+      }
+    ]
+  },
+  "verdict": "negative",
+  "submission_note": "Cross-gradient RTP/conductivity edges; catalogue-independent; 37,654 px (research gate)."
+}

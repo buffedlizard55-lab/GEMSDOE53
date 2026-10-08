@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="H56 co-training: View A vs View B disagreement, synthetic demo, spatial validation and geological reasoning."><title>H56 Co-training — GEMSDOE52</title><link rel="stylesheet" href="style.css"><script src="site.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><header><nav><a class="brand" href="index.html">GEMS / DOE 52</a><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="h56-cotrain.html">H56 audit</a><a href="validation.html">Validation</a><a href="forensics.html">0.2778 autopsy</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav></header><main id="main"><div class="download-bar" id="h56-bar-audit"><div>
+<strong>H56 Co-training TIFF — synthetic demo (research-only)</strong>
+<small><code>gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros.tif</code> — 141,106 bytes · 37,654 px · sha256 c391ae7a5d0d4b25c…</small>
+<small>format gate PASS · uniqueness PASS (96.7% novel) · not merely union PASS (37.1% / 6.4%) · independence r=0.008 → proceed</small>
+<small>Portal name: GEMSDOE52-H56-CoTrain-Disagreement-37654px</small>
+</div>
+<a class="button" href="downloads/gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros.tif" download>↓ Download .TIF</a>
+<a class="button" href="downloads/gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros.zip" download>↓ .ZIP</a>
+<a class="button" href="downloads/gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros-a-only-reasoning.csv" download>↓ Reasoning CSV</a>
+</div>
+
+<div class="status"><strong>RESEARCH-ONLY SYNTHETIC DEMO — safe to download for review, NOT APPROVED FOR UPLOAD; do not spend a weekly slot.</strong> The file is format-valid and unique, but its View A/B fields are synthetic (no training_features.tif bytes). It demonstrates the co-training pipeline end-to-end (Blum & Mitchell). To produce a real submission, run <code>bash scripts/download_competition_data.sh</code> on an unrestricted machine, then <code>python scripts/prepare_data.py</code> and <code>python scripts/build_h56_cotrain.py</code> with real derived layers. See the preregistered hypotheses below.</div>
+
+<div class="eyebrow">H56 · co-training · 2026-10-07T16:30Z · synthetic demo</div>
+<h1>Disagreement as the discovery signal</h1>
+<p class="lede">View A (potential-field + subsurface) vs View B (surface). The fault may be buried where A is confident and B abstains; where B is confident and A abstains, suspect roads or erosion lines. The test is the correlation of the two views’ spatial-block out-of-fold errors on labeled negatives.</p>
+
+<h2>Executive summary: is this file OK to download and submit?</h2>
+<table><thead><tr><th>Question</th><th>Answer (with receipt)</th></tr></thead><tbody>
+<tr><td>Can I download it?</td><td><b>Yes — one click:</b> <a href="downloads/gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros.tif" download>Download .TIF</a> (also <a href="downloads/gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros.zip" download>single-TIFF ZIP</a>). 141,106 bytes, single-band float32, EPSG:32611, 3730×3292 @100 m, values {0,1}, 0 NaN, 0 on catalogue, hash-verified.</td></tr>
+<tr><td>Will the portal accept it as a file?</td><td><b>Locally, yes:</b> format gate <code>True</code> (problems []). The writer re-reads the file and checks dtype, shape, CRS, transform, bounds, and [0,1] range. The earlier “Predicted values must be in range [0, 1]” error is addressed by writing finite 0/1 only and never NaN. <b>But</b> the competition’s undisclosed validator is not reproduced here; a local pass is not proof of organizer acceptance.</td></tr>
+<tr><td>Should I spend a weekly submission slot on it?</td><td><b>No — not yet.</b> This H56 file is a <b>synthetic demonstration</b> (View A/B are simulated, not derived from training_features.tif). Its hide-and-recover numbers are illustrative (ViewB 0.039 vs cotrain 0.097). A real promotion requires a spatial holdout on the catalogue that beats the single-view baseline by ≥0.005 over 4 folds with 3/4 wins, plus the same format/uniqueness/not-union gates. That holdout has not been run on real data in this sandbox. <b>Do not upload until you rerun on real data.</b></td></tr>
+<tr><td>Is it unique?</td><td><b>Yes, in the scanned inventory:</b> 96.7% of its 37,654 px touch none of the 20 priors scanned (36,417 novel), and 327,930 prior px are deliberately not re-emitted. No prior has an identical decoded pattern. Bounded audit; not a proof against private/unlinked files.</td></tr>
+<tr><td>Is it merely the union of the two views?</td><td><b>No:</b> 37.1% of its pixels are in the union of the two views’ top-K sets, 6.4% in the union of their coverage-greedy emissions — equal to neither.</td></tr>
+</tbody></table>
+
+<h2>Co-training, step by step (Blum & Mitchell COLT ’98, doi:10.1145/279943.279962)</h2>
+<p><b>View sufficiency & conditional independence are assumptions the prompt asks to TEST, not to assume.</b> The old evidence omitted all OOF negative predictions and could not establish independence. H56 tests it on spatial blocks.</p>
+<ol>
+<li><b>Two views:</b> <b>View A</b> is gravity (bands 13,11,18,5), magnetics (1,2,3,9,14), strain (4,7,8), seismicity (10,16), depth to basement (15), conductivity (17). <b>View B</b> is detrended elevation (12), slope (19), DEM-derived curvature/line response, plus <b>any radiometric bands in training_features.tif</b> — which resolves to <b>band 6</b>: the file’s tag says “magnetic_data / tilt angle” but measured Spearman vs GeoDAWN TC is <b>1.000</b> and vs K+Th+U is 0.9914, while |ρ| ≤0.149 vs all five magnetic bands. So band 6 is <b>GeoDAWN radiometric total count</b>, not a magnetic derivative, and belongs in View B (IR-52-019, <a href="data/h55_band6_identity.json">bytes proof</a>). Plus 6 external GeoDAWN bands (K,Th,U,Th/K,U/K,U/Th) and LiDAR scarp.</li>
+<li><b>Independence test (empirical):</b> 50×50 blocks, ≥32 labeled negatives per block (footprint pixels 300 m clear of any catalogue trace, because a 300 m kernel would otherwise teach that the trace is background — positive-unlabelled). For each block compute per-view <b>mean squared error</b> (MSE = mean(p²) on negatives) and <b>false positive rate</b> at 0.5, then correlate View A vs View B errors across blocks. Both Pearson and Spearman are checked; if max |r| ≥0.60, <b>abandon co-training</b> (ABANDON_R=0.60). H56 synthetic: <b>4672 blocks, max |r|=0.0075 → proceed</b> (weak proxy correlation, not proof of conditional feature independence).</li>
+<li><b>Pseudo-label only where one view is confident and the other abstains, with spatial isolation:</b> abstain = ≤0.60 quantile on the unlabeled pool (withholds, not “believes opposite”); confident = ≥0.995 quantile. Keep only <b>whole 50×50 components</b> where every pixel of the confident component lies inside the fit region (not within 80 px buffer of a block boundary) and where the receiver is in its abstain interval (not confidently negative). Caps: 2000 px per round, min 5 px per component, at least 200 pseudo-labels per view to avoid noise. This prevents leakage that a 300 m kernel would forgive.</li>
+<li><b>Disagreement as discovery:</b> strata via per-view quantiles (conf 0.98, abstain 0.60): <b>concordant</b> (both confident), <b>A-only</b> (A confident, B abstains → buried beneath cover, flag for Phase 2 reasoning), <b>B-only</b> (B confident, A abstains → suspect road/erosion/levee to suppress), <b>silent</b>. Density for emission: <b>0.7×A-only×(0.5+0.5×cover) + 0.25×concordant + 0.05×B-only×0.3</b> plus 1% base View A, where cover = log1p(depth)/ (1+slope/10). B-only is down-weighted 20×.</li>
+<li><b>Compare vs single-view baseline on hide-and-recover:</b> 4 quadrant whole-component folds with 80 px buffer, same footprint, same logistic learner (L2, C=1.0, balanced), same metric kernel. H56 synthetic demo reports View B 0.039 vs cotrain 0.097 illustratively; a <b>real</b> test must show mean lift ≥0.005 and ≥3/4 folds positive to promote.</li>
+<li><b>Normalize, place, gate, not-union:</b> rank/emit to [0,1], then <b>metric-aware greedy_emit</b> (triangular kernel R=3 px =300 m, <code>k(d)=max(1-d/300,0)</code>) maximizing expected coverage surrogate <code>Σ ρ_g max_x k(d)</code> under fixed budget (here 37,654). Then format gate, uniqueness gate (all priors, ≥20% novelty, selective), and not-union (vs topK and vs greedy unions).</li>
+<li><b>Phase-2 readiness:</b> for every A-only 300-m neighborhood, a row with East/North, cover, probs, stratum counts, and a <b>geological claim + alternative</b> (e.g., “basin-fill burial vs lithologic contact”). See <a href="downloads/gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros-a-only-reasoning.csv">CSV (372 A-only groups)</a>.</li>
+</ol>
+
+<h2>Why this can catch a fault missing from the USGS/INGENIOUS catalogue</h2>
+<p>The catalogue is built from <b>surface expression</b> (INQUA QFaults, INGENIOUS mapping of scarps). Where a range-front splays under an alluvial fan, the DEM scarp is gone but the <b>gravity/mag step + radiometric Th/K step</b> survives, because the two materials still sit either side of the plane. A- confident / B-abstain isolates exactly those; a catalogue fault is concordant (both views confident) and scores in a different stratum. Surface artifacts (roads, canals, quarry faces, erosion lines) do the opposite: B-only, suppressed.</p>
+
+<h2>Holdout (synthetic) and gates</h2>
+<ul>
+<li><b>Independence:</b> 4672 blocks, max |r| 0.0075 (&lt;0.60) → proceed. See <a href="data/submission_h56.json">evidence</a>.</li>
+<li><b>Strata:</b> A-only 65,599, B-only 64,214, concordant 1,101.</li>
+<li><b>Emission:</b> greedy_emit 37,654, all 8-isolated, expected credit 40,205.</li>
+<li><b>Format:</b> PASS, problems [] — 0 NaN, [0,1] only.</li>
+<li><b>Uniqueness:</b> PASS — 96.7% novel vs 20 priors, relation “strictly-novel-and-selective”.</li>
+<li><b>Not merely union:</b> PASS — 37.1% topK, 6.4% greedy.</li>
+<li><b>Reasoning:</b> 381 300-m neighborhoods, 372 A-only groups, each with claim + alternative. <a href="downloads/gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros-a-only-reasoning.csv">Download CSV</a> · <a href="data/h56_reasoning_20261007T1630Z.json">JSON</a></li>
+</ul>
+
+<h2>Four ranked hypotheses (H56 preregistration)</h2>
+<p>Full registry: <a href="../knowledge/13_hypotheses_H56_cotrain.md">knowledge/13_hypotheses_H56_cotrain.md</a>. Ranked by expected DTI per cost and falsifiability. H56-COTRAIN-BURIED was selected for this synthetic demo.</p>
+<div class="table-wrap"><table><thead><tr><th>Rank</th><th>Hypothesis &amp; layers</th><th>Physical signature</th><th>Why it finds unmapped</th><th>Status</th></tr></thead><tbody>
+<tr><td><b>1</b> · H56-COTRAIN-BURIED</td><td>View A (grav/mag/strain/seismic/depth/cond) vs View B (DEM/radiometric TC+K/Th/U/LiDAR). A-confident/B-abstain weighted by cover.</td><td>Persistent offset in potential-field with no DEM/radiometric TC step, on deep cover low slope.</td><td>Buried range-front: DEM gone, lithology + gravity step remains.</td><td><b>Synthetic demo built</b> (gates pass, real holdout pending).</td></tr>
+<tr><td>2 · H56-JUNCTION</td><td>Cond 17 + grav 13/18 + mag 1/2/14; K/Th/U. T-junction/termination across scales.</td><td>Conductivity edge ending on gravity/mag lineament (70–90°, persistent).</td><td>Transfer intersection omitted as single trace.</td><td>Not built (~3–5 h).</td></tr>
+<tr><td>3 · H56-STRAIN-DISPERSION</td><td>Shear 7/dilate 8/2ndinv 4 + mag 2/grav 13.</td><td>Local strike dispersion (circular variance) vs regional strain prior.</td><td>Short transfer splay below generalization.</td><td>Not built (~2–3 h).</td></tr>
+<tr><td>4 · H56-THERMAL-SPRING</td><td>INGENIOUS wellsprings (GDR) + A-only + cond 17. 60+°C within 5 km.</td><td>Thermal corroboration of A-only (spring line along strike, K/Th alteration).</td><td>Blind geothermal: no scarp but hot water at surface.</td><td>Not built (~2 h, data viable).</td></tr>
+<tr><td>5 · H56-SEISMIC-EVENT</td><td>USGS ComCat FDSN event-level (free, official).</td><td>Magnitude-weighted declustered rate along grav step vs smoothed dist/density.</td><td>Recent microseismic traces new segment.</td><td>Not viable in sandbox (TLS fail).</td></tr>
+</tbody></table></div>
+
+<h2>How to submit (for a future real H56)</h2>
+<ol>
+<li>Download the TIF via the button above (or ZIP). Do <b>not</b> reproject or edit in GIS; it must remain float32, single-band, EPSG:32611, 3730×3292, transform <code>[100,0,243350,0,-100,4508550]</code>.</li>
+<li>On an unrestricted machine, run the real holdout: <code>bash scripts/download_competition_data.sh</code> → <code>python scripts/prepare_data.py</code> → <code>python scripts/build_h56_cotrain.py</code> (will replace synthetic views with real derived layers). Verify <code>evidence/submission_*.json</code> says format PASS, uniqueness PASS, not-union PASS, and hide/tip lift ≥0.005 in 3/4 folds.</li>
+<li>Open <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DOE GEMS competition</a>, “New submission”, upload the single-band .tif (or a .zip containing only that .tif). Paste the portal note (≤200 chars): <code>H56 co-training disagreement | A-only 65599 B-only 64214 | independence r=0.008 (&lt;0.6) | greedy 37654px | synthetic demo</code> (replace with real note after rerun).</li>
+<li>Keep the confirmation: submission ID, timestamp, organizer score. Weekly limit is 3 per rolling 7 days.</li>
+</ol>
+<p><b>Predicted values must be in [0,1]:</b> H56 writes finite 0/1 only. The local gate re-reads the file and checks [0,1], shape, CRS, transform, bounds, one band, no NaN. This is a local precaution for the reported error.</p>
+
+<h2>Evidence &amp; links</h2>
+<ul>
+<li><a href="data/submission_h56.json">H56 evidence JSON</a> · <a href="data/h56_reasoning_20261007T1630Z.json">Reasoning JSON</a> · <a href="downloads/gems52-h56-cotrain-disagreement-37654px-20261007T1630Z-zeros-a-only-reasoning.csv">Reasoning CSV</a></li>
+<li><a href="../knowledge/13_hypotheses_H56_cotrain.md">Preregistered hypotheses (H56)</a> · <a href="data/submission_gems52-h55-btherm-greedy-37654px-20261007T0150Z-zeros.json">H55 evidence</a></li>
+<li>Official: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem &amp; DTI</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data (login)</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">rules PDF</a></li>
+<li>Sources: <a href="https://doi.org/10.5066/P93LGLVQ">GeoDAWN (USGS)</a> · <a href="https://gdr.openei.org/submissions/1391">INGENIOUS GDR</a> · <a href="https://doi.org/10.1145/279943.279962">Blum & Mitchell COLT ’98</a> · <a href="https://epsg.io/32611">EPSG:32611</a> · <a href="https://en.wikipedia.org/wiki/Tversky_index">Tversky/DTI</a></li>
+</ul>
+
+<h2>Limitations (not hidden)</h2>
+<ul>
+<li><b>Synthetic data:</b> View A/B in this H56 file are simulated; a real submission needs real <code>training_features.tif</code> bands and derived layers. The synthetic holdout is illustrative.</li>
+<li><b>Proxy negatives:</b> “labeled negatives” are catalogue-zero proxies, not verified absences (positive-unlabelled).</li>
+<li><b>Weak correlation ≠ proof:</b> low block-error correlation is a proxy diagnostic for co-training compatibility, not a proof of conditional independence or view sufficiency.</li>
+<li><b>No organizer score:</b> no portal upload or organizer score is claimed for H56.</li>
+</ul>
+</main><footer>Competition 306 · Synthetic demo · Fault predictions are hypotheses, not verified faults. <a href="irregularities.html">Limitations</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE52">Code &amp; complete prompt</a></footer></body></html>

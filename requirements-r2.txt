@@ -1,0 +1,13 @@
+# Exact scientific versions used by the R2 execution; CPU only, Python 3.11.
+numpy==2.2.6
+scipy==1.15.3
+rasterio==1.4.3
+scikit-learn==1.7.2
+scikit-image==0.25.2
+pandas==2.3.3
+pyproj==3.7.2
+joblib==1.6.0
+requests==2.32.5
+pillow==12.3.0
+pytest==8.4.2
+PyYAML==6.0.3

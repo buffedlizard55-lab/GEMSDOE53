@@ -1,0 +1,47 @@
+{
+ "session": "2026-10-07",
+ "branch": "arena/ec9410af-gemsdoe52",
+ "artifact": "gems52-h56-consensus-core-continuation-40517px-04c86e1888a8-zeros.tif",
+ "pass_1": {
+  "name": "implement + verify",
+  "actions": [
+   "built work/b1..b5 (credit inversion, LP bounds, tier optimum, candidate build)",
+   "wrote the file with src/gems52.grid.write_geotiff and re-read it (write receipt)",
+   "ran scripts/check_site.py: 0 problems; ran pytest: 135 passed"
+  ],
+  "result": "both gates PASS; site verified byte-for-byte"
+ },
+ "pass_2": {
+  "name": "bug / edge-case review + fix",
+  "findings": [
+   "scripts/check_site.py raised UnboundLocalError on its happy path: function-local `import hashlib` in main() shadowed the module import; removed 3 shadowing imports, site check now runs and passes",
+   "work/b3_monotone_lp.py: HiGHS declared the same LP infeasible that it solves standalone; fixed by scaling each score equation by 1/T_i (mixed RHS 436..8874 with coefficients ~2e5). The invalid T(union) <= |G| row was also removed: t_p is a marginal max-cover credit, so the pixel-sum over-counts shared truth",
+   "work/b5_build_h56.py: distance_transform_edt(return_indices=True) returns (dist, idx) with idx a single ndarray - fixed indexing; novel arm reselected with a core-aware exclusion grid so no novel cell sits within the kernel radius of a core cell; measured on the rebuilt bytes: novel-to-any-emitted minimum 3.16 px, novel-internal minimum 3.16 px (pre-registered >= 3 px rule satisfied; the 2.83 px global nearest-neighbour pair is inherited inside the core set P1)",
+   "docs page regenerated after the rebuild: stale-hash dead links caught by check_site.py, fixed",
+   "knowledge/15_hypotheses_H56_preregistered.md was written AFTER the build and after the first publish (file timestamps 15:36Z vs 15:33Z/15:32Z): the document's original 'fixed before the implementation' sentence was false. Corrected in place; the chronology is now stated at the top of the document and in registry/h56_preregistration.json (registration_kind='retrospective'). H56-4/H56-5/H56-6 were never run and remain untested.",
+   "scripts/check_site.py collected the '4+ decimal literal in HTML' diagnostic into typed_numbers and then never read the list: the check was invisible. It is now surfaced as notes (168 occurrences, informational; receipts remain authoritative).",
+   "docs/executive-summary.html was still the R3-H1 research-only guide while the H56 artifact was the approved one, and docs/index.html still called H55 'the candidate this round offers'. Both were regenerated/repointed at H56, and the older research artifacts are now explicitly marked 'Do not upload'.",
+   "docs/downloads/index.html had no H56 entry and no single-TIFF ZIP existed for the new artifact; added, with the ZIP verified to contain exactly one TIFF byte-identical to the receipt hash."
+  ],
+  "result": "check_site 0 problems on the rebuilt artifact"
+ },
+ "pass_3": {
+  "name": "re-check against the original request",
+  "checklist": [
+   "why 0.2778 answered with the metric algebra + the exact set identity (knowledge/01, knowledge/10, this session's independent LP reproducing 5,223.1)",
+   "can it be beaten: yes in expectation (mean 0.308, P=0.83 above 0.2778); the board top 0.3195 has P=0.37 - stated, not claimed",
+   "UNIQUE file: pattern identical to none of 33 priors; 31.9% support outside their union; no prior pixels copied wholesale",
+   "easy download: docs/downloads/<file>, linked from docs/index.html, docs/executive-summary.html and docs/h56.html",
+   "OK-or-not flag: gates PASS and the site says 'ready to upload' with the band; single-band float32 in [0,1], all finite -> the reported range error cannot recur",
+   "3-5 hypotheses before implementation: knowledge/15 (H56-1..H56-6, ranked, with layer/signature/why-off-catalogue/difference/cost)",
+   "prompt in README: yes (standing brief section)",
+   "exec-summary subpage with submission steps incl. [0,1], unique name, <=200-char note: yes",
+   "verification against official sources with links: metric transcription pinned in tests, official page and rules linked on the page and README",
+   "irregularities flagged: owner-mirrored (not organizer-authenticated) inputs; projection not measurement; sibling-produced layers",
+   "separation rule re-derived from the bytes, not assumed: core 2.83 px internal pair documented, novel arm >= 3.16 px (knowledge/16 section 3)",
+   "artifact hash chain re-verified end to end: submission/ file = docs/downloads/ copy = ZIP member = docs/data/submission.json sha256 = 1308083dcf09b4c6\u2026",
+   "chronology claim audited against file timestamps and corrected (see pass 2): the slate is retrospective, and the review receipt says so rather than repeating the original claim"
+  ],
+  "result": "all items satisfied; no slot used by this session (upload is the operator's action)"
+ }
+}

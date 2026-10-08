@@ -1,0 +1,260 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Historical H55 archive: corrected band-6 radiometry, separate co-training and A-only tests, with current H56 status clearly distinguished.">
+<title>H55 archive &mdash; historical evidence and correction &middot; GEMSDOE52</title>
+<link rel="stylesheet" href="style.css"><script src="site.js" defer></script></head><body>
+<a class="skip" href="#main">Skip to evidence</a>
+<header><nav><a class="brand" href="index.html">GEMS / DOE 52</a><a href="index.html">Overview</a>
+<a href="executive-summary.html">Submission guide</a><a href="validation.html">Validation</a>
+<a href="forensics.html">0.2778 autopsy</a><a href="sources.html">Sources</a>
+<a href="h55.html" aria-current="page">H55 archive</a><a href="h55-profile.html">H55-PROFILE follow-up</a><a href="h54.html">Parallel H54</a>
+<a href="h53.html">Parallel H53</a></nav></header>
+<main id="main"><!--H55EDGE-ARCHIVE--><section id="h55-edge-archive" class="card"><h2>H55-EDGE potential-field experiment — failed gates, research only</h2><p>Mean spatial holdout lift +0.000546, positive in 2/4 folds; required +0.005 and 3/4. Strict support-novelty gate also failed. No slot or score.</p><p><a href="downloads/gems52-h55-grav-rtp-logedge-37654-c4b8c10205da-zeros.tif" download>Download research TIFF</a> · <a href="downloads/gems52-h55-grav-rtp-logedge-37654-c4b8c10205da-zeros.zip" download>one-TIFF ZIP</a> · <a href="downloads/gems52-h55-grav-rtp-logedge-37654-c4b8c10205da-zeros-a-only-reasoning.csv">A-only reasoning CSV</a> · <a href="h55-edge.html">Full H55-EDGE audit</a></p></section><!--/H55EDGE-ARCHIVE--><div class="status" id="h55-archive-status"><strong>HISTORICAL H55 ARCHIVE — NOT CURRENT SUBMISSION ADVICE.</strong> H55 is historical; not the current artifact, and is superseded. Its local PASS and View-B holdout are historical findings, not evidence that current H56 is ready. The current H56 co-training TIFF is a synthetic methodology demo and is <b>not approved for upload</b>; do not spend a weekly slot until a real-data build passes the preregistered comparable spatial holdout. No H55 organizer score/upload receipt is recorded in this repository. <a href="h56-cotrain.html">View current H56 status</a>.</div>
+<h1>H55 &mdash; three corrections, one file</h1>
+<p class="lede">A radiometric band hiding in the official feature file under a magnetic tag; a hidden
+constant recovered from our own scored history; and the arithmetic that says placement was worth more
+than prediction, and that this family had left 14&nbsp;% of it unspent.</p>
+
+<div class="download-bar"><div><strong>gems52-h55-btherm-greedy-37654px-20261007T0150Z-zeros.tif</strong>
+<small>147,617 bytes &middot; sha256 <code>a0f3ed4b4524ca67a0c715beca5a905eced165ee9e59be5e5831a39b7526254d</code></small>
+<small>format gate True &middot; uniqueness gate True
+(strictly-novel-and-selective) &middot; three-pass re-verification of the bytes:
+<b>PASS</b>, 23/23 checks</small></div>
+<a class="button" href="downloads/gems52-h55-btherm-greedy-37654px-20261007T0150Z-zeros.tif" download>&darr; Download archived H55 .TIF</a>
+<a class="button" href="downloads/gems52-h55-btherm-greedy-37654px-20261007T0150Z-zeros.zip" download>&darr; Download H55 archive .ZIP</a>
+<a class="button" href="downloads/h55_reasoning_20261007T0150Z.json">&darr; Phase-2 reasoning</a></div>
+
+<h2><span class="num">1</span> Band 6 of the organiser's own feature file is radiometric, not magnetic</h2>
+<p>The TIFF tag inside <code>training_features.tif</code> says <code>data_category = magnetic_data</code>,
+description &ldquo;Tilt angle or total curvature &mdash; magnetic field derivative for edge detection&rdquo;.
+<code>src/gems52/features.py</code> believed it and filed the band inside <b>View A</b>, the
+potential-field view, as <code>A_mag_tilt_abs</code>. Measured on the bytes, 150,000-pixel sample
+(<a href="data/h55_band6_identity.json"><code>evidence/h55_band6_identity.json</code></a>):</p>
+<table><thead><tr><th>band 6 compared with</th><th class="num">Spearman &rho;</th>
+<th class="num">Pearson r</th></tr></thead><tbody><tr><td>geoDAWN TC grid</td><td class='num'><b>+1.0000</b></td><td class='num'>+0.9972</td></tr><tr><td>K plus Th plus U</td><td class='num'><b>+0.9914</b></td><td class='num'>+0.9898</td></tr><tr><td>TMI band14</td><td class='num'><b>-0.0250</b></td><td class='num'>-0.0396</td></tr><tr><td>TMI up150 external</td><td class='num'><b>+0.0079</b></td><td class='num'>-0.0086</td></tr><tr><td>TMI horizontal gradient band3</td><td class='num'><b>-0.1489</b></td><td class='num'>-0.1582</td></tr><tr><td>TMI vertical gradient band9</td><td class='num'><b>+0.0214</b></td><td class='num'>-0.0014</td></tr><tr><td>RTP band2</td><td class='num'><b>-0.0914</b></td><td class='num'>-0.0922</td></tr></tbody></table>
+<p>A total-count channel <em>is</em> the sum of the potassium, thorium and uranium windows, so
+&rho;&nbsp;=&nbsp;+0.9914 against K+Th+U is the physical signature, and
+&rho;&nbsp;=&nbsp;+1.0000 against the independently reduced USGS grid is
+the identification. A magnetic-field derivative cannot be uncorrelated with the magnetic field:
+|&rho;|&nbsp;&le;&nbsp;0.149 against all five magnetic bands in the same file. Band 6 is also strictly
+positive (3.125 &hellip; 40.423, mean 18.46) where a tilt
+angle is bounded by &plusmn;&pi;/2. Official source: Glen &amp; Earney 2024, USGS data release,
+<a href="https://doi.org/10.5066/P93LGLVQ">doi:10.5066/P93LGLVQ</a>, public domain.</p>
+<p><b>Consequence.</b> The brief's clause &ldquo;View B is DEM-derived curvature and slope, <em>plus any
+radiometric bands present in <code>training_features.tif</code></em>&rdquo; resolves to one band, not to
+none as <code>knowledge/04</code> and IR-52-001 recorded &mdash; and every conditional-independence
+measurement this family ever took had a surface-geochemistry band inside the potential-field view, which
+inflates any A&harr;B correlation. <b>IR-52-019 corrects IR-52-001.</b></p>
+
+<h2><span class="num">2</span> |G| &mdash; the hidden truth count &mdash; recovered by inverting the metric</h2>
+<p>The organiser publishes DTI and not |G|, yet |G| sets the credit bar and therefore the file size. For a
+<em>sparse</em> emission (every emitted pixel 8-isolated, so no two compete for the same truth pixel and
+<code>M = T</code>) the published form collapses to one unknown:</p>
+<p class="mono">DTI = T / (0.2&middot;S + 0.8&middot;|G|) &nbsp;&rArr;&nbsp;
+|G| &ge; 0.2&middot;DTI&middot;S / (1 &minus; 0.8&middot;DTI)</p>
+<table><thead><tr><th>raster (sha256-verified)</th><th class="num">S</th><th class="num">DTI</th>
+<th class="num">A/S</th><th class="num">% of ceiling</th><th class="num">largest component</th>
+<th class="num">|G| &ge;</th></tr></thead><tbody><tr><td class='mono'>h33-2-b2</td><td class='num'>37,654</td><td class='num'>0.2778</td><td class='num'>8.044</td><td class='num'>85.8%</td><td class='num'>1</td><td class='num'>2,690</td></tr><tr><td class='mono'>h25-1-dotted-d2-8</td><td class='num'>44,090</td><td class='num'>0.2600</td><td class='num'>7.955</td><td class='num'>84.8%</td><td class='num'>1</td><td class='num'>2,895</td></tr><tr><td class='mono'>h25-1-dotted-d1-5</td><td class='num'>60,069</td><td class='num'>0.2477</td><td class='num'>6.564</td><td class='num'>70.0%</td><td class='num'>1</td><td class='num'>3,711</td></tr><tr><td class='mono'>tgc-v2-on-d1-5</td><td class='num'>61,328</td><td class='num'>0.2449</td><td class='num'>6.584</td><td class='num'>70.2%</td><td class='num'>3</td><td class='num'>3,736</td></tr><tr><td class='mono'>h19-5-powerlaw</td><td class='num'>121,131</td><td class='num'>0.1922</td><td class='num'>3.813</td><td class='num'>40.6%</td><td class='num'>237</td><td class='num'>5,502</td></tr><tr><td class='mono'>h19-4-multiline</td><td class='num'>123,779</td><td class='num'>0.1894</td><td class='num'>3.863</td><td class='num'>41.2%</td><td class='num'>237</td><td class='num'>5,526</td></tr><tr><td class='mono'>h16-1-topo-geophys</td><td class='num'>123,939</td><td class='num'>0.1855</td><td class='num'>3.937</td><td class='num'>42.0%</td><td class='num'>233</td><td class='num'>5,399</td></tr><tr><td class='mono'>h28-dotted-ridge</td><td class='num'>69,281</td><td class='num'>0.1839</td><td class='num'>8.139</td><td class='num'>86.8%</td><td class='num'>1</td><td class='num'>2,988</td></tr><tr><td class='mono'>hedge-v2</td><td class='num'>227,507</td><td class='num'>0.1563</td><td class='num'>3.192</td><td class='num'>34.0%</td><td class='num'>7,909</td><td class='num'>8,128</td></tr><tr><td class='mono'>ens12-adopted</td><td class='num'>172,974</td><td class='num'>0.1563</td><td class='num'>3.443</td><td class='num'>36.7%</td><td class='num'>6,523</td><td class='num'>6,180</td></tr><tr><td class='mono'>h25-ctx-ridge</td><td class='num'>174,232</td><td class='num'>0.1280</td><td class='num'>3.881</td><td class='num'>41.4%</td><td class='num'>258</td><td class='num'>4,969</td></tr><tr><td class='mono'>r13-lattice-s5</td><td class='num'>206,895</td><td class='num'>0.0904</td><td class='num'>9.361</td><td class='num'>99.8%</td><td class='num'>1</td><td class='num'>4,032</td></tr><tr><td class='mono'>placeholder-2314b599</td><td class='num'>147,684</td><td class='num'>0.0107</td><td class='num'>1.664</td><td class='num'>17.7%</td><td class='num'>2,073</td><td class='num'>319</td></tr></tbody></table>
+<p>Binding row <code>hedge-v2</code> &rarr;
+<b>|G| &ge; 8,128</b>; the |G| that makes the implied per-covered-pixel truth
+density most constant across the 5 sparse rows is
+<b>8,129</b>
+(<a href="data/h55_g_calibration.json"><code>evidence/h55_g_calibration.json</code></a>).
+<code>knowledge/01</code>'s independent loss decomposition of the 0.2778 file gave 8,000 &mdash; two
+derivations, 1.6&nbsp;% apart. Caveat carried in the file itself: the geometry is exact because the bytes
+are pinned, but the DTI values are owner-reported (IR-52-003).</p>
+<p class="small">Note the &ldquo;% of ceiling&rdquo; column. One isolated emitted pixel can contribute at
+most <b>9.380298</b> of kernel-weighted coverage &mdash; the disc weight sum,
+enumerated exactly and test-pinned. The 0.2778 file reached 85.75&nbsp;% of it; its contiguous ancestor
+reached 40.65&nbsp;%. At unchanged geology DTI is monotone in that ratio, which is why placement, not
+prediction, was the largest available lever.</p>
+
+<h2><span class="num">3</span> The spacing curve, measured rather than assumed</h2>
+<p>A fault is a line, so the relevant question is: sample a straight trace every <code>s</code> pixels
+&mdash; what does each emitted pixel earn?
+(<a href="data/h55_spacing_curve.json"><code>evidence/h55_spacing_curve.json</code></a>)</p>
+<table><thead><tr><th class="num">spacing s (px = 100 m)</th>
+<th class="num">mean kernel weight per truth px</th>
+<th class="num">credited mass per emitted px, T/S</th><th class="num">A/S</th></tr></thead>
+<tbody><tr><td class='num'>1</td><td class='num'>1.0000</td><td class='num'><b>1.000</b></td><td class='num'>3.112</td></tr><tr><td class='num'>2</td><td class='num'>0.8363</td><td class='num'><b>1.644</b></td><td class='num'>5.376</td></tr><tr><td class='num'>3</td><td class='num'>0.7719</td><td class='num'><b>2.316</b></td><td class='num'>7.567</td></tr><tr><td class='num'>4</td><td class='num'>0.6725</td><td class='num'><b>2.556</b></td><td class='num'>8.487</td></tr><tr><td class='num'>5</td><td class='num'>0.6082</td><td class='num'><b>2.889</b></td><td class='num'>9.380</td></tr><tr><td class='num'>6</td><td class='num'>0.5088</td><td class='num'><b>2.900</b></td><td class='num'>9.380</td></tr><tr><td class='num'>7</td><td class='num'>0.4386</td><td class='num'><b>2.778</b></td><td class='num'>9.380</td></tr><tr><td class='num'>8</td><td class='num'>0.3860</td><td class='num'><b>2.750</b></td><td class='num'>9.380</td></tr></tbody></table>
+<p><b>The optimum is 500&ndash;600&nbsp;m</b>, not 100&nbsp;m and not the 150&ndash;300&nbsp;m the family's
+&ldquo;dotted&rdquo; ancestors used. On real folds, where there is positional error, it moves inward to
+<b>400&nbsp;m</b> &mdash; the curve's job is to be wrong in a measurable direction, not to be quoted.</p>
+
+<h2><span class="num">4</span> Placement, isolated: same field, permitted set, budget and mask</h2>
+<p><code>hide</code> fold 0, <code>n_truth = 10,336</code>, budget 37,654 px
+(<a href="data/h55_holdout_hide.json"><code>evidence/h55_holdout_hide.json</code></a>):</p>
+<table><thead><tr><th>emitter</th><th class="num">A/S</th><th class="num">% of ceiling</th>
+<th class="num">DTI</th></tr></thead><tbody>
+<tr><td>top-K, rank order &mdash; what the family shipped</td><td class="num">2.233</td>
+<td class="num">23.8 %</td><td class="num">0.03196</td></tr>
+<tr><td>hard-core 200 m</td><td class="num">6.184</td><td class="num">65.9 %</td>
+<td class="num">0.05130</td></tr>
+<tr><td>hard-core 300 m</td><td class="num">8.010</td><td class="num">85.4 %</td>
+<td class="num">0.06334</td></tr>
+<tr class="hi"><td><b>hard-core 400 m</b></td><td class="num"><b>8.763</b></td>
+<td class="num"><b>93.4 %</b></td><td class="num"><b>0.10101</b></td></tr>
+<tr><td>hard-core 500 m</td><td class="num">9.303</td><td class="num">99.2 %</td>
+<td class="num">0.07151</td></tr>
+<tr><td>matched random control</td><td class="num">&asymp;9.38</td><td class="num">100 %</td>
+<td class="num">0.04291</td></tr>
+</tbody></table>
+<p>+216&nbsp;% over top-K at <em>identical</em> budget, and +135&nbsp;% over the matched random control.
+Regional centring is the other half: subtracting the field's own 5&nbsp;km / 10&nbsp;km box mean lifts
+<code>hide</code> from 0.0797 to 0.0911 / 0.0917 at identical emitter and budget. The maximum of a smooth
+field is a mountain; the maximum of a <em>locally anomalous</em> field is a structure.</p>
+
+<h2><span class="num">5</span> Holdout: 4 folds &times; 2 instruments, whole segments, prevalence-matched</h2>
+<table><thead><tr><th>arm</th><th>emitter</th><th class="num">hide</th><th class="num">wins</th>
+<th class="num">tip</th><th class="num">wins</th><th class="num">sum</th><th class="num">A/S</th></tr></thead>
+<tbody><tr class="hi"><td class='mono'>B_therm</td><td class='mono'>greedy|37654</td><td class='num'>0.09701</td><td class='num'>4/4</td><td class='num'>0.05470</td><td class='num'>4/4</td><td class='num'><b>0.15171</b></td><td class='num'>8.195</td></tr><tr><td class='mono'>B_c50</td><td class='mono'>greedy|37654</td><td class='num'>0.09699</td><td class='num'>4/4</td><td class='num'>0.05469</td><td class='num'>4/4</td><td class='num'><b>0.15168</b></td><td class='num'>8.194</td></tr><tr><td class='mono'>B_c100</td><td class='mono'>greedy|37654</td><td class='num'>0.09670</td><td class='num'>4/4</td><td class='num'>0.05375</td><td class='num'>4/4</td><td class='num'><b>0.15045</b></td><td class='num'>8.245</td></tr><tr><td class='mono'>B_therm</td><td class='mono'>greedy|50000</td><td class='num'>0.09710</td><td class='num'>4/4</td><td class='num'>0.05319</td><td class='num'>4/4</td><td class='num'><b>0.15029</b></td><td class='num'>7.828</td></tr><tr><td class='mono'>B_c100</td><td class='mono'>hc4|37654</td><td class='num'>0.09167</td><td class='num'>4/4</td><td class='num'>0.05448</td><td class='num'>4/4</td><td class='num'><b>0.14615</b></td><td class='num'>8.843</td></tr><tr><td class='mono'>B_c50</td><td class='mono'>hc4|37654</td><td class='num'>0.09112</td><td class='num'>4/4</td><td class='num'>0.05421</td><td class='num'>4/4</td><td class='num'><b>0.14533</b></td><td class='num'>8.842</td></tr><tr><td class='mono'>B_only</td><td class='mono'>hc4|37654</td><td class='num'>0.07827</td><td class='num'>4/4</td><td class='num'>0.05251</td><td class='num'>4/4</td><td class='num'><b>0.13078</b></td><td class='num'>8.907</td></tr><tr><td class='mono'>AB_w80</td><td class='mono'>hc4|37654</td><td class='num'>0.09112</td><td class='num'>4/4</td><td class='num'>0.05358</td><td class='num'>4/4</td><td class='num'><b>0.14470</b></td><td class='num'>8.828</td></tr><tr><td class='mono'>A_only</td><td class='mono'>hc4|37654</td><td class='num'>0.02979</td><td class='num'>1/4</td><td class='num'>0.02894</td><td class='num'>2/4</td><td class='num'><b>0.05873</b></td><td class='num'>8.341</td></tr><tr><td class='mono'>random</td><td class='mono'>hc|50000</td><td class='num'>0.04318</td><td>&ndash;</td><td class='num'>0.02598</td><td>&ndash;</td><td class='num'>0.06916</td><td class='num'>&asymp;9.38</td></tr><tr><td class='mono'>random</td><td class='mono'>hc|37654</td><td class='num'>0.03948</td><td>&ndash;</td><td class='num'>0.02477</td><td>&ndash;</td><td class='num'>0.06425</td><td class='num'>&asymp;9.38</td></tr></tbody></table>
+<p class="small">Reference: the previously shipped H52 arm scored 0.0518 hide / 0.0291 tip, sum 0.0809.
+Selection by the pre-registered rule &mdash; beat the matched-budget random control on <b>both</b>
+instruments in &ge;3/4 folds, then maximise <code>mean_tip + mean_hide</code>, then prefer the smaller
+mass &mdash; read out of the evidence file at build time, not typed on a command line:</p>
+<pre class="mono">{
+ "source": "evidence/h55_sweep.json",
+ "arm": "B_therm",
+ "emitter": "greedy|37654",
+ "passes_rule1": true,
+ "hide": 0.09701,
+ "tip": 0.0547,
+ "total": 0.15171,
+ "hide_wins": 4,
+ "tip_wins": 4,
+ "mass": 37654,
+ "n_g": 8129.0
+}</pre>
+
+<h2><span class="num">6</span> The brief's own abandonment test: it fires, and it refutes</h2>
+<p>The pre-registration said to correlate the two views' per-block out-of-fold error on labelled negatives
+across spatial blocks and abandon co-training if strongly correlated
+(<code>ABANDON_R = 0.6</code>). In H52 this <b>could not fire</b> &mdash;
+fewer than three usable blocks, Spearman degenerate to 1.0 on ties &mdash; so <code>knowledge/03</code>
+N-1 recorded the premise as <em>unmeasured</em> and retracted two numbers that had been asserted. On the
+corrected split it fires on
+<b>40 usable blocks of 62</b>,
+4/4 folds of both instruments.</p>
+<table><thead><tr><th>instrument</th><th class="num">fold</th><th class="num">usable blocks</th>
+<th class="num">Spearman, mean over-prediction on negatives<br>(the pre-registered statistic)</th>
+<th class="num">Spearman, false-alarm rate at budget 37,654</th>
+<th class="num">CV of A's block FAR</th><th class="num">CV of B's block FAR</th></tr></thead>
+<tbody><tr><td class='mono'>hide</td><td class='num'>0</td><td class='num'>40 / 62</td><td class='num'><b>+0.6341</b></td><td class='num'>+0.1402</td><td class='num'>3.03</td><td class='num'>0.78</td></tr><tr><td class='mono'>hide</td><td class='num'>1</td><td class='num'>40 / 62</td><td class='num'><b>-0.1158</b></td><td class='num'>-0.1741</td><td class='num'>1.35</td><td class='num'>1.18</td></tr><tr><td class='mono'>hide</td><td class='num'>2</td><td class='num'>40 / 62</td><td class='num'><b>+0.7625</b></td><td class='num'>-0.0133</td><td class='num'>4.84</td><td class='num'>0.94</td></tr><tr><td class='mono'>hide</td><td class='num'>3</td><td class='num'>40 / 62</td><td class='num'><b>+0.5576</b></td><td class='num'>+0.1263</td><td class='num'>5.22</td><td class='num'>0.84</td></tr><tr><td class='mono'>tip</td><td class='num'>0</td><td class='num'>40 / 62</td><td class='num'><b>+0.6034</b></td><td class='num'>+0.0997</td><td class='num'>2.89</td><td class='num'>0.75</td></tr><tr><td class='mono'>tip</td><td class='num'>1</td><td class='num'>40 / 62</td><td class='num'><b>+0.4002</b></td><td class='num'>-0.2165</td><td class='num'>3.23</td><td class='num'>0.96</td></tr><tr><td class='mono'>tip</td><td class='num'>2</td><td class='num'>40 / 62</td><td class='num'><b>+0.7107</b></td><td class='num'>+0.0006</td><td class='num'>4.93</td><td class='num'>0.85</td></tr><tr><td class='mono'>tip</td><td class='num'>3</td><td class='num'>40 / 62</td><td class='num'><b>+0.5837</b></td><td class='num'>+0.1873</td><td class='num'>5.12</td><td class='num'>0.81</td></tr></tbody></table>
+<p><b>Verdict: refuted at the pre-registered threshold</b> &mdash; max |&rho;| =
+0.7625 (<code>hide</code>) and
+0.7107 (<code>tip</code>) against
+0.6. Co-training is abandoned. Two qualifications printed in the same
+record: the false-alarm-rate statistic correlates weakly (max |&rho;| 0.2165, negative on 3 of 8
+folds), so this is the verdict of the statistic the pre-registration <em>named</em>; and View A's
+block-level FAR has CV 1.35&ndash;5.22 against View B's 0.75&ndash;1.18 &mdash; a view finding a few
+regional anomalies and nothing else, which is the same reading as N-2 and N-10 from a third direction.</p>
+<p>In the historical H55 analysis, the registered block-error-correlation test refuted the co-training
+premise; separately, the A-only arm failed its preregistered promotion comparison. It wins 1/4
+<code>hide</code> folds and 2/4 <code>tip</code> folds, failing the required &ge;3/4 wins on each instrument.
+Its mean was below matched random on <code>hide</code> (0.02979 vs 0.03948) but above matched random on <code>tip</code> (0.02894 vs 0.02477). These are distinct tests: do not describe
+A-only as below random on both, or conflate its fold gate with co-training's block-correlation result.
+H55 is archived and neither result approves current H56.</p>
+
+<h2><span class="num">7</span> Not merely the union of the two views</h2>
+<p>The brief asks for this explicitly, and <code>gates.uniqueness_report</code> does not answer it &mdash;
+that gate compares against <em>previous submissions</em>. This compares against the two views of
+<em>this</em> pipeline at the same budget:</p>
+<table><thead><tr><th>compared set</th><th class="num">px</th>
+<th class="num">overlap with the shipped file</th><th class="num">% of shipped</th>
+<th>shipped == set</th></tr></thead><tbody><tr><td>top-K of View A alone</td><td class='num'>37,654</td><td class='num'>307</td><td class='num'>0.8%</td><td>False</td></tr><tr><td>top-K of View B alone</td><td class='num'>37,654</td><td class='num'>1,836</td><td class='num'>4.9%</td><td>False</td></tr><tr><td>union of the two views' top-K</td><td class='num'>74,099</td><td class='num'>2,095</td><td class='num'>5.6%</td><td>False</td></tr><tr><td>coverage-greedy of View A alone</td><td class='num'>37,654</td><td class='num'>428</td><td class='num'>1.1%</td><td>False</td></tr><tr><td>coverage-greedy of View B alone</td><td class='num'>37,654</td><td class='num'>6,578</td><td class='num'>17.5%</td><td>False</td></tr><tr><td>union of the two views' coverage-greedy emissions</td><td class='num'>74,760</td><td class='num'>6,902</td><td class='num'>18.3%</td><td>False</td></tr></tbody></table>
+
+<h2><span class="num">8</span> A previously blocked official source, now verified and used</h2>
+<p><code>knowledge/02</code> H52-5 marked the INGENIOUS well-and-spring database <b>blocked</b> because the
+host would not re-resolve, and the standing rule is that an unverifiable file may not move emitted mass.
+It resolves: <a href="https://gdr.openei.org/submissions/1391">GDR submission 1391</a>, DOI
+<a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>, licence <b>CC-BY 4.0</b>. Measured on the
+grid: 12,570 cells carry a well or spring; <b>11,258</b> are more than 300&nbsp;m from any
+mapped fault and 8,958 more than 1&nbsp;km; only <b>194</b> lie <em>on</em> a catalogue pixel; <b>362</b>
+record &ge;70&nbsp;&deg;C and <b>147</b> carry a quartz geothermometer &ge;100&nbsp;&deg;C. A silica
+geothermometer &ge;100&nbsp;&deg;C at discharge means circulation to roughly 2&ndash;4&nbsp;km, which in
+extensional terrain requires a fault.</p>
+<p>A spring is a <em>point</em>, and one point earns at most 1.0 under a 300&nbsp;m kernel. So each thermal
+point is walked into a <b>trace</b> along a strike measured from a 2&nbsp;km structure tensor of the
+radiometric field, truncated where coherence drops below 0.3 or the footprint
+ends. 3,340 cells survive from 951 thermal points,
+because the footprint's median coherence is only 0.106. No layer in
+this family previously turned a point observation into a linear hypothesis.</p>
+<p><b>And it is neutral.</b> <code>B_therm</code> beat <code>B_c50</code> &mdash; the same field without the
+thermal lineaments &mdash; by <b>0.00003</b> on the selection sum (0.15171 vs 0.15168), 4/4
+folds each. That is not a signal, and it is recorded as not a signal. The pre-registered rule picked it
+anyway because the rule maximises the sum and was written before the numbers were seen. The gain in this
+file comes from &sect;1, &sect;3 and &sect;4, not from &sect;8.</p>
+
+<h2><span class="num">9</span> Phase 2: every A-only candidate gets a reason a reviewer can check</h2>
+<p>510 A-confident / B-abstaining neighbourhoods, grouped at
+300&nbsp;m &mdash; the kernel's own support &mdash; so each record is a
+<em>place</em> rather than a lone pixel; the emission is 8-isolated by construction. Each carries lat/lon
+and UTM, strike, elongation, extent, distance to the nearest mapped trace, nine measured layer ranks, the
+nearest temperature-bearing well or spring with its DOI, and an interpretation assembled <b>only</b> from
+numbers in the same record: a clause with no supporting measurement is never emitted, and a candidate with
+no support says so explicitly rather than flattering itself.
+<b>405</b> carry at least one positive-support clause,
+<b>43</b> are linear over &ge;1&nbsp;km,
+<b>98</b> are corroborated by a &ge;60&nbsp;&deg;C well or
+spring within 5&nbsp;km.
+<a href="downloads/h55_reasoning_20261007T0150Z.json">Open the full record &rarr;</a></p>
+
+<h2><span class="num">10</span> Two bugs in code written this session, found by tests written this session</h2>
+<ul class="tight">
+<li><b>IR-52-025.</b> <code>coverage_greedy</code> updated its running cover with
+<code>np.maximum(cf[nbi], kk, out=cf[nbi])</code>. Fancy indexing copies, so <code>out=</code> wrote into a
+throwaway and no pixel ever learned its disc was already covered. The greedy packed into the belief
+field's peak and reported <code>A/S</code> = 1.8&ndash;2.1 &mdash; <em>worse than top-K</em> &mdash; which
+read as a property of greedy coverage. An earlier draft of <code>knowledge/12</code> recorded that
+&ldquo;property&rdquo;; the claim is <b>withdrawn</b>. Caught by the telescoping identity
+<code>sum(marginal gains) == &Sigma; &rho;&#770;&middot;K_E</code> failing at 107.7 vs 66.6. Fixed, the
+greedy reaches A/S 9.27 (98.8&nbsp;% of ceiling) and banks 20&nbsp;% more &rho;&#770;-weighted coverage than
+hard-core thinning and 33&nbsp;% more than top-K, on both a flat and a clustered belief.</li>
+<li><b>IR-52-026.</b> <code>gates.find_priors</code> scanned <code>docs/downloads/</code> &mdash; where
+<code>refresh_feed.py</code> <em>stages</em> the built raster &mdash; so on the second build the candidate
+was compared against a copy of itself and the gate reported <code>identical-to-a-prior, novel = 0</code>:
+the one false verdict that would block a legitimate submission. Fixed by basename, pinned by a test.</li>
+</ul>
+<p>Also fixed: <b>IR-52-020</b> (<code>download_competition_data.sh</code> passed <code>--group all</code>,
+a flag <code>restore_data.py</code> does not accept, so the documented one-command data placement exited 2
+before fetching anything), <b>IR-52-021</b> (<code>registry/irregularities.json</code> was cited by code but
+never existed &mdash; now 42 entries, and every id cited anywhere in the tree must resolve), and
+<b>IR-52-030</b> (two concurrent sessions allocated IR-52-021 and IR-52-022 to different findings; both
+readings are recorded rather than silently renumbered).</p>
+
+<h2><span class="num">11</span> Limitations, and what to do next</h2>
+<ul class="tight">
+<li><b>Nothing here forecasts a portal score.</b> The instruments under-forecast the board by roughly
+4&times; in absolute terms &mdash; this family scores ~0.05 on <code>hide</code> folds and 0.2778 on the
+portal &mdash; so a fold number is a ranking device. The only projection given a number is the placement
+gain in isolation (&asymp;0.3044), and its assumption is stated in the same JSON.</li>
+<li><b>|G| rests on owner-reported scores.</b> The rasters, masses and geometry are SHA-256-exact; the DTI
+values are not organiser-authenticated (IR-52-003). <code>scripts/calibrate_g.py</code> prints every row so
+a human can re-check the pairings by hand.</li>
+<li><b>One tuned constant was set by inspection, not by a sweep:</b> the coherence floor
+0.3 that truncates the thermal strike walk. It discards 99.94&nbsp;% of thermal
+cells' potential extent, and it is the weakest number in the shipped pipeline.</li>
+<li><b>The budget was chosen at fold prevalence (0.2&nbsp;%), not board prevalence
+(&asymp;0.157&nbsp;%).</b> The rule prefers smaller mass on a near-exact tie. A single 60&ndash;80&nbsp;k
+file would settle it, and it is the only available experiment whose answer is a board number rather than a
+fold number.</li>
+<li><b>View A is dead at 100&nbsp;m and was only tested at 100&nbsp;m.</b> N-10 excludes it as a primary
+emitter at the scale the metric scores; it does not exclude a 300&nbsp;m potential-field product used to
+<em>gate</em> a 100&nbsp;m surface detection. That is the one version of the two-view idea the measurements
+do not already exclude.</li>
+<li><b>External layers are uint8-quantised mirrors</b> (1st&ndash;99th percentile) of the official grids.
+The sources are named and reachable, but a re-reduction to float32 from the USGS release would sharpen
+every ratio-step layer.</li>
+<li><b>Three rounds have shipped in parallel</b> (IR-52-029). <code>submission/LATEST.txt</code> points at
+this file; reverting is one line. Every other artefact stays downloadable and is now a prior for the
+uniqueness gate &mdash; this file is 61.1% novel against 23 of
+them and drops 1,123,846 prior px.</li>
+</ul>
+<p class="small muted">Every number on this page is read out of <code>evidence/h55_*.json</code>
+at build time by <code>scripts/run_h55.py</code> and <code>scripts/verify_h55.py</code> and copied to
+<code>docs/data/</code> by <code>scripts/refresh_feed.py</code>; this page is regenerated by
+<code>scripts/make_h55_page.py</code>. Nothing here is typed in by hand. Where a claim is an assumption
+rather than a measurement, it says so in the same sentence.</p>
+<p class="small muted" id="h55-profile-followup-link"><strong>Separate follow-up:</strong> the H55-PROFILE paired-normal DEM experiment failed its registered mean-lift gate and is research-only. <a href="h55-profile.html">Read the follow-up evidence and download</a>; it does not replace this page's incumbent candidate.</p></main><footer>Competition 306 &middot; H55 &middot; fault predictions, not confirmed geothermal vents.
+<a href="irregularities.html">Limitations &amp; review</a> &middot;
+<a href="sources.html">official links</a></footer></body></html>

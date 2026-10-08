@@ -1,0 +1,31 @@
+{
+ "stage": "gates",
+ "raster": "gems52-r4-B_only-37654px-b-only-research.tif",
+ "profile": {
+  "count": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "shape": [
+   3730,
+   3292
+  ],
+  "nodata": 0.0
+ },
+ "checks": {
+  "single_band": true,
+  "all_finite": true,
+  "binary_0_1": true,
+  "shape_matches_grid": true,
+  "crs_is_32611": true,
+  "no_pixel_within_200m_of_catalogue": true,
+  "budget_matches": true
+ },
+ "n_px": 37654,
+ "min_distance_to_catalogue_m": 200.0,
+ "unique_values": [
+  0.0,
+  1.0
+ ],
+ "passes": true,
+ "seconds": 1.3
+}

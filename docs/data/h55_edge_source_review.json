@@ -1,0 +1,77 @@
+{
+  "reviewed_utc": "2026-10-07",
+  "sources": [
+    {
+      "name": "DrivenData GEMS problem description",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "source_class": "official competition page",
+      "verified_takeaway": "Task is fault prediction; known fault data may be incomplete or inaccurate; the metric is distance-weighted Tversky. The description does not disclose hidden fault coordinates or a causal score explanation.",
+      "use": "Task scope, output metric, limitations"
+    },
+    {
+      "name": "DrivenData public leaderboard",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "source_class": "official public leaderboard, fetched manually by Arena web tool",
+      "snapshot": "registry/leaderboard_snapshot_2026-10-07.json",
+      "verified_takeaway": "On 2026-10-07 the rendered table showed xiaofanhu at 0.3774 and participant extradr19 at rank 13 with 0.2778. The page exposes no file name or hash for the score, and participant identity is not authenticated to this repository.",
+      "automated_access": "disabled; the page is client-rendered and source policy requires written permission for automated access"
+    },
+    {
+      "name": "DOE/NLR official competition rules",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "source_class": "official rules PDF",
+      "verified_takeaway": "Up to three public automated-score submissions per week are permitted by the competition website; one final submission is selected for both prize rounds. The single GeoTIFF output, participant responsibility, and generative-AI disclosure requirement are recorded in the session notes.",
+      "retrieval_note": "PDF content was retrieved through the Arena web fetch; direct sandbox TLS retrieval failed during the separate source refresh."
+    },
+    {
+      "name": "USGS OFR 00-189: Summary of geophysical investigations of the Death Valley regional water-flow modeling project",
+      "url": "https://pubs.usgs.gov/of/2000/0189/pdf/of00-189.pdf",
+      "source_class": "U.S. Geological Survey primary technical report",
+      "verified_takeaway": "Report describes gravity anomalies arising from density contrasts, magnetic anomalies from subsurface magnetic rocks, and faults offsetting magnetic lithologies as a possible magnetic expression. It also describes alternate fluvial interpretations for subtle anomalies.",
+      "scope_limit": "Regional Death Valley/Amargosa study; not a validation of every Great Basin grid cell, the H55 transform, or a score gain."
+    },
+    {
+      "name": "USGS OFR 00-188: Aeromagnetic survey of the Amargosa Desert, Nevada and California",
+      "url": "https://pubs.usgs.gov/of/2000/of00-188/of00-188print.pdf",
+      "source_class": "U.S. Geological Survey primary technical report",
+      "verified_takeaway": "Report describes some linear magnetic anomalies associated with shallow faults and subtle anomalies over alluvium. It explicitly notes competing explanations including fault-zone alteration and fluvial concentration/reworking of magnetic minerals.",
+      "scope_limit": "Regional survey report; not a universal magnetic-fault rule or a validation of H55 predictions."
+    },
+    {
+      "name": "INGENIOUS \u2014 Great Basin Regional Dataset Compilation (GDR submission 1391)",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "source_class": "official Geothermal Data Repository record",
+      "verified_takeaway": "Public record advertises well/spring temperature and chemistry data and paleo-geothermal feature data with a CC BY 4.0 license. These are considered only in preregistered H55-2, not in any feature/model/output.",
+      "access_status": "Official metadata page fetched; the linked 19.85 MB well/spring archive failed direct TLS with SSL_ERROR_SYSCALL and the paleo-geothermal ZIP returned HTTP 500. Raw files were not obtained or used."
+    },
+    {
+      "name": "Blum and Mitchell (1998), Combining labeled and unlabeled data with co-training",
+      "url": "https://doi.org/10.1145/279943.279962",
+      "source_class": "peer-reviewed conference paper",
+      "verified_takeaway": "Co-training theory relies on view sufficiency and an approximate conditional-independence premise; the measured blockwise correlation is a diagnostic, not a proof that the premise holds."
+    }
+  ],
+  "prior_raster_refresh": {
+    "script": "scripts/review_sources.py --download-priors --workers 4",
+    "source_review_entries": 67,
+    "distinct_linked_tiff_urls": 395,
+    "eligible_aligned_single_band_tiffs": 389,
+    "all_eligible_local_bytes_present": true,
+    "ineligible_or_unresolved": 6,
+    "ineligible_reasons": [
+      "four linked TIFFs were not aligned single-band competition-grid predictions (including two external/diagnostic layers and a format test)",
+      "two GitHub Pages links no longer resolved to a corresponding blob in the owner repository tree"
+    ],
+    "unlinked_named_sites": [
+      "53GEMSDOE",
+      "54GEMSDOE"
+    ],
+    "scope_limit": "Unlinked, private, inaccessible, or external-storage rasters are outside this finite inventory; a participant score-to-file mapping is not authenticated."
+  },
+  "input_data": {
+    "manifest_entries": 23,
+    "manifest_sha256_check": "all restored files match the owner-pinned sizes and SHA-256 values",
+    "organizer_byte_authentication": false,
+    "external_data_used_in_h55": false
+  }
+}

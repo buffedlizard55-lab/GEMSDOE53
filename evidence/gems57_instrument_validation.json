@@ -1,0 +1,179 @@
+{
+  "pairs": [
+    [
+      "13gems_20261001_r13-lattice-s5_v2_nan-outside",
+      0.0904,
+      0.24861544835427846
+    ],
+    [
+      "8GEMSDOE_Hedge-v2_submission",
+      0.1563,
+      0.08931346217641205
+    ],
+    [
+      "gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00",
+      0.128,
+      0.08199030236530101
+    ],
+    [
+      "gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00",
+      0.1839,
+      0.08949366183776102
+    ],
+    [
+      "gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan",
+      0.1855,
+      0.11131583457031845
+    ],
+    [
+      "gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan",
+      0.1894,
+      0.10515639342939484
+    ],
+    [
+      "gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan",
+      0.1922,
+      0.09916741840855015
+    ],
+    [
+      "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan",
+      0.2477,
+      0.09991134894171928
+    ],
+    [
+      "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan",
+      0.26,
+      0.09417442916119363
+    ],
+    [
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan",
+      0.2449,
+      0.10116333958700564
+    ],
+    [
+      "gemsdoe-ens12-adopted-7f00890a",
+      0.1563,
+      0.10087321907967373
+    ],
+    [
+      "gemsdoe9-PLACEHOLDER-2314b599",
+      0.0107,
+      0.02233537210179619
+    ],
+    [
+      "h33-2-b2-zeros",
+      0.2778,
+      0.09538611460482532
+    ]
+  ],
+  "spearman": 0.19257239675825533,
+  "spearman_p": 0.5284901683295969,
+  "pearson": 0.006083012126428701,
+  "pearson_p": 0.9842647330192372,
+  "file_audit": {
+    "13gems_20261001_r13-lattice-s5_v2_nan-outside": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "8GEMSDOE_Hedge-v2_submission": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gemsdoe-ens12-adopted-7f00890a": {
+      "nan": true,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": NaN
+    },
+    "gemsdoe9-PLACEHOLDER-2314b599": {
+      "nan": false,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": null
+    },
+    "h33-2-b2-zeros": {
+      "nan": false,
+      "nan_inside_footprint": 0,
+      "values_outside_0_1": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "nodata": null
+    }
+  }
+}

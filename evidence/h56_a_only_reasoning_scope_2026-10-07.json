@@ -1,0 +1,21 @@
+{
+  "reviewed_utc": "2026-10-07T16:50:01Z",
+  "artifact": "gems52-h56-consensus-core-continuation-40517px-04c86e1888a8-zeros.tif",
+  "artifact_sha256": "1308083dcf09b4c6fb656589ce79b3c392f5a0dd315e2ed31c8d36a47fc1d52d",
+  "status": "NOT PRODUCED — A-only per-pixel reasoning is not available for H56 in this checkout",
+  "reason": "H56's 25,517-cell core is a consensus intersection of two prior prediction patterns, not an A-vs-B model output. Its 15,000-cell continuation/scarp arm is described in the build/verification summaries, but the committed checkout does not contain the aligned per-cell A/B probabilities, selected-arm mask with layer values, or builder arrays needed to produce defensible point-by-point A-only explanations.",
+  "non_conflation_rule": "Do not reuse or relabel the 925-row R2 reasoning, H54's 11,996-row audit, H55-EDGE's 816-row CSV, or any other candidate's reasoning as H56 evidence.",
+  "available_evidence": [
+    "evidence/gems52-h56-build.json",
+    "evidence/gems52-h56-verify.json",
+    "knowledge/15_hypotheses_H56_preregistered.md",
+    "knowledge/16_what_h56_found.md"
+  ],
+  "data_needed_for_future_a_only_review": [
+    "reproducible H56 arm/core raster masks and exact aligned feature arrays",
+    "per-cell A/B probability or score layers if an A/B distinction is intended",
+    "feature manifest, source hashes, units and training/selection lineage",
+    "one row per relevant H56 cell with coordinates, measured values, geological rationale, alternatives and verification status"
+  ],
+  "slot_gate_effect": "H56 remains not approved for upload. This is an additional evidence gap, separate from the missing comparable spatial holdout."
+}

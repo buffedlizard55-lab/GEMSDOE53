@@ -1,0 +1,92 @@
+name: Refresh competition feed
+
+# Self-maintaining LOCAL evidence feed, not unauthorized leaderboard scraping.
+# DrivenData Terms prohibit automatic access; the last dated board observation
+# is retained honestly until documented permission/a sanctioned API exists.
+# Commits ONLY docs/data/. Never trains/promotes a model or spends any of the
+# competition's three weekly submission slots.
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"                    # four times a day, off the hour
+  workflow_dispatch: {}
+  push:
+    paths:
+      - "scripts/refresh_feed.py"
+      - ".github/workflows/feed.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: feed
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      # No dependencies: scripts/refresh_feed.py is stdlib-only (urllib), on purpose, so a scheduled
+      # refresh cannot fail on a package index.
+
+      - name: Refresh the feed from audited local evidence
+        run: |
+          python scripts/refresh_feed.py --branch "${{ github.ref_name }}" || echo "fetch_failed=1" >> "$GITHUB_ENV"
+
+      - name: Show what changed
+        run: |
+            git status --short
+            git diff --stat || true
+            python - <<'PY'
+            import json, pathlib
+            for name in ("leaderboard", "feed", "submission"):
+                p = pathlib.Path("docs/data") / f"{name}.json"
+                if not p.exists():
+                    print(f"{name}: MISSING")
+                    continue
+                d = json.loads(p.read_text())
+                if name == "leaderboard":
+                    rows = d.get("rows", [])
+                    print(f"leaderboard: status={d.get('status')}, rows={len(rows)}, "
+                          f"top={rows[0].get('score') if rows else 'n/a'}, "
+                          f"fetched_utc={d.get('fetched_utc')}, gap_to_top={d.get('gap_to_top')}")
+                    print(f"  our rows: {d.get('our_rows')}")
+                    if rows:
+                        w = rows[-1]
+                        print(f"  last visible row: #{w.get('rank')} {w.get('team')} {w.get('score')}")
+                elif name == "feed":
+                    print(f"feed: generated_utc={d.get('generated_utc')}, n_files={len(d.get('files', []))}, "
+                          f"leaderboard_status={d.get('leaderboard_status')}, submission={d.get('submission')}, "
+                          f"downloads={d.get('downloads')}")
+                else:
+                    print("submission: " + ", ".join(f"{k}={d[k]}" for k in
+                          ("exists", "file", "download", "sha256", "bytes") if k in d))
+            PY
+
+      - name: Commit the refreshed feed
+        if: always()
+        run: |
+          git config user.name "gems-feed-bot"
+          git config user.email "41898282+gems-feed-bot@users.noreply.github.com"
+          git add docs/data/ || true
+          if ! git diff --cached --quiet; then
+            git commit -m "feed: scheduled refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git pull --rebase origin "${{ github.ref_name }}" || true
+            git push origin "HEAD:${{ github.ref_name }}"
+          else
+            echo "feed unchanged; nothing to commit"
+          fi
+
+      - name: Fail loudly if the evidence feed did not update
+        if: env.fetch_failed == '1'
+        run: |
+          echo "::error::Local evidence refresh failed. No fresh external observation is claimed."
+          exit 1

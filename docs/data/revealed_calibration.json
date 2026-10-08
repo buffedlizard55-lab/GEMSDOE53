@@ -1,0 +1,58 @@
+{
+ "g_estimate_px": 14088.747191011276,
+ "credit_of": {
+  "P1=A&C": 4168.222,
+  "P2=A\\C": 1054.917,
+  "P3=(B\\A)&C": 0.0,
+  "P4=(B\\A)\\C": 0.0,
+  "P5=(E\\B)&C": 1599.422,
+  "P6=(E\\B)\\C": 0.0
+ },
+ "size_of": {
+  "P1=A&C": 25517,
+  "P2=A\\C": 12137,
+  "P3=(B\\A)&C": 4332,
+  "P4=(B\\A)\\C": 2104,
+  "P5=(E\\B)&C": 30220,
+  "P6=(E\\B)\\C": 46821
+ },
+ "density_of": {
+  "P1=A&C": 0.16335,
+  "P2=A\\C": 0.08692,
+  "P3=(B\\A)&C": 0.0,
+  "P4=(B\\A)\\C": 0.0,
+  "P5=(E\\B)&C": 0.05293,
+  "P6=(E\\B)\\C": 0.0
+ },
+ "corridor_credit": 0.0,
+ "t_core_bounds": [
+  4168.222,
+  5223.139
+ ],
+ "t_core_central": 5140.257,
+ "dti_core_bounds": [
+  0.2546,
+  0.319
+ ],
+ "dti_core_central": 0.3139,
+ "reference_densities": {
+  "uniform_random_over_permitted_set": 0.02795,
+  "champion_file_as_a_whole": 0.13871,
+  "champion_file_credit": 5223.1,
+  "note": "credit per emitted pixel, at |G| as solved above; the uniform-random figure is E[max_x k] for a Poisson dot cloud of 37,654 px, integral of (1 - exp(-9*pi*rho*u^2)) du over u in [0,1]"
+ },
+ "notes": [
+  "containment verified: A subset of B (37654 px)",
+  "containment verified: A subset of E (37654 px)",
+  "containment verified: B subset of E (44090 px)",
+  "containment verified: C subset of E (60069 px)",
+  "B\\A = 6436 px; of those 6436 lie within 200 m of the mapped catalogue and 0 do not",
+  "min distance-to-catalogue inside A = 223.6 m",
+  "|G| solved from T(B)-T(A)=0: 14088.7 px (0.2726 % of the footprint)",
+  "atom partition verified: the six atoms sum to |E| = 121131 px",
+  "t(P1) exact interval [4168, 5223] -> credit density [0.1634, 0.2047] -> DTI(P1 alone) [0.2546, 0.3190]",
+  "t(P1) central estimate 5140.3 (tail credit 1599.4 split between P5 and P6 in proportion to size) -> density 0.2014, DTI(P1 alone) 0.3139",
+  "corridor credit T(B)-T(A) = +0.0000 (exactly zero by construction of |G|); corridor atom densities 0.00000 and 0.00000",
+  "t(P1) = 4168.2 over 25517 px -> density 0.1634; exact bounds from t(P6)>=0 and t(P2)>=0 are [4168, 5223]"
+ ]
+}

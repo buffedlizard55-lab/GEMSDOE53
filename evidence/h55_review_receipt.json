@@ -1,0 +1,109 @@
+{
+  "reviewed_utc": "2026-10-07",
+  "passes": 3,
+  "pass_1": "Preregistered four geological hypotheses; implemented five-offset H55 paired-normal profile; used whole-component buffered spatial folds; built unique research-only float32 GeoTIFF after failed holdout; published direct download and audit.",
+  "pass_2": [
+    "Synthetic tests caught and corrected elevation-gradient unit conversion from per-metre gradient to per-pixel displacement.",
+    "Planar-ramp regression verifies first-order slope removal; discontinuity regression verifies normal-profile signal.",
+    "Confirmed the H55 profile feature implementation uses all five preregistered offsets (1,2,3,4,6 cells) and 20 scale-specific channels.",
+    "Build path now writes H55-specific evidence and does not overwrite R2 evidence or latest submission pointers.",
+    "Verified every A-only emitted pixel has one H55 reasoning CSV row; full file is not claimed to be co-training.",
+    "Ran the routine R2 site publisher and confirmed its integrated H55 publishing step preserves the H55 page, direct TIFF/ZIP links, audit summaries, and the full README archive.",
+    "After main advanced, merged its approved/current H55 artifact without replacing it; moved this lower-performing follow-up to its own H55-PROFILE evidence/page namespace and kept submission/LATEST.txt on the incumbent.",
+    "Re-ran the TIFF build after merging main: decoded-pattern audit now includes 27 accessible aligned prior paths, including the main H55 TIFF and its repo copy; the H55-PROFILE artifact stayed byte-identical and remains canonical-distinct."
+  ],
+  "pass_3": {
+    "tests": "125 passed; 45 warnings; warnings are Rasterio Affine pending-deprecation and stress-fixture overflow in the existing structure tensor test.",
+    "py_compile": "passed for scripts/check_site.py, scripts/make_h55_page.py, scripts/run_structural_pipeline.py, scripts/publish_h55_profile_site.py, src/gems52/structural.py",
+    "git_diff_check": "passed",
+    "site_checker": "passed 15 pages and 90 data files, strict local links/JSON, byte-identical incumbent and H55-PROFILE TIFFs, GeoTIFF format/range/geometry, single-TIFF ZIP and failed-slot status",
+    "downloads_index_pages_checked": 15,
+    "data_restore_all_hash_pins_match": true,
+    "restore_receipt_path": "data/restore_receipt.json (ignored local file; not submitted to git)",
+    "site_rebuild_integration": "passed: main H55 incumbent remains at submission/LATEST.txt; H55-PROFILE has separate evidence/page, download links and follow-up card."
+  },
+  "candidate": {
+    "file": "gems52-h55-profile-37654-7fd28c25b51a-research.tif",
+    "sha256": "920b89b94288f55a4808d59d9710a72f069007eb66eb3cc8ed039b99c8f7a261",
+    "bytes": 137085,
+    "submission_name": "GEMSDOE52-H55-PairedProfile-7fd28c25",
+    "note": "H55 paired-normal profile | 37,654 metric-placed pixels | spatial holdout failed | research only; not approved for upload.",
+    "note_characters": 122,
+    "format_ok": true,
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "dtype": "float32",
+    "bands": 1,
+    "min": 0.0,
+    "max": 1.0,
+    "positive_pixels": 37654,
+    "nan_pixels": 0,
+    "mass_outside_footprint": 0,
+    "internal_mask_matches_sample": true,
+    "all_only_reasoning_rows": 916,
+    "uniqueness_priors": 27,
+    "novel_fraction": 0.40898709300472724,
+    "prior_pixels_dropped": 1163345,
+    "strictly_novel_and_selective": true,
+    "not_merely_view_union": true,
+    "weekly_slot_approved": false,
+    "weekly_slots_used": 0,
+    "official_score": null,
+    "upload_acceptance": null,
+    "novel_support_pixels_absent_from_prior_union": 15400,
+    "uniqueness_scope_note": "Recomputed after merging the main H55 incumbent into the accessible repository; includes both published and submission copies of that incumbent as separate inventory paths."
+  },
+  "holdout": {
+    "protocol": "spatial-quadrant, whole original 8-connected component hide-and-recover, 80-pixel Euclidean training buffer",
+    "fold_count": 4,
+    "primary": "structural_contrast_h55",
+    "best_comparable_baseline": "view_B",
+    "mean_primary_dti": 0.1969713750604964,
+    "mean_baseline_dti": 0.19467087779765155,
+    "mean_lift": 0.0023004972628448764,
+    "positive_folds": 3,
+    "mean_lift_gate_passed": false,
+    "fold_support_gate_passed": true,
+    "slot_gate_passed": false,
+    "per_fold_primary": [
+      0.15824088698603012,
+      0.2742188186656,
+      0.14028228804101744,
+      0.21514350654933806
+    ],
+    "per_fold_view_b": [
+      0.1772761701468489,
+      0.2730665027732986,
+      0.13804704633464823,
+      0.1902937919358104
+    ],
+    "comparison_mechanism": "No pseudo-labels or prior prediction pixels in H55 model training; new DEM profile features plus existing structural contrast; same fold/budget/kernel/placement controls.",
+    "warning": "Catalog recovery holdout only; catalogue-zero is not verified geological absence and local DTI does not forecast the hidden competition score.",
+    "evidence_path": "evidence/h55_profile_holdout.json"
+  },
+  "external_data": {
+    "training_features_labels_template": "restored from owner-supplied GitHub mirrors and matched repository SHA-256/byte-count pins; organizer provenance unverified",
+    "ComCat_direct_request": "TLS/connection failure before receiving bytes; not used",
+    "USGS_3DEP_direct_request": "TLS/connection failure before receiving bytes; not used",
+    "GDR_INGENIOUS_direct_request": "TLS/connection failure before receiving bytes; not used"
+  },
+  "notable_irregularities": [
+    "H55 did not achieve the pre-registered +0.005 mean local DTI lift; no upload is recommended.",
+    "The user-reported 0.3195 top score was already not top in the repository snapshot dated 2026-10-06: that dated board observation lists 0.3774 leader and 0.3195 rank 7; values/file identities are moving and not hash-authenticated.",
+    "Owner-mirror input hashes verify byte integrity only; organizer authenticity was not verified.",
+    "25 accessible aligned prior rasters were compared; exhaustive uniqueness across inaccessible/private assets and all historical GEMSDOE website files cannot be certified.",
+    "The H55 supervised structural contrast TIFF is not the co-training output; prior co-training evidence is reported separately and does not support promotion."
+  ],
+  "official_manual_review_links": [
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+    "https://earthquake.usgs.gov/fdsnws/event/1/",
+    "https://www.usgs.gov/the-national-map-data-delivery/gis-data-download",
+    "https://gdr.openei.org/submissions/1391",
+    "https://doi.org/10.1145/279943.279962"
+  ]
+}

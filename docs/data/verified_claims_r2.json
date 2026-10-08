@@ -1,0 +1,125 @@
+{
+  "review_date_utc": "2026-10-06",
+  "method": "Primary documents read with fetch_page during this session. Statements below are bounded excerpts/interpretations, not fabricated organizer measurements. Repeated automated DrivenData access disabled after Terms of Use review.",
+  "claims": [
+    {
+      "id": "C01",
+      "claim": "The competition target is geological faults indicative of geothermal resources, not verified geothermal vents or reservoirs.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "section": "Problem description",
+      "status": "verified primary source"
+    },
+    {
+      "id": "C02",
+      "claim": "Known-fault labels are incomplete and may contain inaccuracies. Initial test labels are new expert-mapped faults; the final round uses an expanded expert-reviewed label set.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "section": "Competition structure",
+      "status": "verified primary source"
+    },
+    {
+      "id": "C03",
+      "claim": "The metric uses a 300 m triangular distance kernel and alpha=0.2, beta=0.8, with max-weighted coverage per truth pixel.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "section": "Mathematical representation",
+      "status": "verified primary source and independently tested arithmetic"
+    },
+    {
+      "id": "C04",
+      "claim": "Submission: one float32 data band, EPSG:32611, 100 m resolution, template-matching bounds, [0,1] predictions; the published text permits null or NaN outside bounds.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "section": "Submission format",
+      "status": "verified primary source; actual mirror dimensions measured separately"
+    },
+    {
+      "id": "C05",
+      "claim": "Known USGS/INGENIOUS fault pixels are excluded from evaluation, in both rounds, and do not incur penalty terms.",
+      "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/2",
+      "section": "DrivenData staff reply, September 16",
+      "status": "verified organizer staff statement"
+    },
+    {
+      "id": "C06",
+      "claim": "The known-fault mask is pixel-exact. Off-mask predictions near known faults are penalized against NEW truth normally; new truth can lie within 300 m of known traces.",
+      "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4",
+      "section": "DrivenData staff reply, September 21",
+      "status": "verified organizer staff statement"
+    },
+    {
+      "id": "C07",
+      "claim": "Organizers are not sharing additional hidden-label data sources, fault types or coverage. It is unsupported to claim the hidden labels are exclusively LiDAR-visible faults.",
+      "source": "https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7",
+      "section": "DrivenData staff reply, September 23",
+      "status": "verified organizer staff statement"
+    },
+    {
+      "id": "C08",
+      "claim": "The official rules specify up to three submissions per week and selection of one final submission for both rounds. No slot was used by this implementation.",
+      "source": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "section": "1.1 Single entry in two prize phases; 3.2 Process Overview",
+      "status": "rules verified; zero uploads is local execution evidence"
+    },
+    {
+      "id": "C09",
+      "claim": "Generative AI development is allowed, but use and extent must be disclosed in the submission narrative; finalists must supply reproducible code and documentation.",
+      "source": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "section": "3.2 Solution verification and AI disclosure",
+      "status": "verified primary rules; narrative included in repository"
+    },
+    {
+      "id": "C10",
+      "claim": "The public leaderboard observation in this session showed rank 1 at 0.3774; 0.3195 was rank 7. Participant scores do not authenticate the brief's filename-to-score mappings.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "section": "Leaderboard table, observed 2026-10-06",
+      "status": "dated official participant-level observation, not artifact-level proof"
+    },
+    {
+      "id": "C11",
+      "claim": "GeoDAWN Area 2 was flown at 400 m flight-line spacing, with variable terrain clearance. 100 m raster cells do not imply independent 100 m magnetic measurements. The release is marked CC0.",
+      "source": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "section": "Survey specifications and Rights; DOI 10.5066/P93LGLVQ",
+      "status": "verified official USGS metadata"
+    },
+    {
+      "id": "C12",
+      "claim": "An integrated Great Basin study used structural setting, terminating/intersecting gravity gradients, magnetic and thermal evidence to investigate blind geothermal systems. This supports multi-physics investigation, not confirmation of these predictions.",
+      "source": "https://www.usgs.gov/publications/discovering-blind-geothermal-systems-great-basin-region-integrated-geologic-and",
+      "section": "2019 report abstract; DOI 10.2172/1724080",
+      "status": "verified official scientific publication"
+    },
+    {
+      "id": "C13",
+      "claim": "INGENIOUS GDR 1391 is publicly accessible and CC BY 4.0, with free official links for wells/springs, geodetics, faults and other data. R2 does not use any of these third-party derived files as new labels.",
+      "source": "https://gdr.openei.org/submissions/1391",
+      "section": "License and Resources; DOI 10.15121/1881483",
+      "status": "official metadata verified; R2 external-data use is false"
+    },
+    {
+      "id": "C14",
+      "claim": "Blum and Mitchell's analysis assumes sufficient compatible views and conditional independence for the pertinent theoretical result. Correlating proxy prediction errors is a diagnostic, not proof of those premises.",
+      "source": "https://www.cs.cmu.edu/~avrim/Papers/cotrain.pdf",
+      "section": "Abstract, formal framework and theoretical analysis; DOI 10.1145/279943.279962",
+      "status": "primary author-hosted scientific paper read"
+    },
+    {
+      "id": "C15",
+      "claim": "Mapping accuracy varies with source/scale and faults may conduct or impede fluids; surface topography alone does not verify a geothermal resource.",
+      "source": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf",
+      "section": "Introduction",
+      "status": "primary scientific proceedings, not organizer hidden-label disclosure"
+    },
+    {
+      "id": "C16",
+      "claim": "The official data page redirected to login in this session. Core data were restored from owner mirrors and SHA-checked, not authenticated against an organizer download.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "section": "Login redirect and evidence/restore_receipt_r2.json",
+      "status": "access limitation verified; input integrity verified separately"
+    },
+    {
+      "id": "C17",
+      "claim": "DrivenData Terms prohibit robot/spider/automatic access and unauthorized monitoring/copying. Scheduled DrivenData scraping is disabled absent a documented permission.",
+      "source": "https://www.drivendata.org/termsofuse/",
+      "section": "Prohibited Uses, Additionally items 2 and 3",
+      "status": "verified primary terms; restriction implemented"
+    }
+  ]
+}

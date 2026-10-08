@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "round": "H58",
+  "version": "gems52-h58-cold-geothermometer-consensus-v1",
+  "status": "amended_frozen_preregistration_before_scored_execution",
+  "registered_utc_date": "2026-10-07",
+  "protocol_amendment": {
+    "date": "2026-10-07",
+    "timing": "After path/fold helper code; before any H58 model fit, holdout score or output.",
+    "reason": "Clarify prevalence matching as 0.2% of each fold's scored region, so hide and block folds target the same local prevalence rather than assigning each quadrant the full-map truth count.",
+    "result_informed": false
+  },
+  "additional_pre_score_clarification": {
+    "date": "2026-10-07",
+    "timing": "During code review, before any H58 model fit, holdout score or output.",
+    "reason": "Require both positive and negative training pixels to be within fit; construct negative clearance only from labels visible in fit; quarantine whole components that cross into a block's scored quadrant but are majority-assigned elsewhere, without adding them to truth; evaluate pseudo-label AUC on primary-held components versus catalogue-zero proxy negatives outside the 500 m full-catalogue clearance in the edge-cleared scored region, rather than removing the evaluation region with the training collar.",
+    "result_informed": false
+  },
+  "hypothesis_document": "knowledge/19_hypotheses_H58_preregistered.md",
+  "hypothesis_document_sha256": "073195521460dc501ca544a16c8e24ab96dcd3882de1b0c8ea14e56f11cdd47f",
+  "preflight_evidence": "evidence/h58_preflight_integrity.json",
+  "preflight_sha256": "e298334490824b29bce01526edcf00147cc8d9aef1d0049def5fc29241d0c963",
+  "data_integrity": {
+    "manifest": "registry/data_manifest.json",
+    "manifest_sha256": "3d9ed91aa3916a72338643f873c41a3858d22658c19e2ca9fad304ac0ff33721",
+    "data_root": "work/h58_pinned",
+    "restore_receipt": "work/h58_pinned/restore_receipt.json",
+    "required_action": "Verify input bytes and SHA-256 against the manifest before every run; fail closed on mismatch.",
+    "qualification": "The exact pins are owner-supplied mirrors. A matching manifest verifies mirror integrity, not organizer provenance.",
+    "tracked_data_policy": "Never overwrite data/*.tif. The current tracked training_features.tif, labels.tif, and sample_submission.tif differ materially from the verified staging copies; see the preflight evidence.",
+    "sample_template_policy": "Use staged sample_submission.tif only for grid metadata and finite domain; never use its pixel predictions or labels as features.",
+    "forbidden_predictor": "dist_known_fault_px in the staged GDR CSV is label-derived; do not read, derive, or use it."
+  },
+  "candidate_slate": [
+    {
+      "rank": 1,
+      "id": "H58-A",
+      "name": "Cold discharge with convergent high reservoir-geothermometer estimates",
+      "expected_relative_dti": "low_to_medium_very_uncertain",
+      "implementation_cost": "medium",
+      "external_data_required": true,
+      "data_status": "Owner-mirror CSV is locally staged and pinned; raw source GDB and geothermometer derivation are not independently verified.",
+      "status": "frozen_top_candidate"
+    },
+    {
+      "rank": 2,
+      "id": "H58-B",
+      "name": "Narrow potential-field residual under thick cover",
+      "expected_relative_dti": "low_to_medium_uncertain",
+      "implementation_cost": "medium",
+      "external_data_required": false,
+      "status": "deferred_not_tested"
+    },
+    {
+      "rank": 3,
+      "id": "H58-C",
+      "name": "Raw-water chemistry mixing/temperature consistency",
+      "expected_relative_dti": "medium_highly_uncertain",
+      "implementation_cost": "high",
+      "external_data_required": true,
+      "external_source": "https://gdr.openei.org/submissions/1391",
+      "resource": "https://gdr.openei.org/files/1391/wellspringdata.gdb.zip",
+      "license": "CC-BY-4.0 (as stated on GDR 1391)",
+      "payload_downloaded": false,
+      "status": "not_viable_until_raw_payload_and_schema_verified"
+    },
+    {
+      "rank": 4,
+      "id": "H58-D",
+      "name": "Fossil spring-deposit traces",
+      "expected_relative_dti": "low_to_medium_very_uncertain",
+      "implementation_cost": "medium_high",
+      "external_data_required": true,
+      "external_source": "https://gdr.openei.org/submissions/1391",
+      "resource": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
+      "license": "CC-BY-4.0 (as stated on GDR 1391)",
+      "payload_downloaded": false,
+      "status": "not_viable_in_this_run_payload_not_locally_obtained"
+    }
+  ],
+  "h58_a": {
+    "source_csv": "work/h58_pinned/external/gdr_wellspring_in_footprint.csv",
+    "allowed_columns_only": ["row", "col", "temp_c", "geothermquartz_c", "geothermcat_c"],
+    "forbidden_column": "dist_known_fault_px",
+    "qualifier": {
+      "measured_discharge_temperature_max_c": 30.0,
+      "quartz_geothermometer_min_c": 100.0,
+      "cation_geothermometer_min_c": 100.0,
+      "maximum_absolute_difference_c": 20.0,
+      "deduplicate": "One qualifying site per raster row/column; no score-dependent selection."
+    },
+    "pre_holdout_coverage_audit": {
+      "qualifying_rows": 22,
+      "unique_qualified_grid_sites": 20,
+      "quartz_non_null_rows": 973,
+      "cation_non_null_rows": 1185,
+      "meaning": "Descriptive source coverage only; not a holdout result or performance claim."
+    },
+    "field": "F_geo(x) = max_s max(1 - Euclidean_distance(x,s)/5000 metres, 0), over qualified sites, restricted to all-band-valid training footprint.",
+    "sole_rank_field": true,
+    "no_label_distance_or_prior_prediction_features": true
+  },
+  "co_training": {
+    "views": {
+      "view_a": "H57 potential-field/subsurface feature specification in src/gems52/h57.py",
+      "view_b": "H57 surface/DEM and available radiometric/LiDAR feature specification in src/gems52/h57.py",
+      "learner": "sklearn LogisticRegression(C=1.0, max_iter=400, solver='lbfgs', class_weight='balanced')",
+      "training_sample_policy": "Both positive and negative samples must be inside fit; negative clearance is derived only from labels visible within fit, never held-region labels.",
+      "negative_training_sample_cap": 60000,
+      "seed": 20261007
+    },
+    "oof_errors": {
+      "folds": 4,
+      "assignment": "Whole 8-connected catalogue components assigned to the majority quadrant.",
+      "block_crossing_component_policy": "If a component assigned elsewhere intersects the held quadrant, quarantine that entire component from this fold's fit and visible mask; do not add it to this fold's scored truth.",
+      "buffer_px": 80,
+      "negative_class": "Catalogue-zero proxy, not verified geological absence.",
+      "spatial_error_block_px": 50,
+      "minimum_negative_pixels_per_block": 300,
+      "correlations": ["Pearson", "tie-aware Spearman"],
+      "error_metrics": ["negative MSE", "false-positive rate at 0.60"],
+      "maximum_absolute_correlation_for_exchange": 0.6,
+      "minimum_usable_blocks": 20,
+      "undefined_or_underpowered": "Fail closed; no exchange."
+    },
+    "pseudo_label_exchange": {
+      "maximum_rounds": 1,
+      "conditional_on_independence_gate": true,
+      "evaluation_region_used_for_pseudo_labels": false,
+      "evaluation_auc_mask": "All majority-assigned held components versus catalogue-zero proxy negatives >=500 m from the full catalogue, inside the edge-cleared scored region; the training collar must not remove the scored pixels.",
+      "pseudo_region": "Next quadrant cyclically; outer evaluation quadrant and its 80-pixel buffer excluded.",
+      "base_training_region": "The two remaining quadrants only.",
+      "confident_donor_threshold": 0.6,
+      "receiver_abstention_interval": [0.4, 0.6],
+      "whole_8_connected_segments": true,
+      "single_spatial_block_px": 50,
+      "minimum_segment_pixels": 5,
+      "maximum_pixels_per_receiver_view_fold": 2000,
+      "pseudo_sample_weight": 0.25,
+      "candidate_clearance_from_labels_px": 5,
+      "diagnostic_only_not_used_in_h58_a_rank_field": true
+    },
+    "a_only_diagnostic": {
+      "mask": "p_A >= 0.60 and p_B <= 0.40",
+      "rank_field": "p_A",
+      "fold_predictions": "four-quadrant block-OOF map only",
+      "minimum_separation_px": 3,
+      "primary_budget": 37654,
+      "reasoning_row_per_emitted_candidate": true,
+      "uses_label_derived_distance": false
+    }
+  },
+  "holdout": {
+    "seed": 20261007,
+    "folds": 4,
+    "whole_components": "Original 8-connected catalogue components remain whole and are assigned to the quadrant containing most of their pixels; any component crossing into a scored block from another majority quadrant is quarantined whole from that fold's training/visible mask, but not added to its scored truth.",
+    "buffer_px": 80,
+    "modes": ["hide", "block"],
+    "prevalence": 0.002,
+    "prevalence_rule": "Per-fold whole-component target is 0.002 times that fold's scored region pixels; hide scores the valid footprint, block scores the quadrant plus 3-pixel kernel halo.",
+    "metric": "Official distance-weighted Tversky index, 300 m triangular kernel, alpha=0.2, beta=0.8.",
+    "candidate_field": "H58-A F_geo; no learned or prior pixel values.",
+    "comparison_fields": ["View A", "View B", "max(View A, View B)", "A-only stratum diagnostic", "seeded random"],
+    "primary_global_budget": 37654,
+    "secondary_global_budget": 15000,
+    "block_mode_budget_rule": "Scale each global budget by the fold's eligible region share of the all-band-valid footprint; report integer rounding.",
+    "emitter": {
+      "type": "isotropic minimum separation aware of the 300 m kernel",
+      "minimum_separation_px": 3,
+      "nms_px": 5,
+      "common_legal_pool_for_all_arms": true,
+      "candidate_support_rule": "H58-A may emit only at F_geo > 0; never backfill a support shortfall with zero-score cells",
+      "support_shortfall": "Fail budget comparability and the registered gate."
+    }
+  },
+  "promotion_gate": {
+    "candidate_must_beat_strongest_refit_single_view_or_union_baseline": true,
+    "minimum_mean_dti_lift": 0.005,
+    "minimum_fold_wins": "3/4",
+    "must_pass_both_modes": ["hide", "block"],
+    "must_pass_input_integrity_and_format": true,
+    "must_pass_decoded_pattern_uniqueness": true,
+    "must_not_equal_view_a_view_b_or_their_union": true,
+    "source_provenance_must_be_resolved_before_upload": true,
+    "organizer_authenticated_performance_required_to_claim_leaderboard_gain": true,
+    "automatic_portal_upload": false,
+    "failed_gate_artifact_label": "research only — NOT approved to submit"
+  },
+  "artifact": {
+    "required": true,
+    "new_inference_not_copied_prior": true,
+    "single_band_dtype": "float32",
+    "minimum": 0.0,
+    "maximum": 1.0,
+    "sample_grid_required": true,
+    "zero_outside_sample_finite_domain": true,
+    "zero_on_catalogue_and_emission_clearance": true,
+    "primary_node_budget": 37654,
+    "download_and_portal_status_must_be_unambiguous": true
+  },
+  "official_sources": [
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://gdr.openei.org/submissions/1391",
+    "https://pubs.usgs.gov/publication/70033407",
+    "https://www.usgs.gov/publications/chemical-geothermometers-and-mixing-models-geothermal-systems",
+    "https://www.usgs.gov/publications/discovering-blind-geothermal-systems-great-basin-region-integrated-geologic-and",
+    "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and"
+  ],
+  "numerical_dti_forecast": null,
+  "results": null
+}

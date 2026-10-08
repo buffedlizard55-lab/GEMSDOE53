@@ -1,0 +1,157 @@
+{
+  "status": "offline snapshot (verified by agent fetch; this sandbox cannot reach drivendata.org over TLS)",
+  "fetched_utc": "2026-10-06T21:33:00Z",
+  "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "column_header_on_board": "Best public DW-Tversky (in descending order)",
+  "note": "Dated participant-level board observation on 2026-10-06; file names and hashes are not exposed. Team identity as the user is not authenticated. Scheduled DrivenData scraping disabled under source policy.",
+  "rows": [
+    {
+      "rank": "1",
+      "team": "xiaofanhu",
+      "score": 0.3774,
+      "extra": []
+    },
+    {
+      "rank": "2",
+      "team": "alexoktaba",
+      "score": 0.3345,
+      "extra": []
+    },
+    {
+      "rank": "3",
+      "team": "nchuzhoy",
+      "score": 0.3262,
+      "extra": []
+    },
+    {
+      "rank": "4",
+      "team": "kinghorton42",
+      "score": 0.3222,
+      "extra": []
+    },
+    {
+      "rank": "5",
+      "team": "joeyfezster",
+      "score": 0.322,
+      "extra": []
+    },
+    {
+      "rank": "6",
+      "team": "Batik Shirt Brothers",
+      "score": 0.3218,
+      "extra": []
+    },
+    {
+      "rank": "7",
+      "team": "DARD",
+      "score": 0.3195,
+      "extra": []
+    },
+    {
+      "rank": "8",
+      "team": "ndavis7",
+      "score": 0.2888,
+      "extra": []
+    },
+    {
+      "rank": "9",
+      "team": "mzoorob",
+      "score": 0.2884,
+      "extra": []
+    },
+    {
+      "rank": "10",
+      "team": "GrigorSargsyan",
+      "score": 0.2876,
+      "extra": []
+    },
+    {
+      "rank": "11",
+      "team": "HardcoreTechGod",
+      "score": 0.2854,
+      "extra": []
+    },
+    {
+      "rank": "12",
+      "team": "op01",
+      "score": 0.2792,
+      "extra": []
+    },
+    {
+      "rank": "13",
+      "team": "extradr19",
+      "score": 0.2778,
+      "extra": []
+    },
+    {
+      "rank": "14",
+      "team": "wbg1",
+      "score": 0.275,
+      "extra": []
+    },
+    {
+      "rank": "15",
+      "team": "smashi34",
+      "score": 0.271,
+      "extra": []
+    },
+    {
+      "rank": "16",
+      "team": "smrtdoog5",
+      "score": 0.2708,
+      "extra": []
+    },
+    {
+      "rank": "17",
+      "team": "jgaines",
+      "score": 0.2638,
+      "extra": []
+    },
+    {
+      "rank": "18",
+      "team": "ad3002",
+      "score": 0.2634,
+      "extra": []
+    },
+    {
+      "rank": "19",
+      "team": "No Fault of Our Own",
+      "score": 0.2628,
+      "extra": []
+    },
+    {
+      "rank": "20",
+      "team": "SDCF9",
+      "score": 0.26,
+      "extra": []
+    },
+    {
+      "rank": "21",
+      "team": "kpomazi",
+      "score": 0.2517,
+      "extra": []
+    },
+    {
+      "rank": "22",
+      "team": "Mekhi12",
+      "score": 0.2515,
+      "extra": []
+    },
+    {
+      "rank": "23",
+      "team": "tchu",
+      "score": 0.2511,
+      "extra": []
+    },
+    {
+      "rank": "24",
+      "team": "BrandenKMurray",
+      "score": 0.2502,
+      "extra": []
+    }
+  ],
+  "our_team": "extradr19",
+  "our_best_reported": 0.2778,
+  "top": 0.3774,
+  "gap_to_top": 0.0996
+}

@@ -1,0 +1,25 @@
+{
+  "generated_utc": "2026-10-07T02:42:24.276961Z",
+  "file": "gems52-h55-grav-rtp-logedge-37654-c4b8c10205da-zeros.tif",
+  "tiff_sha256": "f0732d40d57b92d3f082eb2b910b6e6951b7238e7616f9e6e9c6c22ee9f1c7f8",
+  "format_ok": true,
+  "decoded_readback_identical": true,
+  "exact_template_mask": true,
+  "zip_contains_exactly_one_tiff": true,
+  "zip_tiff_bytes_match": true,
+  "canonical_pattern_unique": true,
+  "strict_support_novelty_gate": false,
+  "matched_budget_max_union_not_equal": true,
+  "holdout_gate": {
+    "minimum_mean_lift": 0.005,
+    "meets_mean_lift": false,
+    "minimum_positive_folds": 3,
+    "meets_fold_support": false,
+    "holdout_promotion_eligible": false,
+    "format_uniqueness_pending": true,
+    "approved_for_weekly_slot": false,
+    "failure_action": "do not spend a weekly submission slot; any later TIFF remains research-only"
+  },
+  "slot_approved": false,
+  "official_score": null
+}

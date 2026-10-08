@@ -1,0 +1,26 @@
+{
+  "version": "2026-10-06-r2",
+  "drivendata": {
+    "automated_fetch_allowed": false,
+    "written_permission_reference": null,
+    "reason": "DrivenData Terms of Use prohibit automatic access. No written permission or sanctioned public API has been provided in this session.",
+    "source": "https://www.drivendata.org/termsofuse/",
+    "section": "Prohibited Uses, Additionally items 2 and 3",
+    "snapshot_policy": "Display the last dated observation and its source, never refresh its observed timestamp merely because local evidence was regenerated.",
+    "automatic_portal_submission": false
+  },
+  "github": {
+    "owner_repository_inventory_refresh": true,
+    "purpose": "audit accessible public owner artifacts for learning and uniqueness; do not use prior predictions as new-model inputs"
+  },
+  "external_data": {
+    "used_by_r2_model": false,
+    "future_use_requires": [
+      "official metadata and license",
+      "successful actual download receipt",
+      "CRS/coverage checks",
+      "training-fold-only processing of any labels",
+      "holdout improvement"
+    ]
+  }
+}

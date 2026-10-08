@@ -1,0 +1,64 @@
+{
+ "schema_version": 1,
+ "round": "H57",
+ "registration_kind": "blind",
+ "written_before_code": true,
+ "slate": "knowledge/17_hypotheses_H57_preregistered.md",
+ "session": "2026-10-07",
+ "data": {
+  "restore_receipt": "data/restore_receipt.json",
+  "all_sha256_pinned": true,
+  "organizer_authenticated": false,
+  "note": "Restored from the owner's hash-pinned sibling mirrors through the GitHub API; every file re-verified by SHA-256 and byte count. The DrivenData data tab is login-walled and this sandbox has no credentials, so these bytes are integrity-pinned, NOT organizer-authenticated."
+ },
+ "frozen_rules": {
+  "R1_no_upload_without_holdout": "mean lift over the matched baseline >= +0.005 AND >= 3/4 folds positive, on BOTH instruments (tip and hide). Otherwise the round is recorded as failed and no weekly slot is spent.",
+  "R2_independence_abandonment": "if the block-level out-of-fold negative-error correlation between the two views reaches |r| >= 0.60 on a non-degenerate statistic, co-training is abandoned. A degenerate or under-powered statistic also returns allow_exchange=false (fail closed), per gems52.spatial.independence.",
+  "R3_corridor": "never emit inside the <= 200 m ring around a mapped catalogue trace.",
+  "R4_range": "values in {0,1}, all finite, single band float32, EPSG:32611, 3730x3292, transform (100,0,243350,0,-100,4508550). NaN is forbidden: that is the mechanism behind the historical 'Predicted values must be in range [0,1]' rejection.",
+  "R5_uniqueness": "the decoded <f4 array must not equal any accessible aligned prior, and support novelty against the accessible prior union is reported.",
+  "R6_not_the_union": "the output must not equal the union of the two named prior files it was derived from, nor A_view union B_view; the decoded-pattern and set checks are reported either way.",
+  "R7_a_only_dossier": "every arm candidate carries a written geological reasoning row: View-A bands that fired, depth-to-basement and conductivity at the node, local strike, distance to nearest mapped trace, and explicit alternative explanations.",
+  "R8_honest_reporting": "every projection is reported with its interval and its prior; the site states the probability that the target is NOT reached."
+ },
+ "metric_algebra": {
+  "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric",
+  "R_m": 300.0,
+  "alpha": 0.2,
+  "beta": 0.8,
+  "identity": "DTI = TPw / (0.2*TPw + 0.2*(S-M) + 0.8*|G|)",
+  "marginal_acceptance_rule": "accept a pixel iff k(d) > alpha*DTI (exact reduction of c(1-aD) > aD f with c=k, f=1-k)",
+  "acceptance_radius_at_dti_0.2778_m": 283.3,
+  "unit": "tests/test_metric.py pins the organiser's worked example; tests/test_h57.py pins the marginal rule and the along-strike spacing sums"
+ },
+ "hypotheses": [
+  {"id": "H57-A", "rank": 1, "status": "implemented",
+   "name": "anisotropic (along-strike) node spacing",
+   "layers": "none new; strike from the structure tensor of the credited node cloud and from the View-A gradient field",
+   "signature": "direction-dependent minimum separation: 4-5 px along strike, 3 px across",
+   "expected_credit_gain_per_node": {"s3": 2.3333, "s4": 2.6667, "s5": 3.0},
+   "cost": "~1h"},
+  {"id": "H57-B", "rank": 2, "status": "implemented",
+   "name": "A-only buried-structure arm",
+   "layers": "View A bands 1,2,3,4,5,9,11,13,14,15,16,17,18; View B bands 6,12,19 plus external LiDAR and radiometric surface proxies",
+   "signature": "cross-validated logistic per view; emit only where View A is confident and View B abstains",
+   "cost": "~2h"},
+  {"id": "H57-C", "rank": 3, "status": "queued, not run",
+   "name": "antisymmetric edge coincidence",
+   "signature": "cos2(theta_A - theta_B) -> -1 within a tile, against a rolled null",
+   "cost": "~1.5h"},
+  {"id": "H57-D", "rank": 4, "status": "queued, not run",
+   "name": "conductivity-depth paired across-strike contrast",
+   "cost": "~1h",
+   "prior_against": "knowledge/03 N-6: six potential-field transforms at 300 m measured at AUC 0.48-0.52"},
+  {"id": "H57-E", "rank": 5, "status": "implemented inside H57-B",
+   "name": "B-only veto (surface artifact suppression)",
+   "cost": "near zero"}
+ ],
+ "authentication_limits": [
+  "Every leaderboard score used anywhere in this repo is owner-reported; no organiser receipt maps a score to a filename or SHA-256.",
+  "|G| = 14,088.7 px is DEFINED by 'the <=200 m ring earns zero credit'; if the ring earns a little, |G| is a little smaller and every credit scales down with it.",
+  "The hide simulator is not a proxy for the leaderboard (knowledge/10 section 5: Spearman -0.1045, n=13), so it is used only for RELATIVE comparisons between arms measured on identical rows and identical node budgets.",
+  "No H57 output may be described as 'verified to score X'."
+ ]
+}

@@ -1,0 +1,464 @@
+{
+  "generated_utc": "2026-10-07T03:00:31.328164Z",
+  "file": "gems52-r3-h1-paired-profile-37654-e42677141dbc-research-only.tif",
+  "submission_name": "GEMSDOE52-R3-H1-PairedProfile-e4267714",
+  "note": "R3-H1 paired DEM profile | local lift +0.000225 vs B (2/4 folds; gate FAIL) | research-only; NOT approved for upload.",
+  "submission_note": "R3-H1 paired DEM profile | local lift +0.000225 vs B (2/4 folds; gate FAIL) | research-only; NOT approved for upload.",
+  "submission_note_chars": 117,
+  "bytes": 138077,
+  "sha256": "0a28426785c4125d4560d6279cc763570f791cd1fdb7fb788ba60d6024e1f9db",
+  "decoded_sha256": "e42677141dbc264dcc0e7b0f7cc96f85fc6ede69c629e50426c205a90669f734",
+  "format": {
+    "path": "/home/user/GEMSDOE52/submission/gems52-r3-h1-paired-profile-37654-e42677141dbc-research-only.tif",
+    "bytes": 138077,
+    "sha256": "0a28426785c4125d4560d6279cc763570f791cd1fdb7fb788ba60d6024e1f9db",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": true,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "n_nonzero": 37654,
+    "mass": 37654.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "uniqueness": {
+    "n_priors_checked": 12,
+    "per_prior": [
+      {
+        "path": "/home/user/GEMSDOE52/docs/downloads/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+        "prior_px": 37654,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "39a43f8bea998e610be595a9829e8a8fbe76c5c6df1f0ff93a171fe94ee373f8",
+        "intersection": 2479,
+        "jaccard": 0.03403863845446182,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 35175
+      },
+      {
+        "path": "/home/user/GEMSDOE52/docs/downloads/gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+        "prior_px": 37654,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "61b67b45dbaf367468f5bec13ac3f7955c5e6e27ec7d9564fb0456f6a03343d0",
+        "intersection": 559,
+        "jaccard": 0.0074783609145272845,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 37095
+      },
+      {
+        "path": "/home/user/GEMSDOE52/docs/downloads/gems52-h53-revealed-core-strike-continuation-50517px-r1.tif",
+        "prior_px": 50517,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "b2d3efea24e42b82b986d1a3eb5159d99ab82ffbc268312ecce1a89d96250e9a",
+        "intersection": 1281,
+        "jaccard": 0.014742778225342387,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 36373
+      },
+      {
+        "path": "/home/user/GEMSDOE52/docs/downloads/gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+        "prior_px": 50517,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "6f9c39e5e5dac08f425f2aaabba76c8e4e8f642dd05b74903e495957655d8110",
+        "intersection": 1258,
+        "jaccard": 0.01447424435930183,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 36396
+      },
+      {
+        "path": "/home/user/GEMSDOE52/docs/downloads/gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",
+        "prior_px": 37654,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "1f751ac9b6eea960c2559519f438afae7be7ea33f4f018e4a32d7149d50e3854",
+        "intersection": 5009,
+        "jaccard": 0.07125279164710735,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 32645
+      },
+      {
+        "path": "/home/user/GEMSDOE52/docs/downloads/gemsdoe52-cotrain-anchored-hybrid-20261006-zeros.tif",
+        "prior_px": 40704,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "0c5398322072947338b9083c7c8f92dc95567b9bea9568691547068a34bda194",
+        "intersection": 1686,
+        "jaccard": 0.021989774624373955,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 35968
+      },
+      {
+        "path": "/home/user/GEMSDOE52/docs/downloads/gemsdoe52-cotrain-disagree-submodular-20261006-nan.tif",
+        "prior_px": 41200,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "de5268abe01cd853b4e7d0f97253edd69d55b27d25df27938f6b0ed3ac77686a",
+        "intersection": 765,
+        "jaccard": 0.009796514233758916,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 36889
+      },
+      {
+        "path": "/home/user/GEMSDOE52/docs/downloads/gemsdoe52-cotrain-disagree-submodular-20261006-zeros.tif",
+        "prior_px": 41200,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "de5268abe01cd853b4e7d0f97253edd69d55b27d25df27938f6b0ed3ac77686a",
+        "intersection": 765,
+        "jaccard": 0.009796514233758916,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 36889
+      },
+      {
+        "path": "/home/user/GEMSDOE52/submission/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+        "prior_px": 37654,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "39a43f8bea998e610be595a9829e8a8fbe76c5c6df1f0ff93a171fe94ee373f8",
+        "intersection": 2479,
+        "jaccard": 0.03403863845446182,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 35175
+      },
+      {
+        "path": "/home/user/GEMSDOE52/submission/gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+        "prior_px": 37654,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "61b67b45dbaf367468f5bec13ac3f7955c5e6e27ec7d9564fb0456f6a03343d0",
+        "intersection": 559,
+        "jaccard": 0.0074783609145272845,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 37095
+      },
+      {
+        "path": "/home/user/GEMSDOE52/submission/gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+        "prior_px": 50517,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "6f9c39e5e5dac08f425f2aaabba76c8e4e8f642dd05b74903e495957655d8110",
+        "intersection": 1258,
+        "jaccard": 0.01447424435930183,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 36396
+      },
+      {
+        "path": "/home/user/GEMSDOE52/submission/gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",
+        "prior_px": 37654,
+        "new_px": 37654,
+        "binary": true,
+        "support_definition": ">0 for binary",
+        "decoded_sha256": "1f751ac9b6eea960c2559519f438afae7be7ea33f4f018e4a32d7149d50e3854",
+        "intersection": 5009,
+        "jaccard": 0.07125279164710735,
+        "identical": false,
+        "subset_of_prior": false,
+        "superset_of_prior": false,
+        "novel_vs_this": 32645
+      }
+    ],
+    "candidate_decoded_sha256": "e42677141dbc264dcc0e7b0f7cc96f85fc6ede69c629e50426c205a90669f734",
+    "canonical_pattern_unique": true,
+    "equals_literal_prior_union": false,
+    "research_publication_ok": true,
+    "support_novelty_gate_ok": true,
+    "gate_correction": "Original >=20% support novelty retained as a FAILED diagnostic, not silently waived for slot promotion. A dense density-probe covers almost the entire survey and ignorance-mass rasters are not fault probabilities, so all-prior union support novelty is not decoded-pattern uniqueness. Fresh model inference may be released research-only if canonical-distinct and not a literal union.",
+    "union_px": 231586,
+    "novel_vs_all_priors": 27838,
+    "novel_fraction": 0.7393105646146492,
+    "prior_px_dropped": 221770,
+    "relation_to_union": "strictly-novel-and-selective",
+    "ok": true,
+    "top_argument_ignored": false,
+    "rule": "distinct decoded values from every supplied prior, >=20% new support against binary/>=0.5 continuous proposal union, and selective prior-pixel removal",
+    "scope": "Only the supplied, aligned accessible inventory; not a proof against all private/unlinked submissions",
+    "inventory": "scripts/run_structural_pipeline.py::prior_paths; evidence/prior_inventory_r2.json plus aligned prior rasters in data/scored, data/reference, docs/downloads and submission",
+    "research_only_due_to_holdout_failure": true
+  },
+  "view_comparison": {
+    "view_A": {
+      "equal": false,
+      "emitted": 37654,
+      "intersection": 721
+    },
+    "view_B": {
+      "equal": false,
+      "emitted": 37654,
+      "intersection": 19757
+    },
+    "view_union": {
+      "equal": false,
+      "pixels": 74561,
+      "candidate_only": 17561,
+      "union_only": 54468
+    },
+    "matched_budget_max_view_union": {
+      "equal": false,
+      "emitted": 37654,
+      "intersection": 12925,
+      "candidate_only": 24729,
+      "union_only": 24729,
+      "placement": {
+        "emitted": 37654,
+        "requested_budget": 37654,
+        "pool": 400000,
+        "pool_restricted": true,
+        "bar": 0.0,
+        "dti_projected": 0.0,
+        "marginal_first": 2.965055465698242,
+        "marginal_last": 0.14557449519634247,
+        "total_expected_credit": 12144.38170196116,
+        "rejects_at_stop": 0,
+        "lazy_updates": 733801,
+        "density_sum": 68477.90625,
+        "false_positive_discount": "unused: fixed matched budget",
+        "objective": "expected triangular max-coverage surrogate; not expected DTI"
+      }
+    },
+    "not_merely_a_view_union": true,
+    "literally_copied_prior": false,
+    "not_copied_or_literal_union": true
+  },
+  "stats": {
+    "emitted": 37654,
+    "requested_budget": 37654,
+    "pool": 400000,
+    "pool_restricted": true,
+    "bar": 0.0,
+    "dti_projected": 0.0,
+    "marginal_first": 2.860269784927368,
+    "marginal_last": 0.12980276346206665,
+    "total_expected_credit": 11359.393773078918,
+    "rejects_at_stop": 0,
+    "lazy_updates": 713036,
+    "density_sum": 53092.90234375,
+    "false_positive_discount": "unused: fixed matched budget",
+    "objective": "expected triangular max-coverage surrogate; not expected DTI"
+  },
+  "model": "single-view B + the two preregistered R3-H1 paired DEM-profile features",
+  "pseudo_exchange_used": false,
+  "cotraining_diagnostic": "evidence/holdout_r3_paired_profile.json; separately evaluated and not used in this artifact",
+  "validation": {
+    "baseline": "view_B",
+    "candidate": "view_B_paired_shoulder",
+    "baseline_mean_dti": 0.19467087779765155,
+    "candidate_mean_dti": 0.1948957893329302,
+    "mean_dti_lift": 0.00022491153527864904,
+    "paired_fold_lifts": [
+      0.0015429977268964223,
+      -0.0007704006713935563,
+      0.0004953668921975352,
+      -0.000368317806585694
+    ],
+    "positive_folds": 2,
+    "total_folds": 4,
+    "required_mean_lift": 0.005,
+    "required_positive_folds": 3,
+    "refitted_historical_baseline_means": {
+      "raw_fusion": 0.14437562226624356,
+      "view_A": 0.10754302222876697,
+      "view_B": 0.19467087779765155,
+      "naive_union": 0.1894242532348807,
+      "structural_contrast": 0.19316716677073964,
+      "disagreement_router": 0.16211998257444857
+    },
+    "published_r2_baseline_means": {
+      "raw_fusion": 0.14437562226624356,
+      "view_A": 0.10754302222876697,
+      "view_B": 0.19467087779765155,
+      "naive_union": 0.1894242532348807,
+      "structural_contrast": 0.19316716677073964,
+      "disagreement_router": 0.16211998257444857
+    },
+    "historical_refit_deltas": {
+      "raw_fusion": 0.0,
+      "view_A": 0.0,
+      "view_B": 0.0,
+      "naive_union": 0.0,
+      "structural_contrast": 0.0,
+      "disagreement_router": 0.0
+    },
+    "same_protocol_historical_refit_matches": true,
+    "refitted_incumbent": "view_B",
+    "refitted_incumbent_mean_dti": 0.19467087779765155,
+    "candidate_lift_over_refitted_incumbent": 0.00022491153527864904,
+    "local_candidate_gate_passed": false,
+    "beats_current_comparable_holdout_best": false,
+    "independent_confirmation": false,
+    "approved_for_weekly_slot": false,
+    "weekly_submission_slots_used": 0,
+    "reason": "candidate did not clear registered local lift/fold-support gate; do not spend a slot"
+  },
+  "promoted": false,
+  "forced": false,
+  "approved_for_weekly_slot": false,
+  "weekly_submission_slots_used": 0,
+  "artifact_status": "RESEARCH ONLY \u2014 R3-H1 spatial holdout failed the preregistered promotion gate; DO NOT UPLOAD",
+  "official_score": null,
+  "score_forecast": null,
+  "source_authentication": "Competition input files are SHA-pinned owner mirrors; organizer portal acceptance and hidden-score attribution are not verified.",
+  "normalization": "single-band float32 binary {0,1}; every raw cell finite and within [0,1]; internal mask equals the sample footprint",
+  "feature_support_px": 36,
+  "eligible_support_px": 4593171,
+  "external_data_used": false,
+  "preregistration_sha256": "76eeeb20defdc1370b3e6ea6f386ea61222efb91a801a6f81a1c267d7737e913",
+  "feature_manifest_sha256": "5e0b4fd432f7fddf07690041b20a4cd6ff35a61bace0c057d2ef9defd0afaca7",
+  "label_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "training": {
+    "n_positive": 53186,
+    "n_negative": 160000,
+    "catalogue_prior": 0.011579364234425411,
+    "positive_index_sha256": "8f9d3dc7dece0ed27e66200aed5ef704d3d019e947cdcda2b1be56c210947eb2",
+    "negative_index_sha256": "20e2a6f61c96dd0d92e6763e7df24e4460c34975b4019840ea5bbd3617ef9c8e"
+  },
+  "values": [
+    0.0,
+    1.0
+  ],
+  "internal_mask_matches_sample": true,
+  "decoded_pixels_match_prediction": true,
+  "prior_inventory": [
+    {
+      "path": "docs/downloads/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+      "bytes": 89751,
+      "sha256": "063fb7247f8e12b80788dd14652c3245dec15be82f7c7e8e901193b9aeaa68b6"
+    },
+    {
+      "path": "docs/downloads/gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+      "bytes": 147575,
+      "sha256": "9ffe11b2b56a2cb43e7da5ce3613a626b1a5503dc72e91cee694376d15f4420f"
+    },
+    {
+      "path": "docs/downloads/gems52-h53-revealed-core-strike-continuation-50517px-r1.tif",
+      "bytes": 311436,
+      "sha256": "6501da54c39757556cac7e3d7990ce0f35ddeacc039fdd2139f3beab753ce424"
+    },
+    {
+      "path": "docs/downloads/gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+      "bytes": 313431,
+      "sha256": "15210d91fa0c939b254d058876b47268e650176e08bf0eed10437ced8d476e36"
+    },
+    {
+      "path": "docs/downloads/gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",
+      "bytes": 136969,
+      "sha256": "c3a08704d46c84acf13141f5df5476dd24e1fa0f55faa5aa77ca73b53621befc"
+    },
+    {
+      "path": "docs/downloads/gemsdoe52-cotrain-anchored-hybrid-20261006-zeros.tif",
+      "bytes": 154585,
+      "sha256": "a7cce341cbe047d08dcbfbd21642f33b54c8941bc212e485e94a09dc0c951e90"
+    },
+    {
+      "path": "docs/downloads/gemsdoe52-cotrain-disagree-submodular-20261006-nan.tif",
+      "bytes": 223917,
+      "sha256": "f66ce1a252f38bcb84d15c832d1d0abc76b6b08bed4e753a048bd47983b37c29"
+    },
+    {
+      "path": "docs/downloads/gemsdoe52-cotrain-disagree-submodular-20261006-zeros.tif",
+      "bytes": 153803,
+      "sha256": "c7e980f472113ff1b3378b9d08a4a361cece5984d07fe93e4b3a6e98fdf8068e"
+    },
+    {
+      "path": "submission/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+      "bytes": 89751,
+      "sha256": "063fb7247f8e12b80788dd14652c3245dec15be82f7c7e8e901193b9aeaa68b6"
+    },
+    {
+      "path": "submission/gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+      "bytes": 147575,
+      "sha256": "9ffe11b2b56a2cb43e7da5ce3613a626b1a5503dc72e91cee694376d15f4420f"
+    },
+    {
+      "path": "submission/gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+      "bytes": 313431,
+      "sha256": "15210d91fa0c939b254d058876b47268e650176e08bf0eed10437ced8d476e36"
+    },
+    {
+      "path": "submission/gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",
+      "bytes": 136969,
+      "sha256": "c3a08704d46c84acf13141f5df5476dd24e1fa0f55faa5aa77ca73b53621befc"
+    }
+  ],
+  "prior_inventory_count": 12,
+  "gate_reason": "candidate did not clear registered local lift/fold-support gate; do not spend a slot",
+  "independent_confirmation": "not performed; no expert-mapped external holdout labels are available",
+  "software": {
+    "python": "3.11.2",
+    "numpy": "2.2.6",
+    "rasterio": "1.4.3",
+    "sklearn": "1.7.2"
+  }
+}

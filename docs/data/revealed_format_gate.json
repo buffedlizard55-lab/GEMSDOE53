@@ -1,0 +1,46 @@
+{
+ "path": "/home/user/GEMSDOE52/submission/gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+ "bytes": 313480,
+ "sha256": "ac6201ad38792369e5a2aa026c22b6264e8741d0326c3c7a62a955571ace6d4a",
+ "bands": 1,
+ "dtype": "float32",
+ "crs": "EPSG:32611",
+ "width": 3292,
+ "height": 3730,
+ "bounds": [
+  243350.0,
+  4135550.0,
+  572550.0,
+  4508550.0
+ ],
+ "ref_bounds": [
+  243350.0,
+  4135550.0,
+  572550.0,
+  4508550.0
+ ],
+ "transform": [
+  100.0,
+  0.0,
+  243350.0,
+  0.0,
+  -100.0,
+  4508550.0
+ ],
+ "nodata": "None",
+ "blocksize": [
+  1,
+  3292
+ ],
+ "nan_pixels": 0,
+ "reference_file_has_nan": 7111787,
+ "mass_outside_footprint": 0,
+ "min": 0.0,
+ "max": 1.0,
+ "mean": 0.004114,
+ "n_nonzero": 50517,
+ "n_nan": 0,
+ "mass": 50517.0,
+ "problems": [],
+ "ok": true
+}

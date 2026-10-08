@@ -1,0 +1,33 @@
+{
+ "version": "gems52-h56-v1",
+ "registered_utc": "2026-10-07T15:36:38Z",
+ "registration_kind": "retrospective \u2014 written after the build (15:33Z) and the first publish (15:32Z) within the same session; stated because a pre-registration claim would be false",
+ "measurement_window_utc": [
+  "2026-10-07T15:25:40Z",
+  "2026-10-07T15:30:00Z"
+ ],
+ "base_commit": "e20adf1e063c23e7fe32d9572ebb867dfd46aa36",
+ "hypothesis_document": "knowledge/15_hypotheses_H56_preregistered.md",
+ "outcome_document": "knowledge/16_what_h56_found.md",
+ "primary_hypothesis": "H56-1: consensus-core retention (P1 = h33-2-b2 n gems24-d1-5, exact credit interval) plus a novel continuation arm, sized by revealed.budget_rule",
+ "not_run": [
+  "H56-4 INGENIOUS 2 m temperature-probe corridors",
+  "H56-5 1 m DEM via GitHub runner",
+  "H56-6 ComCat/NV earthquake lineaments"
+ ],
+ "primary_metric": "official distance-weighted Tversky index (alpha 0.2, beta 0.8, 300 m triangular kernel), as transcribed in src/gems52/metric.py and pinned by tests",
+ "budget_rule": "argmax over n_novel of P(DTI > 0.2778) subject to a >= 20 % support-novelty gate; t_core interval [4168, 5223]; rho_novel prior U[0.03, 0.14]",
+ "artifact": {
+  "file": "gems52-h56-consensus-core-continuation-40517px-04c86e1888a8-zeros.tif",
+  "sha256": "1308083dcf09b4c6fb656589ce79b3c392f5a0dd315e2ed31c8d36a47fc1d52d",
+  "bytes": 153815,
+  "emitted": 40517
+ },
+ "gates_required": [
+  "format gate (on-disk readback)",
+  "canonical-pattern uniqueness vs every aligned prior",
+  "zero pixels on the mapped catalogue",
+  "zero pixels in the <= 200 m ring",
+  "novel arm outside the accessible prior union"
+ ]
+}

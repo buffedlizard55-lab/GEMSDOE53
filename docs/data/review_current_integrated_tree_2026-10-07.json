@@ -1,0 +1,101 @@
+{
+  "reviewed_utc": "2026-10-07T17:04:57Z",
+  "status": "three-pass integration review complete; no upload performed",
+  "scope": [
+    "Current H56 artifact, slot decision, download/feed/page integration",
+    "Separate H54 audit-only and H55-1 failed-holdout records",
+    "User acceptance, README prompt, stale site instructions, hashes, tests and site delivery"
+  ],
+  "pass_1_implementation_and_verification": {
+    "summary": "Integrated recovered H54/H55-1 records without changing the H56 TIFF or main pointer; made the slot decision and short downloads explicit; preserved separate research namespaces and receipts.",
+    "changes": [
+      "Added an explicit H56 not-approved slot-gate review and retained the H56 short TIFF/ZIP aliases as exact byte copies.",
+      "Added and surfaced H55-1's failed paired holdout, scoped page/data, no-TIFF status, and protocol-gate hash-preservation limitation.",
+      "Kept H54 in its separate audit marker, disclosed bounded uniqueness and absent holdout, and staged exact-byte audit aliases.",
+      "Updated feed/page generation for current H56 status, H54 audit and H55-1 archive; extended site checks for current gate, hashes, aliases and disclosures.",
+      "Added a current acceptance addendum to README and corrected archive/pointer text on the index, H53 and H55 pages."
+    ],
+    "h56_tiff_sha256_before_and_after": "1308083dcf09b4c6fb656589ce79b3c392f5a0dd315e2ed31c8d36a47fc1d52d",
+    "submission_latest_pointer_changed": false,
+    "competition_slot_used": false,
+    "portal_upload_performed": false
+  },
+  "pass_2_independent_edge_case_review_and_fixes": {
+    "summary": "Reviewed rendered source content, receipts, generated pages and historical namespace claims. Corrected the issues below before final re-check.",
+    "issues_found_and_fixed": [
+      {
+        "issue": "H56 documentation called the 15,000 selected continuation/scarp cells wholly outside the 33-prior support union, while the saved decoded verifier reports 12,941 total support cells outside the union.",
+        "fix": "Corrected README, candidate page, executive summary, download note and H56 explanatory knowledge; disclosed the derived 2,059 selected-arm cells with checked-prior support and kept the projection explicitly conditional."
+      },
+      {
+        "issue": "The full-file nearest-neighbour >=3 px diagnostic is false at 2.828 px inside the fixed core, despite the selected arm itself being >=3.162 px from other emitted cells.",
+        "fix": "Added the failure to the H56 slot review, site copy and consistency checks; no global spacing pass is claimed."
+      },
+      {
+        "issue": "No H56 per-cell A-only dossier or committed feature/probability arrays were available; R2/H54/H55-EDGE reasoning could otherwise be accidentally conflated.",
+        "fix": "Added a separate NOT PRODUCED scope receipt and prominent non-conflation statement; did not invent pixel explanations."
+      },
+      {
+        "issue": "Historical H55 and H53 pages still described themselves as the global LATEST/current incumbent; H54 generator rendered global decoded uniqueness as None.",
+        "fix": "Corrected historical-pointer text and made H54's full-inventory uniqueness explicitly unknown."
+      },
+      {
+        "issue": "An H55-1 test glob treated unrelated H55-PROFILE/H55-EDGE archives as paired-shoulder TIFFs; another test unconditionally required ignored raw organizer TIFFs.",
+        "fix": "Scoped the H55-1 no-artifact test to paired-shoulder names/marker; separated the optional raw-grid comparison so it skips with an explicit reason when the ignored inputs are absent."
+      }
+    ],
+    "score_to_filename_mapping_authenticated": false,
+    "uncertainties_and_limitations": [
+      "H56 score-to-file associations and implied core credits remain unauthenticated owner-reported inputs.",
+      "H56 has no comparable spatial holdout; its registration is retrospective and no holdout was rerun.",
+      "H56 decoded comparison covers 33 accessible owner-mirror rasters, not private/unlinked submissions.",
+      "H54 global decoded uniqueness remains unknown; 377 eligible inventory rasters were unavailable locally.",
+      "H55-1's exact pre-holdout protocol-gate bytes were not preserved; the hash discrepancy is disclosed, not reconstructed.",
+      "Raw competition rasters under ignored data/ were absent; no model/holdout rerun or slot use occurred."
+    ]
+  },
+  "pass_3_full_recheck_against_acceptance": {
+    "commands": [
+      "python3 scripts/refresh_feed.py --branch arena/310eb064-gemsdoe52",
+      "python3 scripts/make_site_pages.py",
+      ".venv/bin/python scripts/check_site.py",
+      "PYTHONPATH=src .venv/bin/pytest -q"
+    ],
+    "site_check": {
+      "status": "PASS",
+      "pages_checked": 20,
+      "json_data_files_checked": 132,
+      "current_h56_readback": "single-band float32, 3292x3730, EPSG:32611, finite {0,1}, 40,517 emitted cells",
+      "current_h56_short_tiff_and_zip": "both served and byte-identical to their canonical counterparts",
+      "slot_gate_message": "CLOSED for current H56"
+    },
+    "pytest": {
+      "status": "PASS",
+      "passed": 150,
+      "skipped": 1,
+      "failed": 0,
+      "warnings": 41,
+      "skip_reason": "The optional raw-grid comparison requires data/sample_submission.tif and data/labels.tif, which are absent/ignored in this checkout."
+    },
+    "feed_refresh": "PASS; official leaderboard automated access remained disabled under the recorded Terms-of-Use policy.",
+    "generated_page_check": "PASS; H54/H55-1 pages regenerated from their dedicated receipts.",
+    "final_slot_decision": "H56 NOT APPROVED; do not upload or spend a weekly slot without a new preregistered comparable spatial holdout that beats the current best and independent review.",
+    "final_h56_sha256": "1308083dcf09b4c6fb656589ce79b3c392f5a0dd315e2ed31c8d36a47fc1d52d",
+    "h56_short_tiff_sha256": "1308083dcf09b4c6fb656589ce79b3c392f5a0dd315e2ed31c8d36a47fc1d52d",
+    "h56_short_zip_sha256": "d5ad9d2d9651d1c59b14807504714cd6cd292408c65d414e192235ef8b057439",
+    "h54_short_tiff_sha256": "15210d91fa0c939b254d058876b47268e650176e08bf0eed10437ced8d476e36",
+    "h54_short_zip_sha256": "e91764b15758f476b2b243cf0d965119a1b0ecd48635feef77e4d101201518c0",
+    "downloads_index_check": "PASS; the H56 short TIFF/ZIP links and explicit no-upload status appear in the top research-downloads card.",
+    "diff_whitespace_check": "PASS; git diff --check returned no errors.",
+    "python_compile": {
+      "status": "PASS",
+      "files": [
+        "scripts/check_site.py",
+        "scripts/refresh_feed.py",
+        "scripts/make_site_pages.py",
+        "scripts/run_h55_paired_shoulders_holdout.py",
+        "scripts/check_h55_paired_shoulders_protocol.py"
+      ]
+    }
+  }
+}

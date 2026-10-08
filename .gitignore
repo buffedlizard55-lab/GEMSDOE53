@@ -1,0 +1,10 @@
+/data/
+/work/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+logs/
+*.log
+site_src/
+.DS_Store

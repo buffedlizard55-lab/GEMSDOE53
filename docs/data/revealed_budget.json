@@ -1,0 +1,162 @@
+{
+ "g_estimate_px": 14088.747191011276,
+ "n_core": 25517,
+ "t_core_bounds": [
+  4168.222,
+  5223.139
+ ],
+ "rho_prior": [
+  0.03,
+  0.14
+ ],
+ "floor": 0.2778,
+ "rule": "maximise P(DTI > floor) over the exact t_core interval x the stated rho_novel prior; ties to the larger novel fraction",
+ "rows": [
+  {
+   "n_novel": 0,
+   "total": 25517,
+   "novel_fraction": 0.0,
+   "p_win": 0.6398,
+   "mean_dti": 0.2868,
+   "worst_dti": 0.2546,
+   "best_dti": 0.319,
+   "dti_at_central_rho": 0.2868
+  },
+  {
+   "n_novel": 5000,
+   "total": 30517,
+   "novel_fraction": 0.1638,
+   "p_win": 0.7757,
+   "mean_dti": 0.2947,
+   "worst_dti": 0.2485,
+   "best_dti": 0.3409,
+   "dti_at_central_rho": 0.2947
+  },
+  {
+   "n_novel": 10000,
+   "total": 35517,
+   "novel_fraction": 0.2816,
+   "p_win": 0.8241,
+   "mean_dti": 0.3018,
+   "worst_dti": 0.2432,
+   "best_dti": 0.3605,
+   "dti_at_central_rho": 0.3018
+  },
+  {
+   "n_novel": 15000,
+   "total": 40517,
+   "novel_fraction": 0.3702,
+   "p_win": 0.8307,
+   "mean_dti": 0.3082,
+   "worst_dti": 0.2384,
+   "best_dti": 0.378,
+   "dti_at_central_rho": 0.3082
+  },
+  {
+   "n_novel": 20000,
+   "total": 45517,
+   "novel_fraction": 0.4394,
+   "p_win": 0.8269,
+   "mean_dti": 0.3139,
+   "worst_dti": 0.234,
+   "best_dti": 0.3938,
+   "dti_at_central_rho": 0.3139
+  },
+  {
+   "n_novel": 25000,
+   "total": 50517,
+   "novel_fraction": 0.4949,
+   "p_win": 0.8189,
+   "mean_dti": 0.3191,
+   "worst_dti": 0.2301,
+   "best_dti": 0.4081,
+   "dti_at_central_rho": 0.3191
+  },
+  {
+   "n_novel": 30000,
+   "total": 55517,
+   "novel_fraction": 0.5404,
+   "p_win": 0.8102,
+   "mean_dti": 0.3238,
+   "worst_dti": 0.2265,
+   "best_dti": 0.4212,
+   "dti_at_central_rho": 0.3238
+  },
+  {
+   "n_novel": 40000,
+   "total": 65517,
+   "novel_fraction": 0.6105,
+   "p_win": 0.7991,
+   "mean_dti": 0.3321,
+   "worst_dti": 0.2202,
+   "best_dti": 0.444,
+   "dti_at_central_rho": 0.3321
+  }
+ ],
+ "selected": {
+  "n_novel": 25000,
+  "total": 50517,
+  "novel_fraction": 0.4949,
+  "p_win": 0.8189,
+  "mean_dti": 0.3191,
+  "worst_dti": 0.2301,
+  "best_dti": 0.4081,
+  "dti_at_central_rho": 0.3191,
+  "n_novel_applied": 25000
+ },
+ "fabric": {
+  "coherence_credited_mean": 0.4197,
+  "coherence_random_mean": 0.2676,
+  "lift": 1.568,
+  "coherence_credited_frac_gt_0p5": 0.373,
+  "coherence_random_frac_gt_0p5": 0.1144,
+  "strike_histogram_deg": {
+   "bins": [
+    0.0,
+    10.0,
+    20.0,
+    30.0,
+    40.0,
+    50.0,
+    60.0,
+    70.0,
+    80.0,
+    90.0,
+    100.0,
+    110.0,
+    120.0,
+    130.0,
+    140.0,
+    150.0,
+    160.0,
+    170.0,
+    180.0
+   ],
+   "counts": [
+    1147,
+    1117,
+    1154,
+    1235,
+    1335,
+    1324,
+    1535,
+    1676,
+    1792,
+    1811,
+    1819,
+    1659,
+    1514,
+    1507,
+    1348,
+    1214,
+    1256,
+    1074
+   ]
+  },
+  "dominant_strike_deg": [
+   100.0,
+   110.0
+  ],
+  "reading": "a strike undirected in [0,180); array +x is east and +y is south, so a strike near 0 or 180 deg is N-S and near 90 deg is E-W"
+ }
+}

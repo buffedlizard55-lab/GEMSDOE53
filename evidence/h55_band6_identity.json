@@ -1,0 +1,32 @@
+{
+ "n_sampled": 150000,
+ "n_overlap_px": 5164300,
+ "band6_min": 3.1250853538513184,
+ "band6_max": 40.422794342041016,
+ "band6_mean": 18.456576342163086,
+ "spearman": {
+  "geoDAWN_TC_grid": 0.9999501923763776,
+  "K_plus_Th_plus_U": 0.9913908859328837,
+  "TMI_band14": -0.02502200939727079,
+  "TMI_up150_external": 0.007889187315872525,
+  "TMI_horizontal_gradient_band3": -0.14892166303454643,
+  "TMI_vertical_gradient_band9": 0.02136017302828232,
+  "RTP_band2": -0.09144149854249155
+ },
+ "pearson": {
+  "geoDAWN_TC_grid": 0.9972373707894846,
+  "K_plus_Th_plus_U": 0.9897655874173685,
+  "TMI_band14": -0.039600463856725276,
+  "TMI_up150_external": -0.008596351877382996,
+  "TMI_horizontal_gradient_band3": -0.15817741096417717,
+  "TMI_vertical_gradient_band9": -0.0014046879719232675,
+  "RTP_band2": -0.09219494590208828
+ },
+ "band_names": {
+  "2": "rtp",
+  "3": "tmi_hg",
+  "9": "tmi_vg",
+  "14": "tmi"
+ },
+ "conclusion": "band 6 is the GeoDAWN aeroradiometric total-count grid; the file's own 'magnetic_data / tilt angle or total curvature' tag is incorrect"
+}

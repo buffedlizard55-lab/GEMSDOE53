@@ -1,0 +1,350 @@
+{
+ "round": "H57",
+ "artefact": "submission/gems52-h57-union-novel-core25517px-arm14804px.tif",
+ "runtime_s": 434.8,
+ "candidate_geology_dossier": "evidence/gems52-h57-40321px-candidate-geology.csv",
+ "arm_rows_by_stratum": {
+  "neither": 8996,
+  "B_only": 4334,
+  "A_only": 846,
+  "concordant": 628
+ },
+ "name": null,
+ "note": null,
+ "grid": {
+  "shape": [
+   3730,
+   3292
+  ],
+  "crs": "EPSG:32611",
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "footprint_px": 5165840,
+  "catalogue_px": 60988,
+  "permitted_px": 4861502
+ },
+ "thresholds": {
+  "q_conf": 0.6,
+  "q_abstain": 0.4,
+  "corridor_m": 200.0,
+  "along_px": 5,
+  "across_px": 3,
+  "min_coh": 0.25,
+  "emitter": "iso",
+  "veto_b_only": false,
+  "arm_budget": 15000
+ },
+ "set_relations": {
+  "A_px": 37654,
+  "C_px": 60069,
+  "B_px": 44090,
+  "E_px": 121131,
+  "A_minus_C": 12137,
+  "C_minus_A": 34552,
+  "A_minus_B": 0,
+  "B_minus_A": 6436,
+  "A_minus_E": 0,
+  "E_minus_A": 83477,
+  "A_within_C": false
+ },
+ "core": {
+  "px": 25517,
+  "source": "P1 = h33-2-b2 AND gems24-d1-5",
+  "min_distance_to_catalogue_m": 223.60679774997897
+ },
+ "strata": {
+  "allowed": 4861502,
+  "a_only": 179254,
+  "b_only": 201837,
+  "concordant": 46293,
+  "neither": 4434118
+ },
+ "clipping_to_sample_domain_px": 196,
+ "arm": {
+  "px": 14804,
+  "pool_px": 3634998,
+  "min_distance_to_catalogue_m": 223.60679774997897
+ },
+ "file": {
+  "px": 40321,
+  "values": [
+   0.0,
+   1.0
+  ],
+  "min_distance_to_catalogue_m": 223.60679774997897,
+  "sampled_min_nn_px": 2.8284270763397217,
+  "bytes": 157541,
+  "sha256": "5fadcaefd64db0cb553bf16dfd0ec9b54005e3674ed4afb1052d5c8e1e215f78"
+ },
+ "format_gate": {
+  "path": "submission/gems52-h57-union-novel-core25517px-arm14804px.tif",
+  "bytes": 157541,
+  "sha256": "5fadcaefd64db0cb553bf16dfd0ec9b54005e3674ed4afb1052d5c8e1e215f78",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "width": 3292,
+  "height": 3730,
+  "bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "ref_bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": null,
+  "blocksize": [
+   256,
+   256
+  ],
+  "fixture_grid": false,
+  "has_validity_mask": false,
+  "nan_pixels": 0,
+  "infinity_pixels": 0,
+  "n_nan": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "mean": 0.003283693687990308,
+  "n_nonzero": 40321,
+  "mass": 40321.0,
+  "mass_outside_footprint": 0,
+  "problems": [],
+  "ok": true,
+  "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+ },
+ "uniqueness": {
+  "n_priors_checked": 38,
+  "canonical_pattern_unique": true,
+  "support_novelty_gate_ok": true,
+  "novel_fraction": 0.3671535924208229,
+  "equals_literal_prior_union": false
+ },
+ "not_the_union": {
+  "arm_equals_every_pixel_of_the_A_only_pool": false,
+  "arm_is_subset_of_A_only_pool": false,
+  "arm_px": 14804,
+  "a_only_pool_px": 144888,
+  "arm_minus_iso_control_px": 0,
+  "iso_control_px": 15000,
+  "arm_minus_aniso_control_px": 0,
+  "aniso_control_px": 15000,
+  "arm_outside_prior_support_px": 14804,
+  "arm_outside_prior_support_frac": 1.0,
+  "arm_outside_core_ring_px": 14804,
+  "arm_on_B_only_pixels_px": 4334,
+  "arm_on_A_only_pixels_px": 846,
+  "arm_on_concordant_pixels_px": 628,
+  "arm_on_neither_pixels_px": 8996,
+  "file_equals_prior_A": false,
+  "file_equals_prior_B": false,
+  "file_equals_prior_E": false,
+  "file_equals_union_AB": false
+ },
+ "revealed_budget": {
+  "g_estimate_px": 14088.7,
+  "n_core": 25517,
+  "t_core_bounds": [
+   4168.0,
+   5223.0
+  ],
+  "rho_prior": [
+   0.03,
+   0.14
+  ],
+  "floor": 0.3195,
+  "rule": "maximise P(DTI > floor) over the exact t_core interval x the stated rho_novel prior; ties to the larger novel fraction",
+  "rows": [
+   {
+    "n_novel": 5000,
+    "total": 30517,
+    "novel_fraction": 0.1638,
+    "p_win": 0.1209,
+    "mean_dti": 0.2947,
+    "worst_dti": 0.2485,
+    "best_dti": 0.3409,
+    "dti_at_central_rho": 0.2947
+   },
+   {
+    "n_novel": 10000,
+    "total": 35517,
+    "novel_fraction": 0.2816,
+    "p_win": 0.2451,
+    "mean_dti": 0.3018,
+    "worst_dti": 0.2432,
+    "best_dti": 0.3604,
+    "dti_at_central_rho": 0.3018
+   },
+   {
+    "n_novel": 12500,
+    "total": 38017,
+    "novel_fraction": 0.3288,
+    "p_win": 0.3074,
+    "mean_dti": 0.3051,
+    "worst_dti": 0.2407,
+    "best_dti": 0.3694,
+    "dti_at_central_rho": 0.3051
+   },
+   {
+    "n_novel": 15000,
+    "total": 40517,
+    "novel_fraction": 0.3702,
+    "p_win": 0.3677,
+    "mean_dti": 0.3082,
+    "worst_dti": 0.2384,
+    "best_dti": 0.378,
+    "dti_at_central_rho": 0.3082
+   },
+   {
+    "n_novel": 17500,
+    "total": 43017,
+    "novel_fraction": 0.4068,
+    "p_win": 0.4138,
+    "mean_dti": 0.3111,
+    "worst_dti": 0.2361,
+    "best_dti": 0.3861,
+    "dti_at_central_rho": 0.3111
+   },
+   {
+    "n_novel": 20000,
+    "total": 45517,
+    "novel_fraction": 0.4394,
+    "p_win": 0.4485,
+    "mean_dti": 0.3139,
+    "worst_dti": 0.234,
+    "best_dti": 0.3938,
+    "dti_at_central_rho": 0.3139
+   },
+   {
+    "n_novel": 25000,
+    "total": 50517,
+    "novel_fraction": 0.4949,
+    "p_win": 0.4969,
+    "mean_dti": 0.3191,
+    "worst_dti": 0.2301,
+    "best_dti": 0.4081,
+    "dti_at_central_rho": 0.3191
+   },
+   {
+    "n_novel": 30000,
+    "total": 55517,
+    "novel_fraction": 0.5404,
+    "p_win": 0.5292,
+    "mean_dti": 0.3238,
+    "worst_dti": 0.2265,
+    "best_dti": 0.4212,
+    "dti_at_central_rho": 0.3238
+   },
+   {
+    "n_novel": 35000,
+    "total": 60517,
+    "novel_fraction": 0.5783,
+    "p_win": 0.5523,
+    "mean_dti": 0.3282,
+    "worst_dti": 0.2232,
+    "best_dti": 0.4331,
+    "dti_at_central_rho": 0.3282
+   },
+   {
+    "n_novel": 40000,
+    "total": 65517,
+    "novel_fraction": 0.6105,
+    "p_win": 0.5695,
+    "mean_dti": 0.3321,
+    "worst_dti": 0.2202,
+    "best_dti": 0.444,
+    "dti_at_central_rho": 0.3321
+   },
+   {
+    "n_novel": 45000,
+    "total": 70517,
+    "novel_fraction": 0.6381,
+    "p_win": 0.583,
+    "mean_dti": 0.3358,
+    "worst_dti": 0.2175,
+    "best_dti": 0.4541,
+    "dti_at_central_rho": 0.3358
+   }
+  ],
+  "selected": {
+   "n_novel": 45000,
+   "total": 70517,
+   "novel_fraction": 0.6381,
+   "p_win": 0.583,
+   "mean_dti": 0.3358,
+   "worst_dti": 0.2175,
+   "best_dti": 0.4541,
+   "dti_at_central_rho": 0.3358
+  }
+ },
+ "revealed_budget_selected_by_floor": {
+  "0.2778": {
+   "n_novel": 15000,
+   "total": 40517,
+   "novel_fraction": 0.3702,
+   "p_win": 0.8306,
+   "mean_dti": 0.3082,
+   "worst_dti": 0.2384,
+   "best_dti": 0.378,
+   "dti_at_central_rho": 0.3082
+  },
+  "0.3195": {
+   "n_novel": 45000,
+   "total": 70517,
+   "novel_fraction": 0.6381,
+   "p_win": 0.583,
+   "mean_dti": 0.3358,
+   "worst_dti": 0.2175,
+   "best_dti": 0.4541,
+   "dti_at_central_rho": 0.3358
+  },
+  "0.3774": {
+   "n_novel": 45000,
+   "total": 70517,
+   "novel_fraction": 0.6381,
+   "p_win": 0.2881,
+   "mean_dti": 0.3358,
+   "worst_dti": 0.2175,
+   "best_dti": 0.4541,
+   "dti_at_central_rho": 0.3358
+  }
+ },
+ "validated_against": {
+  "ranking": "evidence/h57_validation.json -> ranking: union field rank 1 of 8 on tip@15000, tip@37654, hide@15000 and hide@37654",
+  "emitter": "evidence/h57_validation.json -> placement: aniso5 failed the gate (+0.000055 tip, +0.000031 hide, 2/4 folds); iso 3 px used instead",
+  "strata": "evidence/h57_strata.json -> S_a_only 0.0008 vs random 0.0011, worst of eight arms; the A-only stratum is a labelled component, not the population",
+  "co_training": "evidence/h57_cotrain.json -> block-buffered OOF independence max|r| 0.111 over 2,200 blocks, exchange permitted and executed",
+  "arm_scorability": "A required-novel arm cannot be scored by the catalogue simulator at all: excluding prior support removes every pixel the truth can occupy. The arm's credit density rho is a prior, not a measurement."
+ },
+ "projection_by_rho": {
+  "rho_0.03": 0.2658,
+  "rho_0.05": 0.2811,
+  "rho_0.07": 0.2964,
+  "rho_0.09": 0.3118,
+  "rho_0.12": 0.3347,
+  "rho_0.14": 0.35
+ },
+ "authentication_limits": [
+  "t_core bounds [4168, 5223] and |G| = 14,088.7 px come from owner-reported leaderboard scores; no organiser receipt maps a score to any file here.",
+  "rho_novel (the arm's credit density) is a prior, not a measurement.",
+  "The holdout simulator is not a proxy for the leaderboard (knowledge/10 section 5)."
+ ]
+}

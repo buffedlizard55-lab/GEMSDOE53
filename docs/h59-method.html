@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="H59 method: multi-scale geophysical edge coherence with co-training disagreement and fault-tip structural continuation.">
+<title>H59 Method · GEMSDOE52</title>
+<link rel="stylesheet" href="style.css"><script src="site.js" defer></script></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header><nav>
+<a class="brand" href="index.html">GEMS / DOE 52</a>
+<a href="index.html">Overview</a>
+<a href="executive-summary.html">Submission guide</a>
+<a href="h59-method.html" aria-current="page">Method</a>
+<a href="h59-evidence.html">Evidence</a>
+<a href="sources.html">Sources</a>
+</nav></header>
+
+<main id="main">
+<div class="eyebrow">H59 · Geological hypothesis and algorithm</div>
+<h1>Multi-scale geophysical edge<br>coherence + co-training disagreement.</h1>
+<p class="lede">The discovery signal is disagreement between a geophysical view (subsurface) and a surface view. Where the geophysical view sees strong edges but the surface view does not, the fault may be buried beneath cover — the exact class missing from the USGS/INGENIOUS catalogue.</p>
+
+<h2>The geological hypothesis</h2>
+<p>The northwestern Great Basin has numerous faults that are detectable in potential-field geophysics (gravity, magnetics) but invisible at the surface because they are buried beneath alluvial fill, basin sediments, or volcanic cover. These buried faults are systematically underrepresented in the USGS Quaternary fault catalogue and the INGENIOUS field mapping.</p>
+<p>By detecting <b>disagreement</b> between a subsurface view (View A) and a surface view (View B), we can specifically target these buried structures:</p>
+<ul>
+<li><b>A-confident, B-abstains:</b> Buried fault beneath cover → high-value candidate for new discovery</li>
+<li><b>B-confident, A-abstains:</b> Surface artifact (road, erosion, canal) → suppress</li>
+<li><b>Both confident:</b> Likely already catalogued → lower priority</li>
+</ul>
+
+<h2>View A: Geophysical potential-field edges</h2>
+<p>View A detects subsurface contacts and fault zones using gradient magnitude of potential-field data at multiple Gaussian scales:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>Band</th><th>Source</th><th>Scales (σ)</th></tr></thead>
+<tbody>
+<tr><td>Isostatic gravity anomaly</td><td>13</td><td>GeoDAWN airborne gravimetry</td><td>1, 2, 3 (100–300m)</td></tr>
+<tr><td>Reduced-to-pole magnetic</td><td>2</td><td>GeoDAWN airborne magnetics</td><td>1, 2, 3 (100–300m)</td></tr>
+<tr><td>Gravity vertical gradient</td><td>11</td><td>Derived from gravity</td><td>—</td></tr>
+<tr><td>TMI horizontal gradient</td><td>3</td><td>Total magnetic intensity</td><td>—</td></tr>
+<tr><td>Geodetic strain (2nd invariant)</td><td>4</td><td>GNSS-derived strain rate</td><td>—</td></tr>
+</tbody>
+</table></div>
+<p>Multi-scale processing: at σ=1 (100m), edges are sharp and shallow; at σ=3 (300m), edges are smoother and capture deeper structure. The mean across scales captures structure at all depths.</p>
+<p>Source: <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN survey</a></p>
+
+<h2>View B: Surface expression</h2>
+<p>View B captures the surface expression of structure using radiometric, topographic, and conductivity data:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>Band</th><th>Source</th><th>What it captures</th></tr></thead>
+<tbody>
+<tr><td>Radiometric total count</td><td>6</td><td>GeoDAWN gamma-ray spectrometry</td><td>Lithology contacts, alteration zones</td></tr>
+<tr><td>DEM slope</td><td>19</td><td>100m DEM derivative</td><td>Topographic scarps, fault faces</td></tr>
+<tr><td>Surface conductivity</td><td>17</td><td>Geophysical inversion</td><td>Clay gouge, fluid pathways</td></tr>
+<tr><td>Radiometric edges</td><td>6</td><td>Gradient of band 6</td><td>Sharp lithology boundaries</td></tr>
+</tbody>
+</table></div>
+<p>Source: <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a>, <a href="https://gbcge.org/current-projects/ingenious/">INGENIOUS project</a></p>
+
+<h2>Co-training disagreement (Blum & Mitchell, 1998)</h2>
+<p>Following <a href="https://doi.org/10.1145/279943.279962">Blum & Mitchell (COLT '98)</a>, we test the conditional-independence assumption empirically:</p>
+<ul>
+<li>View A and View B each produce a per-pixel edge score, rank-normalized to [0,1]</li>
+<li>A-only = pixels where View A > 75th percentile AND View B < 40th percentile</li>
+<li>B-only = pixels where View B > 75th percentile AND View A < 40th percentile</li>
+<li>Measured: <b>532,408 A-only pixels</b> (buried fault candidates)</li>
+</ul>
+<p>The independence assumption is tested by correlating spatial-block out-of-fold errors. In this implementation, the A-only boost enters the ranking field as an additive term weighted at 20%.</p>
+
+<h2>Fault-tip structural continuation</h2>
+<p>Geological principle: faults propagate laterally over geologic time. The most likely location for an uncatalogued fault segment is at the <b>tip</b> of an existing mapped fault, in the along-strike direction.</p>
+<p>We identify fault tips as catalogue pixels with ≤2 8-connected catalogue neighbors (55,045 tips identified). The ranking field receives a boost proportional to exp(−d/2000m), where d is distance to the nearest tip. This creates a 2km "continuation halo" around each tip.</p>
+
+<h2>Ranking field composition</h2>
+<p>The final ranking field is a weighted combination:</p>
+<pre>
+ranking = 0.35 × geophysical_edges     (multi-scale gravity + magnetic edges)
+        + 0.15 × surface_score         (radiometric + slope + conductivity)
+        + 0.15 × tip_proximity         (exp decay from fault tips)
+        + 0.15 × external_score        (LiDAR scarp + GeoDAWN extensions)
+        + 0.20 × A_only_indicator      (co-training disagreement)
+</pre>
+<p>A near-catalogue penalty smoothly zeros ranking within 300m of any catalogue pixel. The result is then restricted to pixels ≥200m from the catalogue (the exclusion ring) and rank-normalized.</p>
+
+<h2>Metric-aware greedy placement</h2>
+<p>The emission step uses the repo's <code>greedy_emit</code> function, which maximizes expected kernel coverage under the DTI metric's triangular kernel k(d) = max(1 − d/300m, 0). Given a fixed budget of 37,654 pixels (same as H33's 0.2778), the greedy algorithm places pixels where the ranking field is highest while accounting for overlap with previously placed pixels.</p>
+<p>Reference: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">Competition metric specification</a></p>
+
+<h2>External data layers used</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Layer</th><th>Source</th><th>License</th></tr></thead>
+<tbody>
+<tr><td>LiDAR scarp features</td><td>Derived from USGS/INGENIOUS 1m DEMs</td><td>Public domain</td></tr>
+<tr><td>GeoDAWN radiometric</td><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a></td><td>Public domain</td></tr>
+<tr><td>GeoDAWN extensions</td><td>USGS processed products</td><td>Public domain</td></tr>
+<tr><td>SGMC derived faults</td><td>State geologic map compilation</td><td>Public domain</td></tr>
+<tr><td>Thermal springs</td><td><a href="https://gdr.openei.org/submissions/1391">GDR OpenEI</a></td><td>Public domain</td></tr>
+</tbody>
+</table></div>
+
+<h2>Reproducibility</h2>
+<p>The full pipeline is in <code>scripts/build_h59_submission.py</code>. To reproduce:</p>
+<pre>
+# 1. Restore competition data (requires access to sibling repos)
+python3 scripts/restore_data.py --force
+
+# 2. Build the submission
+PYTHONPATH=src python3 scripts/build_h59_submission.py
+</pre>
+<p>Output: <code>submission/gems52-h59-edge-coh-cotrain-37654px-20261008T022050Z-0f0984928454.tif</code></p>
+</main>
+<footer>DOE GEMS competition 306 · <a href="index.html">Overview</a> · <a href="executive-summary.html">Submit</a> · <a href="sources.html">Sources</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE52">Code</a></footer>
+</body></html>

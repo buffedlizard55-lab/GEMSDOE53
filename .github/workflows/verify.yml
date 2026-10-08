@@ -1,0 +1,45 @@
+name: Verify scientific code and site
+on:
+  pull_request: {}
+  push:
+    branches: [main, arena/f1d591a5-gemsdoe52, arena/ec9410af-gemsdoe52, arena/bb5c27dd-gemsdoe52]
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install pinned CPU scientific environment
+        run: python -m pip install -r requirements-r2.txt
+      - name: Restore small pinned template and labels for raster integration tests
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python scripts/restore_data.py --only sample_submission,labels
+          test -f data/sample_submission.tif
+      - name: Run numerical spatial and workflow regressions
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '2'
+        run: |
+          python -m pytest -q --junitxml=work-tests.xml || status=$?
+          python - <<'PYTEST'
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+          if Path('work-tests.xml').exists():
+              for case in ET.parse('work-tests.xml').iter('testcase'):
+                  for tag in ('failure', 'error'):
+                      for error in case.findall(tag):
+                          message = (error.text or error.get('message', ''))[-5000:]
+                          message = message.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+                          print(f"::error title={case.get('name')}::{message}")
+          PYTEST
+          exit "${status:-0}"
+      - name: Verify all local website links JSON and download bytes
+        run: python scripts/check_site.py

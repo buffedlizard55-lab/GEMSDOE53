@@ -1,0 +1,77 @@
+{
+  "version": "gems52-r3-paired-profile-v1",
+  "registered_date_utc": "2026-10-07",
+  "base_commit": "a381eb2f57ffbfc90dafce5692f05c571ddc211b",
+  "hypothesis_document": "knowledge/12_hypotheses_r3_preregistered.md",
+  "primary_hypothesis": "R3-H1 paired DEM-normal scarp profile; band 12 detrended elevation and band 19 slope",
+  "seed": 520206,
+  "folds": 4,
+  "spatial_layout": "same as R2: four contiguous quadrants; original 8-connected catalogue components assigned by majority eligible quadrant; include all held component tails in evaluation; 80 px Euclidean train/evaluation buffer",
+  "feature": {
+    "name": "paired_scarp_profile",
+    "band": 12,
+    "context_band": 19,
+    "gaussian_sigma_px": 2.0,
+    "gaussian_truncate": 4.0,
+    "profile_offset_px": 2.0,
+    "sample_method": "bilinear along local DEM-gradient unit normal",
+    "derived_features": [
+      "signed paired-slope concordance: sign(left*right)*2*min(abs(left),abs(right))/(abs(left)+abs(right)+epsilon)",
+      "signed shoulder asymmetry: sign(left*right)*(abs(right)-abs(left))/(abs(left)+abs(right)+epsilon)"
+    ],
+    "max_support_px": 10,
+    "external_data_used": false
+  },
+  "baseline_arm": "view_B",
+  "candidate_arm": "view_B_paired_shoulder",
+  "learner": {
+    "class": "sklearn.ensemble.HistGradientBoostingClassifier",
+    "configuration_source": "registry/r2_preregistration.json",
+    "same_seeded_fold_rows_for_baseline_and_candidate": true
+  },
+  "negative_definition": "held-out catalogue-zero proxy, excluding the 3 px known-label collar; not field-verified absence",
+  "placement": {
+    "metric_source": "src/gems52/metric.py",
+    "budget_global_pixels": 37654,
+    "fold_budget_rule": "round(37654 * eligible evaluation-region pixels / eligible footprint pixels)",
+    "candidate_pool": "eligible fold region, minus visible catalogue components",
+    "emitter": "registered R2 incremental triangular-kernel max-cover greedy, fixed pool rule; same for both arms",
+    "this_is_expected_dti_optimal": false
+  },
+  "independence_gate": {
+    "block_side_px": 50,
+    "minimum_negative_pixels_per_block": 32,
+    "minimum_blocks": 20,
+    "metrics": ["negative_mean_squared_error", "negative_false_positive_rate"],
+    "correlations": ["Pearson", "tie-aware Spearman"],
+    "abandon_exchange_if": "any registered correlation is undefined, fewer than 20 usable blocks, or any absolute correlation >= 0.60",
+    "proxy_caveat": "low proxy-negative error correlation does not prove conditional independence or view sufficiency"
+  },
+  "optional_cotraining_trial": {
+    "rounds": 1,
+    "direction": "only confident donor and receiver abstains",
+    "donor_confident_quantile": 0.99,
+    "receiver_abstain_quantiles": [0.4, 0.8],
+    "whole_spatial_components": true,
+    "within_one_50px_spatial_block": true,
+    "train_only": true,
+    "forbidden_visible_catalogue_buffer_px": 3,
+    "max_pseudo_pixels_per_view_per_fold": 2000,
+    "minimum_component_pixels": 5,
+    "pseudo_weight": 0.25,
+    "must_be_reported_separately": true,
+    "cannot_replace_primary_after_observing_holdout": true
+  },
+  "promotion_gate": {
+    "minimum_mean_dti_lift_over_view_B": 0.005,
+    "minimum_positive_paired_folds": 3,
+    "fold_count": 4,
+    "require_same_protocol_historical_incumbent_confirmation": true,
+    "require_independent_confirmation_before_portal_slot": true,
+    "format_and_pixel_novelty_gates_required": true,
+    "automatic_portal_upload": false,
+    "no_official_score_forecast": true
+  },
+  "candidate_set_and_order": ["R3-H1", "R3-H2", "R3-H3", "R3-H4"],
+  "numerical_public_score_forecast": null
+}

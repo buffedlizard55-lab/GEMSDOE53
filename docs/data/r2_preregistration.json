@@ -1,0 +1,87 @@
+{
+  "version": "gems52-r2-signed-normal-v1",
+  "registered_date_utc": "2026-10-06",
+  "base_commit": "ee97b8145ba46dfb0425b2dcc295e3920404f744",
+  "hypothesis_document": "knowledge/07_r2_hypotheses_preregistered.md",
+  "top_hypothesis": "R2-H1 signed cover/gravity normal persistence and surface contradiction",
+  "seed": 520206,
+  "outer_folds": 4,
+  "spatial_layout": "four contiguous quadrants; whole 8-connected components assigned by majority quadrant; evaluation region includes any outside-quadrant tails of held components",
+  "feature_scales_px": [
+    1,
+    3,
+    8
+  ],
+  "gaussian_truncate": 4.0,
+  "max_feature_support_px": 36,
+  "buffer_px": 80,
+  "negative_collar_px": 3,
+  "negative_class": "catalogue-zero proxy, not verified geological absence",
+  "max_training_negatives": 160000,
+  "learner": {
+    "class": "sklearn.ensemble.HistGradientBoostingClassifier",
+    "max_iter": 120,
+    "max_leaf_nodes": 15,
+    "learning_rate": 0.08,
+    "l2_regularization": 2.0,
+    "min_samples_leaf": 80,
+    "early_stopping": false,
+    "class_weight": "balanced"
+  },
+  "arms": [
+    "raw_fusion",
+    "view_A",
+    "view_B",
+    "naive_union",
+    "structural_contrast",
+    "disagreement_router"
+  ],
+  "primary_candidate": "structural_contrast",
+  "single_view_controls": [
+    "view_A",
+    "view_B"
+  ],
+  "primary_budget_global_pixels": 37654,
+  "secondary_budget_global_pixels": [
+    25000,
+    50000
+  ],
+  "budget_rule": "same positive-pixel density on each outer evaluation region as global budget/eligible footprint",
+  "placement": "literal triangular-kernel marginal expected coverage, no truth pixels supplied to placement",
+  "co_training_gate": {
+    "maximum_abs_correlation": 0.6,
+    "minimum_negative_blocks": 20,
+    "block_side_px": 50,
+    "metrics": [
+      "negative_mean_squared_error",
+      "negative_false_positive_rate"
+    ],
+    "correlations": [
+      "Pearson",
+      "tie-aware Spearman"
+    ],
+    "undefined_or_missing": "disable exchange; never impute independence",
+    "confident_quantile": 0.99,
+    "receiver_abstain_quantiles": [
+      0.4,
+      0.8
+    ],
+    "pseudo_min_segment_pixels": 5,
+    "pseudo_max_pixels_per_view_per_fold": 2000,
+    "pseudo_weight": 0.25,
+    "rounds": 1
+  },
+  "slot_gate": {
+    "candidate_must_beat_best_validated_baseline": true,
+    "minimum_mean_dti_lift": 0.005,
+    "minimum_positive_outer_folds": 3,
+    "strict_comparable_prior_best": true,
+    "must_pass_format_and_uniqueness": true,
+    "must_not_be_max_or_union": true,
+    "organizer_score_required_to_claim_live_improvement": true,
+    "automatic_portal_upload": false,
+    "failed_gate_artifact_label": "experimental only \u2014 do not spend a weekly submission slot"
+  },
+  "novelty_scope": "all accessible prior downloadable single-band rasters from supplied sites and local prior submissions; unreachable items reported, never treated as checked",
+  "numerical_score_forecast": null
+}

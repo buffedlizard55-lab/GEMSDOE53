@@ -1,0 +1,166 @@
+{
+ "n_priors_checked": 14,
+ "per_prior": [
+  {
+   "path": "data/scored/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+   "prior_px": 206895,
+   "new_px": 50517,
+   "intersection": 1053,
+   "jaccard": 0.00411,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 49464
+  },
+  {
+   "path": "data/scored/8GEMSDOE_Hedge-v2_submission.tif",
+   "prior_px": 227507,
+   "new_px": 50517,
+   "intersection": 2956,
+   "jaccard": 0.01075,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 47561
+  },
+  {
+   "path": "data/scored/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+   "prior_px": 174232,
+   "new_px": 50517,
+   "intersection": 3063,
+   "jaccard": 0.01382,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 47454
+  },
+  {
+   "path": "data/scored/gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+   "prior_px": 69281,
+   "new_px": 50517,
+   "intersection": 1251,
+   "jaccard": 0.01055,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 49266
+  },
+  {
+   "path": "data/scored/gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
+   "prior_px": 123939,
+   "new_px": 50517,
+   "intersection": 17826,
+   "jaccard": 0.11381,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 32691
+  },
+  {
+   "path": "data/scored/gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan.tif",
+   "prior_px": 123779,
+   "new_px": 50517,
+   "intersection": 21850,
+   "jaccard": 0.14333,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 28667
+  },
+  {
+   "path": "data/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+   "prior_px": 121131,
+   "new_px": 50517,
+   "intersection": 25517,
+   "jaccard": 0.17462,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 25000
+  },
+  {
+   "path": "data/scored/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+   "prior_px": 60069,
+   "new_px": 50517,
+   "intersection": 25517,
+   "jaccard": 0.29996,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 25000
+  },
+  {
+   "path": "data/scored/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "prior_px": 44090,
+   "new_px": 50517,
+   "intersection": 25517,
+   "jaccard": 0.36933,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 25000
+  },
+  {
+   "path": "data/scored/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+   "prior_px": 61328,
+   "new_px": 50517,
+   "intersection": 25517,
+   "jaccard": 0.29558,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 25000
+  },
+  {
+   "path": "data/scored/gemsdoe-ens12-adopted-7f00890a.tif",
+   "prior_px": 172974,
+   "new_px": 50517,
+   "intersection": 2956,
+   "jaccard": 0.0134,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 47561
+  },
+  {
+   "path": "data/scored/gemsdoe9-PLACEHOLDER-2314b599.tif",
+   "prior_px": 343816,
+   "new_px": 50517,
+   "intersection": 756,
+   "jaccard": 0.00192,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 49761
+  },
+  {
+   "path": "data/reference/h33-2-b2-zeros.tif",
+   "prior_px": 37654,
+   "new_px": 50517,
+   "intersection": 25517,
+   "jaccard": 0.40727,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 25000
+  },
+  {
+   "path": "/home/user/GEMSDOE52/submission/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+   "prior_px": 37654,
+   "new_px": 50517,
+   "intersection": 1090,
+   "jaccard": 0.01252,
+   "identical": false,
+   "subset_of_prior": false,
+   "superset_of_prior": false,
+   "novel_vs_this": 49427
+  }
+ ],
+ "union_px": 1030340,
+ "novel_vs_all_priors": 25000,
+ "novel_fraction": 0.4949,
+ "prior_px_dropped": 1004823,
+ "relation_to_union": "strictly-novel-and-selective",
+ "ok": true,
+ "rule": "must not equal any prior, must add >= 20 % of its mass where no prior put anything, and must drop at least one prior pixel (so it cannot be 'the union')"
+}

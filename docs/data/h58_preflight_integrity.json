@@ -1,0 +1,514 @@
+{
+  "schema_version": 2,
+  "observed_utc": "2026-10-07T21:26:40+00:00",
+  "manifest": "registry/data_manifest.json",
+  "verified_staging_receipt": "work/h58_pinned/restore_receipt.json",
+  "scope": "Read-only decoded-cell comparison of tracked data/*.tif against the separate SHA-verified owner-mirror staging copies. No tracked TIFF was modified. Matching a repository pin verifies mirror integrity, not organizer authentication.",
+  "files": {
+    "training_features.tif": {
+      "local_path": "data/training_features.tif",
+      "pinned_staging_path": "work/h58_pinned/training_features.tif",
+      "tracked_in_git": true,
+      "manifest_bytes": 418912844,
+      "manifest_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "local_bytes": 3357961,
+      "pinned_bytes": 418912844,
+      "local_sha256": "9c450a754ed9586972877ced6865e619d5c35c6905970184908bc3d0518435ea",
+      "pinned_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "local_matches_manifest": false,
+      "staging_matches_manifest": true,
+      "local_profile": {
+        "width": 3292,
+        "height": 3730,
+        "count": 19,
+        "dtypes": [
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32"
+        ],
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nodata": -3.4028234663852886e+38
+      },
+      "pinned_profile": {
+        "width": 3292,
+        "height": 3730,
+        "count": 19,
+        "dtypes": [
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32",
+          "float32"
+        ],
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nodata": -3.4028234663852886e+38
+      },
+      "grid_profile_equal": true,
+      "local_band_descriptions": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "pinned_band_descriptions": [
+        "mag_anom - Magnetic anomaly - deviation from expected Earth's magnetic field",
+        "rtp - Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects",
+        "tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction",
+        "geod_2ndinv - Geodetic second invariant - measure of strain rate tensor magnitude",
+        "iso_grav_anom_slope - Isostatic gravity anomaly slope - gradient of gravity after isostatic correction",
+        "tc - Tilt angle or total curvature - magnetic field derivative for edge detection",
+        "geod_shearrate - Geodetic shear rate - rate of angular deformation from GPS/InSAR",
+        "geod_dilaterate - Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)",
+        "tmi_vg - Total magnetic intensity vertical gradient - rate of change in vertical direction",
+        "deq_n100a15 - Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+        "iso_grav_anom_vg - Isostatic gravity anomaly vertical gradient - vertical rate of change",
+        "det_elev - Detrended elevation - topography with regional trends removed",
+        "iso_grav_anom - Isostatic gravity anomaly - gravity after compensating for topographic mass",
+        "tmi - Total magnetic intensity - total strength of magnetic field",
+        "depth_to_base_surf - Depth to basement surface - thickness of sedimentary cover",
+        "ieq_n100a15 - Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+        "cond_surf - Conductivity surface - electrical conductivity of subsurface",
+        "iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change",
+        "det_elev_slope - Detrended elevation slope - gradient of elevation after detrending"
+      ],
+      "band_descriptions_equal": false,
+      "total_decoded_values": 233304040,
+      "decoded_value_mismatches": 97207447,
+      "decoded_mismatch_fraction": 0.41665565242676467,
+      "grid_cells_with_any_decoded_mismatch": 5168913,
+      "validity_mask_mismatches": 87431,
+      "shared_valid_value_mismatches": 97120016,
+      "local_only_valid_values": 58171,
+      "pinned_only_valid_values": 29260,
+      "grid_cells_with_any_shared_valid_value_mismatch": 5164312,
+      "per_band": [
+        {
+          "band": 1,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 2,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 3,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 4,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 5,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 6,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164300,
+          "mismatches_where_both_valid": 5164300,
+          "local_valid_only": 3073,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 7,
+          "total_cells": 12279160,
+          "decoded_mismatches": 4191711,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 4187110,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 8,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5159974,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5155373,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 9,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 10,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5153154,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5148553,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 11,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 12,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 13,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 14,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 15,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 16,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 17,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 18,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        },
+        {
+          "band": 19,
+          "total_cells": 12279160,
+          "decoded_mismatches": 5168913,
+          "shared_valid_cells": 5164312,
+          "mismatches_where_both_valid": 5164312,
+          "local_valid_only": 3061,
+          "pinned_valid_only": 1540
+        }
+      ]
+    },
+    "labels.tif": {
+      "local_path": "data/labels.tif",
+      "pinned_staging_path": "work/h58_pinned/labels.tif",
+      "tracked_in_git": true,
+      "manifest_bytes": 425830,
+      "manifest_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "local_bytes": 152999,
+      "pinned_bytes": 425830,
+      "local_sha256": "488dcb3386dc45cab38ef07021e91b629cb621f6a484ca42d53f2c45cd96347e",
+      "pinned_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "local_matches_manifest": false,
+      "staging_matches_manifest": true,
+      "local_profile": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtypes": [
+          "int8"
+        ],
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nodata": -1.0
+      },
+      "pinned_profile": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtypes": [
+          "int8"
+        ],
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nodata": -1.0
+      },
+      "grid_profile_equal": true,
+      "local_band_descriptions": [
+        null
+      ],
+      "pinned_band_descriptions": [
+        null
+      ],
+      "band_descriptions_equal": true,
+      "total_decoded_values": 12279160,
+      "decoded_value_mismatches": 120650,
+      "decoded_mismatch_fraction": 0.009825590675583673,
+      "grid_cells_with_any_decoded_mismatch": 120650,
+      "validity_mask_mismatches": 0,
+      "shared_valid_value_mismatches": 120650,
+      "local_only_valid_values": 0,
+      "pinned_only_valid_values": 0,
+      "grid_cells_with_any_shared_valid_value_mismatch": 120650,
+      "per_band": [
+        {
+          "band": 1,
+          "total_cells": 12279160,
+          "decoded_mismatches": 120650,
+          "shared_valid_cells": 5167373,
+          "mismatches_where_both_valid": 120650,
+          "local_valid_only": 0,
+          "pinned_valid_only": 0
+        }
+      ],
+      "local_value_counts": {
+        "-1": 7111787,
+        "0": 5106385,
+        "1": 60988
+      },
+      "pinned_value_counts": {
+        "-1": 7111787,
+        "0": 5106385,
+        "1": 60988
+      },
+      "positive_mask_intersection_px": 663,
+      "local_positive_px": 60988,
+      "pinned_positive_px": 60988,
+      "local_only_positive_px": 60325,
+      "pinned_only_positive_px": 60325
+    },
+    "sample_submission.tif": {
+      "local_path": "data/sample_submission.tif",
+      "pinned_staging_path": "work/h58_pinned/sample_submission.tif",
+      "tracked_in_git": true,
+      "manifest_bytes": 1599597,
+      "manifest_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "local_bytes": 97091,
+      "pinned_bytes": 1599597,
+      "local_sha256": "9d35c34ae2293f00e7a9185f67c2428cc94d9bdbeb8166be885da5e6f6270291",
+      "pinned_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "local_matches_manifest": false,
+      "staging_matches_manifest": true,
+      "local_profile": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtypes": [
+          "float32"
+        ],
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nodata": "NaN"
+      },
+      "pinned_profile": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtypes": [
+          "float32"
+        ],
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nodata": "NaN"
+      },
+      "grid_profile_equal": true,
+      "local_band_descriptions": [
+        null
+      ],
+      "pinned_band_descriptions": [
+        null
+      ],
+      "band_descriptions_equal": true,
+      "total_decoded_values": 12279160,
+      "decoded_value_mismatches": 60988,
+      "decoded_mismatch_fraction": 0.004966789259200141,
+      "grid_cells_with_any_decoded_mismatch": 60988,
+      "validity_mask_mismatches": 0,
+      "shared_valid_value_mismatches": 60988,
+      "local_only_valid_values": 0,
+      "pinned_only_valid_values": 0,
+      "grid_cells_with_any_shared_valid_value_mismatch": 60988,
+      "per_band": [
+        {
+          "band": 1,
+          "total_cells": 12279160,
+          "decoded_mismatches": 60988,
+          "shared_valid_cells": 5167373,
+          "mismatches_where_both_valid": 60988,
+          "local_valid_only": 0,
+          "pinned_valid_only": 0
+        }
+      ],
+      "local_sample_positive_px": 0,
+      "pinned_sample_positive_px": 60988,
+      "sample_positive_intersection_px": 0,
+      "local_finite_px": 5167373,
+      "pinned_finite_px": 5167373,
+      "local_nonzero_finite_px": 0,
+      "pinned_nonzero_finite_px": 60988
+    }
+  }
+}

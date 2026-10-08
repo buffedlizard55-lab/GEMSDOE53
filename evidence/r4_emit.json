@@ -1,0 +1,13 @@
+{
+ "stage": "emit",
+ "arm": "B_only",
+ "budget": 37654,
+ "n_px": 37654,
+ "raster": "gems52-r4-B_only-37654px-b-only-research.tif",
+ "sha256": "c6b9351fe45dde5559d3b7ee09c7e8f28d137fa03f7dde95ef3b8fbdf71245e0",
+ "bytes": 106601,
+ "arm_mean_capture": 0.10054653114812406,
+ "random_mean_capture": 0.008117946637590438,
+ "beats_random": true,
+ "seconds": 93.3
+}
