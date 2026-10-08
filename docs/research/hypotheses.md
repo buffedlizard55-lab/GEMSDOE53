@@ -5,12 +5,18 @@ Nothing here is a score. Every number in the holdout columns comes from `evidenc
 
 | Rank | ID | Hypothesis (one line) | Expected gain | Cost | Status |
 |---|---|---|---|---|---|
-| 1 | **H1** | Segment-exact learn-predict separation: distance to visible faults **excluding only the pixel's own fault segment** | small to moderate | low (hours) | **not yet implemented** - next experiment |
-| 2 | H2 | Magnetic lineament map: multi-scale ridge (Hessian) detector on the reduced-to-pole field (band 2), used as a feature | moderate, uncertain | medium | not implemented |
+| 1 | **H1** | Segment-exact learn-predict separation: distance to visible faults **excluding only the pixel's own fault segment** | none (leak) | low | **REJECTED (Exp 4)**: paired pixel-neighbour canary AUC 1.000; the feature encodes the label by construction. Never use. |
+| 2 | H2 | Magnetic lineament map: multi-scale ridge (Hessian) detector on the reduced-to-pole field (band 2), used as a feature | none measurable | medium | **NEGATIVE (Exp 4 canary passes; Exp 5 holdout: paired ridge-minus-bands at q=0.02 = -0.00005, 95% CI [-0.00404, +0.00394])** |
 | 3 | H3 | Fault-parallel strain: principal orientation of shear (band 7) and dilatation (band 8), used as an extensional-lineament feature | small to moderate | medium | not implemented |
 | - | H4 (rejected) | USGS Quaternary Fault and Fold Database as an extra label source | none expected | low | **rejected**: the rules name the USGS quaternary fault maps as a label source (S1 "Labels"), so it re-expresses the catalogue |
 
-## H1 - segment-exact learn-predict separation (rank 1)
+## Status after Experiments 4-5 (2026-10-08)
+- H1 is rejected by its own design, before any holdout run. The exclusion is asymmetric: a positive pixel's own segment is removed and a negative's is not, so the feature encodes the label pixel-exactly (paired canary AUC 1.000). This is the GEMSDOE29 mechanism in a different form.
+- H2 passes the leakage canary (it has no label path) but gives no measurable holdout gain. Pre-registered acceptance is not met.
+- H3 (fault-parallel strain) is not run; the session budget was 3 experiments and 2 were used.
+- The 4x4 block cross-fit (the current leak-free arm) passes the exhaustive pixel-neighbour check (170,638 pairs, AUC 0.4995).
+
+## H1 - segment-exact learn-predict separation (rank 1) - REJECTED, see status above
 - **Layers:** known-fault raster (`labels.tif`, 3,199 eight-connected segments, 60,988 px).
 - **Signature targeted:** proximity to *other* mapped structures. New faults are often parallel or en-echelon to mapped ones.
 - **Why it should catch a fault missing from the catalogue:** a pixel near a mapped fault but not on it is a candidate for an unmapped neighbour. The feature never uses the pixel's own label.

@@ -87,3 +87,26 @@ def test_nan_variant_carries_nodata_nan(tmp_path):
     write_submission(str(out), em, from_origin(0, 0, 100, 100), "EPSG:32611", outside_nan=True)
     with rasterio.open(out) as src:
         assert src.nodata is not None and np.isnan(src.nodata)
+
+
+def test_zero_outside_footprint_is_rejected(tmp_path):
+    """Official rule: outside the bounds is null or NaN. Zeros outside must fail this validator."""
+    fp = _fp()
+    a = np.zeros((20, 30), np.float32)
+    a[fp] = 0.2
+    r = validate_submission(_write(tmp_path, a), fp, TR, CRS, 20, 30)
+    assert not r["checks"]["outside_footprint_nan"]
+    assert not r["all_checks_passed"]
+
+
+def test_lzw_round_trip_keeps_values(tmp_path):
+    """Compression is lossless: LZW output reads back bit-identical to the array that was written."""
+    fp = _fp()
+    a = np.full((20, 30), np.nan, np.float32)
+    a[fp] = np.random.default_rng(1).random(fp.sum()).astype(np.float32)
+    p = _write(tmp_path, a)
+    with rasterio.open(p) as src:
+        back = src.read(1)
+        assert src.compression is not None and src.compression.name.lower() == "lzw"
+    assert np.array_equal(np.isnan(back), np.isnan(a))
+    assert np.array_equal(back[fp], a[fp])

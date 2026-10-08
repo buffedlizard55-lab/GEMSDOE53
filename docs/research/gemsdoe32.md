@@ -8,7 +8,7 @@ Labels used below. **MEASURED** = computed in this repo from files (`evidence/`,
 - **OWNER-CLAIM:** the GEMSDOE32 site says the file is `H33-2-B2`, built from a 0.2708 base by removing dots within 2 px of the public catalogue, with 37,654 dots. It also says "NO ORGANISER SCORE EXISTS". Its 0.2747 figure is a model projection, not a score.
 - **MEASURED:** the registry copy of that file (`gemsdoe32-h33-h33-2-b2-…-e5eb6e7e`) has **37,654** dots. That matches the owner's count, so the file content is consistent with the owner's description.
 - **MEASURED:** our candidate has rank correlation 0.009 with that file and 21.8% of our dots within 3 px of its dots (`evidence/uniqueness_check.json`). Our file is not a copy of it.
-- **MEASURED:** the GEMSDOE32 family in the registry (24 rasters) has rank correlations at or below 0.044 with our candidate. The highest dot overlaps are 0.45 (`h32d-submodular`), 0.43 and 0.42, and none exceed the 70% flag.
+- **MEASURED (updated 2026-10-08, 613-raster population, `evidence/uniqueness_check.json`):** the GEMSDOE32 family in the registry (25 single-band rasters) has rank correlations at most 0.378 with our candidate and dot overlaps at most 0.508. None exceeds the 0.90 or 0.70 flags. The earlier 24-raster figures (rho 0.044, overlap 0.45) came from the old 138-file population and are not comparable (IR-53-23).
 
 ## Mechanism that could make a sparse, catalogue-pruned file score well (hypothesis, not tested)
 
@@ -26,4 +26,4 @@ So the most likely reason a 37–46k-dot file ranks well is: sensible emission v
 
 ## Action
 
-Do not use a submission slot on a GEMSDOE32-style file. The only candidate built here is blocked by the protocol overlap flag (`evidence/overlap_baseline.json`, lift up to 4.2× over random placement). Any new candidate needs a fresh uniqueness check and an explicit decision to spend the budget.
+Do not use a submission slot on a GEMSDOE32-style file. The only candidate built here is blocked by the uniqueness gate: 163 of 613 registry rasters are flagged. The strongest is 17GEMSDOE F-ensemble-2pct (lift 15.2; see `evidence/overlap_baseline.json` and IR-53-21). Any new candidate needs a fresh uniqueness check and an explicit decision to spend the budget.

@@ -40,6 +40,18 @@
     {
       "id": "L-10",
       "item": "Protocol deviation: this lane built its own copies of the validator (now deleted, replaced by the template's scripts/validate_submission.py) and of the writer and metric (src/gems53/core.py). The shared template's src/submission_io.py and scripts/validate_submission.py are the reference. Reconciliation of core.py to the template is not finished (remaining work)."
+    },
+    {
+      "id": "L-11",
+      "item": "Experiments this session: 2 of 3 budgeted (E4 canary of H1/H2 and the leaky-free audit; E5 holdout of H2 vs bands). E1 and E2 were re-run as reproduction checks. The third experiment (H3, fault-parallel strain) was not run."
+    },
+    {
+      "id": "L-12",
+      "item": "No organizer score exists for any file in this repository. Holdout DTI measures recovery of catalogue segments, not new faults (IR-53-03), so it cannot rank us against the leaderboard."
+    },
+    {
+      "id": "L-13",
+      "item": "The competition rasters come from a public GitHub mirror (buffedlizard55-lab/GEMSDOE, data/bridge), not from the login-gated DrivenData data tab. Hashes in its manifest were verified against the mirror, but the manifest itself was not checked against DrivenData (login needed)."
     }
   ]
 }
