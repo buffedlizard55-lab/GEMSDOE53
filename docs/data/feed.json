@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-10-08T13:27:16Z",
-  "branch": "main",
+  "generated_utc": "2026-10-08T18:15:49Z",
+  "branch": "arena/3cbba5d7-gemsdoe53",
   "repo": "buffedlizard55-lab/GEMSDOE52",
   "evidence_copied": [
     "a_only_reasoning_r2.json",
@@ -172,7 +172,7 @@
     "verified_claims_r3.json"
   ],
   "submission": "gems52-h57-union-novel-core25517px-arm14804px.tif",
-  "downloads": 25,
+  "downloads": 27,
   "leaderboard_status": "dated snapshot; automated DrivenData access disabled by Terms-of-Use policy",
   "leaderboard_last_observed_utc": "2026-10-07",
   "prior_entries": 395,

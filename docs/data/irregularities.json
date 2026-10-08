@@ -696,6 +696,46 @@
         "docs/data/submission.json"
       ],
       "disposition": "The view-B round remains downloadable research; no upload or weekly slot approved without a registered holdout. If its owner record can produce one, the gate reopens identically to H59's."
+    },
+    {
+      "id": "IR-R4-001",
+      "round": "R4",
+      "session": "2026-10-08",
+      "severity": "critical",
+      "status": "open",
+      "disposition": "workaround",
+      "title": "A workspace reset wiped every uncommitted artifact of round 4, and .gitignore left work/ and data/ unprotected",
+      "what_it_is": "At roughly 13:06-13:07 on 2026-10-08 the sandbox was reset to the git HEAD state. Destroyed: src/gems52_r4/ (7 modules), tests/test_r4.py (58 tests), scripts/run_r4.py and five publisher/writer scripts, knowledge/20-23_r4*.md, every evidence/r4_*.json receipt, the whole of work/ (74-layer stack.f32, 3.6 GB, OOF and full-field predictions, pseudo-truth fields) and data/external/ (24 restored layers), plus /home/user/.venv. Survived: everything tracked in git at 3bf8ada, including scripts/restore_data.py and registry/data_manifest.json, which is why the data turned out to be fully re-restorable.",
+      "how_we_know": "pgrep showed no live pipeline; ls evidence/r4_*.json returned nothing; git status --short was empty with HEAD still at 3bf8ada; git fsck --lost-found reported no dangling objects; git stash list was empty; find /home/user -name '*r4*' returned nothing; and all 21 prior arena/* remote branches were fetched and grepped with 0 hits for gems52_r4.",
+      "handling": "Recovery is by rebuild, committing after every stage rather than at the end. Root cause kept visible: .gitignore lists /data/ and /work/, so no artifact outside git was ever protected, and the round's code had not been committed. The rebuild writes findings into knowledge/ before it writes code, so a second reset cannot take the conclusions and the implementation together.",
+      "evidence": "evidence/r4_reset_forensics.json"
+    },
+    {
+      "id": "IR-R4-002",
+      "round": "R4",
+      "session": "2026-10-08",
+      "severity": "medium",
+      "status": "open",
+      "disposition": "disclosed",
+      "title": "Band 10 (dist_to_eq) carries distances larger than the grid can physically contain",
+      "what_it_is": "Inside the footprint, band 10 of data/training_features.tif has median 622.8 m and p99 50.2 km, which are plausible, but a maximum of 4,962,515 m. The grid is 3730 x 3292 px at 100 m, so its diagonal is about 492 km; 0.41% of footprint pixels (21,326 of 5,165,840) exceed 329 km and are therefore impossible as a distance-to-nearest-earthquake measured on this grid.",
+      "how_we_know": "Read band 10 directly with rasterio, applied the official nodata sentinel filter, and took percentiles over the 5,165,840-px footprint: min 0.0, p1 118.3, p50 622.8, p99 50,237.2, max 4,962,515.0, with mean(v > 329000) = 0.0041287.",
+      "handling": "Layers derived from band 10 are rank-encoded before any learner sees them, so the tail is compressed to a single extreme rank rather than dominating a linear model; the layer A_eq_dist_negrank is kept but must not be read as a physical distance. Flagged because any future use of band 10 as a metres-valued quantity (a buffer, a threshold, a decay length) would silently mis-handle those pixels.",
+      "evidence": "evidence/r4_layers_smoke.json"
+    },
+    {
+      "id": "IR-52-034",
+      "round": "R4",
+      "session": "2026-10-08",
+      "severity": "high",
+      "status": "open",
+      "disposition": "disclosed",
+      "title": "The organiser's band-6 tag is contradicted by the survey contractor's own read-me: band 6 is radiometric total count, and the competition grid is node-aligned to the survey grid",
+      "what_it_is": "Band 6 of data/training_features.tif is tagged data_category = magnetic_data, 'Tilt angle or total curvature - magnetic field derivative for edge detection'. The GeoDAWN contractor read-me (NV5 / EDCON-PRJ, December 2022, Task Order 140G0221F0024) lists tc_raw and tccorr under Radiometrics and contains no tilt-angle channel anywhere in its channel inventory, so the tag does not correspond to any product the survey delivered. The same document gives the survey's Area 2 origin as 243200.0 / 4135400.0 at 100 m spacing, which is node-aligned to the competition grid rather than pixel-aligned.",
+      "how_we_know": "Two independent lines. First, the contractor read-me's own channel inventory. Second, measured on the bytes: Spearman(band 6, GeoDAWN total-count grid) = +1.0000; Spearman(band 6, K+Th+U) = +0.9915, which is what a total-count channel is by construction; and |Spearman| <= 0.148 against all five magnetic bands in the same file. Band 6 is also strictly positive (range 2.953 to 88.573), where a tilt angle is bounded by +/-pi/2. Independently corroborated by IR-52-019.",
+      "handling": "Band 6 is assigned to View B (as B_band6_TC), not to the potential-field view. A radiometric band inside View A would corrupt the conditional-independence test the two views are required to pass. Enforced by tests/test_r4.py::test_band6_is_in_view_b.",
+      "evidence": "evidence/h53_band6_identity.json and the GeoDAWN read-me, both of which were in data/external/audit_sources/ when first recorded",
+      "provenance_warning": "This entry was reconstructed on 2026-10-08 after the workspace reset (IR-R4-001) destroyed data/external/audit_sources/GeoDAWN_ReadMe.pdf together with the uncommitted register entry. The measured half (the Spearman evidence and the positivity argument) is reproducible from committed code; the documentary half rests on the session record and should be re-verified against a re-fetched copy of the read-me before being relied on."
     }
   ]
 }
