@@ -4,6 +4,7 @@ __pycache__/
 *.tif
 *.tiff
 *.zip
-
-# explicit exception: the one submission-format GeoTIFF is committed on purpose (ignored by default)
+!docs/downloads/*.tif
+!docs/downloads/*.zip
+# explicit exception: the H2 submission-format GeoTIFF is committed on purpose (ignored by default)
 !submissions/*.tif

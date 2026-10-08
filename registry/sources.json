@@ -20,7 +20,7 @@
       "title": "GEMS Prize leaderboard (public DW-Tversky)",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
       "access": "fetched",
-      "used_for": "Public board snapshot: #1 0.3774 (xiaofanhu); #7 0.3195 (DARD); #13 0.2778 (extradr19). Snapshot time not shown on the page."
+      "used_for": "Public board re-fetched 2026-10-08: #1 xiaofanhu 0.3774; #2 alexoktaba 0.3345; #3 nchuzhoy 0.3262; #4 joeyfezster 0.3260; #5 kinghorton42 0.3222; #6 Batik Shirt Brothers 0.3221; #7 DARD 0.3195; #13 extradr19 0.2778. Snapshot time not shown."
     },
     {
       "id": "S3",
@@ -140,34 +140,41 @@
     },
     {
       "id": "S19",
+      "title": "Public GEMSDOE* registry repositories (buffedlizard55-lab), mirrored by shallow git clone; tif files flattened for the uniqueness gate",
+      "url": "https://github.com/buffedlizard55-lab?tab=repositories",
+      "access": "cloned",
+      "used_for": "Registry population for the uniqueness gate (613 single-band rasters on the competition grid; see evidence/registry_inventory/inventory.json)"
+    },
+    {
+      "id": "S20",
       "title": "GEMSDOE32 README (owner repo): one-click file, 46,090-px h32d file, owner-reported incumbent 0.2600, emission-rule algebra",
       "url": "https://github.com/buffedlizard55-lab/GEMSDOE32",
       "access": "fetched via api.github.com (README, 2026-10-08)",
       "used_for": "Q2 owner-claim context. OWNER-CLAIM only; not an organizer receipt."
     },
     {
-      "id": "S20",
+      "id": "S21",
       "title": "GEMSDOE32 docs/score-ledger.csv (owner ledger; leaderboard reads dated 2026-10-03)",
       "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/score-ledger.csv",
       "access": "fetched via api.github.com (2026-10-08)",
       "used_for": "User-reported scores for GEMSDOE22 (0.1002 at 6%, 0.0748 at 10%) and GEMSDOE25 (0.2600). Leaderboard rows here conflict with the user brief (IR-53-19)."
     },
     {
-      "id": "S21",
+      "id": "S22",
       "title": "GEMSDOE32 docs/research/why-d28-scored-026.md and score-ceiling-analysis.md (owner analysis, 2026-10-03)",
       "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/tree/main/docs/research",
       "access": "fetched via api.github.com (2026-10-08)",
       "used_for": "Owner's account that the 0.2600 file is a distance-thinned (2.8 px) emission of 44,090 dots; score-to-file link explicitly unresolved there."
     },
     {
-      "id": "S22",
+      "id": "S23",
       "title": "Shared template at commit dcbbb19: src/metrics.py (DTI), src/submission_io.py (writer, conformance), scripts/validate_submission.py",
       "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb19",
       "access": "cloned (depth 1) 2026-10-08",
       "used_for": "Shared evaluator, writer and validators used for all new measurements and the final file (protocol: use shared tools, no private fork)."
     },
     {
-      "id": "S23",
+      "id": "S24",
       "title": "Public GEMS registry: 63 repos whose names contain 'gems' (53 with rasters), 1,200 rasters, manifest with blob SHAs",
       "url": "https://github.com/buffedlizard55-lab",
       "access": "enumerated and downloaded via gh/api 2026-10-08 (evidence/registry_manifest.json)",

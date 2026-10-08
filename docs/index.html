@@ -36,6 +36,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
       <tr><th>Dots (value 1.0)</th><td>44,090 (the rest of the footprint is 0; outside it NaN)</td></tr>
       <tr><th>sha256</th><td><code>e06f3b34afc9e02239ef554d09b62212c2f2716c66a0f19a8adc1051af7a87aa</code> (422,475 bytes)</td></tr>
     </table>
+    <p class="note">A second file, H1 relay prune, is also on main from another session. Its own label is READY_TO_SUBMIT; this session's cross-check is not cleared under the literal rule. <a href="#second-candidate">See the second candidate</a>.</p>
     <p class="note">This is a research file for review. Its label is <b>DO-NOT-SUBMIT</b> because the uniqueness gate fails
     under the pre-registered rule. A file labelled DO-NOT-SUBMIT must not be uploaded unless you change the rule and the label is re-evaluated.</p>
   </div>
@@ -51,7 +52,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
         Dot-level overlap flags 66 registry rows, all with chance lift ≤ 1.35 (density). Surface-level flags 16 rows with chance lift 3.6 to 5.6 (real similarity to two team files). The file is blocked under either reading.</td>
         <td><span class="pill">MEASURED</span></td></tr>
     <tr><td>Does it beat the 0.3774 public #1?</td>
-        <td>Unknown. No organizer score exists, so nothing here can be claimed. The bar itself is user-reported and conflicts with the owner's ledger (IR-53-19).</td>
+        <td>Unknown. No organizer score exists, so nothing here can be claimed. The bar itself is user-reported and conflicts with the owner's ledger (IR-53-26).</td>
         <td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
     <tr><td>Holdout proxy for the candidate</td>
         <td>Pooled HOLDOUT-DTI <b>0.0501</b> (95% CI 0.0425 to 0.0577) at 44,090 dots. Same-budget HGB: 0.0265. Frozen best: 0.0352. Paired gain +0.0236 (CI +0.0170 to +0.0303).</td>
@@ -60,7 +61,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
         <td>Its distance-to-known-faults feature is built from the labels it is scored on. It is exactly 0 on all 60,988 known-fault pixels (separability 1.000). On the holdout it scores 0.99996, which is inflated. See <a href="evidence.html#gemsdoe29">evidence</a> and <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/docs/leakage-review.md">the review</a>.</td>
         <td><span class="pill">MEASURED</span> <span class="pill">HOLDOUT-DTI (inflated)</span></td></tr>
     <tr><td>Why GEMSDOE32 (0.2778 claim) can score high, and whether we can beat it</td>
-        <td>Measured on our proxy: at the same dot budget, Poisson spacing roughly doubles the credit per dot (TP_w 4,678 vs 2,072 unpacked). Whether 0.2778 is that file is unverified (IR-53-02, IR-53-25). Beating it on the organizer's truth is not established. See <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/docs/research/gemsdoe32.md">the analysis</a>.</td>
+        <td>Measured on our proxy: at the same dot budget, Poisson spacing roughly doubles the credit per dot (TP_w 4,678 vs 2,072 unpacked). Whether 0.2778 is that file is unverified (IR-53-02, IR-53-32). Beating it on the organizer's truth is not established. See <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/docs/research/gemsdoe32.md">the analysis</a>.</td>
         <td><span class="pill">MEASURED (mechanism)</span> <span class="pill">USER-REPORTED (0.2778)</span></td></tr>
     <tr><td>Top hypothesis validated on a spatially blocked holdout?</td>
         <td>Yes: H2 passes G1 (holdout best), G2 (equal budget) and G3 (leakage canary). It is blocked at G5 (uniqueness). See the <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/docs/research/hypotheses.md">ranked list</a>.</td>
@@ -69,6 +70,19 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
         <td>Cause documented by the template: NaN inside the scored region (3,061 px). This file has none; NaN exactly outside the footprint, finite 0/1 inside, nodata tag <code>nan</code>. The portal has not yet confirmed it (no receipt).</td>
         <td><span class="pill">MEASURED (validators)</span> <span class="pill">unconfirmed by portal</span></td></tr>
   </table>
+</section>
+
+<section id="second-candidate">
+  <h2>Second candidate on main (from PR #6): H1 relay prune</h2>
+  <p class="note">This candidate comes from another session on this repository. Its label and numbers are shown as that session states them (USER-REPORTED / its own receipts). They are not re-verified here, except the uniqueness cross-check below, which this session ran against its 1,200-raster registry.</p>
+  <table>
+    <tr><th>File</th><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE53/raw/main/docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif">gems53-h1-relay-prune-q0p0073-nan.tif</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif">view on GitHub</a></td></tr>
+    <tr><th>Stated status (PR #6)</th><td><code>READY_TO_SUBMIT</code> · submitted: False · note: <code>H1 segment-exact learn-predict separation; B=2px catalogue prune; NMS d=300m; values in [0,1]; no internal NaN.</code></td></tr>
+    <tr><th>Holdout (its evaluator: repo copy <code>gems53.core.dti</code>, not the shared template)</th><td>pooled HOLDOUT-DTI <b>0.0560</b> (95% CI 0.0488 to 0.0631) at q = 0.0073; 60,988 withheld fault px.</td></tr>
+    <tr><th>Its own uniqueness check (166 rasters, 12 repos)</th><td>max Spearman 0.0518; max dot overlap 61.79%; drift flag False.</td></tr>
+    <tr><th>This session's cross-check (1,200 rasters, 63 repos)</th><td>compared 1,177 rasters; max Spearman 0.1033; max dot overlap 99.43%; flagged rows 60 (literal rule: NOT CLEARED). Chance lift on flagged rows: 1.00 to 1.31.</td></tr>
+  </table>
+  <p class="note">Why the two holdout numbers differ, and why they are not a ranking for the competition: the holdout truth is the catalogue, and H1 uses distance to visible catalogue faults, which the holdout rewards by design. H2 uses band 2 only. The competition scores faults that are absent from the catalogue (L-02, L-14).</p>
 </section>
 
 <section>
@@ -97,8 +111,8 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
   <h2>Decisions needed from you</h2>
   <ol>
     <li><b>Overlap rule.</b> A chance-corrected dot rule would clear the 66 dot-level rows (chance lift up to 1.35). It would <b>not</b> clear the 16 surface-level rows (lift 3.6 to 5.6), so the file stays blocked. A unique file needs a different top tail, which is a new pre-registered variant. Details: <a href="submission.html#uniqueness">uniqueness</a>.</li>
-    <li><b>Verbatim prompt.</b> The original prompt is not in the workspace (IR-53-20). Paste it into <code>docs/prompt/verbatim.md</code>.</li>
-    <li><b>Leaderboard.</b> Confirm 0.3774, 0.3195 and 0.2778 with a dated official read (IR-53-19).</li>
+    <li><b>Verbatim prompt.</b> The original prompt is not in the workspace (IR-53-27). Paste it into <code>docs/prompt/verbatim.md</code>.</li>
+    <li><b>Leaderboard.</b> Confirm 0.3774, 0.3195 and 0.2778 with a dated official read (IR-53-26).</li>
     <li><b>Radiometric data (H6).</b> Provide the grids, or allow the USGS/ScienceBase host.</li>
   </ol>
 </section>
@@ -107,7 +121,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
   <h2>Bars to beat (USER-REPORTED, not verified here)</h2>
   <table>
     <tr><th>Rank</th><th>Team</th><th>Score</th><th>Label</th></tr>
-    <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td><td>user-reported; owner ledger has a different leader (IR-53-19)</td></tr>
+    <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td><td>user-reported; owner ledger has a different leader (IR-53-26)</td></tr>
     <tr><td>7</td><td>DARD</td><td>0.3195</td><td>user-reported</td></tr>
     <tr><td>13</td><td>extradr19</td><td>0.2778</td><td>user-reported; not linked to a GEMSDOE32 file (IR-53-02); ledger shows 0.2449 at rank 19 (2026-10-03)</td></tr>
   </table>

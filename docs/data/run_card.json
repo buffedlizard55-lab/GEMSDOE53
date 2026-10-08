@@ -1,9 +1,9 @@
 {
   "schema": "gems53.run_card.v2",
-  "generated_utc": "2026-10-08T22:56:30+00:00",
+  "generated_utc": "2026-10-08T23:10:58+00:00",
   "git": {
     "branch": "arena/deed81af-gemsdoe53",
-    "head": "3be78e9"
+    "head": "418ebdf"
   },
   "lane": "H2 label-free magnetic lineament candidate (ridge centrelines, Poisson-packed dots)",
   "hypothesis": "Packing a band-2 ridge/valley centreline score at >= 2.8 px spacing into N=44090 binary dots recovers held-out catalogue fault segments better than the frozen 19-band HGB top-N at equal budget.",
@@ -280,14 +280,14 @@
   "organizer_score_label": "ORGANIZER-CONFIRMED: none (no portal receipt exists)",
   "earlier_experiments_kept_for_the_record": {
     "E1_leakage_canary_19_bands_max_separability": 0.597318,
-    "E1_leak_free_distance_mean_separability": 0.527749,
+    "E1_leak_free_distance_mean_separability": 0.527732,
     "E1_leaky_distance_in_sample_separability": 1.0,
     "E2_HGB_bands_pooled_DTI_q0p02_frozen_best": 0.035233,
     "E2_leaky_ablate_pooled_DTI_q0p02": 0.999957
   },
   "review_passes": [
     "implement: fetch_registry (63 repos, 1,200 rasters); ridge candidate; X1, X2, X3; shared template tools for the metric, writer and validators.",
-    "review: caught and fixed (a) a crash on constant registry rasters (None rho) in the uniqueness max helper; (b) a comment that claimed 'not a copy' while G5 failed; (c) a README claim that leaderboard numbers were fetched (they were not; the static page returned 'Loading...'); (d) a unit test that assumed no side-lobes (the detrend creates them; recorded as IR-53-22, not tuned away).",
+    "review: caught and fixed (a) a crash on constant registry rasters (None rho) in the uniqueness max helper; (b) a comment that claimed 'not a copy' while G5 failed; (c) a README claim that leaderboard numbers were fetched (they were not; the static page returned 'Loading...'); (d) a unit test that assumed no side-lobes (the detrend creates them; recorded as IR-53-29, not tuned away).",
     "re-check: 16 unit tests pass; validator exit codes recorded above; sha256 of the file and its pixel parity with the draft checked; holdout structural identity TP_w + FN_w = |G| verified for every arm and budget; registry rows with overlap flags re-measured against a chance baseline (overlap_baseline_v2.json)."
   ],
   "reconciliation": "The shared template metric (src/metrics.py, commit dcbbb19) reproduces the earlier E2 numbers exactly; writer and validators for the final file are the template's own tools.",
@@ -307,6 +307,9 @@
     "L-13",
     "L-14",
     "L-15",
-    "L-16"
+    "L-16",
+    "L-17",
+    "L-18",
+    "L-19"
   ]
 }

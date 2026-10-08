@@ -1,0 +1,61 @@
+{
+  "experiment": "E4 hypothesis canary (feature alone, training labels)",
+  "label_type": "MEASURED (training-label separability; not a holdout score)",
+  "segments_8conn": 3199,
+  "known_fault_px": 60988,
+  "neg_sample": 200000,
+  "H1": {
+    "description": "segment-exact exclusion: positives measured without their own segment; negatives with all faults",
+    "AUC": 0.243791,
+    "separability": 0.756209,
+    "n_pos": 60988,
+    "n_neg": 200000,
+    "flag_leak_if_above_0.90": false,
+    "positive_value_quantiles_log1p": [
+      1.1744,
+      2.1536,
+      3.5192
+    ],
+    "negative_value_quantiles_log1p": [
+      1.1744,
+      3.2028,
+      4.1109
+    ],
+    "local_pair_canary": {
+      "pairs": 13935,
+      "AUC_fault_gt_neighbour": 1.0,
+      "separability": 1.0,
+      "flag_leak_if_above_0.90": true
+    }
+  },
+  "H2": {
+    "description": "max over sigma 1,2,3 px of sigma^2 * |major eig| * linearity on RTP band (label-free)",
+    "AUC": 0.525998,
+    "separability": 0.525998,
+    "n_pos": 60988,
+    "n_neg": 200000,
+    "flag_leak_if_above_0.90": false,
+    "fp_px": 5167373,
+    "nan_filled_px_in_footprint": 3061,
+    "local_pair_canary": {
+      "pairs": 13935,
+      "AUC_fault_gt_neighbour": 0.500323,
+      "separability": 0.500323,
+      "flag_leak_if_above_0.90": false
+    }
+  },
+  "A_leakfree_crossfit_local_pair": {
+    "pairs": 13935,
+    "AUC_fault_gt_neighbour": 0.499677,
+    "separability": 0.500323,
+    "flag_leak_if_above_0.90": false
+  },
+  "A_leakfree_crossfit_training_sep": {
+    "AUC": 0.472848,
+    "separability": 0.527152,
+    "n_pos": 60988,
+    "n_neg": 200000,
+    "flag_leak_if_above_0.90": false
+  },
+  "runtime_s": 33.4
+}

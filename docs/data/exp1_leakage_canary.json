@@ -335,21 +335,42 @@
     "description": "distance to VISIBLE known faults (withheld segments removed), cross-fitted by 4x4 block",
     "separability_per_fold": [
       0.522958,
-      0.520416,
-      0.524221,
-      0.522352,
-      0.548798
+      0.520535,
+      0.523873,
+      0.522947,
+      0.548347
     ],
     "AUC_per_fold": [
       0.477042,
-      0.479584,
-      0.475779,
-      0.477648,
-      0.451202
+      0.479465,
+      0.476127,
+      0.477053,
+      0.451653
     ],
-    "separability_mean": 0.527749,
+    "separability_mean": 0.527732,
     "flag": "pass",
     "note": "Expected to be informative (new faults often lie near known ones). That is legitimate information available at prediction time, not a label leak."
+  },
+  "B2_distance_segment_exact": {
+    "description": "distance to VISIBLE known faults, segment-exact learn-predict separation (H1)",
+    "separability_per_fold": [
+      0.789368,
+      0.766471,
+      0.786021,
+      0.757634,
+      0.773442
+    ],
+    "AUC_per_fold": [
+      0.210632,
+      0.233529,
+      0.213979,
+      0.242366,
+      0.226558
+    ],
+    "separability_mean": 0.774587,
+    "separability_max": 0.789368,
+    "flag": "pass",
+    "note": "Preserves proximity to fault clusters without self-leakage."
   },
   "C2_leaky_distance_on_withheld": {
     "description": "distance to the FULL catalogue (withheld labels included), evaluated on withheld positives",
@@ -366,10 +387,10 @@
   "summary": {
     "label_free_bands_flagged": [],
     "max_label_free_band_separability": 0.597318,
-    "leak_free_distance_separability_mean": 0.527749,
+    "leak_free_distance_separability_mean": 0.527732,
     "leaky_distance_in_sample_separability": 1.0,
     "leaky_distance_on_withheld_separability_mean": 1.0,
     "verdict": "label-free bands: no band above the 0.90 gate; leak-free distance: pass; leaky distance: confirmed leak (separability 1.0 in-sample; inflated on withheld folds)."
   },
-  "runtime_s": 80.7
+  "runtime_s": 104.8
 }

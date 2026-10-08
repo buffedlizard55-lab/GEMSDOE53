@@ -43,26 +43,38 @@
     },
     {
       "id": "L-11",
-      "item": "The candidate's holdout gain is measured against catalogue truth. Packing helps recover mapped faults. Whether it also helps the competition's new faults is untested (L-02)."
+      "item": "Experiments this session: 2 of 3 budgeted (E4 canary of H1/H2 and the leaky-free audit; E5 holdout of H2 vs bands). E1 and E2 were re-run as reproduction checks. The third experiment (H3, fault-parallel strain) was not run."
     },
     {
       "id": "L-12",
-      "item": "Ridge parameters (scales 1.5, 2.5, 3.5 px; 1.5 km detrend; 2.8 px spacing) were fixed before the holdout. No sensitivity sweep was run, because the experiment budget was spent after X3."
+      "item": "No organizer score exists for any file in this repository. Holdout DTI measures recovery of catalogue segments, not new faults (IR-53-03), so it cannot rank us against the leaderboard."
     },
     {
       "id": "L-13",
-      "item": "Holdout-optimal dot budget is not the pre-registered one. The candidate scores higher at 103k dots (HOLDOUT-DTI 0.0631) than at 44,090 (0.0501). The choice of 44,090 follows the d2.8 family count and is not holdout-optimal (IR-53-21)."
+      "item": "The competition rasters come from a public GitHub mirror (buffedlizard55-lab/GEMSDOE, data/bridge), not from the login-gated DrivenData data tab. Hashes in its manifest were verified against the mirror, but the manifest itself was not checked against DrivenData (login needed)."
     },
     {
       "id": "L-14",
-      "item": "Adjacency to known faults is not tested. The final file masks all catalogue pixels exactly. The owner's 2-px catalogue prune (GEMSDOE32) is neither adopted nor tested; new faults adjacent to mapped ones could be rewarded or penalised."
+      "item": "The candidate's holdout gain is measured against catalogue truth. Packing helps recover mapped faults. Whether it also helps the competition's new faults is untested (L-02)."
     },
     {
       "id": "L-15",
-      "item": "Uniqueness is measured against the public GEMS repos present on 2026-10-08. Private or unpublished submissions cannot be checked, and a pass is not proof of originality beyond that set."
+      "item": "Ridge parameters (scales 1.5, 2.5, 3.5 px; 1.5 km detrend; 2.8 px spacing) were fixed before the holdout. No sensitivity sweep was run, because the experiment budget was spent after X3."
     },
     {
       "id": "L-16",
+      "item": "Holdout-optimal dot budget is not the pre-registered one. The candidate scores higher at 103k dots (HOLDOUT-DTI 0.0631) than at 44,090 (0.0501). The choice of 44,090 follows the d2.8 family count and is not holdout-optimal (IR-53-21)."
+    },
+    {
+      "id": "L-17",
+      "item": "Adjacency to known faults is not tested. The final file masks all catalogue pixels exactly. The owner's 2-px catalogue prune (GEMSDOE32) is neither adopted nor tested; new faults adjacent to mapped ones could be rewarded or penalised."
+    },
+    {
+      "id": "L-18",
+      "item": "Uniqueness is measured against the public GEMS repos present on 2026-10-08. Private or unpublished submissions cannot be checked, and a pass is not proof of originality beyond that set."
+    },
+    {
+      "id": "L-19",
       "item": "The shared template validator and writer were used for the final file. Our in-lane helpers in src/gems53/core.py remain for the earlier experiments. The two metrics agree on the holdout to 6 decimals (test_shared_metric_matches_repo_metric)."
     }
   ]

@@ -10,11 +10,11 @@ Labels used below. **MEASURED** = computed in this repo from files (`evidence/`,
 - **USER-REPORTED:** `extradr19` at 0.2778 (#13). Nothing in the repositories links that row to a GEMSDOE32 file (IR-53-02).
   Our static fetch of the DrivenData leaderboard returned "Loading..." (client-side), so we read no leaderboard
   number ourselves. The owner's ledger (reads dated 2026-10-03) gives extradr19 at 0.2449 (rank 19) and rank 1 at
-  0.3195. The brief gives rank 1 at 0.3774. These cannot both be right for the same snapshot (IR-53-19).
+  0.3195. The brief gives rank 1 at 0.3774. These cannot both be right for the same snapshot (IR-53-26).
 - **OWNER-CLAIM:** the GEMSDOE32 README (read 2026-10-08) names `gemsdoe32-h32d-submodular-multipysics-46090` as its
   one-click file. An earlier landing-page read named `gemsdoe32-h33-h33-2-b2` as primary and UNSCORED, and
-  that is the file behind the 0.2778 claim. The 0.2778 link to H33-2-B2 is not in the owner's ledger (IR-53-25).
-- **OWNER-CLAIM (S19, S21):** the owner's analysis says the 0.2600 "d2.8" file is the model's own emission thinned
+  that is the file behind the 0.2778 claim. The 0.2778 link to H33-2-B2 is not in the owner's ledger (IR-53-32).
+- **OWNER-CLAIM (S20, S22):** the owner's analysis says the 0.2600 "d2.8" file is the model's own emission thinned
   by a 2.8 px distance rule to 44,090 dots, with none on the catalogue. It also says the score-to-file link is
   unresolved. It is not an organizer receipt.
 
@@ -35,16 +35,16 @@ Labels used below. **MEASURED** = computed in this repo from files (`evidence/`,
    arm, which is a structural check of the bookkeeping.) At the same false-positive cost, packing more than doubles the
    credit. Source: `evidence/x2_ridge_holdout.json`.
 3. **So a file in the d2.8 family can score well for a reason the feature does not explain.** Thinning a thick
-   emission into a spaced set of dots is what converts it into credit. This is the owner's own account (S21) and
+   emission into a spaced set of dots is what converts it into credit. This is the owner's own account (S22) and
    matches our measurement. It is not an organizer result.
 4. **The 2-px catalogue prune** (the owner's step in H33-2-B2) removes dots that our holdout could not test. A dot
    adjacent to a mapped fault may earn credit on a new parallel fault, or may just be a false positive. It is untested
-   here (L-14).
+   here (L-17).
 
 ## Can we beat 0.2778?
 
 - **Not established for the organizer's truth.** Our only evidence is HOLDOUT-DTI, which rewards recovery of mapped
-  faults (L-02). The holdout favours larger dot budgets; user-reported board entries favour sparser ones (IR-53-21).
+  faults (L-02). The holdout favours larger dot budgets; user-reported board entries favour sparser ones (IR-53-28).
 - **Our candidate (H2) beats the frozen holdout best** (0.0501 at 44,090 dots versus 0.0352 for the repo's best
   at 103k dots) and the same-budget HGB baseline. It is not a byte copy of any registry file, and its dot-level
   rank correlation is at most 0.09. Its uniqueness gate fails at the surface level against two team files (GEMSDOE46

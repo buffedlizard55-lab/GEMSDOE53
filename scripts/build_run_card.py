@@ -162,7 +162,7 @@ def main() -> int:
         },
         "review_passes": [
             "implement: fetch_registry (63 repos, 1,200 rasters); ridge candidate; X1, X2, X3; shared template tools for the metric, writer and validators.",
-            "review: caught and fixed (a) a crash on constant registry rasters (None rho) in the uniqueness max helper; (b) a comment that claimed 'not a copy' while G5 failed; (c) a README claim that leaderboard numbers were fetched (they were not; the static page returned 'Loading...'); (d) a unit test that assumed no side-lobes (the detrend creates them; recorded as IR-53-22, not tuned away).",
+            "review: caught and fixed (a) a crash on constant registry rasters (None rho) in the uniqueness max helper; (b) a comment that claimed 'not a copy' while G5 failed; (c) a README claim that leaderboard numbers were fetched (they were not; the static page returned 'Loading...'); (d) a unit test that assumed no side-lobes (the detrend creates them; recorded as IR-53-29, not tuned away).",
             "re-check: 16 unit tests pass; validator exit codes recorded above; sha256 of the file and its pixel parity with the draft checked; holdout structural identity TP_w + FN_w = |G| verified for every arm and budget; registry rows with overlap flags re-measured against a chance baseline (overlap_baseline_v2.json)."
         ],
         "reconciliation": "The shared template metric (src/metrics.py, commit dcbbb19) reproduces the earlier E2 "

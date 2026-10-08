@@ -1,0 +1,75 @@
+{
+  "submission_name": "gems53-h1-relay-prune-q0p0073",
+  "built_utc": "2026-10-08T22:32:53Z",
+  "recipe": {
+    "model": "HistGradientBoostingClassifier(max_iter=200, learning_rate=0.1, max_leaf_nodes=31, l2_regularization=1.0, random_state=0)",
+    "arm": "h1_segment_exact",
+    "positives": 60988,
+    "negatives": 300000,
+    "features": 20,
+    "known_fault_mask": "emission forced to 0 on known-fault pixels and B=2px flank pruned",
+    "q_fraction_of_footprint": 0.0073
+  },
+  "holdout_selection_evidence": {
+    "arm": "h1_segment_exact",
+    "q": 0.0073,
+    "pooled_DTI_holdout": 0.055957,
+    "CI95": [
+      0.048826,
+      0.063096
+    ],
+    "label_type": "HOLDOUT-DTI (proxy, withheld known-fault segments, 5 folds)"
+  },
+  "grid": {
+    "H": 3730,
+    "W": 3292,
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "footprint_px": 5167373
+  },
+  "files": {
+    "gems53-h1-relay-prune-q0p0073-nan.tif": {
+      "path": "/home/user/GEMSDOE53/evidence/candidates/gems53-h1-relay-prune-q0p0073-nan.tif",
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "shape_matches_template": true,
+        "crs_is_EPSG_32611": true,
+        "transform_matches_template": true,
+        "no_nan_or_inf_inside_footprint": true,
+        "inside_footprint_in_0_1": true,
+        "outside_footprint_nan_or_zero": true,
+        "all_finite_values_in_0_1": true
+      },
+      "nodata": NaN,
+      "counts": {
+        "footprint_px": 5167373,
+        "finite_px": 5167373,
+        "nonzero_px": 37722,
+        "nan_outside_px": 7111787,
+        "zero_outside_px": 0,
+        "max": 1.0,
+        "min": 0.0
+      },
+      "all_checks_passed": true,
+      "sha256": "4a931832d76040b51252649e525376a31b5b15b3bb8c2ffbda8758531211776b",
+      "bytes": 333749,
+      "on_known_fault_px": 0,
+      "emitted_px": 37722,
+      "emitted_fraction_of_footprint": 0.0073
+    }
+  },
+  "zip_file": {
+    "name": "gems53-h1-relay-prune-q0p0073.zip",
+    "bytes": 253038,
+    "sha256": "26191cc59bf8f3d77605eb217da89081f4f0fb1a8268f186d61a3d6d40a7d809"
+  },
+  "runtime_s": 58.0
+}
