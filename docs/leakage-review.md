@@ -2,7 +2,9 @@
 
 **Review date:** 2026-10-08 (UTC)  
 **Lane:** catalogue-distance leakage diagnosis only  
-**Disposition:** negative / blocked; no new TIFF, no holdout score, no submission-slot decision
+**Disposition:** the diagnosis stands and is now confirmed by measurement (see the session update at the end). The
+prior-session text below was written before any holdout was run. No submission-slot decision was made. The session update
+adds measured numbers and the ridge candidate's canary (X1), which is a separate lane from the distance feature.
 
 ## Executive finding
 
@@ -109,3 +111,28 @@ When the shared, authorized data/tools are available, the next lane-compliant ru
 - **Pass one — review:** inventoried the local checkout; read the official problem/metric/submission pages and leakage paper; inspected the upstream artifact, feature, holdout, and test sources.
 - **Pass two — adversarial check:** distinguished prediction-time legitimate catalogue distance from target-derived training distance; checked the numerical `log1p` statement; found the negative-pool dependence on full labels and the fold-wise score aggregation mismatch; checked H33 evidence provenance.
 - **Pass three — acceptance check:** confirmed no local data, evaluator, writer, registry raster, TIFF, or test suite exists; did not invent a score, validator result, uniqueness pass, or competition-ready file. Run card records the negative outcome.
+
+## Session update 2026-10-08: measured leakage canary and feature audit
+
+Evidence: `evidence/exp1_leakage_canary.json` (E1), `evidence/exp2_holdout_arms.json` (E2), `evidence/x1_ridge_canary.json` (X1).
+All numbers below are MEASURED on the provided data (sha256 pinned in each receipt). They are not scores.
+
+**Feature audit (E1, leakage canary, gate 0.90 on separability = max(AUC, 1 - AUC)):**
+
+| feature | separability (measured) | verdict |
+|---|---:|---|
+| each of the 19 label-free bands (max over bands) | 0.597318 | pass (no band above 0.90) |
+| leak-free distance to visible faults (4x4-block cross-fit), mean over folds | 0.527749 | pass; weak (IR-53-09) |
+| distance to the FULL catalogue, evaluated on the labels it was built from | 1.000000 | **LEAK**: exactly 0 on all 60,988 known-fault px |
+| distance to the FULL catalogue, evaluated on withheld positives (C2) | 1.000000 mean over folds | **LEAK**: the holdout is inflated by this feature |
+
+**Holdout effect (E2, HOLDOUT-DTI, pooled, bands at 2% of footprint):** the leaky ablation scores 0.999957 pooled. The
+label-free bands score 0.035233 (95% t-CI 0.02817 to 0.04223). A feature built from the withheld labels inflates the
+score by an order of magnitude, so it is excluded from every arm.
+
+**Ridge candidate (X1):** the ridge features are computed from band 2 only and never read labels. Their separability
+is 0.559 for L (max over folds), 0.502 for the centreline indicator, and 0.520 for the signed L. All are below the gate.
+
+**Verdict on GEMSDOE29 (unchanged):** a real training-time shortcut (the leaked distance feature). The
+sandbox did not fetch GEMSDOE29's code again in this session; the diagnosis rests on the prior review's citations and
+on E1/E2, which reproduce the mechanism on the provided data.

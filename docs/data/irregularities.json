@@ -144,6 +144,78 @@
       "subject": "Hypothesis H1 was pre-registered but not run",
       "detail": "The top-ranked hypothesis needed a 4th experiment, beyond the 3-experiment budget.",
       "action": "Decide whether to spend budget on H1 before any new candidate is built."
+    },
+    {
+      "id": "IR-53-19",
+      "severity": "high",
+      "status": "open",
+      "subject": "Leaderboard values disagree across sources and cannot be re-read here",
+      "detail": "The brief gives #1 0.3774, #7 0.3195, #13 0.2778 (extradr19). The owner's ledger (GEMSDOE32, reads dated 2026-10-03) gives ranks 1-5 as 0.3195/0.3128/0.3042/0.2998/0.2941 and extradr19 at 0.2449 (rank 19). Our static fetch of the DrivenData leaderboard returned 'Loading...' (client-side), so we did NOT read any leaderboard number ourselves. The README's earlier 'fetched 2026-10-08' wording was wrong and is corrected.",
+      "action": "Treat every leaderboard number as user-reported until a dated official read is recorded. Do not compare HOLDOUT-DTI with leaderboard values."
+    },
+    {
+      "id": "IR-53-20",
+      "severity": "high",
+      "status": "open",
+      "subject": "The verbatim prompt is not in the workspace",
+      "detail": "The session record holds only a summary of the user's request. The README's prompt section is a reconstruction in the user's terms, not the verbatim text. The verbatim text was not found in the workspace, git history or cache.",
+      "action": "Paste the verbatim prompt into docs/prompt/verbatim.md. The README links there. Until then the reconstruction is labelled as such."
+    },
+    {
+      "id": "IR-53-21",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Holdout proxy and user-reported board disagree on emission volume",
+      "detail": "Pooled HOLDOUT-DTI rises with dot budget up to 2% of the footprint (bands arm 0.0352 at 103k dots). User-reported board receipts in S20 show dense emissions scoring lower: GEMSDOE22 6% = 0.1002 and 10% = 0.0748, against 0.2600 for a 44,090-dot file (conflicting owner page). The catalogue proxy is therefore not calibrated to the competition's truth on volume. Our pre-registered N (44,090) follows the dot count of the d2.8 family, not the holdout optimum.",
+      "action": "Report N-dependence on every holdout number (done in X2 grid). Do not select N from the holdout alone."
+    },
+    {
+      "id": "IR-53-22",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Ridge valley arm picks up band-pass side-lobes",
+      "detail": "Subtracting the 1.5 km normalised-convolution trend leaves dark side-lobes about 5 px either side of a sharp ridge. The valley arm turns them into extra centrelines (unit test on a synthetic line: centrelines at columns 55, 60 and 65). About half of the RTP centrelines are valley-polarity (ridge fraction 0.489). Side-lobes are not separated from true valleys.",
+      "action": "Ridge-only ablation and a DoG/halo-free filter are the first follow-ups. Not run here: the candidate is pre-registered and the experiment budget is spent."
+    },
+    {
+      "id": "IR-53-23",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Radiometric grids are not in the 19-band stack and cannot be fetched from this sandbox",
+      "detail": "The 19 bands of training_features.tif (see X1 band list) contain no radiometric channel. The sandbox allow-list is github.com, api.github.com, codeload.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org, so USGS/ScienceBase downloads are impossible from bash.",
+      "action": "H6 (radiometric alteration lineaments) stays data-blocked until the user supplies the grids or allows the host. Not claimed as tested."
+    },
+    {
+      "id": "IR-53-24",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Uniqueness method v2 choices are ours and must be reviewed",
+      "detail": "Dense registry probability maps (more than 20% of footprint pixels > 0) cannot be compared by nonzero pixels. We compare their top-N pixels (N = our dot count) and record both numbers. Constant rasters have undefined rho (recorded as null). The method is documented in scripts/uniqueness_check.py. The v1 receipt (138 files) is superseded.",
+      "action": "Reviewer to confirm the dense rule. Both numbers are in evidence/uniqueness_v2.json."
+    },
+    {
+      "id": "IR-53-25",
+      "severity": "medium",
+      "status": "open",
+      "subject": "GEMSDOE32 'primary' file changed between reads",
+      "detail": "The landing page read in a prior session named gemsdoe32-h33-h33-2-b2 (the file behind the 0.2778 claim) as primary and UNSCORED. The README read on 2026-10-08 names gemsdoe32-h32d-submodular-multipysics-46090 as the one-click file (owner-reported incumbent 0.2600 for d2.8). The 0.2778 link to H33-2-B2 is still not in the owner's ledger.",
+      "action": "Keep the H33-2-B2 / 0.2778 association labelled OWNER-CLAIM or user-reported. Do not state it as organizer-confirmed."
+    },
+    {
+      "id": "IR-53-26",
+      "severity": "low",
+      "status": "open",
+      "subject": "RTP sentinel cells inside the footprint",
+      "detail": "3,061 band-2 (RTP) cells inside the official footprint are no-data. They are excluded as candidates and are not treated as zero evidence. The same count appears in the template's documented portal-rejection case (IR-53-04).",
+      "action": "None beyond keeping the exclusion rule documented."
+    },
+    {
+      "id": "IR-53-27",
+      "severity": "high",
+      "status": "open",
+      "subject": "Candidate's pre-placement surface shares its strongest pixels with two team files, far above chance",
+      "detail": "Top-N surface pixels of H2 fall within 3 px of the top-N pixels of GEMSDOE46 dfa-corroborated (sparse, 37.7k dots) at 72.9% (chance 20.1%, lift 3.6) and of GEMSDOE40 eulerdepth-si0 (sparse) at 70.5% (chance 12.6%, lift 5.6). Their dots overlap ours at 50.7% and 56.9%. The continuous surface correlates at 0.73 with the dense GEMSDOE40 Euler depth-cluster map (below the 0.90 rule). These are measured in evidence/uniqueness_v2.json and evidence/overlap_baseline_v2.json. The signal is therefore not untried in this registry at its strongest structures.",
+      "action": "Do not treat H2 as an untried signal. A unique file needs a different top tail (a new pre-registered variant, which exceeds this session's budget). Also compare emission rules file by file."
     }
   ]
 }

@@ -1,0 +1,303 @@
+{
+  "experiment": "X3 build + format (G4) + uniqueness (G5) for the pre-registered ridge candidate",
+  "label": "DO-NOT-SUBMIT",
+  "label_rule": "OK-TO-SUBMIT only if G1..G5 all pass (evidence/preregistration_x2.json)",
+  "gates": {
+    "G1_holdout_best": true,
+    "G2_equal_budget": true,
+    "G3_leakage_canary": true,
+    "G4_format": true,
+    "G5_uniqueness": false
+  },
+  "failing_gates": [
+    "G5_uniqueness"
+  ],
+  "file": {
+    "path": "submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif",
+    "sha256": "e06f3b34afc9e02239ef554d09b62212c2f2716c66a0f19a8adc1051af7a87aa",
+    "bytes": 422475,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "res": [
+      100.0,
+      100.0
+    ],
+    "width": 3292,
+    "height": 3730,
+    "nodata": "nan",
+    "finite_px": 5167373,
+    "nan_px": 7111787,
+    "nonzero_px": 44090,
+    "dots": 44090,
+    "block_shapes": [
+      [
+        256,
+        256
+      ]
+    ],
+    "tiled": true
+  },
+  "comment": "H2 ridge-packed 44090 dots (band-2 lineaments). DO-NOT-SUBMIT. Failing: G5_uniqueness. Not a byte copy of any registry file.",
+  "comment_chars": 124,
+  "pack_info": {
+    "n_centreline_candidates": 676365,
+    "n_selected": 44090,
+    "n_target": 44090,
+    "r_px": 2.8
+  },
+  "conformance_findings": {
+    "pixels": 12279160,
+    "template_valid_px": 5167373,
+    "nan_inside_px": 0,
+    "finite_outside_px": 0,
+    "out_of_range_px": 0,
+    "conformant": true
+  },
+  "validators": {
+    "scripts/validate_submission.py": {
+      "exit": 0,
+      "tail": "home/user/GEMSDOE53/submissions/_draft.tif\n  Width: 3292, Height: 3730, Count: 1, Dtype: ('float32',), CRS: EPSG:32611, Res: (100.0, 100.0), Nodata: nan\n  Data min: 0.0000, max: 1.0000, mean: 0.0085, nan%: 57.92%\n  \u2713 CRS EPSG:32611\n  \u2713 Resolution 100m\n  \u2713 Single band\n  \u2713 Dtype float32\n  \u2713 Values in [0,1] (min 0.0000 max 1.0000)\n  \u2713 Size matches sample 3292x3730\n  \u2713 Transform matches sample\n  \u2713 All 5,167,373 template-valid px are finite in [0,1]\n  \u2713 NaN exactly outside the template's valid region\n  \u2713 GDAL_NODATA matches the template ('nan')\n  \u2713 Size matches training_features\n  i NaN fraction 57.92% (NaN is expected outside the GeoDAWN footprint)\n\n\u2705 Validation PASSED - Ready for submission!\nNext: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via 'Submit' button\n"
+    },
+    "src.submission_io validate-conformant (draft)": {
+      "exit": 0,
+      "tail": "{\n \"pixels\": 12279160,\n \"template_valid_px\": 5167373,\n \"nan_inside_px\": 0,\n \"finite_outside_px\": 0,\n \"out_of_range_px\": 0,\n \"conformant\": true,\n \"nodata\": \"nan\",\n \"nodata_ok\": true,\n \"path\": \"/home/user/GEMSDOE53/submissions/_draft.tif\"\n}\n"
+    },
+    "src.submission_io validate-conformant (final)": {
+      "exit": 0,
+      "tail": "{\n \"pixels\": 12279160,\n \"template_valid_px\": 5167373,\n \"nan_inside_px\": 0,\n \"finite_outside_px\": 0,\n \"out_of_range_px\": 0,\n \"conformant\": true,\n \"nodata\": \"nan\",\n \"nodata_ok\": true,\n \"path\": \"/home/user/GEMSDOE53/submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif\"\n}\n"
+    }
+  },
+  "uniqueness": {
+    "method_version": 2,
+    "ours": "/home/user/GEMSDOE53/submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif",
+    "ours_sha256": "e06f3b34afc9e02239ef554d09b62212c2f2716c66a0f19a8adc1051af7a87aa",
+    "ours_dots": 44090,
+    "thresholds": {
+      "spearman_rho": 0.9,
+      "dot_overlap_within_3px": 0.7,
+      "within_px": 3.0,
+      "dense_fraction_rule": 0.2
+    },
+    "spearman_sample_px": 300000,
+    "registry_dir": "/tmp/gems53-registry",
+    "n_registry_files": 1200,
+    "n_registry_files_compared": 1177,
+    "n_dense_registry_files": 75,
+    "any_drift_flag": true,
+    "max_spearman_rho": 0.08999,
+    "max_dot_overlap_within_3px_used": 0.99941,
+    "max_surface_spearman_rho": 0.732869,
+    "max_surface_top_N_within_3px": 0.72885,
+    "draft_sha256_before_tags": "6a204359ed9cbfba10fd41c4621a6cc84e9b5f5d1adf294033afa22e32c628db"
+  },
+  "uniqueness_top10": [
+    {
+      "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.zip__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.tif",
+      "sha256": "c12533bb980234c3a706af641d4f1d514bbbe482714b2ebcac3b10f3e72a7a3f",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.zip__13gems_20261001_r13-lattice-s5_v2_zerofill.tif",
+      "sha256": "c12533bb980234c3a706af641d4f1d514bbbe482714b2ebcac3b10f3e72a7a3f",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_A_zerofill.tif",
+      "sha256": "c12533bb980234c3a706af641d4f1d514bbbe482714b2ebcac3b10f3e72a7a3f",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_A_zerofill.zip__13gems_20261001_r13-lattice-s5_A_zerofill.tif",
+      "sha256": "c12533bb980234c3a706af641d4f1d514bbbe482714b2ebcac3b10f3e72a7a3f",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_B_nan-outside.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_B_nan-outside.zip__13gems_20261001_r13-lattice-s5_B_nan-outside.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__latest.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    },
+    {
+      "file": "13GEMSDOE__docs__downloads__latest.zip__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "exact_duplicate": false,
+      "spearman_rho_sample": -0.001217,
+      "spearman_undefined_reason": null,
+      "registry_nonzero_fraction_of_footprint": 0.040039,
+      "registry_dense": false,
+      "our_dots_within_3px_strict": 0.99941,
+      "our_dots_within_3px_top_N": 0.35355,
+      "overlap_mode": "nonzero_dots",
+      "our_dots_within_3px_used": 0.99941,
+      "registry_dots_nonzero": 206895,
+      "surface_spearman_rho": -0.001785,
+      "surface_top_N_within_3px": 0.408528,
+      "drift_flags": [
+        "overlap"
+      ],
+      "drift_flag": true
+    }
+  ],
+  "inputs": {
+    "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "ridge_module_sha256": "479f1f12834cddbfec7c3240d689b2bd7223dbdbe1ff470122f57437ca88ba3a",
+    "template_commit": "dcbbb19 (scripts/validate_submission.py, src/submission_io.py, src/metrics.py)"
+  },
+  "runtime_s": 793.1
+}

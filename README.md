@@ -1,34 +1,52 @@
-# GEMSDOE53 — GEMS Prize research workspace (GEMS DOE competition 306)
+# GEMSDOE53 — GEMS Prize research workspace (DrivenData competition 306)
 
-> **Session start:** read this README (the full prompt is below, then the status and protocol sections) before doing anything else in this repository.
+> **Session start:** read this README first, then `docs/prompt/` (the verbatim prompt) and the status section.
 
-**Live site (GitHub Pages, served from `docs/`):** executive summary → `docs/index.html`, submission file page → `docs/submission.html`, evidence → `docs/evidence.html`.
+## ⬇ Download the GeoTIFF (read the label first)
 
-## Current status (PR #3)
+**Label: DO-NOT-SUBMIT.** The file is valid and downloadable for review. It is **not** cleared for a submission slot.
+It fails the pre-registered uniqueness gate (G5). Dot-level flags are density artefacts (chance lift ≤ 1.35), but the pre-placement surface shares its top-ranked pixels with two team files far above chance (lift 3.6 and 5.6). So it is not cleared under a chance-corrected rule either. See the status section.
 
-One unique, valid candidate GeoTIFF was built (`gems53-hgb-bands-q0p02`, the holdout-selected arm `bands` at 2% of the footprint). It passes the shared template validator and the rules' format checks, and it has no NaN inside the official footprint. It is **blocked and not submitted**: 79.5% of its dots sit within 3 px of one public registry file's dots, above the 70% stop threshold in the parallel-run protocol. Rank correlation is low (max 0.164). **No organizer score exists for anything in this repository.** Every number is a HOLDOUT-DTI proxy unless it is labelled ORGANIZER-CONFIRMED (none yet).
+- File: [`submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif`](submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif)
+- Comment (≤140 characters): [`submissions/SUBMISSION_COMMENT.txt`](submissions/SUBMISSION_COMMENT.txt)
+- Executive summary and how-to-submit steps: [`docs/index.html`](docs/index.html) (GitHub Pages site, `docs/`)
 
-## The full prompt (task as recorded)
+## Status (2026-10-08)
 
-The verbatim user message is not stored in the workspace. The requirements below are the recorded task, in the user's terms. Replace this block with the verbatim text if a copy becomes available.
+- **Candidate:** H2, a label-free magnetic lineament score (ridge and valley centrelines on the reduced-to-pole field, band 2), packed into 44,090 binary dots at ≥ 2.8 px spacing.
+- **Holdout (HOLDOUT-DTI, proxy, 5 folds, shared template evaluator, 95% t-CI df 4):** pooled **0.050097** (CI 0.042504 to 0.057716) at 44,090 dots, against 0.026547 for the 19-band HGB at the same budget, and 0.035233 for the repo's frozen best. Paired difference +0.023615 (CI 0.016962 to 0.030269). Source: `evidence/x2_ridge_holdout.json`.
+- **Leakage canary (G3):** worst single ridge feature separability 0.559 (gate 0.90). Source: `evidence/x1_ridge_canary.json`.
+- **Format (G4):** passes the shared writer, the shared conformance gate and `scripts/validate_submission.py` (all exit 0). Finite 0/1 inside the official footprint, NaN exactly outside.
+- **Uniqueness (G5): FAIL, at two levels.** Byte-level: no exact duplicate. Rank correlation of our dots with every compared registry raster is ≤ 0.09. Dot level: 66 registry rows exceed 70% of our dots within 3 px, but every one has a chance lift of at most 1.35 (density artefacts; the worst is the 5-px lattice raster, lift 1.00). Surface level: the pre-placement ridge surface shares its top-ranked pixels with two team files far above chance: GEMSDOE46 dfa-corroborated (72.9% against 20.1% chance, lift 3.6) and GEMSDOE40 eulerdepth-si0 (70.5% against 12.6%, lift 5.6). The dense GEMSDOE40 Euler map correlates 0.73 with our surface (rule is 0.90). Sources: `evidence/uniqueness_v2.json`, `evidence/overlap_baseline_v2.json`, IR-53-27.
+- **Organizer score:** none exists for anything in this repository. Every number is a HOLDOUT-DTI proxy.
+- **Slot selection:** none. The protocol says log and stop on a flag, so nothing was promoted.
 
-1. Make a **unique, downloadable GeoTIFF** submission for DrivenData GEMS (DOE) competition 306 that scores above the current best (0.3774 on the public leaderboard; 0.3195 and 0.2778 are cited as bars). The file must pass the portal check "Predicted values must be in [0,1]" and match CRS, shape and transform.
-   - Single-band GeoTIFF, values in [0,1], a unique name, and a comment of at most 140 characters.
-   - Do not copy a previous submission except for learning. It must be obvious whether downloading and submitting the generated file is allowed.
-2. Explain why GEMSDOE32 (0.2778) scored high, and whether we can beat it.
-3. Diagnose GEMSDOE29 leakage, audit all features for leakage, and use learn-predict separation.
-4. Generate 3–5 untried geological hypotheses, rank them by expected DTI gain and cost, and validate the top one on a spatially blocked holdout before using a submission slot.
-5. Add an executive summary subpage (how to submit, plus name and comment field) at the top of the GitHub Pages site.
-6. Put the full prompt into the README and read it at the start of each session.
-7. Build a clean GitHub Pages site with sourced links, a run card JSON and a data inventory table.
-8. Create a pull request and merge it to `main`, then list remaining work and limitations.
+### Decisions needed from you
+
+1. **Overlap rule.** A chance-corrected dot rule would clear all 66 dot-level rows (lift ≤ 1.35). It would not clear the 16 surface-level rows (lift 3.6 and 5.6), so the file stays blocked under either reading. A rule change alone does not make this file submittable. A unique file needs a different top tail, which is a new pre-registered variant and needs a decision on budget. We have not changed the rule.
+2. **Verbatim prompt.** The original prompt is not in the workspace. The section below is a reconstruction (IR-53-20). Paste the verbatim text into `docs/prompt/verbatim.md`.
+3. **Leaderboard figures.** 0.3774, 0.3195 and 0.2778 come from the brief, and the owner's ledger disagrees (IR-53-19). Confirm them with a dated official read.
+4. **Radiometric data (H6).** Provide the grids or allow the USGS/ScienceBase host, or drop H6.
+
+## The prompt (reconstruction; not verbatim)
+
+> The verbatim text is pending (see `docs/prompt/`, IR-53-20). The items below restate the user's request in the user's terms. They are not a quotation.
+
+1. Make a **unique, downloadable GeoTIFF** for DrivenData GEMS competition 306 that scores above the current bar (user-reported public leaderboard: 0.3774 at #1, 0.3195 at #7, 0.2778 at #13; unverified, IR-53-19). It must pass the portal check "Predicted values must be in range [0, 1]" and match CRS, shape and transform. Single band, values in [0, 1], a unique name and a comment of at most 140 characters. Do not copy a previous submission except to learn from it. It must be obvious whether downloading and submitting the file is allowed.
+2. Explain why GEMSDOE32 (0.2778 claim) scored high, and whether we can beat it.
+3. Give a formal diagnosis of GEMSDOE29 leakage, and audit every feature for leakage with learn-predict separation.
+4. Generate 3–5 untried geological hypotheses, rank them by expected DTI gain and cost, and validate the top one on a spatially blocked holdout before any submission slot is used.
+5. Add an executive summary page (how to submit, the name and the comment) at the top of the GitHub Pages site, with the download link at the top.
+6. Put the full prompt into this README and read it at the start of each session.
+7. Build a clean GitHub Pages site with sourced links, a JSON run card and a data inventory table.
+8. Create a pull request and merge it to `main`, then list the remaining work and limitations.
 9. Run three passes: implement, review, re-check.
 
 Standing rules recorded with the task:
 - No manual input; work autonomously. Verify line by line against official sources, with links. Flag irregularities. No hallucinations.
-- Parallel-run protocol: stay in one method lane. Log a duplicate and stop if rank correlation with any registry raster is above 0.90, or more than 70% of our dots fall within 3 px of another file's dots. Use the shared template tools. Do not keep a private fork; fix shared tools once in the template and report it.
-- Label every number as **HOLDOUT-DTI** (evaluator version, withheld positives, 95% CI) or **ORGANIZER-CONFIRMED** (from a submission receipt). Projections are never written as scores.
-- Leakage canary: a single feature with holdout separability above 0.90 counts as leakage until proven otherwise (separability = max(AUC, 1−AUC)).
+- Parallel-run protocol: stay in one method lane. Log a duplicate and stop if rank correlation with any registry raster is above 0.90, or if more than 70% of our dots fall within 3 px of another file's dots. Use the shared template tools. Do not keep a private fork; fix shared tools once in the template and report it.
+- Label every number **HOLDOUT-DTI** (evaluator, withheld positives, 95% CI) or **ORGANIZER-CONFIRMED** (from a submission receipt). Projections are never written as scores.
+- Leakage canary: a single feature with holdout separability above 0.90 is leakage until proven otherwise (separability = max(AUC, 1 − AUC)).
 - End with one JSON run card (`evidence/run_card.json`).
 - Budget: stop after 3 experiments or 2 hours. Do not select submissions. Promotion is a separate step within the weekly cap.
 - Use only free, official data sources without DrivenData login; flag any that are missing.
@@ -37,114 +55,52 @@ Standing rules recorded with the task:
 
 | Label | Meaning |
 |---|---|
-| HOLDOUT-DTI | Our hide-and-recover proxy: whole fault segments withheld, official distance-weighted Tversky (α 0.2, β 0.8, 300 m), 5 folds, t-based 95% CI (df 4). Truth is the public catalogue, not the competition's new faults, so it is **not comparable** with the leaderboard. |
+| HOLDOUT-DTI | Our hide-and-recover proxy: whole fault segments withheld, the official distance-weighted Tversky (α 0.2, β 0.8, 300 m kernel) from the template's shared evaluator, 5 folds, t-based 95% CI (df 4). The truth is the public catalogue, not the competition's new faults, so it is **not comparable** with the leaderboard. |
 | ORGANIZER-CONFIRMED | Only from a portal receipt. None exists yet. |
-| MEASURED | Computed in this repository from files. |
-| OWNER-CLAIM | Stated on another team's page; not verified. |
-
-Leaderboard numbers (public, fetched 2026-10-08, snapshot time not shown): #1 0.3774, #7 0.3195, #13 0.2778 (extradr19; not linked to a GEMSDOE32 file).
+| MEASURED | Computed in this repository from files, at build time. |
+| USER-REPORTED | A score from the brief or a ledger, not checked against an official dated read. |
+| OWNER-CLAIM | Stated on another team's own page or repo; not verified. |
 
 ## Layout
 
 | Path | What it is |
 |---|---|
-| `scripts/fetch_data.py` | Re-fetches the competition rasters from the template's split blobs and checks sha256 (writes to `/tmp/gems53-data`, outside the repo). |
-| `src/gems53/core.py` | Metric, folds, features, writer, in-lane checks. **Not yet reconciled with the shared template** (see limitations). |
-| `scripts/exp1_leakage_canary.py` | Experiment 1: leakage canary (`evidence/exp1_leakage_canary.json`). |
-| `scripts/exp2_holdout_arms.py` | Experiment 2: holdout over arms `bands`, `leakfree`, `leaky_ablate` (`evidence/exp2_holdout_arms.json`). |
-| `scripts/exp3_build_submission.py` | Builds the candidate raster and its receipt from the selected arm and q (`--outdir`). |
-| `scripts/uniqueness_check.py` | Rank correlation and 3-px overlap against registry rasters (`evidence/uniqueness_check.json`). |
-| `scripts/overlap_baseline.py` | Chance baseline for the overlap flag (diagnostic; does not change flags). |
-| `scripts/build_run_card.py`, `scripts/build_site.py` | Compose `evidence/run_card.json` and the Pages site from the JSON. No number is typed by hand. |
-| `registry/` | `sources.json` (official links with access status), `irregularities.json`, `limitations.json`. |
-| `docs/` | GitHub Pages site (`index.html`, `submission.html`, `evidence.html`, `data/`, `research/`). |
-| `docs/research/hypotheses.md` | Ranked hypotheses H1–H4 (H4 rejected). |
-| `docs/research/gemsdoe32.md` | Analysis of the 0.2778 file: what is measured and what is an owner claim. |
-| `tests/` | `test_metric.py` (metric checks), `test_submission.py` (validator and nodata regression). |
+| `submissions/` | The candidate GeoTIFF (committed on purpose; `.gitignore` has an explicit exception) and its comment. |
+| `docs/index.html` | Executive summary: download, how to submit, name and comment, answers, labels. |
+| `docs/submission.html` | The file's checks, the gates and the uniqueness result. |
+| `docs/evidence.html` | Experiments, GEMSDOE29 and GEMSDOE32 analysis, registry check, irregularities, limitations, sources. |
+| `docs/research/hypotheses.md` | Ranked hypotheses: H2 (tested), H5, H3, H6, H1 (untried), H4 (rejected). |
+| `docs/research/gemsdoe32.md` | The 0.2778 claim: what is verified, the mechanism we measured, and whether we can beat it. |
+| `docs/leakage-review.md` | GEMSDOE29 leakage diagnosis and the measured feature audit. |
+| `docs/prompt/` | Verbatim prompt placeholder (IR-53-20). |
+| `src/gems53/ridge.py` | The H2 candidate (label-free; pinned by hash in the pre-registration). |
+| `src/gems53/core.py` | Earlier in-lane helpers (folds, features, earlier metric). Verified against the shared metric by `tests/test_ridge.py`. |
+| `scripts/fetch_data.py` | Re-fetches the competition rasters from the template's split blobs and checks sha256 (writes to `/tmp/gems53-data`). |
+| `scripts/fetch_registry.py` | Enumerates the public GEMS repos and downloads every TIF/ZIP to `/tmp/gems53-registry`, with a manifest (`evidence/registry_manifest.json`). |
+| `scripts/x1_ridge_canary.py` | X1: leakage canary for the ridge features (`evidence/x1_ridge_canary.json`). |
+| `scripts/x2_ridge_holdout.py` | X2: pre-registered holdout, H2 vs HGB vs unpacked ablation (`evidence/x2_ridge_holdout.json`). |
+| `scripts/x3_build_candidate.py` | X3: builds the GeoTIFF with the shared writer, runs the shared validators and the uniqueness check. |
+| `scripts/uniqueness_check.py` | Registry check, version 2 (`evidence/uniqueness_v2.json`). |
+| `scripts/overlap_baseline.py` | Chance baseline for the overlap flag (diagnostic; does not change flags) (`evidence/overlap_baseline_v2.json`). |
+| `scripts/exp1_leakage_canary.py`, `scripts/exp2_holdout_arms.py` | Earlier experiments E1 and E2 (kept for the record). |
+| `scripts/build_run_card.py`, `scripts/build_site.py` | Compose `evidence/run_card.json`, `evidence/parallel-run-card.json` and the Pages site from the JSON. No number is typed by hand. |
+| `registry/` | `sources.json` (S1–S23), `irregularities.json` (IR-53-01 to IR-53-26), `limitations.json` (L-01 to L-16). |
+| `tests/` | `test_metric.py`, `test_submission.py`, `test_ridge.py` (ridge behaviour and metric parity with the shared template). |
 
 ## Reproduce
 
 ```bash
-python -m venv /tmp/venv && /tmp/venv/bin/pip install numpy rasterio scipy scikit-learn pyproj matplotlib pytest
-/tmp/venv/bin/python scripts/fetch_data.py                      # verified inputs to /tmp/gems53-data
+python3 -m venv /tmp/venv && /tmp/venv/bin/pip install numpy scipy scikit-learn rasterio pyproj matplotlib pytest
+/tmp/venv/bin/python scripts/fetch_data.py                                  # verified inputs to /tmp/gems53-data
+git clone --depth 1 https://github.com/buffedlizard55-lab/GEMSDOE.git /tmp/gems-template   # shared template (commit dcbbb19)
 /tmp/venv/bin/python -m pytest -q tests/
-/tmp/venv/bin/python scripts/exp1_leakage_canary.py --data-dir /tmp/gems53-data
-/tmp/venv/bin/python scripts/exp2_holdout_arms.py --data-dir /tmp/gems53-data
-/tmp/venv/bin/python scripts/exp3_build_submission.py --data-dir /tmp/gems53-data --arm bands --q 0.02 --name gems53-hgb-bands --outdir /tmp/gems53-held
-# shared template validator (in the GEMSDOE template clone):
-#   python scripts/validate_submission.py --pred /tmp/gems53-held/gems53-hgb-bands-q0p02-nan.tif --sample /tmp/gems53-data/sample_submission.tif --train /tmp/gems53-data/training_features.tif
+/tmp/venv/bin/python scripts/fetch_registry.py --dest /tmp/gems53-registry   # ~1,200 public rasters, ~1.6 GB
+/tmp/venv/bin/python scripts/x1_ridge_canary.py --data-dir /tmp/gems53-data
+/tmp/venv/bin/python scripts/x2_ridge_holdout.py --data-dir /tmp/gems53-data --template /tmp/gems-template
+/tmp/venv/bin/python scripts/x3_build_candidate.py --data-dir /tmp/gems53-data --template /tmp/gems-template --registry /tmp/gems53-registry
+/tmp/venv/bin/python scripts/overlap_baseline.py
 /tmp/venv/bin/python scripts/build_run_card.py && /tmp/venv/bin/python scripts/build_site.py
 ```
 
-The candidate raster (49 MB) is kept outside the repository (`/tmp/gems53-held/`). Its sha256 is in `evidence/candidates/` and in the run card.
-
-## Where to look next
-
-- Limitations and remaining work: `docs/evidence.html#limitations` and `registry/limitations.json`.
-- Irregularities for manual review: `registry/irregularities.json`.
-
-## Read this first at the start of every session
-
-This repository exists to support rigorous, auditable discovery of **previously unmapped geological faults** in the DOE GEMS Prize study area. The long-form project request has been normalized below into a persistent operating brief so each session starts from the same goal, evidence standards, and constraints. It is not permission to invent data, reuse an earlier submission, or claim that a proxy score is an organizer score.
-
-### Standing project brief
-
-- **Objective:** maximize the probability of a scientifically defensible, high-performing competition result. Treat the competition as a discovery task, not merely a raster-classification task. Own the outcome end to end: investigate defects, disclose failures, and improve shared tooling rather than hiding or forking it.
-- **Scientific scope:** find faults that are absent from the supplied USGS/INGENIOUS catalogue, using only features available at prediction time. Use official, freely accessible, properly licensed sources for external data; record provenance, access, license, CRS, resolution, hashes, and transformations.
-- **Research discipline:** before testing a method, state its mechanism, non-fault confounder, expected observable signature, relationship to previously tested work, and a spatially blocked evaluation plan. Do not imply that a feature is leak-free merely because it has a plausible geological interpretation.
-- **Leakage discipline:** apply learn–predict separation. For each held-out fault segment, construct all catalogue-derived features from visible faults only; never derive training features or training-row selection from the hidden target. Test each feature alone on the holdout. Treat a single-feature AUC above 0.90 as a leakage canary until its provenance and prediction-time legitimacy are demonstrated.
-- **Holdout discipline:** hide whole fault segments with a spatial buffer; mask visible faults pixel-exactly; use the official distance-weighted Tversky metric (α = 0.2, β = 0.8, triangular support 300 m); report pooled DTI, evaluator version, withheld-positive count, and a 95% confidence interval. A catalogue hide-and-recover score is a proxy—not an organizer score and not proof of transfer to unmapped faults.
-- **Parallel-run discipline:** stay in the session's assigned method lane. Reuse the shared cached stack, evaluator, and writer; do not recreate them in a private fork. If a shared tool is wrong, report the defect for a fix in the shared template. Stop after three experiments or two hours, whichever comes first. Do not choose a competition submission slot; a separate selector step owns that decision.
-- **Uniqueness and release discipline:** compare a candidate raster with every available registry raster before placement and again on final dots. A rank-correlation above 0.90 or more than 70% of dots within three pixels of one registry raster is a duplicate warning: record it and stop. Never copy an earlier submission as the deliverable. A negative result is still a deliverable.
-- **Submission contract:** the competition requests one-band float32 GeoTIFF predictions in EPSG:32611, at 100 m, with the same bounds/shape/geotransform as the template and predicted values in [0, 1]. A release must be independently reopened and validated across the whole stored array, not just the nominal footprint. The user previously reported a portal range error; test every value including nodata/outside-footprint cells and confirm any zero-outside upload variant against the official template. Clearly expose a unique `.tif` download at the top of any future site, with an unmistakable `Validated / OK to submit` label only after all gates pass; otherwise label it `Research-only / DO NOT SUBMIT`. Include a unique submission name and a note of no more than 140 characters. Never label a projection as a score. Explain the upload steps in an executive-summary page.
-- **Research product:** maintain a clean, current evidence feed, a cited source table, a readable executive summary, ranked testable hypotheses, an explicit irregularity register, and a transparent list of data/access limitations. Use official sources and links for manual review. Do not make leaderboard claims without a submission-page receipt.
-- **Project delivery:** when implementation is ready, open a pull request from this session branch, verify it, and merge it if repository checks and branch policy permit. Never change this session's branch.
-
-### Core values
-
-**Maximize P(Win).** Every experiment and scarce submission opportunity should be chosen for its expected contribution to a valid result, not for novelty alone.
-
-**Own the Outcome.** Report defects and negative results clearly; fix shared systems where permitted; do not treat a successful file write as proof of scientific validity or organizer acceptance.
-
-## Active lane for the present review
-
-> **Scope note (PR #3):** the current task extends this lane. The GEMSDOE29 leakage diagnosis is in `docs/leakage-review.md` and `evidence/run_card.json`. Ranked hypotheses H1–H4 are in `docs/research/hypotheses.md`. No weekly competition slot was used.
-
-
-**Formal diagnosis of the GEMSDOE29 catalogue-distance leakage failure.** This pass is limited to the leakage mechanism, the integrity of its hide-and-recover evaluation, and the evidence needed before any candidate can be released. Do not branch into unrelated geological hypotheses or use a weekly competition slot in this lane.
-
-See [`docs/leakage-review.md`](docs/leakage-review.md) for the source-linked diagnosis and [`evidence/parallel-run-card.json`](evidence/parallel-run-card.json) for the required run card.
-
-## Historical: current checkout status — verified at review start
-
-> **Superseded.** The text below is the review-start snapshot from PR #2, kept for the record. The current status is at the top of this file.
-
-
-The checked-out repository initially contained only this README. It had **no** feature stack, competition rasters, cached arrays, registry rasters, evaluator, submission writer, site, tests, or existing submission TIFF. The official DrivenData data-tab URL redirected to its login page during this review. Therefore this checkout cannot produce a competition-conformant or holdout-validated TIFF in this session.
-
-No placeholder, all-zero raster, copied prior TIFF, projection, or synthetic template will be presented as a competition submission. **There is no TIFF to download or submit from this repository at present.** The run card is negative, not a score claim. The public GEMSDOE29 files were reviewed read-only for diagnosis; this session did not alter their shared tools or keep a private copy/fork.
-
-## Official sources to start with
-
-| Topic | Source |
-|---|---|
-| Challenge overview, timeline, rules, and how to compete | [DrivenData GEMS Prize overview](https://www.drivendata.org/competitions/306/competition-doe-gems/) |
-| Task definition, datasets, metric, and TIFF contract | [DrivenData problem description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) |
-| Login-gated competition data | [DrivenData data tab](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) |
-| Official challenge rules | [DOE/NLR GEMS Prize rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf) |
-| Organizer reference code | [DrivenData reference solution](https://github.com/drivendataorg/gems-prize-reference-solution) |
-| GeoDAWN geophysical survey | [USGS GeoDAWN data release](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) |
-| INGENIOUS regional compilation | [Geothermal Data Repository, submission 1391](https://gdr.openei.org/submissions/1391) |
-| Leakage methodology | [KDD 2011](https://doi.org/10.1145/2020408.2020496) · [ACM TKDD 2012](https://doi.org/10.1145/2382577.2382579) — Kaufman, Rosset, Perlich & Stitelman |
-| Non-fault lineament confounder context | [USGS Open-File Report 89-365](https://pubs.usgs.gov/of/1989/0365/report.pdf) |
-
-## What remains blocked
-
-> **Status update (PR #3):** (1) template and feature stack restored by `scripts/fetch_data.py`, sha256-verified; (2) the shared template validator is used, but `src/gems53/core.py` is not yet reconciled with the template's `src/submission_io.py` (IR-53-17); (3) GEMSDOE29 defects documented (Exp 1); (4) feature-alone canary run on the complete 19-band inventory (max 0.597, no band over 0.90); (5) site built; the one candidate is **blocked and not submitted**.
-
-
-1. Restore the approved, hash-verified competition template and feature stack into this checkout (the official data tab requires a DrivenData login); do not place credentials in chat.
-2. Use the actual shared evaluator and writer. The exact filenames named in the run protocol are not in this checkout; the GEMSDOE29 public repository uses different module/script names and its existing fold summaries do not implement the required pooled-DTI-plus-95%-CI report.
-3. Resolve the two source-audit risks documented in the leakage review: label-derived filtering of holdout negative candidates, and fold-wise rather than pooled score aggregation. Fix shared tooling in its owning template; do not copy it here.
-4. Run the feature-alone leakage canary across the complete, current feature inventory under the required blocked holdout. Only consider a candidate if it beats the comparable holdout best, passes both uniqueness checks, and passes the exact GeoTIFF validator.
-5. Build the website, one-click download, executive submission guide, and data/source catalog only after there is a verified candidate and a reproducible build pipeline. Do not scrape or manually monitor the DrivenData website for a current leaderboard feed without prior written consent or an expressly authorized feed; see the official [Terms of Use](https://www.drivendata.org/termsofuse/).
+Earlier runs (E1, E2 and the blocked 2026-09 candidate) are kept in `evidence/` for the record. Their numbers are
+reproduced by the shared evaluator (`evidence/x2_ridge_holdout.json`, `E2_reproduction_hgb_top_q`).

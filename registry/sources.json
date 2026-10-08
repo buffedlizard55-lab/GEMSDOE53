@@ -137,6 +137,41 @@
       "url": "https://www.dropbox.com/scl/fi/3vz9o0wwavi26xaeoxlwr/gems-geodawn-numerical-features.tif",
       "access": "user_supplied",
       "used_for": "Mirrors named in the S7 manifest. NOT downloaded here. The sha256 check in scripts/fetch_data.py only confirms that the S7 blobs match S7's own pins; it does not confirm the Dropbox originals."
+    },
+    {
+      "id": "S19",
+      "title": "GEMSDOE32 README (owner repo): one-click file, 46,090-px h32d file, owner-reported incumbent 0.2600, emission-rule algebra",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32",
+      "access": "fetched via api.github.com (README, 2026-10-08)",
+      "used_for": "Q2 owner-claim context. OWNER-CLAIM only; not an organizer receipt."
+    },
+    {
+      "id": "S20",
+      "title": "GEMSDOE32 docs/score-ledger.csv (owner ledger; leaderboard reads dated 2026-10-03)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/score-ledger.csv",
+      "access": "fetched via api.github.com (2026-10-08)",
+      "used_for": "User-reported scores for GEMSDOE22 (0.1002 at 6%, 0.0748 at 10%) and GEMSDOE25 (0.2600). Leaderboard rows here conflict with the user brief (IR-53-19)."
+    },
+    {
+      "id": "S21",
+      "title": "GEMSDOE32 docs/research/why-d28-scored-026.md and score-ceiling-analysis.md (owner analysis, 2026-10-03)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/tree/main/docs/research",
+      "access": "fetched via api.github.com (2026-10-08)",
+      "used_for": "Owner's account that the 0.2600 file is a distance-thinned (2.8 px) emission of 44,090 dots; score-to-file link explicitly unresolved there."
+    },
+    {
+      "id": "S22",
+      "title": "Shared template at commit dcbbb19: src/metrics.py (DTI), src/submission_io.py (writer, conformance), scripts/validate_submission.py",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb19",
+      "access": "cloned (depth 1) 2026-10-08",
+      "used_for": "Shared evaluator, writer and validators used for all new measurements and the final file (protocol: use shared tools, no private fork)."
+    },
+    {
+      "id": "S23",
+      "title": "Public GEMS registry: 63 repos whose names contain 'gems' (53 with rasters), 1,200 rasters, manifest with blob SHAs",
+      "url": "https://github.com/buffedlizard55-lab",
+      "access": "enumerated and downloaded via gh/api 2026-10-08 (evidence/registry_manifest.json)",
+      "used_for": "Uniqueness check against every public raster in the owner's GEMS repos (protocol item 2)."
     }
   ]
 }

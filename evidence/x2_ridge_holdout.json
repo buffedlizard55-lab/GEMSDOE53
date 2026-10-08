@@ -1,0 +1,519 @@
+{
+  "experiment": "X2 pre-registered holdout: ridge candidate vs frozen HGB baseline (equal dot budget)",
+  "label_type": "HOLDOUT-DTI (proxy: withheld catalogue segments; NOT the competition's new-fault truth)",
+  "scorer": {
+    "name": "shared template src/metrics.py GtContext (commit dcbbb19)",
+    "R_pixels": 3,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "source": "https://github.com/buffedlizard55-lab/GEMSDOE/blob/dcbbb19/src/metrics.py"
+  },
+  "preregistration": "evidence/preregistration_x2.json",
+  "inputs": {
+    "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "ridge_module_sha256": "479f1f12834cddbfec7c3240d689b2bd7223dbdbe1ff470122f57437ca88ba3a"
+  },
+  "footprint_px": 5167373,
+  "known_fault_px": 60988,
+  "folds": {
+    "K": 5,
+    "seed": 53,
+    "buffer_px": 10,
+    "segments": 3199
+  },
+  "ridge_centreline_candidates_all_folds_ref": 685299,
+  "N_grid": [
+    37654,
+    44090,
+    51674,
+    103348
+  ],
+  "N_primary": 44090,
+  "frozen_best_reference": {
+    "value": 0.035233,
+    "source": "evidence/exp2_holdout_arms.json bands q=0.02"
+  },
+  "arms": {
+    "hgb_bands": {
+      "37654": {
+        "pooled_DTI": 0.02505,
+        "pooled_TP_w": 1801.1061,
+        "pooled_FP_w": 113755.376,
+        "pooled_FN_w": 59186.8939,
+        "per_fold_DTI": [
+          0.015532,
+          0.023499,
+          0.033804,
+          0.022227,
+          0.029907
+        ],
+        "per_fold_mean": 0.024994,
+        "CI95_t_df4_on_fold_mean": [
+          0.01619,
+          0.033798
+        ]
+      },
+      "44090": {
+        "pooled_DTI": 0.026547,
+        "pooled_TP_w": 1998.4683,
+        "pooled_FP_w": 130448.7982,
+        "pooled_FN_w": 58989.5317,
+        "per_fold_DTI": [
+          0.01717,
+          0.025444,
+          0.034824,
+          0.023691,
+          0.031346
+        ],
+        "per_fold_mean": 0.026495,
+        "CI95_t_df4_on_fold_mean": [
+          0.017965,
+          0.035025
+        ]
+      },
+      "51674": {
+        "pooled_DTI": 0.027919,
+        "pooled_TP_w": 2209.0272,
+        "pooled_FP_w": 149449.1181,
+        "pooled_FN_w": 58778.9728,
+        "per_fold_DTI": [
+          0.019074,
+          0.027571,
+          0.035113,
+          0.025414,
+          0.03218
+        ],
+        "per_fold_mean": 0.02787,
+        "CI95_t_df4_on_fold_mean": [
+          0.020154,
+          0.035587
+        ]
+      },
+      "103348": {
+        "pooled_DTI": 0.035233,
+        "pooled_TP_w": 3611.1693,
+        "pooled_FP_w": 264904.2936,
+        "pooled_FN_w": 57376.8307,
+        "per_fold_DTI": [
+          0.026646,
+          0.039074,
+          0.039877,
+          0.032185,
+          0.038216
+        ],
+        "per_fold_mean": 0.0352,
+        "CI95_t_df4_on_fold_mean": [
+          0.02817,
+          0.042229
+        ]
+      }
+    },
+    "ridge_pack": {
+      "37654": {
+        "pooled_DTI": 0.04738,
+        "pooled_TP_w": 4116.5987,
+        "pooled_FP_w": 186354.3559,
+        "pooled_FN_w": 56871.4013,
+        "per_fold_DTI": [
+          0.04504,
+          0.045442,
+          0.049504,
+          0.041537,
+          0.055448
+        ],
+        "per_fold_mean": 0.047394,
+        "CI95_t_df4_on_fold_mean": [
+          0.040796,
+          0.053992
+        ]
+      },
+      "44090": {
+        "pooled_DTI": 0.050097,
+        "pooled_TP_w": 4678.0255,
+        "pooled_FP_w": 218266.5472,
+        "pooled_FN_w": 56309.9745,
+        "per_fold_DTI": [
+          0.047287,
+          0.047874,
+          0.052428,
+          0.043479,
+          0.059482
+        ],
+        "per_fold_mean": 0.05011,
+        "CI95_t_df4_on_fold_mean": [
+          0.042504,
+          0.057716
+        ]
+      },
+      "51674": {
+        "pooled_DTI": 0.05262,
+        "pooled_TP_w": 5316.1423,
+        "pooled_FP_w": 255880.6221,
+        "pooled_FN_w": 55671.8577,
+        "per_fold_DTI": [
+          0.048842,
+          0.051978,
+          0.055549,
+          0.045825,
+          0.060912
+        ],
+        "per_fold_mean": 0.052621,
+        "CI95_t_df4_on_fold_mean": [
+          0.045324,
+          0.059918
+        ]
+      },
+      "103348": {
+        "pooled_DTI": 0.063099,
+        "pooled_TP_w": 9664.3633,
+        "pooled_FP_w": 512194.4379,
+        "pooled_FN_w": 51323.6367,
+        "per_fold_DTI": [
+          0.058104,
+          0.064676,
+          0.066583,
+          0.058626,
+          0.067432
+        ],
+        "per_fold_mean": 0.063084,
+        "CI95_t_df4_on_fold_mean": [
+          0.057589,
+          0.068579
+        ]
+      }
+    },
+    "ridge_topn": {
+      "37654": {
+        "pooled_DTI": 0.020487,
+        "pooled_TP_w": 1770.1006,
+        "pooled_FP_w": 186286.2803,
+        "pooled_FN_w": 59217.8994,
+        "per_fold_DTI": [
+          0.023009,
+          0.018335,
+          0.021235,
+          0.019197,
+          0.020825
+        ],
+        "per_fold_mean": 0.02052,
+        "CI95_t_df4_on_fold_mean": [
+          0.018254,
+          0.022786
+        ]
+      },
+      "44090": {
+        "pooled_DTI": 0.022318,
+        "pooled_TP_w": 2071.781,
+        "pooled_FP_w": 218124.3177,
+        "pooled_FN_w": 58916.219,
+        "per_fold_DTI": [
+          0.024075,
+          0.020069,
+          0.023483,
+          0.021117,
+          0.022974
+        ],
+        "per_fold_mean": 0.022344,
+        "CI95_t_df4_on_fold_mean": [
+          0.020251,
+          0.024437
+        ]
+      },
+      "51674": {
+        "pooled_DTI": 0.024394,
+        "pooled_TP_w": 2449.3659,
+        "pooled_FP_w": 255634.5519,
+        "pooled_FN_w": 58538.6341,
+        "per_fold_DTI": [
+          0.025131,
+          0.02266,
+          0.0262,
+          0.022136,
+          0.025942
+        ],
+        "per_fold_mean": 0.024414,
+        "CI95_t_df4_on_fold_mean": [
+          0.022066,
+          0.026761
+        ]
+      },
+      "103348": {
+        "pooled_DTI": 0.030714,
+        "pooled_TP_w": 4668.6788,
+        "pooled_FP_w": 511402.1054,
+        "pooled_FN_w": 56319.3212,
+        "per_fold_DTI": [
+          0.028514,
+          0.030135,
+          0.031798,
+          0.027744,
+          0.035378
+        ],
+        "per_fold_mean": 0.030714,
+        "CI95_t_df4_on_fold_mean": [
+          0.026942,
+          0.034485
+        ]
+      }
+    }
+  },
+  "paired_differences": {
+    "ridge_pack_minus_hgb_bands@37654": {
+      "mean": 0.0224,
+      "CI95_t_df4": [
+        0.015743,
+        0.029058
+      ],
+      "per_fold": [
+        0.029507,
+        0.021943,
+        0.015701,
+        0.01931,
+        0.025541
+      ]
+    },
+    "ridge_pack_minus_ridge_topn@37654": {
+      "mean": 0.026874,
+      "CI95_t_df4": [
+        0.020481,
+        0.033267
+      ],
+      "per_fold": [
+        0.022031,
+        0.027107,
+        0.028269,
+        0.02234,
+        0.034624
+      ]
+    },
+    "ridge_pack_minus_hgb_bands@44090": {
+      "mean": 0.023615,
+      "CI95_t_df4": [
+        0.016962,
+        0.030269
+      ],
+      "per_fold": [
+        0.030117,
+        0.022431,
+        0.017604,
+        0.019789,
+        0.028137
+      ]
+    },
+    "ridge_pack_minus_ridge_topn@44090": {
+      "mean": 0.027767,
+      "CI95_t_df4": [
+        0.02075,
+        0.034783
+      ],
+      "per_fold": [
+        0.023211,
+        0.027805,
+        0.028945,
+        0.022362,
+        0.036509
+      ]
+    },
+    "ridge_pack_minus_hgb_bands@51674": {
+      "mean": 0.024751,
+      "CI95_t_df4": [
+        0.019248,
+        0.030254
+      ],
+      "per_fold": [
+        0.029769,
+        0.024406,
+        0.020436,
+        0.020411,
+        0.028732
+      ]
+    },
+    "ridge_pack_minus_ridge_topn@51674": {
+      "mean": 0.028207,
+      "CI95_t_df4": [
+        0.022354,
+        0.03406
+      ],
+      "per_fold": [
+        0.023711,
+        0.029318,
+        0.029349,
+        0.023689,
+        0.03497
+      ]
+    },
+    "ridge_pack_minus_hgb_bands@103348": {
+      "mean": 0.027885,
+      "CI95_t_df4": [
+        0.024893,
+        0.030876
+      ],
+      "per_fold": [
+        0.031458,
+        0.025602,
+        0.026705,
+        0.026441,
+        0.029216
+      ]
+    },
+    "ridge_pack_minus_ridge_topn@103348": {
+      "mean": 0.03237,
+      "CI95_t_df4": [
+        0.029554,
+        0.035187
+      ],
+      "per_fold": [
+        0.02959,
+        0.034541,
+        0.034785,
+        0.030881,
+        0.032054
+      ]
+    }
+  },
+  "E2_reproduction_hgb_top_q": {
+    "shared_scorer": {
+      "0.005": {
+        "DTI_shared_scorer": 0.021681
+      },
+      "0.0073": {
+        "DTI_shared_scorer": 0.025063
+      },
+      "0.01": {
+        "DTI_shared_scorer": 0.027919
+      },
+      "0.02": {
+        "DTI_shared_scorer": 0.035233
+      }
+    },
+    "E2_recorded_pooled": {
+      "0.005": 0.021681,
+      "0.0073": 0.025063,
+      "0.01": 0.027919,
+      "0.02": 0.035233
+    },
+    "per_fold_q": [
+      {
+        "fold": 0,
+        "per_q": {
+          "0.005": {
+            "DTI": 0.013444,
+            "emitted_px": 25837
+          },
+          "0.0073": {
+            "DTI": 0.015607,
+            "emitted_px": 37722
+          },
+          "0.01": {
+            "DTI": 0.019074,
+            "emitted_px": 51674
+          },
+          "0.02": {
+            "DTI": 0.026646,
+            "emitted_px": 103347
+          }
+        }
+      },
+      {
+        "fold": 1,
+        "per_q": {
+          "0.005": {
+            "DTI": 0.020418,
+            "emitted_px": 25837
+          },
+          "0.0073": {
+            "DTI": 0.023525,
+            "emitted_px": 37722
+          },
+          "0.01": {
+            "DTI": 0.027571,
+            "emitted_px": 51674
+          },
+          "0.02": {
+            "DTI": 0.039074,
+            "emitted_px": 103347
+          }
+        }
+      },
+      {
+        "fold": 2,
+        "per_q": {
+          "0.005": {
+            "DTI": 0.029201,
+            "emitted_px": 25838
+          },
+          "0.0073": {
+            "DTI": 0.033786,
+            "emitted_px": 37722
+          },
+          "0.01": {
+            "DTI": 0.035113,
+            "emitted_px": 51676
+          },
+          "0.02": {
+            "DTI": 0.039877,
+            "emitted_px": 103347
+          }
+        }
+      },
+      {
+        "fold": 3,
+        "per_q": {
+          "0.005": {
+            "DTI": 0.017143,
+            "emitted_px": 25837
+          },
+          "0.0073": {
+            "DTI": 0.022228,
+            "emitted_px": 37722
+          },
+          "0.01": {
+            "DTI": 0.025413,
+            "emitted_px": 51678
+          },
+          "0.02": {
+            "DTI": 0.032185,
+            "emitted_px": 103347
+          }
+        }
+      },
+      {
+        "fold": 4,
+        "per_q": {
+          "0.005": {
+            "DTI": 0.027981,
+            "emitted_px": 25837
+          },
+          "0.0073": {
+            "DTI": 0.029892,
+            "emitted_px": 37722
+          },
+          "0.01": {
+            "DTI": 0.03218,
+            "emitted_px": 51674
+          },
+          "0.02": {
+            "DTI": 0.038216,
+            "emitted_px": 103347
+          }
+        }
+      }
+    ]
+  },
+  "gates": {
+    "G1_holdout_best": {
+      "rule": "pooled ridge_pack@44090 > 0.035233",
+      "value": 0.050097,
+      "pass": true
+    },
+    "G2_equal_budget": {
+      "rule": "paired ridge_pack - hgb_bands @44090: CI95 lower bound > 0",
+      "value": 0.016962,
+      "pass": true
+    }
+  },
+  "G1_G2_pass": true,
+  "runtime_s": 315.3
+}

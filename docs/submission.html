@@ -7,12 +7,15 @@ header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700
 nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
 main{max-width:980px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
 h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
-.banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
-.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:12px 14px}
-.warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
+.banner{background:var(--warnbg);border:2px solid #fb923c;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
+.banner.ok{background:var(--okbg);border-color:#86efac;color:var(--ok)}
+.dl{background:#ecfdf5;border:2px solid #34d399;border-radius:12px;padding:16px 18px;margin:12px 0}
+.dl a.btn{display:inline-block;background:#0b6e4f;color:#fff;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;font-size:17px}
 table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
-th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
+.pill.fail{color:var(--warn);border-color:#fdba74}.pill.pass{color:var(--ok);border-color:#86efac}
 .note{color:var(--muted);font-size:14px}footer{max-width:980px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
 a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
 </style></head><body>
@@ -20,28 +23,60 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
 <nav><a href="index.html" class="">Executive summary</a><a href="submission.html" class="on">Submission file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
 <main>
 <section>
-  <div class="banner"><b>Research-only / DO NOT SUBMIT.</b> Not offered for download. The file is blocked by the protocol's 3-px overlap flag
-  and quarantined outside the repository. The label "Validated / OK to submit" is not applied: the release gates have not all passed.</div>
-  <h1>Submission file</h1>
-  <p>Method (candidate): gradient-boosted classifier (sklearn HistGradientBoosting, 200 iterations) trained on the 19 label-free feature bands
-  (arm <code>bands</code>), with 300,000 sampled negatives and 60,988 known-fault positives. The top q=2% of the official
-  footprint is emitted (103,348 non-zero pixels), and every known-fault pixel is forced to 0.</p>
-  <h2>Checks (the local validator re-reads the file from disk)</h2>
+  <div class="banner"><b>DO-NOT-SUBMIT.</b> The file is valid and downloadable for review. It fails gate(s): G5_uniqueness. It is not cleared for a submission slot.</div>
+  <h2>The file</h2>
   <table>
-    <tr><th>File</th><th>sha256</th><th>All checks pass</th><th>Footprint px / finite px</th><th>Non-zero px</th></tr>
-    <tr><td>NaN outside footprint (the only file)</td><td><code>f380f70092fee2be7c44b4c20f78e92ce83c12967e5f8ec21432174dca928272</code></td><td>True (in-lane); template validator: True</td><td>5,167,373 / 5,167,373</td><td>103,348</td></tr>
+    <tr><th>Name</th><td><code>GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif</code></td></tr>
+    <tr><th>Download</th><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE53/raw/main/submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif">raw file</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif">view on GitHub</a></td></tr>
+    <tr><th>sha256 / bytes</th><td><code>e06f3b34afc9e02239ef554d09b62212c2f2716c66a0f19a8adc1051af7a87aa</code> · 422,475 bytes</td></tr>
+    <tr><th>Grid</th><td>3292 × 3730 px, 100 m, EPSG:32611, dtype float32, nodata nan</td></tr>
+    <tr><th>Finite / NaN pixels</th><td>5,167,373 finite (inside the official footprint) · 7,111,787 NaN (outside)</td></tr>
+    <tr><th>Dots (value 1.0)</th><td>44,090; minimum spacing 2.8 px (280 m)</td></tr>
+    <tr><th>Comment</th><td><code>H2 ridge-packed 44090 dots (band-2 lineaments). DO-NOT-SUBMIT. Failing: G5_uniqueness. Not a byte copy of any registry file.</code> (124 characters)</td></tr>
   </table>
-  <p class="note">Shared template validator (<code>buffedlizard55-lab/GEMSDOE</code> at commit <code>dcbbb19</code>, <code>scripts/validate_submission.py</code>): <b>PASSED</b>. Its log is <code>evidence/candidates/template_validator_nan.txt</code>.
-  It checks CRS, 100 m, single float32 band, values in [0, 1], finite exactly on the template's valid region, NaN elsewhere, the nodata tag, and the training shape. In-lane checks (core.py) are in the receipt. A validator pass is not a portal acceptance.</p>
-  <h2>Why it is not offered</h2>
-  <ul>
-    <li>Rank correlation with 138 public registry rasters: max 0.164. Below the 0.90 flag.</li>
-    <li>Share of our dots within 3 px of another file's dots: max 0.795. Above the 0.70 stop threshold, so the protocol stops the candidate.</li>
-    <li>Chance baseline (diagnostic only; flags unchanged): the largest lift over random placement at the same registry density is 4.20×. This means the overlap is placement, not just density. See <a href="evidence.html#uniqueness">the uniqueness table</a>.</li>
-  </ul>
-  <p class="note">Files are at <code>/tmp/gems53-held/</code> (not in the repository; they are 49 MB each). They can be regenerated with <code>scripts/exp3_build_submission.py</code> and checked against the sha256 values above.</p>
+</section>
+
+<section>
+  <h2>Format checks (shared template tools)</h2>
+  <table><tr><th>Check</th><th>Result</th></tr><tr><td>scripts/validate_submission.py</td><td>PASS (exit 0)</td></tr><tr><td>src.submission_io validate-conformant (draft)</td><td>PASS (exit 0)</td></tr><tr><td>src.submission_io validate-conformant (final)</td><td>PASS (exit 0)</td></tr></table>
+  <p class="note">The shared writer read the file back and verified it. The shared conformance gate checks that every
+  template-finite pixel is finite in [0, 1] and every template-NaN pixel is NaN, with a matching nodata tag.
+  Sources: <a href="https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb19">template at commit dcbbb19</a>.</p>
+</section>
+
+<section>
+  <h2>Pre-registered gates</h2>
+  <table>
+    <tr><th>Gate</th><th>Result</th></tr><tr><td>G1_holdout_best</td><td><span class="pill pass">PASS</span></td></tr><tr><td>G2_equal_budget</td><td><span class="pill pass">PASS</span></td></tr><tr><td>G3_leakage_canary</td><td><span class="pill pass">PASS</span></td></tr><tr><td>G4_format</td><td><span class="pill pass">PASS</span></td></tr><tr><td>G5_uniqueness</td><td><span class="pill fail">FAIL</span></td></tr>
+  </table>
+  <table>
+    <tr><th>Gate</th><th>Rule and measured value</th></tr>
+    <tr><td>G1 holdout best</td><td>pooled HOLDOUT-DTI at 44,090 dots &gt; 0.035233 (measured 0.050097)</td></tr>
+    <tr><td>G2 equal budget</td><td>paired CI lower bound &gt; 0 (measured +0.016962)</td></tr>
+    <tr><td>G3 leakage canary</td><td>every ridge feature ≤ 0.90 (worst measured 0.559399)</td></tr>
+    <tr><td>G4 format</td><td>template writer read-back, template conformance and validator exit codes 0</td></tr>
+    <tr><td>G5 uniqueness</td><td>every registry raster: Spearman ≤ 0.90 and ≤ 70% of our dots within 3 px; surface top-N likewise (measured max Spearman 0.090; max dot overlap 99.94%; 66 dot-level and 16 surface-level rows flagged)</td></tr>
+  </table>
+  <p class="note">Pre-registration: <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/evidence/preregistration_x2.json">evidence/preregistration_x2.json</a> (written before the run; ridge module hash pinned).</p>
+</section>
+
+<section id="uniqueness">
+  <h2>Uniqueness against the public GEMS repos</h2>
+  <p>Scope: 63 repos whose names contain "GEMS", 1,200 rasters downloaded, 1,177 compared
+  (exact duplicate check by sha256 first; none matched). 75 registry rasters are dense (more than 20% of the footprint nonzero) and are compared on their top-N pixels.</p>
+  <table>
+    <tr><th>Measure</th><th>Value</th></tr>
+    <tr><td>Max Spearman rho, final dots (threshold 0.90)</td><td>0.0900</td></tr>
+    <tr><td>Max share of our dots within 3 px of one registry raster (threshold 70%)</td><td>99.941%</td></tr>
+    <tr><td>Max Spearman rho, surface before placement</td><td>0.7329</td></tr>
+    <tr><td>Max surface top-N share within 3 px</td><td>72.89%</td></tr>
+  </table>
+  <h3>Chance baseline for the flagged rows (diagnostic; flags unchanged)</h3>
+  <p class="note">Random footprint pixels, at the same count as our dots, show the overlap that placement alone would produce against each registry raster.
+  If observed ≈ random, the flag reflects that raster's geometry, not our placement.</p>
+  <table><tr><th>Registry file (truncated)</th><th>Mode</th><th>Registry points</th><th>Observed</th><th>Random</th><th>Lift vs random</th></tr><tr><td><code>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.zip__13gems_2026</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.tif</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.zip__13gems_2026100</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_A_</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_A_</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_B_</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_B_</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__latest.tif</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__latest.zip__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__latest_zerofill.tif</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr><tr><td><code>13GEMSDOE__docs__downloads__latest_zerofill.zip__13gems_20261001_r13-lattice-s5_v2_zerofil</code></td><td>nonzero_dots</td><td>206,895</td><td>99.94%</td><td>99.85%</td><td>1.0009</td></tr></table>
 </section>
 </main>
-<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or the data inventory
-(computed from files at build time). HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
-Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>
+<footer>Every number on these pages is read from JSON in <code>evidence/</code> and <code>registry/</code> at build time.
+HOLDOUT-DTI = our proxy (catalogue truth). ORGANIZER-CONFIRMED = portal receipt only (none exists yet).
+USER-REPORTED and OWNER-CLAIM values are not verified. Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>
