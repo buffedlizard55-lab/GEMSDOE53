@@ -1,35 +1,76 @@
-# Candidate hypotheses (generated before implementation, ranked)
+# Hypotheses, ranked (2026-10-08)
 
-Ranking = expected DTI improvement (geological & data-mining judgement, NOT an organizer score) divided by implementation cost.
-Nothing here is an organizer score. Every number in the holdout columns comes from `evidence/exp2_holdout_arms.json`.
+Ranking = expected DTI gain (judgement, **not a score**) divided by cost. Holdout numbers come only from `evidence/`
+and are labelled **HOLDOUT-DTI** (proxy: withheld catalogue segments, shared template evaluator, 95% t-CI, df 4).
+Nothing on this page is an organizer score.
 
-| Rank | ID | Hypothesis (one line) | Expected gain | Cost | Status |
-|---|---|---|---|---|---|
-| 1 | **H1** | Segment-exact learn-predict separation: distance to visible faults **excluding only the pixel's own fault segment** | High | Low (minutes) | **VALIDATED**: pooled HOLDOUT-DTI = 0.0560 (95% CI [0.0488, 0.0631]), +123% gain over `bands` baseline (0.0251) with non-overlapping CI |
-| 2 | H2 | Multi-physics structural corroboration: joint coincidence of active geodetic strain (bands 4, 7), potential-field basement steps (bands 3, 5, 6, 18), and Quaternary seismicity (bands 10, 16) | Moderate-High | Low-Medium | **IMPLEMENTED** in candidate emission selection |
-| 3 | H3 | Andersonian fault-tip extension & dilatational relay-ramp jog prior: targeting step-over corridors (200 m to 2.5 km off-fault) where unmapped geothermal fluid conduits breach | Moderate | Low | **IMPLEMENTED** via catalogue exclusion buffer ($B=2$ px) and step-over envelope |
-| 4 | H4 | Magnetic lineament ridges: multi-scale ridge (Hessian) detector on the reduced-to-pole field (band 2) and TMI (band 14) | Moderate | Medium | Candidate for future iteration |
-| - | H5 (rejected) | USGS Quaternary Fault and Fold Database as an extra label source | none expected | low | **REJECTED**: competition rules cite the USGS quaternary fault maps as a label source (S1 "Labels"), so it re-expresses the training catalogue |
+| Rank | ID | One line | Status | Evidence |
+|---|---|---|---|---|
+| 1 | **H2** | Band-2 (RTP) multi-scale ridge/valley centrelines, Poisson-packed at 2.8 px, 44,090 binary dots | **Tested on holdout: passes G1, G2, G3, G4. Blocked at G5: dot-level flags are density artefacts, but the surface shares its top tail with two team files (lift 3.6 and 5.6). DO-NOT-SUBMIT.** | `evidence/x2_ridge_holdout.json`, `evidence/x3_candidate_receipt.json`, `evidence/uniqueness_v2.json` |
+| 2 | H5 | Apply the same Poisson packing to the 19-band HGB probability surface (method hypothesis, not geology) | not run (experiment budget spent) | mechanism measured in X2 (below) |
+| 3 | H3 | Fault-parallel strain: orientation of shear (band 7) and dilatation (band 8) as extensional-lineament features | not run | band list in `training_features.tif` |
+| 4 | H6 | Radiometric alteration lineaments (K, Th, U ratios): hydrothermally altered fault zones | **data-blocked** (IR-53-30); no radiometric channel in the 19-band stack | band list; sandbox allow-list |
+| 5 | H1 | Segment-exact learn-predict separation: distance to visible faults, excluding only the pixel's own segment | **validated in another session (PR #6): HOLDOUT-DTI 0.0560, its own uniqueness check; cross-check here is NOT CLEARED under the literal dot rule (60 lattice-family rows, lift ≤ 1.31).** Its file is on main (`docs/downloads/`). Not re-validated here. | `docs/archive/pr6/`, `evidence/crosscheck_pr6_h1_uniqueness_v2.json` |
+| - | H4 (rejected) | USGS Quaternary fault database as an extra label source | rejected: it re-expresses the catalogue (S1, "Labels") | prior session |
 
-## H1 - segment-exact learn-predict separation (rank 1, VALIDATED)
-- **Layers:** known-fault raster (`labels.tif`, 3,199 eight-connected segments, 60,988 px), `training_features.tif`.
-- **Signature targeted:** proximity to *other* mapped structures. In extensional tectonic provinces (Basin and Range), new faults form en-echelon systems sub-parallel to master range-front faults.
-- **Why it catches missing faults:** a pixel near a mapped fault but not on it is a candidate for an unmapped neighbour. The feature never uses the pixel's own connected segment.
-- **Difference from earlier repo code:** Exp 1/2 previously used a 4×4-block cross-fit (`crossfit_distance_grid`). That removed every visible fault in the same ~41 km block, destroying local spatial correlation (separability only 0.52). H1 excludes *only* the pixel's own connected segment.
-- **Validation outcome:**
-  - Evaluated on the 5-fold whole-segment holdout set across all folds.
-  - At $q = 0.0073$ (37,654 dots), pooled HOLDOUT-DTI jumped from **0.025063** (`bands` baseline) to **0.055957** (`h1_segment_exact`), an improvement of **+123.3%**.
-  - The 95% confidence intervals do not overlap: `bands` is $[0.0162, 0.0338]$, while `h1_segment_exact` is $[0.0488, 0.0631]$.
-  - Separability on the leakage canary is $0.7746 < 0.90$ (passes gate; no target shortcut).
+## H2 - tested (rank 1)
 
-## H2 - multi-physics structural corroboration (rank 2, IMPLEMENTED)
-- **Layers:** Band 4 (Geodetic 2nd invariant), Band 7 (Shear rate), Band 3 (Magnetic gradient), Band 5 (Gravity slope), Band 6 (Magnetic tilt/curvature), Bands 10 & 16 (Quaternary microseismicity).
-- **Signature:** Blind hydrothermal circulation systems require active tectonic shear strain (to prevent hydrothermal quartz/calcite self-sealing) coupled with deep basement discontinuities (gravity/magnetic steps).
-- **Why off-catalogue:** Concealed geothermal blind systems frequently lack surface scarps (covered by playa alluvium or pluvial Lake Lahontan sediments), rendering them absent from optical/topographic catalogues but detectable in potential fields and geodetic strain.
-- **Difference from previous code:** Incorporates physical multi-layer coincidence rather than treating features as arbitrary tabular columns.
+- **Layers:** RTP magnetic anomaly only (GeoDAWN band 2). No label is read by the score.
+- **Signature:** linear magnetic discontinuities. Bright ridges (dykes, magnetite-rich contacts) and dark valleys
+  (demagnetised, hydrothermally altered fault zones). Scales 1.5, 2.5 and 3.5 px (150-350 m), a 1.5 km detrend.
+- **Emission:** NMS centrelines, then greedy Poisson-disk packing at 2.8 px (the d2.8 family spacing), 44,090 dots,
+  binary. Visible faults are masked pixel-exactly; all no-data RTP cells are excluded.
+- **Pre-registered gates** (`evidence/preregistration_x2.json`, written before the run):
+  - G1: pooled HOLDOUT-DTI at 44,090 dots > 0.035233 (the repo's frozen best). **Result: 0.050097 (PASS).**
+  - G2: paired per-fold difference vs the same-budget HGB baseline, 95% t-CI lower bound > 0. **Result:
+    +0.023615 (CI 0.016962 to 0.030269), PASS.**
+  - G3: leakage canary, every ridge feature alone <= 0.90. **Result: worst 0.559399 (PASS).**
+  - G4: format, through the template's writer and validators. **PASS** (all three validator exit codes 0).
+  - G5: uniqueness. **FAIL** (see below).
+- **Mechanism (MEASURED, X2):** at the same budget, packing roughly doubles the credit per dot. At 44,090 dots,
+  pooled TP_w is 4,678 for the packed arm versus 2,072 for the unpacked top-N arm and 1,999 for HGB. FP_w is almost
+  the same for both (about 218k). The spacing rule, not the feature alone, does most of the work. The ridge
+  feature on its own is weak (X1 separability 0.56).
+- **Why G5 fails (MEASURED; diagnostic, not an experiment):** 66 registry rows exceed 70% at the dot level, all with
+  chance lift ≤ 1.35, so they are density artefacts (the worst is the 5-px lattice raster, lift 1.00). Sixteen rows
+  exceed 70% at the surface level, and those lifts are real: GEMSDOE46 dfa-corroborated (72.9% against 20.1%
+  chance, lift 3.6) and GEMSDOE40 eulerdepth-si0 (70.5% against 12.6%, lift 5.6). Our signal is therefore not
+  untried at its strongest structures (IR-53-34). A chance-corrected dot rule would not clear the file.
+- **Caveats:** the holdout truth is the catalogue, not the competition's new faults (L-02). The surface similarity
+  above means H2's signal is shared with other team files, so 'untried' does not hold for this signal. About half of the
+  centrelines are valley-polarity, and some of these may be detrend side-lobes (IR-53-29). Nothing has been
+  tuned on the holdout.
 
-## H3 - Andersonian fault-tip extension & relay-ramp prior (rank 3, IMPLEMENTED)
-- **Layers:** `labels.tif`, Band 7 (shear rate), Band 8 (dilatation rate).
-- **Signature:** Dilatational step-overs and stress concentrations between overlapping normal fault tips.
-- **Why off-catalogue:** Over 80% of known Great Basin commercial geothermal fields occur in structural step-overs, terminations, or intersections (Faulds & Hinz, 2015; INGENIOUS project).
-- **Implementation:** Catalogue exclusion buffer ($B=2$ px / 200 m) eliminates guaranteed false positives, while prioritizing candidate lineaments within the 200 m to 2.5 km step-over damage zone.
+## H5 - credit packing on the HGB surface (rank 2, not run)
+
+- **Idea:** keep the 19-band HGB probability surface, but emit it as Poisson-packed dots instead of a top-N block.
+- **Why:** X2 shows that packing alone roughly doubles the credit per dot on a ridge surface. The same effect may hold for
+  any surface whose top-N is clustered.
+- **Test:** one more arm on the same folds, with pre-registered gates. Cost is low (about 5 minutes). Expected gain:
+  unknown; a holdout gain would not by itself show that the gain transfers to new faults (L-14).
+
+## H3 - fault-parallel strain (rank 3, not run)
+
+- **Layers:** geodetic shear rate (band 7) and dilatation rate (band 8); second invariant (band 4).
+- **Signature:** orientation of extensional lineaments from the principal strain axes.
+- **Cost:** medium. Caveat: band 7 is the strongest label-free band in E1 (separability 0.60), so part of any gain may just
+  be strain magnitude.
+
+## H6 - radiometric alteration lineaments (rank 4, data-blocked)
+
+- **Idea:** potassium enrichment and thorium/uranium ratios in altered fault zones (a domain prior, not verified here).
+- **Blocker:** the 19-band stack has no radiometric channel (band descriptions, read this session). The grids would
+  come from USGS/ScienceBase, which is not on the sandbox allow-list (IR-53-30).
+
+## H1 - segment-exact learn-predict separation (rank 5; validated in PR #6, not re-validated here)
+
+- **Idea:** distance to visible faults, excluding only the pixel's own segment, so the leak-free feature is less
+  weak than the 4x4-block cross-fit (separability 0.52, IR-53-09).
+- **Cost:** low. Caveat: it is a feature idea, not an emission rule, and the holdout shows that label-based
+  distance features leak unless learn-predict is separated (E2 `leaky_ablate` 0.999957).
+
+## Sources
+
+- Band list: `training_features.tif` band descriptions, read this session (see `evidence/x1_ridge_canary.json`).
+- Metric and submission rules: S1 (problem page), S3 (rules PDF). Template evaluator and writer: S23.
+- Owner context for the packed d2.8 family: S22 (owner analysis, unverified by an organizer receipt).

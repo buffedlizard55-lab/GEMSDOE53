@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Submission file · GEMSDOE53</title>
+<style>
+:root{--ink:#17202a;--muted:#5b6673;--line:#dfe5ec;--bg:#f7f9fb;--card:#fff;--accent:#0b6e4f;--warn:#9a3412;--warnbg:#fff7ed;--ok:#14532d;--okbg:#f0fdf4}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700;font-size:17px}
+nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
+main{max-width:980px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
+.banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
+.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:14px 18px;font-weight:600;font-size:15px}
+.warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
+.btn{display:inline-block;background:#0b6e4f;color:#fff!important;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;margin-right:12px;margin-top:6px;font-size:15px}
+.btn:hover{background:#09573e}
+.btn-secondary{background:#1e293b}
+.btn-secondary:hover{background:#0f172a}
+.dl-box{background:#f8fafc;border:2px dashed #0b6e4f;border-radius:10px;padding:16px 20px;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
+.pill-ok{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;background:#dcfce7;border:1px solid #86efac;color:#166534;margin-right:4px;font-weight:600;white-space:nowrap}
+.note{color:var(--muted);font-size:14px}footer{max-width:980px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
+a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
+</style></head><body>
+<header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
+<nav><a href="index.html" class="">Executive summary</a><a href="submission.html" class="on">Submission file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
+<main>
+<section>
+  <div class="ok">
+    <b>✅ VERIFIED CANDIDATE READY FOR IMMEDIATE DOWNLOAD AND SUBMISSION</b>
+  </div>
+  <h1>Submission file details</h1>
+  <p><b>Candidate Identifier:</b> <code>gems53-h1-relay-prune-q0p0073</code><br>
+  <b>Architecture:</b> HistGradientBoostingClassifier (200 iterations, max_leaf_nodes=31, l2=1.0) trained with H1 segment-exact learn-predict separation, catalogue flank pruning ($B=2$ px), and along-strike Non-Maximal Suppression ($d=300$ m) yielding 37,722 discrete candidate lineament points.</p>
+
+  <div class="dl-box">
+    <h3 style="margin-top:0;">Download Verified Submission</h3>
+    <div>
+      <a href="downloads/gems53-h1-relay-prune-q0p0073-nan.tif" class="btn" download>📥 Download GeoTIFF (.tif)</a>
+      <a href="downloads/gems53-h1-relay-prune-q0p0073.zip" class="btn btn-secondary" download>📦 Download ZIP (.zip)</a>
+    </div>
+  </div>
+
+  <h2>Format Verification & Validator Audit</h2>
+  <table>
+    <tr><th>File Name</th><th>SHA256 Checksum</th><th>Size</th><th>Validator Status</th><th>Footprint Valid Pixels</th><th>Emitted Dots</th></tr>
+    <tr><td><code>gems53-h1-relay-prune-q0p0073-nan.tif</code></td><td><code>4a931832d76040b51252649e525376a31b5b15b3bb8c2ffbda8758531211776b</code></td><td>325 KB</td><td><b>PASSED</b></td><td>5,167,373 / 5,167,373</td><td>37,722 (100% in [0, 1])</td></tr>
+  </table>
+
+  <h3>Detailed Validator Output (Template & In-Lane Compliance)</h3>
+  <pre>Validating docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif
+  Width: 3292, Height: 3730, Count: 1, Dtype: (&#x27;float32&#x27;,), CRS: EPSG:32611, Res: (100.0, 100.0), Nodata: nan
+  Data min: 0.0000, max: 1.0000, mean: 0.0073, nan%: 57.92%
+  ✓ CRS EPSG:32611
+  ✓ Resolution 100m
+  ✓ Single band
+  ✓ Dtype float32
+  ✓ Values in [0,1] (min 0.0000 max 1.0000)
+  ✓ Size matches sample 3292x3730
+  ✓ Transform matches sample
+  ✓ All 5,167,373 template-valid px are finite in [0,1]
+  ✓ NaN exactly outside the template&#x27;s valid region
+  ✓ GDAL_NODATA matches the template (&#x27;nan&#x27;)
+  ✓ Size matches training_features
+  i NaN fraction 57.92% (NaN is expected outside the GeoDAWN footprint)
+
+✅ Validation PASSED - Ready for submission!
+Next: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via &#x27;Submit&#x27; button
+</pre>
+
+  <h2>Uniqueness & Lane Audit (Parallel-Run Protocol Gate)</h2>
+  <p>Evaluated against all <b>166 public registry rasters</b> from 12 competing repositories:</p>
+  <ul>
+    <li><b>Maximum Spearman Rank Correlation:</b> <code>0.0518</code> (Protocol Flag Threshold: &gt;0.90) → <b style="color:var(--ok);">PASSED (No Correlation Drift)</b></li>
+    <li><b>Maximum 3-Pixel Dot Overlap:</b> <code>0.6179</code> (61.8%, Protocol Flag Threshold: &gt;70%) → <b style="color:var(--ok);">PASSED (No Dot Overlap Drift)</b></li>
+    <li><b>Overlap with GEMSDOE32 (0.2778):</b> <code>0.2430</code> (24.3%) → <b>Unique and distinct method lane</b></li>
+    <li><b>Exact Duplicate Check:</b> Zero exact duplicates detected.</li>
+    <li><b>Lane Drift Verdict:</b> <b>NONE. Candidate is unique, in-lane, and approved for submission.</b></li>
+  </ul>
+</section>
+</main>
+<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or the data inventory
+(computed from files at build time). HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
+Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>

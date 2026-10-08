@@ -1,0 +1,17 @@
+{
+  "file": "docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif",
+  "source": "origin/main at merge time (PR #6, other session); copied to /tmp for checking",
+  "sha256": "4a931832d76040b51252649e525376a31b5b15b3bb8c2ffbda8758531211776b",
+  "bytes": 333749,
+  "checks": {
+    "shared_template_validator_scripts_validate_submission": {"exit": 0, "result": "Validation PASSED"},
+    "shared_conformance_gate_src_submission_io_validate_conformant": {"exit": 0},
+    "finite_px_inside_footprint": 37722,
+    "dots_value_1": 37722,
+    "nan_outside": true,
+    "values_in_0_1": true
+  },
+  "uniqueness_cross_check_receipt": "evidence/crosscheck_pr6_h1_uniqueness_v2.json",
+  "chance_baseline_receipt": "evidence/overlap_baseline_pr6_h1.json",
+  "surface_level_check": "not run: no pre-placement surface for this file is in the repository"
+}

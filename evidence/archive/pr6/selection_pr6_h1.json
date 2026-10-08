@@ -1,0 +1,15 @@
+{
+  "status": "READY_TO_SUBMIT",
+  "submission_name": "gems53-h1-relay-prune-q0p0073",
+  "arm": "h1_segment_exact",
+  "q": 0.0073,
+  "selection_rule": "pre-registered: highest statistically significant pooled HOLDOUT-DTI with leak-free learn-predict separation (H1) and catalogue-flank prune B=2px",
+  "note": "H1 segment-exact learn-predict separation; B=2px catalogue prune; NMS d=300m; values in [0,1]; no internal NaN.",
+  "verdict": "promote",
+  "verdict_reason": "Passes all format and competition validation checks. HOLDOUT-DTI is 0.0560 (95% CI [0.0488, 0.0631]), beating the bands baseline (0.0251) with non-overlapping confidence intervals (+123% gain). Uniqueness check passed across all 166 registry rasters: max Spearman rho is 0.0518 (<0.90) and max dot overlap is 0.6179 (<0.70). Zero drift flags.",
+  "files": [
+    "gems53-h1-relay-prune-q0p0073-nan.tif",
+    "gems53-h1-relay-prune-q0p0073.zip"
+  ],
+  "location": "docs/downloads/ (downloadable directly from GitHub Pages executive summary)"
+}

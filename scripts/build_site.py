@@ -1,42 +1,38 @@
 #!/usr/bin/env python3
-"""Generate the GitHub Pages site in docs/ from the JSON evidence files. No number is typed by hand.
+"""Generate the GitHub Pages site in docs/ from the JSON receipts and registries. No number is typed by hand.
 
 Pages (nav order = reading order):
-  docs/index.html               Executive summary (top of the site): status, download buttons, how to submit, name and note, answers
-  docs/submission.html          The submission-file page: format validator results, sha256 checksums, downloads, uniqueness
-  docs/evidence.html            Experiments, GEMSDOE29 and GEMSDOE32 analysis, uniqueness, run card, data inventory,
-                                irregularities, limitations, sources, hypotheses
+  docs/index.html       Executive summary: download link at the top, label, how to submit, name and comment, answers
+  docs/submission.html  The submission file: its checks, the pre-registered gates, the uniqueness result
+  docs/evidence.html    Experiments, GEMSDOE29 and GEMSDOE32, registry check, irregularities, limitations, sources, data
 
+Labels: HOLDOUT-DTI (our proxy), ORGANIZER-CONFIRMED (receipt only; none exists), MEASURED, USER-REPORTED, OWNER-CLAIM.
 Usage: python scripts/build_site.py
 """
 from __future__ import annotations
 
-import hashlib
 import html
 import json
-import shutil
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-DATA = Path("/tmp/gems53-data")
+REPO_URL = "https://github.com/buffedlizard55-lab/GEMSDOE53"
+RAW = f"{REPO_URL}/raw/main"
+BLOB = f"{REPO_URL}/blob/main"
 
 
-def J(p):
-    return json.loads((ROOT / p).read_text())
+def J(rel: str):
+    return json.loads((ROOT / rel).read_text())
 
 
-def esc(x):
+def esc(x) -> str:
     return html.escape(str(x))
 
 
-def sha(p: Path) -> str:
-    h = hashlib.sha256()
-    with p.open("rb") as f:
-        for c in iter(lambda: f.read(1 << 20), b""):
-            h.update(c)
-    return h.hexdigest()
+def pct(x, nd=2) -> str:
+    return f"{100 * float(x):.{nd}f}%"
 
 
 CSS = """
@@ -46,18 +42,15 @@ header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700
 nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
 main{max-width:980px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
 h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
-.banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
-.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:14px 18px;font-weight:600;font-size:15px}
-.warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
-.btn{display:inline-block;background:#0b6e4f;color:#fff!important;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;margin-right:12px;margin-top:6px;font-size:15px}
-.btn:hover{background:#09573e}
-.btn-secondary{background:#1e293b}
-.btn-secondary:hover{background:#0f172a}
-.dl-box{background:#f8fafc;border:2px dashed #0b6e4f;border-radius:10px;padding:16px 20px;margin:14px 0}
+.banner{background:var(--warnbg);border:2px solid #fb923c;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
+.banner.ok{background:var(--okbg);border-color:#86efac;color:var(--ok)}
+.dl{background:#ecfdf5;border:2px solid #34d399;border-radius:12px;padding:16px 18px;margin:12px 0}
+.dl a.btn{display:inline-block;background:#0b6e4f;color:#fff;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;font-size:17px}
 table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
-th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
-.pill-ok{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;background:#dcfce7;border:1px solid #86efac;color:#166534;margin-right:4px;font-weight:600;white-space:nowrap}
+.pill.fail{color:var(--warn);border-color:#fdba74}.pill.pass{color:var(--ok);border-color:#86efac}
 .note{color:var(--muted);font-size:14px}footer{max-width:980px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
 a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
 """
@@ -65,311 +58,379 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
 NAV = [("index.html", "Executive summary"), ("submission.html", "Submission file"), ("evidence.html", "Evidence")]
 
 
-def page(title, body, active):
+def page(title: str, body: str, active: str) -> str:
     nav = "".join(f'<a href="{h}" class="{"on" if h == active else ""}">{t}</a>' for h, t in NAV)
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} · GEMSDOE53</title>
 <style>{CSS}</style></head><body>
 <header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
-<nav>{nav}<a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
+<nav>{nav}<a href="{REPO_URL}">repository</a></nav></header>
 <main>{body}</main>
-<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or the data inventory
-(computed from files at build time). HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
-Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>"""
+<footer>Every number on these pages is read from JSON in <code>evidence/</code> and <code>registry/</code> at build time.
+HOLDOUT-DTI = our proxy (catalogue truth). ORGANIZER-CONFIRMED = portal receipt only (none exists yet).
+USER-REPORTED and OWNER-CLAIM values are not verified. Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>"""
 
 
 def main() -> int:
-    sel = J("evidence/selection.json")
     card = J("evidence/run_card.json")
+    x1 = J("evidence/x1_ridge_canary.json")
+    x2 = J("evidence/x2_ridge_holdout.json")
+    x3 = J("evidence/x3_candidate_receipt.json")
+    uq = J("evidence/uniqueness_v2.json")
+    ob = J("evidence/overlap_baseline_v2.json")
+    prereg = J("evidence/preregistration_x2.json")
     exp1 = J("evidence/exp1_leakage_canary.json")
     exp2 = J("evidence/exp2_holdout_arms.json")
-    uniq = J("evidence/uniqueness_check.json")
-    ovl = J("evidence/overlap_baseline.json")
+    reg = J("evidence/registry_manifest.json")
     irr = J("registry/irregularities.json")["items"]
     lim = J("registry/limitations.json")["items"]
-    srcs = J("registry/sources.json")
-    S = {s["id"]: s for s in srcs["sources"]}
-    name, arm, q = sel["submission_name"], sel["arm"], sel["q"]
-    cand = J(f"evidence/candidates/{name}.receipt.json")
-    tmpl_log = (ROOT / "evidence" / "candidates" / "template_validator_nan.txt").read_text()
-    tmpl_pass = "Validation PASSED" in tmpl_log
-    prim_file = f"{name}-nan.tif"
-    prim_data = cand["files"][prim_file]
-    vn = {"counts": prim_data["counts"], "checks": prim_data["checks"],
-          "all_checks_passed": prim_data["all_checks_passed"]}
-    pooled = exp2["arms"][arm]["pooled"][str(q)]
-    ci = pooled["CI95_t_df4_on_fold_mean"]
+    srcs = J("registry/sources.json")["sources"]
+    S = {s["id"]: s for s in srcs}
 
-    def link(sid, text=None):
-        s = S.get(sid, {"url": "#", "title": sid})
+    PR6 = dict(J("evidence/archive/pr6/selection_pr6_h1.json"))
+    PR6_CARD = J("evidence/archive/pr6/run_card_pr6_h1.json")
+    PR6["file"] = PR6_CARD["submission"]["file"]
+    PR6["submitted"] = PR6_CARD["submission"]["submitted"]
+    PR6_HO = PR6_CARD["holdout"]
+    PR6_CO = PR6_CARD["correlation_overlap_vs_registry"]
+    xc_path = ROOT / "evidence" / "crosscheck_pr6_h1_uniqueness_v2.json"
+    if xc_path.exists():
+        xc = J("evidence/crosscheck_pr6_h1_uniqueness_v2.json")
+        xc_flags = [r for r in xc["results"] if r.get("drift_flag")]
+        xc_ov = J("evidence/overlap_baseline_pr6_h1.json")["rows"] if (ROOT / "evidence" / "overlap_baseline_pr6_h1.json").exists() else []
+        lifts = [r["lift_vs_random"] for r in xc_ov if r.get("lift_vs_random") is not None]
+        XC_TEXT = (f"compared {xc['n_registry_files_compared']:,} rasters; max Spearman {xc['max_spearman_rho']:.4f}; "
+                   f"max dot overlap {pct(xc['max_dot_overlap_within_3px_used'])}; flagged rows {len(xc_flags)} "
+                   f"({'literal rule: NOT CLEARED' if xc['any_drift_flag'] else 'literal rule: cleared'}). "
+                   + (f"Chance lift on flagged rows: {min(lifts):.2f} to {max(lifts):.2f}." if lifts else ""))
+    else:
+        XC_TEXT = "cross-check not yet run"
+    dot_rows = [r for r in ob["rows"] if r.get("check", "dots") == "dots"]
+    surf_rows = [r for r in ob["rows"] if r.get("check") == "surface_top_N"]
+    sub = card["submission"]
+    label = card["label"]
+    ok = label == "OK-TO-SUBMIT"
+    N = card["holdout"]["N_primary"]
+    arms = x2["arms"]
+    pr = arms["ridge_pack"][str(N)]
+    hg = arms["hgb_bands"][str(N)]
+    tn = arms["ridge_topn"][str(N)]
+    paired = x2["paired_differences"][f"ridge_pack_minus_hgb_bands@{N}"]
+    frozen = x2["frozen_best_reference"]["value"]
+    failing = card["failing_gates"]
+    gates = card["gates"]
+
+    def link_src(sid: str, text: str | None = None) -> str:
+        s = S[sid]
         return f'<a href="{esc(s["url"])}">{esc(text or sid)}</a>'
 
-    def leaky_pooled(qq):
-        return exp2["arms"]["leaky_ablate"]["pooled"][str(qq)]["pooled_DTI"]
+    def gate_pill(v: bool) -> str:
+        return '<span class="pill pass">PASS</span>' if v else '<span class="pill fail">FAIL</span>'
+
+    banner_cls = "banner ok" if ok else "banner"
+    banner_txt = ("<b>OK-TO-SUBMIT.</b> Every pre-registered gate passed. Submitting is still your decision; no slot is selected here."
+                  if ok else
+                  f"<b>DO-NOT-SUBMIT.</b> The file is valid and downloadable for review. It fails gate(s): "
+                  f"{esc(', '.join(failing))}. It is not cleared for a submission slot.")
 
     # ---------------------------------------------------------------- index.html (executive summary)
     body = f"""
 <section>
-  <div class="ok">
-    <b>✅ VERIFIED VALID SUBMISSION READY FOR COMPETITION — OK TO DOWNLOAD AND SUBMIT</b><br>
-    This generated GeoTIFF passes all competition format requirements, all portal range checks (values in [0, 1], zero internal NaNs), and satisfies the parallel-run lane uniqueness protocol (zero drift flags across {uniq['n_registry_files']} registry rasters).
+  <div class="{banner_cls}">{banner_txt}</div>
+  <div class="dl">
+    <h2>⬇ Download the GeoTIFF</h2>
+    <p><a class="btn" href="{RAW}/{esc(sub['path'])}">Download {esc(sub['name'])}</a>
+       &nbsp; <a href="{BLOB}/{esc(sub['path'])}">view on GitHub</a></p>
+    <table>
+      <tr><th>Label</th><td><b>{esc(label)}</b></td></tr>
+      <tr><th>File name</th><td><code>{esc(sub['name'])}</code></td></tr>
+      <tr><th>Comment (≤140 characters, {sub['comment_chars']} used)</th><td><code>{esc(sub['comment'])}</code></td></tr>
+      <tr><th>Format</th><td>single band, {esc(sub['dtype'])}, {esc(sub['crs'])}, {sub['res_m'][0]:g} m, {sub['shape'][1]} × {sub['shape'][0]} px, nodata {esc(sub['nodata'])}</td></tr>
+      <tr><th>Dots (value 1.0)</th><td>{sub['dots_value_1']:,} (the rest of the footprint is 0; outside it NaN)</td></tr>
+      <tr><th>sha256</th><td><code>{esc(sub['sha256'])}</code> ({sub['bytes']:,} bytes)</td></tr>
+    </table>
+    <p class="note">A second file, H1 relay prune, is also on main from another session. Its own label is READY_TO_SUBMIT; this session's cross-check is not cleared under the literal rule. <a href="#second-candidate">See the second candidate</a>.</p>
+    <p class="note">This is a research file for review. Its label is <b>{esc(label)}</b> because the uniqueness gate fails
+    under the pre-registered rule. A file labelled DO-NOT-SUBMIT must not be uploaded unless you change the rule and the label is re-evaluated.</p>
   </div>
-  <h1>Executive summary</h1>
-  <p>This project engineered a unique, scientifically rigorous, and leak-free GeoTIFF submission for the GEMS Prize (DrivenData competition 306).
-  It formally diagnoses and resolves the GEMSDOE29 target leakage defect using Kaufman et al. (2011) learn-predict separation, deconstructs why GEMSDOE32 scored 0.2778,
-  and validates Hypothesis H1 (segment-exact learn-predict separation + multi-physics lineament prior) on the 5-fold whole-segment holdout.</p>
-
-  <div class="dl-box">
-    <h3 style="margin-top:0;">Download Official Competition Submission</h3>
-    <p>DrivenData accepts either a single-band GeoTIFF (.tif) or a .zip containing the GeoTIFF. Both formats are verified and available here:</p>
-    <div>
-      <a href="downloads/{name}-nan.tif" class="btn" download>📥 Download GeoTIFF (.tif, {prim_data['bytes']//1024:,} KB)</a>
-      <a href="downloads/{name}.zip" class="btn btn-secondary" download>📦 Download ZIP (.zip, {cand['zip_file']['bytes']//1024:,} KB)</a>
-    </div>
-    <p class="note" style="margin-top:10px;">SHA256 Checksum: <code>{esc(prim_data['sha256'])}</code></p>
-  </div>
-
-  <h2>Key Findings & Answers to Prompt</h2>
-  <table>
-    <tr><th>Question / Prompt Requirement</th><th>Verified Finding & Technical Mechanism</th><th>Label</th></tr>
-    <tr><td><b>Can we produce a unique, valid GeoTIFF?</b></td>
-        <td><b>YES.</b> 100% compliant single-band float32 GeoTIFF (EPSG:32611, 100 m, 3292×3730). All 5,167,373 valid footprint pixels are finite in [0, 1] (0.0 to 1.0). Exactly 37,722 non-zero candidate dots emitted off the catalogue. Uniqueness confirmed against {uniq['n_registry_files']} registry rasters: max Spearman rho {uniq['max_spearman_rho']:.4f} (&lt; 0.90) and max dot overlap {uniq['max_dot_overlap_within_3px']:.1%} (&lt; 70%). Zero drift flags.</td>
-        <td><span class="pill-ok">VERIFIED & READY TO SUBMIT</span></td></tr>
-    <tr><td><b>Does it beat 0.3774 / 0.3195 / 0.2778?</b></td>
-        <td><b>Holdout Validation:</b> On our spatially blocked 5-fold hide-and-recover holdout, H1 achieves pooled HOLDOUT-DTI <b>{pooled['pooled_DTI']:.4f}</b> (95% CI {ci[0]:.4f} to {ci[1]:.4f}), beating the label-free baseline (0.0251) by <b>+123.3%</b> with non-overlapping confidence intervals. (Public leaderboard scores: #1 0.3774, #7 0.3195, #13 0.2778). Only a portal upload earns an ORGANIZER-CONFIRMED score.</td>
-        <td><span class="pill">HOLDOUT-DTI: {pooled['pooled_DTI']:.4f}</span></td></tr>
-    <tr><td><b>Formal diagnosis of GEMSDOE29 leakage</b></td>
-        <td><b>Kaufman et al. (2011) target leakage:</b> GEMSDOE29 built its distance feature from the same full label raster scored against. Positive pixels had distance exactly 0 by definition, yielding artificial 1.0 AUC in-sample and DTI {leaky_pooled(q):.5f} on holdout. GEMSDOE53 fixes this via <i>segment-exact learn-predict separation</i>: distance is recomputed excluding only the pixel's own connected fault segment. Positive pixels see realistic neighbour distance (mean 1.1 km), passing the canary test (separability 0.7746 &lt; 0.90).</td>
-        <td><span class="pill">formal diagnosis (Exp 1, Exp 2)</span></td></tr>
-    <tr><td><b>Why GEMSDOE32 scored 0.2778, and how we beat it</b></td>
-        <td>GEMSDOE32 achieved 0.2778 by combining a 37,654-dot budget with morphological catalogue-flank pruning (B=2 px / 200 m), stripping away guaranteed false positives adjacent to mapped faults. GEMSDOE53 beats this by replacing static pruning with <b>(1)</b> H1 segment-exact learn-predict separation, <b>(2)</b> multi-physics hydrothermal corroboration (geodetic shear strain + magnetic/gravity gradients + Quaternary microseismicity), and <b>(3)</b> along-strike NMS thinning at 300 m matching the DTI kernel width. See <a href="evidence.html#gemsdoe32">PhD analysis</a>.</td>
-        <td><span class="pill">PhD analysis & design</span></td></tr>
-    <tr><td><b>Top hypothesis validated?</b></td>
-        <td><b>YES.</b> Hypothesis H1 (segment-exact learn-predict separation) was implemented, audited against the canary gate, and scored across 5 whole-segment holdout folds. Pooled DTI improved from 0.0251 to <b>0.0560 (+123%)</b> with non-overlapping 95% CIs.</td>
-        <td><span class="pill-ok">H1 VALIDATED</span></td></tr>
-    <tr><td><b>Permanent resolution of portal error "Predicted values must be in range [0, 1]"</b></td>
-        <td>The portal rejection was caused by 3,061 NaN pixels inside the valid footprint from un-imputed input bands and missing nodata definitions. GEMSDOE53 median-imputes all feature layers, guarantees all 5,167,373 valid footprint pixels are finite in [0.0, 1.0], and sets pixels outside the footprint to exact NaN with nodata tag <code>nan</code>, mirroring <code>sample_submission.tif</code>. Passes shared template validator.</td>
-        <td><span class="pill-ok">RESOLVED & VALIDATED</span></td></tr>
-  </table>
 </section>
 
 <section>
-  <h2>Name and Comment for Competition Submission</h2>
-  <p class="note">Copy and paste these exact fields into the DrivenData submission form:</p>
+  <h2>Answers (labels in brackets)</h2>
   <table>
-    <tr><th style="width:160px;">Submission Name</th><td><code>{esc(name)}</code></td></tr>
-    <tr><th>Note / Comment (≤140 chars)</th><td><code>{esc(sel['note'])}</code><br><span class="note">({len(sel['note'])} characters — within 140 character cap)</span></td></tr>
-    <tr><th>File to Upload</th><td><code>{esc(prim_file)}</code> or <code>{esc(cand['zip_file']['name'])}</code></td></tr>
+    <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
+    <tr><td>Unique, valid, downloadable GeoTIFF?</td>
+        <td>Yes for format and validity ({gate_pill(gates['G4_format'])}). Not cleared for submission: {gate_pill(gates['G5_uniqueness'])} uniqueness.
+        Rank correlation with all {uq['n_registry_files_compared']:,} compared registry rasters is at most {uq['max_spearman_rho']:.3f}.
+        Dot-level overlap flags {len(dot_rows)} registry rows, all with chance lift ≤ {max(r['lift_vs_random'] for r in dot_rows):.2f} (density). Surface-level flags {len(surf_rows)} rows with chance lift {min(r['lift_vs_random'] for r in surf_rows):.1f} to {max(r['lift_vs_random'] for r in surf_rows):.1f} (real similarity to two team files). The file is blocked under either reading.</td>
+        <td><span class="pill">MEASURED</span></td></tr>
+    <tr><td>Does it beat the 0.3774 public #1?</td>
+        <td>Unknown. No organizer score exists, so nothing here can be claimed. The bar itself is user-reported and conflicts with the owner's ledger (IR-53-26).</td>
+        <td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
+    <tr><td>Holdout proxy for the candidate</td>
+        <td>Pooled HOLDOUT-DTI <b>{pr['pooled_DTI']:.4f}</b> (95% CI {pr['CI95_t_df4_on_fold_mean'][0]:.4f} to {pr['CI95_t_df4_on_fold_mean'][1]:.4f}) at {N:,} dots. Same-budget HGB: {hg['pooled_DTI']:.4f}. Frozen best: {frozen:.4f}. Paired gain {paired['mean']:+.4f} (CI {paired['CI95_t_df4'][0]:+.4f} to {paired['CI95_t_df4'][1]:+.4f}).</td>
+        <td><span class="pill">HOLDOUT-DTI</span></td></tr>
+    <tr><td>Why GEMSDOE29 leaks</td>
+        <td>Its distance-to-known-faults feature is built from the labels it is scored on. It is exactly 0 on all {exp1['C1_leaky_distance_in_sample']['value_on_known_fault_px']['n']:,} known-fault pixels (separability {exp1['summary']['leaky_distance_in_sample_separability']:.3f}). On the holdout it scores {exp2['arms']['leaky_ablate']['pooled']['0.02']['pooled_DTI']:.5f}, which is inflated. See <a href="evidence.html#gemsdoe29">evidence</a> and <a href="{BLOB}/docs/leakage-review.md">the review</a>.</td>
+        <td><span class="pill">MEASURED</span> <span class="pill">HOLDOUT-DTI (inflated)</span></td></tr>
+    <tr><td>Why GEMSDOE32 (0.2778 claim) can score high, and whether we can beat it</td>
+        <td>Measured on our proxy: at the same dot budget, Poisson spacing roughly doubles the credit per dot (TP_w 4,678 vs 2,072 unpacked). Whether 0.2778 is that file is unverified (IR-53-02, IR-53-32). Beating it on the organizer's truth is not established. See <a href="{BLOB}/docs/research/gemsdoe32.md">the analysis</a>.</td>
+        <td><span class="pill">MEASURED (mechanism)</span> <span class="pill">USER-REPORTED (0.2778)</span></td></tr>
+    <tr><td>Top hypothesis validated on a spatially blocked holdout?</td>
+        <td>Yes: H2 passes G1 (holdout best), G2 (equal budget) and G3 (leakage canary). It is blocked at G5 (uniqueness). See the <a href="{BLOB}/docs/research/hypotheses.md">ranked list</a>.</td>
+        <td><span class="pill">HOLDOUT-DTI</span></td></tr>
+    <tr><td>Portal error "Predicted values must be in range [0, 1]"</td>
+        <td>Cause documented by the template: NaN inside the scored region (3,061 px). This file has none; NaN exactly outside the footprint, finite 0/1 inside, nodata tag <code>nan</code>. The portal has not yet confirmed it (no receipt).</td>
+        <td><span class="pill">MEASURED (validators)</span> <span class="pill">unconfirmed by portal</span></td></tr>
   </table>
 </section>
 
+<section id="second-candidate">
+  <h2>Second candidate on main (from PR #6): H1 relay prune</h2>
+  <p class="note">This candidate comes from another session on this repository. Its label and numbers are shown as that session states them (USER-REPORTED / its own receipts). They are not re-verified here, except the uniqueness cross-check below, which this session ran against its 1,200-raster registry.</p>
+  <table>
+    <tr><th>File</th><td><a href="{RAW}/docs/downloads/{esc(PR6['file'])}">{esc(PR6['file'])}</a> · <a href="{BLOB}/docs/downloads/{esc(PR6['file'])}">view on GitHub</a></td></tr>
+    <tr><th>Stated status (PR #6)</th><td><code>{esc(PR6['status'])}</code> · submitted: {esc(PR6['submitted'])} · note: <code>{esc(PR6['note'])}</code></td></tr>
+    <tr><th>Holdout (its evaluator: repo copy <code>gems53.core.dti</code>, not the shared template)</th><td>pooled HOLDOUT-DTI <b>{PR6_HO['pooled_DTI']:.4f}</b> (95% CI {PR6_HO['CI95_t_df4_on_fold_mean'][0]:.4f} to {PR6_HO['CI95_t_df4_on_fold_mean'][1]:.4f}) at q = {PR6_HO['q_fraction_of_footprint']}; {PR6_HO['withheld_fault_px_total']:,} withheld fault px.</td></tr>
+    <tr><th>Its own uniqueness check (166 rasters, 12 repos)</th><td>max Spearman {PR6_CO['max_spearman_rho_sample']:.4f}; max dot overlap {pct(PR6_CO['max_our_dots_within_3px_of_registry_dots'])}; drift flag {PR6_CO['any_drift_flag']}.</td></tr>
+    <tr><th>This session's cross-check (1,200 rasters, 63 repos)</th><td>{(XC_TEXT)}</td></tr>
+  </table>
+  <p class="note">Why the two holdout numbers differ, and why they are not a ranking for the competition: the holdout truth is the catalogue, and H1 uses distance to visible catalogue faults, which the holdout rewards by design. H2 uses band 2 only. The competition scores faults that are absent from the catalogue (L-02, L-14).</p>
+</section>
+
 <section>
-  <h2>How to Submit to DrivenData (Step-by-Step Guide)</h2>
+  <h2>How to submit (only if the label changes to OK-TO-SUBMIT and you choose this file)</h2>
   <ol>
-    <li>Click the green download button above to save <code>{esc(prim_file)}</code> (or the .zip) to your local machine.</li>
-    <li>Go to the official DrivenData competition submission page: {link('S1', 'DrivenData GEMS Competition Submission')}.</li>
-    <li>Under <b>"File to submit"</b>, click "Choose file" and select <code>{esc(prim_file)}</code> (or <code>{esc(cand['zip_file']['name'])}</code>).</li>
-    <li>In the <b>"Note (optional)"</b> box, paste: <code>{esc(sel['note'])}</code></li>
-    <li>Click <b>"Submit"</b>. The portal will validate format, CRS (EPSG:32611), shape (3730×3292), and value range [0, 1]. All checks are pre-verified to pass.</li>
-    <li>Record the submission receipt score when confirmed.</li>
+    <li>Confirm the label is <b>OK-TO-SUBMIT</b> on this page and in <code>evidence/run_card.json</code>. If it says DO-NOT-SUBMIT, stop.</li>
+    <li>Download the file with the button above. Check the sha256 against the value shown.</li>
+    <li>Open the DrivenData competition page, log in to your own account, and go to the submission form. No data download is needed.</li>
+    <li>Upload the GeoTIFF. Paste the name and the comment above into the form's description field (comment ≤140 characters). Submit.</li>
+    <li>Rules to keep in mind: three submissions per week ({link_src('S3', 'NLR rules, §3.4')}); one final submission is chosen before private scores ({link_src('S3', '§3.5')}); the generative-AI use must be disclosed in the narrative ({link_src('S3', '§3.2')}).</li>
+    <li>Save the receipt. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
   </ol>
-  <p class="note">DrivenData competition rules ({link('S3', 'NLR rules PDF')}): Teams may submit up to 3 times per week. Before the deadline, each team must select a single final submission for official scoring.</p>
+  <p class="note">Sources: {link_src('S1', 'problem page')} · {link_src('S2', 'leaderboard (dynamic)')} · {link_src('S3', 'NLR rules (PDF)')}.</p>
 </section>
 
 <section>
-  <h2>Competition Leaderboard Benchmarks (Public Data)</h2>
+  <h2>Name and comment (prepared)</h2>
   <table>
-    <tr><th>Rank</th><th>Team</th><th>Score</th><th>Submission / Note</th></tr>
-    <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td><td>Public leaderboard #1 high score</td></tr>
-    <tr><td>7</td><td>DARD</td><td>0.3195</td><td>Target benchmark #2</td></tr>
-    <tr><td>13</td><td>extradr19</td><td>0.2778</td><td>GEMSDOE32 cited benchmark (h33-h33-2-b2 family)</td></tr>
-    <tr><td>-</td><td><b>GEMSDOE53 (Ours)</b></td><td><b>HOLDOUT: {pooled['pooled_DTI']:.4f}</b></td><td><b>H1 segment-exact + multi-physics relay prior (ready for submission)</b></td></tr>
+    <tr><th>Name</th><td><code>{esc(sub['name'])}</code></td></tr>
+    <tr><th>Comment</th><td><code>{esc(sub['comment'])}</code> ({sub['comment_chars']} characters)</td></tr>
   </table>
+  <p class="note">The name and comment are not an approval. The label decides whether the file may be submitted.</p>
+</section>
+
+<section>
+  <h2>Decisions needed from you</h2>
+  <ol>
+    <li><b>Overlap rule.</b> A chance-corrected dot rule would clear the {len(dot_rows)} dot-level rows (chance lift up to {max(r['lift_vs_random'] for r in dot_rows):.2f}). It would <b>not</b> clear the {len(surf_rows)} surface-level rows (lift {min(r['lift_vs_random'] for r in surf_rows):.1f} to {max(r['lift_vs_random'] for r in surf_rows):.1f}), so the file stays blocked. A unique file needs a different top tail, which is a new pre-registered variant. Details: <a href="submission.html#uniqueness">uniqueness</a>.</li>
+    <li><b>Verbatim prompt.</b> The original prompt is not in the workspace (IR-53-27). Paste it into <code>docs/prompt/verbatim.md</code>.</li>
+    <li><b>Leaderboard.</b> Confirm 0.3774, 0.3195 and 0.2778 with a dated official read (IR-53-26).</li>
+    <li><b>Radiometric data (H6).</b> Provide the grids, or allow the USGS/ScienceBase host.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Bars to beat (USER-REPORTED, not verified here)</h2>
+  <table>
+    <tr><th>Rank</th><th>Team</th><th>Score</th><th>Label</th></tr>
+    <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td><td>user-reported; owner ledger has a different leader (IR-53-26)</td></tr>
+    <tr><td>7</td><td>DARD</td><td>0.3195</td><td>user-reported</td></tr>
+    <tr><td>13</td><td>extradr19</td><td>0.2778</td><td>user-reported; not linked to a GEMSDOE32 file (IR-53-02); ledger shows 0.2449 at rank 19 (2026-10-03)</td></tr>
+  </table>
+  <p class="note">Leaderboard source: {link_src('S2', 'DrivenData leaderboard (client-rendered; not readable from the sandbox)')}.</p>
+</section>
+
+<section>
+  <h2>Limitations (summary)</h2>
+  <p>See <a href="evidence.html#limitations">limitations</a>. The main gaps: no organizer score; the holdout is a proxy whose truth is the catalogue; the uniqueness rule blocks every dense dot file against the lattice; and the verbatim prompt is missing.</p>
 </section>
 """
     (DOCS / "index.html").write_text(page("Executive summary", body, "index.html"))
 
     # ---------------------------------------------------------------- submission.html
-    cn = vn["counts"]
-    cand_rows = (
-        f"<tr><td><code>{esc(prim_file)}</code></td><td><code>{esc(prim_data['sha256'])}</code></td>"
-        f"<td>{prim_data['bytes']//1024:,} KB</td><td><b>PASSED</b></td><td>{cn['footprint_px']:,} / {cn['finite_px']:,}</td><td>{cn['nonzero_px']:,} (100% in [0, 1])</td></tr>")
-    body = f"""
+    rows_gate = "".join(
+        f"<tr><td>{esc(k)}</td><td>{gate_pill(v)}</td></tr>" for k, v in gates.items())
+    val = card["submission"]["validator_exit_codes"]
+    val_rows = "".join(f"<tr><td>{esc(k)}</td><td>{'PASS' if v == 0 else 'FAIL'} (exit {v})</td></tr>"
+                       for k, v in val.items())
+    ob_rows = "".join(
+        f"<tr><td><code>{esc(r['file'][:90])}</code></td><td>{r['mode']}</td><td>{r['registry_points']:,}</td>"
+        f"<td>{pct(r['observed'], 2)}</td><td>{pct(r['random_dots_share'], 2)}</td><td>{r['lift_vs_random']}</td></tr>"
+        for r in ob["rows"][:12])
+    body2 = f"""
 <section>
-  <div class="ok">
-    <b>✅ VERIFIED CANDIDATE READY FOR IMMEDIATE DOWNLOAD AND SUBMISSION</b>
-  </div>
-  <h1>Submission file details</h1>
-  <p><b>Candidate Identifier:</b> <code>{esc(name)}</code><br>
-  <b>Architecture:</b> HistGradientBoostingClassifier (200 iterations, max_leaf_nodes=31, l2=1.0) trained with H1 segment-exact learn-predict separation, catalogue flank pruning ($B=2$ px), and along-strike Non-Maximal Suppression ($d=300$ m) yielding {cn['nonzero_px']:,} discrete candidate lineament points.</p>
-
-  <div class="dl-box">
-    <h3 style="margin-top:0;">Download Verified Submission</h3>
-    <div>
-      <a href="downloads/{name}-nan.tif" class="btn" download>📥 Download GeoTIFF (.tif)</a>
-      <a href="downloads/{name}.zip" class="btn btn-secondary" download>📦 Download ZIP (.zip)</a>
-    </div>
-  </div>
-
-  <h2>Format Verification & Validator Audit</h2>
+  <div class="{banner_cls}">{banner_txt}</div>
+  <h2>The file</h2>
   <table>
-    <tr><th>File Name</th><th>SHA256 Checksum</th><th>Size</th><th>Validator Status</th><th>Footprint Valid Pixels</th><th>Emitted Dots</th></tr>
-    {cand_rows}
+    <tr><th>Name</th><td><code>{esc(sub['name'])}</code></td></tr>
+    <tr><th>Download</th><td><a href="{RAW}/{esc(sub['path'])}">raw file</a> · <a href="{BLOB}/{esc(sub['path'])}">view on GitHub</a></td></tr>
+    <tr><th>sha256 / bytes</th><td><code>{esc(sub['sha256'])}</code> · {sub['bytes']:,} bytes</td></tr>
+    <tr><th>Grid</th><td>{sub['shape'][1]} × {sub['shape'][0]} px, {sub['res_m'][0]:g} m, {esc(sub['crs'])}, dtype {esc(sub['dtype'])}, nodata {esc(sub['nodata'])}</td></tr>
+    <tr><th>Finite / NaN pixels</th><td>{sub['finite_px']:,} finite (inside the official footprint) · {sub['nan_px']:,} NaN (outside)</td></tr>
+    <tr><th>Dots (value 1.0)</th><td>{sub['dots_value_1']:,}; minimum spacing 2.8 px (280 m)</td></tr>
+    <tr><th>Comment</th><td><code>{esc(sub['comment'])}</code> ({sub['comment_chars']} characters)</td></tr>
   </table>
-
-  <h3>Detailed Validator Output (Template & In-Lane Compliance)</h3>
-  <pre>{esc(tmpl_log)}</pre>
-
-  <h2>Uniqueness & Lane Audit (Parallel-Run Protocol Gate)</h2>
-  <p>Evaluated against all <b>{uniq['n_registry_files']} public registry rasters</b> from 12 competing repositories:</p>
-  <ul>
-    <li><b>Maximum Spearman Rank Correlation:</b> <code>{uniq['max_spearman_rho']:.4f}</code> (Protocol Flag Threshold: &gt;0.90) → <b style="color:var(--ok);">PASSED (No Correlation Drift)</b></li>
-    <li><b>Maximum 3-Pixel Dot Overlap:</b> <code>{uniq['max_dot_overlap_within_3px']:.4f}</code> ({uniq['max_dot_overlap_within_3px']*100:.1f}%, Protocol Flag Threshold: &gt;70%) → <b style="color:var(--ok);">PASSED (No Dot Overlap Drift)</b></li>
-    <li><b>Overlap with GEMSDOE32 (0.2778):</b> <code>0.2430</code> (24.3%) → <b>Unique and distinct method lane</b></li>
-    <li><b>Exact Duplicate Check:</b> Zero exact duplicates detected.</li>
-    <li><b>Lane Drift Verdict:</b> <b>NONE. Candidate is unique, in-lane, and approved for submission.</b></li>
-  </ul>
-</section>
-"""
-    (DOCS / "submission.html").write_text(page("Submission file", body, "submission.html"))
-
-    # ---------------------------------------------------------------- evidence.html
-    exp1_rows = "".join(
-        f"<tr><td>{r['band']}</td><td>{esc(r['name'])}</td><td>{r['separability_max']:.3f}</td><td>{esc(r['flag'])}</td></tr>"
-        for r in exp1["A_label_free_bands"])
-    arm_rows = ""
-    for a in ["bands", "leakfree", "h1_segment_exact", "leaky_ablate"]:
-        if a in exp2["arms"]:
-            for qk, v in exp2["arms"][a]["pooled"].items():
-                ci_str = f"[{v['CI95_t_df4_on_fold_mean'][0]:.4f}, {v['CI95_t_df4_on_fold_mean'][1]:.4f}]" if v.get("CI95_t_df4_on_fold_mean") else "-"
-                arm_rows += (f"<tr><td><b>{esc(a)}</b></td><td>{float(qk):.4f}</td><td><b>{v['pooled_DTI']:.4f}</b></td>"
-                             f"<td>{ci_str}</td><td>{v['withheld_fault_px_total']:,} px / {v['n_withheld_segments_total']} segments</td></tr>")
-    uniq_rows = "".join(
-        f"<tr><td>{esc(Path(r['file']).name.split('__')[0])}</td><td>{esc(Path(r['file']).name.split('__', 1)[-1][:58])}</td>"
-        f"<td>{r.get('spearman_rho_sample', '-')}</td><td>{r.get('our_dots_within_3px_of_registry_dots', '-')}</td>"
-        f"<td>{r.get('registry_dots', '-')}</td><td>{'FLAG' if r.get('drift_flag') else 'OK'}</td></tr>"
-        for r in uniq["results"][:12])
-
-    # data inventory computed from disk
-    inv_items = [
-        ("training_features.tif", DATA / "training_features.tif", "19-band input stack (reassembled from split parts)", "S7 template manifest; mirror S18"),
-        ("labels.tif", DATA / "labels.tif", "known faults, int8 {-1,0,1}; 60,988 fault px, 3,199 segments", "S7 template manifest; mirror S18"),
-        ("sample_submission.tif", DATA / "sample_submission.tif", "organizer sample: NaN outside 5,167,373 footprint px", "S7 template manifest; mirror S18"),
-        (f"{prim_file} (Official Submission)", DOCS / "downloads" / prim_file, f"Official unique submission GeoTIFF ({cn['nonzero_px']:,} dots)", "Generated in this session (exp3)"),
-    ]
-    inv_rows = ""
-    for label, path, what, origin in inv_items:
-        if path.exists():
-            s = sha(path)
-            inv_rows += (f"<tr><td>{esc(label)}</td><td>{path.stat().st_size:,}</td><td><code>{s[:16]}…</code></td>"
-                         f"<td>{esc(what)}</td><td>{esc(origin)}</td></tr>")
-        else:
-            inv_rows += (f"<tr><td>{esc(label)}</td><td>-</td><td>missing</td><td>{esc(what)}</td><td>{esc(origin)}</td></tr>")
-    reg_count = len(list(Path("/tmp/g53/uniq").glob("*.tif"))) if Path("/tmp/g53/uniq").exists() else 0
-    inv_rows += (f"<tr><td>public registry rasters ({reg_count} files)</td><td>-</td><td>-</td>"
-                 f"<td>166 GeoTIFFs from 12 competing repos used for uniqueness validation</td><td>cloned from github.com (public repos)</td></tr>")
-    irr_rows = "".join(
-        f"<tr><td>{esc(i['id'])}</td><td>{esc(i['severity'])}</td><td>{esc(i['subject'])}</td><td>{esc(i['action'])}</td></tr>"
-        for i in irr)
-    lim_rows = "".join(f"<tr><td>{esc(i['id'])}</td><td>{esc(i['item'])}</td></tr>" for i in lim)
-    src_rows = "".join(
-        f"<tr><td>{esc(s['id'])}</td><td><a href=\"{esc(s['url'])}\">{esc(s['title'])}</a></td><td>{esc(s['access'])}</td></tr>"
-        for s in srcs["sources"])
-
-    b2_canary = exp1.get("B2_distance_segment_exact", {"separability_mean": 0.7746, "flag": "pass"})
-    body = f"""
-<section>
-  <h1>Evidence & Validation Architecture</h1>
-  <p class="note">Labels: <span class="pill">HOLDOUT-DTI</span> our proxy (evaluator version, withheld positives, 95% CI) ·
-  <span class="pill">ORGANIZER-CONFIRMED</span> receipt only · <span class="pill">MEASURED</span> computed here · <span class="pill">OWNER-CLAIM</span> not verified.</p>
-  <p class="note"><a href="research/hypotheses.md">Hypotheses Ranking</a> · <a href="research/gemsdoe32.md">GEMSDOE32 Analysis</a> · <a href="data/run_card.json">Run Card JSON</a></p>
 </section>
 
 <section>
-  <h2>Experiment 1 — Leakage Canary (MEASURED)</h2>
-  <p>Gate: feature separability (max(AUC, 1−AUC)) above 0.90 indicates leakage until proven otherwise. Footprint {exp1['footprint_px']:,} px; {exp1['known_fault_px_in_footprint']:,} known-fault px inside.</p>
-  <table><tr><th>Feature / Construction</th><th>Canary Result</th><th>Status / Diagnosis</th></tr>
-    <tr><td>GEMSDOE29 defect: full catalogue distance on training positives</td><td><b>{exp1['C1_leaky_distance_in_sample']['separability']:.3f}</b> ({exp1['C1_leaky_distance_in_sample']['value_on_known_fault_px']['fraction_exactly_zero']*100:.0f}% of positives exactly 0)</td><td><b style="color:var(--warn);">LEAK CONFIRMED</b> (deterministic target function)</td></tr>
-    <tr><td>GEMSDOE29 defect evaluated on withheld folds</td><td><b>{exp1['C2_leaky_distance_on_withheld']['separability_mean']:.3f}</b></td><td><b style="color:var(--warn);">LEAK CONFIRMED</b> (inflates holdout to 1.0)</td></tr>
-    <tr><td><b>H1 Segment-Exact Distance (Ours)</b></td><td><b>{b2_canary['separability_mean']:.4f}</b> (max: {b2_canary.get('separability_max', 0.7894):.4f})</td><td><b style="color:var(--ok);">PASSED (&lt; 0.90 GATE)</b>; legitimate spatial signal</td></tr>
-    <tr><td>4×4 Block Cross-Fit Distance</td><td>{exp1['B_distance_leak_free']['separability_mean']:.3f}</td><td>Passed, but over-aggressive (erases local signal)</td></tr>
-    <tr><td>Label-free feature bands (19 bands)</td><td>Max separability: {exp1['summary']['max_label_free_band_separability']:.3f}</td><td>All 19 bands pass gate</td></tr>
+  <h2>Format checks (shared template tools)</h2>
+  <table><tr><th>Check</th><th>Result</th></tr>{val_rows}</table>
+  <p class="note">The shared writer read the file back and verified it. The shared conformance gate checks that every
+  template-finite pixel is finite in [0, 1] and every template-NaN pixel is NaN, with a matching nodata tag.
+  Sources: {link_src('S23', 'template at commit dcbbb19')}.</p>
+</section>
+
+<section>
+  <h2>Pre-registered gates</h2>
+  <table>
+    <tr><th>Gate</th><th>Result</th></tr>{rows_gate}
   </table>
-  <details><summary>View per-band separability (19 bands)</summary>
-  <table><tr><th>Band</th><th>Name</th><th>Max Separability</th><th>Status</th></tr>{exp1_rows}</table></details>
-</section>
-
-<section>
-  <h2>Experiment 2 — Spatially Blocked 5-Fold Holdout Comparison (HOLDOUT-DTI)</h2>
-  <p>Five folds of withheld whole fault segments (seed 53, 10 px buffer), visible faults masked to 0. Evaluator: <code>{esc(exp2['evaluator']['name'])} {esc(exp2['evaluator']['version'])}</code> (official triangular kernel, α=0.2, β=0.8, R=300 m). Confidence intervals computed via Student's t distribution (df=4).</p>
-  <table><tr><th>Model Arm</th><th>q (emission fraction)</th><th>Pooled DTI</th><th>95% Confidence Interval</th><th>Withheld Positives Evaluated</th></tr>{arm_rows}</table>
-  <p class="note"><b>Pre-registered Selection Result:</b> Arm <code>h1_segment_exact</code> at q=0.0073 achieves pooled DTI <b>{pooled['pooled_DTI']:.4f}</b>, strictly outperforming baseline <code>bands</code> (0.0251) by +123% with non-overlapping 95% confidence intervals ([0.0488, 0.0631] vs [0.0162, 0.0338]).</p>
-</section>
-
-<section id="gemsdoe32">
-  <h2>GEMSDOE29 & GEMSDOE32 Scientific Analysis</h2>
-  <p><b>GEMSDOE29 Leakage Diagnosis:</b> Following Kaufman et al. (KDD 2011), leakage occurs when target information is used to construct features that would be unavailable at test time. Because GEMSDOE29 calculated distance from the target catalogue itself, all positives had distance 0.0, collapsing learning into a trivial threshold check. Learn-predict separation requires recomputing distance features on the training set using visible faults excluding the instance's own segment, as done in H1.</p>
-  <p><b>GEMSDOE32 (0.2778) Analysis:</b> GEMSDOE32 removed candidate dots within 2 pixels of mapped faults (B=2 px prune). Because test faults are by definition unmapped, dots on mapped faults are guaranteed false positives; removing them pruned FP while preserving TP. GEMSDOE53 generalizes this by pairing catalogue-flank pruning with H1 segment-exact learn-predict separation and along-strike NMS thinning.</p>
+  <table>
+    <tr><th>Gate</th><th>Rule and measured value</th></tr>
+    <tr><td>G1 holdout best</td><td>pooled HOLDOUT-DTI at {N:,} dots &gt; {frozen:.6f} (measured {pr['pooled_DTI']:.6f})</td></tr>
+    <tr><td>G2 equal budget</td><td>paired CI lower bound &gt; 0 (measured {paired['CI95_t_df4'][0]:+.6f})</td></tr>
+    <tr><td>G3 leakage canary</td><td>every ridge feature ≤ {x1['gate']:.2f} (worst measured {x1['worst_candidate_feature_separability']:.6f})</td></tr>
+    <tr><td>G4 format</td><td>template writer read-back, template conformance and validator exit codes 0</td></tr>
+    <tr><td>G5 uniqueness</td><td>every registry raster: Spearman ≤ {uq['thresholds']['spearman_rho']:.2f} and ≤ {pct(uq['thresholds']['dot_overlap_within_3px'], 0)} of our dots within 3 px; surface top-N likewise (measured max Spearman {uq['max_spearman_rho']:.3f}; max dot overlap {pct(uq['max_dot_overlap_within_3px_used'])}; {len(dot_rows)} dot-level and {len(surf_rows)} surface-level rows flagged)</td></tr>
+  </table>
+  <p class="note">Pre-registration: <a href="{BLOB}/evidence/preregistration_x2.json">evidence/preregistration_x2.json</a> (written before the run; ridge module hash pinned).</p>
 </section>
 
 <section id="uniqueness">
-  <h2>Parallel-Run Uniqueness & Lane Compliance (MEASURED)</h2>
-  <p>Audited against all {uniq['n_registry_files']} registry rasters from competing public repositories:</p>
-  <table><tr><th>Repo</th><th>File Name</th><th>Spearman rho (&lt;0.90)</th><th>Our Dots Within 3 px (&lt;70%)</th><th>Registry Dots</th><th>Lane Status</th></tr>{uniq_rows}</table>
-  <p class="note">Maximum observed overlap across all {uniq['n_registry_files']} files is <b>{uniq['max_dot_overlap_within_3px']:.1%}</b> (below the 70% threshold). Maximum Spearman rank correlation is <b>{uniq['max_spearman_rho']:.4f}</b> (below 0.90). Zero drift flags.</p>
-</section>
-
-<section>
-  <h2>Official Run Card (Summary; full JSON in <code>evidence/run_card.json</code>)</h2>
+  <h2>Uniqueness against the public GEMS repos</h2>
+  <p>Scope: {reg['repos_checked']} repos whose names contain "GEMS", {reg['rasters_downloaded']:,} rasters downloaded, {uq['n_registry_files_compared']:,} compared
+  (exact duplicate check by sha256 first; none matched). {uq['n_dense_registry_files']} registry rasters are dense (more than 20% of the footprint nonzero) and are compared on their top-N pixels.</p>
   <table>
-    <tr><th>Hypothesis</th><td>{esc(card['hypothesis'])}</td></tr>
-    <tr><th>Mechanism</th><td>{esc(card['mechanism'])}</td></tr>
-    <tr><th>Non-Fault Mimicking Process</th><td>{esc(card['named_non_fault_process_that_could_mimic_it'])}</td></tr>
-    <tr><th>Holdout Performance</th><td>Pooled HOLDOUT-DTI {card['holdout']['pooled_DTI']:.4f} (95% CI {card['holdout']['CI95_t_df4_on_fold_mean']}); {card['holdout']['withheld_fault_px_total']:,} withheld fault px across 5 folds</td></tr>
-    <tr><th>Registry Overlap / Drift</th><td>Any drift flag: {card['correlation_overlap_vs_registry']['any_drift_flag']}; max rho {card['correlation_overlap_vs_registry']['max_spearman_rho_sample']:.4f}; max dot overlap {card['correlation_overlap_vs_registry']['max_our_dots_within_3px_of_registry_dots']:.4f}</td></tr>
-    <tr><th>Primary Raster SHA256</th><td><code>{esc(card['raster_sha256']['primary_nan_outside'])}</code></td></tr>
-    <tr><th>Template Validator Status</th><td>PASSED ({esc(card['validator_output']['shared_template_validator']['template_repo'])})</td></tr>
-    <tr><th>Verdict</th><td><b style="color:var(--ok);font-size:16px;">{esc(card['verdict'].upper())}</b>: {esc(card['verdict_reason'])}</td></tr>
+    <tr><th>Measure</th><th>Value</th></tr>
+    <tr><td>Max Spearman rho, final dots (threshold 0.90)</td><td>{uq['max_spearman_rho']:.4f}</td></tr>
+    <tr><td>Max share of our dots within 3 px of one registry raster (threshold 70%)</td><td>{pct(uq['max_dot_overlap_within_3px_used'], 3)}</td></tr>
+    <tr><td>Max Spearman rho, surface before placement</td><td>{uq['max_surface_spearman_rho']:.4f}</td></tr>
+    <tr><td>Max surface top-N share within 3 px</td><td>{pct(uq['max_surface_top_N_within_3px'], 2)}</td></tr>
+  </table>
+  <h3>Chance baseline for the flagged rows (diagnostic; flags unchanged)</h3>
+  <p class="note">Random footprint pixels, at the same count as our dots, show the overlap that placement alone would produce against each registry raster.
+  If observed ≈ random, the flag reflects that raster's geometry, not our placement.</p>
+  <table><tr><th>Registry file (truncated)</th><th>Mode</th><th>Registry points</th><th>Observed</th><th>Random</th><th>Lift vs random</th></tr>{ob_rows}</table>
+</section>
+"""
+    (DOCS / "submission.html").write_text(page("Submission file", body2, "submission.html"))
+
+    # ---------------------------------------------------------------- evidence.html
+    exp1_sum = exp1["summary"]
+    ex_rows = "".join(
+        f"<tr><td>{esc(a)}</td><td>{x2_arm_pooled(arms, a, '37654')}</td><td>{x2_arm_pooled(arms, a, '44090')}"
+        f"</td><td>{x2_arm_pooled(arms, a, '51674')}</td><td>{x2_arm_pooled(arms, a, '103348')}</td></tr>"
+        for a in ("ridge_pack", "ridge_topn", "hgb_bands"))
+    feat_rows = "".join(f"<tr><td>{esc(k)}</td><td>{v:.6f}</td></tr>" for k, v in
+                        ((n, f['max_separability_over_folds']) for n, f in x1['features'].items()))
+    irr_rows = "".join(f"<tr><td>{esc(i['id'])}</td><td>{esc(i['severity'])}</td><td>{esc(i['status'])}</td>"
+                       f"<td>{esc(i['subject'])}</td><td>{esc(i['detail'])}</td></tr>" for i in irr)
+    lim_rows = "".join(f"<tr><td>{esc(i['id'])}</td><td>{esc(i['item'])}</td></tr>" for i in lim)
+    src_rows = "".join(f"<tr><td>{esc(s['id'])}</td><td><a href=\"{esc(s['url'])}\">{esc(s['title'])}</a></td>"
+                       f"<td>{esc(s.get('access', ''))}</td></tr>" for s in srcs)
+    inp_rows = "".join(f"<tr><td><code>{esc(k)}</code></td><td><code>{esc(v)}</code></td></tr>"
+                       for k, v in x2["inputs"].items())
+    body3 = f"""
+<section>
+  <h2>Experiments (budget: 3 experiments, 2 hours)</h2>
+  <table>
+    <tr><th>Experiment</th><th>What it did</th><th>Receipt</th></tr>
+    <tr><td>E1 (earlier)</td><td>leakage canary on 19 bands and distance features</td><td><a href="{BLOB}/evidence/exp1_leakage_canary.json">exp1</a></td></tr>
+    <tr><td>E2 (earlier)</td><td>hide-and-recover holdout, bands / leak-free / leaky ablation</td><td><a href="{BLOB}/evidence/exp2_holdout_arms.json">exp2</a></td></tr>
+    <tr><td>X1</td><td>leakage canary on the ridge features (G3)</td><td><a href="{BLOB}/evidence/x1_ridge_canary.json">x1</a></td></tr>
+    <tr><td>X2</td><td>pre-registered holdout: H2 vs HGB vs unpacked ablation, N grid</td><td><a href="{BLOB}/evidence/x2_ridge_holdout.json">x2</a></td></tr>
+    <tr><td>X3</td><td>build with the shared writer, validators, uniqueness (G4, G5)</td><td><a href="{BLOB}/evidence/x3_candidate_receipt.json">x3</a></td></tr>
   </table>
 </section>
 
-<section id="inventory">
-  <h2>Data Inventory</h2>
-  <table><tr><th>File Name</th><th>Size (Bytes)</th><th>SHA256 (prefix)</th><th>Description</th><th>Source / Provenance</th></tr>{inv_rows}</table>
+<section>
+  <h2>X2: HOLDOUT-DTI by arm and dot budget (pooled over 5 folds)</h2>
+  <p class="note">Shared template evaluator (commit dcbbb19). Frozen best {frozen:.6f}. Each cell: pooled DTI (95% t-CI on the fold mean).</p>
+  <table><tr><th>Arm</th><th>{37654:,} dots</th><th>{44090:,} dots (primary)</th><th>{51674:,} dots</th><th>{103348:,} dots</th></tr>{ex_rows}</table>
+  <p class="note">ridge_pack = H2 (packed). ridge_topn = same centrelines, no spacing rule (ablation). hgb_bands = frozen HGB baseline.
+  The E2 q-grid reproduces through the shared evaluator: {json.dumps(x2['E2_reproduction_hgb_top_q']['shared_scorer'])}.</p>
+  <h3>Paired differences (same folds, same budget)</h3>
+  <table><tr><th>Comparison</th><th>Mean</th><th>95% CI (t, df 4)</th></tr>
+  {''.join(f"<tr><td>{esc(k)}</td><td>{v['mean']:+.6f}</td><td>{v['CI95_t_df4'][0]:+.6f} to {v['CI95_t_df4'][1]:+.6f}</td></tr>" for k, v in x2['paired_differences'].items() if k.endswith(f'@{N}'))}
+  </table>
+</section>
+
+<section>
+  <h2>X1: leakage canary (separability = max(AUC, 1 − AUC); gate {x1['gate']:.2f})</h2>
+  <table><tr><th>Feature (computed from band 2 only)</th><th>Max over folds</th></tr>{feat_rows}</table>
+  <p class="note">The last two rows are reference bands and are not candidate features. Worst candidate separability {x1['worst_candidate_feature_separability']:.6f}: G3 {'pass' if x1['G3_pass'] else 'FAIL'}.</p>
+</section>
+
+<section id="gemsdoe29">
+  <h2>GEMSDOE29 leakage (formal diagnosis, measured on the provided data)</h2>
+  <p>A feature built from the labels it is scored against is a shortcut. E1 separability of the distance to the full catalogue,
+  evaluated on the labels it was built from, is {exp1['C1_leaky_distance_in_sample']['separability']:.1f}. On withheld positives it is {exp1['summary']['leaky_distance_on_withheld_separability_mean']:.1f}.
+  The label-free bands reach at most {exp1_sum['max_label_free_band_separability']:.6f} (no band above the 0.90 gate). The leak-free
+  distance (4×4-block cross-fit) reaches {exp1_sum['leak_free_distance_separability_mean']:.6f}. Full write-up: <a href="{BLOB}/docs/leakage-review.md">docs/leakage-review.md</a>.</p>
+  <p class="note">Labels: MEASURED (E1, E2). The GEMSDOE29 code path is cited from the prior review and is not re-read in this session.</p>
+</section>
+
+<section id="gemsdoe32">
+  <h2>GEMSDOE32 (0.2778 claim): verified and unverified</h2>
+  <table>
+    <tr><th>Claim</th><th>Label</th><th>Status</th></tr>
+    <tr><td>extradr19 at 0.2778 (#13)</td><td>USER-REPORTED</td><td>not checked against an official dated read; the owner's ledger shows 0.2449 at rank 19 (2026-10-03)</td></tr>
+    <tr><td>The file is H33-2-B2 (37,654 dots, 0.2708 base, 2-px catalogue prune)</td><td>OWNER-CLAIM</td><td>the README read 2026-10-08 names h32d-submodular-46090 as the one-click file (IR-53-32)</td></tr>
+    <tr><td>Thinning a model emission to a 2.8-px spacing gives the 0.2600 d2.8 file</td><td>OWNER-CLAIM</td><td>the owner says the score-to-file link is unresolved (S22)</td></tr>
+    <tr><td>Spacing roughly doubles credit per dot at a fixed dot budget</td><td>HOLDOUT-DTI (measured)</td><td>X2: TP_w 4,678 (packed) vs 2,072 (unpacked) at 44,090 dots</td></tr>
+  </table>
+  <p>Full analysis: <a href="{BLOB}/docs/research/gemsdoe32.md">docs/research/gemsdoe32.md</a>.</p>
 </section>
 
 <section id="irregularities">
-  <h2>Audited Irregularities</h2>
-  <table><tr><th>ID</th><th>Severity</th><th>Subject</th><th>Resolution / Status</th></tr>{irr_rows}</table>
+  <h2>Irregularities (open first)</h2>
+  <table><tr><th>ID</th><th>Severity</th><th>Status</th><th>Subject</th><th>Detail</th></tr>{irr_rows}</table>
 </section>
 
 <section id="limitations">
-  <h2>Limitations & Future Work</h2>
-  <table><tr><th>ID</th><th>Description</th></tr>{lim_rows}</table>
-  <h3>Future Research Directions</h3>
-  <ul>
-    <li>Incorporate H2/H4 multi-scale Hessian ridge filters on RTP magnetics and gravity gradients into the GBDT feature stack.</li>
-    <li>Explore Bayesian optimization for automated spatial dilation thresholds along complex relay ramps.</li>
-  </ul>
+  <h2>Limitations</h2>
+  <table><tr><th>ID</th><th>Item</th></tr>{lim_rows}</table>
 </section>
 
-<section id="sources">
-  <h2>Official Verified Sources for Review</h2>
-  <table><tr><th>ID</th><th>Source Name</th><th>Access Status</th></tr>{src_rows}</table>
+<section>
+  <h2>Data inventory (inputs, pinned)</h2>
+  <table><tr><th>File</th><th>sha256 (pinned by the sources and the template)</th></tr>{inp_rows}</table>
+  <p class="note">Sample footprint {x2['footprint_px']:,} px; known-fault pixels {x2['known_fault_px']:,}; {x2['folds']['segments']:,} fault segments.
+  Registry: {reg['repos_checked']} repos checked, {reg['rasters_downloaded']:,} rasters, scope: {esc(reg['scope'])}.</p>
+</section>
+
+<section>
+  <h2>Sources</h2>
+  <table><tr><th>ID</th><th>Source</th><th>Access</th></tr>{src_rows}</table>
+  <p class="note">Hypotheses: <a href="{BLOB}/docs/research/hypotheses.md">docs/research/hypotheses.md</a>.
+  Run card: <a href="{BLOB}/evidence/run_card.json">evidence/run_card.json</a>.
+  Parallel-run card: <a href="{BLOB}/evidence/parallel-run-card.json">evidence/parallel-run-card.json</a>.</p>
 </section>
 """
-    (DOCS / "evidence.html").write_text(page("Evidence", body, "evidence.html"))
-
-    # Copy files to docs/data/ for self-contained static site
+    (DOCS / "evidence.html").write_text(page("Evidence", body3, "evidence.html"))
+    # Pages cannot serve evidence/ or registry/, so the cited JSON is copied into docs/data/ (current copies only).
     data_dir = DOCS / "data"
     data_dir.mkdir(exist_ok=True)
-    for rel in ["evidence/run_card.json", "evidence/exp1_leakage_canary.json", "evidence/exp2_holdout_arms.json",
-                "evidence/uniqueness_check.json", "evidence/overlap_baseline.json", "evidence/selection.json",
-                "registry/irregularities.json", "registry/limitations.json", "registry/sources.json"]:
-        (data_dir / Path(rel).name).write_text((ROOT / rel).read_text())
-    (DOCS / ".nojekyll").write_text("")
-    print("Site built successfully in docs/ (index.html, submission.html, evidence.html)")
+    keep = {}
+    for rel in ["evidence/run_card.json", "evidence/parallel-run-card.json", "evidence/x1_ridge_canary.json",
+                "evidence/x2_ridge_holdout.json", "evidence/x3_candidate_receipt.json", "evidence/uniqueness_v2.json",
+                "evidence/overlap_baseline_v2.json", "evidence/preregistration_x2.json",
+                "evidence/exp1_leakage_canary.json", "evidence/exp2_holdout_arms.json",
+                "evidence/registry_manifest.json", "registry/sources.json", "registry/irregularities.json",
+                "registry/limitations.json"]:
+        src = ROOT / rel
+        (data_dir / src.name).write_bytes(src.read_bytes())
+        keep[src.name] = True
+    # other sessions' files in docs/data are left in place (not deleted)
+    print("wrote docs/index.html, docs/submission.html, docs/evidence.html; label:", label)
     return 0
+
+
+def x2_arm_pooled(arms: dict, arm: str, n: str) -> str:
+    v = arms[arm][n]
+    lo, hi = v["CI95_t_df4_on_fold_mean"]
+    return f"{v['pooled_DTI']:.4f} ({lo:.4f} to {hi:.4f})"
 
 
 if __name__ == "__main__":

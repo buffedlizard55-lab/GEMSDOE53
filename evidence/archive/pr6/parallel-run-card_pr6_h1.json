@@ -1,0 +1,36 @@
+{
+  "hypothesis": "The deprecated GEMSDOE29 artifact path lets the full-catalogue distance feature encode mapped-label membership; rebuilding catalogue features from fold-visible faults should remove that direct shortcut.",
+  "mechanism": "Artifact training used all catalogue pixels as positives and derived E_dist from that same full label raster. The historical training sample therefore makes the positive label a deterministic function of E_dist. This review inspected public source and evidence read-only; it did not rerun the holdout. The legacy holdout also has an unresolved full-label negative-sampling dependency and does not report the required pooled DTI with a 95% interval.",
+  "named_non_fault_process": "Fluvial incision can create linear stream-course lineaments that resemble terrain expressions attributed to faults; this is a plausible DEM-feature confounder, not tested in this run (USGS OFR 89-365).",
+  "holdout_dti": {
+    "evidence_label": "HOLDOUT-DTI",
+    "value": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "ci95": null,
+    "status": "NOT RUN: local data, feature stack, and required shared evaluator are absent. No score is claimed."
+  },
+  "correlation_overlap_vs_registry": {
+    "before_placement": {
+      "rank_correlation": null,
+      "dot_share_within_3px": null,
+      "status": "NOT RUN: no candidate surface raster or registry rasters in this checkout."
+    },
+    "final_dots": {
+      "rank_correlation": null,
+      "dot_share_within_3px": null,
+      "status": "NOT RUN: no final-dot raster or registry rasters in this checkout."
+    }
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "no_nan_inside_footprint": "NOT RUN: no prediction raster or footprint template.",
+    "values_in_0_1": "NOT RUN: no prediction raster.",
+    "crs_shape_transform_match": "NOT RUN: no prediction raster or sample-submission template."
+  },
+  "submission": {
+    "name": null,
+    "note": "No file generated: no local template, stack, or validated candidate."
+  },
+  "verdict": "negative"
+}

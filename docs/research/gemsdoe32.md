@@ -1,87 +1,59 @@
-# GEMSDOE32 (0.2778 Leaderboard High Score): Comprehensive PhD-Level Structural & Metric Analysis
+# GEMSDOE32 (the 0.2778 claim): why a dotted file can score high, and whether we can beat it
 
-**Author:** GEMSDOE53 Research Team  
-**Date:** 2026-10-08 (UTC)  
-**Target Submission:** `h33-h33-2-b2-20261004T220000Z-e5eb6e7e` (Score: 0.2778, Leaderboard Rank #13)  
-**Objective:** Deconstruct the exact mathematical, geophysical, and data-mining reasons why GEMSDOE32 achieved the highest score among GEMSDOE sites, and systematically engineer a unique methodology to exceed 0.2778 (targeting the current top scores: 0.3195 and 0.3774).
+Labels used below. **MEASURED** = computed in this repo from files (`evidence/`, `registry/`).
+**OWNER-CLAIM** = stated on the GEMSDOE32 owner repo or site, not verified by an organizer.
+**USER-REPORTED** = a score given in the brief or a ledger, not verified by an organizer or from a dated official read.
+**HOLDOUT-DTI** = our proxy. Nothing here is an organizer score.
 
----
+## What is verified (and what is not)
 
-## 1. The Competition Metric Mechanics: Distance-Weighted Tversky Index (DTI)
+- **USER-REPORTED:** `extradr19` at 0.2778 (#13). Nothing in the repositories links that row to a GEMSDOE32 file (IR-53-02).
+  Our static fetch of the DrivenData leaderboard returned "Loading..." (client-side), so we read no leaderboard
+  number ourselves. The owner's ledger (reads dated 2026-10-03) gives extradr19 at 0.2449 (rank 19) and rank 1 at
+  0.3195. The brief gives rank 1 at 0.3774. These cannot both be right for the same snapshot (IR-53-26).
+- **OWNER-CLAIM:** the GEMSDOE32 README (read 2026-10-08) names `gemsdoe32-h32d-submodular-multipysics-46090` as its
+  one-click file. An earlier landing-page read named `gemsdoe32-h33-h33-2-b2` as primary and UNSCORED, and
+  that is the file behind the 0.2778 claim. The 0.2778 link to H33-2-B2 is not in the owner's ledger (IR-53-32).
+- **OWNER-CLAIM (S20, S22):** the owner's analysis says the 0.2600 "d2.8" file is the model's own emission thinned
+  by a 2.8 px distance rule to 44,090 dots, with none on the catalogue. It also says the score-to-file link is
+  unresolved. It is not an organizer receipt.
 
-The GEMS Prize competition evaluates predictions using a Distance-weighted Tversky Index:
-$$\text{DTI} = \frac{\text{TP}_w}{\text{TP}_w + \alpha\,\text{FP}_w + \beta\,\text{FN}_w}$$
-where $\alpha = 0.2$, $\beta = 0.8$, and the weighting kernel is a triangular radial decay function:
-$$k(d) = \max\left(0,\, 1 - \frac{d}{R}\right), \quad R = 300\text{ m} \text{ (3 pixels at 100 m resolution)}$$
+## Why a sparse, dotted file can score well (MEASURED mechanism, on our proxy)
 
-### Critical Mathematical Consequences:
-1. **Asymmetric Error Penalties ($\beta / \alpha = 4.0$):**
-   A false negative ($\beta = 0.8$) is penalised **four times more severely** than a false positive ($\alpha = 0.2$). The metric heavily rewards capturing unmapped faults even if the prediction includes some spurious background mass.
-2. **Kernel Saturation vs. Bloat:**
-   Because credit decays linearly to zero at $R = 300\text{ m}$, placing a cluster of adjacent dots within 100–200 m of each other on a fault trace yields minimal incremental $\text{TP}_w$ (saturation), but if that cluster is misplaced by 400 m, **every dot accumulates full $\text{FP}_w$ penalty**.
-3. **Continuous Probability Trap:**
-   Continuous probability surfaces (e.g. raw GBDT output across all 5.16 million pixels) assign small positive probabilities (0.02–0.15) to millions of non-fault pixels. In aggregate, $\sum \text{FP}_w$ reaches $300,000 - 600,000$, driving $\alpha\,\text{FP}_w$ to $60,000 - 120,000$ and collapsing DTI to $<0.05$. Top-tier performance requires **sparsification into discrete, confident lineaments**.
+1. **Credit is the bottleneck, not dot count.** With alpha 0.2 and beta 0.8, a dot's false-positive cost is at most alpha
+   (about 0.2 per dot at full cost). Credit comes from dots near truth. Two dots 1 px apart on the same truth share one
+   credit: the metric takes the max over the kernel, not the sum.
+2. **Spacing turns the same dot budget into more distinct credit.** On our holdout (X2, 44,090 dots per fold, 5 folds):
 
----
+   | arm (HOLDOUT-DTI) | pooled DTI | TP_w | FP_w | FN_w |
+   |---|---:|---:|---:|---:|
+   | HGB 19 bands, top-N | 0.0265 | 1,998.5 | 130,448.8 | 58,989.5 |
+   | ridge centrelines, top-N, no spacing | 0.0223 | 2,071.8 | 218,124.3 | 58,916.2 |
+   | ridge centrelines, Poisson 2.8 px (ours) | **0.0501** | **4,678.0** | 218,266.5 | 56,310.0 |
 
-## 2. Why and How GEMSDOE32 (`h33-h33-2-b2`) Achieved 0.2778
+   (Pooled over 5 folds, so FP_w counts about 5 x 44k dots. TP_w + FN_w equals the 60,988 catalogue pixels in every
+   arm, which is a structural check of the bookkeeping.) At the same false-positive cost, packing more than doubles the
+   credit. Source: `evidence/x2_ridge_holdout.json`.
+3. **So a file in the d2.8 family can score well for a reason the feature does not explain.** Thinning a thick
+   emission into a spaced set of dots is what converts it into credit. This is the owner's own account (S22) and
+   matches our measurement. It is not an organizer result.
+4. **The 2-px catalogue prune** (the owner's step in H33-2-B2) removes dots that our holdout could not test. A dot
+   adjacent to a mapped fault may earn credit on a new parallel fault, or may just be a false positive. It is untested
+   here (L-17).
 
-GEMSDOE32 built upon GEMSDOE28 and GEMSDOE31 (which scored 0.2708) and achieved 0.2778 via two core structural properties:
+## Can we beat 0.2778?
 
-### A. Point Budget Optimization (~37,654 dots)
-- The known USGS/INGENIOUS catalogue in Nevada contains **60,988 positive pixels** distributed across 3,199 fault segments.
-- Expert-identified unmapped faults in the private evaluation set are estimated to comprise ~30,000 to ~50,000 linear pixels.
-- Under a 300 m ($3\text{ px}$) triangular kernel, an unmapped fault does not need every contiguous pixel filled; placing dots spaced every 2–3 pixels along strike provides full continuous $\text{TP}_w$ coverage.
-- Thus, a budget of **37,000–45,000 dots** represents the exact mathematical sweet spot between maximum fault length coverage ($\text{TP}_w$) and minimized background false positives ($\text{FP}_w$).
+- **Not established for the organizer's truth.** Our only evidence is HOLDOUT-DTI, which rewards recovery of mapped
+  faults (L-02). The holdout favours larger dot budgets; user-reported board entries favour sparser ones (IR-53-28).
+- **Our candidate (H2) beats the frozen holdout best** (0.0501 at 44,090 dots versus 0.0352 for the repo's best
+  at 103k dots) and the same-budget HGB baseline. It is not a byte copy of any registry file, and its dot-level
+  rank correlation is at most 0.09. Its uniqueness gate fails at the surface level against two team files (GEMSDOE46
+  dfa-corroborated, lift 3.6; GEMSDOE40 eulerdepth-si0, lift 5.6; `evidence/overlap_baseline_v2.json`). The file is
+  therefore DO-NOT-SUBMIT.
+- **What would decide it:** an organizer receipt for a file with this structure, or an agreed chance-corrected
+  overlap rule so that the lattice flag stops blocking dense dot files. Both need a decision from you.
 
-### B. The $B = 2\text{ px}$ (200 m) Catalogue Flank Prune
-- **The Ground Truth Definition:** The competition targets are **unmapped faults** (expert-mapped structures absent from the public database).
-- Any prediction placed directly on an existing catalogue fault or on its immediate flank ($\le 2\text{ px} / 200\text{ m}$) **cannot earn true-positive credit**; it is guaranteed to be scored as a false positive ($\text{FP}_w$).
-- GEMSDOE32 applied a morphological binary dilation of the known catalogue ($B = 2\text{ px}$) and zeroed out all candidate points within that mask.
-- This single pruning step eliminated thousands of guaranteed false positives without sacrificing any true positives on unmapped faults, directly boosting the score from 0.2708 to **0.2778**.
+## Action
 
----
-
-## 3. Limitations of GEMSDOE32 and How to Beat It (>0.2778)
-
-While GEMSDOE32 was effective, it suffered from three fundamental scientific and structural limitations:
-
-1. **Lack of Physics-Informed Conditioning:**
-   GEMSDOE32 performed a purely geometric buffer prune on a pre-existing dotted surface. It did not condition points on regional Andersonian stress mechanics, fault-slip tendency, or hydrothermal permeability.
-2. **No Learn-Predict Separation for Clustering:**
-   GEMSDOE32 did not resolve the Kaufman et al. (2011) leakage dilemma: how to legitimately teach a machine learning model that unmapped faults cluster in en-echelon belts parallel to known master faults without leaking the target catalogue.
-3. **Isotropic Point Distribution:**
-   Dots were pruned uniformly in all directions, ignoring the fact that Basin and Range geothermal systems are highly anisotropic, concentrating along NNE extensional fault tips and NW strike-slip transfer ramps.
-
-### The GEMSDOE53 Strategy to Score Above 0.2778 (Targeting 0.3195 - 0.3774):
-
-To beat 0.2778, GEMSDOE53 implements four complementary innovations:
-
-1. **H1: Segment-Exact Learn-Predict Separation:**
-   - Instead of discarding distance to faults (which drops predictive power) or leaking the target (GEMSDOE29), we compute distance to the catalogue **excluding only the pixel's own connected fault segment**.
-   - Positives see distance to neighbouring fault systems (mean 1.1 km), exactly mirroring what unmapped test faults will see at inference time.
-   - **Result:** Holdout DTI increased by **+123.3%** over baseline (0.0560 vs 0.0251) with non-overlapping 95% confidence intervals.
-2. **Multi-Physics Hydrothermal Corroboration (H2):**
-   - Active geothermal circulation requires simultaneous:
-     - High geodetic shear strain rate (Band 7) and second strain invariant (Band 4) to maintain open fracture networks against mineral sealing;
-     - Basement potential-field steps (magnetic horizontal gradient Band 3 and gravity gradient Band 5) indicating deep permeable crustal faults;
-     - Quaternary microseismicity (Bands 10, 16) proving active brittle reactivation.
-3. **Andersonian Relay-Ramp & Step-Over Structural Focusing (H3):**
-   - Faulds & Hinz (2015) and the INGENIOUS project established that >80% of Great Basin geothermal fields occur in structural step-overs, terminations, or intersections.
-   - We target candidate lineaments within the 200 m to 2.5 km relay damage corridor, capturing the dilatational step-over breaches where blind geothermal systems reside.
-4. **Non-Maximal Suppression (NMS) Spatial Thinning ($d \ge 300\text{ m}$):**
-   - We apply a 3×3 local peak filter along structural strikes, ensuring emitted dots are spaced $\ge 300\text{ m}$ apart.
-   - This prevents kernel saturation, eliminates redundant clustered false positives, and maximizes the $\text{TP}_w$ efficiency per emitted point.
-
----
-
-## 4. Verification of Uniqueness and In-Lane Compliance
-
-To satisfy the parallel-run protocol, our candidate raster (`gems53-h1-relay-prune-q0p0073-nan.tif`) was evaluated against all **166 registry GeoTIFFs** from 12 competing repositories:
-- **Spearman Rank Correlation:** Max $\rho = 0.0518 \ll 0.90$ (completely uncorrelated with previous submissions).
-- **Dot Overlap with GEMSDOE32:** Only **24.3%** of our dots fall within 3 px of GEMSDOE32's `h33-h33-2-b2`.
-- **Maximum Dot Overlap across all 166 registry files:** **0.6179** ($61.8\% < 70.0\%$).
-- **Drift Flags:** **Zero**.
-- **Exact Duplicates:** **Zero**.
-
-The generated submission is fully unique, scientifically grounded, strictly in-lane, and ready for deployment.
+- No submission slot is selected in this session.
+- Keep every GEMSDOE32 number labelled USER-REPORTED or OWNER-CLAIM until a dated official read or receipt exists.
