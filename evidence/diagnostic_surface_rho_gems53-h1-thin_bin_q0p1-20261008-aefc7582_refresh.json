@@ -1,0 +1,34 @@
+{
+ "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
+ "registry": "/tmp/g53/refresh",
+ "re_derivation": {
+  "top_q_nonzero_re_derived": 516737,
+  "top_q_pre_placement_E3": 516737,
+  "match": true
+ },
+ "rho_flagged_rows_checked": 3,
+ "flagged_by_surface_rho_footprint_only": 0,
+ "flagged_by_surface_rho_whole_grid": 0,
+ "rows": [
+  {
+   "file": "GEMSDOE52__docs__downloads__gems52-h60d-dis_contrast-arm37654px.tif",
+   "rho_surface_whole_grid_receipt": null,
+   "rho_surface_whole_grid_recomputed": 0.063299,
+   "rho_surface_footprint_only": 0.009649
+  },
+  {
+   "file": "GEMSDOE53__docs__downloads__gems53-h1-relay-prune-q0p0073-nan.tif",
+   "rho_surface_whole_grid_receipt": null,
+   "rho_surface_whole_grid_recomputed": 0.098888,
+   "rho_surface_footprint_only": 0.128483
+  },
+  {
+   "file": "GEMSDOE53__submissions__GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif",
+   "rho_surface_whole_grid_receipt": null,
+   "rho_surface_whole_grid_recomputed": 0.073353,
+   "rho_surface_footprint_only": 0.016494
+  }
+ ],
+ "seconds": 50.9,
+ "reading": "diagnostic only; the receipt keeps the pre-registered whole-grid rule (IR-53-47)"
+}

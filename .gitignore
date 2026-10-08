@@ -8,3 +8,10 @@ __pycache__/
 !docs/downloads/*.zip
 # explicit exception: the H2 submission-format GeoTIFF is committed on purpose (ignored by default)
 !submissions/*.tif
+# Submission files shipped on purpose (explicit exception, session 2026-10-08): GEMS53 candidate and other session files in docs/submissions and submissions/
+!docs/submissions/
+!docs/submissions/*.tif
+!docs/downloads/
+!docs/downloads/*.tif
+!submissions/
+!submissions/*.tif

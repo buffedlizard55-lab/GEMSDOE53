@@ -288,6 +288,102 @@
       "subject": "Uniqueness scope gap: the 166-raster check missed the 5-px lattice family",
       "detail": "The other session's check (166 GeoTIFFs in 12 repos) reports max overlap 61.79%. This session's check (1,200 rasters in 63 repos) finds 60 rows above 70% for the same file (chance lift 0.996 to 1.31; the 13GEMSDOE r13-lattice family). The earlier result was therefore a scope limit, not a clean bill of health.",
       "action": "Use the full manifest (evidence/registry_manifest.json) for every label decision. Re-check any file labelled OK-TO-SUBMIT against it."
+    },
+    {
+      "id": "IR-53-37",
+      "severity": "high",
+      "status": "open-corrected",
+      "subject": "Negative-pool side channel in the design-A holdout (exp2 and E1)",
+      "detail": "The design-A training pool was fp & ~cat & ~buf, and the 10 px buffer is defined from the WITHHELD faults. The buffer removed 371,176 to 390,883 negative pixels per fold (7.3% to 7.6% of the pool), all within 10 px of a withheld fault. Measured effect on fold 0 of the bands top-q 0.02 arm: 0.0266 (design A) vs 0.0106 (design B). The design-A H1 canary used the same buffered background, so its separability is also inflated. This is the pattern the GEMSDOE29 audit flagged (docs/leakage-review.md).",
+      "action": "Corrected to design B (negatives = every footprint pixel that is not a visible fault). Pre-registration amendment DEV-1 (docs/research/preregistration-2026-10-08.md section 8) is committed before the design-B run. Design-A numbers (evidence/exp2_holdout_arms.json, evidence/e1_h1_thin_holdout.json) are kept as reference only and are not used for any decision."
+    },
+    {
+      "id": "IR-53-38",
+      "severity": "high",
+      "status": "open",
+      "subject": "Verbatim user prompt is not stored in the workspace",
+      "detail": "README.md states that the verbatim user message is not stored. This session has only a condensed record of the requirements. The README requirements block is therefore recorded in the user's terms and is not a verbatim copy.",
+      "action": "Not fabricated. The user should paste the verbatim prompt into README.md (section 'Verbatim prompt'). Until then the README says so explicitly."
+    },
+    {
+      "id": "IR-53-39",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Protocol names two shared tools that do not exist in the template",
+      "detail": "The parallel-run protocol names evaluate_holdout.py and submission_writer.py. At template commit dcbbb19 (fetched 2026-10-08) neither file exists. The nearest shared tools are src/blocks.py with scripts/block_holdout_eval.py (holdout), src/submission_io.py (writer), scripts/validate_submission.py and python -m src.submission_io validate-conformant (validators), and src/metrics.py (DTI).",
+      "action": "Mapping recorded in the pre-registration section 3. This session imports the template modules by file path and does not copy them. Any fix belongs in the template, not in a fork."
+    },
+    {
+      "id": "IR-53-40",
+      "severity": "high",
+      "status": "open",
+      "subject": "H3 (fault-parallel strain orientation) is not testable with the public strain data",
+      "detail": "The geodetic strain CSV in the INGENIOUS mirror (jklinck/geothermal_research commit 56d78de7, geodetics_INGENIOUS_regional_data/geodetic_strain_rate_csv.csv) has only the columns long_wgs84, lat_wgs84, second_inv_strainrate_10e-9, dilationrate_10e-9, shearrate_10e-9. The NBMG README gives the principal rates and derived scalars only. Orientation needs the full tensor or the principal azimuths, which are not in the stack or in this CSV.",
+      "action": "H3 is marked BLOCKED in docs/research/hypotheses.md. Retrieving the tensor would need the NBMG or GDR submission 1391, which the sandbox cannot reach (egress allow-list)."
+    },
+    {
+      "id": "IR-53-41",
+      "severity": "medium",
+      "status": "open",
+      "subject": "GEMSDOE32 'zeros' variant fills the whole grid with 0 (not NaN outside the footprint)",
+      "detail": "Measured on the registry copy of gemsdoe32-h33-h33-2-b2 (zeros variant): 12,279,160 finite pixels, the whole 3730 x 3292 grid. The rules say outside the bounds must be null or NaN. The NaN variant of the same file has 5,167,373 finite pixels (the footprint). Which variant the owner submitted is unknown (no receipt, IR-53-02).",
+      "action": "Recorded as a fact about the registry file. No claim is made about the portal outcome of the zeros variant."
+    },
+    {
+      "id": "IR-53-42",
+      "severity": "high",
+      "status": "open",
+      "subject": "The holdout rewards proximity to visible catalogue faults; the target is new faults",
+      "detail": "Withheld faults are catalogue faults. The H1 feature (distance to visible faults) has single-feature separability 0.77 under design B (fold 0 = 0.768), so the holdout rewards proximity to known faults. The competition scores faults absent from the public catalogue (problem page; IR-53-03, IR-53-08). Gains on this proxy may not carry over, and the competition's new faults may be systematically farther from known faults.",
+      "action": "Flagged in every holdout number. No leaderboard or organizer claim is made. A non-catalogue validation population is listed as remaining work (docs/research/hypotheses.md, L-21)."
+    },
+    {
+      "id": "IR-53-43",
+      "severity": "medium",
+      "status": "resolved-by-rebuild",
+      "subject": "The uniqueness registry used by the previous receipt is not on disk and was incomplete",
+      "detail": "The earlier receipt compared 138 files from /tmp, which no longer exists. This session rebuilt the registry from the GEMSDOE* repositories at their default-branch tips (63 repositories, 907 .tif entries, 628 unique sha256, 621 unique on the official grid). Per-file sha256 values are recorded in evidence/uniqueness_gate_*.json.",
+      "action": "The earlier 138-file receipt is superseded for the new candidate. The rebuilt registry is not committed (it is about 1.3 GB). The fetch script is in the run card."
+    },
+    {
+      "id": "IR-53-44",
+      "severity": "low",
+      "status": "open",
+      "subject": "INGENIOUS 2 m temperature-probe data licence is not stated in its README",
+      "detail": "The mirror README for 2m_temperature_probe_INGENIOUS_regional_data describes the columns and the survey groups but gives no licence. The INGENIOUS dataset is listed as CC BY 4.0 by the template data catalogue (GDR submission 1391), but that licence was not verified for this sub-file.",
+      "action": "Verify the licence before any use beyond internal analysis (rules: data must permit use and sharing with the sponsor)."
+    },
+    {
+      "id": "IR-53-45",
+      "severity": "high",
+      "status": "resolved-with-superseded-record",
+      "subject": "E2 stage-2 baseline computed from the selected arm's model (code bug, first design-B run)",
+      "detail": "When the stage-1 selection is the h1 arm, the first design-B run computed the stage-2 'baseline' (pre-registered: bands top-q 0.02 from the bands model) from the h1 model. The run's stage-2 acceptance was therefore a comparison of two h1 variants, not the pre-registered comparison. Stage 1 of that run is valid. The bug was found by reading the code before any stage-2 result was used.",
+      "action": "Fixed in scripts/e2_leakfree_holdouts.py (run_stage2 / fit_predict_fold). Stage 2 re-run with --stage2-only. The buggy stage-2 output is kept as evidence/superseded/e2_stage2_BUGGY_baseline_from_h1_model.json and is not used for any label. Logged as DEV-1b (pre-registration section 9)."
+    },
+    {
+      "id": "IR-53-46",
+      "severity": "high",
+      "status": "open",
+      "subject": "The raw 70% overlap gate cannot be satisfied by any placement on this registry",
+      "detail": "The rebuilt registry includes GEMSDOE13 r13-lattice-s5_v2 (206,895 dots). Its dots lie within 3 px of 99.87% of the footprint (chance coverage). Any candidate's dots therefore fall within 3 px of it at about 99%, above the 70% stop threshold. The current candidate is flagged, and no placement on this registry can clear the raw rule. Receipt: evidence/uniqueness_gate_<name>.json. Diagnostics: evidence/uniqueness_diagnostics_<name>.json.",
+      "action": "Not changed here (thresholds are the user's). Decision needed: a registry scope that counts only submission-type dot maps, and a chance-corrected overlap rule (lift over chance). Either change needs explicit approval and a fresh pre-registered gate run (IR-53-16)."
+    },
+    {
+      "id": "IR-53-47",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Whole-grid Spearman rho (NaN read as 0) flags 52 rasters on the surface; footprint-only rho flags none",
+      "detail": "The pre-registered rho check uses the whole grid with NaN read as 0. About 7.1 million pixels outside the footprint are zeros in both rasters, which are ties that inflate the rank correlation. Whole-grid rho of the candidate SURFACE (continuous probability) exceeds 0.90 for 52 registry rasters (receipt, column rho_surface). Footprint-only surface rho exceeds 0.90 for none of those 52 (evidence/diagnostic_surface_rho_<name>.json). Whole-grid and footprint-only rho of the FINAL raster exceed 0.90 for none of the 621 rasters.",
+      "action": "Receipts keep the pre-registered whole-grid value. Footprint-only rho is recommended in the decision of IR-53-46. The surface rho flags are reported as method-sensitive, not as duplicates."
+    },
+    {
+      "id": "IR-53-48",
+      "severity": "medium",
+      "status": "open",
+      "subject": "57 of the 103 flags come from dense rasters that are not dot maps",
+      "detail": "Registry rasters with more than 50% of the footprint nonzero (feature grids such as geodawn_rad_u8, probability surfaces such as context_detector_prob_*, and ID rasters such as acquisition_block_id_100m) have nonzero values almost everywhere. Their dot overlap is 100% by construction. The mid-density class adds 4 more flags.",
+      "action": "Registry scope is a decision for the user (IR-53-46). This session reports the classes separately and drops no file from the verdict."
     }
   ]
 }

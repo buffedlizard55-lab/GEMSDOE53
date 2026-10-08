@@ -76,6 +76,38 @@
     {
       "id": "L-19",
       "item": "The shared template validator and writer were used for the final file. Our in-lane helpers in src/gems53/core.py remain for the earlier experiments. The two metrics agree on the holdout to 6 decimals (test_shared_metric_matches_repo_metric)."
+    },
+    {
+      "id": "L-20",
+      "item": "No organizer score exists for any file in this repository. Nothing here is ORGANIZER-CONFIRMED, and no leaderboard data was re-read this session (DrivenData Terms of Use: no scraping or monitoring without prior consent)."
+    },
+    {
+      "id": "L-21",
+      "item": "Budget: three experiments (E1 design-A exploration, E2 design-B selection and confirmation, E3 build). H2 (magnetic ridges), H5 (thermal and paleo-geothermal evidence) and H6 (regional trend prior) are untested. Remaining work, not claims."
+    },
+    {
+      "id": "L-22",
+      "item": "Holdout truth is the catalogue (proximity-dominated, IR-53-42). A non-catalogue validation population is not available in this session, so holdout gains are upper bounds for new-fault performance, not estimates."
+    },
+    {
+      "id": "L-23",
+      "item": "Egress allow-list (github.com, codeload, api.github.com, pypi.org, files.pythonhosted.org, registry.npmjs.org). USGS, ScienceBase, OSTI, GDR and DrivenData are not reachable; external layers come only from GitHub mirrors with pinned commits."
+    },
+    {
+      "id": "L-24",
+      "item": "Compute: 2 vCPU, 3.9 GB RAM, no GPU. The shared template's CNN pipeline was not run; every model here is a gradient-boosted classifier on 19 bands (plus H1 where stated)."
+    },
+    {
+      "id": "L-25",
+      "item": "One negative-sampling seed (53) and one model configuration. Fold CIs describe fold-to-fold spread only, not seed-to-seed Monte-Carlo variance."
+    },
+    {
+      "id": "L-26",
+      "item": "Uniqueness is checked against the GEMSDOE* repositories as they stood on 2026-10-08 (tips at fetch time). Later submissions by other teams are not covered."
+    },
+    {
+      "id": "L-27",
+      "item": "The protocol's raw overlap gate cannot be passed by any placement on the rebuilt registry (IR-53-46). Until the user redefines the gate, no candidate from this repository can be labelled OK to submit."
     }
   ]
 }

@@ -1,0 +1,24 @@
+{
+  "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
+  "file": "docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
+  "sha256": "a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b",
+  "pixel_sha256": "aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda",
+  "label": "Research-only / DO NOT SUBMIT",
+  "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53 h1 thin_bin_q0p1 | proxy DTI 0.0040 | not organizer-scored",
+  "gates": {
+    "holdout_gate_E2_paired_accept": true,
+    "format_validators_all": true,
+    "uniqueness_no_drift_flag": false,
+    "canary_clean_for_features_in_model": true
+  },
+  "spec": {
+    "arm": "h1",
+    "variant": "thin_bin_q0p1",
+    "q": 0.1,
+    "kind": "thin_bin"
+  },
+  "decision": "design-B selection (E2 stage 1) confirmed on spatial blocks (E2 stage 2, paired lower bound > 0)",
+  "receipt": "evidence/candidate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
+  "organizer_score": null,
+  "submitted": false
+}

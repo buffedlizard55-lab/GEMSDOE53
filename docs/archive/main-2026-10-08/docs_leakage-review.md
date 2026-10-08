@@ -2,7 +2,9 @@
 
 **Review date:** 2026-10-08 (UTC)  
 **Lane:** catalogue-distance leakage diagnosis only  
-**Disposition (updated 2026-10-08):** GEMSDOE29 verdict negative and unchanged; holdout corrected to design B (IR-53-37); candidate label in `docs/submissions/CURRENT.json`; no submission slot used
+**Disposition:** the diagnosis stands and is now confirmed by measurement (see the session update at the end). The
+prior-session text below was written before any holdout was run. No submission-slot decision was made. The session update
+adds measured numbers and the ridge candidate's canary (X1), which is a separate lane from the distance feature.
 
 ## Executive finding
 
@@ -11,28 +13,6 @@ The GEMSDOE29 public evidence records a real training-time target shortcut: its 
 The distance-to-*available* catalogue is not inherently illegitimate at competition prediction time: the competition supplies the existing fault catalogue, and the private targets are described as faults not in that catalogue. The defect is using each training target pixel to construct its own feature. That changes the learning problem: training sees a feature that contains the mapped target, whereas an unmapped test fault is absent from the catalogue used at prediction. The correct repair is the documented learn–predict separation: hide whole target segments, construct every catalogue-derived training feature from visible faults only, then build the prediction-time features from the supplied visible catalogue.
 
 This review did **not** execute the holdout. In the current GEMSDOE53 checkout there is no data, stack, evaluator, writer, registry, or raster template. Read-only inspection of GEMSDOE29 also found two protocol gaps that must be resolved in the shared evaluator before its historical holdout results can satisfy the protocol here: a possible hidden-label side channel in negative-sample selection, and fold-wise rather than pooled DTI reporting without the required interval. No candidate is validated; no competition TIFF is created.
-
-## Update 2026-10-08: the holdout had its own leak (design A), corrected to design B
-
-- **Finding (IR-53-37).** The first holdout (exp2 and E1, "design A") built its negative pool as `footprint & ~known & ~buffer`. The
-  10 px buffer is defined from the withheld faults, so the pool depended on withheld locations. The buffer removed 371,176 to
-  390,883 negatives per fold (7.3% to 7.6%), all within 10 px of a withheld fault. Those are the hardest negatives. Measured on
-  fold 0 of the bands arm (top-q 0.02): 0.0266 under design A and 0.0106 under design B. The design-A H1 canary used the same
-  buffered background, so its separability was inflated as well.
-- **Correction (DEV-1, pre-registered before the run).** Design B: positives are visible faults outside the buffer; negatives are
-  every footprint pixel that is not a visible fault. This is the situation the real competition is posed in (unknown faults sit in
-  the unlabelled pool). The 0.035233 figure is design A and is not used for any decision.
-- **Result under design B** (`evidence/e2_leakfree_holdouts.json`, HOLDOUT-DTI, 5 folds, seed 53, pooled, 95% t-interval df 4):
-  bands top-q 0.02 = 0.010562 (CI 0.008337 to 0.012812). H1 with binary thinning at q 0.10 = 0.141319 (stage 1 selection among 24
-  variants, so this value is optimistic). On spatially contiguous super-regions (stage 2, template `src/blocks.py`):
-  baseline 0.000102, selected 0.004049, paired difference 0.003533 (CI 0.000619 to 0.006447). The paired lower bound is above 0,
-  so the pre-registered rule accepts the variant. The absolute size on unseen super-regions is small.
-- **Reading.** H1 is not a buffer artefact: its single-feature separability is 0.77 under design B (0.768 on fold 0, the maximum over folds), so the
-  holdout genuinely rewards proximity to visible faults. That is the same proximity GEMSDOE29 used on its *full* label raster. The
-  difference is that H1 never uses a withheld or self label. The holdout truth is the catalogue, though, so it measures proximity to
-  known faults, not the discovery of faults the catalogue lacks (IR-53-42).
-- **GEMSDOE29 verdict unchanged.** Its artifact builder still trains on full-label distance (mechanism above). This review adds a
-  second requirement for any holdout: the training pool must not depend on withheld locations (IR-53-37).
 
 ## Formal diagnosis
 
@@ -131,3 +111,28 @@ When the shared, authorized data/tools are available, the next lane-compliant ru
 - **Pass one — review:** inventoried the local checkout; read the official problem/metric/submission pages and leakage paper; inspected the upstream artifact, feature, holdout, and test sources.
 - **Pass two — adversarial check:** distinguished prediction-time legitimate catalogue distance from target-derived training distance; checked the numerical `log1p` statement; found the negative-pool dependence on full labels and the fold-wise score aggregation mismatch; checked H33 evidence provenance.
 - **Pass three — acceptance check:** confirmed no local data, evaluator, writer, registry raster, TIFF, or test suite exists; did not invent a score, validator result, uniqueness pass, or competition-ready file. Run card records the negative outcome.
+
+## Session update 2026-10-08: measured leakage canary and feature audit
+
+Evidence: `evidence/exp1_leakage_canary.json` (E1), `evidence/exp2_holdout_arms.json` (E2), `evidence/x1_ridge_canary.json` (X1).
+All numbers below are MEASURED on the provided data (sha256 pinned in each receipt). They are not scores.
+
+**Feature audit (E1, leakage canary, gate 0.90 on separability = max(AUC, 1 - AUC)):**
+
+| feature | separability (measured) | verdict |
+|---|---:|---|
+| each of the 19 label-free bands (max over bands) | 0.597318 | pass (no band above 0.90) |
+| leak-free distance to visible faults (4x4-block cross-fit), mean over folds | 0.527749 | pass; weak (IR-53-09) |
+| distance to the FULL catalogue, evaluated on the labels it was built from | 1.000000 | **LEAK**: exactly 0 on all 60,988 known-fault px |
+| distance to the FULL catalogue, evaluated on withheld positives (C2) | 1.000000 mean over folds | **LEAK**: the holdout is inflated by this feature |
+
+**Holdout effect (E2, HOLDOUT-DTI, pooled, bands at 2% of footprint):** the leaky ablation scores 0.999957 pooled. The
+label-free bands score 0.035233 (95% t-CI 0.02817 to 0.04223). A feature built from the withheld labels inflates the
+score by an order of magnitude, so it is excluded from every arm.
+
+**Ridge candidate (X1):** the ridge features are computed from band 2 only and never read labels. Their separability
+is 0.559 for L (max over folds), 0.502 for the centreline indicator, and 0.520 for the signed L. All are below the gate.
+
+**Verdict on GEMSDOE29 (unchanged):** a real training-time shortcut (the leaked distance feature). The
+sandbox did not fetch GEMSDOE29's code again in this session; the diagnosis rests on the prior review's citations and
+on E1/E2, which reproduce the mechanism on the provided data.

@@ -1,197 +1,171 @@
 #!/usr/bin/env python3
-"""Compose the RUN CARD (JSON) and the parallel-run card from the evidence receipts. No number is typed by hand.
+"""Compose evidence/run_card.json (one JSON run card) from the evidence files. No number is typed by hand.
 
-Reads:  evidence/x1_ridge_canary.json, evidence/x2_ridge_holdout.json, evidence/x3_candidate_receipt.json,
-        evidence/uniqueness_v2.json, evidence/preregistration_x2.json, evidence/registry_manifest.json,
-        evidence/exp1_leakage_canary.json, evidence/exp2_holdout_arms.json (earlier experiments, kept for the record)
-Writes: evidence/run_card.json, evidence/parallel-run-card.json
-
-Labels (protocol item 3):
-  HOLDOUT-DTI          our hide-and-recover proxy (shared evaluator, withheld segments, 95% t-CI, df 4)
-  ORGANIZER-CONFIRMED  only from a submission-page receipt (none exists in this repository)
-  MEASURED             computed from files in this repository at build time
+Reads: evidence/e1_h1_thin_holdout.json (design A, reference), evidence/e2_leakfree_holdouts.json (design B),
+evidence/candidate_<name>.json (E3 receipt, name from docs/submissions/CURRENT.json),
+evidence/uniqueness_gate_<name>.json, evidence/gemsdoe32_measured.json, registry/*.json, evidence/timeline.txt.
 """
 from __future__ import annotations
 
 import json
-import subprocess
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def load(rel: str):
+def J(rel):
     return json.loads((ROOT / rel).read_text())
 
 
-def git(*args: str) -> str:
-    try:
-        return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, timeout=30).stdout.strip()
-    except Exception:  # pragma: no cover
-        return ""
-
-
 def main() -> int:
-    x1 = load("evidence/x1_ridge_canary.json")
-    x2 = load("evidence/x2_ridge_holdout.json")
-    x3 = load("evidence/x3_candidate_receipt.json")
-    uq = load("evidence/uniqueness_v2.json")
-    prereg = load("evidence/preregistration_x2.json")
-    reg = load("evidence/registry_manifest.json")
-    exp1 = load("evidence/exp1_leakage_canary.json")
-    exp2 = load("evidence/exp2_holdout_arms.json")
+    cur = J("docs/submissions/CURRENT.json")
+    e1 = J("evidence/e1_h1_thin_holdout.json")
+    e2 = J("evidence/e2_leakfree_holdouts.json")
+    e3 = J(cur["receipt"])
+    gate = J(f"evidence/uniqueness_gate_{cur['name']}.json")
+    g32 = J("evidence/gemsdoe32_measured.json")
+    irr = J("registry/irregularities.json")["items"]
+    lim = J("registry/limitations.json")["items"]
+    diag = J(f"evidence/uniqueness_diagnostics_{cur['name']}.json")
+    sp_rho = J(f"evidence/diagnostic_surface_rho_{cur['name']}.json")
+    sp = e2.get("spatial_confirmation", {})
+    stage1 = e2.get("segment_selection", {})
+    base_B = e2["baseline_design_B"]
+    cd = e2["canary_design_B"]
+    variants = e2["segment_folds"]["variants"]
 
-    N = prereg["primary_dot_budget_N"]
-    arms = x2["arms"]
-    n_key = str(N)
+    def v(name):
+        return variants.get(name)
 
-    def arm_row(a: str, n: int):
-        v = arms[a][str(n)]
-        return {"pooled_HOLDOUT_DTI": v["pooled_DTI"], "CI95_fold_mean": v["CI95_t_df4_on_fold_mean"],
-                "TP_w": v["pooled_TP_w"], "FP_w": v["pooled_FP_w"], "FN_w": v["pooled_FN_w"],
-                "per_fold_DTI": v["per_fold_DTI"]}
-
-    holdout = {
-        "label": "HOLDOUT-DTI",
-        "evaluator": x2["scorer"],
-        "folds": x2["folds"],
-        "known_fault_px": x2["known_fault_px"],
-        "footprint_px": x2["footprint_px"],
-        "N_primary": N,
-        "arms_at_primary_N": {a: arm_row(a, N) for a in arms},
-        "grid": {a: {str(n): arms[a][str(n)]["pooled_DTI"] for n in x2["N_grid"]} for a in arms},
-        "paired_differences_at_primary_N": {k: v for k, v in x2["paired_differences"].items()
-                                             if k.endswith(f"@{N}")},
-        "frozen_best_reference": x2["frozen_best_reference"],
-        "E2_reproduction": x2["E2_reproduction_hgb_top_q"]["shared_scorer"],
-        "gates": x2["gates"],
-    }
-    canary = {
-        "label": "MEASURED (leakage canary; no score)",
-        "gate": x1["gate"],
-        "worst_candidate_feature_separability": x1["worst_candidate_feature_separability"],
-        "features": {k: v["max_separability_over_folds"] for k, v in x1["features"].items()},
-        "G3_pass": x1["G3_pass"],
-    }
-    gates = dict(x3["gates"])
-    failing = [k for k, v in gates.items() if not v]
-    label = x3["label"]
-    ob_rows = load("evidence/overlap_baseline_v2.json")["rows"]
-    uniq_summary = {
-        "label": "MEASURED (registry check, method v2)",
-        "registry_scope": reg["scope"],
-        "repos_checked": reg["repos_checked"],
-        "registry_rasters_downloaded": reg["rasters_downloaded"],
-        "registry_rasters_compared": uq["n_registry_files_compared"],
-        "dense_registry_rasters": uq["n_dense_registry_files"],
-        "thresholds": uq["thresholds"],
-        "max_spearman_rho_final": uq["max_spearman_rho"],
-        "max_dot_overlap_within_3px_final": uq["max_dot_overlap_within_3px_used"],
-        "max_surface_spearman_rho_pre_placement": uq["max_surface_spearman_rho"],
-        "max_surface_top_N_overlap_pre_placement": uq["max_surface_top_N_within_3px"],
-        "any_drift_flag": uq["any_drift_flag"],
-        "chance_baseline": {
-            "file": "evidence/overlap_baseline_v2.json",
-            "dot_level_rows": sum(1 for r in ob_rows if r["check"] == "dots"),
-            "dot_level_max_lift_vs_random": max([r["lift_vs_random"] for r in ob_rows if r["check"] == "dots"] or [None]),
-            "surface_level_rows": sum(1 for r in ob_rows if r["check"] == "surface_top_N"),
-            "surface_level_lift_vs_random_range": [min([r["lift_vs_random"] for r in ob_rows if r["check"] == "surface_top_N"] or [None]),
-                                                   max([r["lift_vs_random"] for r in ob_rows if r["check"] == "surface_top_N"] or [None])],
-            "surface_level_files": sorted({r["file"].split("__")[0] + "/" + r["file"].split("__")[-1][:60] for r in ob_rows
-                                            if r["check"] == "surface_top_N"}),
-            "reading": "dot-level rows are explained by registry density (lift near 1); surface-level rows are not (lift well above 1)."
-        },
-        "method_note": "Dense probability rasters are compared on their top-N pixels (N = our dot count); "
-                       "sparse dot files on their nonzero pixels. Constant rasters have undefined rho (recorded as null).",
-    }
-    submission = {
-        "name": Path(x3["file"]["path"]).name,
-        "path": x3["file"]["path"],
-        "sha256": x3["file"]["sha256"],
-        "bytes": x3["file"]["bytes"],
-        "dtype": x3["file"]["dtype"],
-        "crs": x3["file"]["crs"],
-        "res_m": x3["file"]["res"],
-        "shape": [x3["file"]["height"], x3["file"]["width"]],
-        "nodata": x3["file"]["nodata"],
-        "finite_px": x3["file"]["finite_px"],
-        "nan_px": x3["file"]["nan_px"],
-        "dots_value_1": x3["file"]["dots"],
-        "comment": x3["comment"],
-        "comment_chars": x3["comment_chars"],
-        "validator_exit_codes": {k: v["exit"] for k, v in x3["validators"].items()},
-        "label": label,
-        "download_url_after_merge": "https://github.com/buffedlizard55-lab/GEMSDOE53/raw/main/" + x3["file"]["path"],
-    }
-    verdict = ("OK-TO-SUBMIT (every pre-registered gate passed). Submission still requires the user's decision."
-               if label == "OK-TO-SUBMIT"
-               else f"DO-NOT-SUBMIT: failing gate(s) {', '.join(failing)}")
     card = {
         "schema": "gems53.run_card.v2",
-        "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "git": {"branch": git("rev-parse", "--abbrev-ref", "HEAD"), "head": git("rev-parse", "--short", "HEAD")},
-        "lane": "H2 label-free magnetic lineament candidate (ridge centrelines, Poisson-packed dots)",
-        "hypothesis": "Packing a band-2 ridge/valley centreline score at >= 2.8 px spacing into N=44090 binary dots "
-                      "recovers held-out catalogue fault segments better than the frozen 19-band HGB top-N at equal budget.",
-        "mechanism": prereg["mechanism"],
-        "named_non_fault_processes": prereg["non_fault_confounders"],
-        "pre_registration": {"file": "evidence/preregistration_x2.json", "ridge_module_sha256":
-                             prereg["ridge_module_sha256"]},
-        "budget": {"experiments_used": ["X1 leakage canary", "X2 pre-registered holdout", "X3 build and gates"],
-                   "experiment_limit": 3, "submission_slots_selected": 0,
-                   "wall_clock": "not logged to the minute (see limitations L-08); X2 runtime "
-                                 f"{x2['runtime_s']} s, X3 runtime {x3['runtime_s']} s"},
-        "leakage_canary": canary,
-        "holdout": holdout,
-        "uniqueness": uniq_summary,
-        "submission": submission,
-        "gates": gates,
-        "failing_gates": failing,
-        "label": label,
-        "verdict": verdict,
-        "organizer_score": None,
-        "organizer_score_label": "ORGANIZER-CONFIRMED: none (no portal receipt exists)",
-        "earlier_experiments_kept_for_the_record": {
-            "E1_leakage_canary_19_bands_max_separability": exp1["summary"]["max_label_free_band_separability"],
-            "E1_leak_free_distance_mean_separability": exp1["summary"]["leak_free_distance_separability_mean"],
-            "E1_leaky_distance_in_sample_separability": exp1["summary"]["leaky_distance_in_sample_separability"],
-            "E2_HGB_bands_pooled_DTI_q0p02_frozen_best": exp2["arms"]["bands"]["pooled"]["0.02"]["pooled_DTI"],
-            "E2_leaky_ablate_pooled_DTI_q0p02": exp2["arms"]["leaky_ablate"]["pooled"]["0.02"]["pooled_DTI"],
+        "session_branch": "arena/0efb644e-gemsdoe53",
+        "date_utc": e3["finished_utc"][:10],
+        "lane": "Formal diagnosis of GEMSDOE29 catalogue-distance leakage; one unique candidate under the parallel-run protocol",
+        "pre_registration": {"file": "docs/research/preregistration-2026-10-08.md",
+                             "amendment": "DEV-1 (section 8), written before the design-B run"},
+        "budget": {
+            "experiments_limit": 3,
+            "experiments_used": 3,
+            "experiments": ["E1 design A (exploration, stopped as a design error)",
+                            "E2 design B (stage 1 selection on segment folds; stage 2 spatial confirmation)",
+                            "E3 build, validation, uniqueness and label (not a holdout experiment)"],
+            "wall_clock_limit_hours": 2,
+            "experiment_start_utc": e1.get("started_utc"),
+            "experiment_end_utc": e3["finished_utc"],
+            "note": "wall clock is read from the experiment receipts (started_utc, finished_utc), not estimated",
         },
-        "review_passes": [
-            "implement: fetch_registry (63 repos, 1,200 rasters); ridge candidate; X1, X2, X3; shared template tools for the metric, writer and validators.",
-            "review: caught and fixed (a) a crash on constant registry rasters (None rho) in the uniqueness max helper; (b) a comment that claimed 'not a copy' while G5 failed; (c) a README claim that leaderboard numbers were fetched (they were not; the static page returned 'Loading...'); (d) a unit test that assumed no side-lobes (the detrend creates them; recorded as IR-53-29, not tuned away).",
-            "re-check: 16 unit tests pass; validator exit codes recorded above; sha256 of the file and its pixel parity with the draft checked; holdout structural identity TP_w + FN_w = |G| verified for every arm and budget; registry rows with overlap flags re-measured against a chance baseline (overlap_baseline_v2.json)."
-        ],
-        "reconciliation": "The shared template metric (src/metrics.py, commit dcbbb19) reproduces the earlier E2 "
-                          "numbers exactly; writer and validators for the final file are the template's own tools.",
-        "limitations_refs": [i["id"] for i in load("registry/limitations.json")["items"]],
+        "label": e3["label"],
+        "submission": {
+            "name": cur["name"], "file": cur["file"], "sha256": cur["sha256"], "pixel_sha256": cur["pixel_sha256"],
+            "bytes": e3["bytes"], "note": cur["note"], "note_chars": len(cur["note"]),
+            "candidate": cur["spec"], "decision": cur["decision"],
+            "submitted": False, "submission_slot_used": False, "organizer_score": None,
+        },
+        "gates": e3["gates"],
+        "validators": {
+            "template_validate_submission_exit": e3["validators"]["final_template_validate_submission"]["exit"],
+            "template_validate_conformant_exit": e3["validators"]["final_validate_conformant"]["exit"],
+            "inlane": e3["inlane"],
+        },
+        "holdout": {
+            "label_type": "HOLDOUT-DTI (proxy: withheld known-fault segments and spatial super-regions; NOT organizer-scored)",
+            "evaluator": {"name": "gems53.core.dti", "version": "1.0.0",
+                          "parity_with_template_src_metrics_py": e1.get("metric_parity_vs_template")},
+            "design_B": {
+                "definition": e2["design"],
+                "baseline_bands_top_q0p02": {"pooled_DTI": base_B["pooled_DTI"], "CI95_t_df4": base_B["CI95"],
+                                             "withheld_positives": base_B["withheld_positives"]},
+                "stage1_selected": stage1.get("selected"),
+                "stage1_selection_rule": stage1.get("rule"),
+                "stage1_qualifying_count": len(stage1.get("qualifying", [])),
+                "stage2": {"status": sp.get("status"), "baseline": sp.get("baseline"),
+                           "selected": sp.get("selected_result"), "paired_difference": sp.get("paired_difference"),
+                           "acceptance": sp.get("acceptance"), "withheld_positives_total": sp.get("withheld_positives_total"),
+                           "withheld_segments_total": sp.get("withheld_segments_total")},
+                "selected_variant_segment_folds": (v(f"{stage1['selected']['arm']}:{stage1['selected']['variant']}")
+                                                   if stage1.get("selected") else None),
+            },
+            "design_A_reference_not_used_for_decisions": {
+                "reason": "negative pool depended on withheld labels (IR-53-37)",
+                "bands_top_q0p02_pooled_DTI": e1["arms"]["bands"]["top_q0p02"]["pooled_DTI"],
+                "bands_top_q0p02_CI95": e1["arms"]["bands"]["top_q0p02"]["CI95_t_df4_on_fold_mean"],
+                "h1_top_q0p02_pooled_DTI": e1["arms"]["h1"]["top_q0p02"]["pooled_DTI"],
+                "reproduction_of_exp2": e1["reproduction_check_vs_exp2"]["pass"],
+            },
+        },
+        "leakage": {
+            "canary_design_B": {"bands_max_separability": cd["bands_max_over_all"], "bands_flag": cd["bands_flag"],
+                                "h1_max_separability": cd["h1_max_separability"], "h1_flag": cd["h1_flag"],
+                                "gate": cd["gate"], "background": cd["background"]},
+            "canary_design_A_reference": {"h1_mean": e1["canary_H1_feature_alone"]["separability_mean"],
+                                          "h1_max": e1["canary_H1_feature_alone"]["separability_max"],
+                                          "note": "buffered background (withheld-derived), inflated"},
+            "gemsdoe29": "docs/leakage-review.md (negative verdict; mechanism = full-label distance feature in build_repo_candidate.py)",
+        },
+        "uniqueness": {
+            "thresholds": gate["thresholds"],
+            "registry_unique_on_grid": gate["registry_unique_on_grid"],
+            "registry_skipped": gate["registry_skipped"],
+            "any_drift_flag": gate["any_drift_flag"],
+            "n_flagged": gate["n_flagged"],
+            "max": gate["max"],
+            "top_by_overlap_final": [{k: r[k] for k in r if k in ("file", "overlap_final", "overlap_pre", "rho_final",
+                                                                 "rho_surface", "lift_over_chance", "chance_coverage_footprint",
+                                                                 "reg_dots", "drift_flag")}
+                                     for r in gate["top_by_overlap_final"][:8]],
+            "receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
+            "diagnostics": {
+                "file": f"evidence/uniqueness_diagnostics_{cur['name']}.json",
+                "flagged_rows": diag["flagged_rows_analysed"], "flagged_by_class": diag["flagged_by_class"],
+                "flagged_by_overlap": diag["flagged_by_overlap"],
+                "flagged_by_rho_final_raster_whole_grid": diag["flagged_by_whole_grid_rho"],
+                "flagged_by_rho_final_raster_footprint_only": diag["flagged_by_footprint_only_rho"],
+                "flagged_by_rho_surface_whole_grid": sp_rho["flagged_by_surface_rho_whole_grid"],
+                "flagged_by_rho_surface_footprint_only": sp_rho["flagged_by_surface_rho_footprint_only"],
+                "sparse_flagged_median_lift": diag["sparse_flagged_median_lift"],
+                "densest_sparse_dot_maps_by_chance_coverage": diag["densest_sparse_dot_maps_by_chance_coverage"],
+                "raw_overlap_gate_satisfiable_by_any_placement": diag["raw_overlap_gate_satisfiable_by_any_placement"],
+                "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the gate receipt (IR-53-46, IR-53-47, IR-53-48)",
+            },
+        },
+        "gemsdoe32": {"measured_file": "evidence/gemsdoe32_measured.json",
+                      "nan_variant": {k: g32["files"]["nan"][k] for k in
+                                      ("dots", "dots_within_2px_of_catalogue", "dots_within_3px_of_catalogue",
+                                       "nearest_dot_distance_quantiles_px", "in_catalogue_DTI_diagnostic")},
+                      "zeros_variant_finite_px": g32["files"]["zeros"]["finite_px"],
+                      "score_link": "NOT ESTABLISHED (IR-53-02): no receipt links the 0.2778 row to this file"},
+        "leaderboard_snapshot_repo": {"1": 0.3774, "7": 0.3195, "13": 0.2778,
+                                      "note": "from the repository's earlier snapshot (S2); not re-read this session (IR-53-01)"},
+        "hypotheses": {"file": "docs/research/hypotheses.md",
+                       "H1": "tested (design B, stage 1 and stage 2)", "M1": "thinning tested (design B)",
+                       "H2": "not tested (budget)", "H3": "BLOCKED: strain orientation not in public data (IR-53-40)",
+                       "H4": "rejected (labels)", "H5": "not tested (budget); data present in pinned mirror (S26, S28)",
+                       "H7": "not tested (budget)"},
+        "verdict_reasons": [
+            "uniqueness gate (pre-registered rule) flags %d registry rasters" % gate["n_flagged"],
+            "the raw 70%% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers %.2f%% of the footprint within 3 px (IR-53-46)" % (100 * diag["densest_sparse_dot_maps_by_chance_coverage"][0]["chance_coverage"]),
+            "rho flags are method-sensitive: surface rho (whole grid) flags %d rasters; footprint-only surface rho flags %d (IR-53-47)" % (sp_rho["flagged_by_surface_rho_whole_grid"], sp_rho["flagged_by_surface_rho_footprint_only"]),
+        ] if not e3["gates"]["uniqueness_no_drift_flag"] else [],
+        "irregularities_open": [i["id"] for i in irr if str(i.get("status", "")).startswith("open")],
+        "irregularities_total": len(irr),
+        "limitations": [i["id"] for i in lim],
+        "verdict": e3["label"],
+        "organizer_score": None,
+        "files": {"preregistration": "docs/research/preregistration-2026-10-08.md",
+                  "e1": "evidence/e1_h1_thin_holdout.json", "e2": "evidence/e2_leakfree_holdouts.json",
+                  "e3_receipt": cur["receipt"], "uniqueness_receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
+                  "measured_gemsdoe32": "evidence/gemsdoe32_measured.json", "current_submission": "docs/submissions/CURRENT.json",
+                  "tests": "tests/test_h1_thin.py, tests/test_metric.py, tests/test_submission.py"},
+        "environment": {"python": "3.11.2 (venv: numpy 2.4.6, scipy 1.17.1, scikit-learn 1.9.1, rasterio 1.4.4, pyproj 3.7.2)",
+                        "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+                        "jklinck_mirror_commit": "56d78de7a989c12e2dce50cd65a4095df57030d2",
+                        "fetch": "scripts/fetch_data.py (sha256 pins from the template manifest, verified)"},
     }
-
-    pcard = {
-        "hypothesis": card["hypothesis"],
-        "mechanism": card["mechanism"],
-        "named_non_fault_process": card["named_non_fault_processes"],
-        "holdout_dti": {"label": "HOLDOUT-DTI", "ridge_pack_N44090": arms["ridge_pack"][n_key]["pooled_DTI"],
-                        "hgb_bands_N44090": arms["hgb_bands"][n_key]["pooled_DTI"],
-                        "paired_CI95": x2["paired_differences"][f"ridge_pack_minus_hgb_bands@{N}"]["CI95_t_df4"]},
-        "correlation_overlap_vs_registry": {"label": "MEASURED", "max_spearman_rho": uq["max_spearman_rho"],
-                                            "max_dot_overlap_within_3px": uq["max_dot_overlap_within_3px_used"],
-                                            "threshold_rho": 0.90, "threshold_overlap": 0.70,
-                                            "flag": uq["any_drift_flag"]},
-        "raster_sha256": submission["sha256"],
-        "validator_output": submission["validator_exit_codes"],
-        "submission": {"label": label, "name": submission["name"]},
-        "verdict": verdict,
-    }
-
-    out_run = ROOT / "evidence" / "run_card.json"
-    out_par = ROOT / "evidence" / "parallel-run-card.json"
-    out_run.write_text(json.dumps(card, indent=2, default=str, allow_nan=False))
-    out_par.write_text(json.dumps(pcard, indent=2, default=str, allow_nan=False))
-    print(json.dumps({"label": label, "failing": failing, "verdict": verdict}, indent=2))
+    out = ROOT / "evidence" / "run_card.json"
+    out.write_text(json.dumps(card, indent=2, default=str))
+    print("wrote", out, len(out.read_text()), "bytes")
     return 0
 
 

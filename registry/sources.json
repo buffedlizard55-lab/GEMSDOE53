@@ -179,6 +179,34 @@
       "url": "https://github.com/buffedlizard55-lab",
       "access": "enumerated and downloaded via gh/api 2026-10-08 (evidence/registry_manifest.json)",
       "used_for": "Uniqueness check against every public raster in the owner's GEMS repos (protocol item 2)."
+    },
+    {
+      "id": "S25",
+      "title": "GEMSDOE shared template, commit dcbbb192e56b2b32c0a131eba791dc363305d4a3 (src/metrics.py, src/blocks.py, src/submission_io.py, scripts/validate_submission.py)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+      "access": "fetched by git clone --depth 1 on 2026-10-08 (verified)",
+      "used_for": "shared metric parity check, spatial block folds, template writer and validators (E1 parity, E2 folds, E3 writer)"
+    },
+    {
+      "id": "S26",
+      "title": "jklinck/geothermal_research commit 56d78de7a989c12e2dce50cd65a4095df57030d2 (INGENIOUS and GeoDAWN mirror; NBMG strain README; 2 m temperature-probe README; paleo-geothermal CSV; wells and springs geodatabase)",
+      "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2",
+      "access": "GitHub API read on 2026-10-08 (verified: file listing, README text, strain CSV header from blob e7c2af0d)",
+      "used_for": "H3 feasibility (IR-53-40), H5 data availability (not validated), provenance of INGENIOUS layers"
+    },
+    {
+      "id": "S27",
+      "title": "buffedlizard55-lab GEMSDOE* repositories (63 repos; 907 .tif entries; 628 unique sha256; 621 unique on the official grid)",
+      "url": "https://github.com/buffedlizard55-lab?tab=repositories",
+      "access": "GitHub API listing and shallow clones on 2026-10-08 (verified)",
+      "used_for": "uniqueness registry (E3 gate), GEMSDOE32 measured structure"
+    },
+    {
+      "id": "S28",
+      "title": "INGENIOUS 2 m temperature-probe shapefile and README (in S26)",
+      "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2/2m_temperature_probe_INGENIOUS_regional_data",
+      "access": "README read 2026-10-08; licence not stated (IR-53-44)",
+      "used_for": "H5 candidate layer (not validated)"
     }
   ]
 }
