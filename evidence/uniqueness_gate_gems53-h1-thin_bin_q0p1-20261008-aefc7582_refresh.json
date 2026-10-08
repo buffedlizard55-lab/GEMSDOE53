@@ -1,0 +1,77 @@
+{
+ "gate": "uniqueness (parallel-run protocol: rho > 0.90 or within-3px overlap > 0.70 = drift)",
+ "thresholds": {
+  "spearman_rho": 0.9,
+  "dot_overlap_within_3px": 0.7
+ },
+ "final_file": "/home/user/GEMSDOE53/docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
+ "final_sha256": "a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b",
+ "final_dots": 56605,
+ "footprint_px": 5167373,
+ "registry_dirs": [
+  "/tmp/g53/refresh"
+ ],
+ "registry_unique_on_grid": 3,
+ "registry_skipped": 0,
+ "skipped_examples": [],
+ "any_drift_flag": false,
+ "n_flagged": 0,
+ "max": {
+  "max_rho_final": 0.165228,
+  "max_overlap_final": 0.480205
+ },
+ "top_by_overlap_final": [
+  {
+   "file": "GEMSDOE53__docs__downloads__gems53-h1-relay-prune-q0p0073-nan.tif",
+   "sha256": "4a931832d76040b51252649e525376a31b5b15b3bb8c2ffbda8758531211776b",
+   "reg_dots": 37722,
+   "rho_final": 0.165228,
+   "overlap_final": 0.480205,
+   "drift_flag": false
+  },
+  {
+   "file": "GEMSDOE53__submissions__GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif",
+   "sha256": "e06f3b34afc9e02239ef554d09b62212c2f2716c66a0f19a8adc1051af7a87aa",
+   "reg_dots": 44090,
+   "rho_final": 0.005901,
+   "overlap_final": 0.200053,
+   "drift_flag": false
+  },
+  {
+   "file": "GEMSDOE52__docs__downloads__gems52-h60d-dis_contrast-arm37654px.tif",
+   "sha256": "18bd0efd582f107ccb988fc20016203c323846bf63d3ecea1f75a0670e4586e8",
+   "reg_dots": 37654,
+   "rho_final": 0.004261,
+   "overlap_final": 0.182952,
+   "drift_flag": false
+  }
+ ],
+ "all_rows_file": null,
+ "seconds": 0.7,
+ "all_rows": [
+  {
+   "file": "GEMSDOE53__docs__downloads__gems53-h1-relay-prune-q0p0073-nan.tif",
+   "sha256": "4a931832d76040b51252649e525376a31b5b15b3bb8c2ffbda8758531211776b",
+   "reg_dots": 37722,
+   "rho_final": 0.165228,
+   "overlap_final": 0.480205,
+   "drift_flag": false
+  },
+  {
+   "file": "GEMSDOE53__submissions__GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif",
+   "sha256": "e06f3b34afc9e02239ef554d09b62212c2f2716c66a0f19a8adc1051af7a87aa",
+   "reg_dots": 44090,
+   "rho_final": 0.005901,
+   "overlap_final": 0.200053,
+   "drift_flag": false
+  },
+  {
+   "file": "GEMSDOE52__docs__downloads__gems52-h60d-dis_contrast-arm37654px.tif",
+   "sha256": "18bd0efd582f107ccb988fc20016203c323846bf63d3ecea1f75a0670e4586e8",
+   "reg_dots": 37654,
+   "rho_final": 0.004261,
+   "overlap_final": 0.182952,
+   "drift_flag": false
+  }
+ ]
+}
