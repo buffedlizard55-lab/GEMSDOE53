@@ -273,3 +273,124 @@ def validate_submission(path: str, footprint: np.ndarray, transform, crs, H: int
     }
     res["all_checks_passed"] = all(res["checks"].values())
     return res
+
+
+# ----------------------------------------------------------------------------------------------
+# H1 (2026-10-08): segment-exact learn-predict separation
+# ----------------------------------------------------------------------------------------------
+
+
+def segment_exact_distance_grid(visible: np.ndarray, seg_label: np.ndarray, cap: int = DIST_CAP_PX) -> np.ndarray:
+    """H1: log1p(min(d, cap)) where d is
+      * the distance to the visible faults EXCLUDING the pixel's own segment, if the pixel lies on a visible segment;
+      * the distance to all visible faults otherwise (background, withheld faults, emission pixels).
+
+    `seg_label` is the 8-connected segment id of the FULL catalogue (0 = background), so the segment
+    of every visible pixel is known. Each visible segment is processed inside its bounding box plus a
+    `cap`-pixel halo; any visible pixel farther than `cap` from the segment is clipped to `cap` anyway, so the
+    windowed result equals the global one exactly (checked against brute force in tests/test_h1_thin.py).
+    """
+    H, W = visible.shape
+    out = log_dist_feature(dist_to(visible))
+    objs = ndimage.find_objects(seg_label)
+    vis_ids = np.unique(seg_label[visible])
+    vis_ids = vis_ids[vis_ids > 0]
+    for sid in vis_ids:
+        sl = objs[int(sid) - 1]
+        if sl is None:
+            continue
+        y0, y1 = sl[0].start, sl[0].stop
+        x0, x1 = sl[1].start, sl[1].stop
+        Y0, Y1 = max(0, y0 - cap), min(H, y1 + cap)
+        X0, X1 = max(0, x0 - cap), min(W, x1 + cap)
+        own = seg_label[y0:y1, x0:x1] == sid
+        if not visible[y0:y1, x0:x1][own].all():
+            raise ValueError("visible must be a union of WHOLE segments (H1 contract); segment %d is partly visible" % sid)
+        others = visible[Y0:Y1, X0:X1] & (seg_label[Y0:Y1, X0:X1] != sid)
+        if others.any():
+            dw = ndimage.distance_transform_edt(~others)
+            dseg = dw[y0 - Y0:y1 - Y0, x0 - X0:x1 - X0]
+        else:
+            dseg = np.full(own.shape, np.inf)
+        sub = out[y0:y1, x0:x1]
+        sub[own] = np.log1p(np.minimum(dseg[own], cap)).astype(np.float32)
+    return out
+
+
+# ----------------------------------------------------------------------------------------------
+# M1 (2026-10-08): metric-aware thinning (greedy distance-R dominating set)
+# ----------------------------------------------------------------------------------------------
+
+
+def greedy_dominating_dots(rows: np.ndarray, cols: np.ndarray, vals: np.ndarray, shape, R: int = R_PX) -> np.ndarray:
+    """Greedy maximal set of candidates whose pairwise distance is strictly greater than R pixels.
+
+    Candidates are visited in decreasing `vals`. A candidate is kept iff no already-kept dot lies within
+    Euclidean distance R of it. Maximality means every rejected candidate lies within R of a kept dot, so the
+    kept set dominates the candidate set at radius R. Returns a boolean keep-mask aligned with the inputs.
+    """
+    H, W = shape
+    order = np.argsort(-np.asarray(vals, dtype=np.float64), kind="stable")
+    offs = [(dy, dx) for dy in range(-R, R + 1) for dx in range(-R, R + 1) if dy * dy + dx * dx <= R * R]
+    blocked = np.zeros((H, W), dtype=bool)
+    keep = np.zeros(len(vals), dtype=bool)
+    for i in order:
+        y, x = int(rows[i]), int(cols[i])
+        if blocked[y, x]:
+            continue
+        keep[i] = True
+        for dy, dx in offs:
+            yy, xx = y + dy, x + dx
+            if 0 <= yy < H and 0 <= xx < W:
+                blocked[yy, xx] = True
+    return keep
+
+
+def thin_emission(p_full: np.ndarray, candidates: np.ndarray, q: float, footprint_px: int,
+                  value: str = "p", R: int = R_PX):
+    """M1: top-q candidates by probability, then a greedy distance-R dominating set.
+
+    value = "p"   keep the model probability on kept dots (the emission is still a probability);
+    value = "bin" set kept dots to 1.0 (the template's hard floor, with the same dots).
+    Returns (emission float32 (H,W), kept_dot_count, selected_candidate_count).
+    """
+    H, W = p_full.shape
+    out = np.zeros((H, W), dtype=np.float32)
+    rr, cc = np.nonzero(candidates)
+    vals = p_full[rr, cc]
+    n_keep = int(round(q * footprint_px))
+    if n_keep <= 0 or vals.size == 0:
+        return out, 0, 0
+    n_keep = min(n_keep, vals.size)
+    top = np.argpartition(-vals, n_keep - 1)[:n_keep]
+    rr, cc, vals = rr[top], cc[top], vals[top]
+    kept = greedy_dominating_dots(rr, cc, vals, (H, W), R)
+    if value == "bin":
+        out[rr[kept], cc[kept]] = 1.0
+    elif value == "p":
+        out[rr[kept], cc[kept]] = vals[kept].astype(np.float32)
+    else:
+        raise ValueError(f"unknown value mode {value!r}")
+    return out, int(kept.sum()), int(n_keep)
+
+
+# ----------------------------------------------------------------------------------------------
+# Shared template tools (imported by file path, never copied into this repository)
+# ----------------------------------------------------------------------------------------------
+
+TEMPLATE_ROOT_DEFAULT = "/tmp/gems-template"
+
+
+def load_template_module(name: str, template_root: str = TEMPLATE_ROOT_DEFAULT):
+    """Import one module of the shared GEMSDOE template by file path (no copy, no package clash)."""
+    import importlib.util
+    from pathlib import Path as _P
+
+    path = _P(template_root) / "src" / f"{name}.py"
+    if not path.exists():
+        raise FileNotFoundError(f"shared template module missing: {path} (run: git clone "
+                                f"https://github.com/buffedlizard55-lab/GEMSDOE.git {template_root})")
+    spec = importlib.util.spec_from_file_location(f"template_{name}", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
