@@ -55,9 +55,14 @@ def share_within_r(ours_mask: np.ndarray, reg_dots: np.ndarray) -> float:
     return float(hit.mean())
 
 
-def load_registry(registry_dirs, shape):
-    """Unique-by-sha256 rasters on the given grid. Returns (list of (name, sha, array), skipped list)."""
-    seen, out, skipped = {}, [], []
+def iter_registry(registry_dirs, shape):
+    """Yield (name, sha, array) for unique-by-sha256 rasters on the given grid, ONE AT A TIME (memory-safe).
+
+    Skipped files (duplicates, other grids) are recorded in the `skipped` list passed by the caller via the
+    generator's .skipped attribute.
+    """
+    seen = {}
+    skipped = []
     for d in registry_dirs:
         for p in sorted(Path(d).glob("*.tif")):
             sha = sha256(p)
@@ -70,8 +75,8 @@ def load_registry(registry_dirs, shape):
                     skipped.append({"file": p.name, "reason": f"grid {s.height}x{s.width} != {shape}"})
                     continue
                 arr = np.nan_to_num(s.read(1).astype(np.float32), nan=0.0, posinf=0.0, neginf=0.0)
-            out.append((p.name, sha, arr))
-    return out, skipped
+            yield p.name, sha, arr
+    iter_registry.skipped = skipped
 
 
 def run_gate(final_path, registry_dirs, out_json, surface=None, candidates=None, footprint=None, seed=53,
@@ -96,9 +101,8 @@ def run_gate(final_path, registry_dirs, out_json, surface=None, candidates=None,
     surf = None if surface is None else np.nan_to_num(surface.astype(np.float32), nan=0.0).ravel()
     cand = None if candidates is None else candidates.astype(bool)
     t0 = time.time()
-    reg, skipped = load_registry(registry_dirs, shape)
     rows = []
-    for name, sha, arr in reg:
+    for name, sha, arr in iter_registry(registry_dirs, shape):
         rho_f = float(stats.spearmanr(final.ravel()[idx], arr.ravel()[idx]).statistic)
         rd = arr > 0
         row = {"file": name, "sha256": sha, "reg_dots": int(rd.sum()),
@@ -117,6 +121,8 @@ def run_gate(final_path, registry_dirs, out_json, surface=None, candidates=None,
         row["drift_flag"] = bool(worst > RHO_FLAG or row["overlap_final"] > OVERLAP_FLAG
                                  or row.get("overlap_pre", 0.0) > OVERLAP_FLAG)
         rows.append(row)
+        del arr
+    skipped = iter_registry.skipped
     rows.sort(key=lambda r: -r["overlap_final"])
     maxes = {
         "max_rho_final": max(r["rho_final"] for r in rows),

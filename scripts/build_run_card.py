@@ -27,6 +27,8 @@ def main() -> int:
     g32 = J("evidence/gemsdoe32_measured.json")
     irr = J("registry/irregularities.json")["items"]
     lim = J("registry/limitations.json")["items"]
+    diag = J(f"evidence/uniqueness_diagnostics_{cur['name']}.json")
+    sp_rho = J(f"evidence/diagnostic_surface_rho_{cur['name']}.json")
     sp = e2.get("spatial_confirmation", {})
     stage1 = e2.get("segment_selection", {})
     base_B = e2["baseline_design_B"]
@@ -114,6 +116,19 @@ def main() -> int:
                                                                  "reg_dots", "drift_flag")}
                                      for r in gate["top_by_overlap_final"][:8]],
             "receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
+            "diagnostics": {
+                "file": f"evidence/uniqueness_diagnostics_{cur['name']}.json",
+                "flagged_rows": diag["flagged_rows_analysed"], "flagged_by_class": diag["flagged_by_class"],
+                "flagged_by_overlap": diag["flagged_by_overlap"],
+                "flagged_by_rho_final_raster_whole_grid": diag["flagged_by_whole_grid_rho"],
+                "flagged_by_rho_final_raster_footprint_only": diag["flagged_by_footprint_only_rho"],
+                "flagged_by_rho_surface_whole_grid": sp_rho["flagged_by_surface_rho_whole_grid"],
+                "flagged_by_rho_surface_footprint_only": sp_rho["flagged_by_surface_rho_footprint_only"],
+                "sparse_flagged_median_lift": diag["sparse_flagged_median_lift"],
+                "densest_sparse_dot_maps_by_chance_coverage": diag["densest_sparse_dot_maps_by_chance_coverage"],
+                "raw_overlap_gate_satisfiable_by_any_placement": diag["raw_overlap_gate_satisfiable_by_any_placement"],
+                "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the gate receipt (IR-53-28, IR-53-29, IR-53-30)",
+            },
         },
         "gemsdoe32": {"measured_file": "evidence/gemsdoe32_measured.json",
                       "nan_variant": {k: g32["files"]["nan"][k] for k in
@@ -128,6 +143,11 @@ def main() -> int:
                        "H2": "not tested (budget)", "H3": "BLOCKED: strain orientation not in public data (IR-53-22)",
                        "H4": "rejected (labels)", "H5": "not tested (budget); data present in pinned mirror (S20, S22)",
                        "H6": "not tested (budget)"},
+        "verdict_reasons": [
+            "uniqueness gate (pre-registered rule) flags %d registry rasters" % gate["n_flagged"],
+            "the raw 70%% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers %.2f%% of the footprint within 3 px (IR-53-28)" % (100 * diag["densest_sparse_dot_maps_by_chance_coverage"][0]["chance_coverage"]),
+            "rho flags are method-sensitive: surface rho (whole grid) flags %d rasters; footprint-only surface rho flags %d (IR-53-29)" % (sp_rho["flagged_by_surface_rho_whole_grid"], sp_rho["flagged_by_surface_rho_footprint_only"]),
+        ] if not e3["gates"]["uniqueness_no_drift_flag"] else [],
         "irregularities_open": [i["id"] for i in irr if str(i.get("status", "")).startswith("open")],
         "irregularities_total": len(irr),
         "limitations": [i["id"] for i in lim],

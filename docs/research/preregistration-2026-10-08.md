@@ -128,3 +128,21 @@ negative-pool side channel that the GEMSDOE29 audit flagged (docs/leakage-review
   Stage 1 of that run is valid and is reused unchanged. Stage 2 was re-run with the corrected code
   (`python scripts/e2_leakfree_holdouts.py --stage2-only`). The rule, the fold design and the acceptance rule are unchanged.
   Logged as IR-53-27.
+
+## 10. Outcome record (written after E3, from the receipts)
+
+- **E1** (design A, reference): completed. Reproduction of exp2: PASS. Metric parity with the template: PASS. Not used.
+- **E2** (design B): stage 1 selected H1 with binary thinning at q 0.10 (pooled HOLDOUT-DTI 0.141319, 24 variants).
+  Stage 2 (spatial contiguous super-regions): paired mean difference +0.003533, 95% CI +0.000619 to +0.006447. **Accepted** by the rule.
+  The absolute level on unseen super-regions is small (selected 0.004049, baseline 0.000102).
+- **E3** (build): candidate `gems53-h1-thin_bin_q0p1-20261008-aefc7582`, 56,605 dots. Format validators: PASS.
+  Canary (design B): bands 0.591151 and H1 0.767983, both below 0.90. **Uniqueness gate: flagged** (103 of 621 registry rasters).
+- **Label:** Research-only / DO NOT SUBMIT, from the pre-registered rule (section 7).
+- **Why the gate flags it, measured (diagnostics, not a verdict):** 57 of the flags are dense rasters (more than 50% of the footprint
+  nonzero) that overlap 100% by construction. For the 42 sparse dot maps the median chance-corrected lift is 1.23. The raw 70%
+  overlap rule cannot be satisfied by any placement on this registry, because a GEMSDOE13 lattice raster covers 99.87% of the
+  footprint within 3 px (IR-53-28). The rho flags come from the surface on the whole grid. Footprint-only surface rho flags none
+  of them (IR-53-29).
+- **Consequence:** no candidate from this repository can be labelled OK to submit until the user decides the gate definition
+  (IR-53-28, IR-53-16). No change to thresholds or rules was made after seeing these results.
+- **Budget:** three experiments used (E1, E2, E3), within 2 hours of the E1 start.

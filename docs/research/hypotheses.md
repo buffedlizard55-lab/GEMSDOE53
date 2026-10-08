@@ -61,7 +61,7 @@ or as an external layer with its pinned source.
 - **Signature:** linear magnetic breaks and ridges at 1 to 3 km scales, typical of buried or covered faults.
 - **Off-catalogue rationale:** covered basins have few mapped faults, but magnetic breaks show them.
 - **Difference from the repo:** the stack has gradient and tilt bands (3, 6, 9) but no ridge or lineament extraction.
-  Band canaries (design B) put the strongest label-free band at separability 0.51 (fold maximum; see the E2 canary table).
+  Band canaries under design B put the strongest label-free band at separability 0.59 (band 7, geodetic shear rate; fold maximum, `evidence/e2_leakfree_holdouts.json`, `canary_design_B`). That is below the 0.90 gate, but it is not weak.
 
 ## H6 - regional trend prior (not tested)
 

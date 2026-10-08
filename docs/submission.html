@@ -1,47 +1,73 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>Submission file · GEMSDOE53</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>The file · GEMSDOE53</title>
 <style>
-:root{--ink:#17202a;--muted:#5b6673;--line:#dfe5ec;--bg:#f7f9fb;--card:#fff;--accent:#0b6e4f;--warn:#9a3412;--warnbg:#fff7ed;--ok:#14532d;--okbg:#f0fdf4}
+:root{--ink:#17202a;--muted:#5b6673;--line:#dfe5ec;--bg:#f7f9fb;--card:#fff;--accent:#0b6e4f;--warn:#9a3412;--warnbg:#fff7ed;--ok:#14532d;--okbg:#f0fdf4;--red:#7f1d1d;--redbg:#fef2f2}
 *{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
 header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700;font-size:17px}
 nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
-main{max-width:980px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+main{max-width:1000px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
 h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
+.label{font-size:20px;font-weight:800;border-radius:10px;padding:14px 16px;margin:4px 0 10px}
+.label.no{background:var(--redbg);border:2px solid #fca5a5;color:var(--red)}
+.label.yes{background:var(--okbg);border:2px solid #86efac;color:var(--ok)}
 .banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
-.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:12px 14px}
 .warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
+.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:12px 14px}
 table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
 th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
-.note{color:var(--muted);font-size:14px}footer{max-width:980px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
-a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
+.note{color:var(--muted);font-size:14px}footer{max-width:1000px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
+a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inline-block;background:#0b6e4f;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
+.btn.dis{background:#94a3b8}
 </style></head><body>
 <header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
-<nav><a href="index.html" class="">Executive summary</a><a href="submission.html" class="on">Submission file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
+<nav><a href="index.html" class="">Executive summary</a><a href="submission.html" class="on">The file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
 <main>
 <section>
-  <div class="banner"><b>Research-only / DO NOT SUBMIT.</b> Not offered for download. The file is blocked by the protocol's 3-px overlap flag
-  and quarantined outside the repository. The label "Validated / OK to submit" is not applied: the release gates have not all passed.</div>
-  <h1>Submission file</h1>
-  <p>Method (candidate): gradient-boosted classifier (sklearn HistGradientBoosting, 200 iterations) trained on the 19 label-free feature bands
-  (arm <code>bands</code>), with 300,000 sampled negatives and 60,988 known-fault positives. The top q=2% of the official
-  footprint is emitted (103,348 non-zero pixels), and every known-fault pixel is forced to 0.</p>
-  <h2>Checks (the local validator re-reads the file from disk)</h2>
-  <table>
-    <tr><th>File</th><th>sha256</th><th>All checks pass</th><th>Footprint px / finite px</th><th>Non-zero px</th></tr>
-    <tr><td>NaN outside footprint (the only file)</td><td><code>f380f70092fee2be7c44b4c20f78e92ce83c12967e5f8ec21432174dca928272</code></td><td>True (in-lane); template validator: True</td><td>5,167,373 / 5,167,373</td><td>103,348</td></tr>
-  </table>
-  <p class="note">Shared template validator (<code>buffedlizard55-lab/GEMSDOE</code> at commit <code>dcbbb19</code>, <code>scripts/validate_submission.py</code>): <b>PASSED</b>. Its log is <code>evidence/candidates/template_validator_nan.txt</code>.
-  It checks CRS, 100 m, single float32 band, values in [0, 1], finite exactly on the template's valid region, NaN elsewhere, the nodata tag, and the training shape. In-lane checks (core.py) are in the receipt. A validator pass is not a portal acceptance.</p>
-  <h2>Why it is not offered</h2>
+  <div class="label no">RESEARCH-ONLY / DO NOT SUBMIT</div>
+  <h1>The file</h1>
+  <p><code>docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif</code> · sha256 <code>a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b</code></p>
+  <p>Name <code>gems53-h1-thin_bin_q0p1-20261008-aefc7582</code> · Comment <code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53 h1 thin_bin_q0p1 | proxy DTI 0.0040 | not organizer-scored</code></p>
+  <p class="note">Decision recorded: design-B selection (E2 stage 1) confirmed on spatial blocks (E2 stage 2, paired lower bound &gt; 0).</p>
+</section>
+<section>
+  <h2>Gates (pre-registered; all must pass for "OK to submit")</h2>
+  <table><tr><th>Gate</th><th>Result</th></tr><tr><td>holdout_gate_E2_paired_accept</td><td>PASS</td></tr><tr><td>format_validators_all</td><td>PASS</td></tr><tr><td>uniqueness_no_drift_flag</td><td>FAIL</td></tr><tr><td>canary_clean_for_features_in_model</td><td>PASS</td></tr></table>
+  <p class="note">Holdout gate = stage-2 paired lower bound above 0 for the selected variant (design B, spatial super-regions). Uniqueness gate = no registry file with Spearman rho above 0.90 and no registry file with more than 70% of our dots within 3 px of its dots.</p>
+</section>
+<section>
+  <h2>Validators (shared template tools, run on the shipped bytes)</h2>
+  <table><tr><th>Check</th><th>Exit code (0 = pass)</th></tr>
+  <tr><td>template scripts/validate_submission.py (shared)</td><td>0</td></tr><tr><td>python -m src.submission_io validate-conformant (shared)</td><td>0</td></tr></table>
+  <h3>In-lane checks on the whole array</h3>
+  <table><tr><th>Check</th><th>Value</th></tr><tr><td>CRS EPSG</td><td>32611</td></tr><tr><td>grid 3730 x 3292</td><td>True</td></tr><tr><td>transform equals sample</td><td>True</td></tr><tr><td>resolution 100 m</td><td>True</td></tr><tr><td>one band</td><td>True</td></tr><tr><td>dtype</td><td>float32</td></tr><tr><td>nodata tag</td><td>nan</td></tr><tr><td>NaN exactly outside sample footprint</td><td>True</td></tr><tr><td>values in [0, 1] on the whole array</td><td>True</td></tr><tr><td>finite pixels (footprint)</td><td>5,167,373</td></tr><tr><td>nonzero pixels (dots)</td><td>56,605</td></tr><tr><td>min / max</td><td>0.0000 / 1.0000</td></tr></table>
+</section>
+<section>
+  <h2>Uniqueness receipt (rebuilt registry, 621 unique rasters)</h2>
+  <p>Every unique (sha256) registry raster on the official grid was compared. Overlap = share of our dots within 3 px of that raster's dots. Lift = overlap / chance coverage (1.0 = what random placement would give).</p>
+  <p>Sparse dot maps flagged (the eight with the largest overlap). Dense rasters (57 flagged) are left out of this table: they overlap 100% by construction.</p>
+  <table><tr><th>Registry dot map</th><th>Dots</th><th>Overlap (our dots within 3 px)</th><th>Chance coverage</th><th>Lift</th><th>Footprint-only rho</th></tr><tr><td>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outs</td><td>206,895</td><td>99.6%</td><td>99.9%</td><td>1.00</td><td>0.0026</td></tr><tr><td>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill</td><td>206,895</td><td>99.6%</td><td>99.9%</td><td>1.00</td><td>0.0026</td></tr><tr><td>13GEMSDOE__docs__downloads__archive__13gems-composite-plus-20260929T18</td><td>380,365</td><td>91.4%</td><td>83.5%</td><td>1.10</td><td>0.0169</td></tr><tr><td>13GEMSDOE__docs__downloads__archive__13gems-composite-plus-20260929T18</td><td>380,365</td><td>91.4%</td><td>83.5%</td><td>1.10</td><td>0.0169</td></tr><tr><td>13GEMSDOE__docs__downloads__archive__13gems-composite-20260929T183221Z</td><td>507,776</td><td>90.2%</td><td>86.1%</td><td>1.05</td><td>0.0077</td></tr><tr><td>13GEMSDOE__docs__downloads__archive__13gems-composite-20260929T183221Z</td><td>507,776</td><td>90.2%</td><td>86.1%</td><td>1.05</td><td>0.0077</td></tr><tr><td>GEMSDOE3__docs__downloads__coverage-v3-wide-20260925T054019Z-0ac095a7e</td><td>624,025</td><td>90.0%</td><td>61.4%</td><td>1.47</td><td>0.0373</td></tr><tr><td>15GEMSDOE__docs__downloads__gems-cleanup-a-20260928T195952Z-curv_scarp</td><td>362,327</td><td>88.4%</td><td>88.9%</td><td>1.00</td><td>-0.0004</td></tr></table>
+  <p>Full receipt (all 621 rasters): <code>evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json</code>. Diagnostics: <code>evidence/uniqueness_diagnostics_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json</code>.</p>
+</section>
+<section>
+  <h2>Why the uniqueness gate flags the file (diagnostics; the verdict is the pre-registered receipt)</h2>
   <ul>
-    <li>Rank correlation with 138 public registry rasters: max 0.164. Below the 0.90 flag.</li>
-    <li>Share of our dots within 3 px of another file's dots: max 0.795. Above the 0.70 stop threshold, so the protocol stops the candidate.</li>
-    <li>Chance baseline (diagnostic only; flags unchanged): the largest lift over random placement at the same registry density is 4.20×. This means the overlap is placement, not just density. See <a href="evidence.html#uniqueness">the uniqueness table</a>.</li>
+    <li><b>103</b> registry rasters are flagged. By class: sparse(&lt;=25%): 42, dense(&gt;50% nonzero): 57, mid(25-50%): 4.</li>
+    <li>By overlap above 70%: 100. By Spearman rho above 0.90 of the candidate surface: 52 rasters on the whole grid (NaN counted as 0, which inflates rho through the zeros outside the footprint), and 0 on the footprint only (IR-53-29). The final raster exceeds 0.90 for none of the rasters on either basis.</li>
+    <li>Chance coverage of the densest sparse dot map: <b>99.87%</b> of the footprint lies within 3 px of its dots (<code>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.tif</code>). Any candidate placed on this footprint therefore overlaps that file above 70%. The raw gate is <b>not satisfiable by placement</b> on this registry (IR-53-28).</li>
+    <li>Median chance-corrected lift for the sparse flagged files: 1.23 (1.0 means the overlap is what random placement would give). This is a diagnostic only. Changing the gate needs your explicit approval.</li>
   </ul>
-  <p class="note">Files are at <code>/tmp/gems53-held/</code> (not in the repository; they are 49 MB each). They can be regenerated with <code>scripts/exp3_build_submission.py</code> and checked against the sha256 values above.</p>
+</section>
+<section>
+  <h2>Why the label reads as it does</h2>
+  <ul>
+    <li>The format and conformance checks pass (yes).</li>
+    <li>The uniqueness gate: drift flagged.</li>
+    <li>The holdout gate: accepted (stage 2, paired, design B). </li>
+    <li>The canary: bands max separability 0.5912, H1 0.7680, both below the 0.90 gate.</li>
+  </ul>
 </section>
 </main>
-<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or the data inventory
-(computed from files at build time). HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
+<footer>Numbers on these pages are read from JSON in <code>evidence/</code>, <code>registry/</code> and <code>docs/submissions/</code>.
+HOLDOUT-DTI = our proxy (withheld known-fault segments or spatial super-regions). ORGANIZER-CONFIRMED = receipt only (none exists).
 Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>

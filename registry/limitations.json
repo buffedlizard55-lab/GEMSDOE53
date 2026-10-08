@@ -68,6 +68,10 @@
     {
       "id": "L-17",
       "item": "Uniqueness is checked against the GEMSDOE* repositories as they stood on 2026-10-08 (tips at fetch time). Later submissions by other teams are not covered."
+    },
+    {
+      "id": "L-18",
+      "item": "The protocol's raw overlap gate cannot be passed by any placement on the rebuilt registry (IR-53-28). Until the user redefines the gate, no candidate from this repository can be labelled OK to submit."
     }
   ]
 }

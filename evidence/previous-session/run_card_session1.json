@@ -295,10 +295,8 @@
         "mid(25-50%)": 4
       },
       "flagged_by_overlap": 100,
-      "flagged_by_rho_final_raster_whole_grid": 0,
-      "flagged_by_rho_final_raster_footprint_only": 0,
-      "flagged_by_rho_surface_whole_grid": 52,
-      "flagged_by_rho_surface_footprint_only": 0,
+      "flagged_by_rho_whole_grid": 0,
+      "flagged_by_rho_footprint_only": 0,
       "sparse_flagged_median_lift": 1.2250999999999999,
       "densest_sparse_dot_maps_by_chance_coverage": [
         {
@@ -357,7 +355,7 @@
   "verdict_reasons": [
     "uniqueness gate (pre-registered rule) flags 103 registry rasters",
     "the raw 70% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers 99.87% of the footprint within 3 px (IR-53-28)",
-    "rho flags are method-sensitive: surface rho (whole grid) flags 52 rasters; footprint-only surface rho flags 0 (IR-53-29)"
+    "rho flags are method-sensitive: footprint-only rho gives 0 flags (IR-53-29)"
   ],
   "irregularities_open": [
     "IR-53-01",
