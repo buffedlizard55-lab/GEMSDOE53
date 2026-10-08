@@ -1,0 +1,35 @@
+{
+  "reviewed_utc": "2026-10-07T00:32:37.651842+00:00",
+  "passes": 3,
+  "tests": {
+    "passed": 86,
+    "skipped": 0,
+    "warnings": 38,
+    "command": ".venv/bin/python -m pytest -q"
+  },
+  "essential_lint": "passed E9/F63/F7/F82/F401",
+  "site_checker": "passed links, strict JSON, receipt values and HTTP byte identity",
+  "browser": "real Chromium desktop 1440px/mobile 390px: no JS errors or horizontal overflow, TIFF hash and note clipboard verified",
+  "release": "exact template/range/mask, single-TIFF ZIP, 925 reasoning rows and same-budget max-union inequality verified",
+  "submission": "gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",
+  "sha256": "c3a08704d46c84acf13141f5df5476dd24e1fa0f55faa5aa77ca73b53621befc",
+  "canonical_prior_comparisons": 395,
+  "prior_inventory_entries": 383,
+  "eligible_inventory_rasters": 377,
+  "canonical_pattern_unique": true,
+  "strict_20percent_support_novelty_diagnostic": "FAIL \u2014 retained, saturated dense/ignorance-raster union",
+  "scientific_slot_gate": "FAIL \u2014 mean lift -0.001504 versus strongest B control, 2/4 folds positive",
+  "official_score": null,
+  "weekly_slots_used": 0,
+  "source_authentication": "owner SHA pins verified, organizer authentication unverified",
+  "deployment": {
+    "branch": "arena/f1d591a5-gemsdoe52",
+    "pull_request": "https://github.com/buffedlizard55-lab/GEMSDOE52/pull/9",
+    "state": "PR created; concurrent main integrated; final merge/deployment verified on GitHub"
+  },
+  "concurrent_h53_preserved": true,
+  "global_incumbent_pointer": "submission/LATEST.txt (H53, unchanged)",
+  "research_pointer": "submission/R2_LATEST.txt",
+  "concurrent_h53_tests": "32 additional tests preserved and passed; structure-tensor numerical overflow warnings in stress fixture flagged",
+  "ci_bug_fixed": "Fresh CI lacked ignored data/sample_submission.tif; workflow now restores only the SHA-pinned 1.6MB template before integration tests. No bulk training data committed."
+}

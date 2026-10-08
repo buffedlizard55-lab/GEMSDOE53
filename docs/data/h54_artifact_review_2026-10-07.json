@@ -1,0 +1,59 @@
+{
+  "reviewed_utc": "2026-10-07T15:04:44.382575Z",
+  "file": "gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+  "file_sha256": "15210d91fa0c939b254d058876b47268e650176e08bf0eed10437ced8d476e36",
+  "artifact_status": "Legacy H54 research/audit only; no comparable spatial holdout and not approved for a weekly slot.",
+  "score_link_authentication": "Owner-mirrored file/score associations; no organizer receipt authenticates exact filename/hash/score.",
+  "local_readback": {
+    "bands": 1,
+    "dtype": "float32",
+    "width": 3292,
+    "height": 3730,
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "min": 0.0,
+    "max": 1.0,
+    "nan_pixels": 0,
+    "positive_pixels": 50517,
+    "single_band": true,
+    "grid_shape": [
+      3730,
+      3292
+    ],
+    "mask_valid_cells": 12279160
+  },
+  "bounded_uniqueness": {
+    "historical_files_checked": 23,
+    "global_inventory_check": "not performed",
+    "eligible_inventory_files_missing_here": 377,
+    "global_decoded_pattern_unique": null,
+    "all_prior_support_novelty_verified": false,
+    "receipt": "evidence/h54_prior_inventory_availability.json"
+  },
+  "spatial_holdout": "Not performed for H54; the prior-dependent budget is not a holdout result.",
+  "weekly_slots_used": 0,
+  "a_only_reasoning": {
+    "source": "evidence/a_only_geological_reasoning54.json",
+    "candidate_count": 11996,
+    "unique_coordinates": 11996,
+    "every_coordinate_is_emitted": true,
+    "pre_repair_docs_copy": {
+      "candidate_count": 11999,
+      "non_emitted_coordinates": 5084,
+      "status": "historical, replaced"
+    },
+    "current_docs_copy": {
+      "candidate_count": 11996,
+      "non_emitted_coordinates": 0,
+      "all_coordinates_match_h54": true
+    },
+    "resolution": "Replaced docs JSON/CSV with evidence candidates and checked every row/column against the exact H54 raster; rows state alternatives and unverified interpretation status."
+  }
+}

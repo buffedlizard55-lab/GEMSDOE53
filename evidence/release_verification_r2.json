@@ -1,0 +1,33 @@
+{
+  "tiff_sha256": "c3a08704d46c84acf13141f5df5476dd24e1fa0f55faa5aa77ca73b53621befc",
+  "raw_range_and_geometry": true,
+  "mask_exact": true,
+  "zip_single_tiff_bytes_match": true,
+  "a_only_rows": 925,
+  "every_reasoning_pixel_emitted": true,
+  "matched_budget_max_union": {
+    "equal": false,
+    "emitted": 37654,
+    "intersection": 5101,
+    "novel_vs_matched_max_union": 32553,
+    "matched_max_union_pixels_dropped": 32553,
+    "placement": {
+      "emitted": 37654,
+      "requested_budget": 37654,
+      "pool": 400000,
+      "pool_restricted": true,
+      "bar": 0.0,
+      "dti_projected": 0.0,
+      "marginal_first": 2.965055465698242,
+      "marginal_last": 0.14557449519634247,
+      "total_expected_credit": 12144.38170196116,
+      "rejects_at_stop": 0,
+      "lazy_updates": 733801,
+      "density_sum": 68477.90625,
+      "false_positive_discount": "unused: fixed matched budget",
+      "objective": "expected triangular max-coverage surrogate; not expected DTI"
+    }
+  },
+  "scientific_slot_approval": false,
+  "official_score": null
+}

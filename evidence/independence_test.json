@@ -1,0 +1,45 @@
+{
+  "hypothesis_tested": "Blum & Mitchell (1998) conditional error independence on out-of-fold labeled negatives",
+  "n_labeled_negatives_total": 4520340,
+  "n_labeled_negatives_evaluated": 200000,
+  "pearson_r_oof_negative_error": 0.10143,
+  "pearson_p_value": 0.0,
+  "spearman_rho_oof_negative_error": 0.10595,
+  "spearman_p_value": 0.0,
+  "block_16x16_mean_error_pearson_r": 0.26847,
+  "top_2pct_false_positive_joint_rate": 0.00077,
+  "top_2pct_false_positive_independent_product": 0.0004,
+  "top_2pct_false_positive_jaccard": 0.01963,
+  "per_quadrant_negative_error_correlation": {
+    "foldNW": {
+      "n_negatives_sampled": 46032,
+      "pearson_r": 0.00657,
+      "spearman_rho": -0.0099
+    },
+    "foldNE": {
+      "n_negatives_sampled": 56541,
+      "pearson_r": 0.06283,
+      "spearman_rho": 0.06932
+    },
+    "foldSW": {
+      "n_negatives_sampled": 54008,
+      "pearson_r": 0.15848,
+      "spearman_rho": 0.18808
+    },
+    "foldSE": {
+      "n_negatives_sampled": 43419,
+      "pearson_r": 0.18437,
+      "spearman_rho": 0.16761
+    }
+  },
+  "abandonment_threshold_abs_r": 0.5,
+  "conditional_independence_gate_passed": true,
+  "decision": "PROCEED_WITH_COTRAINING",
+  "segmentation_summary": {
+    "total_connected_segments": 3199,
+    "held_out_hide_and_recover_segments": 530,
+    "training_segments": 2669,
+    "held_out_positive_pixels": 10649,
+    "training_positive_pixels": 50339
+  }
+}

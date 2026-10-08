@@ -1,0 +1,6274 @@
+{
+ "generated_utc": "2026-10-06T22:18:35Z",
+ "file": "gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+ "sha256": "063fb7247f8e12b80788dd14652c3245dec15be82f7c7e8e901193b9aeaa68b6",
+ "bytes": 89751,
+ "arm": "B_only+blanket|37654|s0",
+ "arm_mean_fold_dti": 0.02914,
+ "budget": 37654,
+ "emit": "topk",
+ "selection_source": "evidence/composite.json",
+ "field_stats": {
+  "mode": "composite",
+  "selection": {
+   "key": "B_only+blanket|37654|s0",
+   "far_ranker": "B_only",
+   "corridor_ranker": "blanket",
+   "total_px": 37654,
+   "corridor_share": 0.0,
+   "corridor_px": 0,
+   "far_px": 37654,
+   "mean_tip": 0.02914,
+   "mean_hide": 0.05178,
+   "sum": 0.08092,
+   "worst": 0.02914,
+   "rand": {
+    "tip": 0.02497,
+    "hide": 0.03921
+   },
+   "rand_all": {
+    "tip": null,
+    "hide": null
+   },
+   "beats_random_all": true,
+   "vs_union_tip": 0.00511,
+   "vs_union_hide": 0.01371,
+   "beats_union_bar": false,
+   "promoted": false
+  },
+  "corridor_px": 958140,
+  "far_px": 4146806
+ },
+ "g_estimate_px": 10331.68,
+ "accept_bar": 0.05932203389830509,
+ "stats": {
+  "emitted": 37654,
+  "corridor_px": 0,
+  "far_px": 37654,
+  "corridor_area": 958140,
+  "far_area": 4146806,
+  "method": "two-regime top-K at the composite-selected split"
+ },
+ "sensitivity_alt_bar": null,
+ "holdout_gates": {
+  "promoted": false,
+  "tested": "B_only+blanket|37654|s0",
+  "explicit_selection": false,
+  "composite_control_bar": true,
+  "registered_union_bar": false,
+  "vs_naive_union": {
+   "tip": 0.00511,
+   "hide": 0.01371
+  },
+  "checks": {
+   "mean_tip": {
+    "ok": true,
+    "value": 0.02914
+   },
+   "mean_hide": {
+    "ok": true,
+    "value": 0.05178
+   }
+  },
+  "reason": "selected by the composite rule: beats random on both instruments at equal budget, maximises the sum of the two instruments' DTI, ties to smaller mass"
+ },
+ "forced": true,
+ "format": {
+  "path": "/home/user/GEMSDOE52/submission/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+  "bytes": 89751,
+  "sha256": "063fb7247f8e12b80788dd14652c3245dec15be82f7c7e8e901193b9aeaa68b6",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "width": 3292,
+  "height": 3730,
+  "bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "ref_bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": "None",
+  "blocksize": [
+   256,
+   256
+  ],
+  "nan_pixels": 0,
+  "reference_file_has_nan": 7111787,
+  "mass_outside_footprint": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "mean": 0.003066,
+  "n_nonzero": 37654,
+  "n_nan": 0,
+  "mass": 37654.0,
+  "problems": [],
+  "ok": true
+ },
+ "writer_receipt": {
+  "path": "/home/user/GEMSDOE52/submission/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+  "bytes": 89751,
+  "sha256": "063fb7247f8e12b80788dd14652c3245dec15be82f7c7e8e901193b9aeaa68b6",
+  "bands": 1,
+  "dtype": "float32",
+  "height": 3730,
+  "width": 3292,
+  "crs": "EPSG:32611",
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "res": [
+   100.0,
+   100.0
+  ],
+  "nodata": null,
+  "nodata_repr": "None",
+  "finite_pixels": 12279160,
+  "min": 0.0,
+  "max": 1.0,
+  "positive_pixels": 37654,
+  "nonzero_in_footprint": 37654,
+  "unique_values": 2
+ },
+ "uniqueness": {
+  "n_priors_checked": 8,
+  "per_prior": [
+   {
+    "path": "/home/user/GEMSDOE52/data/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+    "prior_px": 121131,
+    "new_px": 37654,
+    "intersection": 6747,
+    "jaccard": 0.04438,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 30907
+   },
+   {
+    "path": "/home/user/GEMSDOE52/data/scored/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+    "prior_px": 60069,
+    "new_px": 37654,
+    "intersection": 2912,
+    "jaccard": 0.03071,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 34742
+   },
+   {
+    "path": "/tmp/GEMSDOE31/docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-allfinite.tif",
+    "prior_px": 55304,
+    "new_px": 37654,
+    "intersection": 2542,
+    "jaccard": 0.02811,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 35112
+   },
+   {
+    "path": "/tmp/GEMSDOE31/docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-nan.tif",
+    "prior_px": 55304,
+    "new_px": 37654,
+    "intersection": 2542,
+    "jaccard": 0.02811,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 35112
+   },
+   {
+    "path": "/tmp/GEMSDOE31/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
+    "prior_px": 40199,
+    "new_px": 37654,
+    "intersection": 2039,
+    "jaccard": 0.02689,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 35615
+   },
+   {
+    "path": "/tmp/GEMSDOE31/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+    "prior_px": 40199,
+    "new_px": 37654,
+    "intersection": 2039,
+    "jaccard": 0.02689,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 35615
+   },
+   {
+    "path": "/tmp/GEMSDOE31/docs/downloads/gemsdoe31-reference-d28-offcat-44090-20261004-nan.tif",
+    "prior_px": 44090,
+    "new_px": 37654,
+    "intersection": 2039,
+    "jaccard": 0.02558,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 35615
+   },
+   {
+    "path": "/tmp/GEMSDOE31/docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-allfinite.tif",
+    "prior_px": 106138,
+    "new_px": 37654,
+    "intersection": 3638,
+    "jaccard": 0.02596,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 34016
+   }
+  ],
+  "union_px": 182654,
+  "novel_vs_all_priors": 29685,
+  "novel_fraction": 0.7884,
+  "prior_px_dropped": 174685,
+  "relation_to_union": "strictly-novel-and-selective",
+  "ok": true,
+  "rule": "must not equal any prior, must add >= 20 % of its mass where no prior put anything, and must drop at least one prior pixel (so it cannot be 'the union')"
+ },
+ "n_segments": 1542,
+ "stratum_mix": {
+  "silent": {
+   "pixels": 6809,
+   "fraction": 0.1808
+  },
+  "concordant": {
+   "pixels": 2149,
+   "fraction": 0.0571
+  },
+  "A-only": {
+   "pixels": 1176,
+   "fraction": 0.0312
+  },
+  "B-only": {
+   "pixels": 27520,
+   "fraction": 0.7309
+  }
+ },
+ "per_candidate": [
+  {
+   "segment": 61,
+   "pixels": 993,
+   "row_range": [
+    89,
+    146
+   ],
+   "col_range": [
+    408,
+    489
+   ],
+   "east_m": 45694.00805639476,
+   "north_m": 231719.83887210474,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 28,
+    "concordant": 22,
+    "A-only": 0,
+    "B-only": 943
+   },
+   "cover_depth_rank": 213.7686,
+   "slope_rank": 8.9299,
+   "scarp_rank": 15.4422,
+   "grav_step": 4.7372,
+   "mag_step": 218.5894,
+   "px_to_visible_catalogue": 22.35,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9935,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 624,
+   "pixels": 594,
+   "row_range": [
+    873,
+    935
+   ],
+   "col_range": [
+    1136,
+    1214
+   ],
+   "east_m": 117493.43434343435,
+   "north_m": 152172.22222222222,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 594
+   },
+   "cover_depth_rank": 122.6512,
+   "slope_rank": 8.8198,
+   "scarp_rank": 17.1532,
+   "grav_step": 3.3368,
+   "mag_step": 19.7678,
+   "px_to_visible_catalogue": 19.45,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99395,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 28,
+   "pixels": 536,
+   "row_range": [
+    1,
+    60
+   ],
+   "col_range": [
+    634,
+    680
+   ],
+   "east_m": 65569.40298507462,
+   "north_m": 240356.3432835821,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 9,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 527
+   },
+   "cover_depth_rank": 98.9522,
+   "slope_rank": 10.0904,
+   "scarp_rank": 17.18,
+   "grav_step": 1.2956,
+   "mag_step": 196.3819,
+   "px_to_visible_catalogue": 37.37,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99535,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 225,
+   "pixels": 523,
+   "row_range": [
+    394,
+    470
+   ],
+   "col_range": [
+    257,
+    286
+   ],
+   "east_m": 26548.0879541109,
+   "north_m": 200451.05162523902,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 158,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 365
+   },
+   "cover_depth_rank": 163.937,
+   "slope_rank": 6.5277,
+   "scarp_rank": 13.8832,
+   "grav_step": 1.9583,
+   "mag_step": 132.1578,
+   "px_to_visible_catalogue": 10.85,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99364,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1074,
+   "pixels": 499,
+   "row_range": [
+    1968,
+    2102
+   ],
+   "col_range": [
+    925,
+    1016
+   ],
+   "east_m": 97297.49498997997,
+   "north_m": 39669.73947895793,
+   "stratum": "A-only",
+   "stratum_counts": {
+    "silent": 172,
+    "concordant": 88,
+    "A-only": 120,
+    "B-only": 119
+   },
+   "cover_depth_rank": 52.6495,
+   "slope_rank": 22.476,
+   "scarp_rank": 21.5538,
+   "grav_step": 7.1688,
+   "mag_step": 148.7817,
+   "px_to_visible_catalogue": 2.17,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99401,
+   "claim": "field-view only: potential-field offset (gravity step 7.169, magnetic step 148.782) with no corresponding scarp (surface rank 21.554); cover depth rank 52.650 is deep enough that a scarp would be buried, so this is a buried range-front fault the LiDAR-derived catalogue cannot contain"
+  },
+  {
+   "segment": 596,
+   "pixels": 497,
+   "row_range": [
+    855,
+    937
+   ],
+   "col_range": [
+    0,
+    25
+   ],
+   "east_m": 874.5472837022132,
+   "north_m": 154971.02615694166,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 48,
+    "concordant": 181,
+    "A-only": 28,
+    "B-only": 240
+   },
+   "cover_depth_rank": 166.8499,
+   "slope_rank": 12.1614,
+   "scarp_rank": 15.2216,
+   "grav_step": 16.2065,
+   "mag_step": 167.3823,
+   "px_to_visible_catalogue": 10.3,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99261,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 629,
+   "pixels": 481,
+   "row_range": [
+    885,
+    917
+   ],
+   "col_range": [
+    359,
+    427
+   ],
+   "east_m": 39103.01455301455,
+   "north_m": 153177.75467775468,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 18,
+    "concordant": 15,
+    "A-only": 3,
+    "B-only": 445
+   },
+   "cover_depth_rank": 55.8164,
+   "slope_rank": 7.6246,
+   "scarp_rank": 12.5192,
+   "grav_step": 2.908,
+   "mag_step": 71.8163,
+   "px_to_visible_catalogue": 87.09,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99136,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 956,
+   "pixels": 479,
+   "row_range": [
+    1588,
+    1616
+   ],
+   "col_range": [
+    664,
+    771
+   ],
+   "east_m": 71820.5636743215,
+   "north_m": 83203.54906054278,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 479
+   },
+   "cover_depth_rank": 1378.9778,
+   "slope_rank": 5.4834,
+   "scarp_rank": 12.4571,
+   "grav_step": 0.9701,
+   "mag_step": 108.528,
+   "px_to_visible_catalogue": 27.9,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98983,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 749,
+   "pixels": 474,
+   "row_range": [
+    1188,
+    1346
+   ],
+   "col_range": [
+    1738,
+    1767
+   ],
+   "east_m": 175333.1223628692,
+   "north_m": 116664.76793248946,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 374,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 100
+   },
+   "cover_depth_rank": 750.9863,
+   "slope_rank": 22.7091,
+   "scarp_rank": 21.0056,
+   "grav_step": 10.9576,
+   "mag_step": 169.6998,
+   "px_to_visible_catalogue": 2.58,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99377,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 399,
+   "pixels": 462,
+   "row_range": [
+    593,
+    640
+   ],
+   "col_range": [
+    2776,
+    2802
+   ],
+   "east_m": 278946.5367965368,
+   "north_m": 182216.66666666666,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 71,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 391
+   },
+   "cover_depth_rank": 780.6718,
+   "slope_rank": 7.6476,
+   "scarp_rank": 13.5847,
+   "grav_step": 2.0944,
+   "mag_step": 39.3004,
+   "px_to_visible_catalogue": 27.46,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99266,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 585,
+   "pixels": 400,
+   "row_range": [
+    836,
+    875
+   ],
+   "col_range": [
+    331,
+    375
+   ],
+   "east_m": 35389.75,
+   "north_m": 157687.25,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 53,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 347
+   },
+   "cover_depth_rank": 35.7592,
+   "slope_rank": 8.9618,
+   "scarp_rank": 14.3313,
+   "grav_step": 1.6192,
+   "mag_step": 87.8793,
+   "px_to_visible_catalogue": 81.68,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99286,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 766,
+   "pixels": 376,
+   "row_range": [
+    1226,
+    1259
+   ],
+   "col_range": [
+    435,
+    487
+   ],
+   "east_m": 46458.24468085106,
+   "north_m": 119376.32978723405,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 60,
+    "concordant": 26,
+    "A-only": 0,
+    "B-only": 290
+   },
+   "cover_depth_rank": 768.2194,
+   "slope_rank": 9.5867,
+   "scarp_rank": 13.3677,
+   "grav_step": 2.5347,
+   "mag_step": 184.1973,
+   "px_to_visible_catalogue": 16.8,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99352,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1072,
+   "pixels": 369,
+   "row_range": [
+    1964,
+    2000
+   ],
+   "col_range": [
+    1552,
+    1590
+   ],
+   "east_m": 157012.33062330622,
+   "north_m": 45472.35772357724,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 49,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 320
+   },
+   "cover_depth_rank": 96.1467,
+   "slope_rank": 11.3061,
+   "scarp_rank": 15.3776,
+   "grav_step": 2.8229,
+   "mag_step": 148.0071,
+   "px_to_visible_catalogue": 13.7,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99369,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 657,
+   "pixels": 362,
+   "row_range": [
+    917,
+    966
+   ],
+   "col_range": [
+    437,
+    474
+   ],
+   "east_m": 45513.25966850829,
+   "north_m": 149099.17127071822,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 22,
+    "concordant": 103,
+    "A-only": 15,
+    "B-only": 222
+   },
+   "cover_depth_rank": 303.6739,
+   "slope_rank": 8.2041,
+   "scarp_rank": 13.6454,
+   "grav_step": 4.1469,
+   "mag_step": 71.3853,
+   "px_to_visible_catalogue": 28.6,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99232,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 470,
+   "pixels": 359,
+   "row_range": [
+    681,
+    796
+   ],
+   "col_range": [
+    226,
+    258
+   ],
+   "east_m": 24249.1643454039,
+   "north_m": 169483.00835654596,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 299,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 60
+   },
+   "cover_depth_rank": 106.8826,
+   "slope_rank": 20.8373,
+   "scarp_rank": 20.1635,
+   "grav_step": 7.5658,
+   "mag_step": 294.8034,
+   "px_to_visible_catalogue": 2.51,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99303,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1541,
+   "pixels": 346,
+   "row_range": [
+    3711,
+    3729
+   ],
+   "col_range": [
+    1860,
+    1953
+   ],
+   "east_m": 191500.86705202312,
+   "north_m": -129160.1156069364,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 13,
+    "concordant": 172,
+    "A-only": 59,
+    "B-only": 102
+   },
+   "cover_depth_rank": 3.2109,
+   "slope_rank": 18.43,
+   "scarp_rank": 19.8076,
+   "grav_step": 15.6574,
+   "mag_step": 94.601,
+   "px_to_visible_catalogue": 2.67,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99395,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 1078,
+   "pixels": 342,
+   "row_range": [
+    1982,
+    2063
+   ],
+   "col_range": [
+    1101,
+    1126
+   ],
+   "east_m": 111429.82456140351,
+   "north_m": 41599.41520467837,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 17,
+    "concordant": 60,
+    "A-only": 21,
+    "B-only": 244
+   },
+   "cover_depth_rank": 225.087,
+   "slope_rank": 8.7203,
+   "scarp_rank": 13.3939,
+   "grav_step": 4.3327,
+   "mag_step": 78.9105,
+   "px_to_visible_catalogue": 33.56,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99031,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 795,
+   "pixels": 335,
+   "row_range": [
+    1261,
+    1290
+   ],
+   "col_range": [
+    350,
+    388
+   ],
+   "east_m": 37030.89552238806,
+   "north_m": 115416.41791044777,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 3,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 332
+   },
+   "cover_depth_rank": 1434.5294,
+   "slope_rank": 8.5775,
+   "scarp_rank": 13.293,
+   "grav_step": 0.8615,
+   "mag_step": 175.8637,
+   "px_to_visible_catalogue": 49.7,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99218,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 655,
+   "pixels": 330,
+   "row_range": [
+    909,
+    934
+   ],
+   "col_range": [
+    510,
+    539
+   ],
+   "east_m": 52336.969696969696,
+   "north_m": 150958.48484848486,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 6,
+    "concordant": 288,
+    "A-only": 15,
+    "B-only": 21
+   },
+   "cover_depth_rank": 387.5491,
+   "slope_rank": 6.8027,
+   "scarp_rank": 13.2988,
+   "grav_step": 8.5578,
+   "mag_step": 61.591,
+   "px_to_visible_catalogue": 21.2,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99373,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 944,
+   "pixels": 317,
+   "row_range": [
+    1571,
+    1610
+   ],
+   "col_range": [
+    1350,
+    1365
+   ],
+   "east_m": 135806.4668769716,
+   "north_m": 84027.4447949527,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 205,
+    "A-only": 10,
+    "B-only": 97
+   },
+   "cover_depth_rank": 343.4621,
+   "slope_rank": 8.2899,
+   "scarp_rank": 14.7316,
+   "grav_step": 2.1903,
+   "mag_step": 157.8764,
+   "px_to_visible_catalogue": 21.34,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99354,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 744,
+   "pixels": 304,
+   "row_range": [
+    1158,
+    1186
+   ],
+   "col_range": [
+    1708,
+    1739
+   ],
+   "east_m": 172716.44736842107,
+   "north_m": 126143.75,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 98,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 206
+   },
+   "cover_depth_rank": 1330.8723,
+   "slope_rank": 11.3534,
+   "scarp_rank": 13.1459,
+   "grav_step": 5.8721,
+   "mag_step": 118.1682,
+   "px_to_visible_catalogue": 11.82,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99169,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1224,
+   "pixels": 303,
+   "row_range": [
+    2516,
+    2557
+   ],
+   "col_range": [
+    1549,
+    1566
+   ],
+   "east_m": 155981.02310231022,
+   "north_m": -10407.590759075887,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 6,
+    "concordant": 143,
+    "A-only": 51,
+    "B-only": 103
+   },
+   "cover_depth_rank": 131.6211,
+   "slope_rank": 9.9278,
+   "scarp_rank": 12.8275,
+   "grav_step": 3.1081,
+   "mag_step": 178.3615,
+   "px_to_visible_catalogue": 13.68,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99089,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 738,
+   "pixels": 287,
+   "row_range": [
+    1132,
+    1171
+   ],
+   "col_range": [
+    632,
+    676
+   ],
+   "east_m": 65225.60975609756,
+   "north_m": 127711.14982578397,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 16,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 271
+   },
+   "cover_depth_rank": 1004.9373,
+   "slope_rank": 8.2009,
+   "scarp_rank": 13.4418,
+   "grav_step": 1.6141,
+   "mag_step": 401.6023,
+   "px_to_visible_catalogue": 19.87,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99113,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1259,
+   "pixels": 286,
+   "row_range": [
+    2770,
+    2828
+   ],
+   "col_range": [
+    2013,
+    2036
+   ],
+   "east_m": 202943.70629370632,
+   "north_m": -36064.33566433564,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 29,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 257
+   },
+   "cover_depth_rank": 200.6666,
+   "slope_rank": 9.2422,
+   "scarp_rank": 14.4789,
+   "grav_step": 1.038,
+   "mag_step": 73.933,
+   "px_to_visible_catalogue": 129.84,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99039,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 40,
+   "pixels": 279,
+   "row_range": [
+    33,
+    83
+   ],
+   "col_range": [
+    3270,
+    3287
+   ],
+   "east_m": 328129.5698924731,
+   "north_m": 237372.40143369176,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 47,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 232
+   },
+   "cover_depth_rank": 16.8264,
+   "slope_rank": 6.8795,
+   "scarp_rank": 13.0112,
+   "grav_step": 2.754,
+   "mag_step": 34.7706,
+   "px_to_visible_catalogue": 77.6,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99282,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 227,
+   "pixels": 270,
+   "row_range": [
+    402,
+    449
+   ],
+   "col_range": [
+    604,
+    619
+   ],
+   "east_m": 61300.0,
+   "north_m": 200745.55555555556,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 29,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 241
+   },
+   "cover_depth_rank": 190.8313,
+   "slope_rank": 8.5025,
+   "scarp_rank": 14.8062,
+   "grav_step": 1.9476,
+   "mag_step": 89.5508,
+   "px_to_visible_catalogue": 14.89,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99325,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 479,
+   "pixels": 265,
+   "row_range": [
+    697,
+    738
+   ],
+   "col_range": [
+    257,
+    291
+   ],
+   "east_m": 28033.01886792453,
+   "north_m": 171411.69811320753,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 32,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 233
+   },
+   "cover_depth_rank": 114.7766,
+   "slope_rank": 8.0369,
+   "scarp_rank": 13.785,
+   "grav_step": 1.4273,
+   "mag_step": 208.232,
+   "px_to_visible_catalogue": 43.52,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99194,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 932,
+   "pixels": 262,
+   "row_range": [
+    1556,
+    1578
+   ],
+   "col_range": [
+    446,
+    487
+   ],
+   "east_m": 46916.41221374046,
+   "north_m": 86433.96946564884,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 47,
+    "concordant": 29,
+    "A-only": 41,
+    "B-only": 145
+   },
+   "cover_depth_rank": 682.3408,
+   "slope_rank": 8.8936,
+   "scarp_rank": 11.3715,
+   "grav_step": 4.6877,
+   "mag_step": 111.9539,
+   "px_to_visible_catalogue": 8.55,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99112,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 902,
+   "pixels": 247,
+   "row_range": [
+    1513,
+    1557
+   ],
+   "col_range": [
+    1732,
+    1749
+   ],
+   "east_m": 174189.27125506074,
+   "north_m": 89938.46153846156,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 25,
+    "concordant": 81,
+    "A-only": 22,
+    "B-only": 119
+   },
+   "cover_depth_rank": 2789.1621,
+   "slope_rank": 11.1713,
+   "scarp_rank": 16.2878,
+   "grav_step": 21.3599,
+   "mag_step": 64.8308,
+   "px_to_visible_catalogue": 3.46,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99297,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 341,
+   "pixels": 242,
+   "row_range": [
+    541,
+    609
+   ],
+   "col_range": [
+    2527,
+    2535
+   ],
+   "east_m": 253240.0826446281,
+   "north_m": 186275.20661157026,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 47,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 195
+   },
+   "cover_depth_rank": 2073.104,
+   "slope_rank": 14.1702,
+   "scarp_rank": 17.2175,
+   "grav_step": 1.2713,
+   "mag_step": 30.3202,
+   "px_to_visible_catalogue": 16.31,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99314,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1424,
+   "pixels": 232,
+   "row_range": [
+    3263,
+    3302
+   ],
+   "col_range": [
+    1999,
+    2011
+   ],
+   "east_m": 200784.05172413794,
+   "north_m": -85042.6724137931,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 38,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 194
+   },
+   "cover_depth_rank": 341.2255,
+   "slope_rank": 5.483,
+   "scarp_rank": 10.8253,
+   "grav_step": 2.0579,
+   "mag_step": 6.3696,
+   "px_to_visible_catalogue": 56.06,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99093,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1204,
+   "pixels": 229,
+   "row_range": [
+    2452,
+    2480
+   ],
+   "col_range": [
+    1243,
+    1264
+   ],
+   "east_m": 125297.5982532751,
+   "north_m": -3355.4585152838554,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 31,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 198
+   },
+   "cover_depth_rank": 255.7199,
+   "slope_rank": 7.2187,
+   "scarp_rank": 11.1471,
+   "grav_step": 2.2708,
+   "mag_step": 154.9676,
+   "px_to_visible_catalogue": 47.77,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99066,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 580,
+   "pixels": 228,
+   "row_range": [
+    827,
+    849
+   ],
+   "col_range": [
+    601,
+    627
+   ],
+   "east_m": 61269.29824561404,
+   "north_m": 159694.73684210528,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 12,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 216
+   },
+   "cover_depth_rank": 115.702,
+   "slope_rank": 10.7128,
+   "scarp_rank": 15.3986,
+   "grav_step": 3.3108,
+   "mag_step": 132.3867,
+   "px_to_visible_catalogue": 28.45,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99364,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 821,
+   "pixels": 219,
+   "row_range": [
+    1293,
+    1334
+   ],
+   "col_range": [
+    272,
+    299
+   ],
+   "east_m": 28795.205479452055,
+   "north_m": 111512.78538812784,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 91,
+    "concordant": 21,
+    "A-only": 17,
+    "B-only": 90
+   },
+   "cover_depth_rank": 79.6254,
+   "slope_rank": 9.5438,
+   "scarp_rank": 11.2749,
+   "grav_step": 4.0499,
+   "mag_step": 147.5669,
+   "px_to_visible_catalogue": 4.55,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99115,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1473,
+   "pixels": 216,
+   "row_range": [
+    3357,
+    3388
+   ],
+   "col_range": [
+    1666,
+    1682
+   ],
+   "east_m": 167294.90740740742,
+   "north_m": -94306.94444444444,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 124,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 92
+   },
+   "cover_depth_rank": 115.3611,
+   "slope_rank": 6.628,
+   "scarp_rank": 9.5665,
+   "grav_step": 3.222,
+   "mag_step": 14.6395,
+   "px_to_visible_catalogue": 28.42,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98843,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 396,
+   "pixels": 209,
+   "row_range": [
+    590,
+    620
+   ],
+   "col_range": [
+    2718,
+    2737
+   ],
+   "east_m": 272952.3923444976,
+   "north_m": 182651.1961722488,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 204
+   },
+   "cover_depth_rank": 770.9059,
+   "slope_rank": 8.0414,
+   "scarp_rank": 13.8897,
+   "grav_step": 1.8577,
+   "mag_step": 53.2236,
+   "px_to_visible_catalogue": 15.23,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99134,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 404,
+   "pixels": 208,
+   "row_range": [
+    597,
+    632
+   ],
+   "col_range": [
+    2734,
+    2747
+   ],
+   "east_m": 274140.8653846154,
+   "north_m": 181959.61538461538,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 20,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 188
+   },
+   "cover_depth_rank": 869.265,
+   "slope_rank": 8.1432,
+   "scarp_rank": 13.8514,
+   "grav_step": 3.2197,
+   "mag_step": 35.0866,
+   "px_to_visible_catalogue": 22.28,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99172,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 121,
+   "pixels": 201,
+   "row_range": [
+    172,
+    186
+   ],
+   "col_range": [
+    2899,
+    2942
+   ],
+   "east_m": 292180.34825870645,
+   "north_m": 225463.18407960198,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 201
+   },
+   "cover_depth_rank": 140.3926,
+   "slope_rank": 6.2532,
+   "scarp_rank": 13.3422,
+   "grav_step": 0.5934,
+   "mag_step": 118.0847,
+   "px_to_visible_catalogue": 73.65,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99182,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 461,
+   "pixels": 195,
+   "row_range": [
+    671,
+    711
+   ],
+   "col_range": [
+    2866,
+    2876
+   ],
+   "east_m": 287304.35897435894,
+   "north_m": 174006.6666666667,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 4,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 191
+   },
+   "cover_depth_rank": 373.0375,
+   "slope_rank": 7.9118,
+   "scarp_rank": 15.4421,
+   "grav_step": 2.2491,
+   "mag_step": 66.8544,
+   "px_to_visible_catalogue": 40.43,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99229,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 510,
+   "pixels": 191,
+   "row_range": [
+    734,
+    762
+   ],
+   "col_range": [
+    303,
+    324
+   ],
+   "east_m": 31558.90052356021,
+   "north_m": 168663.87434554973,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 30,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 161
+   },
+   "cover_depth_rank": 154.4089,
+   "slope_rank": 5.9103,
+   "scarp_rank": 13.0813,
+   "grav_step": 0.8643,
+   "mag_step": 106.8301,
+   "px_to_visible_catalogue": 71.48,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99303,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 594,
+   "pixels": 190,
+   "row_range": [
+    851,
+    875
+   ],
+   "col_range": [
+    574,
+    601
+   ],
+   "east_m": 58818.42105263159,
+   "north_m": 157323.15789473685,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 7,
+    "A-only": 0,
+    "B-only": 178
+   },
+   "cover_depth_rank": 162.311,
+   "slope_rank": 7.7813,
+   "scarp_rank": 14.3658,
+   "grav_step": 3.2873,
+   "mag_step": 118.9818,
+   "px_to_visible_catalogue": 33.48,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99354,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1243,
+   "pixels": 188,
+   "row_range": [
+    2613,
+    2637
+   ],
+   "col_range": [
+    1921,
+    1947
+   ],
+   "east_m": 193375.53191489363,
+   "north_m": -19018.617021276557,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 40,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 148
+   },
+   "cover_depth_rank": 685.1716,
+   "slope_rank": 9.8797,
+   "scarp_rank": 14.2125,
+   "grav_step": 4.9743,
+   "mag_step": 107.1587,
+   "px_to_visible_catalogue": 49.28,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99079,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 502,
+   "pixels": 186,
+   "row_range": [
+    715,
+    756
+   ],
+   "col_range": [
+    439,
+    455
+   ],
+   "east_m": 44708.06451612903,
+   "north_m": 169902.688172043,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 9,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 177
+   },
+   "cover_depth_rank": 37.6015,
+   "slope_rank": 13.9582,
+   "scarp_rank": 16.4131,
+   "grav_step": 2.0133,
+   "mag_step": 80.9286,
+   "px_to_visible_catalogue": 10.24,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99414,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1332,
+   "pixels": 186,
+   "row_range": [
+    3041,
+    3088
+   ],
+   "col_range": [
+    1791,
+    1805
+   ],
+   "east_m": 180158.06451612903,
+   "north_m": -63057.526881720405,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 11,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 175
+   },
+   "cover_depth_rank": 300.6019,
+   "slope_rank": 6.8132,
+   "scarp_rank": 12.9007,
+   "grav_step": 2.0784,
+   "mag_step": 42.9019,
+   "px_to_visible_catalogue": 33.77,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99018,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 136,
+   "pixels": 183,
+   "row_range": [
+    195,
+    216
+   ],
+   "col_range": [
+    2863,
+    2903
+   ],
+   "east_m": 288616.6666666666,
+   "north_m": 222726.22950819673,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 183
+   },
+   "cover_depth_rank": 262.9397,
+   "slope_rank": 6.34,
+   "scarp_rank": 12.6314,
+   "grav_step": 0.9092,
+   "mag_step": 87.6267,
+   "px_to_visible_catalogue": 33.06,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99083,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1226,
+   "pixels": 181,
+   "row_range": [
+    2524,
+    2544
+   ],
+   "col_range": [
+    1191,
+    1223
+   ],
+   "east_m": 120952.76243093921,
+   "north_m": -10449.723756906082,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 51,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 130
+   },
+   "cover_depth_rank": 496.3092,
+   "slope_rank": 7.2723,
+   "scarp_rank": 10.378,
+   "grav_step": 1.2932,
+   "mag_step": 196.0329,
+   "px_to_visible_catalogue": 19.66,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99043,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 350,
+   "pixels": 179,
+   "row_range": [
+    553,
+    583
+   ],
+   "col_range": [
+    196,
+    226
+   ],
+   "east_m": 21337.150837988826,
+   "north_m": 186564.80446927375,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 52,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 127
+   },
+   "cover_depth_rank": 35.1828,
+   "slope_rank": 3.631,
+   "scarp_rank": 9.9691,
+   "grav_step": 1.1376,
+   "mag_step": 131.1195,
+   "px_to_visible_catalogue": 13.35,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99109,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 253,
+   "pixels": 174,
+   "row_range": [
+    436,
+    474
+   ],
+   "col_range": [
+    281,
+    295
+   ],
+   "east_m": 28999.42528735632,
+   "north_m": 197582.183908046,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 38,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 136
+   },
+   "cover_depth_rank": 147.5246,
+   "slope_rank": 7.4744,
+   "scarp_rank": 12.8699,
+   "grav_step": 0.8653,
+   "mag_step": 273.0543,
+   "px_to_visible_catalogue": 32.82,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99056,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 522,
+   "pixels": 170,
+   "row_range": [
+    758,
+    772
+   ],
+   "col_range": [
+    2078,
+    2119
+   ],
+   "east_m": 209705.29411764705,
+   "north_m": 166382.35294117648,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 111,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 59
+   },
+   "cover_depth_rank": 33.0774,
+   "slope_rank": 20.6053,
+   "scarp_rank": 19.6941,
+   "grav_step": 4.1494,
+   "mag_step": 44.0156,
+   "px_to_visible_catalogue": 3.45,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99379,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 723,
+   "pixels": 165,
+   "row_range": [
+    1092,
+    1123
+   ],
+   "col_range": [
+    604,
+    627
+   ],
+   "east_m": 62014.242424242424,
+   "north_m": 132477.57575757575,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 28,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 137
+   },
+   "cover_depth_rank": 2138.8188,
+   "slope_rank": 6.3195,
+   "scarp_rank": 12.6757,
+   "grav_step": 0.995,
+   "mag_step": 308.9656,
+   "px_to_visible_catalogue": 15.53,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99118,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 676,
+   "pixels": 162,
+   "row_range": [
+    959,
+    980
+   ],
+   "col_range": [
+    301,
+    318
+   ],
+   "east_m": 31066.04938271605,
+   "north_m": 146347.53086419753,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 28,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 134
+   },
+   "cover_depth_rank": 133.4306,
+   "slope_rank": 7.9675,
+   "scarp_rank": 13.3022,
+   "grav_step": 4.6165,
+   "mag_step": 254.6675,
+   "px_to_visible_catalogue": 28.03,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9902,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 696,
+   "pixels": 162,
+   "row_range": [
+    1006,
+    1044
+   ],
+   "col_range": [
+    265,
+    282
+   ],
+   "east_m": 27369.135802469133,
+   "north_m": 141247.53086419753,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 51,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 111
+   },
+   "cover_depth_rank": 179.2929,
+   "slope_rank": 7.8715,
+   "scarp_rank": 11.6512,
+   "grav_step": 6.9643,
+   "mag_step": 165.6243,
+   "px_to_visible_catalogue": 8.34,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98929,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 322,
+   "pixels": 161,
+   "row_range": [
+    519,
+    550
+   ],
+   "col_range": [
+    319,
+    327
+   ],
+   "east_m": 32517.080745341616,
+   "north_m": 189778.88198757765,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 34,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 127
+   },
+   "cover_depth_rank": 134.9766,
+   "slope_rank": 6.689,
+   "scarp_rank": 12.7619,
+   "grav_step": 0.7132,
+   "mag_step": 166.4402,
+   "px_to_visible_catalogue": 15.74,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99237,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 73,
+   "pixels": 159,
+   "row_range": [
+    115,
+    142
+   ],
+   "col_range": [
+    2556,
+    2595
+   ],
+   "east_m": 257718.5534591195,
+   "north_m": 230535.22012578617,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 17,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 142
+   },
+   "cover_depth_rank": 70.1642,
+   "slope_rank": 5.2736,
+   "scarp_rank": 11.4816,
+   "grav_step": 1.7158,
+   "mag_step": 53.5553,
+   "px_to_visible_catalogue": 38.78,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9907,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 174,
+   "pixels": 152,
+   "row_range": [
+    299,
+    340
+   ],
+   "col_range": [
+    577,
+    583
+   ],
+   "east_m": 58190.13157894737,
+   "north_m": 211409.2105263158,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 33,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 119
+   },
+   "cover_depth_rank": 629.5656,
+   "slope_rank": 8.1732,
+   "scarp_rank": 14.3585,
+   "grav_step": 0.8056,
+   "mag_step": 36.0236,
+   "px_to_visible_catalogue": 26.21,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9892,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 134,
+   "pixels": 151,
+   "row_range": [
+    190,
+    240
+   ],
+   "col_range": [
+    3286,
+    3291
+   ],
+   "east_m": 329122.84768211923,
+   "north_m": 221982.11920529802,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 9,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 142
+   },
+   "cover_depth_rank": 843.8873,
+   "slope_rank": 10.2946,
+   "scarp_rank": 14.3575,
+   "grav_step": 7.2009,
+   "mag_step": 108.5693,
+   "px_to_visible_catalogue": 95.86,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99212,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 648,
+   "pixels": 151,
+   "row_range": [
+    903,
+    921
+   ],
+   "col_range": [
+    299,
+    328
+   ],
+   "east_m": 31555.960264900667,
+   "north_m": 151951.65562913907,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 6,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 145
+   },
+   "cover_depth_rank": 37.4557,
+   "slope_rank": 5.0862,
+   "scarp_rank": 10.3004,
+   "grav_step": 1.2124,
+   "mag_step": 86.7878,
+   "px_to_visible_catalogue": 45.95,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99001,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 276,
+   "pixels": 150,
+   "row_range": [
+    471,
+    502
+   ],
+   "col_range": [
+    538,
+    545
+   ],
+   "east_m": 54336.666666666664,
+   "north_m": 194878.6666666667,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 27,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 123
+   },
+   "cover_depth_rank": 1153.7325,
+   "slope_rank": 9.4332,
+   "scarp_rank": 14.2336,
+   "grav_step": 1.4347,
+   "mag_step": 102.1891,
+   "px_to_visible_catalogue": 39.84,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99172,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1102,
+   "pixels": 148,
+   "row_range": [
+    2044,
+    2074
+   ],
+   "col_range": [
+    1817,
+    1839
+   ],
+   "east_m": 182931.0810810811,
+   "north_m": 37541.21621621621,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 2,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 146
+   },
+   "cover_depth_rank": 7.1552,
+   "slope_rank": 11.1845,
+   "scarp_rank": 17.1589,
+   "grav_step": 0.892,
+   "mag_step": 162.0632,
+   "px_to_visible_catalogue": 3.71,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99087,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 23,
+   "pixels": 146,
+   "row_range": [
+    0,
+    5
+   ],
+   "col_range": [
+    3095,
+    3151
+   ],
+   "east_m": 312197.94520547945,
+   "north_m": 243197.2602739726,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 3,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 143
+   },
+   "cover_depth_rank": 125.0993,
+   "slope_rank": 14.9584,
+   "scarp_rank": 18.0137,
+   "grav_step": 14.5444,
+   "mag_step": 70.0668,
+   "px_to_visible_catalogue": 41.15,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99208,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1180,
+   "pixels": 142,
+   "row_range": [
+    2388,
+    2405
+   ],
+   "col_range": [
+    1348,
+    1370
+   ],
+   "east_m": 136178.87323943662,
+   "north_m": 3524.647887323954,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 141
+   },
+   "cover_depth_rank": 69.8461,
+   "slope_rank": 8.07,
+   "scarp_rank": 12.7221,
+   "grav_step": 2.4046,
+   "mag_step": 60.4417,
+   "px_to_visible_catalogue": 21.03,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99143,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 551,
+   "pixels": 138,
+   "row_range": [
+    773,
+    801
+   ],
+   "col_range": [
+    438,
+    449
+   ],
+   "east_m": 44315.21739130435,
+   "north_m": 164839.1304347826,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 7,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 131
+   },
+   "cover_depth_rank": 119.1925,
+   "slope_rank": 15.2919,
+   "scarp_rank": 15.7012,
+   "grav_step": 1.6075,
+   "mag_step": 77.3249,
+   "px_to_visible_catalogue": 10.2,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99408,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 302,
+   "pixels": 137,
+   "row_range": [
+    495,
+    515
+   ],
+   "col_range": [
+    401,
+    415
+   ],
+   "east_m": 40815.69343065693,
+   "north_m": 192653.28467153283,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 16,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 121
+   },
+   "cover_depth_rank": 20.6523,
+   "slope_rank": 9.739,
+   "scarp_rank": 14.8201,
+   "grav_step": 1.2319,
+   "mag_step": 77.7166,
+   "px_to_visible_catalogue": 17.35,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99277,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 743,
+   "pixels": 136,
+   "row_range": [
+    1157,
+    1175
+   ],
+   "col_range": [
+    687,
+    710
+   ],
+   "east_m": 69937.5,
+   "north_m": 126724.26470588235,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 7,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 129
+   },
+   "cover_depth_rank": 578.2349,
+   "slope_rank": 8.1191,
+   "scarp_rank": 13.9833,
+   "grav_step": 0.7266,
+   "mag_step": 213.8521,
+   "px_to_visible_catalogue": 14.18,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99112,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1448,
+   "pixels": 136,
+   "row_range": [
+    3299,
+    3310
+   ],
+   "col_range": [
+    1969,
+    1997
+   ],
+   "east_m": 198382.35294117648,
+   "north_m": -87122.0588235294,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 135
+   },
+   "cover_depth_rank": 610.1836,
+   "slope_rank": 7.7207,
+   "scarp_rank": 11.7428,
+   "grav_step": 3.0928,
+   "mag_step": 6.7053,
+   "px_to_visible_catalogue": 38.81,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99013,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 239,
+   "pixels": 135,
+   "row_range": [
+    420,
+    442
+   ],
+   "col_range": [
+    855,
+    873
+   ],
+   "east_m": 86595.92592592593,
+   "north_m": 200217.77777777778,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 10,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 125
+   },
+   "cover_depth_rank": 117.4175,
+   "slope_rank": 12.653,
+   "scarp_rank": 16.1199,
+   "grav_step": 2.3985,
+   "mag_step": 52.8668,
+   "px_to_visible_catalogue": 11.02,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99277,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 578,
+   "pixels": 132,
+   "row_range": [
+    825,
+    839
+   ],
+   "col_range": [
+    409,
+    425
+   ],
+   "east_m": 41817.42424242424,
+   "north_m": 160055.30303030304,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 20,
+    "concordant": 4,
+    "A-only": 4,
+    "B-only": 104
+   },
+   "cover_depth_rank": 26.7472,
+   "slope_rank": 5.601,
+   "scarp_rank": 9.7804,
+   "grav_step": 1.6825,
+   "mag_step": 108.1808,
+   "px_to_visible_catalogue": 25.22,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99024,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1463,
+   "pixels": 131,
+   "row_range": [
+    3333,
+    3360
+   ],
+   "col_range": [
+    1949,
+    1959
+   ],
+   "east_m": 195631.67938931298,
+   "north_m": -91519.84732824424,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 17,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 114
+   },
+   "cover_depth_rank": 1015.5615,
+   "slope_rank": 7.4169,
+   "scarp_rank": 10.9004,
+   "grav_step": 3.2799,
+   "mag_step": 37.1177,
+   "px_to_visible_catalogue": 31.41,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98937,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 287,
+   "pixels": 129,
+   "row_range": [
+    486,
+    518
+   ],
+   "col_range": [
+    315,
+    322
+   ],
+   "east_m": 31943.023255813954,
+   "north_m": 193189.1472868217,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 66,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 63
+   },
+   "cover_depth_rank": 153.3504,
+   "slope_rank": 5.6935,
+   "scarp_rank": 11.6151,
+   "grav_step": 1.3685,
+   "mag_step": 154.8206,
+   "px_to_visible_catalogue": 25.75,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9892,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1194,
+   "pixels": 129,
+   "row_range": [
+    2426,
+    2452
+   ],
+   "col_range": [
+    1234,
+    1247
+   ],
+   "east_m": 124016.66666666667,
+   "north_m": -517.8294573643652,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 20,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 109
+   },
+   "cover_depth_rank": 221.2948,
+   "slope_rank": 4.1294,
+   "scarp_rank": 9.3406,
+   "grav_step": 2.6524,
+   "mag_step": 120.8794,
+   "px_to_visible_catalogue": 61.0,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98971,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 458,
+   "pixels": 127,
+   "row_range": [
+    671,
+    694
+   ],
+   "col_range": [
+    247,
+    257
+   ],
+   "east_m": 25346.062992125986,
+   "north_m": 175077.16535433073,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 20,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 107
+   },
+   "cover_depth_rank": 178.6431,
+   "slope_rank": 9.5649,
+   "scarp_rank": 14.4452,
+   "grav_step": 1.3196,
+   "mag_step": 321.1667,
+   "px_to_visible_catalogue": 25.84,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99219,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 906,
+   "pixels": 127,
+   "row_range": [
+    1532,
+    1551
+   ],
+   "col_range": [
+    440,
+    466
+   ],
+   "east_m": 45085.43307086614,
+   "north_m": 89373.22834645669,
+   "stratum": "A-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 30,
+    "A-only": 59,
+    "B-only": 37
+   },
+   "cover_depth_rank": 250.8703,
+   "slope_rank": 4.5395,
+   "scarp_rank": 9.6082,
+   "grav_step": 3.495,
+   "mag_step": 122.8303,
+   "px_to_visible_catalogue": 15.43,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98948,
+   "claim": "field-view only: potential-field offset (gravity step 3.495, magnetic step 122.830) with no corresponding scarp (surface rank 9.608); cover depth rank 250.870 is deep enough that a scarp would be buried, so this is a buried range-front fault the LiDAR-derived catalogue cannot contain"
+  },
+  {
+   "segment": 628,
+   "pixels": 125,
+   "row_range": [
+    883,
+    896
+   ],
+   "col_range": [
+    319,
+    355
+   ],
+   "east_m": 33858.0,
+   "north_m": 154237.59999999998,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 124
+   },
+   "cover_depth_rank": 33.604,
+   "slope_rank": 5.2398,
+   "scarp_rank": 11.0626,
+   "grav_step": 1.1037,
+   "mag_step": 78.7857,
+   "px_to_visible_catalogue": 73.15,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98961,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 274,
+   "pixels": 122,
+   "row_range": [
+    466,
+    492
+   ],
+   "col_range": [
+    629,
+    639
+   ],
+   "east_m": 63392.62295081967,
+   "north_m": 195538.52459016393,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 38,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 84
+   },
+   "cover_depth_rank": 559.2966,
+   "slope_rank": 8.3,
+   "scarp_rank": 12.4456,
+   "grav_step": 2.8091,
+   "mag_step": 79.2928,
+   "px_to_visible_catalogue": 19.3,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99113,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1474,
+   "pixels": 121,
+   "row_range": [
+    3358,
+    3378
+   ],
+   "col_range": [
+    1904,
+    1922
+   ],
+   "east_m": 191707.02479338844,
+   "north_m": -93654.54545454547,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 23,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 98
+   },
+   "cover_depth_rank": 809.8864,
+   "slope_rank": 9.9915,
+   "scarp_rank": 13.3139,
+   "grav_step": 2.9015,
+   "mag_step": 48.4237,
+   "px_to_visible_catalogue": 65.64,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99204,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 98,
+   "pixels": 120,
+   "row_range": [
+    150,
+    167
+   ],
+   "col_range": [
+    2956,
+    2995
+   ],
+   "east_m": 297627.5,
+   "north_m": 227380.83333333334,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 120
+   },
+   "cover_depth_rank": 154.7876,
+   "slope_rank": 2.909,
+   "scarp_rank": 10.92,
+   "grav_step": 1.1113,
+   "mag_step": 47.8682,
+   "px_to_visible_catalogue": 60.23,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98846,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 545,
+   "pixels": 120,
+   "row_range": [
+    772,
+    798
+   ],
+   "col_range": [
+    311,
+    333
+   ],
+   "east_m": 32253.333333333336,
+   "north_m": 164781.6666666667,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 17,
+    "concordant": 9,
+    "A-only": 10,
+    "B-only": 84
+   },
+   "cover_depth_rank": 62.9666,
+   "slope_rank": 6.4166,
+   "scarp_rank": 10.7166,
+   "grav_step": 3.0227,
+   "mag_step": 299.5195,
+   "px_to_visible_catalogue": 69.28,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98926,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 459,
+   "pixels": 119,
+   "row_range": [
+    671,
+    708
+   ],
+   "col_range": [
+    438,
+    448
+   ],
+   "east_m": 44563.445378151264,
+   "north_m": 174546.21848739497,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 13,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 106
+   },
+   "cover_depth_rank": 15.2566,
+   "slope_rank": 13.7065,
+   "scarp_rank": 16.6381,
+   "grav_step": 1.6149,
+   "mag_step": 77.5143,
+   "px_to_visible_catalogue": 9.22,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99478,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 915,
+   "pixels": 118,
+   "row_range": [
+    1547,
+    1565
+   ],
+   "col_range": [
+    1587,
+    1595
+   ],
+   "east_m": 159247.45762711862,
+   "north_m": 87741.5254237288,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 28,
+    "concordant": 75,
+    "A-only": 6,
+    "B-only": 9
+   },
+   "cover_depth_rank": 44.2524,
+   "slope_rank": 9.5054,
+   "scarp_rank": 14.0966,
+   "grav_step": 2.2904,
+   "mag_step": 93.0788,
+   "px_to_visible_catalogue": 11.32,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99341,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 988,
+   "pixels": 118,
+   "row_range": [
+    1632,
+    1648
+   ],
+   "col_range": [
+    937,
+    960
+   ],
+   "east_m": 95260.16949152542,
+   "north_m": 79372.03389830509,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 118
+   },
+   "cover_depth_rank": 224.3879,
+   "slope_rank": 6.9015,
+   "scarp_rank": 14.7039,
+   "grav_step": 1.1619,
+   "mag_step": 115.8904,
+   "px_to_visible_catalogue": 22.59,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99047,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1142,
+   "pixels": 116,
+   "row_range": [
+    2195,
+    2211
+   ],
+   "col_range": [
+    1625,
+    1644
+   ],
+   "east_m": 163892.24137931035,
+   "north_m": 23116.37931034484,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 15,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 101
+   },
+   "cover_depth_rank": 958.5574,
+   "slope_rank": 7.7484,
+   "scarp_rank": 11.795,
+   "grav_step": 1.457,
+   "mag_step": 192.7569,
+   "px_to_visible_catalogue": 22.49,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99033,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1320,
+   "pixels": 116,
+   "row_range": [
+    3030,
+    3039
+   ],
+   "col_range": [
+    2104,
+    2131
+   ],
+   "east_m": 211866.37931034484,
+   "north_m": -60204.310344827594,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 116
+   },
+   "cover_depth_rank": 1.3944,
+   "slope_rank": 11.8524,
+   "scarp_rank": 17.8813,
+   "grav_step": 2.0239,
+   "mag_step": 96.5018,
+   "px_to_visible_catalogue": 24.66,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99195,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1246,
+   "pixels": 114,
+   "row_range": [
+    2655,
+    2683
+   ],
+   "col_range": [
+    1937,
+    1948
+   ],
+   "east_m": 194364.0350877193,
+   "north_m": -23645.614035087754,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 109
+   },
+   "cover_depth_rank": 170.4047,
+   "slope_rank": 9.5818,
+   "scarp_rank": 15.2028,
+   "grav_step": 3.1092,
+   "mag_step": 42.7829,
+   "px_to_visible_catalogue": 50.33,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99039,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 351,
+   "pixels": 113,
+   "row_range": [
+    553,
+    583
+   ],
+   "col_range": [
+    223,
+    238
+   ],
+   "east_m": 23050.88495575221,
+   "north_m": 186548.67256637168,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 26,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 87
+   },
+   "cover_depth_rank": 34.7478,
+   "slope_rank": 4.7101,
+   "scarp_rank": 11.2756,
+   "grav_step": 1.5519,
+   "mag_step": 193.8345,
+   "px_to_visible_catalogue": 29.92,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99199,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 837,
+   "pixels": 112,
+   "row_range": [
+    1332,
+    1357
+   ],
+   "col_range": [
+    1301,
+    1309
+   ],
+   "east_m": 130630.35714285713,
+   "north_m": 109163.39285714287,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 4,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 108
+   },
+   "cover_depth_rank": 492.0442,
+   "slope_rank": 5.5156,
+   "scarp_rank": 13.9645,
+   "grav_step": 1.0579,
+   "mag_step": 514.8872,
+   "px_to_visible_catalogue": 13.94,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99265,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1349,
+   "pixels": 108,
+   "row_range": [
+    3095,
+    3112
+   ],
+   "col_range": [
+    1268,
+    1293
+   ],
+   "east_m": 128333.33333333333,
+   "north_m": -67190.74074074073,
+   "stratum": "A-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 46,
+    "A-only": 62,
+    "B-only": 0
+   },
+   "cover_depth_rank": 484.0879,
+   "slope_rank": 9.444,
+   "scarp_rank": 12.0142,
+   "grav_step": 16.4579,
+   "mag_step": 53.9495,
+   "px_to_visible_catalogue": 3.44,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99141,
+   "claim": "field-view only: potential-field offset (gravity step 16.458, magnetic step 53.950) with no corresponding scarp (surface rank 12.014); cover depth rank 484.088 is deep enough that a scarp would be buried, so this is a buried range-front fault the LiDAR-derived catalogue cannot contain"
+  },
+  {
+   "segment": 335,
+   "pixels": 106,
+   "row_range": [
+    535,
+    570
+   ],
+   "col_range": [
+    271,
+    275
+   ],
+   "east_m": 27423.58490566038,
+   "north_m": 187926.41509433964,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 22,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 84
+   },
+   "cover_depth_rank": 39.4746,
+   "slope_rank": 6.4262,
+   "scarp_rank": 11.4176,
+   "grav_step": 0.6247,
+   "mag_step": 167.9579,
+   "px_to_visible_catalogue": 18.22,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98978,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 619,
+   "pixels": 106,
+   "row_range": [
+    867,
+    885
+   ],
+   "col_range": [
+    186,
+    205
+   ],
+   "east_m": 19922.64150943396,
+   "north_m": 155581.1320754717,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 101
+   },
+   "cover_depth_rank": 26.2915,
+   "slope_rank": 15.6687,
+   "scarp_rank": 18.6298,
+   "grav_step": 1.3165,
+   "mag_step": 160.5835,
+   "px_to_visible_catalogue": 10.07,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99385,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 280,
+   "pixels": 100,
+   "row_range": [
+    479,
+    492
+   ],
+   "col_range": [
+    2248,
+    2275
+   ],
+   "east_m": 226178.00000000003,
+   "north_m": 195084.0,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 13,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 87
+   },
+   "cover_depth_rank": 769.2367,
+   "slope_rank": 7.4138,
+   "scarp_rank": 11.5174,
+   "grav_step": 0.6978,
+   "mag_step": 49.5671,
+   "px_to_visible_catalogue": 68.74,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98906,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 186,
+   "pixels": 99,
+   "row_range": [
+    342,
+    371
+   ],
+   "col_range": [
+    453,
+    458
+   ],
+   "east_m": 45686.36363636364,
+   "north_m": 207675.75757575757,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 13,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 86
+   },
+   "cover_depth_rank": 857.3303,
+   "slope_rank": 6.2783,
+   "scarp_rank": 12.7956,
+   "grav_step": 4.5266,
+   "mag_step": 65.1076,
+   "px_to_visible_catalogue": 73.35,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99008,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1410,
+   "pixels": 99,
+   "row_range": [
+    3228,
+    3252
+   ],
+   "col_range": [
+    1819,
+    1829
+   ],
+   "east_m": 182603.53535353535,
+   "north_m": -80672.72727272724,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 6,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 93
+   },
+   "cover_depth_rank": 13.8153,
+   "slope_rank": 11.2524,
+   "scarp_rank": 16.3694,
+   "grav_step": 3.5783,
+   "mag_step": 43.8308,
+   "px_to_visible_catalogue": 31.2,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9911,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 171,
+   "pixels": 98,
+   "row_range": [
+    284,
+    291
+   ],
+   "col_range": [
+    2472,
+    2503
+   ],
+   "east_m": 249120.4081632653,
+   "north_m": 214524.48979591837,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 93
+   },
+   "cover_depth_rank": 914.4165,
+   "slope_rank": 5.4535,
+   "scarp_rank": 11.3981,
+   "grav_step": 2.3601,
+   "mag_step": 424.0713,
+   "px_to_visible_catalogue": 70.32,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98842,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 506,
+   "pixels": 98,
+   "row_range": [
+    724,
+    740
+   ],
+   "col_range": [
+    1347,
+    1358
+   ],
+   "east_m": 135380.61224489796,
+   "north_m": 170142.85714285716,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 93
+   },
+   "cover_depth_rank": 158.02,
+   "slope_rank": 8.6622,
+   "scarp_rank": 14.3233,
+   "grav_step": 3.493,
+   "mag_step": 36.5364,
+   "px_to_visible_catalogue": 15.01,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99073,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1009,
+   "pixels": 98,
+   "row_range": [
+    1676,
+    1691
+   ],
+   "col_range": [
+    1286,
+    1303
+   ],
+   "east_m": 129510.20408163265,
+   "north_m": 74987.75510204083,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 4,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 94
+   },
+   "cover_depth_rank": 601.6043,
+   "slope_rank": 7.4009,
+   "scarp_rank": 13.4871,
+   "grav_step": 2.1323,
+   "mag_step": 354.5519,
+   "px_to_visible_catalogue": 35.04,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99029,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 263,
+   "pixels": 97,
+   "row_range": [
+    448,
+    468
+   ],
+   "col_range": [
+    2296,
+    2303
+   ],
+   "east_m": 230060.3092783505,
+   "north_m": 197450.51546391752,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 6,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 91
+   },
+   "cover_depth_rank": 571.0957,
+   "slope_rank": 8.9553,
+   "scarp_rank": 14.1244,
+   "grav_step": 0.3365,
+   "mag_step": 54.9229,
+   "px_to_visible_catalogue": 71.08,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99089,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 727,
+   "pixels": 97,
+   "row_range": [
+    1107,
+    1126
+   ],
+   "col_range": [
+    1461,
+    1474
+   ],
+   "east_m": 146789.17525773196,
+   "north_m": 131745.36082474227,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 3,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 94
+   },
+   "cover_depth_rank": 116.3937,
+   "slope_rank": 10.9516,
+   "scarp_rank": 15.8971,
+   "grav_step": 3.2338,
+   "mag_step": 16.0592,
+   "px_to_visible_catalogue": 13.28,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99178,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 381,
+   "pixels": 95,
+   "row_range": [
+    580,
+    602
+   ],
+   "col_range": [
+    644,
+    651
+   ],
+   "east_m": 64888.94736842105,
+   "north_m": 184348.42105263157,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 37,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 58
+   },
+   "cover_depth_rank": 4.8457,
+   "slope_rank": 14.7188,
+   "scarp_rank": 18.5781,
+   "grav_step": 0.6957,
+   "mag_step": 46.4162,
+   "px_to_visible_catalogue": 18.8,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99192,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 686,
+   "pixels": 94,
+   "row_range": [
+    986,
+    1007
+   ],
+   "col_range": [
+    490,
+    501
+   ],
+   "east_m": 49761.70212765957,
+   "north_m": 143832.97872340426,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 21,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 73
+   },
+   "cover_depth_rank": 312.8528,
+   "slope_rank": 10.5956,
+   "scarp_rank": 13.4104,
+   "grav_step": 3.5862,
+   "mag_step": 120.7732,
+   "px_to_visible_catalogue": 10.31,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98991,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 796,
+   "pixels": 94,
+   "row_range": [
+    1261,
+    1281
+   ],
+   "col_range": [
+    1385,
+    1398
+   ],
+   "east_m": 139235.10638297873,
+   "north_m": 116160.63829787233,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 94
+   },
+   "cover_depth_rank": 338.0377,
+   "slope_rank": 8.1545,
+   "scarp_rank": 13.6412,
+   "grav_step": 1.5153,
+   "mag_step": 198.1113,
+   "px_to_visible_catalogue": 23.49,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98754,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 35,
+   "pixels": 93,
+   "row_range": [
+    9,
+    16
+   ],
+   "col_range": [
+    2711,
+    2742
+   ],
+   "east_m": 272924.1935483871,
+   "north_m": 242016.12903225806,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 25,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 68
+   },
+   "cover_depth_rank": 30.7491,
+   "slope_rank": 9.6778,
+   "scarp_rank": 17.5682,
+   "grav_step": 0.8642,
+   "mag_step": 162.3683,
+   "px_to_visible_catalogue": 27.91,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99309,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 598,
+   "pixels": 90,
+   "row_range": [
+    855,
+    862
+   ],
+   "col_range": [
+    158,
+    182
+   ],
+   "east_m": 17351.111111111113,
+   "north_m": 157531.11111111112,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 30,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 60
+   },
+   "cover_depth_rank": 14.5278,
+   "slope_rank": 22.1159,
+   "scarp_rank": 20.5439,
+   "grav_step": 7.5752,
+   "mag_step": 131.5635,
+   "px_to_visible_catalogue": 2.83,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99316,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1312,
+   "pixels": 89,
+   "row_range": [
+    3018,
+    3025
+   ],
+   "col_range": [
+    1533,
+    1559
+   ],
+   "east_m": 154888.20224719102,
+   "north_m": -58858.42696629214,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 89
+   },
+   "cover_depth_rank": 124.244,
+   "slope_rank": 6.0731,
+   "scarp_rank": 11.2781,
+   "grav_step": 1.231,
+   "mag_step": 123.8539,
+   "px_to_visible_catalogue": 19.21,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99102,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1363,
+   "pixels": 89,
+   "row_range": [
+    3133,
+    3139
+   ],
+   "col_range": [
+    1356,
+    1387
+   ],
+   "east_m": 137170.22471910113,
+   "north_m": -70198.8764044944,
+   "stratum": "A-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 9,
+    "A-only": 79,
+    "B-only": 0
+   },
+   "cover_depth_rank": 34.6811,
+   "slope_rank": 20.6791,
+   "scarp_rank": 19.1591,
+   "grav_step": 17.2837,
+   "mag_step": 160.0692,
+   "px_to_visible_catalogue": 2.13,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99227,
+   "claim": "field-view only: potential-field offset (gravity step 17.284, magnetic step 160.069) with no corresponding scarp (surface rank 19.159); cover depth rank 34.681 is deep enough that a scarp would be buried, so this is a buried range-front fault the LiDAR-derived catalogue cannot contain"
+  },
+  {
+   "segment": 414,
+   "pixels": 88,
+   "row_range": [
+    609,
+    631
+   ],
+   "col_range": [
+    1991,
+    1999
+   ],
+   "east_m": 199638.63636363638,
+   "north_m": 181234.0909090909,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 19,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 69
+   },
+   "cover_depth_rank": 56.1343,
+   "slope_rank": 6.8663,
+   "scarp_rank": 11.4548,
+   "grav_step": 0.7265,
+   "mag_step": 34.442,
+   "px_to_visible_catalogue": 19.46,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99053,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 527,
+   "pixels": 88,
+   "row_range": [
+    769,
+    773
+   ],
+   "col_range": [
+    2804,
+    2850
+   ],
+   "east_m": 282836.36363636365,
+   "north_m": 166160.2272727273,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 49,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 39
+   },
+   "cover_depth_rank": 8.8035,
+   "slope_rank": 18.3876,
+   "scarp_rank": 17.362,
+   "grav_step": 1.3083,
+   "mag_step": 59.6213,
+   "px_to_visible_catalogue": 1.8,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98966,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1288,
+   "pixels": 88,
+   "row_range": [
+    2934,
+    2941
+   ],
+   "col_range": [
+    1508,
+    1532
+   ],
+   "east_m": 151972.72727272726,
+   "north_m": -50288.63636363635,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 39,
+    "A-only": 29,
+    "B-only": 20
+   },
+   "cover_depth_rank": 336.6012,
+   "slope_rank": 17.3591,
+   "scarp_rank": 20.1725,
+   "grav_step": 14.2119,
+   "mag_step": 84.6054,
+   "px_to_visible_catalogue": 2.89,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99173,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 1389,
+   "pixels": 87,
+   "row_range": [
+    3197,
+    3205
+   ],
+   "col_range": [
+    2091,
+    2107
+   ],
+   "east_m": 209984.4827586207,
+   "north_m": -76887.35632183909,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 2,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 85
+   },
+   "cover_depth_rank": 129.5087,
+   "slope_rank": 5.3504,
+   "scarp_rank": 10.5006,
+   "grav_step": 3.7386,
+   "mag_step": 29.5154,
+   "px_to_visible_catalogue": 22.79,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99059,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 33,
+   "pixels": 86,
+   "row_range": [
+    6,
+    26
+   ],
+   "col_range": [
+    1504,
+    1509
+   ],
+   "east_m": 150804.6511627907,
+   "north_m": 241626.7441860465,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 12,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 74
+   },
+   "cover_depth_rank": 336.0743,
+   "slope_rank": 6.8589,
+   "scarp_rank": 12.5268,
+   "grav_step": 6.2692,
+   "mag_step": 174.9259,
+   "px_to_visible_catalogue": 101.17,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98927,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1132,
+   "pixels": 86,
+   "row_range": [
+    2167,
+    2188
+   ],
+   "col_range": [
+    1129,
+    1144
+   ],
+   "east_m": 113624.41860465117,
+   "north_m": 25422.093023255817,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 22,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 64
+   },
+   "cover_depth_rank": 84.3856,
+   "slope_rank": 8.835,
+   "scarp_rank": 11.2548,
+   "grav_step": 1.0402,
+   "mag_step": 35.0662,
+   "px_to_visible_catalogue": 51.17,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9875,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1359,
+   "pixels": 85,
+   "row_range": [
+    3115,
+    3136
+   ],
+   "col_range": [
+    2150,
+    2157
+   ],
+   "east_m": 215539.4117647059,
+   "north_m": -69275.2941176471,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 80
+   },
+   "cover_depth_rank": 17.5146,
+   "slope_rank": 11.7999,
+   "scarp_rank": 15.7231,
+   "grav_step": 2.3798,
+   "mag_step": 9.577,
+   "px_to_visible_catalogue": 17.04,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99042,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1499,
+   "pixels": 85,
+   "row_range": [
+    3437,
+    3452
+   ],
+   "col_range": [
+    1725,
+    1741
+   ],
+   "east_m": 173550.0,
+   "north_m": -101109.4117647059,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 84
+   },
+   "cover_depth_rank": 49.4888,
+   "slope_rank": 10.2053,
+   "scarp_rank": 12.7937,
+   "grav_step": 1.6256,
+   "mag_step": 34.3012,
+   "px_to_visible_catalogue": 9.74,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99063,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1513,
+   "pixels": 85,
+   "row_range": [
+    3494,
+    3519
+   ],
+   "col_range": [
+    1647,
+    1662
+   ],
+   "east_m": 165553.5294117647,
+   "north_m": -107128.23529411765,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 41,
+    "A-only": 41,
+    "B-only": 3
+   },
+   "cover_depth_rank": 100.3839,
+   "slope_rank": 14.159,
+   "scarp_rank": 12.2667,
+   "grav_step": 26.4513,
+   "mag_step": 120.817,
+   "px_to_visible_catalogue": 3.55,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98922,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 1464,
+   "pixels": 84,
+   "row_range": [
+    3334,
+    3341
+   ],
+   "col_range": [
+    1667,
+    1684
+   ],
+   "east_m": 167500.0,
+   "north_m": -90460.71428571426,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 2,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 82
+   },
+   "cover_depth_rank": 35.5831,
+   "slope_rank": 10.1409,
+   "scarp_rank": 12.0093,
+   "grav_step": 1.5542,
+   "mag_step": 35.5735,
+   "px_to_visible_catalogue": 13.53,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99073,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 246,
+   "pixels": 82,
+   "row_range": [
+    430,
+    464
+   ],
+   "col_range": [
+    309,
+    319
+   ],
+   "east_m": 31492.682926829268,
+   "north_m": 199010.9756097561,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 56,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 26
+   },
+   "cover_depth_rank": 402.4166,
+   "slope_rank": 3.8514,
+   "scarp_rank": 10.445,
+   "grav_step": 0.6121,
+   "mag_step": 94.5254,
+   "px_to_visible_catalogue": 18.04,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98851,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1035,
+   "pixels": 82,
+   "row_range": [
+    1889,
+    1903
+   ],
+   "col_range": [
+    1034,
+    1057
+   ],
+   "east_m": 104825.60975609756,
+   "north_m": 53792.682926829264,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 82
+   },
+   "cover_depth_rank": 198.7864,
+   "slope_rank": 5.401,
+   "scarp_rank": 12.2694,
+   "grav_step": 2.9231,
+   "mag_step": 669.2829,
+   "px_to_visible_catalogue": 63.06,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98943,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1337,
+   "pixels": 79,
+   "row_range": [
+    3051,
+    3062
+   ],
+   "col_range": [
+    2056,
+    2074
+   ],
+   "east_m": 206784.17721518985,
+   "north_m": -62134.17721518985,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 8,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 71
+   },
+   "cover_depth_rank": 28.8054,
+   "slope_rank": 9.6246,
+   "scarp_rank": 14.8166,
+   "grav_step": 1.1059,
+   "mag_step": 95.5359,
+   "px_to_visible_catalogue": 31.79,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99026,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 518,
+   "pixels": 78,
+   "row_range": [
+    745,
+    758
+   ],
+   "col_range": [
+    1325,
+    1338
+   ],
+   "east_m": 133247.43589743588,
+   "north_m": 168233.33333333334,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 78
+   },
+   "cover_depth_rank": 183.3778,
+   "slope_rank": 7.4407,
+   "scarp_rank": 14.0736,
+   "grav_step": 5.0219,
+   "mag_step": 49.7819,
+   "px_to_visible_catalogue": 41.39,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99048,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 713,
+   "pixels": 78,
+   "row_range": [
+    1057,
+    1070
+   ],
+   "col_range": [
+    1486,
+    1498
+   ],
+   "east_m": 149407.6923076923,
+   "north_m": 136933.3333333333,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 77
+   },
+   "cover_depth_rank": 186.1214,
+   "slope_rank": 9.179,
+   "scarp_rank": 15.978,
+   "grav_step": 2.6951,
+   "mag_step": 50.5324,
+   "px_to_visible_catalogue": 10.61,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99292,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1523,
+   "pixels": 77,
+   "row_range": [
+    3525,
+    3542
+   ],
+   "col_range": [
+    1671,
+    1690
+   ],
+   "east_m": 168475.97402597402,
+   "north_m": -109967.53246753244,
+   "stratum": "A-only",
+   "stratum_counts": {
+    "silent": 15,
+    "concordant": 22,
+    "A-only": 30,
+    "B-only": 10
+   },
+   "cover_depth_rank": 183.5253,
+   "slope_rank": 12.559,
+   "scarp_rank": 11.0979,
+   "grav_step": 21.5796,
+   "mag_step": 183.4256,
+   "px_to_visible_catalogue": 4.83,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98785,
+   "claim": "field-view only: potential-field offset (gravity step 21.580, magnetic step 183.426) with no corresponding scarp (surface rank 11.098); cover depth rank 183.525 is deep enough that a scarp would be buried, so this is a buried range-front fault the LiDAR-derived catalogue cannot contain"
+  },
+  {
+   "segment": 564,
+   "pixels": 76,
+   "row_range": [
+    806,
+    826
+   ],
+   "col_range": [
+    519,
+    523
+   ],
+   "east_m": 52257.89473684211,
+   "north_m": 161723.6842105263,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 34,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 42
+   },
+   "cover_depth_rank": 1334.3185,
+   "slope_rank": 10.3456,
+   "scarp_rank": 13.1582,
+   "grav_step": 1.9413,
+   "mag_step": 180.3299,
+   "px_to_visible_catalogue": 67.24,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98821,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1319,
+   "pixels": 76,
+   "row_range": [
+    3029,
+    3034
+   ],
+   "col_range": [
+    1775,
+    1801
+   ],
+   "east_m": 178901.31578947368,
+   "north_m": -59806.57894736843,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 76
+   },
+   "cover_depth_rank": 358.5645,
+   "slope_rank": 10.15,
+   "scarp_rank": 13.2086,
+   "grav_step": 1.394,
+   "mag_step": 34.3741,
+   "px_to_visible_catalogue": 16.16,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98899,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 191,
+   "pixels": 75,
+   "row_range": [
+    345,
+    362
+   ],
+   "col_range": [
+    2406,
+    2417
+   ],
+   "east_m": 241404.66666666666,
+   "north_m": 208029.33333333334,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 13,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 62
+   },
+   "cover_depth_rank": 69.6112,
+   "slope_rank": 6.3033,
+   "scarp_rank": 11.6481,
+   "grav_step": 0.7582,
+   "mag_step": 106.5919,
+   "px_to_visible_catalogue": 31.7,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99008,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1052,
+   "pixels": 75,
+   "row_range": [
+    1933,
+    1955
+   ],
+   "col_range": [
+    901,
+    916
+   ],
+   "east_m": 91082.0,
+   "north_m": 48912.0,
+   "stratum": "A-only",
+   "stratum_counts": {
+    "silent": 9,
+    "concordant": 12,
+    "A-only": 47,
+    "B-only": 7
+   },
+   "cover_depth_rank": 348.3508,
+   "slope_rank": 19.0681,
+   "scarp_rank": 20.5546,
+   "grav_step": 11.1091,
+   "mag_step": 147.0696,
+   "px_to_visible_catalogue": 2.22,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99313,
+   "claim": "field-view only: potential-field offset (gravity step 11.109, magnetic step 147.070) with no corresponding scarp (surface rank 20.555); cover depth rank 348.351 is deep enough that a scarp would be buried, so this is a buried range-front fault the LiDAR-derived catalogue cannot contain"
+  },
+  {
+   "segment": 1236,
+   "pixels": 75,
+   "row_range": [
+    2553,
+    2558
+   ],
+   "col_range": [
+    1530,
+    1553
+   ],
+   "east_m": 154204.66666666666,
+   "north_m": -12329.333333333343,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 13,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 62
+   },
+   "cover_depth_rank": 22.7845,
+   "slope_rank": 13.2363,
+   "scarp_rank": 14.2331,
+   "grav_step": 5.3949,
+   "mag_step": 252.0408,
+   "px_to_visible_catalogue": 2.71,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99002,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1088,
+   "pixels": 74,
+   "row_range": [
+    2025,
+    2044
+   ],
+   "col_range": [
+    1529,
+    1538
+   ],
+   "east_m": 153572.972972973,
+   "north_m": 39963.51351351352,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 2,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 72
+   },
+   "cover_depth_rank": 91.368,
+   "slope_rank": 5.4359,
+   "scarp_rank": 10.1082,
+   "grav_step": 4.5872,
+   "mag_step": 175.5574,
+   "px_to_visible_catalogue": 11.14,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98821,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1307,
+   "pixels": 74,
+   "row_range": [
+    2980,
+    2994
+   ],
+   "col_range": [
+    1570,
+    1585
+   ],
+   "east_m": 157856.75675675675,
+   "north_m": -55217.567567567574,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 26,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 48
+   },
+   "cover_depth_rank": 410.5408,
+   "slope_rank": 7.6943,
+   "scarp_rank": 11.3224,
+   "grav_step": 2.0865,
+   "mag_step": 294.4861,
+   "px_to_visible_catalogue": 15.18,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9886,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1450,
+   "pixels": 74,
+   "row_range": [
+    3301,
+    3312
+   ],
+   "col_range": [
+    1643,
+    1653
+   ],
+   "east_m": 164939.1891891892,
+   "north_m": -87463.51351351349,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 10,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 64
+   },
+   "cover_depth_rank": 126.8839,
+   "slope_rank": 4.6556,
+   "scarp_rank": 9.3826,
+   "grav_step": 1.4635,
+   "mag_step": 36.9485,
+   "px_to_visible_catalogue": 10.35,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99093,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 132,
+   "pixels": 73,
+   "row_range": [
+    184,
+    205
+   ],
+   "col_range": [
+    2900,
+    2924
+   ],
+   "east_m": 291259.58904109587,
+   "north_m": 224043.83561643836,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 49,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 24
+   },
+   "cover_depth_rank": 194.7918,
+   "slope_rank": 6.9436,
+   "scarp_rank": 11.2623,
+   "grav_step": 0.3838,
+   "mag_step": 114.7314,
+   "px_to_visible_catalogue": 56.49,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99124,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 199,
+   "pixels": 73,
+   "row_range": [
+    359,
+    387
+   ],
+   "col_range": [
+    2382,
+    2389
+   ],
+   "east_m": 238632.19178082192,
+   "north_m": 205932.87671232875,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 18,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 55
+   },
+   "cover_depth_rank": 61.2405,
+   "slope_rank": 5.0681,
+   "scarp_rank": 12.5497,
+   "grav_step": 0.8672,
+   "mag_step": 244.6634,
+   "px_to_visible_catalogue": 26.45,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99057,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1084,
+   "pixels": 73,
+   "row_range": [
+    2005,
+    2023
+   ],
+   "col_range": [
+    1799,
+    1812
+   ],
+   "east_m": 180655.4794520548,
+   "north_m": 42093.15068493152,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 65,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 8
+   },
+   "cover_depth_rank": 7.0203,
+   "slope_rank": 10.1005,
+   "scarp_rank": 12.8883,
+   "grav_step": 3.3933,
+   "mag_step": 221.6934,
+   "px_to_visible_catalogue": 2.77,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9923,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 184,
+   "pixels": 71,
+   "row_range": [
+    338,
+    350
+   ],
+   "col_range": [
+    994,
+    1005
+   ],
+   "east_m": 100085.21126760563,
+   "north_m": 208773.2394366197,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 10,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 61
+   },
+   "cover_depth_rank": 4.4284,
+   "slope_rank": 14.2677,
+   "scarp_rank": 16.1121,
+   "grav_step": 1.4875,
+   "mag_step": 144.9186,
+   "px_to_visible_catalogue": 12.66,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99014,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 6,
+   "pixels": 69,
+   "row_range": [
+    0,
+    2
+   ],
+   "col_range": [
+    2011,
+    2061
+   ],
+   "east_m": 203645.65217391305,
+   "north_m": 243271.01449275363,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 68
+   },
+   "cover_depth_rank": 9.4131,
+   "slope_rank": 21.7547,
+   "scarp_rank": 19.6641,
+   "grav_step": 9.2643,
+   "mag_step": 133.0943,
+   "px_to_visible_catalogue": 32.77,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99224,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1164,
+   "pixels": 69,
+   "row_range": [
+    2347,
+    2353
+   ],
+   "col_range": [
+    1293,
+    1310
+   ],
+   "east_m": 130257.2463768116,
+   "north_m": 8286.956521739135,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 69
+   },
+   "cover_depth_rank": 37.8442,
+   "slope_rank": 8.8993,
+   "scarp_rank": 12.8762,
+   "grav_step": 0.969,
+   "mag_step": 172.3798,
+   "px_to_visible_catalogue": 20.17,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98953,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1183,
+   "pixels": 69,
+   "row_range": [
+    2400,
+    2415
+   ],
+   "col_range": [
+    1561,
+    1573
+   ],
+   "east_m": 156867.39130434784,
+   "north_m": 2239.1304347825935,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 8,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 61
+   },
+   "cover_depth_rank": 62.1009,
+   "slope_rank": 15.5583,
+   "scarp_rank": 17.6879,
+   "grav_step": 2.3859,
+   "mag_step": 415.5361,
+   "px_to_visible_catalogue": 9.11,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9952,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1266,
+   "pixels": 69,
+   "row_range": [
+    2830,
+    2850
+   ],
+   "col_range": [
+    2019,
+    2025
+   ],
+   "east_m": 202435.5072463768,
+   "north_m": -40617.39130434784,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 4,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 65
+   },
+   "cover_depth_rank": 234.1172,
+   "slope_rank": 11.7751,
+   "scarp_rank": 14.822,
+   "grav_step": 1.0461,
+   "mag_step": 49.281,
+   "px_to_visible_catalogue": 128.58,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99048,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 126,
+   "pixels": 68,
+   "row_range": [
+    177,
+    198
+   ],
+   "col_range": [
+    456,
+    462
+   ],
+   "east_m": 46042.64705882353,
+   "north_m": 224548.5294117647,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 7,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 61
+   },
+   "cover_depth_rank": 692.3222,
+   "slope_rank": 7.0424,
+   "scarp_rank": 12.367,
+   "grav_step": 4.3361,
+   "mag_step": 82.4497,
+   "px_to_visible_catalogue": 70.79,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98908,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1239,
+   "pixels": 68,
+   "row_range": [
+    2556,
+    2558
+   ],
+   "col_range": [
+    1306,
+    1340
+   ],
+   "east_m": 132383.82352941175,
+   "north_m": -12444.117647058825,
+   "stratum": "A-only",
+   "stratum_counts": {
+    "silent": 18,
+    "concordant": 0,
+    "A-only": 50,
+    "B-only": 0
+   },
+   "cover_depth_rank": 21.2563,
+   "slope_rank": 11.2989,
+   "scarp_rank": 15.6438,
+   "grav_step": 2.975,
+   "mag_step": 389.8929,
+   "px_to_visible_catalogue": 1.56,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99194,
+   "claim": "field-view only: potential-field offset (gravity step 2.975, magnetic step 389.893) with no corresponding scarp (surface rank 15.644); cover depth rank 21.256 is deep enough that a scarp would be buried, so this is a buried range-front fault the LiDAR-derived catalogue cannot contain"
+  },
+  {
+   "segment": 579,
+   "pixels": 67,
+   "row_range": [
+    825,
+    838
+   ],
+   "col_range": [
+    463,
+    474
+   ],
+   "east_m": 47032.08955223881,
+   "north_m": 160085.07462686568,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 67
+   },
+   "cover_depth_rank": 230.6705,
+   "slope_rank": 10.4844,
+   "scarp_rank": 13.2955,
+   "grav_step": 0.4769,
+   "mag_step": 183.5817,
+   "px_to_visible_catalogue": 13.25,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99124,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 5,
+   "pixels": 65,
+   "row_range": [
+    0,
+    2
+   ],
+   "col_range": [
+    1836,
+    1868
+   ],
+   "east_m": 185531.53846153847,
+   "north_m": 243235.38461538462,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 6,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 59
+   },
+   "cover_depth_rank": 28.7485,
+   "slope_rank": 16.374,
+   "scarp_rank": 18.3107,
+   "grav_step": 7.0559,
+   "mag_step": 152.396,
+   "px_to_visible_catalogue": 56.73,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99147,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 232,
+   "pixels": 65,
+   "row_range": [
+    412,
+    424
+   ],
+   "col_range": [
+    562,
+    571
+   ],
+   "east_m": 56686.92307692307,
+   "north_m": 201413.84615384616,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 22,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 43
+   },
+   "cover_depth_rank": 623.6808,
+   "slope_rank": 5.3177,
+   "scarp_rank": 10.2066,
+   "grav_step": 1.2596,
+   "mag_step": 127.9853,
+   "px_to_visible_catalogue": 32.7,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98917,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 202,
+   "pixels": 64,
+   "row_range": [
+    364,
+    379
+   ],
+   "col_range": [
+    2602,
+    2609
+   ],
+   "east_m": 260828.125,
+   "north_m": 206092.1875,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 63
+   },
+   "cover_depth_rank": 152.6673,
+   "slope_rank": 12.1729,
+   "scarp_rank": 16.3462,
+   "grav_step": 3.0337,
+   "mag_step": 17.3993,
+   "px_to_visible_catalogue": 12.24,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99016,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 330,
+   "pixels": 64,
+   "row_range": [
+    527,
+    546
+   ],
+   "col_range": [
+    1940,
+    1944
+   ],
+   "east_m": 194379.6875,
+   "north_m": 189679.6875,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 29,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 35
+   },
+   "cover_depth_rank": 19.0738,
+   "slope_rank": 8.9278,
+   "scarp_rank": 12.9278,
+   "grav_step": 0.6149,
+   "mag_step": 47.8753,
+   "px_to_visible_catalogue": 17.17,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98763,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1170,
+   "pixels": 64,
+   "row_range": [
+    2366,
+    2382
+   ],
+   "col_range": [
+    1370,
+    1376
+   ],
+   "east_m": 137473.4375,
+   "north_m": 5921.875,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 28,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 36
+   },
+   "cover_depth_rank": 83.0832,
+   "slope_rank": 9.3971,
+   "scarp_rank": 12.5883,
+   "grav_step": 2.263,
+   "mag_step": 176.7573,
+   "px_to_visible_catalogue": 13.05,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98791,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 76,
+   "pixels": 63,
+   "row_range": [
+    116,
+    135
+   ],
+   "col_range": [
+    3248,
+    3259
+   ],
+   "east_m": 325624.6031746032,
+   "north_m": 230647.61904761905,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 12,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 51
+   },
+   "cover_depth_rank": 101.3417,
+   "slope_rank": 6.0074,
+   "scarp_rank": 10.4279,
+   "grav_step": 0.9108,
+   "mag_step": 43.3409,
+   "px_to_visible_catalogue": 46.5,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98853,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1434,
+   "pixels": 63,
+   "row_range": [
+    3281,
+    3293
+   ],
+   "col_range": [
+    2023,
+    2034
+   ],
+   "east_m": 203010.31746031746,
+   "north_m": -85374.6031746032,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 58
+   },
+   "cover_depth_rank": 333.0493,
+   "slope_rank": 2.2939,
+   "scarp_rank": 6.7807,
+   "grav_step": 2.2085,
+   "mag_step": 8.7999,
+   "px_to_visible_catalogue": 45.52,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98785,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 808,
+   "pixels": 62,
+   "row_range": [
+    1279,
+    1294
+   ],
+   "col_range": [
+    332,
+    347
+   ],
+   "east_m": 34033.87096774193,
+   "north_m": 114862.90322580647,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 15,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 47
+   },
+   "cover_depth_rank": 947.9597,
+   "slope_rank": 5.3371,
+   "scarp_rank": 8.0092,
+   "grav_step": 1.3385,
+   "mag_step": 127.8444,
+   "px_to_visible_catalogue": 34.16,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98938,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1308,
+   "pixels": 61,
+   "row_range": [
+    2985,
+    2999
+   ],
+   "col_range": [
+    1599,
+    1608
+   ],
+   "east_m": 160663.11475409835,
+   "north_m": -55968.85245901637,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 7,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 54
+   },
+   "cover_depth_rank": 656.8536,
+   "slope_rank": 6.593,
+   "scarp_rank": 10.8701,
+   "grav_step": 1.743,
+   "mag_step": 114.3026,
+   "px_to_visible_catalogue": 11.72,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99071,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 777,
+   "pixels": 60,
+   "row_range": [
+    1239,
+    1253
+   ],
+   "col_range": [
+    383,
+    397
+   ],
+   "east_m": 39220.0,
+   "north_m": 118623.33333333333,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 59
+   },
+   "cover_depth_rank": 1673.0292,
+   "slope_rank": 6.1473,
+   "scarp_rank": 11.0018,
+   "grav_step": 0.4167,
+   "mag_step": 241.3664,
+   "px_to_visible_catalogue": 17.5,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98966,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1232,
+   "pixels": 60,
+   "row_range": [
+    2547,
+    2558
+   ],
+   "col_range": [
+    1140,
+    1154
+   ],
+   "east_m": 114761.66666666666,
+   "north_m": -12161.666666666686,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 11,
+    "concordant": 2,
+    "A-only": 1,
+    "B-only": 46
+   },
+   "cover_depth_rank": 65.9065,
+   "slope_rank": 26.6242,
+   "scarp_rank": 21.6472,
+   "grav_step": 14.1381,
+   "mag_step": 47.4265,
+   "px_to_visible_catalogue": 1.93,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99637,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1388,
+   "pixels": 59,
+   "row_range": [
+    3193,
+    3199
+   ],
+   "col_range": [
+    2044,
+    2065
+   ],
+   "east_m": 205614.40677966102,
+   "north_m": -76366.10169491521,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 59
+   },
+   "cover_depth_rank": 445.2077,
+   "slope_rank": 4.9642,
+   "scarp_rank": 9.876,
+   "grav_step": 2.4675,
+   "mag_step": 3.2396,
+   "px_to_visible_catalogue": 16.2,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98968,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 597,
+   "pixels": 58,
+   "row_range": [
+    855,
+    858
+   ],
+   "col_range": [
+    103,
+    130
+   ],
+   "east_m": 11984.482758620688,
+   "north_m": 157653.4482758621,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 29,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 29
+   },
+   "cover_depth_rank": 179.1897,
+   "slope_rank": 16.8916,
+   "scarp_rank": 17.1106,
+   "grav_step": 14.0374,
+   "mag_step": 79.903,
+   "px_to_visible_catalogue": 1.67,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98956,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 649,
+   "pixels": 58,
+   "row_range": [
+    904,
+    917
+   ],
+   "col_range": [
+    542,
+    550
+   ],
+   "east_m": 54768.965517241384,
+   "north_m": 152206.89655172414,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 25,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 33
+   },
+   "cover_depth_rank": 222.0515,
+   "slope_rank": 5.3894,
+   "scarp_rank": 10.0714,
+   "grav_step": 4.823,
+   "mag_step": 55.0984,
+   "px_to_visible_catalogue": 12.77,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98857,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1172,
+   "pixels": 58,
+   "row_range": [
+    2366,
+    2379
+   ],
+   "col_range": [
+    1571,
+    1582
+   ],
+   "east_m": 157920.6896551724,
+   "north_m": 6181.034482758609,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 12,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 46
+   },
+   "cover_depth_rank": 2.7688,
+   "slope_rank": 14.7318,
+   "scarp_rank": 16.1577,
+   "grav_step": 1.0258,
+   "mag_step": 360.8172,
+   "px_to_visible_catalogue": 26.22,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98954,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1274,
+   "pixels": 58,
+   "row_range": [
+    2890,
+    2909
+   ],
+   "col_range": [
+    2010,
+    2016
+   ],
+   "east_m": 201391.37931034484,
+   "north_m": -46643.103448275884,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 3,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 55
+   },
+   "cover_depth_rank": 54.4184,
+   "slope_rank": 7.8708,
+   "scarp_rank": 12.4924,
+   "grav_step": 1.0391,
+   "mag_step": 109.3243,
+   "px_to_visible_catalogue": 82.84,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98876,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 920,
+   "pixels": 57,
+   "row_range": [
+    1549,
+    1562
+   ],
+   "col_range": [
+    597,
+    604
+   ],
+   "east_m": 60127.192982456145,
+   "north_m": 87819.29824561402,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 11,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 46
+   },
+   "cover_depth_rank": 675.715,
+   "slope_rank": 8.9543,
+   "scarp_rank": 12.6363,
+   "grav_step": 2.1692,
+   "mag_step": 126.554,
+   "px_to_visible_catalogue": 17.96,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98766,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1179,
+   "pixels": 57,
+   "row_range": [
+    2384,
+    2400
+   ],
+   "col_range": [
+    1583,
+    1589
+   ],
+   "east_m": 158793.8596491228,
+   "north_m": 4138.5964912280615,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 51,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 6
+   },
+   "cover_depth_rank": 1.0515,
+   "slope_rank": 12.98,
+   "scarp_rank": 12.9921,
+   "grav_step": 0.7192,
+   "mag_step": 175.8472,
+   "px_to_visible_catalogue": 28.97,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99082,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 366,
+   "pixels": 56,
+   "row_range": [
+    568,
+    586
+   ],
+   "col_range": [
+    2539,
+    2546
+   ],
+   "east_m": 254451.78571428574,
+   "north_m": 185560.7142857143,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 8,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 48
+   },
+   "cover_depth_rank": 2623.9734,
+   "slope_rank": 13.2273,
+   "scarp_rank": 15.7335,
+   "grav_step": 1.6322,
+   "mag_step": 17.4589,
+   "px_to_visible_catalogue": 22.72,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99194,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 10,
+   "pixels": 55,
+   "row_range": [
+    0,
+    1
+   ],
+   "col_range": [
+    2219,
+    2253
+   ],
+   "east_m": 223724.54545454544,
+   "north_m": 243263.63636363635,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 6,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 49
+   },
+   "cover_depth_rank": 58.5537,
+   "slope_rank": 19.9289,
+   "scarp_rank": 19.5445,
+   "grav_step": 6.3204,
+   "mag_step": 121.2482,
+   "px_to_visible_catalogue": 14.5,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99251,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 256,
+   "pixels": 55,
+   "row_range": [
+    442,
+    465
+   ],
+   "col_range": [
+    444,
+    455
+   ],
+   "east_m": 45264.545454545456,
+   "north_m": 197980.0,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 54
+   },
+   "cover_depth_rank": 118.276,
+   "slope_rank": 6.6584,
+   "scarp_rank": 12.8518,
+   "grav_step": 2.1146,
+   "mag_step": 105.8532,
+   "px_to_visible_catalogue": 17.67,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98916,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 297,
+   "pixels": 55,
+   "row_range": [
+    491,
+    504
+   ],
+   "col_range": [
+    2262,
+    2268
+   ],
+   "east_m": 226640.9090909091,
+   "north_m": 193560.0,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 50
+   },
+   "cover_depth_rank": 864.867,
+   "slope_rank": 5.6096,
+   "scarp_rank": 13.3532,
+   "grav_step": 0.9246,
+   "mag_step": 25.9299,
+   "px_to_visible_catalogue": 64.96,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99117,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1391,
+   "pixels": 55,
+   "row_range": [
+    3200,
+    3204
+   ],
+   "col_range": [
+    2122,
+    2139
+   ],
+   "east_m": 213169.99999999997,
+   "north_m": -76901.81818181818,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 55
+   },
+   "cover_depth_rank": 71.7307,
+   "slope_rank": 4.316,
+   "scarp_rank": 9.6319,
+   "grav_step": 3.1423,
+   "mag_step": 20.5913,
+   "px_to_visible_catalogue": 17.34,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9883,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 301,
+   "pixels": 54,
+   "row_range": [
+    494,
+    511
+   ],
+   "col_range": [
+    2413,
+    2423
+   ],
+   "east_m": 241831.4814814815,
+   "north_m": 193050.0,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 2,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 52
+   },
+   "cover_depth_rank": 1268.3718,
+   "slope_rank": 8.6268,
+   "scarp_rank": 12.2388,
+   "grav_step": 2.2731,
+   "mag_step": 82.1183,
+   "px_to_visible_catalogue": 52.48,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98888,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 375,
+   "pixels": 54,
+   "row_range": [
+    574,
+    590
+   ],
+   "col_range": [
+    2447,
+    2455
+   ],
+   "east_m": 245301.85185185188,
+   "north_m": 185153.7037037037,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 24,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 30
+   },
+   "cover_depth_rank": 2096.8325,
+   "slope_rank": 6.0316,
+   "scarp_rank": 11.1337,
+   "grav_step": 0.6269,
+   "mag_step": 53.8733,
+   "px_to_visible_catalogue": 23.37,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98708,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 437,
+   "pixels": 54,
+   "row_range": [
+    636,
+    651
+   ],
+   "col_range": [
+    2886,
+    2890
+   ],
+   "east_m": 288974.0740740741,
+   "north_m": 178977.77777777778,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 16,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 38
+   },
+   "cover_depth_rank": 238.0567,
+   "slope_rank": 8.5126,
+   "scarp_rank": 13.1041,
+   "grav_step": 3.4569,
+   "mag_step": 25.14,
+   "px_to_visible_catalogue": 24.02,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99126,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 476,
+   "pixels": 54,
+   "row_range": [
+    692,
+    716
+   ],
+   "col_range": [
+    2558,
+    2564
+   ],
+   "east_m": 256292.5925925926,
+   "north_m": 172779.62962962964,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 3,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 51
+   },
+   "cover_depth_rank": 27.6196,
+   "slope_rank": 14.0316,
+   "scarp_rank": 16.6602,
+   "grav_step": 1.2736,
+   "mag_step": 12.4329,
+   "px_to_visible_catalogue": 16.39,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98841,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 909,
+   "pixels": 54,
+   "row_range": [
+    1541,
+    1553
+   ],
+   "col_range": [
+    1295,
+    1301
+   ],
+   "east_m": 130005.55555555556,
+   "north_m": 88698.14814814815,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 15,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 39
+   },
+   "cover_depth_rank": 424.0695,
+   "slope_rank": 12.231,
+   "scarp_rank": 13.9058,
+   "grav_step": 1.1142,
+   "mag_step": 249.4297,
+   "px_to_visible_catalogue": 21.19,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98865,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 933,
+   "pixels": 54,
+   "row_range": [
+    1556,
+    1565
+   ],
+   "col_range": [
+    585,
+    595
+   ],
+   "east_m": 59064.81481481482,
+   "north_m": 87175.92592592593,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 54
+   },
+   "cover_depth_rank": 838.3738,
+   "slope_rank": 7.7021,
+   "scarp_rank": 12.6198,
+   "grav_step": 2.4039,
+   "mag_step": 159.4084,
+   "px_to_visible_catalogue": 17.95,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98696,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1245,
+   "pixels": 54,
+   "row_range": [
+    2653,
+    2663
+   ],
+   "col_range": [
+    1659,
+    1669
+   ],
+   "east_m": 166559.25925925927,
+   "north_m": -22587.037037037022,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 14,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 40
+   },
+   "cover_depth_rank": 111.3164,
+   "slope_rank": 16.9194,
+   "scarp_rank": 15.8012,
+   "grav_step": 3.2964,
+   "mag_step": 123.5893,
+   "px_to_visible_catalogue": 10.11,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99032,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 278,
+   "pixels": 53,
+   "row_range": [
+    479,
+    489
+   ],
+   "col_range": [
+    244,
+    259
+   ],
+   "east_m": 25436.79245283019,
+   "north_m": 194864.15094339623,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 3,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 50
+   },
+   "cover_depth_rank": 33.1882,
+   "slope_rank": 4.1487,
+   "scarp_rank": 11.9732,
+   "grav_step": 1.6105,
+   "mag_step": 116.2574,
+   "px_to_visible_catalogue": 9.62,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99046,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 448,
+   "pixels": 53,
+   "row_range": [
+    653,
+    662
+   ],
+   "col_range": [
+    245,
+    257
+   ],
+   "east_m": 25431.132075471698,
+   "north_m": 177626.41509433964,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 13,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 40
+   },
+   "cover_depth_rank": 98.0202,
+   "slope_rank": 5.6882,
+   "scarp_rank": 10.381,
+   "grav_step": 2.1731,
+   "mag_step": 76.4729,
+   "px_to_visible_catalogue": 32.58,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98973,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1255,
+   "pixels": 53,
+   "row_range": [
+    2744,
+    2762
+   ],
+   "col_range": [
+    2019,
+    2026
+   ],
+   "east_m": 202482.0754716981,
+   "north_m": -32047.169811320724,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 16,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 37
+   },
+   "cover_depth_rank": 154.9534,
+   "slope_rank": 9.6737,
+   "scarp_rank": 13.0021,
+   "grav_step": 1.5792,
+   "mag_step": 75.7196,
+   "px_to_visible_catalogue": 124.58,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9888,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1335,
+   "pixels": 53,
+   "row_range": [
+    3049,
+    3066
+   ],
+   "col_range": [
+    1696,
+    1703
+   ],
+   "east_m": 170083.96226415093,
+   "north_m": -62520.754716981144,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 25,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 28
+   },
+   "cover_depth_rank": 43.6921,
+   "slope_rank": 3.5936,
+   "scarp_rank": 8.6478,
+   "grav_step": 1.3677,
+   "mag_step": 18.3352,
+   "px_to_visible_catalogue": 62.9,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98812,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 177,
+   "pixels": 52,
+   "row_range": [
+    309,
+    335
+   ],
+   "col_range": [
+    456,
+    460
+   ],
+   "east_m": 46017.30769230769,
+   "north_m": 211023.07692307694,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 52
+   },
+   "cover_depth_rank": 796.4489,
+   "slope_rank": 6.5417,
+   "scarp_rank": 12.0888,
+   "grav_step": 4.3044,
+   "mag_step": 201.2082,
+   "px_to_visible_catalogue": 68.03,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98651,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 472,
+   "pixels": 52,
+   "row_range": [
+    684,
+    700
+   ],
+   "col_range": [
+    2693,
+    2703
+   ],
+   "east_m": 270086.5384615385,
+   "north_m": 174059.61538461538,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 8,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 44
+   },
+   "cover_depth_rank": 304.904,
+   "slope_rank": 11.8954,
+   "scarp_rank": 14.674,
+   "grav_step": 1.1857,
+   "mag_step": 18.0361,
+   "px_to_visible_catalogue": 11.35,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98794,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 473,
+   "pixels": 52,
+   "row_range": [
+    685,
+    699
+   ],
+   "col_range": [
+    459,
+    465
+   ],
+   "east_m": 46350.0,
+   "north_m": 173951.92307692306,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 29,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 23
+   },
+   "cover_depth_rank": 54.2614,
+   "slope_rank": 19.2752,
+   "scarp_rank": 16.3281,
+   "grav_step": 2.8288,
+   "mag_step": 161.1169,
+   "px_to_visible_catalogue": 25.5,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98885,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1082,
+   "pixels": 52,
+   "row_range": [
+    2003,
+    2015
+   ],
+   "col_range": [
+    1121,
+    1130
+   ],
+   "east_m": 112830.76923076923,
+   "north_m": 42448.07692307694,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 11,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 41
+   },
+   "cover_depth_rank": 73.2825,
+   "slope_rank": 11.0159,
+   "scarp_rank": 14.1966,
+   "grav_step": 3.2649,
+   "mag_step": 156.8556,
+   "px_to_visible_catalogue": 20.07,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9909,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1286,
+   "pixels": 52,
+   "row_range": [
+    2933,
+    2938
+   ],
+   "col_range": [
+    1388,
+    1406
+   ],
+   "east_m": 139880.76923076925,
+   "north_m": -50173.07692307688,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 52,
+    "A-only": 0,
+    "B-only": 0
+   },
+   "cover_depth_rank": 194.9666,
+   "slope_rank": 9.8774,
+   "scarp_rank": 15.0849,
+   "grav_step": 10.3002,
+   "mag_step": 217.7753,
+   "px_to_visible_catalogue": 2.73,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98934,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 449,
+   "pixels": 51,
+   "row_range": [
+    656,
+    666
+   ],
+   "col_range": [
+    2141,
+    2149
+   ],
+   "east_m": 214644.11764705883,
+   "north_m": 177060.78431372548,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 39,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 12
+   },
+   "cover_depth_rank": 378.9863,
+   "slope_rank": 12.9541,
+   "scarp_rank": 13.6315,
+   "grav_step": 1.264,
+   "mag_step": 149.705,
+   "px_to_visible_catalogue": 14.45,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99086,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 852,
+   "pixels": 51,
+   "row_range": [
+    1363,
+    1380
+   ],
+   "col_range": [
+    1586,
+    1591
+   ],
+   "east_m": 158993.13725490196,
+   "north_m": 106192.15686274512,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 11,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 40
+   },
+   "cover_depth_rank": 400.9529,
+   "slope_rank": 4.6279,
+   "scarp_rank": 9.2366,
+   "grav_step": 1.1553,
+   "mag_step": 85.3031,
+   "px_to_visible_catalogue": 25.37,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98788,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 895,
+   "pixels": 51,
+   "row_range": [
+    1485,
+    1502
+   ],
+   "col_range": [
+    368,
+    384
+   ],
+   "east_m": 37828.43137254902,
+   "north_m": 93945.09803921569,
+   "stratum": "concordant",
+   "stratum_counts": {
+    "silent": 2,
+    "concordant": 25,
+    "A-only": 11,
+    "B-only": 13
+   },
+   "cover_depth_rank": 339.2209,
+   "slope_rank": 19.3016,
+   "scarp_rank": 18.8461,
+   "grav_step": 10.8049,
+   "mag_step": 199.4317,
+   "px_to_visible_catalogue": 1.69,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99305,
+   "claim": "both views agree: continuation of a mapped structure beyond the end or the side of the mapped trace, the case where the catalogue is truncated by mapping convention rather than by data"
+  },
+  {
+   "segment": 910,
+   "pixels": 51,
+   "row_range": [
+    1542,
+    1554
+   ],
+   "col_range": [
+    1312,
+    1320
+   ],
+   "east_m": 131753.92156862744,
+   "north_m": 88484.31372549018,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 51
+   },
+   "cover_depth_rank": 419.0108,
+   "slope_rank": 10.9669,
+   "scarp_rank": 14.6495,
+   "grav_step": 1.0959,
+   "mag_step": 191.7312,
+   "px_to_visible_catalogue": 23.86,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98983,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1051,
+   "pixels": 51,
+   "row_range": [
+    1930,
+    1938
+   ],
+   "col_range": [
+    928,
+    948
+   ],
+   "east_m": 93981.37254901961,
+   "north_m": 49943.13725490196,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 50
+   },
+   "cover_depth_rank": 626.9532,
+   "slope_rank": 11.9381,
+   "scarp_rank": 13.8072,
+   "grav_step": 1.2105,
+   "mag_step": 88.4197,
+   "px_to_visible_catalogue": 19.21,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98708,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1505,
+   "pixels": 51,
+   "row_range": [
+    3465,
+    3474
+   ],
+   "col_range": [
+    1728,
+    1739
+   ],
+   "east_m": 173416.6666666667,
+   "north_m": -103731.37254901964,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 12,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 39
+   },
+   "cover_depth_rank": 156.2689,
+   "slope_rank": 7.0707,
+   "scarp_rank": 9.6293,
+   "grav_step": 3.3727,
+   "mag_step": 85.8927,
+   "px_to_visible_catalogue": 13.68,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98984,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 212,
+   "pixels": 50,
+   "row_range": [
+    380,
+    392
+   ],
+   "col_range": [
+    2346,
+    2357
+   ],
+   "east_m": 235304.0,
+   "north_m": 204806.0,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 50
+   },
+   "cover_depth_rank": 176.2761,
+   "slope_rank": 9.2215,
+   "scarp_rank": 12.872,
+   "grav_step": 0.8264,
+   "mag_step": 75.4732,
+   "px_to_visible_catalogue": 12.84,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99057,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 220,
+   "pixels": 50,
+   "row_range": [
+    387,
+    400
+   ],
+   "col_range": [
+    564,
+    569
+   ],
+   "east_m": 56796.0,
+   "north_m": 203890.0,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 25,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 25
+   },
+   "cover_depth_rank": 598.0486,
+   "slope_rank": 7.7478,
+   "scarp_rank": 12.6918,
+   "grav_step": 2.0434,
+   "mag_step": 76.0556,
+   "px_to_visible_catalogue": 19.17,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9872,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 907,
+   "pixels": 50,
+   "row_range": [
+    1533,
+    1548
+   ],
+   "col_range": [
+    423,
+    433
+   ],
+   "east_m": 42874.0,
+   "north_m": 89266.0,
+   "stratum": "A-only",
+   "stratum_counts": {
+    "silent": 35,
+    "concordant": 5,
+    "A-only": 7,
+    "B-only": 3
+   },
+   "cover_depth_rank": 212.7038,
+   "slope_rank": 7.8583,
+   "scarp_rank": 10.5195,
+   "grav_step": 6.4578,
+   "mag_step": 100.1353,
+   "px_to_visible_catalogue": 2.7,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98926,
+   "claim": "field-view only: potential-field offset (gravity step 6.458, magnetic step 100.135) with no corresponding scarp (surface rank 10.520); cover depth rank 212.704 is deep enough that a scarp would be buried, so this is a buried range-front fault the LiDAR-derived catalogue cannot contain"
+  },
+  {
+   "segment": 304,
+   "pixels": 49,
+   "row_range": [
+    499,
+    504
+   ],
+   "col_range": [
+    629,
+    643
+   ],
+   "east_m": 63672.448979591834,
+   "north_m": 193204.08163265308,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 4,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 45
+   },
+   "cover_depth_rank": 297.7179,
+   "slope_rank": 10.7047,
+   "scarp_rank": 13.6092,
+   "grav_step": 0.98,
+   "mag_step": 104.7546,
+   "px_to_visible_catalogue": 12.28,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9897,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 329,
+   "pixels": 49,
+   "row_range": [
+    527,
+    535
+   ],
+   "col_range": [
+    1194,
+    1210
+   ],
+   "east_m": 120450.0,
+   "north_m": 190316.32653061225,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 6,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 43
+   },
+   "cover_depth_rank": 308.1423,
+   "slope_rank": 7.5499,
+   "scarp_rank": 11.6869,
+   "grav_step": 4.2341,
+   "mag_step": 95.1861,
+   "px_to_visible_catalogue": 74.11,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98861,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 436,
+   "pixels": 49,
+   "row_range": [
+    633,
+    657
+   ],
+   "col_range": [
+    2077,
+    2081
+   ],
+   "east_m": 208076.5306122449,
+   "north_m": 178836.73469387754,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 4,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 45
+   },
+   "cover_depth_rank": 639.5308,
+   "slope_rank": 5.202,
+   "scarp_rank": 10.1318,
+   "grav_step": 6.0611,
+   "mag_step": 117.4713,
+   "px_to_visible_catalogue": 31.91,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98573,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 446,
+   "pixels": 49,
+   "row_range": [
+    652,
+    665
+   ],
+   "col_range": [
+    544,
+    548
+   ],
+   "east_m": 54776.530612244904,
+   "north_m": 177387.75510204083,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 20,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 29
+   },
+   "cover_depth_rank": 207.0954,
+   "slope_rank": 4.6053,
+   "scarp_rank": 10.7779,
+   "grav_step": 1.0634,
+   "mag_step": 60.6651,
+   "px_to_visible_catalogue": 57.74,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98951,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 498,
+   "pixels": 49,
+   "row_range": [
+    712,
+    726
+   ],
+   "col_range": [
+    471,
+    483
+   ],
+   "east_m": 47756.12244897959,
+   "north_m": 171334.693877551,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 15,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 34
+   },
+   "cover_depth_rank": 133.7155,
+   "slope_rank": 14.289,
+   "scarp_rank": 14.7529,
+   "grav_step": 2.7863,
+   "mag_step": 226.0785,
+   "px_to_visible_catalogue": 38.1,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98905,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1187,
+   "pixels": 49,
+   "row_range": [
+    2412,
+    2423
+   ],
+   "col_range": [
+    1293,
+    1304
+   ],
+   "east_m": 129976.5306122449,
+   "north_m": 1651.0204081632837,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 49
+   },
+   "cover_depth_rank": 106.522,
+   "slope_rank": 5.1605,
+   "scarp_rank": 9.682,
+   "grav_step": 0.9257,
+   "mag_step": 294.8648,
+   "px_to_visible_catalogue": 13.38,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98804,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 327,
+   "pixels": 48,
+   "row_range": [
+    525,
+    542
+   ],
+   "col_range": [
+    2505,
+    2508
+   ],
+   "east_m": 250756.25,
+   "north_m": 189945.83333333334,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 5,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 43
+   },
+   "cover_depth_rank": 2488.2185,
+   "slope_rank": 5.6953,
+   "scarp_rank": 11.7579,
+   "grav_step": 0.4892,
+   "mag_step": 116.0214,
+   "px_to_visible_catalogue": 10.16,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98879,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 584,
+   "pixels": 48,
+   "row_range": [
+    832,
+    848
+   ],
+   "col_range": [
+    479,
+    483
+   ],
+   "east_m": 48212.5,
+   "north_m": 159250.0,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 14,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 34
+   },
+   "cover_depth_rank": 282.2649,
+   "slope_rank": 8.2925,
+   "scarp_rank": 11.7057,
+   "grav_step": 1.501,
+   "mag_step": 141.6148,
+   "px_to_visible_catalogue": 26.42,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98852,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 599,
+   "pixels": 48,
+   "row_range": [
+    855,
+    860
+   ],
+   "col_range": [
+    244,
+    262
+   ],
+   "east_m": 25325.0,
+   "north_m": 157693.75,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 37,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 11
+   },
+   "cover_depth_rank": 26.7342,
+   "slope_rank": 19.2568,
+   "scarp_rank": 16.9041,
+   "grav_step": 4.8809,
+   "mag_step": 233.5634,
+   "px_to_visible_catalogue": 2.06,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.99098,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 753,
+   "pixels": 48,
+   "row_range": [
+    1208,
+    1214
+   ],
+   "col_range": [
+    493,
+    510
+   ],
+   "east_m": 50256.25,
+   "north_m": 122147.91666666667,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 40,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 8
+   },
+   "cover_depth_rank": 446.6128,
+   "slope_rank": 9.4763,
+   "scarp_rank": 13.8072,
+   "grav_step": 3.0464,
+   "mag_step": 186.3985,
+   "px_to_visible_catalogue": 15.24,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98956,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1336,
+   "pixels": 48,
+   "row_range": [
+    3050,
+    3065
+   ],
+   "col_range": [
+    1674,
+    1682
+   ],
+   "east_m": 167829.1666666667,
+   "north_m": -62406.25,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 10,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 38
+   },
+   "cover_depth_rank": 32.3711,
+   "slope_rank": 5.3326,
+   "scarp_rank": 9.1981,
+   "grav_step": 1.453,
+   "mag_step": 39.8544,
+   "px_to_visible_catalogue": 57.34,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98942,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 1401,
+   "pixels": 48,
+   "row_range": [
+    3217,
+    3227
+   ],
+   "col_range": [
+    1935,
+    1949
+   ],
+   "east_m": 194322.9166666667,
+   "north_m": -78937.5,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 0,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 48
+   },
+   "cover_depth_rank": 102.4817,
+   "slope_rank": 9.9997,
+   "scarp_rank": 15.4738,
+   "grav_step": 3.0088,
+   "mag_step": 4.1806,
+   "px_to_visible_catalogue": 76.18,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.98995,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 425,
+   "pixels": 47,
+   "row_range": [
+    618,
+    632
+   ],
+   "col_range": [
+    2003,
+    2013
+   ],
+   "east_m": 200986.17021276595,
+   "north_m": 180676.59574468085,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 1,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 46
+   },
+   "cover_depth_rank": 48.2288,
+   "slope_rank": 7.8337,
+   "scarp_rank": 11.8528,
+   "grav_step": 1.1296,
+   "mag_step": 14.1302,
+   "px_to_visible_catalogue": 13.27,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9891,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  },
+  {
+   "segment": 439,
+   "pixels": 47,
+   "row_range": [
+    644,
+    656
+   ],
+   "col_range": [
+    540,
+    547
+   ],
+   "east_m": 54426.59574468085,
+   "north_m": 178327.6595744681,
+   "stratum": "B-only",
+   "stratum_counts": {
+    "silent": 30,
+    "concordant": 0,
+    "A-only": 0,
+    "B-only": 17
+   },
+   "cover_depth_rank": 181.8692,
+   "slope_rank": 5.7226,
+   "scarp_rank": 10.7188,
+   "grav_step": 0.5857,
+   "mag_step": 65.1812,
+   "px_to_visible_catalogue": 61.41,
+   "touches_visible_catalogue": false,
+   "field_mass": 0.9885,
+   "claim": "surface-view only: scarp with no field offset; the catalogue was built from this same surface expression, so an uncatalogued scarp here is more likely a road cut, canal levee, quarry face or erosion line than a fault - down-weighted, and emitted only if it clears the metric bar"
+  }
+ ],
+ "per_candidate_csv": "gems52-h52-cotrain-disagreement-emission-composite-37654px-r1-candidates.csv"
+}

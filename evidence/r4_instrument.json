@@ -1,0 +1,85 @@
+{
+ "stage": "instrument",
+ "catalogue_px": 60894,
+ "dispersed": {
+  "mode": "dispersed",
+  "seed": 52008,
+  "n_components": 3198,
+  "n_hidden": 1439,
+  "n_kept": 1759,
+  "moved_px": 23175,
+  "size_px": 13500,
+  "target_px": 13500,
+  "size_before_match": 55723
+ },
+ "clustered": {
+  "mode": "clustered",
+  "seed": 52008,
+  "n_components": 3198,
+  "n_hidden": 1439,
+  "n_kept": 1759,
+  "moved_px": 20719,
+  "size_px": 13500,
+  "target_px": 13500,
+  "size_before_match": 52703
+ },
+ "validation": {
+  "n": 4,
+  "names": [
+   "h33-2-b2",
+   "random_20000",
+   "random_37654",
+   "random_70000"
+  ],
+  "raw_rho": -0.7745966692414834,
+  "raw_p": 0.22540333075851665,
+  "budget_partial": {
+   "n": 4,
+   "raw_rho": -0.7745966692414834,
+   "raw_p": 0.22540333075851665,
+   "degenerate": false,
+   "resid_sd_x": 0.8660254037844386,
+   "resid_sd_board": 0.8660254037844386,
+   "r": -1.0,
+   "p": 0.0
+  },
+  "spearman_board_vs_neg_budget": 0.0,
+  "random_control": {
+   "best_random_score": 0.060798420110707636,
+   "incumbent_score": 0.021529348058073015,
+   "random_beats_incumbent": true,
+   "verdict": "INSTRUMENT CANNOT PROMOTE -- uniform random at or above incumbent"
+  }
+ },
+ "rows": [
+  {
+   "name": "h33-2-b2",
+   "score": 0.021529348058073015,
+   "board": 0.2778,
+   "budget": 37654,
+   "kind": "incumbent"
+  },
+  {
+   "name": "random_20000",
+   "score": 0.03129568770490975,
+   "board": 0.0,
+   "budget": 20000,
+   "kind": "random"
+  },
+  {
+   "name": "random_37654",
+   "score": 0.04737428803125987,
+   "board": 0.0,
+   "budget": 37654,
+   "kind": "random"
+  },
+  {
+   "name": "random_70000",
+   "score": 0.060798420110707636,
+   "board": 0.0,
+   "budget": 70000,
+   "kind": "random"
+  }
+ ],
+ "seconds": 104.0
+}

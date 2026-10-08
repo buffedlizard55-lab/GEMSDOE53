@@ -1,0 +1,2 @@
+# H58 reasoning exports intentionally use RFC 4180 CRLF record endings; retain them and do not flag CR as trailing whitespace.
+docs/downloads/*h58*reasoning.csv whitespace=cr-at-eol

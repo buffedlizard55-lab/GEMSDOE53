@@ -1,0 +1,72 @@
+{
+  "reviewed_utc": "2026-10-07T16:50:01Z",
+  "review_scope": "Apply the standing no-upload-unless-comparable-spatial-holdout-won rule to the current main H56 candidate; no portal operation.",
+  "artifact": "gems52-h56-consensus-core-continuation-40517px-04c86e1888a8-zeros.tif",
+  "sha256": "1308083dcf09b4c6fb656589ce79b3c392f5a0dd315e2ed31c8d36a47fc1d52d",
+  "bytes": 153815,
+  "current_pointer": "submission/LATEST.txt",
+  "current_pointer_matches_artifact": true,
+  "main_commit_reviewed": "4ab78fd0f64bc5d4c33743460f7d11eeb2c7b36b",
+  "preexisting_receipt_claim": true,
+  "preexisting_promotion_text": "selected by src/gems52/revealed.py::budget_rule (max P(DTI > 0.2778) over the exact t_core interval [4168, 5223] x rho_novel prior U[0.03, 0.14]); both local gates pass. This is a projection from published scores plus a prior, not a leaderboard measurement.",
+  "h56_registration_kind": "retrospective — written after the build (15:33Z) and the first publish (15:32Z) within the same session; stated because a pre-registration claim would be false",
+  "spatial_holdout": {
+    "h56_comparable_holdout_receipt_found": false,
+    "matching_receipts_found": [],
+    "evidence_directories_checked": [
+      "evidence",
+      "docs/data"
+    ],
+    "conclusion": "No H56 spatially blocked holdout/comparison receipt was found. The existing R2, R3, H55 and H55-1 results are different candidates/arms and cannot be substituted as H56 validation."
+  },
+  "format_and_uniqueness_are_not_holdout": true,
+  "decision": {
+    "approved_for_weekly_slot": false,
+    "submission_slots_used": 0,
+    "reason": "The user's standing acceptance rule requires this candidate to beat the current comparable spatially blocked holdout best before any upload. No comparable H56 holdout is recorded, and its preregistration is explicitly retrospective. Preserve the H56 TIFF and pointer as the current artifact, but do not upload or spend a slot until a properly preregistered comparable holdout passes."
+  },
+  "official_score": null,
+  "organizer_upload_acceptance": null,
+  "leaderboard_score_to_filename_mapping_authenticated": false,
+  "artifact_bytes_changed": false,
+  "postbuild_decoded_pattern_review": {
+    "source_receipts": {
+      "build_receipt": "evidence/gems52-h56-build.json",
+      "build_receipt_sha256": "a22da9ce7ea1a383db3daafe1de680bc97cf2060f57b30e9a9be9be42c1548b7",
+      "verify_receipt": "evidence/gems52-h56-verify.json",
+      "verify_receipt_sha256": "cbcfa36a53995c81be2947f74cd5bac0231385e5e1e0282d02f61bd700a5d63b",
+      "review_receipt": "evidence/gems52-h56_review_receipt.json",
+      "review_receipt_sha256": "5cca2dd251727e25078f8eebbc84f3f9bfceadb525bcde2caf0a75530fa41821"
+    },
+    "canonical_pattern_identical_to_accessible_prior": false,
+    "aligned_prior_files_checked": 33,
+    "decoded_support_outside_prior_union": 12941,
+    "decoded_support_fraction_outside_prior_union": 0.3193967964064467,
+    "artifact_cells": 40517,
+    "selected_continuation_scarp_arm_cells": 15000,
+    "core_cells": 25517,
+    "core_is_subset_of_accessible_prior_union": true,
+    "derived_arm_cells_outside_prior_union": 12941,
+    "derived_arm_cells_with_accessible_prior_support": 2059,
+    "status": "The 15,000-cell constructed arm is not wholly support-novel against the 33 decoded priors. Earlier wording that all 15,000 lie outside the 33-prior union is overstated; the saved decoded verification reports 12,941 total cells outside that union. The full pattern differs from every checked prior, but only 31.94% of its emitted support is outside the comparison union. This is bounded to accessible files and does not establish geologic novelty.",
+    "projection_implication": "The original score projection models 15,000 selected arm cells with a stated novel-density prior. This receipt mismatch makes that interpretation conditional and should be re-derived from an authenticated candidate mask if the projection is reused. Projection was not a measured holdout in any case.",
+    "pixel_level_arm_overlap_attribution_available": false
+  },
+  "additional_local_diagnostics": {
+    "global_min_nearest_neighbor_px": 2.8284271247461903,
+    "global_min_NN_separation_diagnostic_passed": false,
+    "reason": "The closest pair is inherited inside the fixed 25,517-cell P1 core; the selected 15,000-cell continuation/scarp arm is at least 3.162 px from every emitted cell per the frozen verifier receipt.",
+    "not_a_slot_gate": "This is a disclosed geometry diagnostic, not a replacement for the missing comparable spatial holdout."
+  },
+  "a_only_reasoning": {
+    "status": "not produced / not applicable to the two-pattern core; per-pixel continuation-arm A/B attribution cannot be reproduced from committed data",
+    "do_not_substitute": "Do not relabel R2, H54, H55-EDGE or another candidate's A-only reasoning as H56 evidence.",
+    "scope_receipt": "evidence/h56_a_only_reasoning_scope_2026-10-07.json"
+  },
+  "preexisting_publication_claim_review": {
+    "receipt": "evidence/gems52-h56_review_receipt.json",
+    "receipt_sha256": "5cca2dd251727e25078f8eebbc84f3f9bfceadb525bcde2caf0a75530fa41821",
+    "historical_claim": "The earlier H56 review receipt describes the site as ready to upload after local format/pattern checks.",
+    "current_disposition": "That historical copy was superseded: a local gate is not a comparable spatial holdout, the H56 slate is retrospective, and the current slot gate is closed. No portal upload is authorized."
+  }
+}

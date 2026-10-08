@@ -1,0 +1,165 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H57 &middot; two-view co-training union arm &middot; GEMSDOE52</title>
+<link rel="stylesheet" href="style.css"><script src="site.js" defer></script></head><body>
+<a class="skip" href="#main">Skip to evidence</a>
+<header><nav><a class="brand" href="index.html">GEMS / DOE 52</a><a href="index.html">Overview</a>
+<a href="executive-summary.html">Submission guide</a><a href="h57.html">H57 current</a><a href="h56.html">H56 audit</a><a href="validation.html">Validation</a>
+<a href="forensics.html">0.2778 autopsy</a><a href="sources.html">Sources</a></nav></header>
+<main id="main">
+<div class="download-bar" id="h57-bar" aria-label="H57 submission download">
+<div><strong>H57 &mdash; two-view co-training union arm &middot; VERDICT: SUPPORTED BUT BELOW THE REGISTERED LIFT THRESHOLD</strong>
+<small><code>gems52-h57-union-novel-core25517px-arm14804px.tif</code></small>
+<small>157,541 bytes &middot; single-band float32 &middot; EPSG:32611 &middot;
+3,292 &times; 3,730 &middot; 40,321 emitted px
+(25,517 exactly-accounted core + 14,804 novel arm) &middot; values exactly
+<code>{0, 1}</code> &middot; 0 NaN &middot; sha256 <code>5fadcaefd64db0cb553bf16d&hellip;</code></small>
+<small>format gate <b>PASS</b>
+(no problems) &middot; decoded pattern
+unique against 38 accessible aligned priors:
+<b>True</b> &middot; arm cells outside their support union:
+<b>14,804 px (100.0% of the arm)</b></small>
+<small>closest emitted cell to a mapped catalogue trace <b>223.6 m</b>
+&mdash; the &le; 200 m ring that measured exactly zero credit is empty by construction.</small>
+<small>conditional projection only (owner-reported scores, not organiser-authenticated):
+rho=0.03 &rarr; 0.2658, rho=0.05 &rarr; 0.2811, rho=0.07 &rarr; 0.2964, rho=0.09 &rarr; 0.3118, rho=0.12 &rarr; 0.3347, rho=0.14 &rarr; 0.35.
+rho is the arm's credit density &mdash; a <b>prior, not a measurement</b>. Not a forecast.</small>
+<small>submission name: <code>gems52-h57-two-view-union-arm-core25517px-arm14804px-5fadcaef-zeros</code><br>note (181 chars): <code>H57: exactly-accounted core of two scored priors plus 14.8k px of two-view co-training union mass, all outside the 200m ring and all outside prior support. Not a verified fault map.</code></small>
+</div>
+<a class="button" href="downloads/gems52-h57-union-novel-core25517px-arm14804px.tif" download>&darr; Download the submission .TIF</a>
+<a class="button" href="downloads/gems52-h57-union-novel-core25517px-arm14804px.zip" download>&darr; Download single-TIFF .ZIP</a>
+<a class="button secondary" href="downloads/h57-candidate.tif" download>Short link &middot; h57-candidate.tif</a>
+<a class="button secondary" href="h57.html">Full audit &amp; holdout &rarr;</a>
+</div>
+<div class="eyebrow">H57 &middot; session 2026-10-07 &middot; blind preregistration in
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE52/blob/main/knowledge/17_hypotheses_H57_preregistered.md">knowledge/17</a>
+&middot; results in
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE52/blob/main/knowledge/18_hypotheses_H57_results.md">knowledge/18</a></div>
+<h1>Two views, measured honestly.<br>One of them won. Three ideas did not.</h1>
+<p class="lede">The brief asked for co-training between a geophysical view and a surface view, with
+<em>disagreement</em> as the discovery signal, plus a metric-aware placement rule. H57 ran all of
+it on restored competition bytes and reports all five outcomes, including the four that failed. The
+artefact ships the union ranking field and the incumbent isotropic emitter, because those are the
+two choices the holdouts actually supported.</p>
+
+<div class="status"><strong>Verdict: SUPPORTED BUT BELOW THE REGISTERED LIFT THRESHOLD.</strong> The structure of this artifact is verified end to end -- format, uniqueness, novelty, the ring, the set relations and the per-candidate geological reasoning all pass their registered gates, and the ranking field is the best of eight on the only holdout that can measure anything. R1's absolute +0.005 lift threshold is not met (best +0.0048). Upload is therefore a judgement call, not a gate pass: P(this file scores below the owner's own 0.2778) = 0.83 under the registered prior, and P(above 0.3195) = 0.36.</div>
+
+<h2>1 &middot; What the metric actually pays for</h2>
+<p>From the published definition
+(<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">page 967</a>)
+and the identity <code>FNw = |G| &minus; TPw</code>, a marginal pixel covering a previously
+uncovered truth pixel at distance <code>d</code> is worth accepting exactly when
+<code>k(d) &gt; &alpha;&middot;DTI</code>. At DTI 0.2778 that is a radius of <b>283 m</b>. Two
+consequences drive everything below: place, do not spray; and <b>add mass only if its credit
+density exceeds 0.2&middot;DTI &asymp; 0.0556</b>. The dead 6,436-cell ring
+inside 200 m of a mapped trace earned <b>exactly zero</b>, and deleting it turned a real 0.2600 into
+a real 0.2778.</p>
+
+<h2>2 &middot; The conditional-independence test the brief demands</h2>
+<p>Per-block out-of-fold error of each view on labelled negatives, whole-segment folds, 4 px buffer,
+2,200 blocks, 4,501,385 negative predictions.</p>
+<ul>
+<li>block-level negative MSE: Pearson 0.0530,
+Spearman 0.0579</li>
+<li>block-level negative mean squared error: Pearson 0.0530, Spearman 0.0579</li><li>block-level negative false positive rate: Pearson 0.0395, Spearman 0.1108</li>
+<li>pixel-level out-of-fold logit correlation 0.0555
+(n = 4,519,160)</li>
+<li><strong>measured</strong> = True &middot; <strong>allow_exchange</strong> =
+True &middot; max |r| = 0.1108 against the registered
+abandonment threshold |r| &ge; 0.60</li>
+</ul>
+<p class="small">This is the first non-degenerate measurement of the premise in this repository:
+<code>knowledge/03</code> N-1 could not estimate it, so it had to fail closed and the
+pseudo-label exchange was never run there. Here the statistic is well powered and the premise is
+<em>not refuted</em> &mdash; which is a statement about weak coupling, not about independence.</p>
+
+<h2>3 &middot; Disagreement strata &mdash; measured, not assumed</h2>
+<table class="data"><tr><th>stratum</th><th>pixels</th><th>median depth to basement</th>
+<th>the brief's reading</th><th>what the holdout says</th></tr>
+<tr><td>A confident, B abstains</td><td>179,254</td>
+<td>411 m</td><td>buried structure under cover</td>
+<td><b>REFUTED as the arm population</b> &mdash; worst of eight arms, below random</td></tr>
+<tr><td>B confident, A abstains</td><td>201,837</td>
+<td>161 m</td><td>surface artefact</td><td>real but second-best; kept as a
+labelled component</td></tr>
+<tr><td>both confident</td><td>46,293</td>
+<td>208 m</td><td>already-mapped fabric</td><td>smallest, weakest</td></tr>
+<tr><td>neither</td><td>4,434,118</td><td>&mdash;</td>
+<td>no view sees it</td><td>the sub-threshold shoulder of the structural signal</td></tr></table>
+<p>The A-only stratum really is the deep-cover stratum: median depth to basement
+411 m against 161 m in B-only, 316 m over the
+permitted set. The geological premise is <b>correct</b>. What failed is the bet that this makes it
+a better place to look for faults.</p>
+
+<h2>4 &middot; Pseudo-label exchange &mdash; ran, and did nothing</h2>
+<p>1,996 pseudo-labelled pixels in 102 whole segments;
+View-A out-of-fold AUC 0.4842 &rarr; 0.4869
+(delta +0.0027), evaluated on 908,665 held-out pixels no
+model had seen. That is indistinguishable from noise, and it reproduces
+<code>knowledge/03</code> N-1 exactly. Disagreement is therefore used to <em>label</em> the arm, not
+to <em>train</em> it.</p>
+
+<h2>5 &middot; Ranking: eight fields, one protocol, two instruments</h2>
+<p>Candidates may not sit on the <b>visible</b> catalogue dilated by 2 px; the <b>held-out</b>
+catalogue is scored as truth, so credit can only be earned on faults the model never saw. Both
+instruments, because either one alone is structurally blind (<code>knowledge/03</code> N-3).</p>
+<table class="data"><tr><th>cell</th><th>rank</th><th>field</th><th>fold-mean DTI</th>
+<th>vs random control</th></tr><tr><td><code>tip@15000</code></td><td>1</td><td><code>clf_union</code></td><td>0.00471</td><td>+0.00368</td></tr><tr><td><code>tip@15000</code></td><td>2</td><td><code>clf_view_B</code></td><td>0.00464</td><td>+0.00361</td></tr><tr><td><code>tip@15000</code></td><td>3</td><td><code>clf_view_A</code></td><td>0.00379</td><td>+0.00277</td></tr><tr><td><code>tip@15000</code></td><td>4</td><td><code>ridge_A_depth_to_base</code></td><td>0.00268</td><td>+0.00166</td></tr><tr><td><code>tip@15000</code></td><td>5</td><td><code>ridge_A_grav_slope</code></td><td>0.00181</td><td>+0.00079</td></tr><tr><td><code>tip@15000</code></td><td>6</td><td><code>ridge_A_tmi_hg</code></td><td>0.00156</td><td>+0.00054</td></tr><tr><td><code>tip@15000</code></td><td>7</td><td><code>ridge_B_det_elev</code></td><td>0.00149</td><td>+0.00047</td></tr><tr><td><code>tip@15000</code></td><td>8</td><td><code>ridge_B_rad_TC</code></td><td>0.00140</td><td>+0.00038</td></tr><tr><td><code>tip@37654</code></td><td>1</td><td><code>clf_union</code></td><td>0.00544</td><td>+0.00390</td></tr><tr><td><code>tip@37654</code></td><td>2</td><td><code>clf_view_B</code></td><td>0.00522</td><td>+0.00367</td></tr><tr><td><code>tip@37654</code></td><td>3</td><td><code>ridge_A_grav_slope</code></td><td>0.00492</td><td>+0.00337</td></tr><tr><td><code>tip@37654</code></td><td>4</td><td><code>ridge_B_det_elev</code></td><td>0.00423</td><td>+0.00269</td></tr><tr><td><code>tip@37654</code></td><td>5</td><td><code>ridge_A_depth_to_base</code></td><td>0.00391</td><td>+0.00237</td></tr><tr><td><code>tip@37654</code></td><td>6</td><td><code>ridge_A_tmi_hg</code></td><td>0.00381</td><td>+0.00226</td></tr><tr><td><code>tip@37654</code></td><td>7</td><td><code>clf_view_A</code></td><td>0.00379</td><td>+0.00225</td></tr><tr><td><code>tip@37654</code></td><td>8</td><td><code>ridge_B_rad_TC</code></td><td>0.00345</td><td>+0.00190</td></tr><tr><td><code>hide@15000</code></td><td>1</td><td><code>clf_view_B</code></td><td>0.00511</td><td>+0.00406</td></tr><tr><td><code>hide@15000</code></td><td>2</td><td><code>clf_union</code></td><td>0.00504</td><td>+0.00399</td></tr><tr><td><code>hide@15000</code></td><td>3</td><td><code>clf_view_A</code></td><td>0.00391</td><td>+0.00286</td></tr><tr><td><code>hide@15000</code></td><td>4</td><td><code>ridge_A_depth_to_base</code></td><td>0.00291</td><td>+0.00186</td></tr><tr><td><code>hide@15000</code></td><td>5</td><td><code>ridge_A_grav_slope</code></td><td>0.00171</td><td>+0.00065</td></tr><tr><td><code>hide@15000</code></td><td>6</td><td><code>ridge_A_tmi_hg</code></td><td>0.00156</td><td>+0.00050</td></tr><tr><td><code>hide@15000</code></td><td>7</td><td><code>ridge_B_det_elev</code></td><td>0.00136</td><td>+0.00030</td></tr><tr><td><code>hide@15000</code></td><td>8</td><td><code>ridge_B_rad_TC</code></td><td>0.00121</td><td>+0.00015</td></tr><tr><td><code>hide@37654</code></td><td>1</td><td><code>clf_union</code></td><td>0.00645</td><td>+0.00484</td></tr><tr><td><code>hide@37654</code></td><td>2</td><td><code>clf_view_B</code></td><td>0.00641</td><td>+0.00481</td></tr><tr><td><code>hide@37654</code></td><td>3</td><td><code>ridge_A_grav_slope</code></td><td>0.00588</td><td>+0.00428</td></tr><tr><td><code>hide@37654</code></td><td>4</td><td><code>ridge_B_det_elev</code></td><td>0.00552</td><td>+0.00392</td></tr><tr><td><code>hide@37654</code></td><td>5</td><td><code>ridge_A_tmi_hg</code></td><td>0.00495</td><td>+0.00335</td></tr><tr><td><code>hide@37654</code></td><td>6</td><td><code>ridge_A_depth_to_base</code></td><td>0.00481</td><td>+0.00321</td></tr><tr><td><code>hide@37654</code></td><td>7</td><td><code>ridge_B_rad_TC</code></td><td>0.00428</td><td>+0.00267</td></tr><tr><td><code>hide@37654</code></td><td>8</td><td><code>clf_view_A</code></td><td>0.00391</td><td>+0.00231</td></tr></table>
+
+<h2>6 &middot; Placement: the anisotropic emitter failed its own gate</h2>
+<p>The kernel algebra is exact: on an isolated 1-px trace the credited truth per node interval
+[0,&nbsp;s) is 7/3 at s&nbsp;=&nbsp;3, 8/3 at s&nbsp;=&nbsp;4 and 3.0 at s&nbsp;=&nbsp;5, i.e. 5 px
+carries <b>+28.6&nbsp;%</b> over 3 px. That is the whole case for H57-A, and it is the right number
+&mdash; for an isolated 1-px trace.</p>
+<table class="data"><tr><th>cell</th><th>isotropic 3 px</th><th>anisotropic 5&times;3 px</th>
+<th>lift</th><th>relative</th><th>folds won</th><th>gate</th></tr><tr><td><code>tip@15000</code></td><td>0.00181</td><td>0.00181</td><td>+0.00000</td><td>+0.00%</td><td>0/4</td><td><b>FAIL</b></td></tr><tr><td><code>tip@37654</code></td><td>0.00486</td><td>0.00492</td><td>+0.00006</td><td>+1.12%</td><td>2/4</td><td><b>FAIL</b></td></tr><tr><td><code>hide@15000</code></td><td>0.00171</td><td>0.00171</td><td>+0.00000</td><td>+0.00%</td><td>0/4</td><td><b>FAIL</b></td></tr><tr><td><code>hide@37654</code></td><td>0.00585</td><td>0.00588</td><td>+0.00003</td><td>+0.54%</td><td>2/4</td><td><b>FAIL</b></td></tr></table>
+<p class="small">Against the mapped traces the advantage does not survive: the traces are wider
+than 1 px and adjacent nodes along a gently curving strike overlap anyway. The artefact ships the
+isotropic emitter. This is recorded as a <b>refutation</b>, not a tuning result.</p>
+
+<h2>7 &middot; Which stratum should carry the arm</h2>
+<table class="data"><tr><th>arm</th><th>fold-mean DTI</th><th>vs random</th><th>outcome</th></tr>
+<tr><td><code>union</code></td><td>0.004875</td><td>4.61&times;</td><td><b>shipped</b></td></tr><tr><td><code>view_B</code></td><td>0.004873</td><td>4.61&times;</td><td><b></b></td></tr><tr><td><code>S_neither</code></td><td>0.004081</td><td>3.86&times;</td><td><b></b></td></tr><tr><td><code>view_A</code></td><td>0.003850</td><td>3.64&times;</td><td><b></b></td></tr><tr><td><code>S_b_only</code></td><td>0.002889</td><td>2.73&times;</td><td><b></b></td></tr><tr><td><code>random</code></td><td>0.001057</td><td>1.00&times;</td><td><b></b></td></tr><tr><td><code>S_concordant</code></td><td>0.000852</td><td>0.81&times;</td><td><b></b></td></tr><tr><td><code>S_a_only</code></td><td>0.000785</td><td>0.74&times;</td><td><b>REFUTED</b></td></tr></table>
+
+<h2>8 &middot; What failed, stated plainly</h2>
+<table class="data"><tr><th>hypothesis</th><th>evidence</th><th>result</th></tr><tr><td>H57-A anisotropic along-strike placement</td><td><code>evidence/h57_validation.json -> placement</code></td><td>+0.000055 tip and +0.000031 hide, 2/4 folds; the +28.6 % credited-truth per node is exact for an isolated 1-px trace and does not survive against the wider mapped traces, so the isotropic 3-px emitter was shipped</td></tr><tr><td>H57-B A-only buried-structure population</td><td><code>evidence/h57_strata.json -> S_a_only</code></td><td>0.000785 against a matched random control of 0.001057: the worst of the eight arms tested, and below random. The stratum is kept as a labelled component of the arm and carries its own reasoning rows, but it is not the population</td></tr><tr><td>View A alone as the arm's ranking field</td><td><code>evidence/h57_strata.json -> view_A</code></td><td>0.003850 against the union's 0.004875 on identical rows</td></tr><tr><td>pseudo-labels as a training signal for View A</td><td><code>evidence/h57_cotrain.json -> pseudo_label</code></td><td>out-of-fold AUC 0.4842 -> 0.4869 (delta +0.0027), i.e. indistinguishable from noise, matching knowledge/03 N-1</td></tr></table>
+
+<h2>9 &middot; The artefact</h2>
+<p>25,517 core cells &mdash; the double-corroborated atom
+<code>P1 = h33-2-b2 &cap; gems24-d1-5</code>, whose credit density is bounded exactly by
+published-score algebra &mdash; plus 14,804 arm cells ranked by
+<code>max(p_A, p_B)</code> over pixels outside the &le; 200 m ring, outside every accessible
+prior's support union, and at least 3 px from the core, placed with the isotropic 3-px emitter.</p>
+<p><a class="button" href="downloads/gems52-h57-union-novel-core25517px-arm14804px.tif" download>&darr; Download the .TIF</a>
+<a class="button" href="downloads/gems52-h57-union-novel-core25517px-arm14804px.zip" download>&darr; Download the .ZIP</a>
+<a class="button secondary" href="downloads/gems52-h57-40321px-candidate-geology.csv">per-candidate geological reasoning CSV</a></p>
+
+<h2>10 &middot; Slot gate</h2>
+<table class="data"><tr><th>registered check</th><th>result</th></tr><tr><td>R4 format gate (single band, float32, EPSG:32611, 3730x3292, transform, all finite, [0,1], no nodata)</td><td><b>PASS</b></td></tr><tr><td>R5 decoded pattern differs from every accessible aligned prior</td><td><b>PASS</b></td></tr><tr><td>R5 support novelty gate</td><td><b>PASS</b></td></tr><tr><td>R6 artefact is not the union of the two named priors</td><td><b>PASS</b></td></tr><tr><td>R3 nothing emitted inside the <= 200 m catalogue ring</td><td><b>PASS</b></td></tr><tr><td>R2 block-buffered OOF independence measured and non-degenerate</td><td><b>PASS</b></td></tr><tr><td>R7 one written geological reasoning per emitted arm pixel</td><td><b>PASS</b></td></tr><tr><td>R1 mean lift >= +0.005 on BOTH instruments</td><td><b>FAIL</b></td></tr><tr><td>R1 >= 3/4 folds positive on BOTH instruments</td><td><b>PASS</b></td></tr></table>
+<p>P(this file scores below the owner's own 0.2778) = <b>0.83</b> &middot;
+P(above 0.3195) = <b>0.36</b> &middot; P(above the observed board top 0.3774) =
+<b>0.00</b>, all under the registered joint prior over the exact core-credit interval
+and the arm's credit density. registry/leaderboard_snapshot_2026-10-07.json records rank 1 = 0.3774 (team xiaofanhu), rank 7 = 0.3195 (team DARD) and the owner-reported extradr19 best of 0.2778 at rank 13. The working target of 0.3195 is rank 7, not the top.</p>
+
+<h2>11 &middot; Limits, stated plainly</h2>
+<ol>
+<li>The arm <b>cannot be scored by this simulator at all</b>. With the catalogue halo removed from
+the candidate pool, the View A field scored 0.000358 against a random control of 0.001713 during
+validation: excluding the catalogue removes every pixel the truth can occupy. The arm's credit
+density is a prior, not a measurement, and nothing in this repository can certify it.</li>
+<li><strong>No number on this page is a leaderboard forecast.</strong> The simulator scores against
+a proxy truth; Spearman(reported score, simulated DTI) = &minus;0.1045 (p = 0.734, n = 13) in
+<code>knowledge/10</code> &sect;5. These comparisons are valid between arms on identical rows and
+for nothing else.</li>
+<li>Every leaderboard score quoted anywhere in this repository is <b>owner-reported</b>. No
+organiser receipt maps a score to any filename or SHA-256, and the board snapshot records a top of
+0.3774, not 0.3195.</li>
+<li>No computable feature re-ranks inside the core family (<code>knowledge/10</code> &sect;6:
+63&nbsp;+&nbsp;108 features, best AUC 0.5453). All gain here comes from mass the family has never
+emitted.</li>
+<li>Catalogue-zero pixels are proxies for absence, not verified geological absence, and a
+competition score is not the Phase-2 expert outcome.</li>
+<li>Inputs are SHA-pinned owner mirrors restored through the GitHub API and verified by SHA-256 and
+byte count &mdash; integrity-pinned, <b>not</b> organiser-authenticated downloads.</li>
+</ol>
+</main></body></html>

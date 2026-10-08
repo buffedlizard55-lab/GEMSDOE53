@@ -1,0 +1,168 @@
+[
+  {
+    "round": 1,
+    "total_a_teaches_b_pixels": 20000,
+    "total_b_teaches_a_pixels": 20000,
+    "total_a_teaches_b_segments": 2358,
+    "total_b_teaches_a_segments": 7286,
+    "per_fold_a_teaches_b": [
+      {
+        "teacher_conf_threshold": 0.70436,
+        "student_abstain_band": [
+          0.11903,
+          0.34121
+        ],
+        "n_whole_segments": 688,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.70935,
+        "student_abstain_band": [
+          0.13053,
+          0.35238
+        ],
+        "n_whole_segments": 524,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.72795,
+        "student_abstain_band": [
+          0.11771,
+          0.35472
+        ],
+        "n_whole_segments": 584,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.72682,
+        "student_abstain_band": [
+          0.11669,
+          0.32935
+        ],
+        "n_whole_segments": 562,
+        "n_pseudo_pixels": 5000
+      }
+    ],
+    "per_fold_b_teaches_a": [
+      {
+        "teacher_conf_threshold": 0.73948,
+        "student_abstain_band": [
+          0.22894,
+          0.47073
+        ],
+        "n_whole_segments": 1897,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.75836,
+        "student_abstain_band": [
+          0.21371,
+          0.46563
+        ],
+        "n_whole_segments": 1723,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.72407,
+        "student_abstain_band": [
+          0.24867,
+          0.45988
+        ],
+        "n_whole_segments": 1871,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.73703,
+        "student_abstain_band": [
+          0.21484,
+          0.45082
+        ],
+        "n_whole_segments": 1795,
+        "n_pseudo_pixels": 5000
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "total_a_teaches_b_pixels": 20000,
+    "total_b_teaches_a_pixels": 20000,
+    "total_a_teaches_b_segments": 2824,
+    "total_b_teaches_a_segments": 6764,
+    "per_fold_a_teaches_b": [
+      {
+        "teacher_conf_threshold": 0.75532,
+        "student_abstain_band": [
+          0.14063,
+          0.36867
+        ],
+        "n_whole_segments": 775,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.75945,
+        "student_abstain_band": [
+          0.15143,
+          0.38577
+        ],
+        "n_whole_segments": 669,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.74308,
+        "student_abstain_band": [
+          0.1521,
+          0.38652
+        ],
+        "n_whole_segments": 676,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.74223,
+        "student_abstain_band": [
+          0.13879,
+          0.36357
+        ],
+        "n_whole_segments": 704,
+        "n_pseudo_pixels": 5000
+      }
+    ],
+    "per_fold_b_teaches_a": [
+      {
+        "teacher_conf_threshold": 0.75046,
+        "student_abstain_band": [
+          0.21295,
+          0.51522
+        ],
+        "n_whole_segments": 1754,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.76177,
+        "student_abstain_band": [
+          0.20977,
+          0.52282
+        ],
+        "n_whole_segments": 1555,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.73219,
+        "student_abstain_band": [
+          0.2246,
+          0.47614
+        ],
+        "n_whole_segments": 1720,
+        "n_pseudo_pixels": 5000
+      },
+      {
+        "teacher_conf_threshold": 0.74183,
+        "student_abstain_band": [
+          0.18855,
+          0.43861
+        ],
+        "n_whole_segments": 1735,
+        "n_pseudo_pixels": 5000
+      }
+    ]
+  }
+]

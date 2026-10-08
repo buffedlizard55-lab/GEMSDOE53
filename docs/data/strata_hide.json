@@ -1,0 +1,88 @@
+{
+ "concordant": {
+  "n_px": 6731,
+  "frac_of_footprint": 0.0013,
+  "precision_on_catalogue": 0.07607,
+  "precision_in_3px_halo": 0.42772,
+  "precision_on_isolated": 0.0
+ },
+ "A_only": {
+  "n_px": 96586,
+  "frac_of_footprint": 0.0187,
+  "precision_on_catalogue": 0.02527,
+  "precision_in_3px_halo": 0.18889,
+  "precision_on_isolated": 0.0
+ },
+ "B_only": {
+  "n_px": 96587,
+  "frac_of_footprint": 0.0187,
+  "precision_on_catalogue": 0.05934,
+  "precision_in_3px_halo": 0.36758,
+  "precision_on_isolated": 0.0
+ },
+ "silent": {
+  "n_px": 4965936,
+  "frac_of_footprint": 0.9613,
+  "precision_on_catalogue": 0.01051,
+  "precision_in_3px_halo": 0.09065,
+  "precision_on_isolated": 0.0
+ },
+ "_definitions": {
+  "halo": "3 px dilation of catalogue, off-trace",
+  "isolated": "catalogue px >3 px from any other catalogue px (7x7)"
+ },
+ "oof_strata_n_held": 36375,
+ "A_only_is_buried": {
+  "metric": "band 15 depth-to-basement rank, mean over the stratum inside a 15 px corridor off the visible catalogue (high = deeper cover = plausibly buried)",
+  "concordant": {
+   "n": 4774,
+   "mean_depth_rank": 251.2475,
+   "median_depth_rank": 151.3315
+  },
+  "A_only": {
+   "n": 55357,
+   "mean_depth_rank": 455.0237,
+   "median_depth_rank": 379.6738
+  },
+  "B_only": {
+   "n": 60076,
+   "mean_depth_rank": 296.7354,
+   "median_depth_rank": 161.0335
+  },
+  "silent": {
+   "n": 1975639,
+   "mean_depth_rank": 499.0846,
+   "median_depth_rank": 319.567
+  },
+  "corridor_px": 2095846,
+  "catalogue_px": 60894,
+  "near_px": 567682
+ },
+ "B_only_is_artifact": {
+  "metric": "mean slope rank and |gravity/magnetic step| per stratum inside the 15 px off-trace corridor; an artefact has slope without a field offset",
+  "concordant": {
+   "n": 4774,
+   "slope": 10.4848,
+   "grav_step": 7.4476,
+   "mag_step": 107.7174
+  },
+  "A_only": {
+   "n": 55357,
+   "slope": 7.9348,
+   "grav_step": 6.0626,
+   "mag_step": 112.4751
+  },
+  "B_only": {
+   "n": 60076,
+   "slope": 10.6479,
+   "grav_step": 2.5917,
+   "mag_step": 93.483
+  },
+  "silent": {
+   "n": 1975639,
+   "slope": 7.6086,
+   "grav_step": 2.1619,
+   "mag_step": 88.8648
+  }
+ }
+}

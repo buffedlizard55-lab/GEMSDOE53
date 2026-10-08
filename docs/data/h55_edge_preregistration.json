@@ -1,0 +1,72 @@
+{
+  "version": "gems52-h55-edge-polarity-v1",
+  "registered_utc": "2026-10-07",
+  "base_branch": "arena/3769d111-gemsdoe52",
+  "hypothesis_document": "knowledge/12_h55_hypotheses_preregistered.md",
+  "primary_hypothesis": "H55-1: local signed second-derivative zero-crossing pairs in gravity and RTP magnetics, conditioned on modelled cover and weak surface expression",
+  "candidate_features": {
+    "gravity_bands_1_based": [13, 11, 18],
+    "magnetic_bands_1_based": [2, 9],
+    "cover_band_1_based": 15,
+    "surface_bands_1_based": [12, 19],
+    "scales_sigma_pixels": [1, 3],
+    "normalized_signed_laplacian_of_gaussian": "-sigma^2 times scipy gaussian_laplace of normalized-convolution Gaussian-smoothed band, sigma in pixels",
+    "sign_change": "8-neighbour 3x3 local minimum < 0 < local maximum of LoG response",
+    "edge_response": "sign_change multiplied by gradient magnitude per metre; signed LoG retained as a separate feature",
+    "pair_alignment": "sqrt(gravity_edge_response * RTP_edge_response) * abs(dot(unit_gradient_normals)); sigma=3",
+    "cover_surface_condition": "pair_alignment * log1p(max(band15,0)) / (1 + max(band19,0)/10)",
+    "radiometric_bands_in_training_cube": 0
+  },
+  "seed": 520206,
+  "outer_folds": 4,
+  "spatial_layout": "four contiguous quadrants; whole original 8-connected catalogue components assigned by majority quadrant; evaluation region includes held component tails",
+  "feature_support_px": 36,
+  "train_evaluation_buffer_px": 80,
+  "negative_class": "catalogue-zero proxy, not verified fault absence",
+  "negative_collar_px": 3,
+  "max_training_negatives_per_fold": 160000,
+  "learner_seed": "520206 + outer-fold index; full-data build uses 520206 + 100",
+  "learner": {
+    "class": "sklearn.ensemble.HistGradientBoostingClassifier",
+    "max_iter": 120,
+    "max_leaf_nodes": 15,
+    "learning_rate": 0.08,
+    "l2_regularization": 2.0,
+    "min_samples_leaf": 80,
+    "early_stopping": false,
+    "class_weight": "balanced"
+  },
+  "primary_budget_global_pixels": 37654,
+  "budget_rule": "same positive-pixel density on each outer evaluation region as global budget divided by eligible footprint",
+  "placement": "triangular 300 m max-cover greedy at matched budget; no held-out truth labels enter placement",
+  "comparators": ["view_A", "view_B", "max_union", "R2_structural_contrast"],
+  "promotion_gate": {
+    "minimum_mean_dti_lift_over_best_comparable_baseline": 0.005,
+    "minimum_positive_outer_folds": 3,
+    "outer_folds": 4,
+    "failure_action": "do not spend a weekly competition slot; research artifact only"
+  },
+  "co_training_diagnostic": {
+    "block_size_px": 50,
+    "minimum_negative_blocks": 20,
+    "maximum_absolute_error_correlation": 0.6,
+    "metrics": ["negative_mean_squared_error", "false_positive_rate"],
+    "correlations": ["Pearson", "tie-aware Spearman"],
+    "undefined_or_insufficient": "disable pseudo-label exchange",
+    "confident_quantile": 0.99,
+    "receiver_abstain_quantiles": [0.4, 0.8],
+    "whole_segment_minimum_pixels": 5,
+    "pseudo_pixels_per_view_per_fold_cap": 2000,
+    "evaluation_buffer_px": 80,
+    "pseudo_label_rounds": 1,
+    "pseudo_labels_used_in_primary": false
+  },
+  "data_policy": {
+    "external_data_used": false,
+    "previous_submission_pixels_used_as_features": false,
+    "prior_public_scores_used_as_labels": false,
+    "holdout_truth_used_for_placement": false,
+    "organizer_authentication_of_mirrored_core_rasters": false
+  },
+  "score_forecast": null
+}

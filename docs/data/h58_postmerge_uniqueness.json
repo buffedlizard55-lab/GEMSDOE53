@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "round": "H58",
+  "review_utc": "2026-10-08T00:16:43Z",
+  "scope": "Supplemental decoded-pattern check after merging origin/main; it does not change the H58 model run or its 29-prior run-time receipt.",
+  "candidate": {
+    "path": "submission/gems52-h58-coldgeo-consensus-22px-a55b0dee38-research.tif",
+    "file_sha256": "130c242e33aef398c44b22cdf247e8a9357d8b402f43f17f0a2da30f2ede1fc7",
+    "decoded_float32_sha256": "a55b0dee38eedfddb2c150ea5e45b41d91475476bf3b6cc70ea8878dc2e445f3",
+    "positive_pixels": 22
+  },
+  "additional_upstream_prior": {
+    "source_commit": "1a12c77 (origin/main)",
+    "path": "submission/gems57-h57-credit-core25517-plus-novel8000-33517px-zeros.tif",
+    "file_sha256": "88b6fe79e01b1573c85e3202a5cb1ef39a6d9e83def6227a576c828e73e1c5eb",
+    "decoded_float32_sha256": "87bd1803d9b60e803562600dec49669a8c22cf3cd721a384c56b2dc110b33d16",
+    "positive_pixels": 33517
+  },
+  "grid_equal": true,
+  "support_intersection_pixels": 0,
+  "support_union_pixels": 33539,
+  "support_jaccard": 0.0,
+  "decoded_patterns_identical": false,
+  "additional_pattern_unique": true,
+  "scope_limit": "This supplements, but does not expand the original run-time uniqueness inventory beyond the one upstream TIFF named here; it is not a proof against unlinked/private submissions."
+}

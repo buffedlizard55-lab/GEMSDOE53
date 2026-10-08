@@ -1,0 +1,132 @@
+{
+  "review_date_utc": "2026-10-07",
+  "scope": "R3-H1 validation, the one-off public-board correction, and a research-only GeoTIFF release. External facts are limited to the linked primary sources; local raster/model measurements are identified separately.",
+  "claims": [
+    {
+      "id": "R3-S01",
+      "claim": "The official task maps geological faults that may be relevant to geothermal resources; the supplied known-fault map is incomplete and may contain inaccuracies, and test faults were separately expert-mapped.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "section": "Problem description and competition structure",
+      "status": "official competition page checked 2026-10-07; not a geothermal-vent label claim"
+    },
+    {
+      "id": "R3-S02",
+      "claim": "The official public leaderboard fetch on 2026-10-07 showed 0.3774 at rank 1, 0.3195 at rank 7, and 0.2778 at rank 13 among visible rows.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "section": "Best public DW-Tversky leaderboard table",
+      "status": "one-off dated participant-level observation; no filename/hash/upload-receipt mapping"
+    },
+    {
+      "id": "R3-S03",
+      "claim": "The organizer's submission requirements include a single prediction band on the competition grid with values in [0,1]; the local written TIFF is additionally checked against the exact sample-template shape, CRS, affine transform, and bounds.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "section": "Submission format",
+      "status": "official requirements read; byte-level checks are local and do not prove portal acceptance"
+    },
+    {
+      "id": "R3-S04",
+      "claim": "Known USGS/INGENIOUS fault pixels are excluded from evaluation according to the organizer's staff clarification; predictions near those traces but outside the mask are not thereby known to be masked.",
+      "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/2",
+      "section": "DrivenData staff reply",
+      "status": "official staff clarification; local geometric comparisons do not reveal hidden truth"
+    },
+    {
+      "id": "R3-S05",
+      "claim": "The public metric rewards max-weighted proximity within a 300 m triangular kernel and uses alpha=0.2 and beta=0.8.",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "section": "Metric definition",
+      "status": "official page; local implementation parity tested in tests/test_metric.py"
+    },
+    {
+      "id": "R3-S06",
+      "claim": "Blum–Mitchell co-training relies on sufficient compatible views and a conditional-independence assumption in its theoretical setup; the R3 spatial proxy-error correlations are only a diagnostic and do not establish those assumptions.",
+      "source": "https://www.cs.cmu.edu/~avrim/Papers/cotrain.pdf",
+      "section": "Formal framework and theoretical analysis",
+      "status": "primary author-hosted paper; limitation explicitly retained"
+    },
+    {
+      "id": "R3-S07",
+      "claim": "USGS's 1 m 3DEP DEM catalog identifies public-domain lidar-derived bare-earth DEM products and points to The National Map acquisition routes; exact coverage and downloaded bytes for this competition footprint were not checked.",
+      "source": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+      "section": "Catalog metadata and access links",
+      "status": "official catalog checked; footprint availability unverified"
+    },
+    {
+      "id": "R3-L01",
+      "claim": "The 19-band local inventory describes band 12 as detrended elevation and band 19 as detrended-elevation slope; R3-H1 adds only two derived profile features to the existing surface-view feature list.",
+      "source": "evidence/band_inventory.json; evidence/features_r3.json; src/gems52/structural.py",
+      "section": "Local input inventory and feature manifest",
+      "status": "measured from the restored owner-mirrored input; core input bytes are not organizer-authenticated"
+    },
+    {
+      "id": "R3-L02",
+      "claim": "On the fixed four-fold, 80-pixel-buffer catalogue holdout, view B averaged 0.1946708778 DTI and view B plus the registered paired-profile features averaged 0.1948957893, a +0.0002249115 mean lift with positive paired lift in 2/4 folds. The preregistered gates required at least +0.005 and at least 3/4 positive folds; the candidate failed.",
+      "source": "evidence/holdout_r3_paired_profile.json; registry/r3_preregistration.json",
+      "section": "Fixed local catalogue-component recovery diagnostic",
+      "status": "recomputed against the registered local proxy task; not a public-score forecast or expert-label result"
+    },
+    {
+      "id": "R3-L03",
+      "claim": "The R2 baseline arms refit exactly reproduced the published R2 holdout means; view B remained the strongest refitted local comparator at 0.1946708778.",
+      "source": "evidence/holdout_r3_paired_profile.json; evidence/holdout_r2.json",
+      "section": "Same-protocol comparator refit",
+      "status": "all six recorded mean deltas were zero; this establishes reproducibility of the local proxy comparison only"
+    },
+    {
+      "id": "R3-L04",
+      "claim": "R3 proxy-negative view-error diagnostics used 2,093 spatial blocks and 4,201,273 held-out catalogue-zero predictions. Maximum absolute Pearson/Spearman correlation was 0.0711 for A versus B and 0.0805 for A versus B+H1; the frozen threshold was 0.60. The gate permitted a separate co-training diagnostic but does not prove view sufficiency or conditional independence.",
+      "source": "evidence/independence_r3.json; registry/r3_preregistration.json",
+      "section": "Out-of-fold proxy-negative block errors",
+      "status": "computed; catalogue-zero pixels are not verified geological absences"
+    },
+    {
+      "id": "R3-L05",
+      "claim": "One optional exchange round was reported separately: A-to-B+H1 had +0.000794 mean DTI change in 2/4 folds; B+H1-to-A had -0.002259 mean change in 2/4 folds. Pseudo-labels were restricted to buffered training regions and did not change the primary candidate.",
+      "source": "evidence/holdout_r3_paired_profile.json; evidence/a_only_reasoning_r3.csv",
+      "section": "Secondary co-training diagnostic",
+      "status": "local experiment only; not promoted"
+    },
+    {
+      "id": "R3-L06",
+      "claim": "The R3 H1 candidate did not pass its local promotion gate, is not independently confirmed against expert-mapped hidden faults, and has no weekly-slot approval; no portal upload was performed.",
+      "source": "evidence/holdout_r3_paired_profile.json; evidence/submission_r3.json",
+      "section": "Promotion receipt and research-only artifact receipt",
+      "status": "local evidence; zero portal interactions by this implementation"
+    },
+    {
+      "id": "R3-P01",
+      "claim": "Automated recurring DrivenData access remains disabled after review of the site's Terms of Use; the current board value is a dated one-off observation.",
+      "source": "https://www.drivendata.org/termsofuse/",
+      "section": "Prohibited uses: automated access and unauthorized monitoring",
+      "status": "policy and implementation recorded in registry/source_policy.json; no scheduled scraping"
+    },
+    {
+      "id": "R3-L07",
+      "claim": "The research-only R3-H1 GeoTIFF is one float32 band on the 3292 by 3730 sample grid, EPSG:32611, exact sample affine transform and bounds, raw values {0,1}, 37,654 positive cells, no non-finite values, matching internal mask, and byte/decoded hashes matching the receipts.",
+      "source": "evidence/independent_tiff_check_r3.json; evidence/submission_r3.json",
+      "section": "Independent post-build TIFF readback",
+      "status": "local byte and raster checks passed; does not establish organizer portal acceptance"
+    },
+    {
+      "id": "R3-L08",
+      "claim": "The candidate differs from each of 12 aligned accessible prior rasters, has 27,838 cells (73.9% of its 37,654-cell support) outside their comparison union, omits 221,770 prior-support cells, and is not the View A/View B literal union or matched-budget maximum-view union.",
+      "source": "evidence/uniqueness_r3.json; evidence/not_union_r3.json",
+      "section": "Accessible prior-pattern and view-union audit",
+      "status": "research publication diagnostic passed; limited to supplied, accessible aligned inventory and not proof against inaccessible/private artifacts"
+    },
+    {
+      "id": "R3-L09",
+      "claim": "The secondary whole-component A-only reasoning CSV contains 48 accepted components across four folds and one contextual geological-reasoning row per component; these are unverified candidates, not confirmed faults.",
+      "source": "evidence/a_only_reasoning_r3.csv; evidence/holdout_r3_paired_profile.json",
+      "section": "A-only component review",
+      "status": "48 rows and 496 total exchanged pixels measured; hypotheses only"
+    },
+    {
+      "id": "R3-L10",
+      "claim": "The local forensic comparison removes 2,545 off-catalogue pixels within 200 m from an owner-attributed 40,199-pixel base to a 37,654-pixel reference, adding none; the public score attribution and causal explanation remain unauthenticated.",
+      "source": "evidence/reference_forensics_r2.json; https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "section": "Nested sparse-raster byte comparison and dated public-board scope",
+      "status": "local file hashes and set differences measured; participant filename-to-score association is owner-reported and hidden labels are unavailable"
+    }
+  ]
+}

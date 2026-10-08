@@ -1,0 +1,21 @@
+{
+  "hypothesis": "H59: Multi-scale geophysical edge coherence + co-training disagreement + fault-tip continuation",
+  "method": "Multi-scale gradient edges from gravity/RTP/radiometric + surface features + co-training A-only boost + tip proximity, with metric-aware greedy placement",
+  "budget": 37654,
+  "n_positive": 37654,
+  "value_range": [
+    0.0,
+    1.0
+  ],
+  "sha256": "4a60f9410405c7a4df12c004736e57596fa8c6d4877d667d694b002740f635f6",
+  "bytes": 130768,
+  "timestamp_utc": "20261008T022050Z",
+  "format_problems": [],
+  "format_ok": true,
+  "off_catalogue_only": true,
+  "min_dist_to_catalogue_m": 300.0,
+  "overlap_with_h33": 466,
+  "novelty_vs_h33": 0.9876241567960907,
+  "a_only_pixels": null,
+  "unique": true
+}

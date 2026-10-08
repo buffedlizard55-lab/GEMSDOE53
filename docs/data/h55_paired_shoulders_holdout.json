@@ -1,0 +1,370 @@
+{
+  "generated_utc": "2026-10-07T15:17:00.824523Z",
+  "status": "COMPLETED_RESEARCH_HOLDOUT",
+  "holdout_run": true,
+  "model_fit": true,
+  "portal_upload_performed": false,
+  "preregistration_sha256": "1b952f50a2547d4809f79781c147f1d47d6303c21dd3418686ee38e0354bc0d2",
+  "parent_preregistration_sha256": "eeb91ce2aebcb0446fe04ba91ba05004f16991deb6dd938cb8845303c63e482e",
+  "protocol_gate_sha256": "91060c4fa59acc7fd973020f245d998ec238e4adb061ffb045f0bc9f2fb7488e",
+  "feature_manifest_sha256": "1360621eebc079333adc43d24c8dd2ecccd6907fb8c413c140eccc0cad2db6a0",
+  "input_sha256": {
+    "sample_submission": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+  },
+  "protocol": {
+    "folds": 4,
+    "buffer_px": 80,
+    "feature_support_px": 36,
+    "external_data_used": false,
+    "same_rows_seed_and_learner_for_candidate_control": true,
+    "primary_budget_global_pixels": 37654,
+    "negative_class": "catalogue-zero proxy, not verified geological absence"
+  },
+  "arms": {
+    "matched_view_B_mean_dti": 0.19467087779765155,
+    "h55_paired_shoulders_mean_dti": 0.1970317574426225,
+    "mean_dti_lift": 0.002360879644970948
+  },
+  "positive_outer_folds": 4,
+  "total_outer_folds": 4,
+  "scientific_holdout_gate_pass": false,
+  "slot_gate": {
+    "approved_for_weekly_slot": false,
+    "submission_slots_used": 0,
+    "scientific_gate_pass": false,
+    "minimum_mean_lift": 0.005,
+    "minimum_positive_folds": 3,
+    "reason": "H55-1 did not pass its preregistered matched-control gate; do not spend a weekly slot."
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "receipt": {
+        "fold": 0,
+        "truth_px": 27329,
+        "evaluation_px": 2266071,
+        "training_domain_px": 2053487,
+        "held_components": 1688,
+        "shared_train_truth_components": 0,
+        "buffer_px": 80,
+        "nearest_training_to_region_px": 80.00624975587844,
+        "held_pixels_without_feature_support": 6267
+      },
+      "training_sample": {
+        "n_positive": 22947,
+        "n_negative": 160000,
+        "catalogue_prior": 0.011174650728249072,
+        "positive_index_sha256": "c1b6e9ef8317771535c4515ab78d08884b7210db13d4376dded039527f7c2cb1",
+        "negative_index_sha256": "796f38109bb2f471553abc455fbcb6e944ab799deeec5d3cc3863cc61490df9a"
+      },
+      "scores": {
+        "view_B": {
+          "dti": 0.1772761701468489,
+          "tpw": 4613.756403207677,
+          "fpw": 16199.307175552367,
+          "fnw": 22715.243596792323,
+          "n_truth": 27329,
+          "mass": 18577.0,
+          "m_covers": 2377.692824447634,
+          "reduced": 0.1772761701468489,
+          "emitted": 18577,
+          "placement": {
+            "emitted": 18577,
+            "requested_budget": 18577,
+            "pool": 297232,
+            "pool_restricted": true,
+            "bar": 0.0,
+            "dti_projected": 0.0,
+            "marginal_first": 3.318485975265503,
+            "marginal_last": 0.14959469437599182,
+            "total_expected_credit": 5965.688850268722,
+            "rejects_at_stop": 0,
+            "lazy_updates": 418550,
+            "density_sum": 24477.95703125,
+            "false_positive_discount": "unused: fixed matched budget",
+            "objective": "expected triangular max-coverage surrogate; not expected DTI"
+          }
+        },
+        "view_B_h55_paired_shoulders": {
+          "dti": 0.18030755191761125,
+          "tpw": 4693.939137677497,
+          "fpw": 16154.856727953222,
+          "fnw": 22635.060862322505,
+          "n_truth": 27329,
+          "mass": 18577.0,
+          "m_covers": 2422.143272046779,
+          "reduced": 0.18030755191761125,
+          "emitted": 18577,
+          "placement": {
+            "emitted": 18577,
+            "requested_budget": 18577,
+            "pool": 297232,
+            "pool_restricted": true,
+            "bar": 0.0,
+            "dti_projected": 0.0,
+            "marginal_first": 3.6534528732299805,
+            "marginal_last": 0.14877018332481384,
+            "total_expected_credit": 5968.21533472836,
+            "rejects_at_stop": 0,
+            "lazy_updates": 416468,
+            "density_sum": 24154.287109375,
+            "false_positive_discount": "unused: fixed matched budget",
+            "objective": "expected triangular max-coverage surrogate; not expected DTI"
+          }
+        }
+      },
+      "paired_dti_lift": 0.0030313817707623425,
+      "same_training_rows_seed_and_learner": true
+    },
+    {
+      "fold": 1,
+      "receipt": {
+        "fold": 1,
+        "truth_px": 10648,
+        "evaluation_px": 1170581,
+        "training_domain_px": 3272244,
+        "held_components": 594,
+        "shared_train_truth_components": 0,
+        "buffer_px": 80,
+        "nearest_training_to_region_px": 80.00624975587844,
+        "held_pixels_without_feature_support": 549
+      },
+      "training_sample": {
+        "n_positive": 40282,
+        "n_negative": 160000,
+        "catalogue_prior": 0.012310206696077677,
+        "positive_index_sha256": "7ef8ac4cbdf6529f00918c89711afed63408a7d0bb14cd43fa4b4ca7e19761b9",
+        "negative_index_sha256": "78787287d3fae502ede0e088f71f4741c66db7e7328764cde0fb82da8ab95cb6"
+      },
+      "scores": {
+        "view_B": {
+          "dti": 0.2730665027732986,
+          "tpw": 2927.909980982702,
+          "fpw": 8091.7551490583555,
+          "fnw": 7720.090019017298,
+          "n_truth": 10648,
+          "mass": 9596.0,
+          "m_covers": 1504.244850941645,
+          "reduced": 0.2730665027732986,
+          "emitted": 9596,
+          "placement": {
+            "emitted": 9596,
+            "requested_budget": 9596,
+            "pool": 153536,
+            "pool_restricted": true,
+            "bar": 0.0,
+            "dti_projected": 0.0,
+            "marginal_first": 2.3755764961242676,
+            "marginal_last": 0.1556188464164734,
+            "total_expected_credit": 2946.1210859566927,
+            "rejects_at_stop": 0,
+            "lazy_updates": 231166,
+            "density_sum": 13548.11328125,
+            "false_positive_discount": "unused: fixed matched budget",
+            "objective": "expected triangular max-coverage surrogate; not expected DTI"
+          }
+        },
+        "view_B_h55_paired_shoulders": {
+          "dti": 0.27421118088104784,
+          "tpw": 2940.0364561150095,
+          "fpw": 8076.945618733168,
+          "fnw": 7707.963543884991,
+          "n_truth": 10648,
+          "mass": 9596.0,
+          "m_covers": 1519.0543812668318,
+          "reduced": 0.2742111808810479,
+          "emitted": 9596,
+          "placement": {
+            "emitted": 9596,
+            "requested_budget": 9596,
+            "pool": 153536,
+            "pool_restricted": true,
+            "bar": 0.0,
+            "dti_projected": 0.0,
+            "marginal_first": 2.418632745742798,
+            "marginal_last": 0.15515555441379547,
+            "total_expected_credit": 2946.1263981610537,
+            "rejects_at_stop": 0,
+            "lazy_updates": 232110,
+            "density_sum": 13520.6640625,
+            "false_positive_discount": "unused: fixed matched budget",
+            "objective": "expected triangular max-coverage surrogate; not expected DTI"
+          }
+        }
+      },
+      "paired_dti_lift": 0.001144678107749264,
+      "same_training_rows_seed_and_learner": true
+    },
+    {
+      "fold": 2,
+      "receipt": {
+        "fold": 2,
+        "truth_px": 6847,
+        "evaluation_px": 472060,
+        "training_domain_px": 3945284,
+        "held_components": 281,
+        "shared_train_truth_components": 0,
+        "buffer_px": 80,
+        "nearest_training_to_region_px": 80.00624975587844,
+        "held_pixels_without_feature_support": 643
+      },
+      "training_sample": {
+        "n_positive": 43429,
+        "n_negative": 160000,
+        "catalogue_prior": 0.011007826052573147,
+        "positive_index_sha256": "171d763ce07281d34329d49fdcac10c9269a1d248d2d0711c437eb33f373f099",
+        "negative_index_sha256": "06751d8f2a3f1ea67c23710f89318fab4712e93a50ad17cf0c517a0c6dd1b77a"
+      },
+      "scores": {
+        "view_B": {
+          "dti": 0.13804704633464823,
+          "tpw": 876.6227099773826,
+          "fpw": 3486.24531845939,
+          "fnw": 5970.377290022618,
+          "n_truth": 6847,
+          "mass": 3870.0,
+          "m_covers": 383.7546815406098,
+          "reduced": 0.13804704633464823,
+          "emitted": 3870,
+          "placement": {
+            "emitted": 3870,
+            "requested_budget": 3870,
+            "pool": 61920,
+            "pool_restricted": true,
+            "bar": 0.0,
+            "dti_projected": 0.0,
+            "marginal_first": 2.188706874847412,
+            "marginal_last": 0.1626605987548828,
+            "total_expected_credit": 1165.7069268971682,
+            "rejects_at_stop": 0,
+            "lazy_updates": 89485,
+            "density_sum": 5499.64501953125,
+            "false_positive_discount": "unused: fixed matched budget",
+            "objective": "expected triangular max-coverage surrogate; not expected DTI"
+          }
+        },
+        "view_B_h55_paired_shoulders": {
+          "dti": 0.1404556445709854,
+          "tpw": 892.3426032595421,
+          "fpw": 3485.6503543448684,
+          "fnw": 5954.657396740458,
+          "n_truth": 6847,
+          "mass": 3870.0,
+          "m_covers": 384.3496456551315,
+          "reduced": 0.1404556445709854,
+          "emitted": 3870,
+          "placement": {
+            "emitted": 3870,
+            "requested_budget": 3870,
+            "pool": 61920,
+            "pool_restricted": true,
+            "bar": 0.0,
+            "dti_projected": 0.0,
+            "marginal_first": 2.45388126373291,
+            "marginal_last": 0.1634184569120407,
+            "total_expected_credit": 1179.6749729216099,
+            "rejects_at_stop": 0,
+            "lazy_updates": 89577,
+            "density_sum": 5539.80810546875,
+            "false_positive_discount": "unused: fixed matched budget",
+            "objective": "expected triangular max-coverage surrogate; not expected DTI"
+          }
+        }
+      },
+      "paired_dti_lift": 0.002408598236337156,
+      "same_training_rows_seed_and_learner": true
+    },
+    {
+      "fold": 3,
+      "receipt": {
+        "fold": 3,
+        "truth_px": 8362,
+        "evaluation_px": 686840,
+        "training_domain_px": 3814037,
+        "held_components": 284,
+        "shared_train_truth_components": 0,
+        "buffer_px": 80,
+        "nearest_training_to_region_px": 80.00624975587844,
+        "held_pixels_without_feature_support": 343
+      },
+      "training_sample": {
+        "n_positive": 43002,
+        "n_negative": 160000,
+        "catalogue_prior": 0.011274667760171178,
+        "positive_index_sha256": "32d1fca2931fe21a6e37a65118a05e5cfe2b87664f5b0c97acd21fc07116917b",
+        "negative_index_sha256": "390724c799e9d30ecc6889ea0b6c868fa071c3a9a98fb0d9a4b8f21f7ff8d247"
+      },
+      "scores": {
+        "view_B": {
+          "dti": 0.1902937919358104,
+          "tpw": 1518.7652176409579,
+          "fpw": 4939.035234148486,
+          "fnw": 6843.234782359043,
+          "n_truth": 8362,
+          "mass": 5631.0,
+          "m_covers": 691.9647658515139,
+          "reduced": 0.1902937919358104,
+          "emitted": 5631,
+          "placement": {
+            "emitted": 5631,
+            "requested_budget": 5631,
+            "pool": 90096,
+            "pool_restricted": true,
+            "bar": 0.0,
+            "dti_projected": 0.0,
+            "marginal_first": 2.322824716567993,
+            "marginal_last": 0.15030941367149353,
+            "total_expected_credit": 1643.3410899490118,
+            "rejects_at_stop": 0,
+            "lazy_updates": 127789,
+            "density_sum": 7962.13818359375,
+            "false_positive_discount": "unused: fixed matched budget",
+            "objective": "expected triangular max-coverage surrogate; not expected DTI"
+          }
+        },
+        "view_B_h55_paired_shoulders": {
+          "dti": 0.19315265240084556,
+          "tpw": 1542.2213859326516,
+          "fpw": 4932.124146556143,
+          "fnw": 6819.778614067349,
+          "n_truth": 8362,
+          "mass": 5631.0,
+          "m_covers": 698.8758534438567,
+          "reduced": 0.19315265240084556,
+          "emitted": 5631,
+          "placement": {
+            "emitted": 5631,
+            "requested_budget": 5631,
+            "pool": 90096,
+            "pool_restricted": true,
+            "bar": 0.0,
+            "dti_projected": 0.0,
+            "marginal_first": 2.2975914478302,
+            "marginal_last": 0.1508113443851471,
+            "total_expected_credit": 1643.7728179991245,
+            "rejects_at_stop": 0,
+            "lazy_updates": 127984,
+            "density_sum": 7981.00390625,
+            "false_positive_discount": "unused: fixed matched budget",
+            "objective": "expected triangular max-coverage surrogate; not expected DTI"
+          }
+        }
+      },
+      "paired_dti_lift": 0.002858860465035168,
+      "same_training_rows_seed_and_learner": true
+    }
+  ],
+  "no_public_score_forecast": true,
+  "score_mapping_authenticated": false,
+  "organizer_input_bytes_authenticated": false,
+  "caveats": [
+    "Inputs are SHA-pinned owner-supplied mirrors, not organizer-authenticated bytes.",
+    "Catalogue-zero is not verified geological absence.",
+    "Original connected raster components are spatial proxies, not authenticated fault identities.",
+    "This local catalogue-recovery instrument is not organizer new-fault evaluation.",
+    "A passing four-fold proxy gate is not a public competition-score improvement.",
+    "No submission TIFF was built and no portal slot was used."
+  ]
+}

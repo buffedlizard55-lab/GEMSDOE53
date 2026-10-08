@@ -1,0 +1,356 @@
+{
+ "generated_utc": "2026-10-07T00:55:14Z",
+ "file": "gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+ "sha256": "ac6201ad38792369e5a2aa026c22b6264e8741d0326c3c7a62a955571ace6d4a",
+ "bytes": 313480,
+ "arm": "H54 revealed-core+strike-continuation|50517|s0",
+ "budget": 50517,
+ "emit": "revealed-core + isolated-dot top-K on a two-view field",
+ "selection_source": "evidence/revealed_budget.json",
+ "g_estimate_px": 14088.7,
+ "g_bracket": [
+  8128,
+  14089
+ ],
+ "accept_bar": 0.05883,
+ "accept_bar_note": "alpha*DTI/(1-alpha*DTI) at the group's best reported score; a pixel is worth emitting iff its expected kernel credit clears this",
+ "n_segments": 48337,
+ "retained_core_px": 25517,
+ "novel_px": 25000,
+ "novel_along_strike_px": 7093,
+ "novel_far_px": 17907,
+ "corridor_excluded_m": 200.0,
+ "projected_dti": {
+  "n_novel": 25000,
+  "total": 50517,
+  "novel_fraction": 0.4949,
+  "p_win": 0.8189,
+  "mean_dti": 0.3191,
+  "worst_dti": 0.2301,
+  "best_dti": 0.4081,
+  "dti_at_central_rho": 0.3191,
+  "n_novel_applied": 25000
+ },
+ "format": {
+  "path": "/home/user/GEMSDOE52/submission/gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+  "bytes": 313480,
+  "sha256": "ac6201ad38792369e5a2aa026c22b6264e8741d0326c3c7a62a955571ace6d4a",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "width": 3292,
+  "height": 3730,
+  "bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "ref_bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": "None",
+  "blocksize": [
+   1,
+   3292
+  ],
+  "nan_pixels": 0,
+  "reference_file_has_nan": 7111787,
+  "mass_outside_footprint": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "mean": 0.004114,
+  "n_nonzero": 50517,
+  "n_nan": 0,
+  "mass": 50517.0,
+  "problems": [],
+  "ok": true
+ },
+ "uniqueness": {
+  "n_priors_checked": 14,
+  "per_prior": [
+   {
+    "path": "data/scored/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "prior_px": 206895,
+    "new_px": 50517,
+    "intersection": 1053,
+    "jaccard": 0.00411,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 49464
+   },
+   {
+    "path": "data/scored/8GEMSDOE_Hedge-v2_submission.tif",
+    "prior_px": 227507,
+    "new_px": 50517,
+    "intersection": 2956,
+    "jaccard": 0.01075,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 47561
+   },
+   {
+    "path": "data/scored/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+    "prior_px": 174232,
+    "new_px": 50517,
+    "intersection": 3063,
+    "jaccard": 0.01382,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 47454
+   },
+   {
+    "path": "data/scored/gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+    "prior_px": 69281,
+    "new_px": 50517,
+    "intersection": 1251,
+    "jaccard": 0.01055,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 49266
+   },
+   {
+    "path": "data/scored/gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
+    "prior_px": 123939,
+    "new_px": 50517,
+    "intersection": 17826,
+    "jaccard": 0.11381,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 32691
+   },
+   {
+    "path": "data/scored/gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan.tif",
+    "prior_px": 123779,
+    "new_px": 50517,
+    "intersection": 21850,
+    "jaccard": 0.14333,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 28667
+   },
+   {
+    "path": "data/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+    "prior_px": 121131,
+    "new_px": 50517,
+    "intersection": 25517,
+    "jaccard": 0.17462,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 25000
+   },
+   {
+    "path": "data/scored/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+    "prior_px": 60069,
+    "new_px": 50517,
+    "intersection": 25517,
+    "jaccard": 0.29996,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 25000
+   },
+   {
+    "path": "data/scored/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+    "prior_px": 44090,
+    "new_px": 50517,
+    "intersection": 25517,
+    "jaccard": 0.36933,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 25000
+   },
+   {
+    "path": "data/scored/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+    "prior_px": 61328,
+    "new_px": 50517,
+    "intersection": 25517,
+    "jaccard": 0.29558,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 25000
+   },
+   {
+    "path": "data/scored/gemsdoe-ens12-adopted-7f00890a.tif",
+    "prior_px": 172974,
+    "new_px": 50517,
+    "intersection": 2956,
+    "jaccard": 0.0134,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 47561
+   },
+   {
+    "path": "data/scored/gemsdoe9-PLACEHOLDER-2314b599.tif",
+    "prior_px": 343816,
+    "new_px": 50517,
+    "intersection": 756,
+    "jaccard": 0.00192,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 49761
+   },
+   {
+    "path": "data/reference/h33-2-b2-zeros.tif",
+    "prior_px": 37654,
+    "new_px": 50517,
+    "intersection": 25517,
+    "jaccard": 0.40727,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 25000
+   },
+   {
+    "path": "/home/user/GEMSDOE52/submission/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+    "prior_px": 37654,
+    "new_px": 50517,
+    "intersection": 1090,
+    "jaccard": 0.01252,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 49427
+   }
+  ],
+  "union_px": 1030340,
+  "novel_vs_all_priors": 25000,
+  "novel_fraction": 0.4949,
+  "prior_px_dropped": 1004823,
+  "relation_to_union": "strictly-novel-and-selective",
+  "ok": true,
+  "rule": "must not equal any prior, must add >= 20 % of its mass where no prior put anything, and must drop at least one prior pixel (so it cannot be 'the union')"
+ },
+ "writer_receipt": {
+  "writer": "scripts/build_revealed_submission.py",
+  "read_back_independently": true,
+  "nan_pixels": 0,
+  "values": [
+   0.0,
+   1.0
+  ],
+  "mass_outside_footprint": 0,
+  "mass_on_catalogue": 0,
+  "mass_within_corridor": 0
+ },
+ "holdout_gates": {
+  "promoted": true,
+  "tested": "H54 revealed-core + strike continuation",
+  "explicit_selection": true,
+  "instrument": "NOT the whole-component hide simulator: knowledge/10 s5 measures that it does not predict the organiser's score (Spearman -0.10, p=0.73, n=13), so the selection is made on the exact set algebra over five scored files instead, and the P(win) integral in evidence/revealed_budget.json",
+  "vs_naive_union": null,
+  "beats_union_bar": null,
+  "checks": {
+   "p_win": {
+    "ok": true,
+    "value": 0.8189
+   },
+   "mean_dti": {
+    "ok": true,
+    "value": 0.3191
+   },
+   "novel_fraction": {
+    "ok": true,
+    "value": 0.4949
+   }
+  },
+  "reason": "budget chosen by maximising P(DTI > 0.2778) over the exact t_core interval and a stated rho_novel prior; ties to the larger novel fraction"
+ },
+ "forced": false,
+ "per_candidate_csv": "a_only_reasoning54.csv",
+ "stratum_mix": {
+  "A_only_emitted": 11999,
+  "B_only_suppressed": 37305,
+  "concordant": 6775,
+  "abstain": 359413
+ },
+ "retained_core_credit_central": 5140.257,
+ "retained_core_credit_bounds": [
+  4168.222,
+  5223.139
+ ],
+ "retained_core_density_central": 0.20144,
+ "view_a_oof_auc": 0.7132,
+ "view_b_oof_auc": 0.9277,
+ "blended_oof_auc": 0.9128,
+ "independence": "proceed: errors not strongly correlated",
+ "independence_pixel_r": 0.2777,
+ "fabric": {
+  "coherence_credited_mean": 0.4197,
+  "coherence_random_mean": 0.2676,
+  "lift": 1.568,
+  "coherence_credited_frac_gt_0p5": 0.373,
+  "coherence_random_frac_gt_0p5": 0.1144,
+  "strike_histogram_deg": {
+   "bins": [
+    0.0,
+    10.0,
+    20.0,
+    30.0,
+    40.0,
+    50.0,
+    60.0,
+    70.0,
+    80.0,
+    90.0,
+    100.0,
+    110.0,
+    120.0,
+    130.0,
+    140.0,
+    150.0,
+    160.0,
+    170.0,
+    180.0
+   ],
+   "counts": [
+    1147,
+    1117,
+    1154,
+    1235,
+    1335,
+    1324,
+    1535,
+    1676,
+    1792,
+    1811,
+    1819,
+    1659,
+    1514,
+    1507,
+    1348,
+    1214,
+    1256,
+    1074
+   ]
+  },
+  "dominant_strike_deg": [
+   100.0,
+   110.0
+  ],
+  "reading": "a strike undirected in [0,180); array +x is east and +y is south, so a strike near 0 or 180 deg is N-S and near 90 deg is E-W"
+ },
+ "dti_against_mapped_catalogue": 0.0063633907216275355
+}

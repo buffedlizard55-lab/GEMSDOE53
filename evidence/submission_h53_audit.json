@@ -1,0 +1,253 @@
+{
+ "path": "/home/user/GEMSDOE52/docs/downloads/gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+ "bytes": 147575,
+ "sha256": "9ffe11b2b56a2cb43e7da5ce3613a626b1a5503dc72e91cee694376d15f4420f",
+ "bands": 1,
+ "dtype": "float32",
+ "height": 3730,
+ "width": 3292,
+ "crs": "EPSG:32611",
+ "transform": [
+  100.0,
+  0.0,
+  243350.0,
+  0.0,
+  -100.0,
+  4508550.0
+ ],
+ "res": [
+  100.0,
+  100.0
+ ],
+ "nodata": null,
+ "nodata_repr": "None",
+ "finite_pixels": 12279160,
+ "min": 0.0,
+ "max": 1.0,
+ "positive_pixels": 37654,
+ "nonzero_in_footprint": 37654,
+ "unique_values": 2,
+ "holdout_gates": {
+  "promoted": true,
+  "composite_control_bar": true,
+  "registered_union_bar": true,
+  "vs_naive_union": {
+   "tip": 0.00298,
+   "hide": 0.00956
+  },
+  "vs_rolled_control": {
+   "tip": 0.01951,
+   "hide": 0.02917
+  },
+  "reason": "fold-mean DTI above every comparator on both blocked instruments, with identical comparator ordering; rule in registry/preregistration_h53.json"
+ },
+ "file": "gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+ "budget": 37654,
+ "n_segments": 37654,
+ "note": "H53-1: surface lineaments kept only where an independent geophysical family agrees on strike in the same 1.6 km tile (permutation-calibrated, top 10%); 37,654 spaced single pixels.",
+ "submission_name": "gems52-h53-coincidence-gated-singles-37654px-r1",
+ "format": {
+  "path": "/home/user/GEMSDOE52/docs/downloads/gems52-h53-coincidence-gated-singles-37654px-r1.tif",
+  "bytes": 147575,
+  "sha256": "9ffe11b2b56a2cb43e7da5ce3613a626b1a5503dc72e91cee694376d15f4420f",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "width": 3292,
+  "height": 3730,
+  "bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "ref_bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": "None",
+  "blocksize": [
+   256,
+   256
+  ],
+  "nan_pixels": 0,
+  "reference_file_has_nan": 7111787,
+  "min": 0.0,
+  "max": 1.0,
+  "mean": 0.003066,
+  "n_nonzero": 37654,
+  "n_nan": 0,
+  "mass": 37654.0,
+  "problems": [],
+  "ok": true
+ },
+ "uniqueness": {
+  "n_priors_checked": 8,
+  "per_prior": [
+   {
+    "path": "/home/user/GEMSDOE52/docs/downloads/gems52-h52-cotrain-disagreement-emission-composite-37654px-r1.tif",
+    "prior_px": 37654,
+    "new_px": 37654,
+    "intersection": 784,
+    "jaccard": 0.01052,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 36870
+   },
+   {
+    "path": "/home/user/GEMSDOE52/docs/downloads/gemsdoe52-cotrain-anchored-hybrid-20261006-zeros.tif",
+    "prior_px": 40704,
+    "new_px": 37654,
+    "intersection": 408,
+    "jaccard": 0.00523,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 37246
+   },
+   {
+    "path": "/home/user/GEMSDOE52/docs/downloads/gemsdoe52-cotrain-disagree-submodular-20261006-nan.tif",
+    "prior_px": 41200,
+    "new_px": 37654,
+    "intersection": 377,
+    "jaccard": 0.0048,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 37277
+   },
+   {
+    "path": "/home/user/GEMSDOE52/docs/downloads/gemsdoe52-cotrain-disagree-submodular-20261006-zeros.tif",
+    "prior_px": 41200,
+    "new_px": 37654,
+    "intersection": 377,
+    "jaccard": 0.0048,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 37277
+   },
+   {
+    "path": "/home/user/GEMSDOE52/data/scored/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "prior_px": 206895,
+    "new_px": 37654,
+    "intersection": 1590,
+    "jaccard": 0.00654,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 36064
+   },
+   {
+    "path": "/home/user/GEMSDOE52/data/scored/8GEMSDOE_Hedge-v2_submission.tif",
+    "prior_px": 227507,
+    "new_px": 37654,
+    "intersection": 1488,
+    "jaccard": 0.00564,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 36166
+   },
+   {
+    "path": "/home/user/GEMSDOE52/data/scored/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+    "prior_px": 174232,
+    "new_px": 37654,
+    "intersection": 1942,
+    "jaccard": 0.00925,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 35712
+   },
+   {
+    "path": "/home/user/GEMSDOE52/data/scored/gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+    "prior_px": 69281,
+    "new_px": 37654,
+    "intersection": 720,
+    "jaccard": 0.00678,
+    "identical": false,
+    "subset_of_prior": false,
+    "superset_of_prior": false,
+    "novel_vs_this": 36934
+   }
+  ],
+  "union_px": 661686,
+  "novel_vs_all_priors": 31868,
+  "novel_fraction": 0.8463,
+  "prior_px_dropped": 655900,
+  "relation_to_union": "strictly-novel-and-selective",
+  "ok": true,
+  "rule": "must not equal any prior, must add >= 20 % of its mass where no prior put anything, and must drop at least one prior pixel (so it cannot be 'the union')"
+ },
+ "non_union_verification": {
+  "coincidence_gated_px": 37654,
+  "ungated_union_px_at_same_budget": 37654,
+  "shared_px": 5722,
+  "coincidence_only_px": 31932,
+  "jaccard_vs_ungated_union": 0.08223,
+  "confirmed_not_mere_union": true
+ },
+ "emit_budget": 37654,
+ "min_px": 3.0,
+ "arm": "B_corr:spaced|37654",
+ "verdict": {
+  "candidate": "B_corr:spaced|37654",
+  "comparators": [
+   "union:spaced|37654",
+   "B_only:spaced|37654",
+   "B_corr_rolled|37654"
+  ],
+  "checks": {
+   "tip": {
+    "candidate_mean": 0.03872,
+    "comparator_means": {
+     "union:spaced|37654": 0.03574,
+     "B_only:spaced|37654": 0.02894,
+     "B_corr_rolled|37654": 0.01921
+    },
+    "fold_wins_of_4": {
+     "union:spaced|37654": 3,
+     "B_only:spaced|37654": 4,
+     "B_corr_rolled|37654": 4
+    },
+    "emit": "topk",
+    "beats_all": true,
+    "beats_strongest_3of4": true
+   },
+   "hide": {
+    "candidate_mean": 0.06608,
+    "comparator_means": {
+     "union:spaced|37654": 0.05652,
+     "B_only:spaced|37654": 0.04453,
+     "B_corr_rolled|37654": 0.03691
+    },
+    "fold_wins_of_4": {
+     "union:spaced|37654": 4,
+     "B_only:spaced|37654": 4,
+     "B_corr_rolled|37654": 4
+    },
+    "emit": "topk",
+    "beats_all": true,
+    "beats_strongest_3of4": true
+   }
+  },
+  "comparator_order_identical_across_modes": true,
+  "promoted": true,
+  "rule": "fold-mean strictly greater than every comparator on both instruments AND >=3/4 fold wins against the strongest comparator AND identical comparator ordering",
+  "note": "the comparator ordering being identical in tip and hide is the part that makes this a mechanism rather than a lucky fold set"
+ },
+ "forced": false,
+ "generated_utc": "2026-10-06T23:41:58Z"
+}

@@ -1,0 +1,41 @@
+{
+  "recorded_utc": "2026-10-07T15:17:00Z",
+  "artifact": "evidence/h55_paired_shoulders_holdout.json",
+  "status": "post-run source and input integrity supplement; does not alter the frozen test or outcome",
+  "holdout_receipt_sha256": "753470ca44c2bb8681f378389eb53b179b6e7bfce45efa5cb25ee3e8d861a9b8",
+  "protocol_gate_sha256": "91060c4fa59acc7fd973020f245d998ec238e4adb061ffb045f0bc9f2fb7488e",
+  "feature_manifest_sha256": "1360621eebc079333adc43d24c8dd2ecccd6907fb8c413c140eccc0cad2db6a0",
+  "source_and_registration_sha256": {
+    "scripts/run_h55_holdout.py": "b2d0d911d3958e8e4bdf082fe457866b24f365d0ed681047b518430fd52a7893",
+    "scripts/check_h55_protocol.py": "e7073dac6faec251f68d09954570b3389dba3d4ed0da1d7fc78ca1343c85d777",
+    "scripts/run_structural_pipeline.py": "55c46db89514e1cbee2c0a1f54ebbe6ecbcad1cb0c3bb47b4409c36b6c94b8b3",
+    "src/gems52/spatial.py": "3776a6be457268a548b7d9931263bc6b5c1e5a431cb1ee727a22caacffc17c34",
+    "src/gems52/structural.py": "ee200d0b82e4a4986f1e7c588540a1bfdb198ee86422c78a617c571143e8adb7",
+    "src/gems52/h55_shoulders.py": "16538a7903808142e338ea79564d119083259db0519d6e9cb4f1c9b76bdcc619",
+    "registry/h55_preregistration.json": "1b952f50a2547d4809f79781c147f1d47d6303c21dd3418686ee38e0354bc0d2",
+    "registry/r2_preregistration.json": "eeb91ce2aebcb0446fe04ba91ba05004f16991deb6dd938cb8845303c63e482e",
+    "registry/data_manifest.json": "3d9ed91aa3916a72338643f873c41a3858d22658c19e2ca9fad304ac0ff33721",
+    "requirements-r2.txt": "3df21ae38a08041f7a23e1f2ad79f4f331823fdb9f0b626e93b08dd1cc68f4d0"
+  },
+  "input_sha256": {
+    "sample_submission": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+  },
+  "portal_upload_performed": false,
+  "public_score_authenticated": false,
+  "execution_path_namespace": {
+    "execution_checkout_base": "a381eb2f57ffbfc90dafce5692f05c571ddc211b; the uncommitted execution source is pinned by the hashes above",
+    "note": "The source_and_registration_sha256 keys preserve the literal paths used by the original run. Main reserves generic H55 paths for its separate H55-PROFILE records; this paired-shoulder registration/result is preserved under explicitly scoped names. The copied registration is byte-identical to the frozen registration used at execution. The captured source hashes bind the result to the pre-integration implementation; this merged tree is not a rerun.",
+    "preserved_preregistration": "registry/h55_paired_shoulders_preregistration.json",
+    "preserved_holdout": "evidence/h55_paired_shoulders_holdout.json",
+    "do_not_reinterpret": "The merged-tree feature builder now also carries main-branch H55-PROFILE/R3 features; this historical result is bound to the captured pre-merge source hashes and must not be described as a rerun of the merged tree.",
+    "reported_later_commit": "7a4379b was reported in the preceding session notes, but that object is absent from the current shallow checkout; this historical identifier cannot be verified here.",
+    "protocol_gate_preservation_gap": {
+      "holdout_bound_preholdout_gate_sha256": "91060c4fa59acc7fd973020f245d998ec238e4adb061ffb045f0bc9f2fb7488e",
+      "currently_preserved_post_run_gate_sha256": "6a696fe215d922713f574862f4e02ac39afc3620f7434576d6fe8232ac7e676e",
+      "preholdout_gate_exact_bytes_preserved": false,
+      "note": "The later idempotency/preflight re-check overwrote the protocol-gate path. The frozen holdout receipt still records the earlier gate hash, but the exact earlier gate bytes are not present in this checkout. Do not present the current gate receipt as byte-identical to the pre-holdout gate."
+    }
+  }
+}

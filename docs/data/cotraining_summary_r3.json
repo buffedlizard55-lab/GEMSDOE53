@@ -1,0 +1,122 @@
+{
+  "source_receipt": "evidence/holdout_r3_paired_profile.json",
+  "preregistration_sha256": "76eeeb20defdc1370b3e6ea6f386ea61222efb91a801a6f81a1c267d7737e913",
+  "enabled": true,
+  "used_in_primary": false,
+  "independence_gate_reason": "weak proxy negative-error correlation; not proof of conditional feature independence; exchange is a separate secondary diagnostic and does not modify the R3-H1 primary",
+  "directions": [
+    {
+      "donor_view": "view_A",
+      "receiver_view": "view_B_paired_shoulder",
+      "baseline_arm": "view_B_paired_shoulder",
+      "mean_baseline_dti": 0.1948957893329302,
+      "mean_after_exchange_dti": 0.1956901908915185,
+      "mean_paired_lift": 0.0007944015585883077,
+      "positive_folds": 2,
+      "total_folds": 4,
+      "pseudo_pixels": 496,
+      "all_pseudo_pixels_training_only": true,
+      "evaluation_pseudo_pixels": 0,
+      "folds": [
+        {
+          "fold": 0,
+          "pseudo_pixels": 10,
+          "baseline_dti": 0.17881916787374533,
+          "after_exchange_dti": 0.1787539949645252,
+          "paired_lift": -6.517290922011809e-05,
+          "positive": false,
+          "all_pseudo_pixels_in_training": true,
+          "evaluation_pixels": 0
+        },
+        {
+          "fold": 1,
+          "pseudo_pixels": 59,
+          "baseline_dti": 0.272296102101905,
+          "after_exchange_dti": 0.275219250087916,
+          "paired_lift": 0.0029231479860109544,
+          "positive": true,
+          "all_pseudo_pixels_in_training": true,
+          "evaluation_pixels": 0
+        },
+        {
+          "fold": 2,
+          "pseudo_pixels": 230,
+          "baseline_dti": 0.13854241322684577,
+          "after_exchange_dti": 0.13719694445765807,
+          "paired_lift": -0.001345468769187702,
+          "positive": false,
+          "all_pseudo_pixels_in_training": true,
+          "evaluation_pixels": 0
+        },
+        {
+          "fold": 3,
+          "pseudo_pixels": 197,
+          "baseline_dti": 0.1899254741292247,
+          "after_exchange_dti": 0.1915905740559748,
+          "paired_lift": 0.0016650999267500965,
+          "positive": true,
+          "all_pseudo_pixels_in_training": true,
+          "evaluation_pixels": 0
+        }
+      ]
+    },
+    {
+      "donor_view": "view_B_paired_shoulder",
+      "receiver_view": "view_A",
+      "baseline_arm": "view_A",
+      "mean_baseline_dti": 0.10754302222876697,
+      "mean_after_exchange_dti": 0.10528412040257994,
+      "mean_paired_lift": -0.002258901826187012,
+      "positive_folds": 2,
+      "total_folds": 4,
+      "pseudo_pixels": 781,
+      "all_pseudo_pixels_training_only": true,
+      "evaluation_pseudo_pixels": 0,
+      "folds": [
+        {
+          "fold": 0,
+          "pseudo_pixels": 120,
+          "baseline_dti": 0.07628045509185577,
+          "after_exchange_dti": 0.07641060164943929,
+          "paired_lift": 0.00013014655758351867,
+          "positive": true,
+          "all_pseudo_pixels_in_training": true,
+          "evaluation_pixels": 0
+        },
+        {
+          "fold": 1,
+          "pseudo_pixels": 245,
+          "baseline_dti": 0.12823626835476645,
+          "after_exchange_dti": 0.13170712870337778,
+          "paired_lift": 0.0034708603486113265,
+          "positive": true,
+          "all_pseudo_pixels_in_training": true,
+          "evaluation_pixels": 0
+        },
+        {
+          "fold": 2,
+          "pseudo_pixels": 227,
+          "baseline_dti": 0.10396347926785078,
+          "after_exchange_dti": 0.10241403805670032,
+          "paired_lift": -0.0015494412111504569,
+          "positive": false,
+          "all_pseudo_pixels_in_training": true,
+          "evaluation_pixels": 0
+        },
+        {
+          "fold": 3,
+          "pseudo_pixels": 189,
+          "baseline_dti": 0.12169188620059485,
+          "after_exchange_dti": 0.11060471320080241,
+          "paired_lift": -0.011087172999792436,
+          "positive": false,
+          "all_pseudo_pixels_in_training": true,
+          "evaluation_pixels": 0
+        }
+      ]
+    }
+  ],
+  "interpretation": "Secondary diagnostic only. Weak catalogue-zero proxy-error correlations allowed exchange under the registered numeric gate but do not prove conditional independence or view sufficiency. Neither direction is promoted into the primary artifact.",
+  "slots_used": 0,
+  "public_score_forecast": null
+}

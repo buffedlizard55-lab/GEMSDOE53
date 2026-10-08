@@ -1,0 +1,40 @@
+{
+  "observed_utc": "2026-10-07T02:29:06Z",
+  "type": "post-run preregistration-to-implementation discrepancy",
+  "preregistration_file": "registry/h55_edge_preregistration.json",
+  "preregistration_sha256_at_validation": "12b678d62269589c42b4009ec07e38f53f325b8a4ece5e42da888f9c8e01c401",
+  "implementation_files": {
+    "feature_builder": "src/gems52/h55.py",
+    "validation_and_build": "scripts/validate_h55.py"
+  },
+  "registered_h55_log_edge_inputs": {
+    "gravity_bands_1_based": [13, 11, 18],
+    "magnetic_bands_1_based": [2, 9]
+  },
+  "implemented_new_h55_log_edge_inputs": {
+    "gravity_bands_1_based": [13],
+    "magnetic_bands_1_based": [2],
+    "cover_band_1_based": 15,
+    "slope_band_1_based": 19,
+    "scales_sigma_pixels": [1, 3]
+  },
+  "omitted_h55_log_edge_transforms": {
+    "bands_1_based": [11, 18, 9],
+    "clarification": "These bands remain present as raw/pre-existing features in the inherited R2 view/structural-contrast feature sets; the H55-specific signed-LoG and sign-change channels were not computed for them."
+  },
+  "measured_result_scope": "The reported H55 holdout and full-data raster correspond to the implemented subset (new LoG features on bands 13 and 2, with the registered cover/slope interaction), not the complete transform set described in the frozen H55-1 candidate-feature list.",
+  "holdout_result_for_implemented_subset": {
+    "mean_dti_lift_over_best_comparable_baseline": 0.000546,
+    "positive_outer_folds": 2,
+    "required_mean_lift": 0.005,
+    "required_positive_outer_folds": 3,
+    "gate_passed": false
+  },
+  "release_status": {
+    "research_only": true,
+    "weekly_slot_approved": false,
+    "portal_upload_performed": false,
+    "official_score": null
+  },
+  "handling": "The original preregistration and result receipts are preserved unchanged; this note does not retroactively amend them. Do not describe the full registered H55-1 transform set as tested. Any future test of the omitted channels must be separately preregistered and evaluated on an untouched confirmation design; do not tune against the already-used four folds."
+}

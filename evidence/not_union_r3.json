@@ -1,0 +1,44 @@
+{
+  "view_A": {
+    "equal": false,
+    "emitted": 37654,
+    "intersection": 721
+  },
+  "view_B": {
+    "equal": false,
+    "emitted": 37654,
+    "intersection": 19757
+  },
+  "view_union": {
+    "equal": false,
+    "pixels": 74561,
+    "candidate_only": 17561,
+    "union_only": 54468
+  },
+  "matched_budget_max_view_union": {
+    "equal": false,
+    "emitted": 37654,
+    "intersection": 12925,
+    "candidate_only": 24729,
+    "union_only": 24729,
+    "placement": {
+      "emitted": 37654,
+      "requested_budget": 37654,
+      "pool": 400000,
+      "pool_restricted": true,
+      "bar": 0.0,
+      "dti_projected": 0.0,
+      "marginal_first": 2.965055465698242,
+      "marginal_last": 0.14557449519634247,
+      "total_expected_credit": 12144.38170196116,
+      "rejects_at_stop": 0,
+      "lazy_updates": 733801,
+      "density_sum": 68477.90625,
+      "false_positive_discount": "unused: fixed matched budget",
+      "objective": "expected triangular max-coverage surrogate; not expected DTI"
+    }
+  },
+  "not_merely_a_view_union": true,
+  "literally_copied_prior": false,
+  "not_copied_or_literal_union": true
+}

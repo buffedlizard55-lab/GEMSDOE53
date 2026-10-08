@@ -1,0 +1,17 @@
+{
+ "counts": {
+  "allowed": 4861502,
+  "a_only": 179254,
+  "b_only": 201837,
+  "concordant": 46293,
+  "neither": 4434118
+ },
+ "q_conf": 0.6,
+ "q_abstain": 0.4,
+ "median_depth_to_basement_m": {
+  "a_only": 410.93743896484375,
+  "b_only": 161.23439025878906,
+  "concordant": 207.9919891357422,
+  "permitted": 315.98773193359375
+ }
+}

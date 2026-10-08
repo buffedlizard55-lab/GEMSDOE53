@@ -1,0 +1,26 @@
+[
+ {
+  "fold": 0,
+  "mode": "tip",
+  "n_truth": 3947,
+  "n_held": 3947
+ },
+ {
+  "fold": 1,
+  "mode": "tip",
+  "n_truth": 8339,
+  "n_held": 8339
+ },
+ {
+  "fold": 2,
+  "mode": "tip",
+  "n_truth": 5210,
+  "n_held": 5210
+ },
+ {
+  "fold": 3,
+  "mode": "tip",
+  "n_truth": 1687,
+  "n_held": 1687
+ }
+]

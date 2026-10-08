@@ -1,0 +1,62 @@
+{
+  "prior_support": {
+    "ref_h33_2_b2": 37654,
+    "d28": 44090,
+    "d15": 60069,
+    "tgc": 61328,
+    "h19_5": 121131,
+    "h19_4": 123779,
+    "h16_1": 123939,
+    "h28": 69281,
+    "ens12": 172974,
+    "hedge2": 227507,
+    "h25ctx": 174232,
+    "r13": 206895,
+    "ph": 343816,
+    "h52_composite": 37654,
+    "h53_coincidence": 37654,
+    "h54_revealed": 50517,
+    "h55_btherm": 37654,
+    "h56_consensus": 40517,
+    "h56_cotrain": 37654,
+    "r2_signednormal": 37654,
+    "r3_h1_paired": 37654,
+    "h55_grav": 37654,
+    "h55_profile": 37654
+  },
+  "union_px": 1217368,
+  "core_px": 25517,
+  "eligible_px": 4862825,
+  "novel_pool_px": 3993853,
+  "stride": 2,
+  "ranker": {
+    "file": "work/cache/gridscore_joint.npy",
+    "stride": 2,
+    "provenance": "two-view co-training OOF grid scores (H57-2, scripts/build_h57_cotrain.py)",
+    "disclosure": "REFUTED METHOD as a scored arm: independence Spearman 0.637 > 0.6 ABANDON and joint top-5000 catalogue density 0.0236 < View-B 0.0244 (evidence/gems57_validate.json). Reused as ranker material for the novel arm only; the shipped projection does NOT credit the co-training arm with any validated gain."
+  },
+  "credit_bracket": {
+    "source": "work/credit_lp2.json / work/credit_robust.json",
+    "note": "13 owner-reported scores fitted exactly at |G|=14,088.7 px; the per-cell credit allocation is under-determined, so core-only credit lies in the LP interval [0.2491, 0.3206] of implied DTI and the champion file itself projects to 0.2778.",
+    "core_only_dti_min": 0.2491,
+    "core_only_dti_max": 0.3206
+  },
+  "artifacts": {
+    "budget_33517": {
+      "name": "gems57-h57-credit-core25517-plus-novel8000-33517px-zeros",
+      "mass": 33517,
+      "core_cells": 25517,
+      "novel_cells": 8000,
+      "novel_fraction": 0.2387,
+      "tif": "docs/downloads/gems57-h57-credit-core25517-plus-novel8000-33517px-zeros.tif",
+      "zip": "docs/downloads/gems57-h57-credit-core25517-plus-novel8000-33517px-zeros.zip",
+      "sha256": "88b6fe79e01b1573c85e3202a5cb1ef39a6d9e83def6227a576c828e73e1c5eb",
+      "format_problems": [],
+      "novelty_gate_ok": true,
+      "novel_vs_all_priors": 8000,
+      "prior_px_dropped": 1191851,
+      "identical_to_any_prior": false,
+      "reasoning_rows": 8000
+    }
+  }
+}

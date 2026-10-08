@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary — GEMSDOE52</title><link rel="stylesheet" href="style.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap"><div class="brand">GEMS<span>DOE</span>52</div>
+<nav class="top"><a href="index.html">Overview</a><a href="executive-summary.html" aria-current="page">Executive&nbsp;summary</a>
+<a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a>
+<a href="validation.html">Validation</a><a href="feed.html">Data&nbsp;feed</a>
+<a href="irregularities.html">Irregularities</a><a href="sources.html">Official&nbsp;links</a></nav></div></header><main id="main">
+
+<h1>Executive summary, and exactly how to submit</h1>
+<p class="small muted">Read this before touching the portal. It is three paragraphs and a numbered list.</p>
+
+<div class="banner"><strong>The one thing to do.</strong> Download the single-band GeoTIFF below, upload it
+to competition 306, paste the note verbatim, submit. No other file on this site is a submission;
+everything else here is the evidence behind that file.
+<div id="exec-dl" data-exec-dl style="margin:.7rem 0 0"></div>
+<p class="small">Notes box text: <span data-note><code>see data/submission.json</code></span></p></div>
+
+<div class="banner" data-gate-verdict>reading the holdout verdict from <code>data/submission.json</code>…
+</div>
+<p class="small"><strong>Why that verdict is above the steps.</strong> The file is legal, unique, and
+<em>promoted</em>: on both blocked instruments at the incumbent's budget it beats every comparator it was
+measured against — the same field without the coincidence gate, surface lineaments with no corroboration,
+and the same arm with its places rolled to a different tile — and the ordering is identical on both
+instruments. The rule it had to clear is written in <code>registry/preregistration_h53.json</code> and
+re-derivable from <code>evidence/h53_holdout.json</code>. The failures that came before it (the co-training
+round, the corridor composite) stay published on <a href="validation.html">Validation</a> and
+<a href="irregularities.html">the register</a>.</p>
+
+<h2><span class="num">1</span> Submission steps (portal-side)</h2>
+<ol class="steps">
+<li>Open <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">drivendata.org/competitions/306</a>
+  and sign in as the team that owns the group account. Submissions are attributed to the <em>team</em>,
+  not to whoever uploads.</li>
+<li>Tab <strong>Predict</strong> → <em>“Make a submission”</em>. Two rounds exist; the final round is
+  scored on a hidden test set and the organiser picks <strong>one</strong> blind submission from your
+  last-round entries. Do not “try both files and see” — there is no feedback after the deadline.</li>
+<li>Select the downloaded <code>.tif</code>. Leave every other option at its default: the file already
+  carries CRS, transform, band count and dtype.</li>
+<li>Notes box, verbatim: the string in the banner above — it is rendered from
+  <code>docs/data/submission.json</code> &rarr; <code>note</code>, which is copied from
+  <code>evidence/submission_&lt;file&gt;.json</code> at build time, so what you paste is what was audited
+  (180 characters, inside the form's 200-character limit). Name the submission
+  <code>gems52-h53-coincidence-gated-singles-37654px-r1</code>, so it is distinguishable from the r1 file it
+  replaces.</li>
+<li>Submit. If — and only if — the validator rejects the file, stop and read §3. Do not re-upload a
+  renamed copy: each weekly slot is spent.</li>
+</ol>
+
+<h2><span class="num">2</span> What the file is</h2>
+<table><thead><tr><th>property</th><th>value</th><th>where it is enforced</th></tr></thead><tbody id="subprops">
+<tr><td>class</td><td colspan="2">single-band <code>float32</code>, values in <code>[0,1]</code>, NaN
+ outside the footprint, EPSG:32611, 100 m cells, bounds identical to
+ <code>sample_submission.tif</code>, 3730 × 3292</td></tr>
+<tr><td>mass</td><td colspan="2">{0, 1} on accepted pixels only — <em>not</em> a smoothed probability:
+ for a single pixel the metric is <code>DTI = λk / (0.2λ + 0.8)</code>, strictly increasing in λ, so
+ partial credit is never worth taking instead of committing</td></tr>
+<tr><td>selection</td><td colspan="2">lazy-greedy maximum expected coverage, accepting a pixel iff its
+ marginal gain clears <code>α·DTI/(1−α·DTI) · (1−wmax)</code> (<code>src/gems52/emit.py</code>,
+ derived and test-pinned in <code>tests/test_metric.py</code>)</td></tr>
+<tr><td>gates</td><td colspan="2">format legality + uniqueness vs every raster this group has ever built,
+ including a “not merely the union” clause (<code>src/gems52/gates.py</code>)</td></tr>
+</tbody></table>
+
+<h2><span class="num">3</span> “Predicted values must be in range [0, 1]” — why it happened and why it cannot happen again</h2>
+<p>That message is the portal’s <em>range</em> validator, not a units complaint. It fires for three
+reasons, all of which are now structural rather than advisory:</p>
+<table><thead><tr><th>cause</th><th>mechanism</th><th>fix in this repo</th></tr></thead><tbody>
+<tr><td>NaN outside the footprint</td><td><code>NaN</code> fails <code>0 ≤ v ≤ 1</code> against any
+ bound, so the whole file is rejected and the error text still says “range”. This is the trap in the
+ rules page: it says “null or NaN where there is no data”, and the validator disagrees</td>
+ <td><code>build_submission</code> writes <b>0.0</b> outside the footprint; <code>gates.format_report</code>
+ fails the build if <code>nan_pixels &gt; 0</code>. Scoring-identical: a pixel with <code>p=0</code>
+ contributes nothing to <code>FPw</code></td></tr>
+<tr><td>probability field left unclipped</td><td>any pre-normalised score with values &gt; 1 (e.g. a
+ raw logit sum, or a rank field on a 0–1000 band scale) is rejected outright</td>
+ <td>every layer enters the model as a uint8 percentile rank, and the emission is exactly {0,1};
+ <code>grid.write_geotiff</code> raises before writing if <code>min&lt;0</code> or <code>max&gt;1</code></td></tr>
+<tr><td>grid mismatch masquerading as a value error</td><td>wrong shape/CRS can surface as a value
+ complaint after the reader fills the difference with a nodata constant</td>
+ <td>the writer re-reads its own output and returns a receipt (shape, transform, dtype, sha256) which
+ the gate compares to the pinned grid; the file is rejected if it differs at all</td></tr>
+</tbody></table>
+<p class="small muted">Verified against the official rules text on page 967 and the community
+thread’s validator discussion; links on <a href="sources.html">the sources page</a>. The band-scale
+detail (some supplied bands are ~0–1000, not 0–1) is our own measurement of the downloaded files and is
+why nothing in this pipeline is clipped-by-assumption.</p>
+
+<h2><span class="num">4</span> The bet, in three sentences</h2>
+<p>We are not trying to reproduce the catalogue; a model trained to do that scored 0.12 and 0.03 in
+this family and deserves to. We are trying to place mass where the <em>two</em> views disagree for
+physical reasons — deep cover hiding a range-front scarp — and to pay for it only where the metric’s
+own 300 m kernel says the price is right. And we published the part that failed: the pseudo-label
+round of co-training made View A measurably worse on every blocked fold, so the submitted field uses
+the disagreement strata and drops the pseudo-label mechanism that was supposed to amplify them.</p>
+
+<div class="grid2">
+<div class="card"><h3>Expected score and the honest uncertainty</h3>
+<p class="small" id="expect">loading…</p></div>
+<div class="card"><h3>If it fails</h3><p class="small">Nothing here is irreversible except a submission
+slot. The evidence, pre-registration and tests are in the repo; the fallback is the best-validated
+arm in <code>docs/validation.html</code>, and the reason each rejected arm was rejected is in the same
+file.</p></div></div>
+</main><footer><div class="wrap">GEMSDOE52 · numbers render from <code>data/*.json</code> · <a href="sources.html">official links</a> · <a href="irregularities.html">irregularities</a></div></footer><script src="site.js"></script>
+<script src="exec.js"></script></body></html>

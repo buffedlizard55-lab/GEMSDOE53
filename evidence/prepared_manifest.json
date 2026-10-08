@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "shape": [
+    3730,
+    3292
+  ],
+  "footprint_pixels": 5167373,
+  "catalogue_positive_pixels": 60988,
+  "view_a_official_bands": [
+    "mag_anom",
+    "rtp",
+    "tmi_hg",
+    "geod_2ndinv",
+    "iso_grav_anom_slope",
+    "tc",
+    "geod_shearrate",
+    "geod_dilaterate",
+    "tmi_vg",
+    "deq_n100a15",
+    "iso_grav_anom_vg",
+    "iso_grav_anom",
+    "tmi",
+    "depth_to_base_surf",
+    "ieq_n100a15",
+    "cond_surf",
+    "iso_grav_anom_hg"
+  ],
+  "view_b_official_bands": [
+    "det_elev",
+    "det_elev_slope"
+  ],
+  "view_a_channels": [
+    "a01_mag_anom",
+    "a02_rtp_edge",
+    "a03_tmi_hg",
+    "a04_tmi_vg_abs",
+    "a05_tc_zero_ridge",
+    "a06_grav_hg",
+    "a07_grav_vg_abs",
+    "a08_grav_analytic_ridge",
+    "a09_depth_base",
+    "a10_depth_grad",
+    "a11_cond_surf_edge",
+    "a12_strain_composite",
+    "a13_seismic_corridor",
+    "a14_subsurface_coh"
+  ],
+  "view_b_channels": [
+    "b01_det_elev",
+    "b02_det_elev_slope",
+    "b03_curv_s1",
+    "b04_curv_s2",
+    "b05_ridge_s1",
+    "b06_ridge_s2",
+    "b07_ridge_s3",
+    "b08_tophat2",
+    "b09_relief5",
+    "b10_slope_break",
+    "b11_surf_coherence",
+    "b12_rad_kth_scarp"
+  ],
+  "radiometric_audit_note": "IR-52-01: training_features.tif contains 0 radiometric bands (Band 6 'tc' has data_category='magnetic_data', description='Tilt angle or total curvature - magnetic field derivative for edge detection'). True airborne gamma-ray spectrometry bands (K, Th, U, TC) are loaded into View B channel b12_rad_kth_scarp from the USGS GeoDAWN release data/external/geodawn_rad_u8.tif (DOI:10.5066/P93LGLVQ).",
+  "strict_view_disjointness_verified": true,
+  "elapsed_seconds": 66.52
+}

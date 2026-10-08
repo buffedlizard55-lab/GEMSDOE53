@@ -1,0 +1,95 @@
+{
+  "n_rows": 483952,
+  "n_pos": 120988,
+  "pos_cat": 60988,
+  "pos_sgmc": 60000,
+  "n_neg": 362964,
+  "folds": {
+    "0": {
+      "n_train": 360729,
+      "n_test": 123223,
+      "auc_A": 0.624137561192536,
+      "auc_B": 0.7389517418372572,
+      "auc_joint": 0.7461885280621424,
+      "auc_A_on_cat": 0.5709046620341534,
+      "auc_B_on_cat": 0.6883956358379341
+    },
+    "1": {
+      "n_train": 397911,
+      "n_test": 86041,
+      "auc_A": 0.5862536030984105,
+      "auc_B": 0.6958505637991592,
+      "auc_joint": 0.7049260876411036,
+      "auc_A_on_cat": 0.5377156498460983,
+      "auc_B_on_cat": 0.6487947315827642
+    },
+    "2": {
+      "n_train": 406309,
+      "n_test": 77643,
+      "auc_A": 0.6178006724357488,
+      "auc_B": 0.7481460503333641,
+      "auc_joint": 0.7465775099777674,
+      "auc_A_on_cat": 0.5594032878245874,
+      "auc_B_on_cat": 0.7069562241714065
+    },
+    "3": {
+      "n_train": 384880,
+      "n_test": 99072,
+      "auc_A": 0.5725598522869845,
+      "auc_B": 0.7206582542397184,
+      "auc_joint": 0.7227665723519593,
+      "auc_A_on_cat": 0.55208122684958,
+      "auc_B_on_cat": 0.6706307431870422
+    },
+    "4": {
+      "n_train": 385979,
+      "n_test": 97973,
+      "auc_A": 0.6047572952937664,
+      "auc_B": 0.7080883459816409,
+      "auc_joint": 0.7272414878996031,
+      "auc_A_on_cat": 0.5650154730481266,
+      "auc_B_on_cat": 0.6436011548134428
+    }
+  },
+  "views": {
+    "A_features": 51,
+    "B_features": 32
+  },
+  "auc_mean": {
+    "auc_A": 0.6011017968614893,
+    "auc_B": 0.7223389912382279,
+    "auc_joint": 0.7295400371865152,
+    "auc_A_on_cat": 0.5570240599205091,
+    "auc_B_on_cat": 0.6716756979185179
+  },
+  "independence": {
+    "n_blocks": 33,
+    "spearman": 0.636697860962567,
+    "pearson": 0.706335748245941,
+    "abandon_threshold": 0.6,
+    "abandon": true,
+    "note": "errors = out-of-fold predicted probability on labelled negatives"
+  },
+  "density": {
+    "grid_stride": 2,
+    "k": 5000,
+    "instrument_note": "instrument 1 = catalogue faults; instrument 2 = uncatalogued-SGMC (weak, 0.0512 on the real board)",
+    "base_density_uncS_sgmc": 0.042128416705065036,
+    "base_density_catalogue": 0.0035250251168842724,
+    "A": {
+      "scored_cells": 1216196,
+      "density_uncS_sgmc": 0.11792232285919478,
+      "density_catalogue": 0.008267589221442773
+    },
+    "B": {
+      "scored_cells": 1216196,
+      "density_uncS_sgmc": 0.13165885108495695,
+      "density_catalogue": 0.024362940345586337
+    },
+    "joint": {
+      "scored_cells": 1216196,
+      "density_uncS_sgmc": 0.15946152362416305,
+      "density_catalogue": 0.023644761089820474
+    }
+  }
+}

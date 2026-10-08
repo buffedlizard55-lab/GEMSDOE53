@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Irregularities — GEMSDOE52</title><link rel="stylesheet" href="style.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap"><div class="brand">GEMS<span>DOE</span>52</div>
+<nav class="top"><a href="index.html">Overview</a><a href="executive-summary.html">Executive&nbsp;summary</a>
+<a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a>
+<a href="validation.html">Validation</a><a href="feed.html">Data&nbsp;feed</a>
+<a href="irregularities.html" aria-current="page">Irregularities</a><a href="sources.html">Official&nbsp;links</a></nav></div></header><main id="main">
+
+<h1>Irregularities, contradictions, and things that could not be verified</h1>
+<p class="small muted">Flagged rather than smoothed over. Each item says what was checked and what stays
+open.</p>
+<table><thead><tr><th>#</th><th>finding</th><th>how it was established</th><th>what was done</th></tr></thead><tbody>
+<tr class="hi"><td>IR-52-001</td><td><b>The method's premise failed.</b> The pre-registered co-training
+lift test is negative on every measure used: pooled AUC 0.797→0.761 on the full grid, 1/4 folds
+improved, and the arm lost to the naive union and to random emission on both instruments.</td>
+<td><code>evidence/co_train_folds_*.json</code>, <code>evidence/independence_*.json</code>,
+<code>evidence/holdout_*.json</code>; thresholds fixed in
+<code>registry/preregistration.json</code> before any fold was scored</td>
+<td>the pseudo-label round is excluded from the shipped field and the failure is on the front page; the
+strata the same theory motivates are kept because they were measured separately and survived</td></tr>
+<tr><td>IR-52-002</td><td><b>"0.3195 is the highest score right now" (session context) is stale</b>: live
+#1 is 0.3774 and our 0.2778 sits at #13 of 16 visible rows.</td><td>leaderboard fetch, 2026-10-06</td>
+<td>numbers come from the feed, so no page can repeat the stale value</td></tr>
+<tr><td>IR-52-003</td><td><b>No file→score mapping is organiser-authenticated</b>, including the
+<code>h33-2-b2</code> → 0.2778 mapping that the "why 0.2778" analysis rests on.</td>
+<td>board inspection; sibling <code>registry/</code> status <code>NO_ELIGIBLE_SUBMISSION</code> after
+GEMSDOE47 retracted its mapping</td>
+<td>tagged <span class="tag warn">owner-reported</span> everywhere; the arithmetic on the file's own
+pixels stands regardless, but the <em>ranking</em> claim depends on the mapping and is labelled so</td></tr>
+<tr><td>IR-52-004</td><td><b>0 labels are not proven absences.</b> <code>labels.tif</code> is −1/0/1
+where 0 means "not mapped"; the final test set is updated by expert review, so 0-pixels are
+positive-unlabelled.</td><td>band inventory of the supplied files; staff post in thread 11527</td>
+<td>stated in <code>cotrain.labelled_sets</code>; negatives keep a 3 px collar; the β=0.8 asymmetry is
+modelled, not assumed away</td></tr>
+<tr><td>IR-52-005</td><td><b><code>sample_submission.tif</code> ships 60,988 positive pixels sitting
+exactly on label pixels</b> — copying or lightly editing it is un-original and worth ~0 under the
+mask.</td><td>direct file comparison</td><td>never used as target or base; the uniqueness gate compares
+the shipped file against every prior raster found on disk</td></tr>
+<tr><td>IR-52-006</td><td><b>The brief's verbatim text is not recoverable from this workspace</b> — one
+commit, no brief file, and a search for the theory citation returns only our own source.</td>
+<td><code>git log</code>; filesystem <code>grep</code></td>
+<td><code>knowledge/00_brief_as_received.md</code> itemises every directive and states it is a
+reconstruction; no quotation marks are placed around invented wording</td></tr>
+<tr><td>IR-52-007</td><td><b>Isolated-vs-flanking counts disagree with the sibling's published
+numbers</b> (ours 24,347 / 36,547; GEMSDOE47 published 6,315 / 54,673).</td>
+<td>recomputed from the label file; the cause is the dilation definition (exact 300 m disc vs box
+dilation)</td><td>both definitions documented in <code>evidence/layer_screen.json</code>; we use ours and
+say which</td></tr>
+<tr><td>IR-52-008</td><td><b>There is no radiometric band</b> in the training cube, although the brief's
+reasoning implies one; band 15 is depth to basement, band 17 is EM conductivity.</td>
+<td>band-by-band inventory → <code>evidence/band_inventory.json</code></td>
+<td>recorded; radiometric evidence would need an external source, hence H52-5 is blocked on provenance
+rather than quietly used</td></tr>
+<tr><td>IR-52-009</td><td><b>The external GDR CSVs (27,092 springs, 1,126 QFaults traces, 1 vent) are
+derived files from a sibling session</b>; the GDR host is unreachable here, so they cannot be
+re-downloaded and hash-checked.</td><td><code>registry/data_manifest.json</code>; failed fetch</td>
+<td>not allowed to move mass in the shipped file; kept as documented corroboration, labelled derived</td></tr>
+<tr><td>IR-52-010</td><td><b>The reference UNet arm cannot be reproduced here</b>: 2 cores / 3 GB cannot
+hold the 27-layer float32 cube plus a torch model, and the official reference solution publishes no
+scoring code.</td><td>measured resident memory of the cube (27 × 49 MB)</td>
+<td>stated rather than faked; the learners here are rank-input logistic views, which are exact, cheap and
+auditable — and sufficient because the metric's optimum is {0,1}, not a calibrated probability</td></tr>
+<tr><td>IR-52-011</td><td><b>The rules PDF host in the brief is stale</b>: cited
+<code>docs.nlr.gov</code>, live host is <code>www.nlr.gov</code>.</td><td>fetch of both</td>
+<td>recorded on <a href="sources.html">sources</a>; the canonical PDF is read from the live host</td></tr>
+<tr><td>IR-52-012</td><td><b>Prior-project claims about what the leaderboard "needs" were not
+reproducible</b>: fitting a truth model to the eleven published scores gives best RMSE 0.1449, i.e. no
+signal.</td><td>inherited analysis, re-checked by reading the sibling <code>knowledge/</code></td>
+<td>not repeated here: no claim on this site is derived from inverting published scores</td></tr>
+
+<tr><td><code>IR-52-022</code></td>
+<td><strong>We overwrote our own uncommitted work and recovered part of it from the bytecode.</strong>
+The H53-1 detector was written earlier in the same session but never committed. A draft rewrite replaced
+<code>src/gems52/structure.py</code> (different API; it broke <code>dicoincidence.py</code> and
+<code>tests/test_structure.py</code> until noticed), and this session's rewritten versions replaced
+<code>scripts/validate_h53.py</code> and <code>scripts/h53_detect.py</code>.</td>
+<td><span class="tag ok">recovered, with limits</span> &mdash; <code>structure.py</code> was restored from
+<code>__pycache__/structure.cpython-311.pyc</code> (the pyc's recorded source size and mtime match the lost
+file, not the draft) and verified <em>behaviourally</em> against the loaded bytecode module: max absolute
+difference &lt; 1e-6 on energy, coherence, azimuth and along-strike persistence over synthetic line, noise
+and mixed fields. The two scripts had no cache and are not recoverable; the H53 gate's <em>rule</em> is
+recorded in <code>registry/preregistration_h53.json</code> with a provenance note, and the timestamps show the
+gate ran before the submission was written. Mitigation: the H53 code ships committed in this PR.</td></tr>
+
+</tbody></table>
+</main><footer><div class="wrap">GEMSDOE52 · tables render from <code>docs/data/*.json</code>, regenerated by <code>scripts/refresh_feed.py</code> · <a href="sources.html">official links</a> · <a href="irregularities.html">irregularities</a></div></footer><script src="site.js"></script><script src="tables.js"></script></body></html>

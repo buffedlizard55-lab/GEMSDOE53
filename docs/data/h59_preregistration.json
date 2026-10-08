@@ -1,0 +1,63 @@
+{
+ "schema_version": 1,
+ "round": "H59",
+ "version": "gems52-h59-corroborated-consensus-cotrain-v1",
+ "status": "frozen_preregistration_before_any_scored_execution",
+ "registered_utc_date": "2026-10-08",
+ "brief": "Two-view co-training (Blum & Mitchell COLT '98, doi:10.1145/279943.279962): View A potential-field/subsurface (gravity 5/11/13/18, magnetic 1/2/3/9/14, strain 4/7/8, seismicity 10/16, depth 15, conductivity 17), View B surface (DEM 12/19 + radiometric TC band 6 + GeoDAWN K/Th/U extensions + 1-m LiDAR scarp stack); independence tested empirically on spatial-block out-of-fold negative errors with abandonment at max|r| >= 0.60; pseudo-labels only where one view is confident and the other abstains, whole-segment blocks with buffer; disagreement as discovery signal; single-view baselines on hide-and-recover; per-A-only-candidate written geological reasoning; [0,1] GeoTIFF on the pinned grid with the repo metric-aware placement, uniqueness gate, and not-merely-union confirmation.",
+ "hypothesis_document": "knowledge/20_hypotheses_H59_preregistered.md",
+ "hypothesis_document_sha256": "51ea29c25cb25505a8d28822ea902e5af1ff46ee1abb2a083b92ad99c06c6e8c",
+ "data_integrity": {
+  "manifest": "registry/data_manifest.json",
+  "manifest_sha256": "3d9ed91aa3916a72338643f873c41a3858d22658c19e2ca9fad304ac0ff33721",
+  "data_root": "work/h59_pinned",
+  "restore_receipt": "work/h59_pinned/restore_receipt.json",
+  "restore_receipt_sha256": "bd4591851492b809b26e06fc9eba8959e4f56760d31743ac4447fdedbec33cc4",
+  "required_action": "Verify every input file's SHA-256 and byte count against the manifest before any read; fail closed on mismatch; record the measured hashes of all three tracked data/*.tif stubs and their inequality to the pins in evidence/h59_preflight_integrity.json (never overwrite data/*.tif).",
+  "qualification": "The pins are owner-supplied GitHub mirrors verified by hash and byte count; that proves mirror integrity, NOT organizer authentication. Every H59 receipt repeats this qualification.",
+  "tracked_data_policy": "The tracked data/training_features.tif is a grid stub (19 zero bands; sha 9c450a754ed95869); data/labels.tif and data/sample_submission.tif likewise differ from the pins. No H59 number may be computed from tracked data/*.tif."
+ },
+ "protocol": {
+  "seed": 20261009,
+  "folds": "HO.make_folds n_folds=4 buffer_px=4 prevalence=0.002; fit-on-block per run_h57_cotrain.py; arms scored on tip and hide instruments with identical fold geometry",
+  "thresholds": {"q_conf": 0.60, "q_abstain": 0.40, "independence_abandonment_max_abs_r": 0.60, "block_px": 50, "min_negatives_per_block": 300, "neg_train": 60000},
+  "budgets_px": [15000, 37654],
+  "emitter": "isotropic 3 px (h57.iso_select); anisotropic emitter is NOT used (refuted, evidence/h57_validation.json placement)",
+  "pool": "fold region & footprint & ~dilate(catalogue, 2 px) [the <=200 m ring rule], candidates may not sit on the visible catalogue dilated by 2 px; held-out catalogue is scored as truth",
+  "fields": {
+   "incumbent": ["clf_union=max(pA,pB)", "clf_view_A", "clf_view_B", "random (rebuilt per budget)"],
+   "challengers": {
+    "H59-A": "x_corroborated = u * (0.55 + 0.45*lid) where lid = normalized sqrt(rank(B_lidar_coh100_val) * rank(B_lidar_ex_max_val)) over the permitted pool",
+    "H59-B": "x_artifact_suppressed = max(pA, pB*(1 - 0.5*(b_only & lid < median_lid_permitted)))",
+    "H59-C": "x_strain = coh(grad(2ndinv)+grad(shear)) >= 0.25 * ridge_strength(sum of both grads) * (1 - rank(dist_band_10)); label-free",
+    "H59-D": "halo population: 3-6 px annulus of the exactly-accounted P1 core, pool-restricted, corroboration-weighted; scored as pool density statistic",
+    "H59-E": "x_geoconj = u * (0.6 + 0.4*rank(band17 | band15 > median depth of pool))"
+   }
+  },
+  "decision_rules": {
+   "independence": "spatial.independence on block error rows; measured and non-degenerate required to allow the exchange; abandonment at max|r| >= 0.60 forces the single-view fallback and is reported as a refutation",
+   "field_promotion": "a challenger replaces the union field for arm selection iff its fold-mean DTI exceeds the union fold-mean in all four cells {tip,hide} x {15000,37654}; otherwise union ships and the result is reported as the incumbent",
+   "slot_approval_bar": "mean lift vs matched random >= +0.005 on both instruments at budget 37654 AND >= 3/4 folds positive on each; unmet => artifact downloadable for review but NOT approved to spend a weekly slot",
+   "halo_gate_H59D": "k-weighted held-truth density of the halo pool >= 2.0x the random control of equal size in the same legal pool on the tip instrument; unmet => halo not emitted",
+   "not_merely_union": "report fraction of emitted arm pixels outside the top-k set of the plain union field; also artifact != any prior, != union of prior pairs, and (when a challenger ships) != union top-k",
+   "novelty": "arm 100% outside the support union of all accessible aligned priors; decoded pattern unique vs every accessible aligned prior incl. this repo's own archived artifacts and the restored scored/calib priors"
+  }
+ },
+ "reporting": {
+  "receipts": [
+   "evidence/h59_preflight_integrity.json",
+   "evidence/h59_cotrain.json",
+   "evidence/h59_validation.json",
+   "evidence/h59_build.json",
+   "evidence/h59_slot_gate.json",
+   "evidence/h59_uniqueness.json",
+   "evidence/h59_format_gate.json",
+   "evidence/h59_reasoning_scope.json"
+  ],
+  "prohibitions": [
+   "No leaderboard score may enter model fitting, field construction, fold geometry, or arm selection; revealed-preference arithmetic (gems52.revealed) may size budgets and project outcomes only, labelled conditional on owner-reported scores.",
+   "No number here is a leaderboard forecast; Spearman(reported, simulated DTI) = -0.1045 (knowledge/10 s5).",
+   "A-only reasoning rows are hypotheses for Phase-2 review, never 'discovered faults'."
+  ]
+ }
+}

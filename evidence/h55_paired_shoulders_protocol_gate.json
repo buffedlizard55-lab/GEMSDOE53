@@ -1,0 +1,93 @@
+{
+  "generated_utc": "2026-10-07T15:22:56.032455Z",
+  "status": "READY_FOR_PREREGISTERED_HOLDOUT_ONLY",
+  "holdout_run": false,
+  "model_fit": false,
+  "portal_upload_performed": false,
+  "preregistration": "registry/h55_preregistration.json",
+  "preregistration_sha256": "1b952f50a2547d4809f79781c147f1d47d6303c21dd3418686ee38e0354bc0d2",
+  "parent_preregistration_sha256": "eeb91ce2aebcb0446fe04ba91ba05004f16991deb6dd938cb8845303c63e482e",
+  "data_manifest_sha256": "3d9ed91aa3916a72338643f873c41a3858d22658c19e2ca9fad304ac0ff33721",
+  "data_restore_receipt": {
+    "path": "data/restore_receipt.json",
+    "all_ok": true,
+    "verified_against": "registry/data_manifest.json",
+    "core_file_count": 3
+  },
+  "input_provenance": "SHA-pinned owner-supplied sibling-repository mirrors; pins do not authenticate organizer portal bytes",
+  "organizer_input_bytes_authenticated": false,
+  "missing_inputs": [],
+  "protocol_or_integrity_problems": [],
+  "input_reports": {
+    "sample_submission": {
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "valid_cells_in_three_sample_windows": 54181,
+      "bytes": 1599597,
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "matches_manifest_pin": true
+    },
+    "training_features": {
+      "width": 3292,
+      "height": 3730,
+      "bands": 19,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "valid_cells_in_three_sample_windows_band1": 54236,
+      "sampled_label_values": null,
+      "bytes": 418912844,
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "matches_manifest_pin": true
+    },
+    "labels": {
+      "width": 3292,
+      "height": 3730,
+      "bands": 1,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "valid_cells_in_three_sample_windows_band1": 54181,
+      "sampled_label_values": [
+        0,
+        1
+      ],
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "matches_manifest_pin": true
+    }
+  },
+  "existing_matching_holdout": {
+    "path": "evidence/h55_holdout.json",
+    "sha256": "753470ca44c2bb8681f378389eb53b179b6e7bfce45efa5cb25ee3e8d861a9b8",
+    "scientific_holdout_gate_pass": false,
+    "mean_dti_lift": 0.002360879644970948,
+    "positive_outer_folds": 4,
+    "total_outer_folds": 4,
+    "same_registration_and_core_input_hashes": true
+  },
+  "score_mapping_authenticated": false,
+  "next_action": "Matching H55-1 holdout already completed; do not refit/retest under the same registration and input hashes. A new experiment needs a new preregistration.",
+  "interpretation": "READY authorizes only the preregistered local holdout; it is not a successful validation, submission uniqueness, weekly-slot approval, organizer acceptance, or public-score forecast."
+}

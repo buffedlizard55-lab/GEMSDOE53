@@ -1,0 +1,36 @@
+{
+  "version": "gems52-h55-profile-v1",
+  "registered_utc": "2026-10-07",
+  "base_commit": "a381eb2f57ffbfc90dafce5692f05c571ddc211b",
+  "hypothesis_document": "knowledge/12_hypotheses_H55_preregistered.md",
+  "primary_hypothesis": "H55-PROFILE: local-normal, paired DEM shoulder profile with strike persistence",
+  "seed": 520207,
+  "folds": "existing four spatial whole-component quadrant folds with 80 px buffer",
+  "baseline_arms": ["view_B", "structural_contrast"],
+  "primary_metric": "official distance-weighted Tversky index with alpha=0.2, beta=0.8, 300m triangular kernel",
+  "primary_budget_global_pixels": 37654,
+  "registered_transform": {
+    "surface_band": 12,
+    "orientation_source": "gradient of normalized Gaussian-smoothed detrended elevation at sigma=3 px",
+    "normal_offsets_px": [1, 2, 3, 4, 6],
+    "features": ["signed_cross_normal_elevation_difference", "absolute_cross_normal_step", "paired_flank_minimum_contrast", "paired_flank_asymmetry"],
+    "tangent_persistence_px": 3,
+    "normal_sign": "direction of the local gradient; signed feature is retained, not absolute-only",
+    "comparison": "same folds, negative proxy, learner, sampling, budget, metric and emission placement as baseline"
+  },
+  "slot_gate": {
+    "minimum_mean_dti_lift": 0.005,
+    "minimum_positive_folds": 3,
+    "total_folds": 4,
+    "format_gate_required": true,
+    "uniqueness_gate_required": true,
+    "weekly_slot_spend": false,
+    "public_score_claim_allowed": false
+  },
+  "external_data": {
+    "used": false,
+    "deferred_candidate": "H55-SEISMIC",
+    "source": "https://earthquake.usgs.gov/fdsnws/event/1/",
+    "availability_test": "TLS/connection failed before response bytes; not available in this sandbox"
+  }
+}

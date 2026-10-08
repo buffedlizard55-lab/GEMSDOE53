@@ -1,0 +1,83 @@
+{
+ "test": "Blum & Mitchell conditional independence (COLT '98, doi:10.1145/279943.279962): correlation of the two views' out-of-fold errors on labelled negatives over 4x4 spatial blocks",
+ "view_a": "potential field / subsurface (gravity, magnetics, strain, seismicity, depth to base of basin fill, conductivity)",
+ "view_b": "surface (detrended elevation and slope, 1 m LiDAR scarp features, radiometrics K/Th/U/TC and their ratios)",
+ "label": "revealed-preference tier A&C, derived from the organiser's own published scores -- not a pseudo-label, see knowledge/03 N-1",
+ "pixel_pearson_r": 0.2777,
+ "pixel_pearson_p": 0.0,
+ "pixel_spearman_r": 0.4269,
+ "block_mean_r": 0.283,
+ "block_var_r": 0.003039,
+ "n_blocks": 11,
+ "per_block": [
+  {
+   "block": 0,
+   "n": 7629,
+   "pearson_r": 0.219,
+   "p": 0.0
+  },
+  {
+   "block": 1,
+   "n": 12169,
+   "pearson_r": 0.2752,
+   "p": 0.0
+  },
+  {
+   "block": 2,
+   "n": 9948,
+   "pearson_r": 0.2437,
+   "p": 0.0
+  },
+  {
+   "block": 3,
+   "n": 9894,
+   "pearson_r": 0.3248,
+   "p": 0.0
+  },
+  {
+   "block": 4,
+   "n": 5197,
+   "pearson_r": 0.3229,
+   "p": 0.0
+  },
+  {
+   "block": 5,
+   "n": 11147,
+   "pearson_r": 0.3863,
+   "p": 0.0
+  },
+  {
+   "block": 6,
+   "n": 970,
+   "pearson_r": 0.1876,
+   "p": 0.0
+  },
+  {
+   "block": 9,
+   "n": 6384,
+   "pearson_r": 0.308,
+   "p": 0.0
+  },
+  {
+   "block": 10,
+   "n": 4389,
+   "pearson_r": 0.3242,
+   "p": 0.0
+  },
+  {
+   "block": 13,
+   "n": 1639,
+   "pearson_r": 0.2352,
+   "p": 0.0
+  },
+  {
+   "block": 14,
+   "n": 7184,
+   "pearson_r": 0.2865,
+   "p": 0.0
+  }
+ ],
+ "threshold": 0.6,
+ "verdict": "proceed: errors not strongly correlated",
+ "degenerate_block_variance": false
+}

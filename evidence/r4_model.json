@@ -1,0 +1,40 @@
+{
+ "stage": "model",
+ "n_blocks": 162,
+ "footprint_px": 5165840,
+ "catalogue_px": 60894,
+ "n_train": 300000,
+ "n_pos": 60000,
+ "n_neg": 240000,
+ "n_layers_A": 30,
+ "n_layers_B": 44,
+ "view_A": {
+  "blocked_auc": 0.6004518704867382,
+  "median_block_auc": 0.5946449340515376,
+  "n_blocks_scored": 152,
+  "n_blocks_skipped": 10
+ },
+ "view_B": {
+  "blocked_auc": 0.777881420604807,
+  "median_block_auc": 0.7999171797812538,
+  "n_blocks_scored": 152,
+  "n_blocks_skipped": 10
+ },
+ "independence": {
+  "n_blocks": 150,
+  "max_abs_rho": 0.7050670113250316,
+  "mean_abs_rho": 0.24124796919664343,
+  "threshold": 0.6,
+  "independent": false,
+  "verdict": "NOT independent",
+  "worst_block_rho": 0.7050670113250316,
+  "median_px_per_block": 2110.5
+ },
+ "strata_px": {
+  "A_only": 23430,
+  "B_only": 23430,
+  "both": 6570,
+  "neither": 246570
+ },
+ "seconds": 150.4
+}

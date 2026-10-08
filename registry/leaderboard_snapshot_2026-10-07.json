@@ -1,0 +1,16 @@
+{
+  "status": "one-off official leaderboard observation; no recurring fetch",
+  "observed_date_utc": "2026-10-07",
+  "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "column_header_on_board": "Best public DW-Tversky (in descending order)",
+  "rows": [
+    {"rank": "1", "team": "xiaofanhu", "score": 0.3774},
+    {"rank": "7", "team": "DARD", "score": 0.3195},
+    {"rank": "13", "team": "extradr19", "score": 0.2778}
+  ],
+  "our_team": "extradr19 (owner-reported association; not authenticated)",
+  "our_best_reported": 0.2778,
+  "top": 0.3774,
+  "gap_to_top": 0.0996,
+  "scope_note": "Selected official board rows preserved from the one-off 2026-10-07 fetch. The board reports team-level best scores, not filenames, hashes, upload receipts, hidden labels, or causal attribution. Automated DrivenData access remains disabled under the repository's reviewed Terms-of-Use policy."
+}

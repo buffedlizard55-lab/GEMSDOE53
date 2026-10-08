@@ -1,0 +1,29 @@
+{
+ "csv": "data/external/gdr_wellspring_in_footprint.csv",
+ "source": "https://gdr.openei.org/submissions/1391",
+ "doi": "10.15121/1881483",
+ "licence": "CC-BY 4.0",
+ "raw_csv_rows": 27092,
+ "unique_cells": 12570,
+ "distance_recomputed_from": "data/labels.tif",
+ "points": {
+  "cells_scored": 951,
+  "t_floor": 60.0,
+  "score_sum": 185.20947265625,
+  "score_max": 1.0,
+  "cells_ge_0p25": 232,
+  "cells_ge_0p5": 90,
+  "cells_off_catalogue_gt300m": 806
+ },
+ "lineament": {
+  "cells_scored": 3340,
+  "score_sum": 108.01115417480469,
+  "score_max": 0.31837135553359985,
+  "length_m": 3000.0,
+  "coh_floor": 0.3,
+  "strike_source": "R_tc_rank",
+  "coherence_median": 0.10575904697179794,
+  "cells_above_coh_floor": 643745,
+  "off_catalogue_px": 3253
+ }
+}

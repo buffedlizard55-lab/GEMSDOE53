@@ -1,0 +1,50 @@
+{
+  "checked_utc": "2026-10-07T03:11:07.889250Z",
+  "file": "gems52-r3-h1-paired-profile-37654-e42677141dbc-research-only.tif",
+  "submission_sha256": "0a28426785c4125d4560d6279cc763570f791cd1fdb7fb788ba60d6024e1f9db",
+  "published_bytes": 138077,
+  "metadata": {
+    "driver": "GTiff",
+    "width": 3292,
+    "height": 3730,
+    "count": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "transform_matches_sample": true,
+    "crs_matches_sample": true,
+    "bounds_match_sample": true,
+    "internal_mask_matches_sample": true,
+    "finite": true,
+    "minimum": 0.0,
+    "maximum": 1.0,
+    "values": [
+      0.0,
+      1.0
+    ],
+    "positive_pixels": 37654,
+    "decoded_sha256": "e42677141dbc264dcc0e7b0f7cc96f85fc6ede69c629e50426c205a90669f734"
+  },
+  "checks": {
+    "tiff": true,
+    "one_float32_band": true,
+    "sample_grid": true,
+    "finite_[0,1]": true,
+    "binary_pattern_and_budget": true,
+    "mask_matches_sample": true,
+    "receipt_byte_hash": true,
+    "receipt_decoded_hash": true,
+    "published_copy_identical": true,
+    "note_limit": true,
+    "research_only_no_slot": true
+  },
+  "ok": true,
+  "scope": "Independent post-build readback against the local sample template and current receipts; not an organizer portal test or geological truth check."
+}

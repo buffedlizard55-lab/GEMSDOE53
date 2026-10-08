@@ -1,0 +1,333 @@
+{
+ "view_a": {
+  "n_features": 49,
+  "features": [
+   "a_mag_anom",
+   "a_mag_anom__hg",
+   "a_rtp",
+   "a_rtp__hg",
+   "a_rtp__lap",
+   "a_rtp__range5",
+   "a_rtp__coh",
+   "a_tmi_hg",
+   "a_tmi_hg__hg",
+   "a_geod_2ndinv",
+   "a_geod_2ndinv__hg",
+   "a_geod_2ndinv__lap",
+   "a_geod_2ndinv__range5",
+   "a_geod_2ndinv__coh",
+   "a_iso_grav_anom_slope",
+   "a_iso_grav_anom_slope__hg",
+   "a_tc",
+   "a_tc__hg",
+   "a_geod_shearrate",
+   "a_geod_shearrate__hg",
+   "a_geod_dilaterate",
+   "a_geod_dilaterate__hg",
+   "a_tmi_vg",
+   "a_tmi_vg__hg",
+   "a_deq_n100a15",
+   "a_deq_n100a15__hg",
+   "a_iso_grav_anom_vg",
+   "a_iso_grav_anom_vg__hg",
+   "a_iso_grav_anom",
+   "a_iso_grav_anom__hg",
+   "a_iso_grav_anom__lap",
+   "a_iso_grav_anom__range5",
+   "a_iso_grav_anom__coh",
+   "a_tmi",
+   "a_tmi__hg",
+   "a_tmi__lap",
+   "a_tmi__range5",
+   "a_tmi__coh",
+   "a_depth_to_base_surf",
+   "a_depth_to_base_surf__hg",
+   "a_depth_to_base_surf__lap",
+   "a_depth_to_base_surf__range5",
+   "a_depth_to_base_surf__coh",
+   "a_ieq_n100a15",
+   "a_ieq_n100a15__hg",
+   "a_cond_surf",
+   "a_cond_surf__hg",
+   "a_iso_grav_anom_hg",
+   "a_iso_grav_anom_hg__hg"
+  ],
+  "oof_auc": 0.7132,
+  "per_block": [
+   {
+    "block": 0,
+    "n": 10592,
+    "auc": 0.713,
+    "counted_in_mean": true
+   },
+   {
+    "block": 1,
+    "n": 16027,
+    "auc": 0.7129,
+    "counted_in_mean": true
+   },
+   {
+    "block": 2,
+    "n": 13419,
+    "auc": 0.6961,
+    "counted_in_mean": true
+   },
+   {
+    "block": 3,
+    "n": 12531,
+    "auc": 0.7184,
+    "counted_in_mean": true
+   },
+   {
+    "block": 4,
+    "n": 8022,
+    "auc": 0.6731,
+    "counted_in_mean": true
+   },
+   {
+    "block": 5,
+    "n": 13861,
+    "auc": 0.7741,
+    "counted_in_mean": true
+   },
+   {
+    "block": 6,
+    "n": 1268,
+    "auc": 0.597,
+    "counted_in_mean": true
+   },
+   {
+    "block": 8,
+    "n": 3,
+    "auc": 1.0,
+    "counted_in_mean": false
+   },
+   {
+    "block": 9,
+    "n": 8668,
+    "auc": 0.7372,
+    "counted_in_mean": true
+   },
+   {
+    "block": 10,
+    "n": 5902,
+    "auc": 0.7349,
+    "counted_in_mean": true
+   },
+   {
+    "block": 13,
+    "n": 2538,
+    "auc": 0.6897,
+    "counted_in_mean": true
+   },
+   {
+    "block": 14,
+    "n": 9237,
+    "auc": 0.7255,
+    "counted_in_mean": true
+   }
+  ]
+ },
+ "view_b": {
+  "n_features": 32,
+  "features": [
+   "b_det_elev",
+   "b_det_elev__hg",
+   "b_det_elev__lap",
+   "b_det_elev__range5",
+   "b_det_elev__coh",
+   "b_det_elev_slope",
+   "b_det_elev_slope__hg",
+   "b_det_elev_slope__lap",
+   "b_det_elev_slope__range5",
+   "b_det_elev_slope__coh",
+   "b_lidar_ex_max",
+   "b_lidar_ex_mean",
+   "b_lidar_step_max",
+   "b_lidar_lapneg_max",
+   "b_lidar_lappos_max",
+   "b_lidar_downface_max",
+   "b_lidar_upface_max",
+   "b_lidar_cross_max",
+   "b_lidar_relief",
+   "b_lidar_coh100",
+   "b_lidar_strike",
+   "b_lidar_valid",
+   "b_rad_K",
+   "b_rad_Th",
+   "b_rad_U",
+   "b_rad_TC",
+   "b_rad_ThK",
+   "b_rad_UK",
+   "b_rad_UTh",
+   "b_rad_TMI_up150",
+   "b_scarp_asym",
+   "b_scarp_asym_x_step"
+  ],
+  "oof_auc": 0.9277,
+  "per_block": [
+   {
+    "block": 0,
+    "n": 10592,
+    "auc": 0.9268,
+    "counted_in_mean": true
+   },
+   {
+    "block": 1,
+    "n": 16027,
+    "auc": 0.9317,
+    "counted_in_mean": true
+   },
+   {
+    "block": 2,
+    "n": 13419,
+    "auc": 0.9292,
+    "counted_in_mean": true
+   },
+   {
+    "block": 3,
+    "n": 12531,
+    "auc": 0.9043,
+    "counted_in_mean": true
+   },
+   {
+    "block": 4,
+    "n": 8022,
+    "auc": 0.8888,
+    "counted_in_mean": true
+   },
+   {
+    "block": 5,
+    "n": 13861,
+    "auc": 0.9577,
+    "counted_in_mean": true
+   },
+   {
+    "block": 6,
+    "n": 1268,
+    "auc": 0.9397,
+    "counted_in_mean": true
+   },
+   {
+    "block": 8,
+    "n": 3,
+    "auc": 0.5,
+    "counted_in_mean": false
+   },
+   {
+    "block": 9,
+    "n": 8668,
+    "auc": 0.9413,
+    "counted_in_mean": true
+   },
+   {
+    "block": 10,
+    "n": 5902,
+    "auc": 0.9227,
+    "counted_in_mean": true
+   },
+   {
+    "block": 13,
+    "n": 2538,
+    "auc": 0.8865,
+    "counted_in_mean": true
+   },
+   {
+    "block": 14,
+    "n": 9237,
+    "auc": 0.9319,
+    "counted_in_mean": true
+   }
+  ]
+ },
+ "blended_oof_auc": 0.9128,
+ "single_view_baseline": {
+  "note": "the brief's hide-and-recover comparison: is the two-view method better than each view alone at equal cost?",
+  "view_a_mean": 0.7065,
+  "view_b_mean": 0.9237,
+  "blocks_excluded_for_small_n": 2,
+  "label_caveat": "the label is 'was this pixel one of the organiser-credited core dots', so a high AUC means the view can find WHERE this family emitted, not WHICH emissions were right; knowledge/10 s6 measures that habitat is not credit (AUC 0.70 for the credited tier against random, but 0.68-0.70 for tiers carrying 20x less credit). This is why rho_novel is a prior and not a point estimate in the budget rule.",
+  "blend": 0.9128,
+  "co_training_wins": false
+ },
+ "independence": {
+  "pixel_pearson_r": 0.2777,
+  "pixel_pearson_p": 0.0,
+  "pixel_spearman_r": 0.4269,
+  "block_mean_r": 0.283,
+  "block_var_r": 0.003039,
+  "n_blocks": 11,
+  "per_block": [
+   {
+    "block": 0,
+    "n": 7629,
+    "pearson_r": 0.219,
+    "p": 0.0
+   },
+   {
+    "block": 1,
+    "n": 12169,
+    "pearson_r": 0.2752,
+    "p": 0.0
+   },
+   {
+    "block": 2,
+    "n": 9948,
+    "pearson_r": 0.2437,
+    "p": 0.0
+   },
+   {
+    "block": 3,
+    "n": 9894,
+    "pearson_r": 0.3248,
+    "p": 0.0
+   },
+   {
+    "block": 4,
+    "n": 5197,
+    "pearson_r": 0.3229,
+    "p": 0.0
+   },
+   {
+    "block": 5,
+    "n": 11147,
+    "pearson_r": 0.3863,
+    "p": 0.0
+   },
+   {
+    "block": 6,
+    "n": 970,
+    "pearson_r": 0.1876,
+    "p": 0.0
+   },
+   {
+    "block": 9,
+    "n": 6384,
+    "pearson_r": 0.308,
+    "p": 0.0
+   },
+   {
+    "block": 10,
+    "n": 4389,
+    "pearson_r": 0.3242,
+    "p": 0.0
+   },
+   {
+    "block": 13,
+    "n": 1639,
+    "pearson_r": 0.2352,
+    "p": 0.0
+   },
+   {
+    "block": 14,
+    "n": 7184,
+    "pearson_r": 0.2865,
+    "p": 0.0
+   }
+  ],
+  "threshold": 0.6,
+  "verdict": "proceed: errors not strongly correlated",
+  "degenerate_block_variance": false
+ },
+ "simulator_warning": "knowledge/03 N-9: the whole-component hide simulator does not predict the organiser's score (Spearman -0.10, p=0.73, n=13), so these AUCs are reported as a bias check, not as a score forecast"
+}

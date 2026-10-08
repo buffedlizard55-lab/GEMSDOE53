@@ -1,0 +1,50 @@
+{
+  "shape": [
+    3730,
+    3292,
+    36
+  ],
+  "n_features": 36,
+  "bytes": 442049760,
+  "view_a": [
+    "A_grav_step",
+    "A_grav_edge",
+    "A_grav_vg_rank",
+    "A_grav_hg_rank",
+    "A_grav_slope_band",
+    "A_mag_step",
+    "A_mag_edge_vg",
+    "A_rtp_rank",
+    "A_strain_inv_rank",
+    "A_strain_inv_reg",
+    "A_shear_rank",
+    "A_dilate_rank",
+    "A_eqdens_rank",
+    "A_eqdist_negrank",
+    "A_depth_base_rank",
+    "A_cond_rank"
+  ],
+  "view_b": [
+    "B_scarp_p900",
+    "B_scarp_p300",
+    "B_scarp_fine",
+    "B_slope_rank",
+    "B_elev_rank",
+    "B_line_resp",
+    "B_elev_grad",
+    "R_tc_step900",
+    "R_tc_edge",
+    "R_tc_line",
+    "R_tc_rank",
+    "R_thk_step900",
+    "R_uk_step900",
+    "R_thk_edge",
+    "R_uk_edge",
+    "L_step_max",
+    "L_ex_max",
+    "L_coh100",
+    "L_relief",
+    "L_cover"
+  ],
+  "footprint_px": 5165840
+}

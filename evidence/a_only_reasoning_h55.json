@@ -1,0 +1,26 @@
+{
+  "rows": 916,
+  "expected_emitted_A_only_pixels": 916,
+  "complete": true,
+  "file": "gems52-h55-profile-37654-7fd28c25b51a-research-candidates.csv",
+  "sha256": "fbfe7684cc48e7b9c84edfb77d1aca50890c259c95870aebb38b0bd4fcfd63b2",
+  "thresholds": {
+    "view_A": {
+      "confident": 0.8076143962772816,
+      "abstain_lo": 0.40937033924806976,
+      "abstain_hi": 0.615292616801012,
+      "n_reference": 50000,
+      "reference": "training sample only; relative confidence, not calibrated fault probability"
+    },
+    "view_B": {
+      "confident": 0.9335636013276364,
+      "abstain_lo": 0.395316115775161,
+      "abstain_hi": 0.6119904909108141,
+      "n_reference": 50000,
+      "reference": "training sample only; relative confidence, not calibrated fault probability"
+    }
+  },
+  "units_note": "Raw band native units have not been authenticated against organizer metadata; gradient-direction and persistence values are dimensionless.",
+  "candidate_scope": "every emitted A-only pixel; raster components are not claimed to be geologically verified segments",
+  "geological_support_url": "https://www.usgs.gov/publications/discovering-blind-geothermal-systems-great-basin-region-integrated-geologic-and"
+}

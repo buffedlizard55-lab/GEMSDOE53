@@ -1,0 +1,275 @@
+{
+ "round": "H59",
+ "file": "gems52-h59-union-core25517px-arm14783px.tif",
+ "stem": "gems52-h59-union-core25517px-arm14783px",
+ "submission_name": "gems52-h59-union-core25517px-arm14783px-8c4945ce-zeros",
+ "note": "H59 union arm 14783px outside all prior support + 25,517px credited core; all finite binary [0,1]; 200m ring excluded; not a verified fault map",
+ "note_chars": 143,
+ "bytes": 157138,
+ "sha256": "8c4945ce170b702495057176fe61b892ee4b1af975b11f978920387216cf968d",
+ "nonzero_px": 40300,
+ "core_px": 25517,
+ "arm_px": 14783,
+ "verdict": "RESEARCH ONLY \u2014 DOWNLOAD OK FOR REVIEW; DO NOT SPEND A WEEKLY SLOT",
+ "approved_for_weekly_slot": false,
+ "promoted_field": "clf_union",
+ "halo_rule_shipped": false,
+ "submission_slots_used": 0,
+ "format": {
+  "path": "/home/user/GEMSDOE52/submission/gems52-h59-union-core25517px-arm14783px.tif",
+  "bytes": 157138,
+  "sha256": "8c4945ce170b702495057176fe61b892ee4b1af975b11f978920387216cf968d",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "width": 3292,
+  "height": 3730,
+  "bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "ref_bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": null,
+  "blocksize": [
+   256,
+   256
+  ],
+  "fixture_grid": false,
+  "has_validity_mask": false,
+  "nan_pixels": 0,
+  "infinity_pixels": 0,
+  "n_nan": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "mean": 0.00328198354691267,
+  "n_nonzero": 40300,
+  "mass": 40300.0,
+  "mass_outside_footprint": 0,
+  "problems": [],
+  "ok": true,
+  "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+ },
+ "uniqueness": {
+  "n_priors_checked": 51,
+  "canonical_pattern_unique": true,
+  "support_novelty_gate_ok": true,
+  "novel_fraction": 0.3668238213399504,
+  "equals_literal_prior_union": false
+ },
+ "not_the_union": {
+  "arm_px": 14783,
+  "arm_outside_prior_support_px": 14783,
+  "arm_outside_prior_support_frac": 1.0,
+  "arm_outside_union_topk_px": 0,
+  "arm_outside_union_topk_frac": 0.0,
+  "field_shipped": "clf_union",
+  "field_is_plain_union": true,
+  "halo_rule_shipped": false,
+  "arm_on_A_only_pixels_px": 781,
+  "arm_on_B_only_pixels_px": 5084,
+  "arm_in_halo_px": 6367,
+  "file_equals_prior_A": false,
+  "file_equals_prior_B": false,
+  "file_equals_prior_C": false,
+  "file_equals_prior_E": false,
+  "file_equals_union_AB": false,
+  "file_equals_union_AC": false,
+  "strata_counts_recomputed": {
+   "allowed": 4861502,
+   "a_only": 183553,
+   "b_only": 197898,
+   "concordant": 47183,
+   "neither": 4432868
+  }
+ },
+ "projection_by_rho": {
+  "rho_0.03": 0.2658,
+  "rho_0.05": 0.2811,
+  "rho_0.07": 0.2964,
+  "rho_0.09": 0.3117,
+  "rho_0.12": 0.3347,
+  "rho_0.14": 0.35
+ },
+ "revealed_budget": {
+  "g_estimate_px": 14088.7,
+  "n_core": 25517,
+  "t_core_bounds": [
+   4168.0,
+   5223.0
+  ],
+  "rho_prior": [
+   0.03,
+   0.14
+  ],
+  "floor": 0.3195,
+  "rule": "maximise P(DTI > floor) over the exact t_core interval x the stated rho_novel prior; ties to the larger novel fraction",
+  "rows": [
+   {
+    "n_novel": 5000,
+    "total": 30517,
+    "novel_fraction": 0.1638,
+    "p_win": 0.1209,
+    "mean_dti": 0.2947,
+    "worst_dti": 0.2485,
+    "best_dti": 0.3409,
+    "dti_at_central_rho": 0.2947
+   },
+   {
+    "n_novel": 10000,
+    "total": 35517,
+    "novel_fraction": 0.2816,
+    "p_win": 0.2451,
+    "mean_dti": 0.3018,
+    "worst_dti": 0.2432,
+    "best_dti": 0.3604,
+    "dti_at_central_rho": 0.3018
+   },
+   {
+    "n_novel": 12500,
+    "total": 38017,
+    "novel_fraction": 0.3288,
+    "p_win": 0.3074,
+    "mean_dti": 0.3051,
+    "worst_dti": 0.2407,
+    "best_dti": 0.3694,
+    "dti_at_central_rho": 0.3051
+   },
+   {
+    "n_novel": 15000,
+    "total": 40517,
+    "novel_fraction": 0.3702,
+    "p_win": 0.3677,
+    "mean_dti": 0.3082,
+    "worst_dti": 0.2384,
+    "best_dti": 0.378,
+    "dti_at_central_rho": 0.3082
+   },
+   {
+    "n_novel": 17500,
+    "total": 43017,
+    "novel_fraction": 0.4068,
+    "p_win": 0.4138,
+    "mean_dti": 0.3111,
+    "worst_dti": 0.2361,
+    "best_dti": 0.3861,
+    "dti_at_central_rho": 0.3111
+   },
+   {
+    "n_novel": 20000,
+    "total": 45517,
+    "novel_fraction": 0.4394,
+    "p_win": 0.4485,
+    "mean_dti": 0.3139,
+    "worst_dti": 0.234,
+    "best_dti": 0.3938,
+    "dti_at_central_rho": 0.3139
+   },
+   {
+    "n_novel": 25000,
+    "total": 50517,
+    "novel_fraction": 0.4949,
+    "p_win": 0.4969,
+    "mean_dti": 0.3191,
+    "worst_dti": 0.2301,
+    "best_dti": 0.4081,
+    "dti_at_central_rho": 0.3191
+   },
+   {
+    "n_novel": 30000,
+    "total": 55517,
+    "novel_fraction": 0.5404,
+    "p_win": 0.5292,
+    "mean_dti": 0.3238,
+    "worst_dti": 0.2265,
+    "best_dti": 0.4212,
+    "dti_at_central_rho": 0.3238
+   },
+   {
+    "n_novel": 35000,
+    "total": 60517,
+    "novel_fraction": 0.5783,
+    "p_win": 0.5523,
+    "mean_dti": 0.3282,
+    "worst_dti": 0.2232,
+    "best_dti": 0.4331,
+    "dti_at_central_rho": 0.3282
+   },
+   {
+    "n_novel": 40000,
+    "total": 65517,
+    "novel_fraction": 0.6105,
+    "p_win": 0.5695,
+    "mean_dti": 0.3321,
+    "worst_dti": 0.2202,
+    "best_dti": 0.444,
+    "dti_at_central_rho": 0.3321
+   },
+   {
+    "n_novel": 45000,
+    "total": 70517,
+    "novel_fraction": 0.6381,
+    "p_win": 0.583,
+    "mean_dti": 0.3358,
+    "worst_dti": 0.2175,
+    "best_dti": 0.4541,
+    "dti_at_central_rho": 0.3358
+   }
+  ],
+  "selected": {
+   "n_novel": 45000,
+   "total": 70517,
+   "novel_fraction": 0.6381,
+   "p_win": 0.583,
+   "mean_dti": 0.3358,
+   "worst_dti": 0.2175,
+   "best_dti": 0.4541,
+   "dti_at_central_rho": 0.3358
+  }
+ },
+ "receipts": [
+  "h59_preflight_integrity.json",
+  "h59_cotrain.json",
+  "h59_validation.json",
+  "h59_build.json",
+  "h59_format_gate.json",
+  "h59_uniqueness.json",
+  "h59_slot_gate.json"
+ ],
+ "candidate_geology_dossier": "evidence/gems52-h59-40300px-candidate-geology.csv",
+ "a_only_segment_dossier": "evidence/gems52-h59-a-only-candidate-segments.csv",
+ "official_score_status": "no portal upload or organizer score is recorded",
+ "marker": "submission/LATEST.txt",
+ "exists": true,
+ "download": "downloads/gems52-h59-union-core25517px-arm14783px.tif",
+ "download_zip": "downloads/gems52-h59-union-core25517px-arm14783px.zip",
+ "zip": {
+  "bytes": 126425,
+  "sha256": "b5439188588ce7b477beb4240738814dae2768ef33435ad4b19e0362247f79b1",
+  "contents": [
+   "gems52-h59-union-core25517px-arm14783px.tif",
+   "submission-name.txt",
+   "submission-note.txt",
+   "STATUS.txt",
+   "README-paste-these.txt"
+  ]
+ },
+ "runtime_s": 633.6,
+ "min_distance_to_catalogue_m": 223.6,
+ "sampled_min_nn_px": 0.0,
+ "clipping_to_sample_domain_px": 217
+}

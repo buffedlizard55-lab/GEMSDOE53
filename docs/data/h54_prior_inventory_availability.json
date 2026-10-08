@@ -1,0 +1,14 @@
+{
+  "generated_utc": "2026-10-07T15:04:44.382409Z",
+  "candidate_file": "submission/gems52-h54-revealed-core-strike-continuation-50517px-r1.tif",
+  "inventory_path": "evidence/prior_inventory_r2.json",
+  "inventory_entries": 383,
+  "eligible_grid_aligned_inventory_entries": 377,
+  "eligible_inventory_rasters_present_locally": 0,
+  "eligible_inventory_rasters_missing_locally": 377,
+  "present_local_paths": [],
+  "historical_bounded_comparison_files_checked": 23,
+  "current_global_decoded_comparison_performed": false,
+  "comparison_status": "NOT PERFORMED for H54 against the full inventory. Inventory metadata is not decoded-pattern comparison; H54 global decoded-pattern uniqueness and all-prior support novelty are unknown.",
+  "note": "Historical comparisons are bounded. Full-inventory source TIFFs were not present at the inventory local paths; restored competition input rasters are not prior submissions."
+}

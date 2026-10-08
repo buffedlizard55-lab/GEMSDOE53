@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "verified_files_count": 17,
+  "storage_root": "/home/user/GEMSDOE52/data",
+  "files": [
+    {
+      "id": "training_features",
+      "dest": "training_features.tif",
+      "group": "core",
+      "status": "restored",
+      "bytes": 418912844,
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
+    },
+    {
+      "id": "labels",
+      "dest": "labels.tif",
+      "group": "core",
+      "status": "restored",
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+    },
+    {
+      "id": "sample_submission",
+      "dest": "sample_submission.tif",
+      "group": "core",
+      "status": "restored",
+      "bytes": 1599597,
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+    },
+    {
+      "id": "ext_lidar_scarp_features_u8",
+      "dest": "external/lidar_scarp_features_u8.tif",
+      "group": "external",
+      "status": "restored",
+      "bytes": 36943606,
+      "sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568"
+    },
+    {
+      "id": "ext_geodawn_rad_u8",
+      "dest": "external/geodawn_rad_u8.tif",
+      "group": "external",
+      "status": "restored",
+      "bytes": 26612970,
+      "sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682"
+    },
+    {
+      "id": "ext_geodawn_extensions_u8",
+      "dest": "external/geodawn_extensions_u8.tif",
+      "group": "external",
+      "status": "restored",
+      "bytes": 27132925,
+      "sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b"
+    },
+    {
+      "id": "ext_derived_sgmc_faults_100m_u8",
+      "dest": "external/derived_sgmc_faults_100m_u8.tif",
+      "group": "external",
+      "status": "restored",
+      "bytes": 198602,
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"
+    },
+    {
+      "id": "ext_gdr_wellspring_in_footprint",
+      "dest": "external/gdr_wellspring_in_footprint.csv",
+      "group": "external",
+      "status": "restored",
+      "bytes": 2146771,
+      "sha256": "122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea"
+    },
+    {
+      "id": "ext_gdr_qfaults_traces",
+      "dest": "external/gdr_qfaults_traces.csv",
+      "group": "external",
+      "status": "restored",
+      "bytes": 126177,
+      "sha256": "9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c"
+    },
+    {
+      "id": "ext_gdr_volcanic_vents_in_footprint",
+      "dest": "external/gdr_volcanic_vents_in_footprint.csv",
+      "group": "external",
+      "status": "restored",
+      "bytes": 672,
+      "sha256": "f91bafbaccaaf2754e71d60434fc0f9eb2c7b880c6e714883f4974542ff6a0bf"
+    },
+    {
+      "id": "scored_gemsdoe32_02778_b2",
+      "dest": "scored/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "group": "scored",
+      "status": "restored",
+      "bytes": 219065,
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    {
+      "id": "scored_gemsdoe36_02750_pinn",
+      "dest": "scored/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+      "group": "scored",
+      "status": "restored",
+      "bytes": 318190,
+      "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a"
+    },
+    {
+      "id": "scored_d28_02600",
+      "dest": "scored/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "group": "scored",
+      "status": "restored",
+      "bytes": 1603424,
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8"
+    },
+    {
+      "id": "scored_d15_02477",
+      "dest": "scored/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "group": "scored",
+      "status": "restored",
+      "bytes": 1632732,
+      "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310"
+    },
+    {
+      "id": "scored_h19_5_01922",
+      "dest": "scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+      "group": "scored",
+      "status": "restored",
+      "bytes": 1712322,
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d"
+    },
+    {
+      "id": "sibling_gemsdoe44_twostageAB",
+      "dest": "scored/GEMS44_h46-twostageAB_20261006T160000Z_b0cfe956-zeros.tif",
+      "group": "scored",
+      "status": "restored",
+      "bytes": 315429,
+      "sha256": "3c04892d0deca00ccbadf77c801130180f05a03a9c0d575e4d8b91127286d06f"
+    },
+    {
+      "id": "sibling_gemsdoe46_r11f",
+      "dest": "scored/gems46-r11f-scarp-radiometric-fusion-00e049b51218-zeros.tif",
+      "group": "scored",
+      "status": "restored",
+      "bytes": 384938,
+      "sha256": "57be86502a03a22eb755f04204cb090b49ba4b89158662a728ca2e34b1d37f95"
+    }
+  ]
+}
