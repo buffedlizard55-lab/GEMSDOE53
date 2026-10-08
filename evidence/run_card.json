@@ -41,14 +41,17 @@
   },
   "correlation_overlap_vs_registry": {
     "any_drift_flag": true,
-    "max_spearman_rho_sample": 0.164367,
-    "max_our_dots_within_3px_of_registry_dots": 0.795371,
-    "registry_files_checked": 138,
+    "max_spearman_rho_sample": 0.516955,
+    "max_our_dots_within_3px_of_registry_dots": 1.0,
+    "registry_files_checked": 613,
     "thresholds": {
       "spearman_rho": 0.9,
       "dot_overlap_within_3px": 0.7
     },
-    "receipt": "evidence/uniqueness_check.json"
+    "receipt": "evidence/uniqueness_check.json",
+    "population": "evidence/registry_inventory/inventory.json (613 single-band registry rasters on the competition grid; 907 mirrored files)",
+    "flagged_files": 163,
+    "max_spearman_rho_file": "12GEMSDOE__docs__downloads__12GEMSDOE_multiphysics_submission_06ca61e5.tif"
   },
   "raster_sha256": {
     "primary_nan_outside": "f380f70092fee2be7c44b4c20f78e92ce83c12967e5f8ec21432174dca928272"
@@ -89,22 +92,52 @@
     "file": "gems53-hgb-bands-q0p02-nan.tif",
     "status": "BLOCKED",
     "submitted": false,
-    "location_of_files": "/tmp/gems53-held/ (outside repo; 49 MB; regenerate with scripts/exp3_build_submission.py --outdir ...)"
+    "location_of_files": "not in the repository and not offered for download (sha256 in evidence/run_card.json); regenerate with scripts/exp3_build_submission.py --outdir <dir> (about 1 minute)"
   },
   "overlap_chance_baseline": {
-    "max_lift": 4.2032,
+    "max_lift": 15.1772,
     "file": "evidence/overlap_baseline.json",
-    "reading": "lift >> 1 means our dots sit near the other file's dots more than random placement at that density would"
+    "reading": "lift >> 1 means our dots sit near the other file's dots more than random placement at that density would",
+    "top_lift_file": "17GEMSDOE__docs__downloads__17GEMSDOE_F-ensemble-2pct_20260930T050626Z.tif"
   },
   "hypothesis_status": {
-    "H1_segment_exact": "ranked 1, NOT run (budget exhausted before the experiment)",
-    "H2_magnetic_ridges": "not run",
-    "H3_fault_parallel_strain": "not run",
+    "H1_segment_exact": "RUN AS CANARY (Exp 4): REJECTED. Paired pixel-neighbour canary AUC 1.000 (label-dependent by construction). See evidence/exp4_hypothesis_canary.json.",
+    "H2_magnetic_ridges": "RUN (Exp 4 canary, Exp 5 holdout): NEGATIVE. Paired ridge-minus-bands difference, q=0.02: {'mean': -4.9e-05, 'CI95_t_df4': [-0.004039, 0.003942]}; q=0.01: {'mean': 0.001589, 'CI95_t_df4': [-0.001381, 0.004559]}. Pre-registered acceptance (gain beyond the fold-level 95% half-width) not met.",
+    "H3_fault_parallel_strain": "not run (experiment budget: 2 of 3 used this session)",
     "H4_qfaults_label_source": "rejected (rules name USGS quaternary maps as a label source)"
+  },
+  "experiments_this_session": {
+    "budget": "3 experiments or 2 hours (protocol); 2 new experiments used (E4, E5). E1 and E2 re-run as reproduction checks only.",
+    "E1_reproduction": "evidence/exp1_leakage_canary.json (re-run: identical separability 1.0 for the leaky distance)",
+    "E2_reproduction": "bands arm per-fold values reproduced exactly in Exp 5 (same seed, same order)",
+    "E4_canary": {
+      "H1_separability": 0.756209,
+      "H1_pixel_pair_AUC": 1.0,
+      "H2_separability": 0.525998,
+      "H2_pixel_pair_AUC": 0.500323,
+      "A_leakfree_pixel_pair_AUC": 0.499677,
+      "file": "evidence/exp4_hypothesis_canary.json"
+    },
+    "E5_holdout_bands_vs_ridge": {
+      "label_type": "HOLDOUT-DTI",
+      "bands_pooled_DTI_by_q": {
+        "0.005": 0.021681,
+        "0.0073": 0.025063,
+        "0.01": 0.027919,
+        "0.02": 0.035233
+      },
+      "bands_ridge_pooled_DTI_by_q": {
+        "0.005": 0.023266,
+        "0.0073": 0.026706,
+        "0.01": 0.029503,
+        "0.02": 0.035193
+      },
+      "file": "evidence/exp5_holdout_bands_vs_ridge.json"
+    }
   },
   "gemsdoe32_0p2778": "see docs/research/gemsdoe32.md (owner claims, not verified)",
   "limitations": "registry/limitations.json",
   "organizer_score": null,
   "verdict": "negative",
-  "verdict_reason": "Blocked before any submission slot. Rank correlation is low (max rho 0.164). But up to 79.5% of our dots sit within 3 px of one public file's dots (GEMSDOE22; 75.7% for GEMSDOE27/28, lift 4.2x over random placement), above the 70% protocol threshold. Stopped per the parallel-run protocol. Holdout proxy 0.0352 is not an organizer score and is not comparable to the leaderboard."
+  "verdict_reason": "Blocked before any submission slot. Format checks pass (shared template validator PASSED), but the uniqueness gate fails: 163 of 613 single-band registry rasters on the competition grid exceed the 70% dot-overlap flag (evidence/uniqueness_check.json). Strongest match: 17GEMSDOE F-ensemble-2pct (103,347 dots vs our 103,348; 75.8% of our dots within 3 px of its dots; lift 15.2 over random placement; sample rank correlation 0.507). The highest rank correlation in the registry is 0.517 (12GEMSDOE multiphysics_submission, 97.2% dot overlap). Both are below the 0.90 correlation flag but well above the value-similarity level of a unique file. Holdout proxy 0.0352 (HOLDOUT-DTI) is not an organizer score."
 }

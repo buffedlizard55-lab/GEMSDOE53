@@ -81,6 +81,25 @@ def main() -> int:
     irr = J("registry/irregularities.json")["items"]
     lim = J("registry/limitations.json")["items"]
     srcs = J("registry/sources.json")
+    exp4 = J("evidence/exp4_hypothesis_canary.json")
+    exp5 = J("evidence/exp5_holdout_bands_vs_ridge.json")
+    inv = J("evidence/registry_inventory/inventory.json")["summary"]
+    card_h = J("evidence/run_card.json")["hypothesis_status"]
+    n_flag = sum(1 for r in uniq["results"] if r.get("drift_flag"))
+    top_lift = max((r for r in ovl["flagged_rows"] if r.get("lift")), key=lambda r: r["lift"])
+    top_lift_obs = top_lift["observed_overlap_ours_within_3px"]
+    top_lift_rho = top_lift.get("spearman_rho_sample")
+    n_dense = sum(1 for r in ovl["flagged_rows"] if r.get("expected_overlap_random_placement", 0) >= 0.5)
+
+    def paired(q):
+        import math
+        b = [f["per_q"][q]["DTI"] for f in exp5["arms"]["bands"]["folds"]]
+        r_ = [f["per_q"][q]["DTI"] for f in exp5["arms"]["bands_ridge"]["folds"]]
+        d = [x - y for x, y in zip(r_, b)]
+        m = sum(d) / len(d)
+        sd = math.sqrt(sum((x - m) ** 2 for x in d) / (len(d) - 1))
+        h = 2.776 * sd / math.sqrt(len(d))
+        return m, m - h, m + h
     S = {s["id"]: s for s in srcs["sources"]}
     name, arm, q = sel["submission_name"], sel["arm"], sel["q"]
     cand = J(f"evidence/candidates/{name}.receipt.json")
@@ -101,8 +120,9 @@ def main() -> int:
     # ---------------------------------------------------------------- index.html (executive summary)
     body = f"""
 <section>
-  <div class="banner"><b>Research-only / DO NOT SUBMIT.</b> No file is offered for submission. The one candidate built is blocked by the
-  parallel-run drift flag (protocol item 2). Nothing has been submitted, and no organizer score exists.</div>
+  <div class="banner"><b>Research-only / DO NOT SUBMIT.</b> No file is offered for download or submission. The one valid candidate is blocked by the
+  uniqueness gate: {n_flag} of {uniq['n_registry_files']} registry rasters are flagged, and the closest is a near-duplicate of an existing submission.
+  Nothing has been submitted, and no organizer score exists.</div>
   <h1>Executive summary</h1>
   <p>This project tried to build a unique, valid GeoTIFF for the GEMS Prize (DrivenData competition 306) that beats the public
   bar, to explain leakage in the GEMSDOE29 file, to explain the high-scoring GEMSDOE32 file, and to test new geological hypotheses.
@@ -110,8 +130,9 @@ def main() -> int:
   <table>
     <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
     <tr><td>Can we produce a unique, valid GeoTIFF?</td>
-        <td>Yes, a valid one exists (rules checks pass, 0 known-fault pixels emitted). It is <b>blocked</b>: up to {uniq['max_dot_overlap_within_3px']:.1%} of its dots sit within
-        3 px of one public file's dots (above the 70% stop threshold). It is not offered. Rank correlation is low (max rho {uniq['max_spearman_rho']:.3f}).</td>
+        <td>A format-valid one exists (template validator PASSED, 0 known-fault pixels emitted). It is <b>blocked</b> by the uniqueness gate:
+        {n_flag} of {uniq['n_registry_files']} registry rasters exceed the 70% dot-overlap flag. The closest, 17GEMSDOE F-ensemble-2pct, has {top_lift_obs:.1%} overlap
+        with a lift of {top_lift['lift']:.1f}× over chance and rank correlation {top_lift_rho:.3f}. Its dot count is almost identical to ours. It is not offered.</td>
         <td><span class="pill">validator output</span></td></tr>
     <tr><td>Does it beat 0.3774 (the public #1)?</td><td>Unknown. We have no organizer score, so nothing can be claimed.</td>
         <td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
@@ -124,8 +145,9 @@ def main() -> int:
     <tr><td>Why GEMSDOE32 (0.2778) may score high, and whether we can beat it</td>
         <td>Likely a sensible emission volume placed off the catalogue, with a light false-positive penalty. Not verified. We cannot beat it on current evidence. See <a href="evidence.html#gemsdoe32">evidence</a>.</td>
         <td><span class="pill">hypothesis / owner-claim</span></td></tr>
-    <tr><td>Top hypothesis validated?</td><td>No. H1 (segment-exact learn-predict separation) ranked first but was not run, since the budget ran out.</td>
-        <td><span class="pill">measured: not run</span></td></tr>
+    <tr><td>Top hypothesis validated?</td><td><b>H1</b> (segment-exact separation, ranked first) fails the leakage canary: its pixel-neighbour AUC is {exp4['H1']['local_pair_canary']['AUC_fault_gt_neighbour']:.3f}, so it encodes the label. Rejected.
+        <b>H2</b> (label-free magnetic ridge) gives no gain. The paired ridge-minus-bands difference at q=0.02 is {paired('0.02')[0]:+.5f} (95% CI {paired('0.02')[1]:+.5f} to {paired('0.02')[2]:+.5f}).</td>
+        <td><span class="pill">measured (Exp 4, Exp 5)</span></td></tr>
     <tr><td>Portal error "Predicted values must be in range [0, 1]"</td>
         <td>The shared template validator documents a real platform rejection caused by 3,061 NaN px inside the valid region (owner-documented, not independently verified). Our file has no NaN inside the footprint, all values in [0, 1], and passes the template validator. The portal has not yet confirmed it (no receipt).</td>
         <td><span class="pill">unverified (IR-53-04)</span></td></tr>
@@ -166,7 +188,8 @@ def main() -> int:
 
 <section>
   <h2>Next steps and limitations</h2>
-  <p>See <a href="evidence.html#limitations">limitations</a>. Main gaps: no organizer score, the top hypothesis not run, and the overlap flag still blocks the only candidate.</p>
+  <p>See <a href="evidence.html#limitations">limitations</a>. Main gaps: no organizer score; the overlap gate is confounded for dense non-submission rasters (IR-53-20);
+  the one candidate duplicates an existing recipe (IR-53-21); the mirrored sample does not match its description (IR-53-19); and the rules require a generative-AI disclosure (IR-53-24).</p>
 </section>
 """
     (DOCS / "index.html").write_text(page("Executive summary", body, "index.html"))
@@ -193,8 +216,9 @@ def main() -> int:
   It checks CRS, 100 m, single float32 band, values in [0, 1], finite exactly on the template's valid region, NaN elsewhere, the nodata tag, and the training shape. In-lane checks (core.py) are in the receipt. A validator pass is not a portal acceptance.</p>
   <h2>Why it is not offered</h2>
   <ul>
-    <li>Rank correlation with 138 public registry rasters: max {uniq['max_spearman_rho']:.3f}. Below the 0.90 flag.</li>
-    <li>Share of our dots within 3 px of another file's dots: max {uniq['max_dot_overlap_within_3px']:.3f}. Above the 0.70 stop threshold, so the protocol stops the candidate.</li>
+    <li>Population: {uniq['n_registry_files']} single-band registry rasters on the competition grid (from {inv['files']} mirrored tif files; {inv['unique_sha256']} unique). Rank correlation: max {uniq['max_spearman_rho']:.3f}, below the 0.90 flag.</li>
+    <li>Share of our dots within 3 px of another file's dots: {n_flag} files above the 0.70 stop threshold (max {uniq['max_dot_overlap_within_3px']:.3f}), so the protocol stops the candidate.</li>
+    <li>Closest match: 17GEMSDOE F-ensemble-2pct, {top_lift_obs:.1%} overlap, lift {top_lift['lift']:.1f}×, rank correlation {top_lift_rho:.3f}. Our recipe duplicates an existing one (IR-53-21).</li>
     <li>Chance baseline (diagnostic only; flags unchanged): the largest lift over random placement at the same registry density is {ovl['max_lift']:.2f}×. This means the overlap is placement, not just density. See <a href="evidence.html#uniqueness">the uniqueness table</a>.</li>
   </ul>
   <p class="note">Files are at <code>/tmp/gems53-held/</code> (not in the repository; they are 49 MB each). They can be regenerated with <code>scripts/exp3_build_submission.py</code> and checked against the sha256 values above.</p>
@@ -237,9 +261,9 @@ def main() -> int:
                          f"<td>{esc(what)}</td><td>{esc(origin)}</td></tr>")
         else:
             inv_rows += (f"<tr><td>{esc(label)}</td><td>-</td><td>missing</td><td>{esc(what)}</td><td>{esc(origin)}</td></tr>")
-    reg_count = len(list(Path("/tmp/g53/uniq").glob("*.tif"))) if Path("/tmp/g53/uniq").exists() else 0
-    inv_rows += (f"<tr><td>public registry rasters (12 repos + GEMSDOE29/32 + official sample)</td><td>-</td><td>-</td>"
-                 f"<td>{reg_count} symlinked rasters used by the uniqueness check; registry lists</td><td>cloned from github.com (public repos)</td></tr>")
+    inv_rows += (f"<tr><td>public registry rasters (GEMSDOE* repos, mirrored)</td><td>-</td><td>-</td>"
+                 f"<td>{inv['files']} tif files; {inv['unique_sha256']} unique sha256; {uniq['n_registry_files']} single-band on the competition grid used by the gate "
+                 f"(<code>evidence/registry_inventory/inventory.json</code>)</td><td>shallow git clone of public repos (S19)</td></tr>")
     irr_rows = "".join(
         f"<tr><td>{esc(i['id'])}</td><td>{esc(i['severity'])}</td><td>{esc(i['subject'])}</td><td>{esc(i['action'])}</td></tr>"
         for i in irr)
@@ -278,6 +302,23 @@ def main() -> int:
   The result is bands at q=0.02 (0.0352) versus leakfree (0.0343). The two intervals overlap almost entirely, so the leak-free distance feature adds no measurable value in this proxy.</p>
 </section>
 
+<section>
+  <h2>Experiments 4 and 5 - the untried hypotheses (MEASURED and HOLDOUT-DTI)</h2>
+  <p>Ranked by expected gain and cost in <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/docs/research/hypotheses.md">hypotheses.md</a>. Each one was checked with a
+  paired pixel-neighbour canary before any holdout run: a fault pixel and an adjacent non-fault pixel should not separate unless the feature encodes the label pixel-exactly.</p>
+  <table><tr><th>Check</th><th>Feature alone: separability</th><th>Pixel-neighbour AUC (fault &gt; neighbour)</th><th>Result</th></tr>
+    <tr><td>H1 segment-exact exclusion (rank 1)</td><td>{exp4['H1']['separability']:.3f}</td><td><b>{exp4['H1']['local_pair_canary']['AUC_fault_gt_neighbour']:.3f}</b></td><td>REJECTED: label-dependent by construction (the positive's own segment is removed; a negative's is not)</td></tr>
+    <tr><td>H2 label-free RTP ridge (rank 2)</td><td>{exp4['H2']['separability']:.3f}</td><td>{exp4['H2']['local_pair_canary']['AUC_fault_gt_neighbour']:.3f}</td><td>Passes the canary (no label path)</td></tr>
+    <tr><td>Current leak-free arm (4×4 block cross-fit)</td><td>{exp4['A_leakfree_crossfit_training_sep']['separability']:.3f}</td><td>{exp4['A_leakfree_crossfit_local_pair']['AUC_fault_gt_neighbour']:.3f}</td><td>Passes (exhaustive check: 170,638 neighbour pairs, AUC 0.4995)</td></tr>
+  </table>
+  <h3>Holdout: bands versus bands + ridge (HOLDOUT-DTI, evaluator {esc(exp5['evaluator']['name'])} {esc(exp5['evaluator']['version'])}, 5 folds, 60,988 withheld px)</h3>
+  <table><tr><th>q (fraction of footprint)</th><th>bands pooled DTI</th><th>bands + ridge pooled DTI</th><th>Paired difference (ridge − bands), 95% CI</th></tr>{''.join(
+      f"<tr><td>{float(q_):.4f}</td><td>{exp5['arms']['bands']['pooled'][q_]['pooled_DTI']:.4f}</td><td>{exp5['arms']['bands_ridge']['pooled'][q_]['pooled_DTI']:.4f}</td>"
+      f"<td>{paired(q_)[0]:+.5f} [{paired(q_)[1]:+.5f}, {paired(q_)[2]:+.5f}]</td></tr>" for q_ in exp5['arms']['bands']['pooled'])}</table>
+  <p class="note">Result: H2 gives no measurable gain at any q. The pre-registered acceptance rule (a gain beyond the fold-level 95% half-width) is not met, so H2 is negative.
+  Every holdout number here is a proxy: the withheld truth is catalogue segments, not new faults (IR-53-03).</p>
+</section>
+
 <section id="gemsdoe32">
   <h2>GEMSDOE29 and GEMSDOE32</h2>
   <p><b>GEMSDOE29 (leakage; repo {link('S8', 'S8')}):</b> the feature from its own labels is the leak. See Experiment 1 and the leaky arm. The GEMSDOE29 registry rasters overlap our candidate by up to {max(r['our_dots_within_3px_of_registry_dots'] for r in uniq['results'] if 'GEMSDOE29' in r['file']):.1%} within 3 px (below the 70% flag).</p>
@@ -286,7 +327,8 @@ def main() -> int:
 
 <section id="uniqueness">
   <h2>Uniqueness against public GEMS submissions (MEASURED)</h2>
-  <p>138 registry rasters (12 repos, GEMSDOE29 and GEMSDOE32 downloads, official sample). Spearman rho on 300k sampled footprint pixels. Overlap = share of our dots within 3 px of that file's dots. Flags: rho &gt; 0.90 or overlap &gt; 0.70.</p>
+  <p>{uniq['n_registry_files']} single-band registry rasters on the competition grid (population: <code>evidence/registry_inventory/inventory.json</code>). Spearman rho on 300k sampled footprint pixels. Overlap = share of our dots within 3 px of that file's dots. Flags: rho &gt; 0.90 or overlap &gt; 0.70. The earlier 138-file receipt is kept as <code>evidence/uniqueness_check_prior138.json</code> and is not comparable (IR-53-23).</p>
+  <p class="note">Confound (IR-53-20): {n_dense} of the flagged files cover at least half the footprint, so overlap approaches 100% for any dense map. The lift column separates density from placement.</p>
   <table><tr><th>Repo</th><th>File (first 58 chars)</th><th>Spearman rho</th><th>Our dots within 3 px</th><th>Registry dots</th><th>Flag</th></tr>{uniq_rows}</table>
   <h3>Chance baseline for the overlap flag (diagnostic only; does not change any flag)</h3>
   <p>Expected overlap = share of the footprint within 3 px of that file's dots (what random placement would give at the same density). Lift = observed ÷ expected.</p>
@@ -347,6 +389,8 @@ def main() -> int:
     for rel in ["evidence/run_card.json", "evidence/exp1_leakage_canary.json", "evidence/exp2_holdout_arms.json",
                 "evidence/uniqueness_check.json", "evidence/overlap_baseline.json", "evidence/selection.json",
                 "registry/irregularities.json", "registry/limitations.json", "registry/sources.json",
+                "evidence/exp4_hypothesis_canary.json", "evidence/exp5_holdout_bands_vs_ridge.json",
+                "evidence/registry_inventory/inventory.json",
                 "evidence/candidates/gems53-hgb-bands-q0p02.receipt.json"]:
         (data_dir / Path(rel).name).write_text((ROOT / rel).read_text())
     (DOCS / ".nojekyll").write_text("")  # serve the static HTML as-is (no Jekyll processing)

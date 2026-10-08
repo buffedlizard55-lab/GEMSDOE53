@@ -15,6 +15,7 @@ Arms:
   leakfree     : bands + distance to visible faults, learn-predict separated (4x4-block cross-fit)
   leaky_ablate : bands + distance to the FULL catalogue                 (GEMSDOE29 defect; demonstrates
                  that a holdout built this way is inflated; NOT a candidate)
+  bands_ridge  : bands + label-free magnetic ridge on RTP (H2; no catalogue input)
 
 Writes evidence/exp2_holdout_arms.json. Usage: python scripts/exp2_holdout_arms.py --data-dir /tmp/gems53-data
 """
@@ -40,6 +41,7 @@ from gems53.core import (  # noqa: E402
     fine_and_quad_blocks,
     leaky_distance_grid,
     load_inputs,
+    rtp_ridge_grid,
     segment_folds,
 )
 
@@ -47,7 +49,7 @@ K_FOLDS = 5
 T_CRIT_DF4 = 2.776  # two-sided 95% t critical value, df = K-1 = 4
 Q_GRID = [0.005, 0.0073, 0.01, 0.02]  # fraction of footprint pixels emitted (0.0073 ~ the 37,654-dot files)
 N_NEG = 300_000
-ARMS = ["bands", "leakfree", "leaky_ablate"]
+ARMS = ["bands", "leakfree", "leaky_ablate", "bands_ridge"]
 
 
 def sha256(path: Path) -> str:
@@ -124,6 +126,11 @@ def main() -> int:
             buf = buffer_zone(hidden, 10)
             if arm == "bands":
                 F_all = inp.feats
+                dist = None
+            elif arm == "bands_ridge":
+                if k == 0:
+                    ridge_grid = rtp_ridge_grid(str(dd / "training_features.tif"), inp.fp)
+                F_all = np.column_stack([inp.feats, ridge_grid[inp.fp]]).astype(np.float32)
                 dist = None
             else:
                 if arm == "leakfree":

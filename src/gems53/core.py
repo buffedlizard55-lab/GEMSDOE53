@@ -144,6 +144,60 @@ def leaky_distance_grid(cat: np.ndarray) -> np.ndarray:
 
 
 # ----------------------------------------------------------------------------------------------
+# H2 feature: label-free magnetic ridge (multi-scale Hessian). Uses ONLY the reduced-to-pole band.
+# ----------------------------------------------------------------------------------------------
+
+RIDGE_SIGMAS_PX = (1.0, 2.0, 3.0)  # 100, 200, 300 m
+
+
+def ridge_feature(band: np.ndarray, sigmas=RIDGE_SIGMAS_PX) -> np.ndarray:
+    """Scale-normalised linear-ridge strength (bright or dark), max over scales. No catalogue input.
+
+    For each scale s: lam_big / lam_small are the Hessian eigenvalues ordered by |.|;
+    response = s^2 * |lam_big| * linearity, linearity = 1 - |lam_small|/|lam_big| (0 for blobs),
+    clipped to >= 0. Output is max over scales, float32, same shape as the input.
+    """
+    from scipy import ndimage
+
+    best = np.zeros(band.shape, dtype=np.float32)
+    for s in sigmas:
+        hxx = ndimage.gaussian_filter(band, s, order=(0, 2))
+        hyy = ndimage.gaussian_filter(band, s, order=(2, 0))
+        hxy = ndimage.gaussian_filter(band, s, order=(1, 1))
+        tmp = np.sqrt(((hxx - hyy) / 2) ** 2 + hxy ** 2)
+        l1 = (hxx + hyy) / 2 + tmp
+        l2 = (hxx + hyy) / 2 - tmp
+        use1 = np.abs(l1) >= np.abs(l2)
+        big = np.where(use1, l1, l2)
+        small = np.where(use1, l2, l1)
+        lin = np.clip(1.0 - np.abs(small) / (np.abs(big) + 1e-12), 0.0, 1.0)
+        r = (s ** 2) * np.abs(big) * lin
+        best = np.maximum(best, r.astype(np.float32))
+    return best
+
+
+def rtp_ridge_grid(features_path: str, footprint: np.ndarray, band: int = 2) -> np.ndarray:
+    """Ridge feature on the full grid from band `band` (1-based; band 2 = reduced-to-pole magnetics).
+
+    Sentinel/NaN cells (nodata) are filled with the footprint mean before filtering so that the
+    filter does not respond to the nodata edge; output is set to 0 outside the footprint.
+    """
+    import rasterio
+
+    with rasterio.open(features_path) as src:
+        x = src.read(band).astype(np.float64)
+        nod = src.nodata
+    bad = ~np.isfinite(x) | (x < FEATURE_NODATA_THRESHOLD)
+    if nod is not None and np.isfinite(nod):
+        bad |= x == nod
+    fill = float(np.nanmean(np.where(bad, np.nan, x)[footprint]))
+    x = np.where(bad, fill, x) - fill
+    out = ridge_feature(x).astype(np.float32)
+    out[~footprint] = 0.0
+    return out
+
+
+# ----------------------------------------------------------------------------------------------
 # Metric: distance-weighted Tversky index (official definition)
 # ----------------------------------------------------------------------------------------------
 
@@ -224,24 +278,30 @@ def dti_bruteforce(p: np.ndarray, gt: np.ndarray, alpha: float = ALPHA, beta: fl
 # ----------------------------------------------------------------------------------------------
 
 
-def write_submission(path: str, emission: np.ndarray, transform, crs, outside_nan: bool) -> None:
-    """Write a single-band float32 GeoTIFF. outside_nan=True matches the official sample_submission.tif."""
+def write_submission(path: str, emission: np.ndarray, transform, crs, outside_nan: bool,
+                     compress: str | None = "lzw") -> None:
+    """Write a single-band float32 GeoTIFF. outside_nan=True matches the official sample_submission.tif.
+
+    compress='lzw' matches the organizer's sample (compress=lzw, one strip per row, nodata NaN). Compression
+    is lossless: pixel values are unchanged, and tests/test_submission.py checks the round-trip.
+    """
     import rasterio
 
     H, W = emission.shape
     arr = emission.astype(np.float32, copy=True)
     if outside_nan:
         arr[np.isnan(arr)] = np.nan
+    kwargs = {} if compress is None else {"compress": compress}
     with rasterio.open(
         path, "w", driver="GTiff", height=H, width=W, count=1, dtype="float32",
-        crs=crs, transform=transform, nodata=(float("nan") if outside_nan else None),
+        crs=crs, transform=transform, nodata=(float("nan") if outside_nan else None), **kwargs,
     ) as dst:
         dst.write(arr, 1)
 
 
 def validate_submission(path: str, footprint: np.ndarray, transform, crs, H: int, W: int) -> dict:
     """Checks that mirror the official format text: CRS, shape, transform, dtype, single band, values in
-    [0,1] wherever finite, no NaN/inf inside the footprint, outside-footprint pixels null or NaN OR zero."""
+    [0,1] wherever finite, no NaN/inf inside the footprint, outside-footprint pixels null or NaN (only)."""
     import rasterio
 
     res = {"path": path, "checks": {}}
@@ -259,8 +319,9 @@ def validate_submission(path: str, footprint: np.ndarray, transform, crs, H: int
     res["checks"]["no_nan_or_inf_inside_footprint"] = bool(np.isfinite(x[inside]).all())
     res["checks"]["inside_footprint_in_0_1"] = bool(((x[inside] >= 0) & (x[inside] <= 1)).all())
     outside = ~inside
-    outside_ok = bool(np.all(np.isnan(x[outside]) | (x[outside] == 0)))
-    res["checks"]["outside_footprint_nan_or_zero"] = outside_ok
+    # Official text (drivendata page 967, "Submission format"): "data outside the bounds is null or nan".
+    # Zero outside is NOT accepted here (IR-53-18: this check used to allow zero, which the rule does not).
+    res["checks"]["outside_footprint_nan"] = bool(np.isnan(x[outside]).all())
     res["checks"]["all_finite_values_in_0_1"] = bool(((x[finite] >= 0) & (x[finite] <= 1)).all())
     res["counts"] = {
         "footprint_px": int(inside.sum()),

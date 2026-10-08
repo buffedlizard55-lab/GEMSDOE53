@@ -35,9 +35,10 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
   It checks CRS, 100 m, single float32 band, values in [0, 1], finite exactly on the template's valid region, NaN elsewhere, the nodata tag, and the training shape. In-lane checks (core.py) are in the receipt. A validator pass is not a portal acceptance.</p>
   <h2>Why it is not offered</h2>
   <ul>
-    <li>Rank correlation with 138 public registry rasters: max 0.164. Below the 0.90 flag.</li>
-    <li>Share of our dots within 3 px of another file's dots: max 0.795. Above the 0.70 stop threshold, so the protocol stops the candidate.</li>
-    <li>Chance baseline (diagnostic only; flags unchanged): the largest lift over random placement at the same registry density is 4.20×. This means the overlap is placement, not just density. See <a href="evidence.html#uniqueness">the uniqueness table</a>.</li>
+    <li>Population: 613 single-band registry rasters on the competition grid (from 907 mirrored tif files; 628 unique). Rank correlation: max 0.517, below the 0.90 flag.</li>
+    <li>Share of our dots within 3 px of another file's dots: 163 files above the 0.70 stop threshold (max 1.000), so the protocol stops the candidate.</li>
+    <li>Closest match: 17GEMSDOE F-ensemble-2pct, 75.8% overlap, lift 15.2×, rank correlation 0.507. Our recipe duplicates an existing one (IR-53-21).</li>
+    <li>Chance baseline (diagnostic only; flags unchanged): the largest lift over random placement at the same registry density is 15.18×. This means the overlap is placement, not just density. See <a href="evidence.html#uniqueness">the uniqueness table</a>.</li>
   </ul>
   <p class="note">Files are at <code>/tmp/gems53-held/</code> (not in the repository; they are 49 MB each). They can be regenerated with <code>scripts/exp3_build_submission.py</code> and checked against the sha256 values above.</p>
 </section>
