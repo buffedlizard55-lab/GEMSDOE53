@@ -1,11 +1,11 @@
-Validating /tmp/gems53-held/gems53-hgb-bands-q0p02-nan.tif
+Validating docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif
   Width: 3292, Height: 3730, Count: 1, Dtype: ('float32',), CRS: EPSG:32611, Res: (100.0, 100.0), Nodata: nan
-  Data min: 0.0000, max: 0.8852, mean: 0.0115, nan%: 57.92%
+  Data min: 0.0000, max: 1.0000, mean: 0.0073, nan%: 57.92%
   ✓ CRS EPSG:32611
   ✓ Resolution 100m
   ✓ Single band
   ✓ Dtype float32
-  ✓ Values in [0,1] (min 0.0000 max 0.8852)
+  ✓ Values in [0,1] (min 0.0000 max 1.0000)
   ✓ Size matches sample 3292x3730
   ✓ Transform matches sample
   ✓ All 5,167,373 template-valid px are finite in [0,1]

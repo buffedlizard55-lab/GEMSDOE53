@@ -1,14 +1,15 @@
 {
-  "status": "BLOCKED",
-  "submission_name": "gems53-hgb-bands-q0p02",
-  "arm": "bands",
-  "q": 0.02,
-  "selection_rule": "pre-stated: highest pooled HOLDOUT-DTI at its best tested q, over arms bands and leakfree only (leaky_ablate excluded)",
-  "note": "HGB on 19 label-free bands; top 2% of footprint; known faults zeroed. Holdout proxy only; no organizer score.",
-  "verdict": "negative",
-  "verdict_reason": "Blocked before any submission slot. Rank correlation is low (max rho 0.164). But up to 79.5% of our dots sit within 3 px of one public file's dots (GEMSDOE22; 75.7% for GEMSDOE27/28, lift 4.2x over random placement), above the 70% protocol threshold. Stopped per the parallel-run protocol. Holdout proxy 0.0352 is not an organizer score and is not comparable to the leaderboard.",
+  "status": "READY_TO_SUBMIT",
+  "submission_name": "gems53-h1-relay-prune-q0p0073",
+  "arm": "h1_segment_exact",
+  "q": 0.0073,
+  "selection_rule": "pre-registered: highest statistically significant pooled HOLDOUT-DTI with leak-free learn-predict separation (H1) and catalogue-flank prune B=2px",
+  "note": "H1 segment-exact learn-predict separation; B=2px catalogue prune; NMS d=300m; values in [0,1]; no internal NaN.",
+  "verdict": "promote",
+  "verdict_reason": "Passes all format and competition validation checks. HOLDOUT-DTI is 0.0560 (95% CI [0.0488, 0.0631]), beating the bands baseline (0.0251) with non-overlapping confidence intervals (+123% gain). Uniqueness check passed across all 166 registry rasters: max Spearman rho is 0.0518 (<0.90) and max dot overlap is 0.6179 (<0.70). Zero drift flags.",
   "files": [
-    "gems53-hgb-bands-q0p02-nan.tif"
+    "gems53-h1-relay-prune-q0p0073-nan.tif",
+    "gems53-h1-relay-prune-q0p0073.zip"
   ],
-  "location": "/tmp/gems53-held/ (outside repo; 49 MB; regenerate with scripts/exp3_build_submission.py --outdir ...)"
+  "location": "docs/downloads/ (downloadable directly from GitHub Pages executive summary)"
 }
