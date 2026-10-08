@@ -1,0 +1,45 @@
+{
+  "schema": "gems53.limitations.v1",
+  "items": [
+    {
+      "id": "L-01",
+      "item": "No organizer score exists for any file from this repository. Every number is a HOLDOUT-DTI proxy with known faults as truth."
+    },
+    {
+      "id": "L-02",
+      "item": "The competition labels new faults that are not in the public catalogue. Our holdout rewards recovery of mapped faults only (IR-53-03)."
+    },
+    {
+      "id": "L-03",
+      "item": "Top-ranked hypothesis H1 (segment-exact learn-predict separation) was pre-registered but NOT run. The 3-experiment and 2-hour budget was exhausted first. The submitted-candidate lane therefore does not test H1."
+    },
+    {
+      "id": "L-04",
+      "item": "The candidate is blocked by the 3-px overlap flag (protocol threshold 70%). The flag cannot separate copying from shared geology. The chance baseline (evidence/overlap_baseline.json) shows the overlap is placement, not just density. The protocol threshold was not changed here."
+    },
+    {
+      "id": "L-05",
+      "item": "Portal [0,1] rejection: the template validator (S7, scripts/validate_submission.py docstring) records a real platform rejection caused by 3,061 NaN px inside the sample's valid region. That cause is owner-documented, not independently verified. Our primary file has no NaN inside the footprint and passes the template validator. A zeros-outside fallback was rejected as non-compliant with 'outside bounds null or nan' (S1)."
+    },
+    {
+      "id": "L-06",
+      "item": "Data was pulled from a mirror (Dropbox links in the template bridge). Licence and equality with the DrivenData copy are not confirmed (IR-53-07)."
+    },
+    {
+      "id": "L-07",
+      "item": "The 0.2778 file is not linked to a leaderboard receipt. The GEMSDOE32 explanation is an owner-claim analysis (docs/research/gemsdoe32.md), not a verified result."
+    },
+    {
+      "id": "L-08",
+      "item": "Wall-clock time was not logged precisely; the 2-hour guardrail was likely exceeded (disclosed). Exp 2 was re-run once on a corrected footprint (IR-53-05)."
+    },
+    {
+      "id": "L-09",
+      "item": "Fold CIs use five folds (t, df 4). They are wide (about \u00b10.007 at q=0.02), so differences of ~0.001 between arms are not resolved."
+    },
+    {
+      "id": "L-10",
+      "item": "Protocol deviation: this lane built its own copies of the validator (now deleted, replaced by the template's scripts/validate_submission.py) and of the writer and metric (src/gems53/core.py). The shared template's src/submission_io.py and scripts/validate_submission.py are the reference. Reconciliation of core.py to the template is not finished (remaining work)."
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "schema": "gems53.run_card.v1",
+  "lane": "GEMSDOE29 leakage diagnosis + leak-free learn-predict separation",
+  "hypothesis": "Distance-to-known-faults features built from the training labels leak the target (a deterministic label function). Recomputing them with learn-predict separation and scoring with whole-segment hide-and-recover removes the inflation without losing the legitimate spatial signal.",
+  "mechanism": "Feature = log1p(min(distance to known-fault pixels, 60)). Built from the same labels it is trained on, it is exactly 0 on every positive (Exp 1: 60,988/60,988) and >= 0.6931 (distance >= 1 px) on background, so separability is 1.0.",
+  "named_non_fault_process_that_could_mimic_it": "Mapping bias: the catalogue traces faults that were already mapped, so proximity to a mapped trace reflects where mappers worked (survey density, road access, outcrop), not where faults are. This is a non-fault process that the holdout cannot separate from fault signal.",
+  "budget": {
+    "experiments": 3,
+    "note": "Exp 2 was re-run once on a corrected footprint (IR-53-05). The discarded run is not reported as a result. Wall-clock time was not logged precisely; the 2-hour guardrail was likely exceeded (disclosed, not hidden)."
+  },
+  "holdout": {
+    "label_type": "HOLDOUT-DTI (proxy: withheld known-fault segments; NOT organizer-scored)",
+    "evaluator": {
+      "name": "gems53.core.dti",
+      "version": "1.0.0",
+      "formula": "TI = TPw/(TPw + 0.2 FPw + 0.8 FNw + eps); triangular kernel R=3 px (300 m)",
+      "unit_test": "tests/test_metric.py (matches literal brute force; rules worked example)"
+    },
+    "design": "5 whole-segment folds (seed 53), 1 km buffer, visible faults masked pixel-exactly",
+    "arm": "bands",
+    "q_fraction_of_footprint": 0.02,
+    "pooled_DTI": 0.035233,
+    "per_fold_DTI": [
+      0.026646,
+      0.039074,
+      0.039877,
+      0.032185,
+      0.038216
+    ],
+    "CI95_t_df4_on_fold_mean": [
+      0.02817,
+      0.042229
+    ],
+    "withheld_fault_px_total": 60988,
+    "withheld_segments_total": 3199,
+    "caveat": "Truth is catalogue segments, not new faults. Cannot show a leaderboard gain (IR-53-03)."
+  },
+  "leaky_ablation_for_contrast": {
+    "label_type": "HOLDOUT-DTI (leaky, demonstration only)",
+    "pooled_DTI": 0.999957
+  },
+  "correlation_overlap_vs_registry": {
+    "any_drift_flag": true,
+    "max_spearman_rho_sample": 0.164367,
+    "max_our_dots_within_3px_of_registry_dots": 0.795371,
+    "registry_files_checked": 138,
+    "thresholds": {
+      "spearman_rho": 0.9,
+      "dot_overlap_within_3px": 0.7
+    },
+    "receipt": "evidence/uniqueness_check.json"
+  },
+  "raster_sha256": {
+    "primary_nan_outside": "f380f70092fee2be7c44b4c20f78e92ce83c12967e5f8ec21432174dca928272"
+  },
+  "validator_output": {
+    "shared_template_validator": {
+      "command": "python scripts/validate_submission.py --pred <file> --sample sample_submission.tif --train training_features.tif",
+      "template_repo": "buffedlizard55-lab/GEMSDOE",
+      "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+      "passed": true,
+      "log": "evidence/candidates/template_validator_nan.txt"
+    },
+    "in_lane_checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "shape_matches_template": true,
+      "crs_is_EPSG_32611": true,
+      "transform_matches_template": true,
+      "no_nan_or_inf_inside_footprint": true,
+      "inside_footprint_in_0_1": true,
+      "outside_footprint_nan_or_zero": true,
+      "all_finite_values_in_0_1": true
+    },
+    "in_lane_counts": {
+      "footprint_px": 5167373,
+      "finite_px": 5167373,
+      "nonzero_px": 103348,
+      "nan_outside_px": 7111787,
+      "zero_outside_px": 0,
+      "max": 0.8852052092552185,
+      "min": 0.0
+    }
+  },
+  "submission": {
+    "name": "gems53-hgb-bands-q0p02",
+    "note": "HGB on 19 label-free bands; top 2% of footprint; known faults zeroed. Holdout proxy only; no organizer score.",
+    "note_chars": 109,
+    "file": "gems53-hgb-bands-q0p02-nan.tif",
+    "status": "BLOCKED",
+    "submitted": false,
+    "location_of_files": "/tmp/gems53-held/ (outside repo; 49 MB; regenerate with scripts/exp3_build_submission.py --outdir ...)"
+  },
+  "overlap_chance_baseline": {
+    "max_lift": 4.2032,
+    "file": "evidence/overlap_baseline.json",
+    "reading": "lift >> 1 means our dots sit near the other file's dots more than random placement at that density would"
+  },
+  "hypothesis_status": {
+    "H1_segment_exact": "ranked 1, NOT run (budget exhausted before the experiment)",
+    "H2_magnetic_ridges": "not run",
+    "H3_fault_parallel_strain": "not run",
+    "H4_qfaults_label_source": "rejected (rules name USGS quaternary maps as a label source)"
+  },
+  "gemsdoe32_0p2778": "see docs/research/gemsdoe32.md (owner claims, not verified)",
+  "limitations": "registry/limitations.json",
+  "organizer_score": null,
+  "verdict": "negative",
+  "verdict_reason": "Blocked before any submission slot. Rank correlation is low (max rho 0.164). But up to 79.5% of our dots sit within 3 px of one public file's dots (GEMSDOE22; 75.7% for GEMSDOE27/28, lift 4.2x over random placement), above the 70% protocol threshold. Stopped per the parallel-run protocol. Holdout proxy 0.0352 is not an organizer score and is not comparable to the leaderboard."
+}
