@@ -86,3 +86,35 @@ files with those names. The mapping above is the nearest shared tool and is an i
   (only from a submission-page receipt; none exists in this session).
 - Known caveat stated before running: E1 selects among about 24 variants on the same folds, so the E1 gain is
   optimistic. E2 is the fair test.
+
+## 8. Amendment DEV-1 (written after E1 finished its design-A arms and before any design-B run)
+
+**Found during E1.** The exp2 negative pool was `fp & ~cat & ~buf`. The buffer is defined from the WITHHELD faults, so
+the pool depends on withheld locations. Measured on the segment folds (seed 53): the buffer removes 371,176 to 390,883
+negative pixels per fold, which is 7.3% to 7.6% of the pool, and all of them lie within 10 px of a withheld fault.
+Those are the hardest negatives, and dropping them can only push the emission toward withheld locations. This is the
+negative-pool side channel that the GEMSDOE29 audit flagged (docs/leakage-review.md). The E1 H1 fold-0 jump (0.0266 to
+0.0631) must not be read as a result until it is re-tested under a pool that does not depend on withheld labels.
+
+**Corrected design (design B), used for every number in E2 and E3:**
+- positives: visible faults outside the 10 px buffer (pixel-exact visible mask, as before);
+- negatives: every footprint pixel that is NOT a visible fault (withheld faults, buffer and background are all
+  candidates, so the training pool does not depend on withheld locations). This is the situation the real
+  competition is posed in: unknown faults sit inside the unlabelled pool;
+- every other rule unchanged: 300k negatives per fold, `default_rng(53)` per arm, same model, same folds, same
+  evaluator, pooled DTI, t-based CI with df = 4.
+
+**Consequences, pre-registered now:**
+- The current holdout best is **re-established under design B**: bands top-q 0.02 under design B. The 0.035233 figure
+  is design A and is reported only as the leaky reference.
+- Selection rule of section 4 applies unchanged, against the design-B baseline.
+- Confirmation rule of section 5 applies unchanged: spatial contiguous super-regions, paired t-interval (df = 4) lower
+  bound above 0 against the design-B bands top-q 0.02 baseline.
+- Canary (section 4) is recomputed under design B: withheld positives against the full non-fault background
+  (footprint and not any known fault), not against a buffered background, since the buffer is also a withheld-derived
+  exclusion.
+- E1 (design A) is kept in `evidence/e1_h1_thin_holdout.json`, unchanged, and is not used for selection.
+- Experiment count: E1 (design A, exploration, stopped as a design error) and E2 (design B, selection plus confirmation)
+  are the two holdout experiments. E3 is the build. The 3-experiment limit is respected.
+- Removed: `scripts/e2_spatial_block_confirm.py` (design A, written but never run) is deleted in the same commit. Its
+  content is superseded by `scripts/e2_leakfree_holdouts.py`.
