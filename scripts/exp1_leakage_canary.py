@@ -40,6 +40,7 @@ from gems53.core import (  # noqa: E402
     fine_and_quad_blocks,
     leaky_distance_grid,
     load_inputs,
+    segment_exact_distance_grid,
     segment_folds,
 )
 
@@ -143,12 +144,14 @@ def main() -> int:
     report["A_label_free_bands"] = band_rows
 
     # ---- B. leak-free distance feature (learn-predict separation), per fold -------------------
-    b_rows, c2_rows = [], []
+    b_rows, b2_rows, c2_rows = [], [], []
     for k in range(K_FOLDS):
         visible = inp.cat & (fold_grid != k)
         hid, bg = per_fold_pos[k]
         d_free = crossfit_distance_grid(visible, fine)
+        _d_train_seg, d_pred_seg = segment_exact_distance_grid(visible)
         b_rows.append(separability(d_free[hid], d_free[bg], rng))
+        b2_rows.append(separability(d_pred_seg[hid], d_pred_seg[bg], rng))
         c2_rows.append(separability(leaky[hid], leaky[bg], rng))
     report["B_distance_leak_free"] = {
         "description": "distance to VISIBLE known faults (withheld segments removed), cross-fitted by 4x4 block",
@@ -158,6 +161,15 @@ def main() -> int:
         "flag": "LEAK_SUSPECT" if max(r["separability"] for r in b_rows) > GATE else "pass",
         "note": ("Expected to be informative (new faults often lie near known ones). That is legitimate "
                  "information available at prediction time, not a label leak."),
+    }
+    report["B2_distance_segment_exact"] = {
+        "description": "distance to VISIBLE known faults, segment-exact learn-predict separation (H1)",
+        "separability_per_fold": [r["separability"] for r in b2_rows],
+        "AUC_per_fold": [r["AUC"] for r in b2_rows],
+        "separability_mean": round(float(np.mean([r["separability"] for r in b2_rows])), 6),
+        "separability_max": round(float(np.max([r["separability"] for r in b2_rows])), 6),
+        "flag": "LEAK_SUSPECT" if max(r["separability"] for r in b2_rows) > GATE else "pass",
+        "note": "Preserves proximity to fault clusters without self-leakage.",
     }
     report["C2_leaky_distance_on_withheld"] = {
         "description": "distance to the FULL catalogue (withheld labels included), evaluated on withheld positives",

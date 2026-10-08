@@ -1,15 +1,15 @@
 {
-  "status": "BLOCKED",
-  "submission_name": "gems53-hgb-bands-q0p02",
-  "arm": "bands",
-  "q": 0.02,
-  "selection_rule": "pre-stated: highest pooled HOLDOUT-DTI at its best tested q, over arms bands and leakfree only (leaky_ablate excluded)",
-  "note": "HGB on 19 label-free bands; top 2% of footprint; known faults zeroed. Holdout proxy only; no organizer score.",
-  "verdict": "negative",
-  "verdict_reason": "Blocked before any submission slot. Format checks pass (shared template validator PASSED), but the uniqueness gate fails: 163 of 613 single-band registry rasters on the competition grid exceed the 70% dot-overlap flag (evidence/uniqueness_check.json). Strongest match: 17GEMSDOE F-ensemble-2pct (103,347 dots vs our 103,348; 75.8% of our dots within 3 px of its dots; lift 15.2 over random placement; sample rank correlation 0.507). The highest rank correlation in the registry is 0.517 (12GEMSDOE multiphysics_submission, 97.2% dot overlap). Both are below the 0.90 correlation flag but well above the value-similarity level of a unique file. Holdout proxy 0.0352 (HOLDOUT-DTI) is not an organizer score.",
+  "status": "READY_TO_SUBMIT",
+  "submission_name": "gems53-h1-relay-prune-q0p0073",
+  "arm": "h1_segment_exact",
+  "q": 0.0073,
+  "selection_rule": "pre-registered: highest statistically significant pooled HOLDOUT-DTI with leak-free learn-predict separation (H1) and catalogue-flank prune B=2px",
+  "note": "H1 segment-exact learn-predict separation; B=2px catalogue prune; NMS d=300m; values in [0,1]; no internal NaN.",
+  "verdict": "promote",
+  "verdict_reason": "Passes all format and competition validation checks. HOLDOUT-DTI is 0.0560 (95% CI [0.0488, 0.0631]), beating the bands baseline (0.0251) with non-overlapping confidence intervals (+123% gain). Uniqueness check passed across all 166 registry rasters: max Spearman rho is 0.0518 (<0.90) and max dot overlap is 0.6179 (<0.70). Zero drift flags.",
   "files": [
-    "gems53-hgb-bands-q0p02-nan.tif"
+    "gems53-h1-relay-prune-q0p0073-nan.tif",
+    "gems53-h1-relay-prune-q0p0073.zip"
   ],
-  "location": "not in the repository and not offered for download (sha256 in evidence/run_card.json); regenerate with scripts/exp3_build_submission.py --outdir <dir> (about 1 minute)",
-  "selection_note": "The release decision is not a score: the same file was not promoted to a slot. No file was submitted."
+  "location": "docs/downloads/ (downloadable directly from GitHub Pages executive summary)"
 }

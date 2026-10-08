@@ -138,63 +138,51 @@ def crossfit_distance_grid(visible: np.ndarray, fine: np.ndarray) -> np.ndarray:
     return out
 
 
+def segment_exact_distance_grid(visible: np.ndarray, max_dist: float = 60.0) -> tuple[np.ndarray, np.ndarray]:
+    """Segment-exact learn-predict separation for the distance-to-known-faults feature (Hypothesis H1).
+
+    For training:
+      - Positives on segment s: distance to all OTHER visible segments (excluding segment s).
+      - Background pixels: distance to any visible segment.
+    For prediction:
+      - All pixels: distance to any visible segment (since an unmapped test fault is absent from the catalogue).
+
+    Returns:
+      (train_dist, pred_dist) where each is log1p(min(d_px, max_dist)) as float32.
+    """
+    from scipy import ndimage
+    L_sub, n_sub = ndimage.label(visible, structure=np.ones((3, 3), bool))
+    d_base = np.clip(ndimage.distance_transform_edt(~visible), 0, max_dist).astype(np.float32)
+    train_dist = d_base.copy()
+    slices = ndimage.find_objects(L_sub)
+    margin = int(max_dist)
+    H, W = visible.shape
+    for s_idx in range(n_sub):
+        seg_id = s_idx + 1
+        sl = slices[s_idx]
+        if sl is None:
+            continue
+        r0 = max(0, sl[0].start - margin)
+        r1 = min(H, sl[0].stop + margin)
+        c0 = max(0, sl[1].start - margin)
+        c1 = min(W, sl[1].stop + margin)
+        local_vis = visible[r0:r1, c0:c1].copy()
+        local_L = L_sub[r0:r1, c0:c1]
+        seg_px = local_L == seg_id
+        if not seg_px.any():
+            continue
+        local_vis[seg_px] = False
+        if local_vis.any():
+            d_loc = np.clip(ndimage.distance_transform_edt(~local_vis), 0, max_dist).astype(np.float32)
+            train_dist[r0:r1, c0:c1][seg_px] = d_loc[seg_px]
+        else:
+            train_dist[r0:r1, c0:c1][seg_px] = max_dist
+    return log_dist_feature(train_dist), log_dist_feature(d_base)
+
+
 def leaky_distance_grid(cat: np.ndarray) -> np.ndarray:
     """DELIBERATELY LEAKY reproduction of the GEMSDOE29 defect (used only in the leakage canary/ablation)."""
     return log_dist_feature(dist_to(cat))
-
-
-# ----------------------------------------------------------------------------------------------
-# H2 feature: label-free magnetic ridge (multi-scale Hessian). Uses ONLY the reduced-to-pole band.
-# ----------------------------------------------------------------------------------------------
-
-RIDGE_SIGMAS_PX = (1.0, 2.0, 3.0)  # 100, 200, 300 m
-
-
-def ridge_feature(band: np.ndarray, sigmas=RIDGE_SIGMAS_PX) -> np.ndarray:
-    """Scale-normalised linear-ridge strength (bright or dark), max over scales. No catalogue input.
-
-    For each scale s: lam_big / lam_small are the Hessian eigenvalues ordered by |.|;
-    response = s^2 * |lam_big| * linearity, linearity = 1 - |lam_small|/|lam_big| (0 for blobs),
-    clipped to >= 0. Output is max over scales, float32, same shape as the input.
-    """
-    from scipy import ndimage
-
-    best = np.zeros(band.shape, dtype=np.float32)
-    for s in sigmas:
-        hxx = ndimage.gaussian_filter(band, s, order=(0, 2))
-        hyy = ndimage.gaussian_filter(band, s, order=(2, 0))
-        hxy = ndimage.gaussian_filter(band, s, order=(1, 1))
-        tmp = np.sqrt(((hxx - hyy) / 2) ** 2 + hxy ** 2)
-        l1 = (hxx + hyy) / 2 + tmp
-        l2 = (hxx + hyy) / 2 - tmp
-        use1 = np.abs(l1) >= np.abs(l2)
-        big = np.where(use1, l1, l2)
-        small = np.where(use1, l2, l1)
-        lin = np.clip(1.0 - np.abs(small) / (np.abs(big) + 1e-12), 0.0, 1.0)
-        r = (s ** 2) * np.abs(big) * lin
-        best = np.maximum(best, r.astype(np.float32))
-    return best
-
-
-def rtp_ridge_grid(features_path: str, footprint: np.ndarray, band: int = 2) -> np.ndarray:
-    """Ridge feature on the full grid from band `band` (1-based; band 2 = reduced-to-pole magnetics).
-
-    Sentinel/NaN cells (nodata) are filled with the footprint mean before filtering so that the
-    filter does not respond to the nodata edge; output is set to 0 outside the footprint.
-    """
-    import rasterio
-
-    with rasterio.open(features_path) as src:
-        x = src.read(band).astype(np.float64)
-        nod = src.nodata
-    bad = ~np.isfinite(x) | (x < FEATURE_NODATA_THRESHOLD)
-    if nod is not None and np.isfinite(nod):
-        bad |= x == nod
-    fill = float(np.nanmean(np.where(bad, np.nan, x)[footprint]))
-    x = np.where(bad, fill, x) - fill
-    out = ridge_feature(x).astype(np.float32)
-    out[~footprint] = 0.0
-    return out
 
 
 # ----------------------------------------------------------------------------------------------

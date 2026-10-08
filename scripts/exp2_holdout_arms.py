@@ -15,7 +15,6 @@ Arms:
   leakfree     : bands + distance to visible faults, learn-predict separated (4x4-block cross-fit)
   leaky_ablate : bands + distance to the FULL catalogue                 (GEMSDOE29 defect; demonstrates
                  that a holdout built this way is inflated; NOT a candidate)
-  bands_ridge  : bands + label-free magnetic ridge on RTP (H2; no catalogue input)
 
 Writes evidence/exp2_holdout_arms.json. Usage: python scripts/exp2_holdout_arms.py --data-dir /tmp/gems53-data
 """
@@ -41,7 +40,7 @@ from gems53.core import (  # noqa: E402
     fine_and_quad_blocks,
     leaky_distance_grid,
     load_inputs,
-    rtp_ridge_grid,
+    segment_exact_distance_grid,
     segment_folds,
 )
 
@@ -49,7 +48,7 @@ K_FOLDS = 5
 T_CRIT_DF4 = 2.776  # two-sided 95% t critical value, df = K-1 = 4
 Q_GRID = [0.005, 0.0073, 0.01, 0.02]  # fraction of footprint pixels emitted (0.0073 ~ the 37,654-dot files)
 N_NEG = 300_000
-ARMS = ["bands", "leakfree", "leaky_ablate", "bands_ridge"]
+ARMS = ["bands", "leakfree", "h1_segment_exact", "leaky_ablate"]
 
 
 def sha256(path: Path) -> str:
@@ -97,7 +96,7 @@ def main() -> int:
     footprint_px = int(inp.fp.sum())
 
     report = {
-        "experiment": "E2 hide-and-recover holdout, three arms",
+        "experiment": "E2 hide-and-recover holdout, four arms (including H1 segment-exact)",
         "evaluator": {"name": "gems53.core.dti", "version": "1.0.0",
                       "formula": "TI = TPw/(TPw + 0.2 FPw + 0.8 FNw + eps); triangular kernel R=3 px (300 m)",
                       "unit_test": "tests/test_metric.py (matches literal brute force; rules worked example)"},
@@ -114,6 +113,12 @@ def main() -> int:
                  "l2_regularization=1.0, random_state=0); negatives 300k sampled per fold",
         "arms": {},
     }
+    if Path(args.out).exists():
+        try:
+            prev = json.loads(Path(args.out).read_text())
+            report["arms"].update(prev.get("arms", {}))
+        except Exception:
+            pass
 
     for arm in arms:
         arm_rows = []
@@ -125,19 +130,19 @@ def main() -> int:
             visible = inp.cat & (fold_grid != k)
             buf = buffer_zone(hidden, 10)
             if arm == "bands":
-                F_all = inp.feats
-                dist = None
-            elif arm == "bands_ridge":
-                if k == 0:
-                    ridge_grid = rtp_ridge_grid(str(dd / "training_features.tif"), inp.fp)
-                F_all = np.column_stack([inp.feats, ridge_grid[inp.fp]]).astype(np.float32)
-                dist = None
+                F_train = inp.feats
+                F_pred = inp.feats
+            elif arm == "h1_segment_exact":
+                d_train_seg, d_pred_seg = segment_exact_distance_grid(visible)
+                F_train = np.column_stack([inp.feats, d_train_seg[inp.fp]]).astype(np.float32)
+                F_pred = np.column_stack([inp.feats, d_pred_seg[inp.fp]]).astype(np.float32)
             else:
                 if arm == "leakfree":
                     dist = crossfit_distance_grid(visible, fine)
                 else:  # leaky_ablate
                     dist = leaky_distance_grid(inp.cat)
-                F_all = np.column_stack([inp.feats, dist[inp.fp]]).astype(np.float32)
+                F_train = np.column_stack([inp.feats, dist[inp.fp]]).astype(np.float32)
+                F_pred = F_train
 
             pos_mask = visible & ~buf & inp.fp
             neg_mask = inp.fp & ~inp.cat & ~buf
@@ -148,10 +153,10 @@ def main() -> int:
             y = np.r_[np.ones(pos_rows.size), np.zeros(neg_rows.size)]
             model = HistGradientBoostingClassifier(max_iter=200, learning_rate=0.1, max_leaf_nodes=31,
                                                    l2_regularization=1.0, random_state=0)
-            model.fit(F_all[rows], y)
+            model.fit(F_train[rows], y)
 
             p_full = np.zeros((inp.H, inp.W), dtype=np.float32)
-            p_full[inp.fp] = predict_chunked(model, F_all)
+            p_full[inp.fp] = predict_chunked(model, F_pred)
             p_full[visible] = 0.0  # pixel-exact mask of visible faults: the emission may not reuse them
 
             row = {"fold": k, "withheld_fault_px": int(hidden.sum()),
