@@ -140,10 +140,66 @@
     {
       "id": "IR-53-18",
       "severity": "medium",
+      "status": "closed",
+      "subject": "H1 (segment-exact learn-predict separation) was run as a canary and rejected",
+      "detail": "Run as Experiment 4 (evidence/exp4_hypothesis_canary.json). Pixel-level paired canary AUC = 1.000 (fault pixel vs adjacent non-fault pixel): the H1 feature is a function of the label, because a positive's own segment is removed and a negative's is not. Rejected by design. No holdout run was needed.",
+      "action": "Do not use H1 in any candidate. Keep the paired (pixel-neighbour) canary in every future feature audit."
+    },
+    {
+      "id": "IR-53-19",
+      "severity": "high",
       "status": "open",
-      "subject": "Hypothesis H1 was pre-registered but not run",
-      "detail": "The top-ranked hypothesis needed a 4th experiment, beyond the 3-experiment budget.",
-      "action": "Decide whether to spend budget on H1 before any new candidate is built."
+      "subject": "Mirrored example_submission.tif is pixel-identical to the known-fault labels, not the 'total fault absence' template the rules describe",
+      "detail": "Pixels equal to 1.0 in the mirror: 60,988; labels.tif pixels equal to 1: 60,988; identical mask (verified by np.array_equal). The official problem page says the sample 'predicts total fault absence' (S1, Submission format). The shared template validator also warns that an all-zero file is the 'total-fault-absence template'. Either the Dropbox mirror (S18) is not the official sample, or the official sample is not what the text says.",
+      "action": "Manual check on the DrivenData data tab (login needed; not done here). Until resolved, do not treat the mirrored sample as an official reference for the 'empty prediction' format."
+    },
+    {
+      "id": "IR-53-20",
+      "severity": "high",
+      "status": "open",
+      "subject": "The 70% overlap gate is confounded for dense registry rasters and includes non-submission files",
+      "detail": "Of 163 flagged registry rasters, 80 cover at least half the footprint, so 'our dots within 3 px' approaches 100% for any candidate (max observed 1.000). The mirror also contains feature and diagnostic rasters (for example acquisition block IDs, TIGER road distance, a context-detector probability map) that are not submissions. The lift (observed/expected) baseline (evidence/overlap_baseline.json) separates density from placement: median lift 1.77, 62 files at lift 1.2 or lower, and 17GEMSDOE F-ensemble-2pct at lift 15.2.",
+      "action": "Protocol owner to decide: restrict the registry to submission rasters and/or gate on lift. This session did not change the gate. It was applied as written."
+    },
+    {
+      "id": "IR-53-21",
+      "severity": "high",
+      "status": "open",
+      "subject": "Our 2%-of-footprint HGB candidate duplicates an existing registry submission's placement",
+      "detail": "17GEMSDOE F-ensemble-2pct (GEMSDOE17 repo, docs/downloads) has 103,347 dots against our 103,348; 75.8% of our dots are within 3 px of its dots (expected 5.0% by chance, lift 15.2), and the sample rank correlation is 0.507. The registry maximum rank correlation is 0.517 (12GEMSDOE multiphysics_submission, 97.2% overlap). Method attribution is an inference from the dot count and placement, not a verified fact about how those files were built.",
+      "action": "Do not release this recipe. Any future candidate needs a different method family, not a different quota, and must pass the uniqueness gate again."
+    },
+    {
+      "id": "IR-53-22",
+      "severity": "medium",
+      "status": "fixed",
+      "subject": "Repository validator accepted zeros outside the footprint",
+      "detail": "src/gems53/core.py validate_submission allowed zero outside the footprint ('nan OR zero'). The official text says null or NaN. Fixed in this session: the check is now NaN-only, with tests (tests/test_submission.py: test_zero_outside_footprint_is_rejected). The shared template validator already requires NaN exactly outside the template's valid region.",
+      "action": "Tests pass (13). Port the same rule to the shared template as a cross-check if it does not already exist there."
+    },
+    {
+      "id": "IR-53-23",
+      "severity": "medium",
+      "status": "open",
+      "subject": "The 138-raster registry in the earlier receipt cannot be reproduced",
+      "detail": "The earlier receipt used 138 registry rasters from /tmp/g53/uniq, which no longer exists. This session mirrored the public GEMSDOE* repositories by shallow git clone: 53 repositories contain tif files, giving 907 tif files. Inventory: 628 unique sha256; 613 single-band rasters on the competition grid (evidence/registry_inventory/inventory.json). The earlier receipt is kept as evidence/uniqueness_check_prior138.json and is not comparable.",
+      "action": "Use the 613-file inventory as the population. Document any change to the population."
+    },
+    {
+      "id": "IR-53-24",
+      "severity": "medium",
+      "status": "open",
+      "subject": "NLR rules section 3.2 requires a narrative disclosure of generative-AI use",
+      "detail": "The rules (S3, section 3.2, 'Indication of use of generative AI technology') require the extent and purpose of generative-AI use to be stated in the submission narrative. This work used AI-agent tooling for code, analysis and drafting. The disclosure is not yet written into a narrative.",
+      "action": "Draft the disclosure before any final submission. It is not a competition score issue, but it can disqualify a submission if missing."
+    },
+    {
+      "id": "IR-53-25",
+      "severity": "low",
+      "status": "open",
+      "subject": "Leaderboard snapshot time is not shown",
+      "detail": "The leaderboard page (S2) gives relative times only. Re-fetched this session: #1 xiaofanhu 0.3774, #2 alexoktaba 0.3345, #7 DARD 0.3195, #13 extradr19 0.2778. The 'highest score' 0.3195 in the request is therefore #7, not #1.",
+      "action": "Re-fetch before any slot decision."
     }
   ]
 }

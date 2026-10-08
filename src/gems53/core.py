@@ -266,25 +266,30 @@ def dti_bruteforce(p: np.ndarray, gt: np.ndarray, alpha: float = ALPHA, beta: fl
 # ----------------------------------------------------------------------------------------------
 
 
-def write_submission(path: str, emission: np.ndarray, transform, crs, outside_nan: bool) -> None:
-    """Write a single-band float32 GeoTIFF. outside_nan=True matches the official sample_submission.tif."""
+def write_submission(path: str, emission: np.ndarray, transform, crs, outside_nan: bool,
+                     compress: str | None = "lzw") -> None:
+    """Write a single-band float32 GeoTIFF. outside_nan=True matches the official sample_submission.tif.
+
+    compress='lzw' matches the organizer's sample (compress=lzw, one strip per row, nodata NaN). Compression
+    is lossless: pixel values are unchanged, and tests/test_submission.py checks the round-trip.
+    """
     import rasterio
 
     H, W = emission.shape
     arr = emission.astype(np.float32, copy=True)
     if outside_nan:
         arr[np.isnan(arr)] = np.nan
+    kwargs = {} if compress is None else {"compress": compress}
     with rasterio.open(
         path, "w", driver="GTiff", height=H, width=W, count=1, dtype="float32",
-        crs=crs, transform=transform, nodata=(float("nan") if outside_nan else None),
-        compress="deflate",
+        crs=crs, transform=transform, nodata=(float("nan") if outside_nan else None), **kwargs,
     ) as dst:
         dst.write(arr, 1)
 
 
 def validate_submission(path: str, footprint: np.ndarray, transform, crs, H: int, W: int) -> dict:
     """Checks that mirror the official format text: CRS, shape, transform, dtype, single band, values in
-    [0,1] wherever finite, no NaN/inf inside the footprint, outside-footprint pixels null or NaN OR zero."""
+    [0,1] wherever finite, no NaN/inf inside the footprint, outside-footprint pixels null or NaN (only)."""
     import rasterio
 
     res = {"path": path, "checks": {}}
@@ -302,8 +307,9 @@ def validate_submission(path: str, footprint: np.ndarray, transform, crs, H: int
     res["checks"]["no_nan_or_inf_inside_footprint"] = bool(np.isfinite(x[inside]).all())
     res["checks"]["inside_footprint_in_0_1"] = bool(((x[inside] >= 0) & (x[inside] <= 1)).all())
     outside = ~inside
-    outside_ok = bool(np.all(np.isnan(x[outside]) | (x[outside] == 0)))
-    res["checks"]["outside_footprint_nan_or_zero"] = outside_ok
+    # Official text (drivendata page 967, "Submission format"): "data outside the bounds is null or nan".
+    # Zero outside is NOT accepted here (IR-53-18: this check used to allow zero, which the rule does not).
+    res["checks"]["outside_footprint_nan"] = bool(np.isnan(x[outside]).all())
     res["checks"]["all_finite_values_in_0_1"] = bool(((x[finite] >= 0) & (x[finite] <= 1)).all())
     res["counts"] = {
         "footprint_px": int(inside.sum()),

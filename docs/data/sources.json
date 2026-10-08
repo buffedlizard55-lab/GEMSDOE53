@@ -20,7 +20,7 @@
       "title": "GEMS Prize leaderboard (public DW-Tversky)",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
       "access": "fetched",
-      "used_for": "Public board snapshot: #1 0.3774 (xiaofanhu); #7 0.3195 (DARD); #13 0.2778 (extradr19). Snapshot time not shown on the page."
+      "used_for": "Public board re-fetched 2026-10-08: #1 xiaofanhu 0.3774; #2 alexoktaba 0.3345; #3 nchuzhoy 0.3262; #4 joeyfezster 0.3260; #5 kinghorton42 0.3222; #6 Batik Shirt Brothers 0.3221; #7 DARD 0.3195; #13 extradr19 0.2778. Snapshot time not shown."
     },
     {
       "id": "S3",
@@ -137,6 +137,13 @@
       "url": "https://www.dropbox.com/scl/fi/3vz9o0wwavi26xaeoxlwr/gems-geodawn-numerical-features.tif",
       "access": "user_supplied",
       "used_for": "Mirrors named in the S7 manifest. NOT downloaded here. The sha256 check in scripts/fetch_data.py only confirms that the S7 blobs match S7's own pins; it does not confirm the Dropbox originals."
+    },
+    {
+      "id": "S19",
+      "title": "Public GEMSDOE* registry repositories (buffedlizard55-lab), mirrored by shallow git clone; tif files flattened for the uniqueness gate",
+      "url": "https://github.com/buffedlizard55-lab?tab=repositories",
+      "access": "cloned",
+      "used_for": "Registry population for the uniqueness gate (613 single-band rasters on the competition grid; see evidence/registry_inventory/inventory.json)"
     }
   ]
 }

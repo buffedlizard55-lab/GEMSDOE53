@@ -19,11 +19,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> int:
-    rec = json.loads((ROOT / "evidence/uniqueness_check.json").read_text())
-    ours_path = ROOT / rec["ours"]
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--receipt", default=str(ROOT / "evidence/uniqueness_check.json"))
+    ap.add_argument("--out", default=str(ROOT / "evidence/overlap_baseline.json"))
+    ap.add_argument("--footprint", default="/tmp/gems53-data/sample_submission.tif")
+    args = ap.parse_args()
+    rec = json.loads(Path(args.receipt).read_text())
+    ours_path = Path(rec["ours"])
     with rasterio.open(ours_path) as s:
         ours = np.nan_to_num(s.read(1).astype(np.float64)) > 0
-    with rasterio.open("/tmp/gems53-data/sample_submission.tif") as s:
+    with rasterio.open(args.footprint) as s:
         fp = np.isfinite(s.read(1))
     rows = []
     for r in rec["results"]:
@@ -53,7 +60,7 @@ def main() -> int:
         "flagged_rows": rows,
         "max_lift": max([r["lift"] for r in rows if r.get("lift") is not None] or [None]),
     }
-    (ROOT / "evidence/overlap_baseline.json").write_text(json.dumps(out, indent=2))
+    Path(args.out).write_text(json.dumps(out, indent=2))
     print(json.dumps(out, indent=2))
     return 0
 
