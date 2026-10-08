@@ -29,7 +29,7 @@
   }
  ],
  "raw_overlap_gate_satisfiable_by_any_placement": false,
- "note_raw_gate": "If a sparse registry dot-map covers more than 99% of the footprint within 3 px, any candidate has overlap above 70% against it, so the raw gate cannot be passed. See IR-53-28.",
+ "note_raw_gate": "If a sparse registry dot-map covers more than 99% of the footprint within 3 px, any candidate has overlap above 70% against it, so the raw gate cannot be passed. See IR-53-46.",
  "sparse_flagged_top": [
   {
    "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",

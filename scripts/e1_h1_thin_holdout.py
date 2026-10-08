@@ -34,7 +34,7 @@ from gems53.core import (  # noqa: E402
     dti,
     load_inputs,
     load_template_module,
-    segment_exact_distance_grid,
+    h1_segment_exact_distance,
     segment_folds,
     thin_emission,
 )
@@ -80,7 +80,7 @@ def run_arm(arm, inp, fold_grid, L, rng, canary_rng):
         if arm == "bands":
             F_all = inp.feats
         else:
-            h1 = segment_exact_distance_grid(visible, L)
+            h1 = h1_segment_exact_distance(visible, L)
             F_all = np.column_stack([inp.feats, h1[inp.fp]]).astype(np.float32)
             # canary: H1 feature alone, withheld positives vs buffered background (never trained on)
             bg = inp.fp & ~inp.cat & ~buf

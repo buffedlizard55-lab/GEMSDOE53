@@ -2,7 +2,7 @@
 
 **Review date:** 2026-10-08 (UTC)  
 **Lane:** catalogue-distance leakage diagnosis only  
-**Disposition (updated 2026-10-08):** GEMSDOE29 verdict negative and unchanged; holdout corrected to design B (IR-53-19); candidate label in `docs/submissions/CURRENT.json`; no submission slot used
+**Disposition (updated 2026-10-08):** GEMSDOE29 verdict negative and unchanged; holdout corrected to design B (IR-53-37); candidate label in `docs/submissions/CURRENT.json`; no submission slot used
 
 ## Executive finding
 
@@ -14,7 +14,7 @@ This review did **not** execute the holdout. In the current GEMSDOE53 checkout t
 
 ## Update 2026-10-08: the holdout had its own leak (design A), corrected to design B
 
-- **Finding (IR-53-19).** The first holdout (exp2 and E1, "design A") built its negative pool as `footprint & ~known & ~buffer`. The
+- **Finding (IR-53-37).** The first holdout (exp2 and E1, "design A") built its negative pool as `footprint & ~known & ~buffer`. The
   10 px buffer is defined from the withheld faults, so the pool depended on withheld locations. The buffer removed 371,176 to
   390,883 negatives per fold (7.3% to 7.6%), all within 10 px of a withheld fault. Those are the hardest negatives. Measured on
   fold 0 of the bands arm (top-q 0.02): 0.0266 under design A and 0.0106 under design B. The design-A H1 canary used the same
@@ -30,9 +30,9 @@ This review did **not** execute the holdout. In the current GEMSDOE53 checkout t
 - **Reading.** H1 is not a buffer artefact: its single-feature separability is 0.77 under design B (0.768 on fold 0, the maximum over folds), so the
   holdout genuinely rewards proximity to visible faults. That is the same proximity GEMSDOE29 used on its *full* label raster. The
   difference is that H1 never uses a withheld or self label. The holdout truth is the catalogue, though, so it measures proximity to
-  known faults, not the discovery of faults the catalogue lacks (IR-53-24).
+  known faults, not the discovery of faults the catalogue lacks (IR-53-42).
 - **GEMSDOE29 verdict unchanged.** Its artifact builder still trains on full-label distance (mechanism above). This review adds a
-  second requirement for any holdout: the training pool must not depend on withheld locations (IR-53-19).
+  second requirement for any holdout: the training pool must not depend on withheld locations (IR-53-37).
 
 ## Formal diagnosis
 

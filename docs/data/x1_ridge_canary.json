@@ -1,0 +1,232 @@
+{
+  "experiment": "X1 leakage canary for the label-free ridge candidate (protocol gate G3)",
+  "label_type": "HOLDOUT-DTI-canary (feature alone vs withheld segments; no score is reported here)",
+  "gate": 0.9,
+  "rule": "separability > 0.90 means leakage until proven otherwise",
+  "inputs": {
+    "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "ridge_module_sha256": "479f1f12834cddbfec7c3240d689b2bd7223dbdbe1ff470122f57437ca88ba3a"
+  },
+  "band_used": {
+    "index_1based": 2,
+    "description": "Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects"
+  },
+  "label_access": "ridge features are computed from band 2 only; labels are used only for the separability test",
+  "folds": {
+    "K": 5,
+    "seed": 53,
+    "buffer_px": 10,
+    "segments": 3199
+  },
+  "features": {
+    "ridge_L_max_scale": {
+      "max_separability_over_folds": 0.559399,
+      "mean_separability_over_folds": 0.530059,
+      "per_fold": [
+        {
+          "AUC": 0.527193,
+          "separability": 0.527193,
+          "n_pos": 11370,
+          "n_neg": 200000,
+          "fold": 0
+        },
+        {
+          "AUC": 0.523963,
+          "separability": 0.523963,
+          "n_pos": 12598,
+          "n_neg": 200000,
+          "fold": 1
+        },
+        {
+          "AUC": 0.535845,
+          "separability": 0.535845,
+          "n_pos": 12169,
+          "n_neg": 200000,
+          "fold": 2
+        },
+        {
+          "AUC": 0.496105,
+          "separability": 0.503895,
+          "n_pos": 12671,
+          "n_neg": 200000,
+          "fold": 3
+        },
+        {
+          "AUC": 0.559399,
+          "separability": 0.559399,
+          "n_pos": 12180,
+          "n_neg": 200000,
+          "fold": 4
+        }
+      ]
+    },
+    "ridge_centreline_indicator": {
+      "max_separability_over_folds": 0.502061,
+      "mean_separability_over_folds": 0.501646,
+      "per_fold": [
+        {
+          "AUC": 0.498943,
+          "separability": 0.501057,
+          "n_pos": 11370,
+          "n_neg": 200000,
+          "fold": 0
+        },
+        {
+          "AUC": 0.501696,
+          "separability": 0.501696,
+          "n_pos": 12598,
+          "n_neg": 200000,
+          "fold": 1
+        },
+        {
+          "AUC": 0.501843,
+          "separability": 0.501843,
+          "n_pos": 12169,
+          "n_neg": 200000,
+          "fold": 2
+        },
+        {
+          "AUC": 0.502061,
+          "separability": 0.502061,
+          "n_pos": 12671,
+          "n_neg": 200000,
+          "fold": 3
+        },
+        {
+          "AUC": 0.498428,
+          "separability": 0.501572,
+          "n_pos": 12180,
+          "n_neg": 200000,
+          "fold": 4
+        }
+      ]
+    },
+    "ridge_signed_L_(+bright,-dark)": {
+      "max_separability_over_folds": 0.519622,
+      "mean_separability_over_folds": 0.511212,
+      "per_fold": [
+        {
+          "AUC": 0.501423,
+          "separability": 0.501423,
+          "n_pos": 11370,
+          "n_neg": 200000,
+          "fold": 0
+        },
+        {
+          "AUC": 0.492775,
+          "separability": 0.507225,
+          "n_pos": 12598,
+          "n_neg": 200000,
+          "fold": 1
+        },
+        {
+          "AUC": 0.480378,
+          "separability": 0.519622,
+          "n_pos": 12169,
+          "n_neg": 200000,
+          "fold": 2
+        },
+        {
+          "AUC": 0.485155,
+          "separability": 0.514845,
+          "n_pos": 12671,
+          "n_neg": 200000,
+          "fold": 3
+        },
+        {
+          "AUC": 0.487055,
+          "separability": 0.512945,
+          "n_pos": 12180,
+          "n_neg": 200000,
+          "fold": 4
+        }
+      ]
+    },
+    "reference_detrended_RTP": {
+      "max_separability_over_folds": 0.516689,
+      "mean_separability_over_folds": 0.508614,
+      "per_fold": [
+        {
+          "AUC": 0.508153,
+          "separability": 0.508153,
+          "n_pos": 11370,
+          "n_neg": 200000,
+          "fold": 0
+        },
+        {
+          "AUC": 0.491961,
+          "separability": 0.508039,
+          "n_pos": 12598,
+          "n_neg": 200000,
+          "fold": 1
+        },
+        {
+          "AUC": 0.49176,
+          "separability": 0.50824,
+          "n_pos": 12169,
+          "n_neg": 200000,
+          "fold": 2
+        },
+        {
+          "AUC": 0.483311,
+          "separability": 0.516689,
+          "n_pos": 12671,
+          "n_neg": 200000,
+          "fold": 3
+        },
+        {
+          "AUC": 0.498052,
+          "separability": 0.501948,
+          "n_pos": 12180,
+          "n_neg": 200000,
+          "fold": 4
+        }
+      ]
+    },
+    "reference_raw_RTP_band2": {
+      "max_separability_over_folds": 0.522113,
+      "mean_separability_over_folds": 0.512959,
+      "per_fold": [
+        {
+          "AUC": 0.503523,
+          "separability": 0.503523,
+          "n_pos": 11354,
+          "n_neg": 200000,
+          "fold": 0
+        },
+        {
+          "AUC": 0.506106,
+          "separability": 0.506106,
+          "n_pos": 12584,
+          "n_neg": 200000,
+          "fold": 1
+        },
+        {
+          "AUC": 0.484667,
+          "separability": 0.515333,
+          "n_pos": 12146,
+          "n_neg": 200000,
+          "fold": 2
+        },
+        {
+          "AUC": 0.477887,
+          "separability": 0.522113,
+          "n_pos": 12650,
+          "n_neg": 200000,
+          "fold": 3
+        },
+        {
+          "AUC": 0.517721,
+          "separability": 0.517721,
+          "n_pos": 12160,
+          "n_neg": 200000,
+          "fold": 4
+        }
+      ]
+    }
+  },
+  "worst_candidate_feature_separability": 0.559399,
+  "G3_pass": true,
+  "runtime_s": 25.1
+}

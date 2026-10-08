@@ -37,7 +37,7 @@ from gems53.core import (  # noqa: E402
     dti,
     load_inputs,
     load_template_module,
-    segment_exact_distance_grid,
+    h1_segment_exact_distance,
     segment_folds,
     thin_emission,
 )
@@ -76,7 +76,7 @@ def fold_inputs(inp, visible, hidden, L, arm):
     if arm == "bands":
         F = inp.feats
     else:
-        h1 = segment_exact_distance_grid(visible, L)
+        h1 = h1_segment_exact_distance(visible, L)
         F = np.column_stack([inp.feats, h1[inp.fp]]).astype(np.float32)
         del h1
     return F, inp.fp_idx[pos_mask], inp.fp_idx[neg_mask], buf
@@ -195,7 +195,7 @@ def main() -> int:
             del p_full, model, F
             if arm == "h1":
                 # canary for H1 under design B, against the full non-fault background
-                h1 = segment_exact_distance_grid(visible, L)
+                h1 = h1_segment_exact_distance(visible, L)
                 bgB = inp.fp & ~inp.cat
                 canary_rows.append({"fold": k, "feature": "h1_distance",
                                     **separability(h1[hidden & inp.fp], h1[bgB], canary_rng)})

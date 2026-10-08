@@ -127,7 +127,7 @@ negative-pool side channel that the GEMSDOE29 audit flagged (docs/leakage-review
   run's stage-2 output is kept, labelled superseded, in `evidence/superseded/e2_stage2_BUGGY_baseline_from_h1_model.json`.
   Stage 1 of that run is valid and is reused unchanged. Stage 2 was re-run with the corrected code
   (`python scripts/e2_leakfree_holdouts.py --stage2-only`). The rule, the fold design and the acceptance rule are unchanged.
-  Logged as IR-53-27.
+  Logged as IR-53-45.
 
 ## 10. Outcome record (written after E3, from the receipts)
 
@@ -141,8 +141,8 @@ negative-pool side channel that the GEMSDOE29 audit flagged (docs/leakage-review
 - **Why the gate flags it, measured (diagnostics, not a verdict):** 57 of the flags are dense rasters (more than 50% of the footprint
   nonzero) that overlap 100% by construction. For the 42 sparse dot maps the median chance-corrected lift is 1.23. The raw 70%
   overlap rule cannot be satisfied by any placement on this registry, because a GEMSDOE13 lattice raster covers 99.87% of the
-  footprint within 3 px (IR-53-28). The rho flags come from the surface on the whole grid. Footprint-only surface rho flags none
-  of them (IR-53-29).
+  footprint within 3 px (IR-53-46). The rho flags come from the surface on the whole grid. Footprint-only surface rho flags none
+  of them (IR-53-47).
 - **Consequence:** no candidate from this repository can be labelled OK to submit until the user decides the gate definition
-  (IR-53-28, IR-53-16). No change to thresholds or rules was made after seeing these results.
+  (IR-53-46, IR-53-16). No change to thresholds or rules was made after seeing these results.
 - **Budget:** three experiments used (E1, E2, E3), within 2 hours of the E1 start.

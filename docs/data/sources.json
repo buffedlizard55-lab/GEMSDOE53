@@ -20,7 +20,7 @@
       "title": "GEMS Prize leaderboard (public DW-Tversky)",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
       "access": "fetched",
-      "used_for": "Public board snapshot: #1 0.3774 (xiaofanhu); #7 0.3195 (DARD); #13 0.2778 (extradr19). Snapshot time not shown on the page."
+      "used_for": "Public board re-fetched 2026-10-08: #1 xiaofanhu 0.3774; #2 alexoktaba 0.3345; #3 nchuzhoy 0.3262; #4 joeyfezster 0.3260; #5 kinghorton42 0.3222; #6 Batik Shirt Brothers 0.3221; #7 DARD 0.3195; #13 extradr19 0.2778. Snapshot time not shown."
     },
     {
       "id": "S3",
@@ -140,30 +140,72 @@
     },
     {
       "id": "S19",
+      "title": "Public GEMSDOE* registry repositories (buffedlizard55-lab), mirrored by shallow git clone; tif files flattened for the uniqueness gate",
+      "url": "https://github.com/buffedlizard55-lab?tab=repositories",
+      "access": "cloned",
+      "used_for": "Registry population for the uniqueness gate (613 single-band rasters on the competition grid; see evidence/registry_inventory/inventory.json)"
+    },
+    {
+      "id": "S20",
+      "title": "GEMSDOE32 README (owner repo): one-click file, 46,090-px h32d file, owner-reported incumbent 0.2600, emission-rule algebra",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32",
+      "access": "fetched via api.github.com (README, 2026-10-08)",
+      "used_for": "Q2 owner-claim context. OWNER-CLAIM only; not an organizer receipt."
+    },
+    {
+      "id": "S21",
+      "title": "GEMSDOE32 docs/score-ledger.csv (owner ledger; leaderboard reads dated 2026-10-03)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/score-ledger.csv",
+      "access": "fetched via api.github.com (2026-10-08)",
+      "used_for": "User-reported scores for GEMSDOE22 (0.1002 at 6%, 0.0748 at 10%) and GEMSDOE25 (0.2600). Leaderboard rows here conflict with the user brief (IR-53-19)."
+    },
+    {
+      "id": "S22",
+      "title": "GEMSDOE32 docs/research/why-d28-scored-026.md and score-ceiling-analysis.md (owner analysis, 2026-10-03)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/tree/main/docs/research",
+      "access": "fetched via api.github.com (2026-10-08)",
+      "used_for": "Owner's account that the 0.2600 file is a distance-thinned (2.8 px) emission of 44,090 dots; score-to-file link explicitly unresolved there."
+    },
+    {
+      "id": "S23",
+      "title": "Shared template at commit dcbbb19: src/metrics.py (DTI), src/submission_io.py (writer, conformance), scripts/validate_submission.py",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb19",
+      "access": "cloned (depth 1) 2026-10-08",
+      "used_for": "Shared evaluator, writer and validators used for all new measurements and the final file (protocol: use shared tools, no private fork)."
+    },
+    {
+      "id": "S24",
+      "title": "Public GEMS registry: 63 repos whose names contain 'gems' (53 with rasters), 1,200 rasters, manifest with blob SHAs",
+      "url": "https://github.com/buffedlizard55-lab",
+      "access": "enumerated and downloaded via gh/api 2026-10-08 (evidence/registry_manifest.json)",
+      "used_for": "Uniqueness check against every public raster in the owner's GEMS repos (protocol item 2)."
+    },
+    {
+      "id": "S25",
       "title": "GEMSDOE shared template, commit dcbbb192e56b2b32c0a131eba791dc363305d4a3 (src/metrics.py, src/blocks.py, src/submission_io.py, scripts/validate_submission.py)",
       "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb192e56b2b32c0a131eba791dc363305d4a3",
       "access": "fetched by git clone --depth 1 on 2026-10-08 (verified)",
       "used_for": "shared metric parity check, spatial block folds, template writer and validators (E1 parity, E2 folds, E3 writer)"
     },
     {
-      "id": "S20",
+      "id": "S26",
       "title": "jklinck/geothermal_research commit 56d78de7a989c12e2dce50cd65a4095df57030d2 (INGENIOUS and GeoDAWN mirror; NBMG strain README; 2 m temperature-probe README; paleo-geothermal CSV; wells and springs geodatabase)",
       "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2",
       "access": "GitHub API read on 2026-10-08 (verified: file listing, README text, strain CSV header from blob e7c2af0d)",
-      "used_for": "H3 feasibility (IR-53-22), H5 data availability (not validated), provenance of INGENIOUS layers"
+      "used_for": "H3 feasibility (IR-53-40), H5 data availability (not validated), provenance of INGENIOUS layers"
     },
     {
-      "id": "S21",
+      "id": "S27",
       "title": "buffedlizard55-lab GEMSDOE* repositories (63 repos; 907 .tif entries; 628 unique sha256; 621 unique on the official grid)",
       "url": "https://github.com/buffedlizard55-lab?tab=repositories",
       "access": "GitHub API listing and shallow clones on 2026-10-08 (verified)",
       "used_for": "uniqueness registry (E3 gate), GEMSDOE32 measured structure"
     },
     {
-      "id": "S22",
-      "title": "INGENIOUS 2 m temperature-probe shapefile and README (in S20)",
+      "id": "S28",
+      "title": "INGENIOUS 2 m temperature-probe shapefile and README (in S26)",
       "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2/2m_temperature_probe_INGENIOUS_regional_data",
-      "access": "README read 2026-10-08; licence not stated (IR-53-26)",
+      "access": "README read 2026-10-08; licence not stated (IR-53-44)",
       "used_for": "H5 candidate layer (not validated)"
     }
   ]

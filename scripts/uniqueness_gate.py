@@ -103,6 +103,10 @@ def run_gate(final_path, registry_dirs, out_json, surface=None, candidates=None,
     t0 = time.time()
     rows = []
     for name, sha, arr in iter_registry(registry_dirs, shape):
+        if sha == final_sha:
+            # the file under test is itself a registry member: do not compare it with itself
+            del arr
+            continue
         rho_f = float(stats.spearmanr(final.ravel()[idx], arr.ravel()[idx]).statistic)
         rd = arr > 0
         row = {"file": name, "sha256": sha, "reg_dots": int(rd.sum()),

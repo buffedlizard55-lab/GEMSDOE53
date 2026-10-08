@@ -20,7 +20,7 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
-from gems53.core import load_inputs, segment_exact_distance_grid  # noqa: E402
+from gems53.core import load_inputs, h1_segment_exact_distance  # noqa: E402
 from exp2_holdout_arms import predict_chunked, top_q_emission  # noqa: E402
 from uniqueness_gate import iter_registry  # noqa: E402
 
@@ -39,7 +39,7 @@ def main() -> int:
     t0 = time.time()
     inp = load_inputs(str(dd / "training_features.tif"), str(dd / "labels.tif"), str(dd / "sample_submission.tif"))
     L, _ = __import__("scipy.ndimage", fromlist=["label"]).label(inp.cat, structure=np.ones((3, 3), dtype=int))
-    h1 = segment_exact_distance_grid(inp.cat, L)
+    h1 = h1_segment_exact_distance(inp.cat, L)
     F = np.column_stack([inp.feats, h1[inp.fp]]).astype(np.float32)
     del h1
     rng = np.random.default_rng(53)
@@ -87,7 +87,7 @@ def main() -> int:
            "flagged_by_surface_rho_footprint_only": int(sum(o["rho_surface_footprint_only"] > 0.90 for o in out)),
            "flagged_by_surface_rho_whole_grid": int(sum(o["rho_surface_whole_grid_recomputed"] > 0.90 for o in out)),
            "rows": out, "seconds": round(time.time() - t0, 1),
-           "reading": "diagnostic only; the receipt keeps the pre-registered whole-grid rule (IR-53-29)"}
+           "reading": "diagnostic only; the receipt keeps the pre-registered whole-grid rule (IR-53-47)"}
     suffix = args.receipt_suffix or ""
     (ROOT / f"evidence/diagnostic_surface_rho_{cur['name']}{suffix}.json").write_text(json.dumps(res, indent=1))
     print(json.dumps({k: v for k, v in res.items() if k != "rows"}, indent=1))

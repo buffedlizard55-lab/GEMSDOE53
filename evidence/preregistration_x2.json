@@ -1,0 +1,38 @@
+{
+  "schema": "gems53.preregistration.v1",
+  "written_before": "running scripts/x1_ridge_canary.py and scripts/x2_ridge_holdout.py in this session",
+  "lane": "H2 label-free magnetic lineament candidate (docs/research/hypotheses.md, H2)",
+  "hypothesis": "A Hessian ridge/valley centreline score on the reduced-to-pole field (band 2), packed at >= 2.8 px spacing into binary dots, recovers held-out catalogue fault segments better than the frozen 19-band HGB top-N emission at the same dot budget.",
+  "mechanism": "Linear magnetic discontinuities (bright ridges: dykes, magnetite-rich contacts; dark valleys: hydrothermally demagnetised fault zones) mark structural lineaments. Band 2 is label-free, so the score cannot leak labels.",
+  "non_fault_confounders": [
+    "Lithologic contacts and intrusive dykes produce linear magnetic anomalies without displacement.",
+    "Survey flight-line and tie-line levelling artefacts produce straight, orientation-locked linear features.",
+    "Topographic/terrain magnetic effects along valleys and ridges."
+  ],
+  "primary_dot_budget_N": 44090,
+  "dot_budget_rationale": "44,090 is the dot count of the team's d2.8 Poisson family (the 0.26-0.28 cluster on the team's own public-board receipts). It is fixed before the holdout is run; it is NOT chosen from holdout results.",
+  "grid_N_diagnostic": [37654, 44090, 51674, 103348],
+  "arms": {
+    "hgb_bands": "frozen baseline: HistGradientBoostingClassifier on the 19 label-free bands, top-N probability emission (scripts/exp2_holdout_arms.py, bands arm, same RNG seed 53)",
+    "ridge_pack": "candidate: ridge centrelines + Poisson-disk packing at 2.8 px, binary dots",
+    "ridge_topn": "ablation: ridge centrelines, top-N by L with NO spacing rule (isolates the packing effect)"
+  },
+  "design": {
+    "folds": 5, "seed": 53, "segment_definition": "8-connected components of labels.tif == 1", "buffer_px": 10,
+    "visible_mask": "known faults outside the fold, masked pixel-exactly from every emission",
+    "scorer": "shared template src/metrics.py GtContext (pooled TP_w, FP_w, FN_w summed over folds, then one DTI)",
+    "scorer_source": "https://github.com/buffedlizard55-lab/GEMSDOE (commit dcbbb19), file src/metrics.py",
+    "label_type": "HOLDOUT-DTI (proxy: withheld catalogue segments; NOT the competition's new-fault truth)"
+  },
+  "frozen_comparator": {"name": "repo best HOLDOUT-DTI", "value": 0.035233, "source": "evidence/exp2_holdout_arms.json: arms.bands.pooled.0.02", "ci95": [0.02817, 0.042229]},
+  "gates": {
+    "G1_holdout_best": "pooled HOLDOUT-DTI of ridge_pack at N=44090 must exceed 0.035233",
+    "G2_equal_budget": "paired per-fold difference ridge_pack - hgb_bands at N=44090 must have a 95% t-interval (df 4) with lower bound > 0",
+    "G3_leakage_canary": "every ridge-derived feature, tested alone on the holdout, must have separability <= 0.90",
+    "G4_format": "shared template validator passes: float32, single band, EPSG:32611, 100 m, template transform/shape, NaN exactly outside the sample footprint, finite values in [0,1] inside it",
+    "G5_uniqueness": "against every public GEMS registry raster: Spearman <= 0.90 and <= 70% of our dots within 3 px of that raster's dots, checked on the surface before placement AND on the final dots"
+  },
+  "promotion_rule": "Label 'Validated / OK to submit' only if G1-G5 all pass. Otherwise label 'Research-only / DO NOT SUBMIT' and name the failing gate(s). No weekly slot is chosen in this session.",
+  "budget": "3 experiments (X1 canary, X2 holdout, X3 build+checks) and 2 hours, per the parallel-run protocol",
+  "ridge_module_sha256": "479f1f12834cddbfec7c3240d689b2bd7223dbdbe1ff470122f57437ca88ba3a"
+}

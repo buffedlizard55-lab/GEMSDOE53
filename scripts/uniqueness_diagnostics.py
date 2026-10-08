@@ -81,7 +81,7 @@ def main() -> int:
                                                     for c, n, d in top_cov],
         raw_overlap_gate_satisfiable_by_any_placement=bool(not any(c > 0.30 for c, _, _ in top_cov) is False),
         note_raw_gate="If a sparse registry dot-map covers more than 99% of the footprint within 3 px, any candidate has "
-                      "overlap above 70% against it, so the raw gate cannot be passed. See IR-53-28.",
+                      "overlap above 70% against it, so the raw gate cannot be passed. See IR-53-46.",
         sparse_flagged_top=sparse[:10], all_flagged=out_rows,
     )
     # the satisfiability flag is "no" when the densest sparse map covers more than 70% of the footprint

@@ -19,7 +19,7 @@ from gems53.core import (  # noqa: E402
     dti,
     greedy_dominating_dots,
     load_template_module,
-    segment_exact_distance_grid,
+    h1_segment_exact_distance,
     thin_emission,
 )
 
@@ -59,7 +59,7 @@ def test_h1_matches_bruteforce_on_random_grid():
     keep_ids = np.flatnonzero(rng.random(n + 1) < 0.7)
     keep_ids = np.union1d(keep_ids, [1])            # segment 1 is always visible
     visible = cat & np.isin(seg, keep_ids[keep_ids > 0])
-    got = segment_exact_distance_grid(visible, seg, cap=DIST_CAP_PX).astype(np.float64)
+    got = h1_segment_exact_distance(visible, seg, cap=DIST_CAP_PX).astype(np.float64)
     want = _brute_h1(visible, seg, cap=DIST_CAP_PX)
     assert np.allclose(got, want, atol=1e-6), float(np.abs(got - want).max())
 
@@ -70,7 +70,7 @@ def test_h1_self_exclusion_is_real():
     cat = np.zeros((H, W), dtype=bool)
     cat[5, 2:18] = True                   # one long horizontal fault
     seg, _ = ndimage.label(cat, structure=np.ones((3, 3), dtype=int))
-    got = segment_exact_distance_grid(cat, seg)
+    got = h1_segment_exact_distance(cat, seg)
     assert np.all(got[5, 2:18] == np.float32(np.log1p(DIST_CAP_PX)))   # no other visible fault -> capped
     assert got[0, 0] == np.float32(np.log1p(math.hypot(5, 2)))         # background sees the fault
 

@@ -1086,5 +1086,5 @@
  "status": "COMPLETED",
  "runtime_s": 1020.9,
  "finished_utc": "2026-10-08T22:36:55Z",
- "SUPERSEDED": "Stage 2 of this file is invalid: the baseline was computed from the selected arm model (h1) instead of the pre-registered bands model. Stage 1 is valid. Replaced by evidence/e2_leakfree_holdouts.json after the fix (IR-53-27)."
+ "SUPERSEDED": "Stage 2 of this file is invalid: the baseline was computed from the selected arm model (h1) instead of the pre-registered bands model. Stage 1 is valid. Replaced by evidence/e2_leakfree_holdouts.json after the fix (IR-53-45)."
 }

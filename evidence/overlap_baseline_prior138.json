@@ -1,0 +1,113 @@
+{
+  "purpose": "chance baseline for the 3-px overlap flag (diagnostic only; flags unchanged)",
+  "ours": "/tmp/gems53-held/gems53-hgb-bands-q0p02-nan.tif",
+  "ours_dots": 103348,
+  "footprint_px": 5167373,
+  "flagged_rows": [
+    {
+      "file": "GEMSDOE22__gems22-h23-b-dti-optimal-emission-10pct-20261002-86176698-allfinite.tif",
+      "registry_dots": 516738,
+      "observed_overlap_ours_within_3px": 0.795371,
+      "expected_overlap_random_placement": 0.534328,
+      "lift": 1.4885,
+      "spearman_rho_sample": 0.08133
+    },
+    {
+      "file": "GEMSDOE22__gems22-h23-b-dti-optimal-emission-10pct-20261002-86176698-nan.tif",
+      "registry_dots": 516738,
+      "observed_overlap_ours_within_3px": 0.795371,
+      "expected_overlap_random_placement": 0.534328,
+      "lift": 1.4885,
+      "spearman_rho_sample": 0.08133
+    },
+    {
+      "file": "GEMSDOE37__gemsdoe37-h6-physics-dotted-80k-20261005T055000Z-0bef9211631c.tif",
+      "registry_dots": 80000,
+      "observed_overlap_ours_within_3px": 0.770542,
+      "expected_overlap_random_placement": 0.26599,
+      "lift": 2.8969,
+      "spearman_rho_sample": 0.055471
+    },
+    {
+      "file": "GEMSDOE27__gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+      "registry_dots": 59075,
+      "observed_overlap_ours_within_3px": 0.757363,
+      "expected_overlap_random_placement": 0.180187,
+      "lift": 4.2032,
+      "spearman_rho_sample": 0.067441
+    },
+    {
+      "file": "GEMSDOE27__gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+      "registry_dots": 59075,
+      "observed_overlap_ours_within_3px": 0.757363,
+      "expected_overlap_random_placement": 0.180187,
+      "lift": 4.2032,
+      "spearman_rho_sample": 0.067441
+    },
+    {
+      "file": "GEMSDOE28__gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+      "registry_dots": 59075,
+      "observed_overlap_ours_within_3px": 0.757363,
+      "expected_overlap_random_placement": 0.180187,
+      "lift": 4.2032,
+      "spearman_rho_sample": 0.067441
+    },
+    {
+      "file": "GEMSDOE28__gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+      "registry_dots": 59075,
+      "observed_overlap_ours_within_3px": 0.757363,
+      "expected_overlap_random_placement": 0.180187,
+      "lift": 4.2032,
+      "spearman_rho_sample": 0.067441
+    },
+    {
+      "file": "GEMSDOE30__gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif",
+      "registry_dots": 80000,
+      "observed_overlap_ours_within_3px": 0.751964,
+      "expected_overlap_random_placement": 0.267238,
+      "lift": 2.8138,
+      "spearman_rho_sample": 0.052538
+    },
+    {
+      "file": "GEMSDOE30__gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+      "registry_dots": 80000,
+      "observed_overlap_ours_within_3px": 0.751964,
+      "expected_overlap_random_placement": 0.267238,
+      "lift": 2.8138,
+      "spearman_rho_sample": 0.052538
+    },
+    {
+      "file": "GEMSDOE28__gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
+      "registry_dots": 38545,
+      "observed_overlap_ours_within_3px": 0.745007,
+      "expected_overlap_random_placement": 0.190055,
+      "lift": 3.92,
+      "spearman_rho_sample": 0.071964
+    },
+    {
+      "file": "GEMSDOE28__gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+      "registry_dots": 38545,
+      "observed_overlap_ours_within_3px": 0.745007,
+      "expected_overlap_random_placement": 0.190055,
+      "lift": 3.92,
+      "spearman_rho_sample": 0.071964
+    },
+    {
+      "file": "GEMSDOE22__gems22-h23-a-dti-optimal-emission-6pct-20261002-e2ec4b49-allfinite.tif",
+      "registry_dots": 335879,
+      "observed_overlap_ours_within_3px": 0.73328,
+      "expected_overlap_random_placement": 0.413134,
+      "lift": 1.7749,
+      "spearman_rho_sample": 0.084611
+    },
+    {
+      "file": "GEMSDOE22__gems22-h23-a-dti-optimal-emission-6pct-20261002-e2ec4b49-nan.tif",
+      "registry_dots": 335879,
+      "observed_overlap_ours_within_3px": 0.73328,
+      "expected_overlap_random_placement": 0.413134,
+      "lift": 1.7749,
+      "spearman_rho_sample": 0.084611
+    }
+  ],
+  "max_lift": 4.2032
+}

@@ -74,6 +74,53 @@ HOLDOUT-DTI = our proxy (withheld known-fault segments or spatial super-regions)
 Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>"""
 
 
+def other_candidates():
+    """Files that other sessions committed to this repository. Labels are read from their own receipts."""
+    rows = []
+    def try_json(rel):
+        p = ROOT / rel
+        return json.loads(p.read_text()) if p.exists() else None
+    h1run = try_json("evidence/archive/pr6/run_card_pr6_h1.json")
+    g1 = try_json("evidence/uniqueness_gate_other-session_h1_relay.json")
+    rows.append(dict(
+        file="docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif",
+        session="H1 relay prune (PR #6, another session)",
+        stated=(h1run or {}).get("submission", {}).get("status", "not found"),
+        stated_source="evidence/archive/pr6/run_card_pr6_h1.json (its archived run card)",
+        our_gate=(None if g1 is None else dict(flagged=g1["n_flagged"], any_drift=g1["any_drift_flag"],
+                                               max_overlap=g1["max"]["max_overlap_final"],
+                                               max_rho=g1["max"]["max_rho_final"], unique=g1["registry_unique_on_grid"])),
+        caveat="The same session's README on main says that under the literal dot rule this file is NOT CLEARED. Its archived run card still says READY_TO_SUBMIT."))
+    g2 = try_json("evidence/uniqueness_gate_other-session_h2_ridge.json")
+    x3 = try_json("evidence/x3_candidate_receipt.json")
+    rows.append(dict(
+        file="submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif",
+        session="H2 ridge-packed (PR #7, another session)",
+        stated=(x3 or {}).get("label", "not found"),
+        stated_source="evidence/x3_candidate_receipt.json",
+        our_gate=(None if g2 is None else dict(flagged=g2["n_flagged"], any_drift=g2["any_drift_flag"],
+                                               max_overlap=g2["max"]["max_overlap_final"],
+                                               max_rho=g2["max"]["max_rho_final"], unique=g2["registry_unique_on_grid"])),
+        caveat="Its own gate G5 (uniqueness) fails, so the label is DO-NOT-SUBMIT."))
+    return rows
+
+
+def other_rows_html():
+    out = []
+    for c in other_candidates():
+        g = c["our_gate"]
+        if g is None:
+            gate_txt = "pending"
+        else:
+            flag = "FLAGGED" if g["any_drift"] else "not flagged"
+            gate_txt = (f"{flag} · {g['unique']} unique rasters, {g['flagged']} flagged, "
+                        f"max overlap {pct(g['max_overlap'])}, max rho {f4(g['max_rho'])}")
+        out.append("<tr><td><code>" + esc(c["file"]) + "</code></td><td>" + esc(c["session"]) + "</td><td><b>"
+                   + esc(c["stated"]) + "</b><br><span class='note'>" + esc(c["stated_source"]) + "</span></td><td>"
+                   + esc(gate_txt) + "</td><td>" + esc(c["caveat"]) + "</td></tr>")
+    return "".join(out)
+
+
 def pct(x):
     return "n/a" if x is None else f"{100 * x:.1f}%"
 
@@ -135,7 +182,7 @@ def main() -> int:
     gate_rows = "".join(f"<tr><td>{esc(k)}</td><td>{'PASS' if gate_pass[k] else 'FAIL'}</td></tr>" for k in gate_pass)
     open_irr = [i for i in irr if str(i.get("status", "")).startswith("open")]
     top_irr = "".join(f"<li><b>{esc(i['id'])}</b> ({esc(i['severity'])}): {esc(i['subject'])}</li>"
-                      for i in irr if i["id"] in ("IR-53-01", "IR-53-02", "IR-53-19", "IR-53-20", "IR-53-22", "IR-53-24"))
+                      for i in irr if i["id"] in ("IR-53-01", "IR-53-02", "IR-53-37", "IR-53-38", "IR-53-40", "IR-53-42"))
 
     body = f"""
 <section>
@@ -145,8 +192,8 @@ def main() -> int:
   <h1>Executive summary</h1>
   <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
   Short answer: the file below passes every format check, but it is <b>not cleared by the uniqueness gate</b>, so it is labelled
-  <b>{esc(label)}</b>. The uniqueness gate flags {gate['n_flagged']} registry rasters, and on this registry the raw 70% overlap rule cannot be satisfied by any placement (IR-53-28).
-  The holdout evidence is also a proxy, and our first holdout had a design error (IR-53-19).</p>
+  <b>{esc(label)}</b>. The uniqueness gate flags {gate['n_flagged']} registry rasters, and on this registry the raw 70% overlap rule cannot be satisfied by any placement (IR-53-46).
+  The holdout evidence is also a proxy, and our first holdout had a design error (IR-53-37).</p>
   <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
   Nothing has been submitted, and no submission slot was used.</div>
 </section>
@@ -166,6 +213,16 @@ def main() -> int:
 </section>
 
 <section>
+  <h2>Other files in this repository (from other sessions, not ours)</h2>
+  <div class="warn">Other sessions merged their files into this repository while this session ran. They are listed here so that the
+  labels are not confused. Each label is quoted from its own receipt. Our gate is run on the same registry as ours (final dots, overlap and rho).
+  <b>None of them is cleared by the pre-registered raw overlap gate (IR-53-46).</b></div>
+  <table><tr><th>File</th><th>Session</th><th>Label stated in its receipt</th><th>Our gate (same registry)</th><th>Caveat</th></tr>
+  {other_rows_html()}
+  </table>
+</section>
+
+<section>
   <h2>How to submit (only if the label says OK)</h2>
   <ol>
     <li>Read the label above first. If it says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
@@ -182,9 +239,9 @@ def main() -> int:
   <h2>Answers (each labelled)</h2>
   <table>
     <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
-    <tr><td>Is the file unique and valid?</td><td>Valid: yes (format and conformance checks pass). Unique under the pre-registered gate: <b>no</b>. The gate flags {gate['n_flagged']} of {gate['registry_unique_on_grid']} unique GEMSDOE registry rasters. Of those flags, {diag['flagged_by_class'].get('dense(>50% nonzero)', 0)} are dense rasters (feature grids, probability surfaces) that overlap 100% by construction, and the other {diag['flagged_by_class'].get('sparse(<=25%)', 0) + diag['flagged_by_class'].get('mid(25-50%)', 0)} are dot maps. For those the median chance-corrected lift is {diag['sparse_flagged_median_lift']:.2f} (1.0 = random placement), so most of their overlap is what footprint coverage predicts (IR-53-28, IR-53-30).</td>
+    <tr><td>Is the file unique and valid?</td><td>Valid: yes (format and conformance checks pass). Unique under the pre-registered gate: <b>no</b>. The gate flags {gate['n_flagged']} of {gate['registry_unique_on_grid']} unique GEMSDOE registry rasters. Of those flags, {diag['flagged_by_class'].get('dense(>50% nonzero)', 0)} are dense rasters (feature grids, probability surfaces) that overlap 100% by construction, and the other {diag['flagged_by_class'].get('sparse(<=25%)', 0) + diag['flagged_by_class'].get('mid(25-50%)', 0)} are dot maps. For those the median chance-corrected lift is {diag['sparse_flagged_median_lift']:.2f} (1.0 = random placement), so most of their overlap is what footprint coverage predicts (IR-53-46, IR-53-48).</td>
       <td><span class="pill">gates in submission.html</span></td></tr>
-    <tr><td>What would make the file OK to submit?</td><td>A change to the gate's definition (registry scope, a chance-corrected overlap rule, and a footprint-only rank correlation), approved by you (IR-53-16, IR-53-28, IR-53-29), followed by a fresh pre-registered gate run. Nothing of that kind has been applied here.</td>
+    <tr><td>What would make the file OK to submit?</td><td>A change to the gate's definition (registry scope, a chance-corrected overlap rule, and a footprint-only rank correlation), approved by you (IR-53-16, IR-53-46, IR-53-47), followed by a fresh pre-registered gate run. Nothing of that kind has been applied here.</td>
       <td><span class="pill">decision for the user</span></td></tr>
     <tr><td>Does it beat 0.3774 (public #1)?</td><td>Unknown. Nothing here is an organizer score.</td><td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
     <tr><td>Holdout proxy (stage 1, design B)</td><td>Bands top-q 0.02 baseline: pooled {f4(base_B['pooled_DTI'])}, 95% CI {base_B['CI95'][0]:.4f} to {base_B['CI95'][1]:.4f}, withheld positives {base_B['withheld_positives']:,}.
@@ -193,14 +250,14 @@ def main() -> int:
     {sp_rows}
     <tr><td>Why GEMSDOE29 leaks</td><td>Its distance feature is built from the full catalogue, so it is exactly 0 on every known-fault pixel (separability 1.0). Mechanism and audit in <a href="evidence.html#gemsdoe29">evidence</a> and <code>docs/leakage-review.md</code>.</td>
       <td><span class="pill">measured</span></td></tr>
-    <tr><td>Our own holdout had a leak (IR-53-19)</td><td>The first holdout (design A) built its negative pool from withheld labels. Its bands top-q 0.02 pooled DTI was {f4(e1['arms']['bands']['top_q0p02']['pooled_DTI'])}; corrected design B gives {f4(base_B['pooled_DTI'])}. Corrected to design B (DEV-1, pre-registered; the design-A numbers are not used).</td>
+    <tr><td>Our own holdout had a leak (IR-53-37)</td><td>The first holdout (design A) built its negative pool from withheld labels. Its bands top-q 0.02 pooled DTI was {f4(e1['arms']['bands']['top_q0p02']['pooled_DTI'])}; corrected design B gives {f4(base_B['pooled_DTI'])}. Corrected to design B (DEV-1, pre-registered; the design-A numbers are not used).</td>
       <td><span class="pill">measured</span></td></tr>
     <tr><td>Why GEMSDOE32 H33-2-B2 (0.2778) may score high</td><td>Measured on the registry copy: 37,654 dots (0.73% of the footprint), no dot within 2 px of a mapped fault, and dot spacing centred on 3 px (the metric radius). Whether that produced 0.2778 is <b>not established</b>: no receipt links the row to the file (IR-53-02).</td>
       <td><span class="pill">MEASURED structure; score link NOT established</span></td></tr>
-    <tr><td>Can a higher-scoring file be built?</td><td>Not shown. We have a proxy that rises with thinning and proximity, which is not the competition target (IR-53-24). No file here is shown to beat any leaderboard row.</td>
+    <tr><td>Can a higher-scoring file be built?</td><td>Not shown. We have a proxy that rises with thinning and proximity, which is not the competition target (IR-53-42). No file here is shown to beat any leaderboard row.</td>
       <td><span class="pill">not established</span></td></tr>
   </table>
-  <p class="note">The spatial numbers are small in absolute terms: on unseen super-regions the candidate recovers very few withheld faults. The paired gain is positive on all five folds, and the pre-registered rule accepts it. The segment-fold number above is the within-region proximity effect, which the competition target may not share (IR-53-24).</p>
+  <p class="note">The spatial numbers are small in absolute terms: on unseen super-regions the candidate recovers very few withheld faults. The paired gain is positive on all five folds, and the pre-registered rule accepts it. The segment-fold number above is the within-region proximity effect, which the competition target may not share (IR-53-42).</p>
 </section>
 
 <section>
@@ -272,8 +329,8 @@ def main() -> int:
   <h2>Why the uniqueness gate flags the file (diagnostics; the verdict is the pre-registered receipt)</h2>
   <ul>
     <li><b>{diag['flagged_rows_analysed']}</b> registry rasters are flagged. By class: {esc(', '.join(f'{k}: {v}' for k, v in diag['flagged_by_class'].items()))}.</li>
-    <li>By overlap above 70%: {diag['flagged_by_overlap']}. By Spearman rho above 0.90 of the candidate surface: {sp_rho['flagged_by_surface_rho_whole_grid']} rasters on the whole grid (NaN counted as 0, which inflates rho through the zeros outside the footprint), and {sp_rho['flagged_by_surface_rho_footprint_only']} on the footprint only (IR-53-29). The final raster exceeds 0.90 for none of the rasters on either basis.</li>
-    <li>Chance coverage of the densest sparse dot map: <b>{100 * diag['densest_sparse_dot_maps_by_chance_coverage'][0]['chance_coverage']:.2f}%</b> of the footprint lies within 3 px of its dots (<code>{esc(diag['densest_sparse_dot_maps_by_chance_coverage'][0]['file'][:80])}</code>). Any candidate placed on this footprint therefore overlaps that file above 70%. The raw gate is <b>not satisfiable by placement</b> on this registry (IR-53-28).</li>
+    <li>By overlap above 70%: {diag['flagged_by_overlap']}. By Spearman rho above 0.90 of the candidate surface: {sp_rho['flagged_by_surface_rho_whole_grid']} rasters on the whole grid (NaN counted as 0, which inflates rho through the zeros outside the footprint), and {sp_rho['flagged_by_surface_rho_footprint_only']} on the footprint only (IR-53-47). The final raster exceeds 0.90 for none of the rasters on either basis.</li>
+    <li>Chance coverage of the densest sparse dot map: <b>{100 * diag['densest_sparse_dot_maps_by_chance_coverage'][0]['chance_coverage']:.2f}%</b> of the footprint lies within 3 px of its dots (<code>{esc(diag['densest_sparse_dot_maps_by_chance_coverage'][0]['file'][:80])}</code>). Any candidate placed on this footprint therefore overlaps that file above 70%. The raw gate is <b>not satisfiable by placement</b> on this registry (IR-53-46).</li>
     <li>Median chance-corrected lift for the sparse flagged files: {diag['sparse_flagged_median_lift']:.2f} (1.0 means the overlap is what random placement would give). This is a diagnostic only. Changing the gate needs your explicit approval.</li>
   </ul>
 </section>
@@ -311,11 +368,11 @@ def main() -> int:
                        for k, s in srcs.items())
     hyp_rows = """<tr><td>H1</td><td>Segment-exact learn-predict separation (distance to visible faults excluding the pixel's own segment)</td><td>Tested in E2 (design B); see the stage-1 and stage-2 tables</td></tr>
 <tr><td>M1</td><td>Metric-aware thinning: greedy dominating set at radius 3 px, value p or 1</td><td>Tested in E2 (design B) as variants</td></tr>
-<tr><td>H2</td><td>Magnetic lineament ridges (Hessian) on band 2 and the native GeoDAWN grid (mirror S20)</td><td>Not tested (budget)</td></tr>
-<tr><td>H3</td><td>Fault-parallel strain from bands 7 and 8</td><td><b>BLOCKED</b>: the public strain data have scalars only (IR-53-22)</td></tr>
+<tr><td>H2</td><td>Magnetic lineament ridges (Hessian) on band 2 and the native GeoDAWN grid (mirror S26)</td><td>Not tested (budget)</td></tr>
+<tr><td>H3</td><td>Fault-parallel strain from bands 7 and 8</td><td><b>BLOCKED</b>: the public strain data have scalars only (IR-53-40)</td></tr>
 <tr><td>H4</td><td>USGS Qfaults as an extra label source</td><td>Rejected: the rules name these maps as a label source</td></tr>
-<tr><td>H5</td><td>Off-catalogue thermal evidence: INGENIOUS 2 m temperature probes, paleo-geothermal deposits, wells and springs (mirror S20, S22)</td><td>Not tested (budget). Data present in the pinned mirror; licence to verify (IR-53-26)</td></tr>
-<tr><td>H6</td><td>Regional trend prior: dominant orientation of visible faults as a feature</td><td>Not tested (budget)</td></tr>"""
+<tr><td>H5</td><td>Off-catalogue thermal evidence: INGENIOUS 2 m temperature probes, paleo-geothermal deposits, wells and springs (mirror S26, S28)</td><td>Not tested (budget). Data present in the pinned mirror; licence to verify (IR-53-44)</td></tr>
+<tr><td>H7</td><td>Regional trend prior: dominant orientation of visible faults as a feature</td><td>Not tested (budget)</td></tr>"""
     g = g32["files"]["nan"]
     body = f"""
 <section>
@@ -327,7 +384,7 @@ def main() -> int:
 </section>
 <section>
   <h2>E1 (design A, reference only): exploration with the withheld-label negative pool</h2>
-  <div class="warn">Design A is <b>not used</b> for any decision (IR-53-19). It is shown to measure the side channel. Reproduction of the exp2 numbers: {'PASS' if e1['reproduction_check_vs_exp2']['pass'] else 'FAIL'}.</div>
+  <div class="warn">Design A is <b>not used</b> for any decision (IR-53-37). It is shown to measure the side channel. Reproduction of the exp2 numbers: {'PASS' if e1['reproduction_check_vs_exp2']['pass'] else 'FAIL'}.</div>
   <table><tr><th>Bands arm variant</th><th>Pooled DTI</th><th>95% CI</th><th>Emitted px</th></tr>{e1_rows}</table>
   <p>H1 (design A) at top-q 0.02: <b>{f4(e1['arms']['h1']['top_q0p02']['pooled_DTI'])}</b>.
   Canary, design A (buffered background, reference): H1 mean {f4(e1['canary_H1_feature_alone']['separability_mean'])}.</p>
@@ -356,7 +413,7 @@ def main() -> int:
     <tr><td>dots within 2 px of a mapped fault</td><td>{pct(g['dots_within_2px_of_catalogue'])}</td></tr>
     <tr><td>dots within 3 px of a mapped fault</td><td>{pct(g['dots_within_3px_of_catalogue'])}</td></tr>
     <tr><td>nearest-dot distance, median (px)</td><td>{g['nearest_dot_distance_quantiles_px']['0.5']}</td></tr>
-    <tr><td>finite pixels (footprint) vs zeros variant</td><td>{g['finite_px']:,} vs {g32['files']['zeros']['finite_px']:,} (the zeros variant fills the grid with 0, IR-53-23)</td></tr>
+    <tr><td>finite pixels (footprint) vs zeros variant</td><td>{g['finite_px']:,} vs {g32['files']['zeros']['finite_px']:,} (the zeros variant fills the grid with 0, IR-53-41)</td></tr>
     <tr><td>in-catalogue DTI (diagnostic only)</td><td>{f4(g['in_catalogue_DTI_diagnostic'])}</td></tr>
   </table>
   <p><b>OWNER-CLAIM (not verified):</b> 0.2708 base, dots within 2 px removed, 37,654 dots, no organiser score. The pruning claim is consistent with the measured 0.0% within 2 px.

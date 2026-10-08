@@ -154,7 +154,7 @@
       }
     },
     "design_A_reference_not_used_for_decisions": {
-      "reason": "negative pool depended on withheld labels (IR-53-19)",
+      "reason": "negative pool depended on withheld labels (IR-53-37)",
       "bands_top_q0p02_pooled_DTI": 0.035233,
       "bands_top_q0p02_CI95": [
         0.02817,
@@ -318,7 +318,7 @@
         }
       ],
       "raw_overlap_gate_satisfiable_by_any_placement": false,
-      "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the gate receipt (IR-53-28, IR-53-29, IR-53-30)"
+      "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the gate receipt (IR-53-46, IR-53-47, IR-53-48)"
     }
   },
   "gemsdoe32": {
@@ -349,15 +349,15 @@
     "H1": "tested (design B, stage 1 and stage 2)",
     "M1": "thinning tested (design B)",
     "H2": "not tested (budget)",
-    "H3": "BLOCKED: strain orientation not in public data (IR-53-22)",
+    "H3": "BLOCKED: strain orientation not in public data (IR-53-40)",
     "H4": "rejected (labels)",
-    "H5": "not tested (budget); data present in pinned mirror (S20, S22)",
-    "H6": "not tested (budget)"
+    "H5": "not tested (budget); data present in pinned mirror (S26, S28)",
+    "H7": "not tested (budget)"
   },
   "verdict_reasons": [
     "uniqueness gate (pre-registered rule) flags 103 registry rasters",
-    "the raw 70% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers 99.87% of the footprint within 3 px (IR-53-28)",
-    "rho flags are method-sensitive: surface rho (whole grid) flags 52 rasters; footprint-only surface rho flags 0 (IR-53-29)"
+    "the raw 70% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers 99.87% of the footprint within 3 px (IR-53-46)",
+    "rho flags are method-sensitive: surface rho (whole grid) flags 52 rasters; footprint-only surface rho flags 0 (IR-53-47)"
   ],
   "irregularities_open": [
     "IR-53-01",
@@ -375,19 +375,35 @@
     "IR-53-13",
     "IR-53-16",
     "IR-53-17",
-    "IR-53-18",
     "IR-53-19",
     "IR-53-20",
     "IR-53-21",
-    "IR-53-22",
     "IR-53-23",
     "IR-53-24",
+    "IR-53-25",
     "IR-53-26",
+    "IR-53-27",
     "IR-53-28",
     "IR-53-29",
-    "IR-53-30"
+    "IR-53-30",
+    "IR-53-31",
+    "IR-53-32",
+    "IR-53-33",
+    "IR-53-34",
+    "IR-53-35",
+    "IR-53-36",
+    "IR-53-37",
+    "IR-53-38",
+    "IR-53-39",
+    "IR-53-40",
+    "IR-53-41",
+    "IR-53-42",
+    "IR-53-44",
+    "IR-53-46",
+    "IR-53-47",
+    "IR-53-48"
   ],
-  "irregularities_total": 30,
+  "irregularities_total": 48,
   "limitations": [
     "L-01",
     "L-02",
@@ -406,7 +422,16 @@
     "L-15",
     "L-16",
     "L-17",
-    "L-18"
+    "L-18",
+    "L-19",
+    "L-20",
+    "L-21",
+    "L-22",
+    "L-23",
+    "L-24",
+    "L-25",
+    "L-26",
+    "L-27"
   ],
   "verdict": "Research-only / DO NOT SUBMIT",
   "organizer_score": null,

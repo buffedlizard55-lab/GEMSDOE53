@@ -33,7 +33,7 @@ from gems53.core import (  # noqa: E402
     dti,
     load_inputs,
     load_template_module,
-    segment_exact_distance_grid,
+    h1_segment_exact_distance,
     thin_emission,
 )
 from exp2_holdout_arms import predict_chunked, top_q_emission  # noqa: E402
@@ -123,7 +123,7 @@ def main() -> int:
 
     # ---- 2. final model on ALL known faults ----
     if spec["arm"] == "h1":
-        h1 = segment_exact_distance_grid(inp.cat, L)
+        h1 = h1_segment_exact_distance(inp.cat, L)
         F_all = np.column_stack([inp.feats, h1[inp.fp]]).astype(np.float32)
         del h1
     else:

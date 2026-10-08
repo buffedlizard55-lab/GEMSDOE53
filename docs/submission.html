@@ -53,8 +53,8 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <h2>Why the uniqueness gate flags the file (diagnostics; the verdict is the pre-registered receipt)</h2>
   <ul>
     <li><b>103</b> registry rasters are flagged. By class: sparse(&lt;=25%): 42, dense(&gt;50% nonzero): 57, mid(25-50%): 4.</li>
-    <li>By overlap above 70%: 100. By Spearman rho above 0.90 of the candidate surface: 52 rasters on the whole grid (NaN counted as 0, which inflates rho through the zeros outside the footprint), and 0 on the footprint only (IR-53-29). The final raster exceeds 0.90 for none of the rasters on either basis.</li>
-    <li>Chance coverage of the densest sparse dot map: <b>99.87%</b> of the footprint lies within 3 px of its dots (<code>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.tif</code>). Any candidate placed on this footprint therefore overlaps that file above 70%. The raw gate is <b>not satisfiable by placement</b> on this registry (IR-53-28).</li>
+    <li>By overlap above 70%: 100. By Spearman rho above 0.90 of the candidate surface: 52 rasters on the whole grid (NaN counted as 0, which inflates rho through the zeros outside the footprint), and 0 on the footprint only (IR-53-47). The final raster exceeds 0.90 for none of the rasters on either basis.</li>
+    <li>Chance coverage of the densest sparse dot map: <b>99.87%</b> of the footprint lies within 3 px of its dots (<code>13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.tif</code>). Any candidate placed on this footprint therefore overlaps that file above 70%. The raw gate is <b>not satisfiable by placement</b> on this registry (IR-53-46).</li>
     <li>Median chance-corrected lift for the sparse flagged files: 1.23 (1.0 means the overlap is what random placement would give). This is a diagnostic only. Changing the gate needs your explicit approval.</li>
   </ul>
 </section>
