@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Executive summary · GEMSDOE53</title>
+<style>
+:root{--ink:#17202a;--muted:#5b6673;--line:#dfe5ec;--bg:#f7f9fb;--card:#fff;--accent:#0b6e4f;--warn:#9a3412;--warnbg:#fff7ed;--ok:#14532d;--okbg:#f0fdf4}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700;font-size:17px}
+nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
+main{max-width:980px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
+.banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
+.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:12px 14px}
+.warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
+.note{color:var(--muted);font-size:14px}footer{max-width:980px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
+a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
+</style></head><body>
+<header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
+<nav><a href="index.html" class="on">Executive summary</a><a href="submission.html" class="">Submission file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
+<main>
+<section>
+  <div class="banner">Status: no file is offered for submission. The one candidate built is blocked by the parallel-run drift flag
+  (protocol item 2). Nothing has been submitted, and no organizer score exists.</div>
+  <h1>Executive summary</h1>
+  <p>This project tried to build a unique, valid GeoTIFF for the GEMS Prize (DrivenData competition 306) that beats the public
+  bar, to explain leakage in the GEMSDOE29 file, to explain the high-scoring GEMSDOE32 file, and to test new geological hypotheses.
+  Here is each answer, with its label.</p>
+  <table>
+    <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
+    <tr><td>Can we produce a unique, valid GeoTIFF?</td>
+        <td>Yes, a valid one exists (rules checks pass, 0 known-fault pixels emitted). It is <b>blocked</b>: up to 79.5% of its dots sit within
+        3 px of one public file's dots (above the 70% stop threshold). It is not offered. Rank correlation is low (max rho 0.164).</td>
+        <td><span class="pill">validator output</span></td></tr>
+    <tr><td>Does it beat 0.3774 (the public #1)?</td><td>Unknown. We have no organizer score, so nothing can be claimed.</td>
+        <td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
+    <tr><td>Our holdout proxy</td>
+        <td>Pooled HOLDOUT-DTI 0.0352 (95% CI 0.0282 to 0.0422) for the bands arm at q=0.02. It is a proxy and not comparable with the leaderboard.</td>
+        <td><span class="pill">HOLDOUT-DTI</span></td></tr>
+    <tr><td>Why GEMSDOE29 leaks</td>
+        <td>Its distance-to-known-faults feature is built from the same labels it is scored on. It is exactly 0 on all 60,988 known-fault pixels, so separability is 1.0. On the holdout it gives DTI 0.99996.</td>
+        <td><span class="pill">measured (Exp 1, Exp 2)</span></td></tr>
+    <tr><td>Why GEMSDOE32 (0.2778) may score high, and whether we can beat it</td>
+        <td>Likely a sensible emission volume placed off the catalogue, with a light false-positive penalty. Not verified. We cannot beat it on current evidence. See <a href="evidence.html#gemsdoe32">evidence</a>.</td>
+        <td><span class="pill">hypothesis / owner-claim</span></td></tr>
+    <tr><td>Top hypothesis validated?</td><td>No. H1 (segment-exact learn-predict separation) ranked first but was not run, since the budget ran out.</td>
+        <td><span class="pill">measured: not run</span></td></tr>
+    <tr><td>Portal error "Predicted values must be in range [0, 1]"</td>
+        <td>The shared template validator documents a real platform rejection caused by 3,061 NaN px inside the valid region (owner-documented, not independently verified). Our file has no NaN inside the footprint, all values in [0, 1], and passes the template validator. The portal has not yet confirmed it (no receipt).</td>
+        <td><span class="pill">unverified (IR-53-04)</span></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Name and comment (prepared, not submitted)</h2>
+  <p class="note">Shown here so the form can be filled in if the file is ever promoted. The name and note are not an approval.</p>
+  <table>
+    <tr><th>Name</th><td><code>gems53-hgb-bands-q0p02</code></td></tr>
+    <tr><th>Comment (≤140 characters)</th><td><code>HGB on 19 label-free bands; top 2% of footprint; known faults zeroed. Holdout proxy only; no organizer score.</code> (109 characters)</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>How to submit (for when a file is promoted)</h2>
+  <ol>
+    <li>Open the competition submission page on DrivenData. Log in to your own account (no DrivenData data download is needed).</li>
+    <li>Choose a single-band float32 GeoTIFF (.tif), EPSG:32611, 100 m grid, values in [0, 1]. The checks are on the <a href="submission.html">submission-file page</a>.</li>
+    <li>Paste the comment above. Submit. Feedback submissions are limited to 3 per week (<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules</a>). The problem page (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">S1</a>) says each team must choose a <b>single</b> submission for scoring across both rounds before the deadline. That choice is a separate decision and is not made here.</li>
+    <li>Record the receipt. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
+    <li>If the portal still rejects the range, record the exact message and keep the cause open (IR-53-04). A zeros-outside file is not an option: it breaks the rule that outside the bounds must be null or NaN.</li>
+  </ol>
+  <p class="note">Sources: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules (PDF)</a>.</p>
+</section>
+
+<section>
+  <h2>Bars to beat (public, as fetched 2026-10-08)</h2>
+  <table>
+    <tr><th>Rank</th><th>Team</th><th>Score</th><th>Label</th></tr>
+    <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td><td>leaderboard (public)</td></tr>
+    <tr><td>7</td><td>DARD</td><td>0.3195</td><td>leaderboard (public)</td></tr>
+    <tr><td>13</td><td>extradr19</td><td>0.2778</td><td>leaderboard (public); not linked to GEMSDOE32 (IR-53-02)</td></tr>
+  </table>
+  <p class="note">The leaderboard snapshot time is not shown on the page (IR-53-01). Source: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData leaderboard</a>.</p>
+</section>
+
+<section>
+  <h2>Next steps and limitations</h2>
+  <p>See <a href="evidence.html#limitations">limitations</a>. Main gaps: no organizer score, the top hypothesis not run, and the overlap flag still blocks the only candidate.</p>
+</section>
+</main>
+<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or the data inventory
+(computed from files at build time). HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
+Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>

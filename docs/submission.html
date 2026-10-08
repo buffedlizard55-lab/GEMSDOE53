@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Submission file · GEMSDOE53</title>
+<style>
+:root{--ink:#17202a;--muted:#5b6673;--line:#dfe5ec;--bg:#f7f9fb;--card:#fff;--accent:#0b6e4f;--warn:#9a3412;--warnbg:#fff7ed;--ok:#14532d;--okbg:#f0fdf4}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700;font-size:17px}
+nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
+main{max-width:980px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
+.banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
+.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:12px 14px}
+.warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
+.note{color:var(--muted);font-size:14px}footer{max-width:980px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
+a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
+</style></head><body>
+<header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
+<nav><a href="index.html" class="">Executive summary</a><a href="submission.html" class="on">Submission file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
+<main>
+<section>
+  <div class="banner">Not offered for download. The file is blocked by the protocol's 3-px overlap flag and quarantined outside the repository.</div>
+  <h1>Submission file</h1>
+  <p>Method (candidate): gradient-boosted classifier (sklearn HistGradientBoosting, 200 iterations) trained on the 19 label-free feature bands
+  (arm <code>bands</code>), with 300,000 sampled negatives and 60,988 known-fault positives. The top q=2% of the official
+  footprint is emitted (103,348 non-zero pixels), and every known-fault pixel is forced to 0.</p>
+  <h2>Checks (the local validator re-reads the file from disk)</h2>
+  <table>
+    <tr><th>File</th><th>sha256</th><th>All checks pass</th><th>Footprint px / finite px</th><th>Non-zero px</th></tr>
+    <tr><td>NaN outside footprint (the only file)</td><td><code>f380f70092fee2be7c44b4c20f78e92ce83c12967e5f8ec21432174dca928272</code></td><td>True (in-lane); template validator: True</td><td>5,167,373 / 5,167,373</td><td>103,348</td></tr>
+  </table>
+  <p class="note">Shared template validator (<code>buffedlizard55-lab/GEMSDOE</code> at commit <code>dcbbb19</code>, <code>scripts/validate_submission.py</code>): <b>PASSED</b>. Its log is <code>evidence/candidates/template_validator_nan.txt</code>.
+  It checks CRS, 100 m, single float32 band, values in [0, 1], finite exactly on the template's valid region, NaN elsewhere, the nodata tag, and the training shape. In-lane checks (core.py) are in the receipt. A validator pass is not a portal acceptance.</p>
+  <h2>Why it is not offered</h2>
+  <ul>
+    <li>Rank correlation with 138 public registry rasters: max 0.164. Below the 0.90 flag.</li>
+    <li>Share of our dots within 3 px of another file's dots: max 0.795. Above the 0.70 stop threshold, so the protocol stops the candidate.</li>
+    <li>Chance baseline (diagnostic only; flags unchanged): the largest lift over random placement at the same registry density is 4.20×. This means the overlap is placement, not just density. See <a href="evidence.html#uniqueness">the uniqueness table</a>.</li>
+  </ul>
+  <p class="note">Files are at <code>/tmp/gems53-held/</code> (not in the repository; they are 49 MB each). They can be regenerated with <code>scripts/exp3_build_submission.py</code> and checked against the sha256 values above.</p>
+</section>
+</main>
+<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or the data inventory
+(computed from files at build time). HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
+Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>

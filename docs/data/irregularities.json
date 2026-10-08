@@ -1,0 +1,149 @@
+{
+  "schema": "gems53.irregularities.v1",
+  "items": [
+    {
+      "id": "IR-53-01",
+      "severity": "high",
+      "status": "open",
+      "subject": "Target score in the request is not the leaderboard top",
+      "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page.",
+      "action": "Use 0.3774 as the public bar. Re-check S2 before any slot decision."
+    },
+    {
+      "id": "IR-53-02",
+      "severity": "high",
+      "status": "open",
+      "subject": "The 0.2778 file is not mapped to a leaderboard receipt",
+      "detail": "S2 lists 0.2778 for extradr19 (#13). S9/S10 say the 0.2778-scoring file is GEMSDOE32 H33-2-B2 and that the file's note is 'UNSCORED'. Nothing in the repositories ties the file to the leaderboard row.",
+      "action": "Label 0.2778 as ORGANIZER-CONFIRMED only when a receipt is seen; until then it is user-reported."
+    },
+    {
+      "id": "IR-53-03",
+      "severity": "high",
+      "status": "open",
+      "subject": "Holdout truth is the catalogue, the competition's truth is not",
+      "detail": "The competition labels new faults that are NOT in the public catalogue (S1, S3 section 3.3). Any holdout built from catalogue pixels rewards recovering mapped faults. S9 states the same limitation (IR-32-PROXY-01). The catalogue-flank prune behind the 0.2778 file is supported only by proxies and one user report.",
+      "action": "Treat every HOLDOUT-DTI as a proxy. Add an off-catalogue check before trusting any prune or flank rule."
+    },
+    {
+      "id": "IR-53-04",
+      "severity": "high",
+      "status": "open",
+      "subject": "Portal error '[0, 1]': cause documented by the template, not independently confirmed",
+      "detail": "The template validator docstring (S7) records a real platform rejection caused by 3,061 NaN px inside the sample's valid region. Owner-documented, not independently verified here.",
+      "action": "Keep NaN exactly outside the official footprint and finite [0,1] inside it (done). Confirm with one scored upload only when a submission is approved. Do not use zeros outside (breaks 'outside bounds null or nan')."
+    },
+    {
+      "id": "IR-53-05",
+      "severity": "high",
+      "status": "open",
+      "subject": "Footprint definition: all-bands-finite is wrong",
+      "detail": "Defining the footprint as 'all 19 feature bands finite' gives 5,165,840 px. The official sample's finite mask gives 5,167,373 px. They differ on 4,613 px. This repo first used the wrong definition; it was caught and fixed before any submission was built (the discarded run is not reported as a result).",
+      "action": "Footprint = finite mask of sample_submission.tif. Test assertions on the count (5,167,373) are in the run receipts."
+    },
+    {
+      "id": "IR-53-06",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Redistribution of competition rasters",
+      "detail": "The competition rasters are login-gated on DrivenData (S4). The public template repo (S7) commits them as split git blobs. This repository does NOT commit them: fetch_data.py writes them to /tmp, outside the repository.",
+      "action": "Human/legal review of whether the rasters may be redistributed. Until resolved, do not add them to this repo."
+    },
+    {
+      "id": "IR-53-07",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Pins are the template owner's, not DrivenData's",
+      "detail": "The sha256 values in S7 were produced by the template owner's inventory on a GitHub-hosted runner. They are internally consistent but not checked against DrivenData.",
+      "action": "Compare the three hashes to a receipt from DrivenData when one is available."
+    },
+    {
+      "id": "IR-53-08",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Leakage diagnosis: the framing needs one correction",
+      "detail": "The request says the catalogue 'is the thing this competition's target is defined against'. The competition target is new faults, and the catalogue is a legitimate input at prediction time (S1, S3). The leak is a training/evaluation defect: a feature built from the training labels themselves (GEMSDOE29 IR-29-ARTIFACT-LEAK, which says the same thing). Exp 1 reproduces it: separability 1.0 in-sample and on withheld folds.",
+      "action": "Use learn-predict separation for training and hide-and-recover for evaluation. Do not reject distance-to-catalogue as a feature."
+    },
+    {
+      "id": "IR-53-09",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Leak-free distance feature is weak under block cross-fitting",
+      "detail": "Exp 1 leak-free separability is 0.52 on average across the 5 folds. The 4x4-block cross-fit removes the nearest visible faults for every pixel in the same block, which discards most local information. Segment-exact exclusion (exclude only the pixel's own fault segment) keeps it and is not yet implemented.",
+      "action": "Next experiment: segment-exact learn-predict separation, pre-registered before running (see docs/research/hypotheses.md H1)."
+    },
+    {
+      "id": "IR-53-10",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Compute limits",
+      "detail": "This sandbox has 2 CPUs, 3 GB RAM and no GPU. The reference notebook (S5) is a GPU U-Net. It was not run. The model here is a histogram gradient-boosting classifier.",
+      "action": "Run the reference U-Net on a GPU host with the same holdout before claiming it is worse or better."
+    },
+    {
+      "id": "IR-53-11",
+      "severity": "low",
+      "status": "open",
+      "subject": "Minor reference-notebook and file inconsistencies",
+      "detail": "The notebook prints labels as int32 and reports the loop index 'Band 19' in the label-metadata print (a leftover variable). The file labels.tif is int8 with values -1/0/1 (verified here).",
+      "action": "Read dtypes from the file, not from the notebook output."
+    },
+    {
+      "id": "IR-53-12",
+      "severity": "low",
+      "status": "open",
+      "subject": "Kaufman et al. KDD 2011 citation not verified",
+      "detail": "The request cites a KDD 2011 and a TKDD 2012 version. The TKDD 2012 article is verified (S11). The KDD 2011 version is not verified here.",
+      "action": "Cite only the verified TKDD 2012 article."
+    },
+    {
+      "id": "IR-53-13",
+      "severity": "low",
+      "status": "open",
+      "subject": "Repository started empty",
+      "detail": "At the start of this session the repository contained only a one-line README. The mission text, evidence and tools described in the request were not in it. They were rebuilt from the public template (S7) and the public repos, and only the parts verified here are included.",
+      "action": "Treat the GEMSDOE/GEMSDOE29/GEMSDOE32 files as external references, not as code of this repo."
+    },
+    {
+      "id": "IR-53-14",
+      "severity": "high",
+      "status": "fixed",
+      "subject": "Written raster had nodata=None; the template sample tag is 'nan'",
+      "detail": "The shared template validator failed the first build on the nodata tag. The writer now sets nodata=NaN for the NaN variant. Regression test added (tests/test_submission.py).",
+      "action": "Fixed in src/gems53/core.py. Re-checked with the template validator (PASSED)."
+    },
+    {
+      "id": "IR-53-15",
+      "severity": "high",
+      "status": "fixed",
+      "subject": "Zeros-outside fallback is not compliant with the official rule",
+      "detail": "The official rule text (S1) says outside the bounds must be null or NaN. The template validator rejects a zeros-outside file. The fallback was removed.",
+      "action": "Removed from scripts/exp3_build_submission.py and from the plan. Do not offer a zeros file."
+    },
+    {
+      "id": "IR-53-16",
+      "severity": "high",
+      "status": "open",
+      "subject": "3-px overlap flag fires on placement, not density alone",
+      "detail": "Max overlap 79.5% (GEMSDOE22). Chance baseline (evidence/overlap_baseline.json): lift up to 4.2x for GEMSDOE27/28. The flag is therefore not explained by density.",
+      "action": "Candidate blocked under the current protocol. Any change to the 70% rule (for example, a chance-corrected rule) needs the user's explicit approval."
+    },
+    {
+      "id": "IR-53-17",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Protocol deviation: private validator and writer in this lane",
+      "detail": "This lane first wrote its own validator (scripts/validate_submission.py) and kept its own writer and metric (src/gems53/core.py). The protocol forbids a private fork.",
+      "action": "Own validator deleted; the template's scripts/validate_submission.py is now the official check. core.py is not yet reconciled with the template's src/submission_io.py (remaining work)."
+    },
+    {
+      "id": "IR-53-18",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Hypothesis H1 was pre-registered but not run",
+      "detail": "The top-ranked hypothesis needed a 4th experiment, beyond the 3-experiment budget.",
+      "action": "Decide whether to spend budget on H1 before any new candidate is built."
+    }
+  ]
+}

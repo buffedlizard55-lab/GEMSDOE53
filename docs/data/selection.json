@@ -1,0 +1,14 @@
+{
+  "status": "BLOCKED",
+  "submission_name": "gems53-hgb-bands-q0p02",
+  "arm": "bands",
+  "q": 0.02,
+  "selection_rule": "pre-stated: highest pooled HOLDOUT-DTI at its best tested q, over arms bands and leakfree only (leaky_ablate excluded)",
+  "note": "HGB on 19 label-free bands; top 2% of footprint; known faults zeroed. Holdout proxy only; no organizer score.",
+  "verdict": "negative",
+  "verdict_reason": "Blocked before any submission slot. Rank correlation is low (max rho 0.164). But up to 79.5% of our dots sit within 3 px of one public file's dots (GEMSDOE22; 75.7% for GEMSDOE27/28, lift 4.2x over random placement), above the 70% protocol threshold. Stopped per the parallel-run protocol. Holdout proxy 0.0352 is not an organizer score and is not comparable to the leaderboard.",
+  "files": [
+    "gems53-hgb-bands-q0p02-nan.tif"
+  ],
+  "location": "/tmp/gems53-held/ (outside repo; 49 MB; regenerate with scripts/exp3_build_submission.py --outdir ...)"
+}

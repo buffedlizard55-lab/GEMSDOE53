@@ -1,0 +1,375 @@
+{
+  "experiment": "E1 leakage canary (whole-segment holdout)",
+  "inputs": {
+    "training_features.tif": {
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
+    },
+    "labels.tif": {
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+    }
+  },
+  "grid": {
+    "H": 3730,
+    "W": 3292,
+    "res_m": 100,
+    "crs": "EPSG:32611"
+  },
+  "footprint_px": 5167373,
+  "known_fault_px_in_footprint": 60988,
+  "known_fault_px_outside_footprint": 0,
+  "label_values": [
+    -1,
+    0,
+    1
+  ],
+  "fault_segments_8conn": 3199,
+  "folds": {
+    "K": 5,
+    "seed": 53,
+    "buffer_px": 10,
+    "withheld_segments_per_fold": [
+      640,
+      640,
+      640,
+      640,
+      639
+    ],
+    "withheld_px_per_fold": [
+      11370,
+      12598,
+      12169,
+      12671,
+      12180
+    ]
+  },
+  "gate": {
+    "separability_flag_above": 0.9
+  },
+  "C1_leaky_distance_in_sample": {
+    "description": "log1p(min(dist_to_full_catalogue,60)) on the training labels it was built from",
+    "value_on_known_fault_px": {
+      "min": 0.0,
+      "max": 0.0,
+      "fraction_exactly_zero": 1.0,
+      "n": 60988
+    },
+    "value_on_background_px": {
+      "min": 0.6931471824645996,
+      "max": 4.110873699188232
+    },
+    "AUC": 0.0,
+    "separability": 1.0,
+    "n_pos": 60988,
+    "n_neg": 200000,
+    "verdict": "LEAK: separable by construction (the feature is a deterministic function of the label)"
+  },
+  "A_label_free_bands": [
+    {
+      "band": 1,
+      "name": "Magnetic anomaly - deviation from expected Earth's magnetic field",
+      "separability_per_fold": [
+        0.509099,
+        0.505511,
+        0.536866,
+        0.521862,
+        0.500978
+      ],
+      "separability_mean": 0.514863,
+      "separability_max": 0.536866,
+      "flag": "pass"
+    },
+    {
+      "band": 2,
+      "name": "Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects",
+      "separability_per_fold": [
+        0.502962,
+        0.506471,
+        0.514169,
+        0.522719,
+        0.518955
+      ],
+      "separability_mean": 0.513055,
+      "separability_max": 0.522719,
+      "flag": "pass"
+    },
+    {
+      "band": 3,
+      "name": "Total magnetic intensity horizontal gradient - rate of change in horizontal direction",
+      "separability_per_fold": [
+        0.527365,
+        0.523336,
+        0.53398,
+        0.502912,
+        0.56309
+      ],
+      "separability_mean": 0.530137,
+      "separability_max": 0.56309,
+      "flag": "pass"
+    },
+    {
+      "band": 4,
+      "name": "Geodetic second invariant - measure of strain rate tensor magnitude",
+      "separability_per_fold": [
+        0.593875,
+        0.544816,
+        0.594142,
+        0.550187,
+        0.592811
+      ],
+      "separability_mean": 0.575166,
+      "separability_max": 0.594142,
+      "flag": "pass"
+    },
+    {
+      "band": 5,
+      "name": "Isostatic gravity anomaly slope - gradient of gravity after isostatic correction",
+      "separability_per_fold": [
+        0.504667,
+        0.569735,
+        0.539636,
+        0.531913,
+        0.539252
+      ],
+      "separability_mean": 0.537041,
+      "separability_max": 0.569735,
+      "flag": "pass"
+    },
+    {
+      "band": 6,
+      "name": "Tilt angle or total curvature - magnetic field derivative for edge detection",
+      "separability_per_fold": [
+        0.572562,
+        0.576234,
+        0.553964,
+        0.527338,
+        0.548192
+      ],
+      "separability_mean": 0.555658,
+      "separability_max": 0.576234,
+      "flag": "pass"
+    },
+    {
+      "band": 7,
+      "name": "Geodetic shear rate - rate of angular deformation from GPS/InSAR",
+      "separability_per_fold": [
+        0.587034,
+        0.541364,
+        0.597318,
+        0.55818,
+        0.585884
+      ],
+      "separability_mean": 0.573956,
+      "separability_max": 0.597318,
+      "flag": "pass"
+    },
+    {
+      "band": 8,
+      "name": "Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)",
+      "separability_per_fold": [
+        0.544325,
+        0.533264,
+        0.52076,
+        0.505134,
+        0.546816
+      ],
+      "separability_mean": 0.53006,
+      "separability_max": 0.546816,
+      "flag": "pass"
+    },
+    {
+      "band": 9,
+      "name": "Total magnetic intensity vertical gradient - rate of change in vertical direction",
+      "separability_per_fold": [
+        0.504995,
+        0.512818,
+        0.527637,
+        0.51664,
+        0.508732
+      ],
+      "separability_mean": 0.514164,
+      "separability_max": 0.527637,
+      "flag": "pass"
+    },
+    {
+      "band": 10,
+      "name": "Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+      "separability_per_fold": [
+        0.57421,
+        0.528671,
+        0.567467,
+        0.529062,
+        0.569771
+      ],
+      "separability_mean": 0.553836,
+      "separability_max": 0.57421,
+      "flag": "pass"
+    },
+    {
+      "band": 11,
+      "name": "Isostatic gravity anomaly vertical gradient - vertical rate of change",
+      "separability_per_fold": [
+        0.534834,
+        0.549076,
+        0.501457,
+        0.532856,
+        0.527695
+      ],
+      "separability_mean": 0.529184,
+      "separability_max": 0.549076,
+      "flag": "pass"
+    },
+    {
+      "band": 12,
+      "name": "Detrended elevation - topography with regional trends removed",
+      "separability_per_fold": [
+        0.510974,
+        0.524871,
+        0.517221,
+        0.526401,
+        0.502974
+      ],
+      "separability_mean": 0.516488,
+      "separability_max": 0.526401,
+      "flag": "pass"
+    },
+    {
+      "band": 13,
+      "name": "Isostatic gravity anomaly - gravity after compensating for topographic mass",
+      "separability_per_fold": [
+        0.553741,
+        0.546238,
+        0.547288,
+        0.548022,
+        0.517196
+      ],
+      "separability_mean": 0.542497,
+      "separability_max": 0.553741,
+      "flag": "pass"
+    },
+    {
+      "band": 14,
+      "name": "Total magnetic intensity - total strength of magnetic field",
+      "separability_per_fold": [
+        0.502136,
+        0.503261,
+        0.540794,
+        0.52001,
+        0.503408
+      ],
+      "separability_mean": 0.513922,
+      "separability_max": 0.540794,
+      "flag": "pass"
+    },
+    {
+      "band": 15,
+      "name": "Depth to basement surface - thickness of sedimentary cover",
+      "separability_per_fold": [
+        0.512446,
+        0.532111,
+        0.503314,
+        0.505825,
+        0.509422
+      ],
+      "separability_mean": 0.512624,
+      "separability_max": 0.532111,
+      "flag": "pass"
+    },
+    {
+      "band": 16,
+      "name": "Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+      "separability_per_fold": [
+        0.586269,
+        0.554764,
+        0.590346,
+        0.541704,
+        0.593988
+      ],
+      "separability_mean": 0.573414,
+      "separability_max": 0.593988,
+      "flag": "pass"
+    },
+    {
+      "band": 17,
+      "name": "Conductivity surface - electrical conductivity of subsurface",
+      "separability_per_fold": [
+        0.537645,
+        0.522472,
+        0.520807,
+        0.539723,
+        0.515074
+      ],
+      "separability_mean": 0.527144,
+      "separability_max": 0.539723,
+      "flag": "pass"
+    },
+    {
+      "band": 18,
+      "name": "Isostatic gravity anomaly horizontal gradient - horizontal rate of change",
+      "separability_per_fold": [
+        0.532621,
+        0.549783,
+        0.516296,
+        0.502437,
+        0.505467
+      ],
+      "separability_mean": 0.521321,
+      "separability_max": 0.549783,
+      "flag": "pass"
+    },
+    {
+      "band": 19,
+      "name": "Detrended elevation slope - gradient of elevation after detrending",
+      "separability_per_fold": [
+        0.5604,
+        0.551049,
+        0.568239,
+        0.54659,
+        0.573005
+      ],
+      "separability_mean": 0.559857,
+      "separability_max": 0.573005,
+      "flag": "pass"
+    }
+  ],
+  "B_distance_leak_free": {
+    "description": "distance to VISIBLE known faults (withheld segments removed), cross-fitted by 4x4 block",
+    "separability_per_fold": [
+      0.522958,
+      0.520416,
+      0.524221,
+      0.522352,
+      0.548798
+    ],
+    "AUC_per_fold": [
+      0.477042,
+      0.479584,
+      0.475779,
+      0.477648,
+      0.451202
+    ],
+    "separability_mean": 0.527749,
+    "flag": "pass",
+    "note": "Expected to be informative (new faults often lie near known ones). That is legitimate information available at prediction time, not a label leak."
+  },
+  "C2_leaky_distance_on_withheld": {
+    "description": "distance to the FULL catalogue (withheld labels included), evaluated on withheld positives",
+    "separability_per_fold": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "separability_mean": 1.0,
+    "verdict": "LEAK: a holdout scored with a feature built from its own labels is inflated"
+  },
+  "summary": {
+    "label_free_bands_flagged": [],
+    "max_label_free_band_separability": 0.597318,
+    "leak_free_distance_separability_mean": 0.527749,
+    "leaky_distance_in_sample_separability": 1.0,
+    "leaky_distance_on_withheld_separability_mean": 1.0,
+    "verdict": "label-free bands: no band above the 0.90 gate; leak-free distance: pass; leaky distance: confirmed leak (separability 1.0 in-sample; inflated on withheld folds)."
+  },
+  "runtime_s": 80.7
+}
