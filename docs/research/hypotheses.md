@@ -1,4 +1,7 @@
-# Hypotheses and next-candidate screen (reviewed 2026-10-08)
+# Hypotheses and next-candidate screen (reviewed 2026-10-09)
+
+**2026-10-09 pre-placement update (no new experiment):** C1 remains an *untested* stack-only hypothesis (the S3 update below recommends H12 first); it was not implemented or scored because a pixel-verified public [GEMSDOE17 registry raster](https://github.com/buffedlizard55-lab/17GEMSDOE/blob/main/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif) is positive on all 5,167,373 sample-footprint pixels (`evidence/protocol_preflight_20261009.json`). A nonempty C1 dot map necessarily overlaps that raster at distance zero by 100%, violating the unchanged 70% rule **before** placement. C2 and C3 still need official data availability/rights checks. None has new HOLDOUT-DTI or ORGANIZER-CONFIRMED evidence; no submission slot was spent. The earlier budget sentence below concerns the 2026-10-08 E1/E2/E3 run, not this session.
+
 
 **No experiment was run during this review.** The three-experiment budget in `evidence/run_card.json` is already used. Ranks are qualitative expected-value-per-cost judgements (expected catalogue-proxy gain balanced against data and validation cost), not DTI projections or scores. Candidate HOLDOUT-DTI values and organizer scores are reported only when measured/receipted in the evidence files.
 
@@ -19,7 +22,7 @@ The portfolio scan is derived from `evidence/registry_manifest.json` and local s
 | 2 | **C2: depth- and time-resolved earthquake-plane continuity** | Raw earthquake hypocentres (location, depth, time, magnitude), not only the stack's smoothed bands 10/16. Target coherent 3-D hypocentral planes and depth-step terminations across spatial blocks. | Seismicity can illuminate active or reactivated fault segments absent from a surface catalogue; time/depth structure can distinguish a coherent fault plane from diffuse seismic background. | The 19-band stack contains smoothed earthquake distance/intensity; this proposal uses raw event geometry and temporal structure, not those scalars. The registry includes a “seisgeom-ridgesnap” candidate, so portfolio novelty needs a source-code audit. | **Moderate potential, very uncertain.** Raw event planes may map active faults, but sparse/temporally biased seismic coverage could limit catalogue-proxy recovery. No DTI projection. | **High / blocked here.** Candidate official source: [USGS ANSS ComCat FDSN event service](https://earthquake.usgs.gov/fdsnws/event/1/). This host is outside this session's egress allow-list, so endpoint availability, licensing and downloadability were not checked; it is **not viable in this environment** until checked. |
 | 3 | **C3: seasonally persistent satellite thermal residuals** | Multi-date USGS Landsat Collection 2 Level-2 surface-temperature composites, after emissivity, elevation, land-cover and seasonal controls; test persistent local thermal residuals, not one-date brightness. | Persistent thermal upflow can identify a fluid pathway/vent above an unmapped permeable structure, an independent observation rather than a catalogue trace. | The stack has no satellite thermal time series. Portfolio files include probe/population/geothermometer-style thermal approaches, so this is a different measurement modality, not a claim that “thermal” is new. | **Low-to-moderate, high uncertainty for fault labels.** Thermal vents do not represent every fault, so signal coverage may be sparse. No DTI projection. | **High / blocked here.** Candidate official source: [USGS Landsat Collection 2 Level-2 science products](https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products). USGS is outside this session's egress allow-list; product coverage, access and licence were not verified. **Not viable here until obtained and verified.** |
 
-**Selection for the next experiment:** C1 is the only candidate that can be evaluated from the existing feature stack without new third-party data. It was not tested in this review because the experiment budget is exhausted. No weekly slot has been used or selected. C2/C3 must not be called viable until their official sources and data rights are checked. All candidates require a new pre-registration, per-feature leakage canary, whole-segment hide-and-recover, spatial-blocked confirmation and the registry uniqueness gate before a submission decision.
+**Selection for the next experiment (original review; superseded by the S3 update below, which ranks H12 first):** C1 is the only candidate that can be evaluated from the existing feature stack without new third-party data. It was not tested in this review because the experiment budget is exhausted. No weekly slot has been used or selected. C2/C3 must not be called viable until their official sources and data rights are checked. All candidates require a new pre-registration, per-feature leakage canary, whole-segment hide-and-recover, spatial-blocked confirmation and the registry uniqueness gate before a submission decision.
 
 ## H1 - segment-exact learn-predict separation (tested)
 
@@ -97,3 +100,34 @@ The portfolio scan is derived from `evidence/registry_manifest.json` and local s
 - Mirror contents and commit: `S26` (`jklinck/geothermal_research@56d78de7`), read through the GitHub API on 2026-10-08.
 - Rules and metric: S1 (problem page) and S3 (NLR rules PDF), as recorded in `registry/sources.json`.
 - No hypothesis has an organiser score. None is ORGANIZER-CONFIRMED.
+
+---
+
+# S3 update (2026-10-08): H8 tested (negative); ranking of the untested hypotheses
+
+This section supersedes the ranking table above for the untested items. Band names are read from `training_features.tif` (verified, 19 bands). Every number is HOLDOUT-DTI (proxy; `gems53.core.dti` v1.0.0), not an organizer score.
+
+## H8 - gravity horizontal-gradient maxima on band 13 (tested S3-B, NEGATIVE)
+
+- Layer: band 13 `iso_grav_anom` (isostatic gravity anomaly, label-free). Transform: Blakely and Simpson (1986) maxima of |grad g|, 100 m cells, 90th percentile threshold, 3 px border (`src/gems53/h8.py`).
+- Result (design B, pre-registration S3 section 4): stage 1 selected `thin_bin_q0p1` (pooled 0.091362 on the segment folds, selected on those folds). Stage 2 spatial: H8 pooled **0.00402**; bands baseline 0.000102; the E2 H1 `thin_bin_q0p1` best 0.004049.
+- Paired H8 minus H1, fold mean +0.000424, 95% CI [-0.003746, +0.004594]. The lower bound is not above 0, so the pre-registered rule gives **NEGATIVE**. Note: the pooled values are nearly equal (0.00402 vs 0.00405), but the paired fold differences are not one-signed.
+- Paired H8 minus bands: +0.003957, CI [0.000129, 0.007785]. H8 adds information over the bands baseline on the proxy, but not over H1.
+- Canary (single feature, design B, fold maxima): R 0.502, S 0.502, log1pD 0.572. All below the 0.90 gate.
+- Receipt: `evidence/s3b_h8_holdout.json`. Run card: `evidence/run_card.json` (`s3_lane`).
+
+## Untested, ranked by expected DTI gain divided by cost (judgement)
+
+| Rank | ID | Hypothesis | Layer(s) (verified names) | Named non-fault mimic (to be tested as negative control) | Expected gain / cost (judgement) | Status |
+|---|---|---|---|---|---|---|
+| 1 | **H12** | Coincidence of H8 gravity-gradient ridges and magnetic horizontal-gradient maxima within 2 px. Two independent potential-field edges at one location are more likely a fault than either alone. | band 13 (H8 ridge) and band 3 `tmi_hg` (TMI horizontal gradient) | Lithological contacts that produce a gravity edge without a magnetic edge (and the reverse) | moderate / low (in-stack) | **proposed, not run**. Next experiment; validate on a spatially blocked holdout before any slot. |
+| 2 | **H10** | Blakely and Simpson gradient maxima on band 15 `depth_to_base_surf` (sedimentary cover thickness). Basin-margin faults show as steps in cover thickness. | band 15 | Stratigraphic onlap and depositional thickness changes without faulting | moderate / low (in-stack). Caveat: the origin of band 15 is not documented here; if it derives from the same gravity field as band 13, it partly duplicates H8. | proposed, not run |
+| 3 | **H9** | Hessian or curvature ridges on band 12 `det_elev` (100 m detrended elevation). Fault scarps appear as linear ridges in curvature. | band 12 (and band 19 slope) | Erosional escarpments, landslide scarps, and river terraces (USGS OFR 89-365 notes stream courses confound lineament interpretation) | low to moderate / low. Limit: scarps smaller than 100 m are unresolved at this grid. | proposed, not run |
+| 4 | H5 | Off-catalogue thermal and paleo-geothermal evidence (INGENIOUS temperature probes, wells, springs) | external | Hot springs not on faults | unknown / medium. Licence to verify (IR-53-44). | not tested (earlier budget) |
+| 5 | H2 | Magnetic lineament ridges (Hessian) on band 2 `rtp` native grids | band 2 (native GeoDAWN grid) | Dike and intrusive edges | moderate / medium | not tested |
+| 6 | H7 | Regional trend prior (dominant orientation of visible faults) | catalogue-derived | Any trend-aligned feature | small to moderate / low | not tested. Caution: catalogue-derived, so it must use visible faults only. |
+| - | H11 | Seismicity epicentre alignments (USGS ComCat) | bands 10 `deq_n100a15` and 16 `ieq_n100a15` already provide earthquake-derived features in the stack | Aftershock clusters along non-fault structures | potentially high / high | **BLOCKED**: the sandbox cannot reach ComCat (L-31). Also possibly redundant with bands 10 and 16 (not checked). |
+| - | H3 | Fault-parallel strain | bands 7 and 8 are scalars | - | none | BLOCKED (IR-53-40) |
+| - | H4 | USGS quaternary fault maps as extra labels | - | - | none | rejected (labels) |
+
+Notes on the table: the gain and cost columns are judgements, not measurements. Nothing in the table is a score. Any of ranks 1 to 3 needs the spatially blocked holdout (design B, stage 2) before a submission slot is considered, and a named mimic run as a negative control.

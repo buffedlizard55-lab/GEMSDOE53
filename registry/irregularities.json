@@ -6,7 +6,7 @@
    "severity": "high",
    "status": "open",
    "subject": "Target score in the request is not the leaderboard top",
-   "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page. Re-checked 2026-10-09 on the live board: #1 xiaofanhu 0.3774, #2 alexoktaba 0.3345, #7 DARD 0.3195, #13 extradr19 0.2778 (S2, fetched this session).",
+   "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page. [Session 4f95697f update] Re-checked 2026-10-09 on the live board: #1 xiaofanhu 0.3774, #2 alexoktaba 0.3345, #7 DARD 0.3195, #13 extradr19 0.2778 (S2, fetched this session).",
    "action": "Use 0.3774 as the public bar. Re-check S2 before any slot decision."
   },
   {
@@ -14,7 +14,7 @@
    "severity": "high",
    "status": "open",
    "subject": "The 0.2778 file is not mapped to a leaderboard receipt",
-   "detail": "S2 lists 0.2778 for extradr19 (#13). S9/S10 say the 0.2778-scoring file is GEMSDOE32 H33-2-B2 and that the file's note is 'UNSCORED'. Nothing in the repositories ties the file to the leaderboard row. 2026-10-09: the live board still shows extradr19 0.2778 (#13); no submission receipt links it to the H33-2-B2 file. The file itself is measured in evidence/h53_lineage_algebra.json.",
+   "detail": "S2 lists 0.2778 for extradr19 (#13). S9/S10 say the 0.2778-scoring file is GEMSDOE32 H33-2-B2 and that the file's note is 'UNSCORED'. Nothing in the repositories ties the file to the leaderboard row. [Session 4f95697f update] 2026-10-09: the live board still shows extradr19 0.2778 (#13); no submission receipt links it to the H33-2-B2 file. The file itself is measured in evidence/h53_lineage_algebra.json.",
    "action": "Label 0.2778 as ORGANIZER-CONFIRMED only when a receipt is seen; until then it is user-reported."
   },
   {
@@ -394,76 +394,197 @@
    "action": "Keep the full-registry receipt as the verdict source; label the refresh partial in any future UI or remove it from clearance paths. No threshold or registry scope was changed."
   },
   {
-   "id": "IR-53-50",
+   "id": "IR-53-63",
    "severity": "medium",
    "status": "open",
-   "subject": "HWVC field shows a rectangular grid artefact in the north of the footprint",
-   "detail": "Visible in docs/assets/h53_hwvc_R_s5.png (rows ~0-800). Most likely survey-block seams in one of the four input bands (cond_surf or depth_to_base_surf); not traced to a band in this session. It can create false straight ridges.",
-   "action": "Trace per band before any HWVC reuse; mask or detrend seams."
+   "subject": "Band 18 is labelled 'horizontal gradient' but takes negative values",
+   "detail": "training_features.tif band 18 ('Isostatic gravity anomaly horizontal gradient - horizontal rate of change') has minimum -15.44 and median 0.038 on the footprint. A gradient magnitude cannot be negative, so the layer is a signed component or a mislabelled field. The official problem page lists 'the slope of the isostatic gravity anomaly' among the layers (S1, 'Provided features'). H8 therefore computes its own gradient from band 13, not from band 18. Measured 2026-10-08 with src/gems53/core.py load_inputs.",
+   "action": "Ask the data owner (DrivenData forum or the USGS/GeoDAWN metadata) what band 18 is. Until then do not treat it as a magnitude."
+  },
+  {
+   "id": "IR-53-50",
+   "severity": "high",
+   "status": "open",
+   "subject": "The uniqueness gate counts any value > 0 as a dot, so dense probability surfaces make the overlap rule unsatisfiable",
+   "detail": "In the rebuilt registry (2026-10-08, 1,212 files, 635 unique sha256, 1,189 on the official grid) several rasters are probability surfaces with reg_dots = 5,167,373, the full footprint (for example 17GEMSDOE E-proba-multiscale and 5GEMSDOE context_detector_prob_*). For them within-3-px overlap is 1.0 for any candidate, by construction. scripts/uniqueness_gate.py: 'rd = arr > 0'. The gate therefore flags every candidate on this registry (IR-53-46 and IR-53-48 already describe the lattice and dense classes). This is a defect in the gate definition, not a property of any candidate. It was not changed, because a change needs the user's approval (README, Decisions needed).",
+   "action": "Decision for the user: define dot maps (for example, sparse rasters only, or a 'top-k dots' definition) and re-run the gate under a new pre-registration. Until then every file is labelled RESEARCH-ONLY."
   },
   {
    "id": "IR-53-51",
    "severity": "high",
    "status": "open",
-   "subject": "Template conformance rule (NaN outside) conflicts with organizer-accepted all-finite files",
-   "detail": "The shared template's validate-conformant requires NaN outside the footprint. The organizer-scored 0.2778 file (GEMSDOE32, zeros) has 0 NaN and nodata unset, and the user reports the portal error 'Predicted values must be in range [0, 1]' for a NaN-outside file from this repo. The problem page says outside data 'is null or nan'. Our file follows the empirically accepted all-finite layout; the template check is run and reported (expected non-conformant) together with the same check on the 0.2778 control.",
-   "action": "Fix the template rule once (accept all-finite zeros outside) in the template repository; not done here because this session may push only to its own branch."
+   "subject": "Live leaderboard cannot be fed automatically; DrivenData Terms of Use prohibit automated access and manual copying",
+   "detail": "The DrivenData Terms of Use (fetched 2026-10-08 (session date), https://www.drivendata.org/termsofuse/, 'Prohibited Uses' item 2 and item 3) say: 'Use any robot, spider or other automatic device, process or means to access the Website for any purpose, including monitoring or copying any of the material on the Website' and 'Use any manual process to monitor or copy any of the material on the Website ... without our prior written consent.' The leaderboard values in the request are therefore user-supplied, not fetched. The same page says 'Last Modified: August 7, 2014'; that date should be checked against the current site. A current-score feed needs written permission from DrivenData, or an official API if one is offered.",
+   "action": "User decision: request written permission from DrivenData for a feed, or accept user-supplied leaderboard values with their date. Do not scrape."
   },
   {
    "id": "IR-53-52",
-   "severity": "medium",
-   "status": "open",
-   "subject": "Submission decoder D-S scores below M1 on our proxy",
-   "detail": "Stage 1 HOLDOUT-DTI arm A: M1 thin q0.10 0.141319 vs D-S (flank 2 px, sep 2.8, 40,000 dots) 0.116626. D-S was pre-registered from USER-REPORTED organizer evidence (dot budget/spacing/flank of the scored GEMSDOE lineage), not tuned on the proxy. Proxy and organizer evidence disagree on the dot budget; the proxy truth is the catalogue (IR-53-42).",
-   "action": "Resolve only with an organizer score of this file."
+   "severity": "high",
+   "status": "resolved-in-template-and-this-repo",
+   "subject": "Cause of the 'Predicted values must be in range [0, 1]' rejection",
+   "detail": "The shared template src/submission_io.py documents the rejection (2026-09-24): NaN inside the scored footprint (3,061 px in the earlier shipped raster), finite values outside the template mask (1,540 px), and no GDAL nodata tag. NaN is not in [0, 1]. The fix is conform_to_template(): template finite -> finite in [0,1]; template NaN -> NaN. The S3 candidate passes this (nan_inside_footprint = 0, finite_outside_template = 0). The rejection itself was seen by the user; the rule was taken from the official page ('values between 0 and 1', 'data outside the bounds is null or nan', S1).",
+   "action": "Re-run the organizer's validator on the file before upload. We have no organizer validator output for the new file (organizer_score = null)."
   },
   {
    "id": "IR-53-53",
-   "severity": "high",
-   "status": "closed",
-   "subject": "E3 dots concentrate 3-10 px from the catalogue (catalogue-proximity bet)",
-   "detail": "evidence/h53_e3_geometry_vs_b2.json: 52.2% of our dots are within 5 px and 89.6% within 10 px of a catalogue fault (median 5.0 px); the 0.2778 file has 15.0% within 5 px (median 19.65 px). The H1 feature drives this, and the hide-and-recover proxy rewards it because withheld catalogue segments lie near visible ones. Whether expert-mapped NEW faults lie 300 m-1 km from mapped faults is unknown; dots <= 2 px were FP-only by the lineage algebra (INFERENCE). RESOLVED 2026-10-09: the bet was never placed. The same near-catalogue sleeves are shared with 27 public registry rows, so the E3 file is DUPLICATE under gate v2 (evidence/h53_gate_v2_e3_armA_ds40000.json) and not OK to submit. No organizer score exists.",
-   "action": "State it on the site; treat the organizer score of this file as an information probe for the near-catalogue band."
+   "severity": "low",
+   "status": "resolved",
+   "subject": "KDD 2011 DOI of the Kaufman et al. paper not verified in this session",
+   "detail": "The TKDD 2012 DOI 10.1145/2382577.2382579 and the learn-predict separation wording were verified in this session (search results, S41). The KDD 2011 DOI 10.1145/2020408.2020496 used in docs/leakage-review.md was not opened. Treat it as unverified until checked. Resolved 2026-10-08: the DOI 10.1145/2020408.2020496 resolves to 'Leakage in data mining' (Proc. 17th ACM SIGKDD, S38).",
+   "action": "Closed. The TKDD 2012 DOI (S41) is also kept."
   },
   {
    "id": "IR-53-54",
-   "severity": "low",
-   "status": "closed",
-   "subject": "Pre-registration wording fix committed after the first pre-registration commit",
-   "detail": "Commit 7ba7778 contained an unfinished fallback sentence; the next commit replaced it with the fallback rule (arm A + D-S). Both commits precede every experiment (E1 receipt is later).",
-   "action": "None; recorded for transparency."
+   "severity": "medium",
+   "status": "open",
+   "subject": "Sandbox UTC clock is one day ahead of the session date",
+   "detail": "S3-B started 2026-10-08T23:47Z and S3-C started 2026-10-09T00:04Z (receipts). The session date in the system prompt is 2026-10-08. The S3 file name therefore carries 20261009, and some timestamps read 10-09.",
+   "action": "Name kept: renaming would break the receipts and the sha256 pins. Timestamps are reported as read from the receipts. Confirm the session date for the record."
   },
   {
    "id": "IR-53-55",
    "severity": "medium",
    "status": "open",
-   "subject": "HWVC rejected by stage 1 but favoured on spatial blocks",
-   "detail": "Stage 2 (spatial super-regions) B-A +0.000344, 95% CI [-0.000216, +0.000903], B wins 4/5; stage 1 (segment folds) B-A -0.001587, CI [-0.003732, +0.000559], B wins 1/5. The rule requires both, so HWVC is negative. HWVC may help where the catalogue is absent (unseen regions).",
-   "action": "Next session: pre-register HWVC as a catalogue-free arm (no H1), test on spatial blocks only."
+   "subject": "Submission deadline time differs between two sources",
+   "detail": "NLR Official Rules Appendix A.1 (fetched 2026-10-08, S3): the submission must be posted or uploaded by 5:00 p.m. ET on the deadline date. The template SUBMISSION_GUIDE.md (S7 / S25 / S33 template repository) gives Dec 3, 2026 11:59 pm UTC. The DrivenData page fetched this session did not show key dates, so the competition page was not verified for dates.",
+   "action": "Check the competition page for the exact deadline before any submission. Treat the earlier of the two times as binding."
   },
   {
    "id": "IR-53-56",
    "severity": "medium",
    "status": "open",
-   "subject": "Uniqueness gate v2 was defined by this session, not by a human decision",
-   "detail": "The user instructed 'no manual input'. Gate D-1 (chance-corrected overlap with kappa > 0.40, top-K matching for dense rasters, Spearman on 500k footprint pixels) was pre-registered before any run. The raw-rule numbers are reported next to it for every registry raster. Outcome: gate v2 was applied as pre-registered and flagged the E3 file (27 rows, kappa up to 1.00). The raw rule flags 97 rasters. Both rules agree on DO NOT SUBMIT.",
-   "action": "Owner may override; the receipt allows recomputation under any rule."
+   "subject": "Registry counts differ from the S3 pre-registration",
+   "detail": "The S3 pre-registration (section 6) expects 1212 files, 635 unique sha256 and 1189 unique on the official grid. The gate receipt for the S3 file reports 628 unique rasters on the grid and 584 skipped. The difference is not reconciled. The registry lives in /tmp and in GitHub repositories and is not committed.",
+   "action": "Reconcile the counts (which files are skipped and why) and commit a manifest with the gate run. Until then, state the gate's registry as 628 unique rasters, as in the receipt."
   },
   {
    "id": "IR-53-57",
+   "severity": "low",
+   "status": "open",
+   "subject": "NaN correlation can hide a surface flag in max() (no effect in this run)",
+   "detail": "uniqueness_gate.py computes the worst case with max(rho_final, rho_surface). When rho_final is NaN (constant input) and rho_surface is numeric, Python max() can return NaN, and NaN > 0.90 is False. In the S3 run two registry rasters are all-zero (0 dots, both rho NaN), so no drift was possible and no flag was missed. The code path is fragile.",
+   "action": "Guard NaN explicitly in the gate code (not a rule change) and re-run. Report in the template if the shared function is reused."
+  },
+  {
+   "id": "IR-53-58",
+   "severity": "medium",
+   "status": "open",
+   "subject": "S3 pre-registration names no non-fault mimic",
+   "detail": "The run card requires a named non-fault mimic for each hypothesis. The S3 pre-registration (section 1) gives a targeted signature (density contrast with a fault-parallel trend) but no mimic. The run card names one for H8 post hoc (basin-margin and lithological density contacts), and it is not tested.",
+   "action": "Name the mimic before any future run, and test it as a negative control (a non-fault population with the same gravity-gradient signature)."
+  },
+  {
+   "id": "IR-53-59",
+   "severity": "low",
+   "status": "open",
+   "subject": "Two pixel-hash conventions in the receipts",
+   "detail": "The gate's final_sha256 hashes the in-memory array with NaN bytes (receipt label 'pixel sha256 8e73fcfe203ab2c6'). The candidate receipt's pixel_sha256 hashes the array after nan_to_num(nan=-1). The two values do not match for the same file. The S3 pixel_sha256 e67cda00... was recomputed from the shipped bytes with the nan=-1 convention and matches.",
+   "action": "Use one convention (nan=-1, as in e3_build_candidate.pixel_sha256) in the gate receipt. Record which convention each hash uses."
+  },
+  {
+   "id": "IR-53-60",
+   "severity": "high",
+   "status": "open",
+   "subject": "The S3 file is a control with a much lower holdout proxy than H1",
+   "detail": "The shipped S3 file (bands top-q 0.02, RESEARCH-ONLY) has HOLDOUT-DTI proxy 0.000102 pooled. H1 thin_bin_q0p1 has 0.004049 on the same proxy, and it is 40 times higher. The S3 file was built as the pre-registered frozen control, not as the best candidate. Its download is useful for research. As a candidate it is far weaker than H1 on our own proxy.",
+   "action": "Do not treat the S3 file as the submission candidate. Decide between H1 and a new candidate under a changed gate (Decisions needed, item 2)."
+  },
+  {
+   "id": "IR-53-61",
+   "severity": "low",
+   "status": "resolved",
+   "subject": "run_card.json carried another session's branch name",
+   "detail": "scripts/build_run_card.py hardcoded session_branch 'arena/0efb644e-gemsdoe53' (another session's branch).",
+   "action": "Fixed in this session: session_branch now reads arena/7b60bcc7-gemsdoe53 and the run card is regenerated."
+  },
+  {
+   "id": "IR-53-62",
+   "severity": "low",
+   "status": "open",
+   "subject": "The prompt names data scripts that do not exist in this repository",
+   "detail": "The verbatim prompt mentions 'scripts/download_competition_data.sh' and 'scripts/prepare_data.py' and says the data step is the single blocker. Neither file exists here. The competition rasters came from the GEMSDOE template repository (GitHub mirror), verified by sha256 with scripts/fetch_data.py. The DrivenData data tab needs login (verbatim prompt, 'No DrivenData auth').",
+   "action": "Do not add the named scripts as copies of anything. Document fetch_data.py as the data path. Confirm with the user whether the named scripts belong to another repository."
+  },
+  {
+   "id": "IR-53-64",
+   "severity": "medium",
+   "status": "open",
+   "subject": "HWVC field shows a rectangular grid artefact in the north of the footprint",
+   "detail": "Visible in docs/assets/h53_hwvc_R_s5.png (rows ~0-800). Most likely survey-block seams in one of the four input bands (cond_surf or depth_to_base_surf); not traced to a band in this session. It can create false straight ridges.",
+   "action": "Trace per band before any HWVC reuse; mask or detrend seams.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+  },
+  {
+   "id": "IR-53-65",
+   "severity": "high",
+   "status": "open",
+   "subject": "Template conformance rule (NaN outside) conflicts with organizer-accepted all-finite files",
+   "detail": "The shared template's validate-conformant requires NaN outside the footprint. The organizer-scored 0.2778 file (GEMSDOE32, zeros) has 0 NaN and nodata unset, and the user reports the portal error 'Predicted values must be in range [0, 1]' for a NaN-outside file from this repo. The problem page says outside data 'is null or nan'. Our file follows the empirically accepted all-finite layout; the template check is run and reported (expected non-conformant) together with the same check on the 0.2778 control.",
+   "action": "Fix the template rule once (accept all-finite zeros outside) in the template repository; not done here because this session may push only to its own branch.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+  },
+  {
+   "id": "IR-53-66",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Submission decoder D-S scores below M1 on our proxy",
+   "detail": "Stage 1 HOLDOUT-DTI arm A: M1 thin q0.10 0.141319 vs D-S (flank 2 px, sep 2.8, 40,000 dots) 0.116626. D-S was pre-registered from USER-REPORTED organizer evidence (dot budget/spacing/flank of the scored GEMSDOE lineage), not tuned on the proxy. Proxy and organizer evidence disagree on the dot budget; the proxy truth is the catalogue (IR-53-42).",
+   "action": "Resolve only with an organizer score of this file.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+  },
+  {
+   "id": "IR-53-67",
+   "severity": "high",
+   "status": "closed",
+   "subject": "E3 dots concentrate 3-10 px from the catalogue (catalogue-proximity bet)",
+   "detail": "evidence/h53_e3_geometry_vs_b2.json: 52.2% of our dots are within 5 px and 89.6% within 10 px of a catalogue fault (median 5.0 px); the 0.2778 file has 15.0% within 5 px (median 19.65 px). The H1 feature drives this, and the hide-and-recover proxy rewards it because withheld catalogue segments lie near visible ones. Whether expert-mapped NEW faults lie 300 m-1 km from mapped faults is unknown; dots <= 2 px were FP-only by the lineage algebra (INFERENCE). RESOLVED 2026-10-09: the bet was never placed. The same near-catalogue sleeves are shared with 27 public registry rows, so the E3 file is DUPLICATE under gate v2 (evidence/h53_gate_v2_e3_armA_ds40000.json) and not OK to submit. No organizer score exists.",
+   "action": "State it on the site; treat the organizer score of this file as an information probe for the near-catalogue band.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+  },
+  {
+   "id": "IR-53-68",
+   "severity": "low",
+   "status": "closed",
+   "subject": "Pre-registration wording fix committed after the first pre-registration commit",
+   "detail": "Commit 7ba7778 contained an unfinished fallback sentence; the next commit replaced it with the fallback rule (arm A + D-S). Both commits precede every experiment (E1 receipt is later).",
+   "action": "None; recorded for transparency.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+  },
+  {
+   "id": "IR-53-69",
+   "severity": "medium",
+   "status": "open",
+   "subject": "HWVC rejected by stage 1 but favoured on spatial blocks",
+   "detail": "Stage 2 (spatial super-regions) B-A +0.000344, 95% CI [-0.000216, +0.000903], B wins 4/5; stage 1 (segment folds) B-A -0.001587, CI [-0.003732, +0.000559], B wins 1/5. The rule requires both, so HWVC is negative. HWVC may help where the catalogue is absent (unseen regions).",
+   "action": "Next session: pre-register HWVC as a catalogue-free arm (no H1), test on spatial blocks only.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+  },
+  {
+   "id": "IR-53-70",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Uniqueness gate v2 was defined by this session, not by a human decision",
+   "detail": "The user instructed 'no manual input'. Gate D-1 (chance-corrected overlap with kappa > 0.40, top-K matching for dense rasters, Spearman on 500k footprint pixels) was pre-registered before any run. The raw-rule numbers are reported next to it for every registry raster. Outcome: gate v2 was applied as pre-registered and flagged the E3 file (27 rows, kappa up to 1.00). The raw rule flags 97 rasters. Both rules agree on DO NOT SUBMIT.",
+   "action": "Owner may override; the receipt allows recomputation under any rule.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+  },
+  {
+   "id": "IR-53-71",
    "severity": "high",
    "status": "open",
    "subject": "Catalogue-distance models converge on shared consensus sleeves; uniqueness fails without a regime change",
    "detail": "E3 (H1 HGB + D-S) overlaps, within 3 px, earlier public rasters whose file names indicate different methods (receipts not read): GEMSDOE37 physics-dotted-80k 0.892 (kappa 0.852), 12GEMSDOE r5-nms3-trace 0.872 (0.816), GEMSDOE43 sup01-hgb21-n40000 0.812 (0.769), GEMSDOE44 0.733 (0.683), and our 2026-10-08 file 1.000 (1.000). Dense 40k-dot files placed near mapped structure are mutually redundant. Only the B2 regime (median 19.65 px from the catalogue) is clearly distinct; E3 vs B2 overlap is 28.9%.",
-   "action": "Next session: gate the score surface top-K against the 27 flagged rows BEFORE placement (minutes, not 20 min), and target the far-from-catalogue regime."
+   "action": "Next session: gate the score surface top-K against the 27 flagged rows BEFORE placement (minutes, not 20 min), and target the far-from-catalogue regime.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
   },
   {
-   "id": "IR-53-58",
+   "id": "IR-53-72",
    "severity": "low",
    "status": "open",
    "subject": "Gate v2 kappa is degenerate when overlap = 1.0",
    "detail": "kappa = (ov - ch)/(1 - ch) equals 1 whenever every dot is covered, whatever the coverage. With 40,000 dots that needs coverage near 100% (P ~ ch^40000), so the real gate is unaffected; a small-sample unit test exposed it (tests/test_h53.py docstring). The r13 lattice has ov 0.9945, ch 0.9987, kappa -3.25.",
-   "action": "If gate v3 is written, use a binomial z-score of ov vs ch instead of kappa."
+   "action": "If gate v3 is written, use a binomial z-score of ov vs ch instead of kappa.",
+   "session": "arena/4f95697f (2026-10-09, HWVC lane)"
   }
  ]
 }

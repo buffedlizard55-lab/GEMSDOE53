@@ -15,7 +15,7 @@ code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.
 table{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:#f1f4f8}
 td.n{text-align:right;font-variant-numeric:tabular-nums}.muted{color:var(--muted);font-size:14px}ol li,ul li{margin:4px 0}
 img{max-width:100%;border:1px solid var(--line);border-radius:8px}
-</style></head><body><header><b>GEMSDOE53 · GEMS Prize (DrivenData #306)</b><nav><a href="index.html" class="on">Executive summary</a><a href="how-to-submit.html" class="">How to submit</a><a href="evidence.html" class="">Archive: 2026-10-08 evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53" class="">Repository</a></nav></header><main>
+</style></head><body><header><b>GEMSDOE53 · GEMS Prize (DrivenData #306)</b><nav><a href="index.html" class="on">Executive summary</a><a href="how-to-submit.html" class="">How to submit</a><a href="evidence.html" class="">Evidence (S3 session and archive)</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53" class="">Repository</a></nav></header><main>
 <section>
 <h1>Submission status, 2026-10-09: no file is OK to submit</h1>
 <div class="verdict no">NO — do not submit. This session produced no file that passed every gate.</div>
@@ -28,13 +28,13 @@ img{max-width:100%;border:1px solid var(--line);border-radius:8px}
 <a href="../archive/do-not-submit/gems53-h1ds-n40000-20261009-c468977c-zeros__DO-NOT-SUBMIT.tif">gems53-h1ds-n40000-20261009-c468977c-zeros__DO-NOT-SUBMIT.tif</a> (143,771 bytes, sha256 <span class=mono>1101b655fbc33152…</span>).
 Unique name: <code>gems53-h1ds-n40000-20261009-c468977c-zeros</code>. Note: <code>GEMSDOE53 E3: H1 HGB (19 bands+seg-exact fault dist), 40k dots sep2.8 px, &gt;2 px off catalogue. HOLDOUT-DTI 0.117 (DS). Unscored.</code> (128 chars).</p>
 <p><b>What would pass next time.</b> Build a B2-regime file (median at least 15 px from the catalogue; flank of 3 px or more) from a model trained WITHOUT catalogue-distance features, for example catalogue-free HWVC on spatial blocks. Run the dot-overlap gate on the score surface&#x27;s top-K BEFORE placement, using a fast subset of the 27 rasters above.</p>
-<p class="muted">Every older file in <code>docs/downloads/</code> and <code>submissions/</code> is also <b>not</b> OK to submit. Reasons: NaN outside the footprint (the layout that returned
+<p class="muted">The same-day S3 session&#39;s control file <code>docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</code> and every older file in <code>docs/downloads/</code>, <code>docs/submissions/</code> and <code>submissions/</code> are also <b>not</b> OK to submit. Reasons: NaN outside the footprint (the layout that returned
 “Predicted values must be in range [0, 1]”), a failed uniqueness gate (the 2026-10-08 candidate), or both.</p>
 </section>
 
 <section><h2>Format validation (the bytes you download)</h2>
 <table><tr><th>Check</th><th>Result</th></tr><tr><td>single_band</td><td>PASS</td></tr><tr><td>dtype_float32</td><td>PASS</td></tr><tr><td>crs_epsg_32611</td><td>PASS</td></tr><tr><td>shape_matches_sample</td><td>PASS</td></tr><tr><td>transform_matches_sample</td><td>PASS</td></tr><tr><td>resolution_100m</td><td>PASS</td></tr><tr><td>no_nan_anywhere</td><td>PASS</td></tr><tr><td>no_inf</td><td>PASS</td></tr><tr><td>no_nan_inside_footprint</td><td>PASS</td></tr><tr><td>values_in_0_1</td><td>PASS</td></tr><tr><td>outside_footprint_all_zero</td><td>PASS</td></tr><tr><td>nodata_unset</td><td>PASS</td></tr>
-<tr><td>template <code>scripts/validate_submission.py</code></td><td>exit 1; failures: - 7111787 px outside the template&#x27;s valid region are finite; - Nodata tag None != template&#x27;s &#x27;nan&#x27;. The organizer-accepted 0.2778 file gives exit 1 with identical failures (IR-53-51).</td></tr>
+<tr><td>template <code>scripts/validate_submission.py</code></td><td>exit 1; failures: - 7111787 px outside the template&#x27;s valid region are finite; - Nodata tag None != template&#x27;s &#x27;nan&#x27;. The organizer-accepted 0.2778 file gives exit 1 with identical failures (IR-53-65).</td></tr>
 <tr><td>template <code>validate-conformant</code> (requires NaN outside; expected to differ)</td><td>exit 1 — same check on the organizer-accepted 0.2778 zeros file: exit 1</td></tr></table>
 <p class="muted">Dots: 40,000; dots outside footprint: 0; min distance to a catalogue fault: 2.83 px.</p>
 </section>

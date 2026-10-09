@@ -49,7 +49,7 @@ JS = """<script>function cp(id){const el=document.getElementById(id);el.select()
 def page(title, active, body):
     nav = "".join(f'<a href="{h}" class="{"on" if k == active else ""}">{t}</a>' for k, h, t in (
         ("index", "index.html", "Executive summary"), ("submit", "how-to-submit.html", "How to submit"),
-        ("evidence", "evidence.html", "Archive: 2026-10-08 evidence"), ("repo", REPO, "Repository")))
+        ("evidence", "evidence.html", "Evidence (S3 session and archive)"), ("repo", REPO, "Repository")))
     return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{e(title)} · GEMSDOE53</title><style>{CSS}</style></head><body><header><b>GEMSDOE53 · GEMS Prize (DrivenData #306)</b>'
             f'<nav>{nav}</nav></header><main>{body}</main>{JS}</body></html>\n')
@@ -121,7 +121,7 @@ def main():
 <a href="{e(href)}">{e(fname)}</a> ({sub['bytes']:,} bytes, sha256 <span class=mono>{e(sub['sha256'][:16])}…</span>).
 Unique name: <code>{e(cur['name'])}</code>. Note: <code>{e(cur['note'])}</code> ({len(cur['note'])} chars).</p>
 <p><b>What would pass next time.</b> {e(cur['next_step'])}</p>
-<p class="muted">Every older file in <code>docs/downloads/</code> and <code>submissions/</code> is also <b>not</b> OK to submit. Reasons: NaN outside the footprint (the layout that returned
+<p class="muted">The same-day S3 session&#39;s control file <code>docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</code> and every older file in <code>docs/downloads/</code>, <code>docs/submissions/</code> and <code>submissions/</code> are also <b>not</b> OK to submit. Reasons: NaN outside the footprint (the layout that returned
 “Predicted values must be in range [0, 1]”), a failed uniqueness gate (the 2026-10-08 candidate), or both.</p>
 </section>"""
     verdict_cls = "yes" if ok else "no"
@@ -131,7 +131,7 @@ Unique name: <code>{e(cur['name'])}</code>. Note: <code>{e(cur['note'])}</code> 
 
 <section><h2>Format validation (the bytes you download)</h2>
 <table><tr><th>Check</th><th>Result</th></tr>{chk_rows}
-<tr><td>template <code>scripts/validate_submission.py</code></td><td>exit {sub['template_validate_submission']['exit']}; failures: {e('; '.join(sub.get('template_failures_ours', [])))}. The organizer-accepted 0.2778 file gives exit {sub['control_organizer_accepted_zeros_file'].get('template_validate_submission', {}).get('exit')} with identical failures (IR-53-51).</td></tr>
+<tr><td>template <code>scripts/validate_submission.py</code></td><td>exit {sub['template_validate_submission']['exit']}; failures: {e('; '.join(sub.get('template_failures_ours', [])))}. The organizer-accepted 0.2778 file gives exit {sub['control_organizer_accepted_zeros_file'].get('template_validate_submission', {}).get('exit')} with identical failures (IR-53-65).</td></tr>
 <tr><td>template <code>validate-conformant</code> (requires NaN outside; expected to differ)</td><td>exit {sub['template_validate_conformant']['exit']} — same check on the organizer-accepted 0.2778 zeros file: exit {sub['control_organizer_accepted_zeros_file'].get('template_validate_conformant',{}).get('exit')}</td></tr></table>
 <p class="muted">Dots: {sub['stats']['dots']:,}; dots outside footprint: {sub['stats']['dots_outside_footprint']}; min distance to a catalogue fault: {e3['min_dist_to_catalogue_px']:.2f} px.</p>
 </section>

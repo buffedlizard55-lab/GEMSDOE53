@@ -64,5 +64,13 @@
     ]
   },
   "session_branch": "arena/4f95697f-gemsdoe53",
-  "previous_pointer": "docs/submissions/archive/CURRENT_2026-10-08.json"
+  "previous_pointer": "docs/submissions/archive/CURRENT_2026-10-08.json",
+  "other_sessions_same_day": [
+    {
+      "session": "S3 (PRs #9-#12)",
+      "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+      "label": "Research-only / DO NOT SUBMIT",
+      "pointer": "docs/submissions/archive/CURRENT_2026-10-09-S3.json"
+    }
+  ]
 }

@@ -133,7 +133,7 @@
     "- 7111787 px outside the template's valid region are finite",
     "- Nodata tag None != template's 'nan'"
   ],
-  "template_failure_interpretation": "Both files fail only the template's NaN-outside and nodata-NaN rules (IR-53-51). The control scored 0.2778 on the organizer platform (user-reported), so these two rules are stricter than the platform. The NaN variant is not shipped because a NaN-outside file previously returned 'Predicted values must be in range [0, 1]' to the user.",
+  "template_failure_interpretation": "Both files fail only the template's NaN-outside and nodata-NaN rules (IR-53-65). The control scored 0.2778 on the organizer platform (user-reported), so these two rules are stricter than the platform. The NaN variant is not shipped because a NaN-outside file previously returned 'Predicted values must be in range [0, 1]' to the user.",
   "file_as_written": "docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif",
   "label": "DO NOT SUBMIT \u2014 valid format, but DUPLICATE under the pre-registered uniqueness gate v2 (27 registry rows, max kappa 1.00)."
 }

@@ -118,23 +118,55 @@
    "item": "USGS S31/S32 support only the plausibility of the C1 mechanism using studies from Colorado and Yellowstone. They do not validate the feature in Great Basin data; S32 is a different geothermal setting and conductivity/resistivity is an indirect proxy."
   },
   {
+   "id": "L-36",
+   "item": "The live DrivenData leaderboard cannot be read automatically under the Terms of Use (IR-53-51). Leaderboard values in this repo are user-supplied snapshots with no read date from the owner."
+  },
+  {
+   "id": "L-37",
+   "item": "The holdout truth is the catalogue. Every holdout gain (H1, H8) measures proximity to known faults. None of them measures discovery of unmapped faults, which is what the leaderboard scores (IR-53-42)."
+  },
+  {
    "id": "L-30",
-   "item": "External official data (USGS 3DEP 1 m DEM, ComCat) is unreachable from this sandbox (egress limited to GitHub/PyPI/npm). A GitHub Actions workflow on a runner with open egress is the planned route; not built yet."
+   "item": "Single seed and two-vCPU compute. H8 vs H1 is a paired comparison over five spatial folds with a t interval of df 4, so the power to detect a difference of order 0.001 is low (see the S3 receipt)."
   },
   {
    "id": "L-31",
-   "item": "Compute: 2 vCPU, ~3.9 GB RAM, no GPU. The template CNN pipeline cannot be trained here; HGB models only."
+   "item": "H11 (seismicity epicentre alignments from USGS ComCat) is blocked: the sandbox cannot reach earthquake.usgs.gov (curl exit 35, S35). Getting the data needs a manual download, which the no-manual-input rule excludes. Not tested."
   },
   {
    "id": "L-32",
-   "item": "No organizer feedback loop: this session cannot submit. Every score here is HOLDOUT-DTI or USER-REPORTED; the expected leaderboard score of the shipped file is unknown."
+   "item": "H9, H10 and H12 are proposed and have not been run. Each needs a spatially blocked holdout before any use of a submission slot. The next experiment (H12) is outside this session's three-experiment cap."
   },
   {
    "id": "L-33",
-   "item": "The full uniqueness gate takes ~20 min on 2 CPUs (1,222 files, 605 unique on-grid). It ran after the build, so the duplicate verdict came after the last experiment budget was spent."
+   "item": "The uniqueness gate cannot be re-run from the repository alone: the registry is in /tmp and in GitHub repositories and is not committed (IR-53-56). The S3 gate used 628 unique rasters on the grid."
   },
   {
    "id": "L-34",
+   "item": "HOLDOUT-DTI numbers are proxies on the catalogue, with 5 folds and one seed. They are not organizer scores, and no organizer receipt exists (IR-53-42, L-25)."
+  },
+  {
+   "id": "L-35",
+   "item": "Competition rasters are not downloaded from the DrivenData data tab (login required). They come from the GEMSDOE template repository (GitHub mirror), checked against sha256 pins. Copies in /tmp (/tmp/gems53-data, /tmp/gems53-registry-now) do not persist between sessions; fetch_data.py and the registry rebuild must be re-run (IR-53-62)."
+  },
+  {
+   "id": "L-38",
+   "item": "External official data (USGS 3DEP 1 m DEM, ComCat) is unreachable from this sandbox (egress limited to GitHub/PyPI/npm). A GitHub Actions workflow on a runner with open egress is the planned route; not built yet."
+  },
+  {
+   "id": "L-39",
+   "item": "Compute: 2 vCPU, ~3.9 GB RAM, no GPU. The template CNN pipeline cannot be trained here; HGB models only."
+  },
+  {
+   "id": "L-40",
+   "item": "No organizer feedback loop: this session cannot submit. Every score here is HOLDOUT-DTI or USER-REPORTED; the expected leaderboard score of the shipped file is unknown."
+  },
+  {
+   "id": "L-41",
+   "item": "The full uniqueness gate takes ~20 min on 2 CPUs (1,222 files, 605 unique on-grid). It ran after the build, so the duplicate verdict came after the last experiment budget was spent."
+  },
+  {
+   "id": "L-42",
    "item": "Session 2026-10-09 produced no OK-to-submit file. The single E3 build was the only build the 3-experiment budget allowed."
   }
  ]
