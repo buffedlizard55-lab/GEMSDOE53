@@ -1,8 +1,23 @@
 # GEMSDOE29 leakage review
 
-**Review date:** 2026-10-08 (UTC)  
+**Review date:** 2026-10-08 (UTC), citations verified and addendum added 2026-10-09 (session 2)  
 **Lane:** catalogue-distance leakage diagnosis only  
 **Disposition (updated 2026-10-08):** GEMSDOE29 verdict negative and unchanged; holdout corrected to design B (IR-53-37); candidate label in `docs/submissions/CURRENT.json`; no submission slot used
+
+## Session-2 addendum (2026-10-09): verified citation record and the formal test applied
+
+**Citations now verified line-by-line from official/authoritative bibliographic sources (IR-53-12 resolved):**
+
+- **KDD '11 (three authors):** Kaufman, S., Rosset, S., Perlich, C. "Leakage in data mining: formulation, detection, and avoidance." *Proceedings of the 17th ACM SIGKDD (KDD '11)*, pp. 556–563, 2011. DOI [10.1145/2020408.2020496](https://doi.org/10.1145/2020408.2020496). Verified via [dblp record conf/kdd/KaufmanRP11](https://dblp.org/rec/conf/kdd/KaufmanRP11.html) and [Tel Aviv University CRIS](https://cris.tau.ac.il/en/publications/leakage-in-data-mining-formulation-detection-and-avoidance-2/) (both list exactly these three authors, these pages, this DOI).
+- **ACM TKDD 2012 (four authors, the version the standing prompt quotes):** Kaufman, Rosset, Perlich **and Stitelman**, *ACM TKDD* 6(4):15, 2012 (S52). The prompt's four-author attribution is correct for the journal version; Stitelman does not appear on the KDD '11 conference paper.
+
+**The KRS(-S) formulation applied to GEMSDOE29, step by step:**
+
+1. *Leakage definition* — information about the target that "should not be legitimately available" is used to mine the model. Operational test: for a suspiciously strong feature, ask whether it **could only take its observed value because the label is already known**.
+2. *Apply to `E_dist = log1p(min(d(i, C_full), 60))` with label `Y = 1[i ∈ C_full]`*: every positive has `E_dist = 0` **by construction** (a pixel's distance to a set it belongs to is 0); the builder's negative filter (`d > 1.5 px`) makes every negative ≥ `log1p(2) ≈ 1.0986`. The feature can take the value 0 *only* when the label is 1 — the observed value is a deterministic consequence of label membership. This is the textbook case, not borderline.
+3. *Detection signature* — single-feature TRAIN-AUC = 1.0 (owner-archived measurement), root split on the distance column, two distinct columns used by the fitted trees: consistent with a feature that re-expresses the label.
+4. *Why the fix is learn–predict separation* — at genuine prediction time the target (an unmapped fault) is **absent** from the catalogue the distance is computed against, so the legitimate prediction-time feature is distance-to-*visible*-catalogue. Training must therefore present the same situation: hide whole target segments, compute every catalogue-derived feature from visible faults only (this repo's design B, `h1_segment_exact_distance`), and keep the training pool independent of withheld locations (IR-53-37).
+5. *Template, not isolated incident* — the same question is applied to every feature in the current stack via the per-feature canary (gate: single-feature separability ≥ 0.90 on a leak-free holdout = leakage until proven otherwise). Session-1 E1/E2 ran it for the 19 bands + H1; session-2 S2-E1 runs it for the 14 C1 features (`evidence/s2_c1_holdout.json`).
 
 ## Executive finding
 

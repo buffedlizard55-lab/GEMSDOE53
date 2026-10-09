@@ -145,3 +145,23 @@ def test_site_and_prompt_capture_do_not_claim_raster_uniqueness_or_verbatim_text
     assert "X2" in leakage and "design-A negatives" in leakage
     assert "H2 is not untried, but it is not cleanly validated" in hypotheses
     assert "S31" in hypotheses and "S32" in hypotheses
+
+
+def test_session2_archived_pointer_is_consistent_and_listed_as_sibling():
+    """Session 2 (branch arena/dc236d07) landed in parallel; its pointer is archived and listed as a same-day sibling."""
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S2.json")
+    rec = _load("evidence/s3_c1_build_receipt.json")
+    assert cur["name"] == rec["name"]
+    assert cur["sha256"] == rec["sha256_file"]
+    assert cur["pixel_sha256"] == rec["pixel_sha256"]
+    tif = ROOT / cur["file"]
+    assert tif.exists()
+    assert _sha(tif) == cur["sha256"]
+    assert cur["submit_allowed"] is False and cur["submitted"] is False
+    assert len(cur["note"]) <= 140
+    # chain: S2 C1 -> S3 control -> session-1 H1 archive
+    assert cur["previous_pointer"]["name"] == "gems53-s3-bands-top_q0p02-20261009-e67cda00"
+    assert cur["previous_pointer"]["sha256"] != cur["sha256"]
+    live = _load("docs/submissions/CURRENT.json")
+    assert any(o.get("pointer") == "docs/submissions/archive/CURRENT_2026-10-09-S2.json"
+               for o in live.get("other_sessions_same_day", []))

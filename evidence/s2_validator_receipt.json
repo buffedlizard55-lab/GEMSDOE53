@@ -1,0 +1,24 @@
+{
+ "template_validate_submission_exit": 0,
+ "template_validate_conformant_exit": 0,
+ "template_validate_submission_tail": [
+  "  i NaN fraction 57.92% (NaN is expected outside the GeoDAWN footprint)",
+  "\u2705 Validation PASSED - Ready for submission!",
+  "Next: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via 'Submit' button"
+ ],
+ "template_validate_conformant_tail": [
+  "conformant: true; nan_inside_px=0; finite_outside_px=0; out_of_range_px=0; nodata_ok=true (exit 0)"
+ ],
+ "conformant_findings": {
+  "pixels": 12279160,
+  "template_valid_px": 5167373,
+  "nan_inside_px": 0,
+  "finite_outside_px": 0,
+  "out_of_range_px": 0,
+  "conformant": true,
+  "nodata": "nan",
+  "nodata_ok": true
+ },
+ "note": "The postbuild chain first invoked validate-conformant without --sample (exit 2 usage) and wrote all_ok=false; the script was fixed and the conformant validator re-run with the official sample: exit 0. This receipt records the corrected run.",
+ "all_ok": true
+}

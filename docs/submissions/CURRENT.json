@@ -71,6 +71,15 @@
       "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
       "label": "Research-only / DO NOT SUBMIT",
       "pointer": "docs/submissions/archive/CURRENT_2026-10-09-S3.json"
+    },
+    {
+      "session": "Session 2 C1 (branch arena/dc236d07, merged via PR #16)",
+      "file": "docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif",
+      "label": "RESEARCH-ONLY / DO NOT SUBMIT",
+      "pointer": "docs/submissions/archive/CURRENT_2026-10-09-S2.json",
+      "note": "RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT",
+      "sha256": "ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398",
+      "holdout": "HOLDOUT-DTI stage-2 pooled 0.004182 (CI95 +0.000336..+0.007834); canary max separability 0.573 < 0.90; uniqueness gate v2 STOP (literal) / corrected reading flagged (IR-53-76)"
     }
   ]
 }

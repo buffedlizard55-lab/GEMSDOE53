@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Executive summary · GEMSDOE53</title>
+<style>
+:root{--ink:#17202a;--muted:#5b6673;--line:#dfe5ec;--bg:#f7f9fb;--card:#fff;--accent:#0b6e4f;--warn:#9a3412;--warnbg:#fff7ed;--ok:#14532d;--okbg:#f0fdf4;--red:#7f1d1d;--redbg:#fef2f2}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700;font-size:17px}
+nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
+main{max-width:1000px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
+.label{font-size:20px;font-weight:800;border-radius:10px;padding:14px 16px;margin:4px 0 10px}
+.label.no{background:var(--redbg);border:2px solid #fca5a5;color:var(--red)}
+.label.yes{background:var(--okbg);border:2px solid #86efac;color:var(--ok)}
+.banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
+.warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
+.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:12px 14px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
+.note{color:var(--muted);font-size:14px}footer{max-width:1000px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
+a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inline-block;background:#0b6e4f;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
+.btn.dis{background:#94a3b8}
+</style></head><body>
+<header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306 · session 2 (2026-10-09)</div>
+<nav><a href="index.html" class="on">Executive summary</a><a href="submission.html" class="">The file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
+<main>
+<section>
+  <div class="label no">RESEARCH-ONLY / DO NOT SUBMIT</div>
+  <p style="font-size:17px"><b>Is it OK to download?</b> Download is allowed. If the label below says OK TO SUBMIT, this file may be uploaded to the competition as described in 'How to submit'.<br>
+  <b>Is it OK to submit?</b> <b>NO.</b> At least one pre-registered gate did not pass. Do not upload this file.</p>
+  <table>
+    <tr><th style="width:220px">Download the submission TIF</th>
+        <td><a class="btn dis" href="../../submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif">⬇ Download gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif</a>
+        <span class="note">(1,655,200 bytes, sha256 <code>ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398</code>)</span></td></tr>
+    <tr><th>Submission name</th><td><code>gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b</code></td></tr>
+    <tr><th>Comment (paste into the Note field, 119 / 140 chars)</th><td><code>RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT</code></td></tr>
+  </table>
+</section>
+
+<section>
+  <h1>Executive summary</h1>
+  <p><b>What this is.</b> Session 2 validated the pre-registered lane C1 (conductivity–magnetic cross-scale edge
+  coherence, <code>bc1</code> arm = the 19 stack bands + 14 label-free C1 features, no catalogue feature) on the leak-free
+  design-B holdout, built the candidate GeoTIFF, and ran every gate. The file above is the result.</p>
+  <p><b>Headline numbers</b> (all HOLDOUT-DTI, evaluator <code>gems53.core.dti</code> v1.0.0, parity with the shared template
+  metric; withheld positives 60,988):</p>
+  <ul>
+    <li>Leakage canary (S2-E1): max single-feature separability of the 14 C1 features = <b>0.5726</b> — gate 0.90 → <b>pass</b>.</li>
+    <li>Stage-1 segment folds (S2-E2): baseline <code>bands:top_q0p02</code> pooled = <b>0.0106</b>;
+        selected <code>bc1 thin_bin_q0p1</code> pooled = <b>0.0922</b>.</li>
+    <li>Stage-2 spatial confirmation: paired Δ +0.0041, 95% CI [+0.0003, +0.0078] → ACCEPTED.</li>
+    <li>Uniqueness (GD-1 corrected gate): <b>PROTOCOL DUPLICATE / STOP</b>; raw literal-rule values archived.</li>
+    <li>Organizer score: <b>none</b>. Nothing was submitted; no slot was used. No number here is ORGANIZER-CONFIRMED.</li>
+  </ul>
+  <div class="warn"><b>Honesty box.</b> The holdout truth is the withheld known-fault catalogue — catalogue recovery is an
+  upper bound for performance on the competition's unmapped targets (IR-53-42). The named non-fault process that could mimic
+  C1 is volcanic/lithologic contacts producing co-located magnetic + conductivity edges. GD-1 (corrected uniqueness gate) is a
+  pre-registered interpretation of a literal rule that is provably unsatisfiable (IR-53-46/50) and is flagged for user ratification.</div>
+</section>
+
+<section>
+  <div class="banner">Pre-placement STOP (universal, pixel-verified): the public GEMSDOE17 E-proba-multiscale registry raster is positive on
+  all 5,167,373 sample-footprint pixels, so ANY nonempty dot map overlaps it within 3 px
+  at 100% under the literal 70% rule (IR-53-46/IR-53-50). Receipt: <a href="../../data/protocol_preflight_20261009.json">data/protocol_preflight_20261009.json</a>.
+  Session 2 therefore applies the pre-registered corrected gate (GD-1, IR-53-73) and reports both readings.</div>
+</section>
+
+<section>
+  <h2>How to submit (read the label first)</h2>
+  <ol>
+    <li>If the label at the top says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
+    <li>Download the TIF above directly (do not edit it; sha256 is listed so you can verify integrity).</li>
+    <li>Open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition submission page</a> and log in with your own account.</li>
+    <li>Choose the <code>.tif</code> file as the file to submit (a zip containing exactly this one TIF is also accepted by the platform).</li>
+    <li>Paste the comment from the box above into the optional Note field.</li>
+    <li>Submit, and record the portal's exact response text and any score it returns — only that receipt makes a number ORGANIZER-CONFIRMED. Weekly slot cap applies (NLR rules §3.4).</li>
+  </ol>
+  <p class="note">Format requirement verified against the official problem page (S53): EPSG:32611, 100 m, same bounds, outside the bounds null/NaN,
+  single-band float32, values in [0,1]. If the platform ever returns "Predicted values must be in range [0, 1]", see IR-53-74: no GEMSDOE53 file
+  shipped to date contains NaN inside the scored region, the only known cause of that exact error.</p>
+</section>
+
+<section>
+  <h2>Session-2 run card (one JSON)</h2>
+  <p class="note">Full machine-readable card in the repository: <code>evidence/run_card_session2.json</code></p>
+  <pre>{
+ &quot;hypothesis&quot;: {
+  &quot;id&quot;: &quot;C1&quot;,
+  &quot;statement&quot;: &quot;Co-located, co-oriented linear edges in the conductivity surface (band 17) and reduced-to-pole magnetics (band 2), measured by energy-gated multi-scale structure-tensor agreement, rank buried/covered faults that are absent from the USGS/INGENIOUS catalogue.&quot;,
+  &quot;mechanism&quot;: &quot;A concealed fault juxtaposes magnetic units (linear RTP edge) and hosts a conductive damage zone (linear conductivity edge). Requiring both fields to agree at the same place and orientation rejects single-field artifacts. Fourteen label-free features; HGB trained with design-B leak-free sampling.&quot;,
+  &quot;named_non_fault_mimic&quot;: &quot;Volcanic dikes/sills and lithologic contacts produce co-located magnetic + conductivity edges; pluvial-lake paleoshorelines can align conductivity gradients. A catalogue holdout cannot distinguish these; the mimics are named here as required.&quot;,
+  &quot;scope_note&quot;: &quot;Holdout truth is the withheld known-fault catalogue (IR-53-42, L-44): catalogue recovery is an upper bound for performance on the competition&#x27;s unmapped targets.&quot;
+ },
+ &quot;verdict&quot;: &quot;negative&quot;,
+ &quot;holdout_headline&quot;: {
+  &quot;label_type&quot;: &quot;HOLDOUT-DTI (proxy; NOT organizer-scored)&quot;,
+  &quot;evaluator&quot;: &quot;gems53.core.dti v1.0.0 (template-metric parity abs diff 1.3e-13, session-1 E1)&quot;,
+  &quot;canary_max_separability&quot;: 0.57262,
+  &quot;canary_flag&quot;: &quot;pass&quot;,
+  &quot;withheld_positives&quot;: 60988,
+  &quot;baseline_same_run_bands_top_q0p02&quot;: {
+   &quot;pooled_DTI&quot;: 0.010562,
+   &quot;CI95&quot;: [
+    0.008337,
+    0.012812
+   ]
+  },
+  &quot;selected_stage1&quot;: {
+   &quot;arm&quot;: &quot;bc1&quot;,
+   &quot;variant&quot;: &quot;thin_bin_q0p1&quot;,
+   &quot;pooled_DTI&quot;: 0.092172
+  },
+  &quot;stage2&quot;: {
+   &quot;baseline_pooled_DTI&quot;: 0.000102,
+   &quot;selected_pooled_DTI&quot;: 0.004182,
+   &quot;paired_mean_diff&quot;: 0.004085,
+   &quot;paired_CI95&quot;: [
+    0.000336,
+    0.007834
+   ],
+   &quot;accepted&quot;: true,
+   &quot;withheld_positives_total&quot;: 60988,
+   &quot;withheld_segments_total&quot;: 3199
+  }
+ },
+ &quot;uniqueness_headline&quot;: {
+  &quot;gate_version&quot;: &quot;v2 (GD-1: raw literal values archived + corrected reading decides)&quot;,
+  &quot;verdict&quot;: &quot;PROTOCOL DUPLICATE / STOP&quot;,
+  &quot;registry_unique_on_grid&quot;: 631,
+  &quot;n_flagged_corrected&quot;: 25,
+  &quot;n_flagged_raw_archived&quot;: 111,
+  &quot;max_rho_surface_footprint&quot;: 0.885655,
+  &quot;max_rho_surface_whole_grid_raw&quot;: 0.977076,
+  &quot;max_overlap_final&quot;: 1.0,
+  &quot;max_lift_over_chance&quot;: 5.9924
+ }
+}</pre>
+</section>
+
+<section>
+  <h2>Earlier files in this repository (other sessions; not session-2's)</h2>
+  <table><tr><th>File</th><th>Label in its own receipt</th><th>Status</th></tr>
+  <tr><td><code>docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</code></td><td>RESEARCH-ONLY / DO NOT SUBMIT</td><td>Parallel-session S3 frozen control (bands top-q 0.02; H8 did not beat the holdout best). Previous pointer; not a recommendation.</td></tr>
+  <tr><td><code>docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif</code></td><td>RESEARCH-ONLY / DO NOT SUBMIT</td><td>Session-1 H1/M1 candidate; failed the raw registry duplicate gate (protocol duplicate / stop). Superseded as current candidate but retained with all receipts.</td></tr>
+  <tr><td><code>docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif</code></td><td>READY_TO_SUBMIT in its archived run card (PR #6), contradicted by its own session's README</td><td>Flagged by the full-registry gate (82 rasters). Do not upload on the strength of the archived label.</td></tr>
+  <tr><td><code>submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif</code></td><td>DO-NOT-SUBMIT (PR #7)</td><td>Flagged by the full-registry gate (86 rasters); X2 holdout used the invalid design-A negative pool (IR-53-37).</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Answers to the standing questions (each labelled)</h2>
+  <table><tr><th>Question</th><th>Answer</th></tr>
+  <tr><td>GEMSDOE29 leakage bug?</td><td>Formally diagnosed per Kaufman–Rosset–Perlich (KDD'11, DOI 10.1145/2020408.2020496, verified S44) / Kaufman–Rosset–Perlich–Stitelman (TKDD 2012, S45): its distance feature equals 0 on every positive <i>by construction</i> — the feature can take its observed value only because the label is known. Fix = learn–predict separation (design B). Full write-up: <a href="../../leakage-review.md">docs/leakage-review.md</a>.</td></tr>
+  <tr><td>Why did GEMSDOE32 H33-2-B2 score 0.2778?</td><td>NOT ESTABLISHED (IR-53-02): no receipt links the row to the file. Measured geometry (37,654 dots, median 3 px spacing, 0% within 2 px of the catalogue) is compatible with metric-aware off-catalogue packing; that is a plausible mechanism, not proof.</td></tr>
+  <tr><td>Can we beat 0.2778 / 0.3195 / 0.3774?</td><td>Unknown — no GEMSDOE53 file has an organizer score. Leaderboard values are the repo snapshot (IR-53-01). Session 2 ships the strongest leak-free candidate this repo has produced (stage-2 ACCEPTED); whether it scores is decided only by submitting through a slot, which is a separate selector decision.</td></tr>
+  </table>
+</section>
+</main>
+<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> and <code>docs/submissions/</code>.
+HOLDOUT-DTI = our proxy (withheld known-fault segments or spatial super-regions; never an organizer score). ORGANIZER-CONFIRMED = portal receipt only (none exists).
+Regenerate with <code>python scripts/build_site_s2.py</code>.</footer></body></html>

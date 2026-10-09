@@ -32,6 +32,13 @@ Unique name: <code>gems53-h1ds-n40000-20261009-c468977c-zeros</code>. Note: <cod
 “Predicted values must be in range [0, 1]”), a failed uniqueness gate (the 2026-10-08 candidate), or both.</p>
 </section>
 
+<section><h2>Same-day parallel sessions (merged into this repository)</h2>
+<p>These lanes ran concurrently on 2026-10-09 and were merged together. Each keeps its own archived pointer and receipts;
+none of their files is cleared for submission either. The live pointer above remains the single source of truth for
+&ldquo;may I upload?&rdquo;.</p>
+<table><tr><th>Session</th><th>File</th><th>Status</th></tr><tr><td>S3 (PRs #9-#12)</td><td class=mono><a href="submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif">gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</a></td><td>Research-only / DO NOT SUBMIT<br>Pointer: <a href="submissions/archive/CURRENT_2026-10-09-S3.json">docs/submissions/archive/CURRENT_2026-10-09-S3.json</a></td></tr><tr><td>Session 2 C1 (branch arena/dc236d07, merged via PR #16)</td><td class=mono><a href="submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif">gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif</a><br><span class=mono>sha256 ba1ef907a699a879…</span></td><td>RESEARCH-ONLY / DO NOT SUBMIT<br>Note: <code>RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT</code><br>Holdout: HOLDOUT-DTI stage-2 pooled 0.004182 (CI95 +0.000336..+0.007834); canary max separability 0.573 &lt; 0.90; uniqueness gate v2 STOP (literal) / corrected reading flagged (IR-53-76)<br>Pointer: <a href="submissions/archive/CURRENT_2026-10-09-S2.json">docs/submissions/archive/CURRENT_2026-10-09-S2.json</a></td></tr></table>
+</section>
+
 <section><h2>Format validation (the bytes you download)</h2>
 <table><tr><th>Check</th><th>Result</th></tr><tr><td>single_band</td><td>PASS</td></tr><tr><td>dtype_float32</td><td>PASS</td></tr><tr><td>crs_epsg_32611</td><td>PASS</td></tr><tr><td>shape_matches_sample</td><td>PASS</td></tr><tr><td>transform_matches_sample</td><td>PASS</td></tr><tr><td>resolution_100m</td><td>PASS</td></tr><tr><td>no_nan_anywhere</td><td>PASS</td></tr><tr><td>no_inf</td><td>PASS</td></tr><tr><td>no_nan_inside_footprint</td><td>PASS</td></tr><tr><td>values_in_0_1</td><td>PASS</td></tr><tr><td>outside_footprint_all_zero</td><td>PASS</td></tr><tr><td>nodata_unset</td><td>PASS</td></tr>
 <tr><td>template <code>scripts/validate_submission.py</code></td><td>exit 1; failures: - 7111787 px outside the template&#x27;s valid region are finite; - Nodata tag None != template&#x27;s &#x27;nan&#x27;. The organizer-accepted 0.2778 file gives exit 1 with identical failures (IR-53-65).</td></tr>

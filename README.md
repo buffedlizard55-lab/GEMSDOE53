@@ -269,7 +269,7 @@ Go ahead and create a pull request and then merge the pull request onto the main
 
 The requested unique, submit-ready TIFF **cannot be produced while that literal rule and registry scope stand**. We stopped *before* another experiment, placement, or upload. The existing TIFF remains downloadable for **research only / DO NOT SUBMIT**. Do not create an all-zero raster to sidestep the gate: it has no meaningful fault-recovery signal. Changing registry eligibility or to a chance-adjusted uniqueness metric requires an explicit new rule and preregistration; no silent relaxation was made. `scripts/build_site.py` now fails closed if a ready label conflicts with the file hash, the canonical registry gate or this proof. This session consumed **zero new experiments and zero weekly submission slots**.
 
-Untested hypotheses H12 and C1–C3 are in [`docs/research/hypotheses.md`](docs/research/hypotheses.md); S3 ranks H12 first. C1 uses cached conductivity and magnetics; C2 (ComCat) and C3 (Landsat) need official data-access verification. No new holdout DTI or organizer score exists for them. The prior GEMSDOE29 leakage diagnosis remains in [`docs/leakage-review.md`](docs/leakage-review.md); the previous design-B holdout is a catalogue proxy, not evidence of a public-board gain. The leaderboard's 0.2778-to-file attribution remains unproven, and 0.3774 (not 0.3195) headed the last recorded snapshot. [Official problem and submission rules](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [official leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) · [ACM leakage paper](https://doi.org/10.1145/2382577.2382579).
+Untested hypotheses H12 and C1–C3 are in [`docs/research/hypotheses.md`](docs/research/hypotheses.md); S3 ranks H12 first. C1 uses cached conductivity and magnetics; C2 (ComCat) and C3 (Landsat) need official data-access verification. No new holdout DTI or organizer score exists for them. The prior GEMSDOE29 leakage diagnosis remains in [`docs/leakage-review.md`](docs/leakage-review.md); the previous design-B holdout is a catalogue proxy, not evidence of a public-board gain. The leaderboard's 0.2778-to-file attribution remains unproven, and 0.3774 (not 0.3195) headed the last recorded snapshot. [Official problem and submission rules](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [official leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) · [ACM leakage paper](https://doi.org/10.1145/2020408.2020496).
 
 ## Status (2026-10-08)
 
@@ -277,6 +277,32 @@ Untested hypotheses H12 and C1–C3 are in [`docs/research/hypotheses.md`](docs/
 
 | Item | Value |
 |---|---|
+## Status (2026-10-09, session 2 lane `arena/dc236d07`, merged PR #16): C1 conductivity–magnetic coherence — NEGATIVE
+
+Session-2 pointer archived at [`docs/submissions/archive/CURRENT_2026-10-09-S2.json`](docs/submissions/archive/CURRENT_2026-10-09-S2.json) and listed in `other_sessions_same_day` of [`docs/submissions/CURRENT.json`](docs/submissions/CURRENT.json) (the live pointer belongs to the later HWVC session). After merging the HWVC session, session-2 IDs were renumbered again: IR-53-64..67 → IR-53-73..76, L-38..40 → L-43..45, S44..46 → S51..53.
+
+| Item | Value |
+|---|---|
+| Label | **RESEARCH-ONLY / DO NOT SUBMIT** (pre-registered verdict matrix: uniqueness gate failed; see `docs/submissions/CURRENT.json`) |
+| File | [`docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif`](docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif) (54,959 dots; sha256 `ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398`) |
+| OK to download? | Yes, for research and review. |
+| OK to submit? | **No.** Corrected uniqueness gate (GD-1, IR-53-73) flags 25 registry rasters (overlap > 70% with lift > 1.5). Verdict: negative. |
+| Submitted? | No. No slot used. No organizer score exists for any file in this repo. |
+
+**What session 2 did (3 experiments, pre-registered 2026-10-09):** lane C1 — conductivity–magnetic cross-scale edge coherence (`bc1` arm = 19 stack bands + 14 label-free C1 features, **no catalogue feature**), pre-registration [`docs/research/preregistration-2026-10-09-session2.md`](docs/research/preregistration-2026-10-09-session2.md).
+
+| Experiment | Result (all HOLDOUT-DTI, evaluator `gems53.core.dti` v1.0.0; 60,988 withheld positives in 3,199 segments) |
+|---|---|
+| S2-E1 canary | max single-feature separability of the 14 C1 features = **0.5726** (band-2 RTP edge, σ=4) → **pass** (gate 0.90). No leakage signal. |
+| S2-E2 holdout | Stage 1: same-run baseline `bands:top_q0p02` = **0.010562** (CI 0.008337–0.012812, reproduces session 1 exactly); selected `bc1:thin_bin_q0p1` = **0.092172** (CI 0.080924–0.103406). Stage 2 spatial: baseline 0.000102 vs selected **0.004182**, paired Δ **+0.004085**, 95% CI **[+0.000336, +0.007834]** → **accepted**. Note: 0.004182 slightly exceeds session-1 H1's 0.004049 — pure geophysics matching a catalogue-distance model on the honest spatial holdout. |
+| S2-E3 build + gates | Validators: template `validate_submission.py` exit 0, `validate-conformant` exit 0 (0 NaN inside the scored region, values in [0,1], EPSG:32611/shape/transform match). Uniqueness gate v2: max footprint rho **0.8857** (< 0.90) vs 5GEMSDOE bands-only surfaces; but 25 rasters exceed the corrected overlap rule → **PROTOCOL DUPLICATE / STOP**, label applied. |
+
+**Why it is still not cleared (read IR-53-76).** The C1 surface ranking is genuinely distinct (max footprint rho 0.8857 < 0.90), yet its dots overlap 25 unrelated dot maps above chance (lift 1.5–4.2). Those 25 files span many methods — dot overlap measures shared *fault geography* (structural corridors), not shared *method*. Under the pre-registered rule the verdict is negative anyway; the gate definition needs a geography-stratified null or an explicit governance decision before any dot-based candidate can clear it. The raw literal rule remains provably unsatisfiable (IR-53-46/50), as the parallel session's pixel-level preflight also proved independently.
+
+**Other session-2 deliverables:** verified KDD'11/TKDD'12 leakage citations and the formal KRS diagnostic applied to GEMSDOE29 ([`docs/leakage-review.md`](docs/leakage-review.md), IR-53-12 and IR-53-53 resolved); expanded 5-candidate hypothesis screen C1/C5/C4/C7 + blocked C2/C3 ([`docs/research/hypotheses.md`](docs/research/hypotheses.md)); GD-2 evidence: 196 registry `-zerofill` files measured zeros-outside, and none of the three files ever shipped from this repo can reproduce the user-reported platform range error (IR-53-74, unresolved — needs the user's exact submitted file); IR-53-75 logged a prompt-injection attempt observed inside fetched web content.
+
+## Status (2026-10-09, parallel-session S3 control) — superseded by session 2 as current pointer
+
 | Current pointer | `docs/submissions/CURRENT.json` (single status pointer) |
 | Label | **RESEARCH-ONLY / DO NOT SUBMIT** |
 | File | [`docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif`](docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif) (828,867 bytes). Pre-registered frozen control, not a recommendation. |
@@ -287,6 +313,15 @@ Untested hypotheses H12 and C1–C3 are in [`docs/research/hypotheses.md`](docs/
 | OK to download? | **Yes, for research and review only.** It is not cleared for submission. |
 | OK to submit? | **No.** The pre-registered uniqueness gate fails for this file. |
 | Submitted? | No. No submission slot was used. `organizer_score` is null. |
+
+The session-2 C1 pointer above supersedes this control as `docs/submissions/CURRENT.json`; the control file remains listed there as `previous_pointer`. Both files are RESEARCH-ONLY.
+
+## Status (2026-10-08, session 1) — receipts frozen
+
+| Item | Value |
+|---|---|
+| Label | **RESEARCH-ONLY / DO NOT SUBMIT** (see `docs/submissions/CURRENT_session1_archived.json`) |
+| File | [`docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif`](docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif) (445,801 bytes; pixels unchanged by the later metadata-only note update) |
 
 **What the file is.** The pre-registered frozen control (E2 design B, bands top-q 0.02). It is a control, not a recommendation. Its HOLDOUT-DTI proxy is 0.000102, far below H1 `thin_bin_q0p1` (0.004049) on the same proxy (IR-53-60). It passes every format check; see `docs/submission.html`.
 
@@ -426,26 +461,26 @@ git clone --depth 1 https://github.com/buffedlizard55-lab/GEMSDOE.git /tmp/gems-
 
 The GEMSDOE* registry is rebuilt from the GitHub repositories (`scripts/fetch_registry.py`, which uses `gh`; the copy loop is described in the run card). Its 1.3 GB are not committed (IR-53-56, L-33). The S3 gate used 628 unique rasters on the grid, from a 1212-file rebuild.
 
-## Remaining work
+## Remaining work (updated 2026-10-09)
 
-1. Resolve the raw uniqueness-gate scope/definition only through an explicit governance decision; then pre-register and rerun it (IR-53-46 to IR-53-49). Until then, do not promote any candidate.
-2. Run H12 on the spatially blocked holdout, with a named mimic as negative control (next experiment; IR-53-58). Do not spend a submission slot on a hypothesis that has not beaten the current holdout best.
-3. Reconcile the registry counts and commit the manifest used by the gate (IR-53-56, L-33).
-4. Test H10 and H9 (ranks 2 and 3), after checking where band 15 (depth to basement) comes from; its origin is not documented in this workspace.
-5. Test H5 (verify the INGENIOUS licence first; IR-53-44), H2 and H7 (their designs were not valid as run; see Answers).
-6. Build a non-catalogue validation population so that holdout gains are not catalogue-proximity gains (IR-53-42, L-22).
-7. Add seed replicates and a model-variance estimate (L-25).
-8. Obtain a portal receipt for any uploaded file before making an ORGANIZER-CONFIRMED claim (none exists).
-9. Confirm the stored prompt capture against the original message (IR-53-27, IR-53-38).
-10. Resolve the leaderboard conflict (IR-53-01) and the deadline conflict (IR-53-55) from the official competition page.
+1. **Unblock the gate (highest leverage).** IR-53-76 shows dot-overlap rules measure shared fault geography, not method drift: C1's surface is distinct (max footprint rho 0.8857) yet its dots overlap 25 unrelated methods above chance; the parallel session's preflight independently proved the literal rule unsatisfiable (IR-53-50). Options, each needing an explicit governance decision + fresh pre-registration: (a) geography-stratified lift null; (b) restrict the overlap rule to surface rho; (c) user ratification of GD-1 clearance (IR-53-73) for files with footprint rho < 0.90. Until resolved, no dot-based candidate from any session clears an overlap rule on this registry.
+2. **Selector decision (human).** Session-2 C1 passed every scientific gate (canary, design-B spatial holdout accepted, format validators) and failed only the overlap reading of the uniqueness rule. Whether to spend a weekly slot on it is a separate selector step that no lane makes alone — but it is the strongest leak-free candidate this repo has produced.
+3. Run H12 on the spatially blocked holdout with a named mimic as negative control (next experiment from the S3 screen; IR-53-58). Do not spend a slot on a hypothesis that has not beaten the current holdout best.
+4. Reconcile the registry counts and commit the manifest used by the gate (IR-53-56, L-33).
+5. For C2/C3, confirm official USGS source reachability and terms (S29/S30, L-45) — blocked in this environment. Test H10/H9 after documenting band 15's origin.
+6. Next-budget candidates from the ranked screen: C5 strain-budget residual, C4 gravity–basement collinearity, C7 seismic–conductive concurrence (`docs/research/hypotheses.md`).
+7. Build a non-catalogue validation population so holdout gains are not catalogue-proximity gains (IR-53-42, L-22/L-44).
+8. Add seed replicates and model-variance estimates (L-25/L-30).
+9. Obtain a portal receipt for any uploaded file before making an ORGANIZER-CONFIRMED claim (none exists). Confirm with the user which file produced the reported "Predicted values must be in range [0, 1]" error (IR-53-52/IR-53-74) — none of this repo's files can reproduce it.
+10. Resolve the leaderboard conflict (IR-53-01) and the deadline conflict (IR-53-55) from the official competition page; retain the prompt capture as normalized until an exact transcript exists (IR-53-27, IR-53-38).
 
 ## Limitations
 
-See `registry/limitations.json` (L-01 to L-37). The main ones: no organizer score exists; the holdout truth is the catalogue (proximity-dominated, IR-53-42); shell egress is limited to github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org, so USGS ComCat (curl exit 35 in this sandbox), ScienceBase and similar sources cannot be fetched from the shell (L-31); USGS publication pages S31/S32 were read via the page tool, and no external layers were downloaded; compute is 2 vCPU with no GPU; the shared template's CNN pipeline was not run; the registry is not committed (L-33).
+See `registry/limitations.json` (L-01 to L-45; L-38 to L-42 added by the HWVC session, L-43 to L-45 by session 2). The main ones: no organizer score exists; the holdout truth is the catalogue (proximity-dominated, IR-53-42); shell egress is limited to github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org, so USGS ComCat (curl exit 35 in this sandbox), ScienceBase and similar sources cannot be fetched from the shell (L-31); USGS publication pages S31/S32 were read via the page tool, and no external layers were downloaded; compute is 2 vCPU with no GPU; the shared template's CNN pipeline was not run; the registry is not committed (L-33).
 
 ## Irregularities
 
-See `registry/irregularities.json` (IR-53-01 to IR-53-63). Open items that change a decision: IR-53-01 (leaderboard conflict: 0.3774 vs 0.3195), IR-53-02 (0.2778 not linked to a file), IR-53-16 (the 70% rule), IR-53-27 and IR-53-38 (the prompt capture is normalized, not verbatim), IR-53-37 (design A leak, corrected), IR-53-40 (H3 blocked), IR-53-42 (catalogue-proximity holdout), IR-53-46 (the raw overlap rule is unsatisfiable on this registry), IR-53-47 (rho flags depend on whole-grid NaN handling), IR-53-49 (partial refresh is not a clearance), IR-53-54 (sandbox clock is one day ahead of the session date), IR-53-55 (deadline differs between sources), IR-53-56 (registry counts not reconciled), IR-53-58 (no pre-registered mimic), IR-53-60 (the S3 file is a weak control), IR-53-62 (named scripts missing in the workspace).
+See `registry/irregularities.json` (IR-53-01 to IR-53-76). Open items that change a decision: IR-53-01 (leaderboard conflict: 0.3774 vs 0.3195), IR-53-02 (0.2778 not linked to a file), IR-53-16 (the 70% rule), IR-53-27 and IR-53-38 (the prompt capture is normalized, not verbatim), IR-53-37 (design A leak, corrected), IR-53-40 (H3 blocked), IR-53-42 (catalogue-proximity holdout), IR-53-46 (the raw overlap rule is unsatisfiable on this registry), IR-53-47 (rho flags depend on whole-grid NaN handling), IR-53-49 (partial refresh is not a clearance), IR-53-50 (dense surfaces defeat the dot rule), IR-53-54 to IR-53-63 (S3-session items), IR-53-64 to IR-53-72 (HWVC-session items), **IR-53-73 (GD-1 gate interpretation, needs ratification)**, **IR-53-74 (user-reported platform rejection unreproducible from shipped files)**, **IR-53-75 (prompt-injection content observed in fetched web page)**, **IR-53-76 (chance-corrected overlap still flags convergent fault geography)**. IR-53-12 and IR-53-53 (leakage-paper citations) were verified and closed on 2026-10-09.
 
 ## Prompt (normalized capture; read at every session start)
 

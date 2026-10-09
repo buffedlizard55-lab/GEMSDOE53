@@ -1,0 +1,76 @@
+{
+  "session": "2026-10-09 session 2",
+  "session1_archived_pointer": "docs/submissions/CURRENT_session1_archived.json",
+  "previous_pointer": {
+    "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+    "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+    "label": "Research-only / DO NOT SUBMIT (parallel-session S3 pre-registered frozen control; H8 did not beat the holdout best)",
+    "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
+    "note": "superseded as current pointer by session-2 C1; not cleared"
+  },
+  "name": "gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b",
+  "file": "docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif",
+  "sha256": "ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398",
+  "pixel_sha256": "8cb3456b78c3189300d8715958af736b3cf5fb399ab68982ca420154eeaf6146",
+  "bytes": 1655200,
+  "label": "RESEARCH-ONLY / DO NOT SUBMIT",
+  "note": "RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT",
+  "note_chars": 119,
+  "gates": {
+    "canary_clean_for_c1_features": true,
+    "holdout_gate_stage2_spatial_accept": true,
+    "format_validators_all": true,
+    "uniqueness_corrected_gate_GD1": false
+  },
+  "spec": {
+    "arm": "bc1",
+    "variant": "thin_bin_q0p1",
+    "q": 0.1,
+    "kind": "thin_bin"
+  },
+  "decision": "pre-registered verdict matrix: at least one gate failed",
+  "receipt": "evidence/s3_c1_build_receipt.json",
+  "organizer_score": null,
+  "submitted": false,
+  "submission_slot_used": false,
+  "download_allowed_for_research": true,
+  "submit_allowed": false,
+  "uniqueness_verdict": "PROTOCOL DUPLICATE / STOP",
+  "uniqueness_detail": {
+    "gate_receipt": "evidence/uniqueness_gate_v2_session2.json",
+    "registry_unique_on_grid": 631,
+    "n_flagged_corrected": 25,
+    "n_flagged_raw_archived": 111,
+    "max_rho_surface_footprint": 0.885655,
+    "max_rho_surface_whole_grid_raw": 0.977076,
+    "max_overlap_final": 1.0,
+    "max_lift_over_chance": 5.9924
+  },
+  "holdout_summary": {
+    "label_type": "HOLDOUT-DTI (proxy; NOT organizer-scored)",
+    "canary_max_separability": 0.57262,
+    "baseline_same_run": {
+      "arm": "bands",
+      "variant": "top_q0p02",
+      "pooled_DTI": 0.010562,
+      "CI95": [
+        0.008337,
+        0.012812
+      ],
+      "withheld_positives": 60988
+    },
+    "stage1_selected": {
+      "arm": "bc1",
+      "variant": "thin_bin_q0p1",
+      "pooled_DTI": 0.092172
+    },
+    "stage2": {
+      "accepted": true,
+      "paired_CI95": [
+        0.000336,
+        0.007834
+      ],
+      "withheld_positives_total": 60988
+    }
+  }
+}

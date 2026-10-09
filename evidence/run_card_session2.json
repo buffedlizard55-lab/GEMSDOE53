@@ -1,0 +1,123 @@
+{
+ "schema": "gems53.run_card.session2.v1",
+ "session": "2026-10-09 session 2, branch arena/dc236d07-gemsdoe53",
+ "preregistration": "docs/research/preregistration-2026-10-09-session2.md",
+ "lane": "C1 conductivity-magnetic cross-scale edge coherence (bc1 arm; no catalogue feature)",
+ "hypothesis": {
+  "id": "C1",
+  "statement": "Co-located, co-oriented linear edges in the conductivity surface (band 17) and reduced-to-pole magnetics (band 2), measured by energy-gated multi-scale structure-tensor agreement, rank buried/covered faults that are absent from the USGS/INGENIOUS catalogue.",
+  "mechanism": "A concealed fault juxtaposes magnetic units (linear RTP edge) and hosts a conductive damage zone (linear conductivity edge). Requiring both fields to agree at the same place and orientation rejects single-field artifacts. Fourteen label-free features; HGB trained with design-B leak-free sampling.",
+  "named_non_fault_mimic": "Volcanic dikes/sills and lithologic contacts produce co-located magnetic + conductivity edges; pluvial-lake paleoshorelines can align conductivity gradients. A catalogue holdout cannot distinguish these; the mimics are named here as required.",
+  "scope_note": "Holdout truth is the withheld known-fault catalogue (IR-53-42, L-44): catalogue recovery is an upper bound for performance on the competition's unmapped targets."
+ },
+ "budget": {
+  "experiments_limit": 3,
+  "experiments_used": 3,
+  "experiments": [
+   "S2-E1 canary (14 C1 features, design B)",
+   "S2-E2 design-B holdout (stage-1 segment folds + stage-2 spatial confirmation)",
+   "S2-E3 build + validators + uniqueness gate v2 (not a holdout experiment)"
+  ],
+  "wall_clock_limit_hours": 2
+ },
+ "holdout_headline": {
+  "label_type": "HOLDOUT-DTI (proxy; NOT organizer-scored)",
+  "evaluator": "gems53.core.dti v1.0.0 (template-metric parity abs diff 1.3e-13, session-1 E1)",
+  "canary_max_separability": 0.57262,
+  "canary_flag": "pass",
+  "withheld_positives": 60988,
+  "baseline_same_run_bands_top_q0p02": {
+   "pooled_DTI": 0.010562,
+   "CI95": [
+    0.008337,
+    0.012812
+   ]
+  },
+  "selected_stage1": {
+   "arm": "bc1",
+   "variant": "thin_bin_q0p1",
+   "pooled_DTI": 0.092172
+  },
+  "stage2": {
+   "baseline_pooled_DTI": 0.000102,
+   "selected_pooled_DTI": 0.004182,
+   "paired_mean_diff": 0.004085,
+   "paired_CI95": [
+    0.000336,
+    0.007834
+   ],
+   "accepted": true,
+   "withheld_positives_total": 60988,
+   "withheld_segments_total": 3199
+  }
+ },
+ "uniqueness_headline": {
+  "gate_version": "v2 (GD-1: raw literal values archived + corrected reading decides)",
+  "verdict": "PROTOCOL DUPLICATE / STOP",
+  "registry_unique_on_grid": 631,
+  "n_flagged_corrected": 25,
+  "n_flagged_raw_archived": 111,
+  "max_rho_surface_footprint": 0.885655,
+  "max_rho_surface_whole_grid_raw": 0.977076,
+  "max_overlap_final": 1.0,
+  "max_lift_over_chance": 5.9924
+ },
+ "submission": {
+  "name": "gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b",
+  "file": "docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif",
+  "note": "RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT",
+  "note_chars": 119,
+  "sha256_file": "ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398",
+  "sha256_pixels": "8cb3456b78c3189300d8715958af736b3cf5fb399ab68982ca420154eeaf6146",
+  "bytes": 1655200,
+  "label": "RESEARCH-ONLY / DO NOT SUBMIT",
+  "download_ok": true,
+  "submit_ok": false,
+  "organizer_score": null,
+  "submitted": false,
+  "submission_slot_used": false
+ },
+ "validators": {
+  "template_validate_submission_exit": 0,
+  "template_validate_conformant_exit": 0,
+  "template_validate_submission_tail": [
+   "  i NaN fraction 57.92% (NaN is expected outside the GeoDAWN footprint)",
+   "\u2705 Validation PASSED - Ready for submission!",
+   "Next: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via 'Submit' button"
+  ],
+  "template_validate_conformant_tail": [
+   "conformant: true; nan_inside_px=0; finite_outside_px=0; out_of_range_px=0; nodata_ok=true (exit 0)"
+  ],
+  "conformant_findings": {
+   "pixels": 12279160,
+   "template_valid_px": 5167373,
+   "nan_inside_px": 0,
+   "finite_outside_px": 0,
+   "out_of_range_px": 0,
+   "conformant": true,
+   "nodata": "nan",
+   "nodata_ok": true
+  },
+  "note": "The postbuild chain first invoked validate-conformant without --sample (exit 2 usage) and wrote all_ok=false; the script was fixed and the conformant validator re-run with the official sample: exit 0. This receipt records the corrected run.",
+  "all_ok": true
+ },
+ "gates": {
+  "canary_clean_for_c1_features": true,
+  "holdout_gate_stage2_spatial_accept": true,
+  "format_validators_all": true,
+  "uniqueness_corrected_gate_GD1": false
+ },
+ "verdict": "negative",
+ "verdict_reasons": [
+  "canary_clean=True",
+  "stage2_spatial_accept=True",
+  "uniqueness_corrected_gate=False",
+  "validators=True",
+  "no organizer score exists for any GEMSDOE53 file; nothing submitted"
+ ],
+ "irregularities_session2": [
+  "IR-53-73 (GD-1 gate interpretation, open)",
+  "IR-53-74 (user-reported rejection unreproducible from shipped files, open)",
+  "IR-53-75 (prompt-injection content observed in fetched web page, logged)"
+ ]
+}
