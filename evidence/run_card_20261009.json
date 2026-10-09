@@ -1,11 +1,13 @@
 {
   "session": "arena/2cc82f0e-gemsdoe53 (2026-10-09)",
-  "hypothesis": "Pre-placement registry feasibility of any nonempty stack-derived candidate (H12 and C1 remain untried)",
+  "hypothesis": "C1 preliminary screen: conductivity\u2013magnetic phase coherence (untried; S3 ranks H12 ahead of C1)",
   "mechanism": "Matched, oriented cross-scale edges in conductivity band 17 and RTP magnetics band 2 could indicate buried fault damage/fluid pathways.",
   "named_non_fault_process_that_could_mimic_it": "Lithologic contact between units with different conductivity and magnetic susceptibility.",
   "experiment_status": "STOP at pixel-verified registry pre-placement feasibility gate; zero experiments this session; no new surface or dots placed",
   "holdout_DTI": {
     "new_candidate": null,
+    "current_S3_control_pooled": 0.000102,
+    "current_S3_pooled_CI95": null,
     "legacy_candidate_pooled": 0.004049,
     "legacy_pooled_CI95": null,
     "legacy_paired_mean_gain_over_baseline": 0.003533,
@@ -15,7 +17,7 @@
     ],
     "evaluator": "gems53.core.dti v1.0.0 (parity with template src/metrics.py verified in E1)",
     "withheld_positives": 60988,
-    "note": "HOLDOUT-DTI catalogue proxy from prior H1/M1 lane; the interval is for the paired fold-mean GAIN, not the pooled DTI or a new candidate."
+    "note": "HOLDOUT-DTI catalogue proxy: current S3 control and prior H1. The interval is for H1 paired fold-mean GAIN vs baseline, not either pooled DTI or a new candidate."
   },
   "registry": {
     "reference_url": "https://github.com/buffedlizard55-lab/17GEMSDOE/blob/main/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",

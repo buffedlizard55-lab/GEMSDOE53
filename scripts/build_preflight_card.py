@@ -22,19 +22,21 @@ def main():
     assert old["sha256"] == cur["previous_pointer"]["sha256"]
     card = {
         "session": "arena/2cc82f0e-gemsdoe53 (2026-10-09)",
-        "hypothesis": "Pre-placement registry feasibility of any nonempty stack-derived candidate (H12 and C1 remain untried)",
+        "hypothesis": "C1 preliminary screen: conductivity–magnetic phase coherence (untried; S3 ranks H12 ahead of C1)",
         "mechanism": "Matched, oriented cross-scale edges in conductivity band 17 and RTP magnetics band 2 could indicate buried fault damage/fluid pathways.",
         "named_non_fault_process_that_could_mimic_it": "Lithologic contact between units with different conductivity and magnetic susceptibility.",
         "experiment_status": "STOP at pixel-verified registry pre-placement feasibility gate; zero experiments this session; no new surface or dots placed",
         "holdout_DTI": {
             "new_candidate": None,
+            "current_S3_control_pooled": current["holdout"]["s3b_stage2_pooled"]["bands_baseline"],
+            "current_S3_pooled_CI95": None,
             "legacy_candidate_pooled": old["holdout"]["stage2_selected"]["pooled_DTI"],
             "legacy_pooled_CI95": None,
             "legacy_paired_mean_gain_over_baseline": old["holdout"]["stage2_paired_difference"]["mean_fold_diff"],
             "legacy_paired_gain_CI95": old["holdout"]["stage2_paired_difference"]["CI95"],
             "evaluator": old["holdout"]["evaluator"],
             "withheld_positives": old["holdout"]["withheld_positives_total"],
-            "note": "HOLDOUT-DTI catalogue proxy from prior H1/M1 lane; the interval is for the paired fold-mean GAIN, not the pooled DTI or a new candidate.",
+            "note": "HOLDOUT-DTI catalogue proxy: current S3 control and prior H1. The interval is for H1 paired fold-mean GAIN vs baseline, not either pooled DTI or a new candidate.",
         },
         "registry": {
             "reference_url": proof["reference_url"],
