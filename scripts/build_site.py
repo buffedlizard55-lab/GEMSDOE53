@@ -206,7 +206,7 @@ def main() -> int:
   <p><b>Is it OK to submit?</b> <b>NO.</b> The pre-registered uniqueness gate fails for this file, so the protocol does not allow it into a submission slot.</p>
   <table>
     <tr><th>Name field (unique)</th><td><code>{esc(cur['name'])}</code></td></tr>
-    <tr><th>Comment field (≤140 characters, {len(cur['note'])} used)</th><td><code>{esc(cur['note'])}</code></td></tr>
+    <tr><th>Note (optional comment field, ≤140 characters; {len(cur['note'])} used)</th><td><code>{esc(cur['note'])}</code></td></tr>
   </table>
   <p><b>What this file is.</b> A pre-registered control: the E2 bands top-q 0.02 candidate, with an S3 receipt. It is <b>not</b> the best holdout candidate.
   HOLDOUT-DTI (proxy, evaluator {esc(s3_hold['evaluator'])}, not organizer-scored): this control {f4(s3_pooled['bands_baseline'])}; H1 thin_bin_q0p1 {f4(s3_pooled['E2_H1_thin_bin_q0p1_best'])}; H8 gravity-gradient {f4(s3_pooled['h8_selected'])}.
@@ -220,13 +220,25 @@ def main() -> int:
     <li>Submission slots. None has been used. organizer_score is null. Public leaderboard figures are the repository snapshot (IR-53-01, IR-53-51), not verified organizer receipts.</li>
   </ol>
 </section>
+<section id="checklist">
+  <h2>Checklist against the request</h2>
+  <table>
+    <tr><th>Requirement</th><th>Status</th><th>Where</th></tr>
+    <tr><td>Obvious answer on arrival: download and submit</td><td>Given in the top block. Download: yes, for research and review only. Submit: <b>NO</b>.</td><td>top of this page; README Status</td></tr>
+    <tr><td>Unique name; optional Note (≤140 characters)</td><td>Name and Note are shown above. The Note is optional. It is an identifier-level comment, not a uniqueness claim.</td><td>top block</td></tr>
+    <tr><td>Unique raster under the pre-registered gate</td><td><b>Not met</b>: {s3c['uniqueness']['n_flagged']} of {s3c['uniqueness']['registry_unique_on_grid']} registry rasters flagged (protocol duplicate / stop).</td><td><a href="submission.html">submission.html</a></td></tr>
+    <tr><td>Free official sources for hypotheses that need new data</td><td>Named: USGS ComCat (C2, H11) and USGS Landsat Collection 2 Level-2 (C3); INGENIOUS for H5 (licence not yet verified, IR-53-44). <b>Not verified</b>: the sandbox cannot reach USGS, so availability, licence and coverage remain open (L-31).</td><td><a href="evidence.html">evidence.html</a> (hypotheses); registry/sources.json</td></tr>
+    <tr><td>Three-pass review: implement, review for bugs, re-check against the request</td><td>Done for this merge: implemented; reviewed (fixed S3 canary labels, branch links, pointer hashes and the missing S3 evidence section); re-checked against the request (this table). Open gaps are listed under Decisions and the evidence page.</td><td>this table; <a href="evidence.html">evidence.html</a></td></tr>
+    <tr><td>Prompt in the README; read at every session start</td><td>Yes. README section "Prompt" holds the capture, which is <b>normalized, not verbatim</b> (IR-53-27, IR-53-38 open).</td><td>README.md; docs/prompt/verbatim.md</td></tr>
+  </table>
+</section>
 <section>
   <div class="label {label_cls}">{esc(label).upper()}</div>
   <p><b>Is it OK to download?</b> {dl_text}<br>
   <b>Is it OK to submit?</b> {sub_text}</p>
   <h1>Executive summary</h1>
   <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
-  Short answer: the file below passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>{esc(label)}</b> and must not be uploaded. The full registry gate flags {gate['n_flagged']} rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by {100*lattice['overlap_final']:.3f}% within 3 px (limit {overlap_limit_pct:.0f}%; chance coverage {100*lattice['chance_coverage']:.2f}%, lift {lattice['lift_over_chance']:.4f}); whole-grid pre-placement surface rho max is {gate['max']['max_rho_surface']:.6f} (limit {rho_limit:.2f}). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
+  Short answer: the S3 file in the download block above passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>{esc(label)}</b> and must not be uploaded. The full registry gate flags {gate['n_flagged']} rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by {100*lattice['overlap_final']:.3f}% within 3 px (limit {overlap_limit_pct:.0f}%; chance coverage {100*lattice['chance_coverage']:.2f}%, lift {lattice['lift_over_chance']:.4f}); whole-grid pre-placement surface rho max is {gate['max']['max_rho_surface']:.6f} (limit {rho_limit:.2f}). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
   <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
   Nothing has been submitted, and no submission slot was used.</div>
 </section>
@@ -236,7 +248,7 @@ def main() -> int:
   <table>
     <tr><th>Download</th><td><a class="btn {'' if ok else 'dis'}" href="submissions/{esc(fname)}">Download {esc(fname)}</a> ({size_b:,} bytes)</td></tr>
     <tr><th>Submission name (identifier)</th><td><code>{esc(cur['name'])}</code></td></tr>
-    <tr><th>Comment (≤140 characters, {len(cur['note'])} used)</th><td><code>{esc(cur['note'])}</code></td></tr>
+    <tr><th>Note (optional comment field, ≤140 characters; {len(cur['note'])} used)</th><td><code>{esc(cur['note'])}</code></td></tr>
     <tr><th>sha256 (container)</th><td><code>{esc(cur['sha256'])}</code></td></tr>
     <tr><th>sha256 (pixels, float32 little-endian)</th><td><code>{esc(cur['pixel_sha256'])}</code></td></tr>
     <tr><th>Candidate</th><td>{esc(cand_desc)}, trained on all known faults, emission zeroed on known faults</td></tr>
@@ -260,7 +272,7 @@ def main() -> int:
   <ol>
     <li>Read the label above first. If it says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
     <li>Open the competition submission page on DrivenData and log in to your own account. No data download is needed.</li>
-    <li>Upload the file. In the name field enter <code>{esc(cur['name'])}</code>. In the comment field enter the comment above (≤140 characters).</li>
+    <li>Upload the file. In the name field enter <code>{esc(cur['name'])}</code>. Optional: in the Note (comment) field enter the note above (≤140 characters).</li>
     <li>Check the upload result. Record the portal's exact message. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
     <li>The portal limit is 3 feedback submissions per week and one final choice (<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules §3.4</a>).
     Choosing a slot is a separate decision and was not made here.</li>
@@ -336,7 +348,7 @@ def main() -> int:
   <div class="label {label_cls}">{esc(label).upper()}</div>
   <h1>The file</h1>
   <p><code>{esc(cur['file'])}</code> · sha256 <code>{esc(cur['sha256'])}</code></p>
-  <p>Name <code>{esc(cur['name'])}</code> · Comment <code>{esc(cur['note'])}</code></p>
+  <p>Name <code>{esc(cur['name'])}</code> · Note <code>{esc(cur['note'])}</code></p>
   <p class="note">Decision recorded: {esc(cur['decision'])}.</p>
 </section>
 <section>
