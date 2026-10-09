@@ -184,7 +184,34 @@ def main() -> int:
     top_irr = "".join(f"<li><b>{esc(i['id'])}</b> ({esc(i['severity'])}): {esc(i['subject'])}</li>"
                       for i in irr if i["id"] in ("IR-53-01", "IR-53-02", "IR-53-37", "IR-53-38", "IR-53-40", "IR-53-42"))
 
+    s3c = J(cur["receipt"])
+    s3b = J("evidence/s3b_h8_holdout.json")
+    s3_hold = s3c["holdout"]
+    s3_pb = s3_hold["s3b_paired_b"]
+    s3_pooled = s3_hold["s3b_stage2_pooled"]
+    s3_gate_rows = "".join(f"<li>{esc(k)}: <b>{'PASS' if v else 'FAIL'}</b></li>" for k, v in s3c["gates"].items())
     body = f"""
+<section id="s3-download" style="border:2px solid #fca5a5">
+  <div class="label no">S3 FILE: {esc(label).upper()}. DO NOT SUBMIT.</div>
+  <p><b>Is it OK to download?</b> Yes, for research and review only. <a class="btn dis" href="submissions/{esc(fname)}">Download {esc(fname)}</a> ({size_b:,} bytes, sha256 <code>{esc(cur['sha256'])}</code>).</p>
+  <p><b>Is it OK to submit?</b> <b>NO.</b> The pre-registered uniqueness gate fails for this file, so the protocol does not allow it into a submission slot.</p>
+  <table>
+    <tr><th>Name field (unique)</th><td><code>{esc(cur['name'])}</code></td></tr>
+    <tr><th>Comment field (≤140 characters, {len(cur['note'])} used)</th><td><code>{esc(cur['note'])}</code></td></tr>
+  </table>
+  <p><b>What this file is.</b> A pre-registered control: the E2 bands top-q 0.02 candidate, with an S3 receipt. It is <b>not</b> the best holdout candidate.
+  HOLDOUT-DTI (proxy, evaluator {esc(s3_hold['evaluator'])}, not organizer-scored): this control {f4(s3_pooled['bands_baseline'])}; H1 thin_bin_q0p1 {f4(s3_pooled['E2_H1_thin_bin_q0p1_best'])}; H8 gravity-gradient {f4(s3_pooled['h8_selected'])}.
+  H8 minus H1, paired mean {s3_pb['mean_fold_diff']:+.6f}, 95% CI {s3_pb['CI95'][0]:+.6f} to {s3_pb['CI95'][1]:+.6f}. Pooled values differ by only 0.00003, and the five paired fold differences change sign, so the H1 comparison is not decided. Verdict: <b>NEGATIVE</b> under pre-registration section 4 (the lower bound is not above 0).</p>
+  <p><b>Gates in this receipt:</b></p><ul>{s3_gate_rows}</ul>
+  <p><b>Decisions needed from you</b> (nothing below was done without your approval):</p>
+  <ol>
+    <li>Gate definition. The pre-registered rule flags {s3c['uniqueness']['n_flagged']} of {s3c['uniqueness']['registry_unique_on_grid']} registry rasters. Of the overlap flags, the sparse lattice dot maps reach 99.87% chance coverage, so no placement can pass the raw 70% rule (IR-53-46). The surface rho flags depend on whole-grid NaN handling (IR-53-47). Approve or reject a footprint-only, chance-corrected rule (<a href="evidence.html#irregularities">evidence page</a>), then a fresh gate run.</li>
+    <li>Candidate choice. H1 thin_bin_q0p1 has the higher holdout proxy (0.0040), but its own receipt also fails the uniqueness gate. Decide whether H1 or another candidate should be the one tested under a changed rule.</li>
+    <li>Next experiment. H12 (potential-field edge coincidence) is recommended for spatially blocked validation. It has not been run (the three-experiment cap for this session is used up: S3-A, S3-B, S3-C).</li>
+    <li>Submission slots. None has been used. organizer_score is null. Public leaderboard figures are the repository snapshot (IR-53-01, IR-53-51), not verified organizer receipts.</li>
+  </ol>
+</section>
+
 <section>
   <div class="label {label_cls}">{esc(label).upper()}</div>
   <p><b>Is it OK to download?</b> {dl_text}<br>
@@ -257,7 +284,7 @@ def main() -> int:
     <tr><td>Can a higher-scoring file be built?</td><td>Not shown. We have a proxy that rises with thinning and proximity, which is not the competition target (IR-53-42). No file here is shown to beat any leaderboard row.</td>
       <td><span class="pill">not established</span></td></tr>
   </table>
-  <p class="note">The spatial numbers are small in absolute terms: on unseen super-regions the candidate recovers very few withheld faults. The paired gain is positive on all five folds, and the pre-registered rule accepts it. The segment-fold number above is the within-region proximity effect, which the competition target may not share (IR-53-42).</p>
+  <p class="note">The spatial numbers are small in absolute terms: on unseen super-regions the candidate recovers very few withheld faults. For the H1 candidate (E2 design B), the paired gain is positive on all five folds and the pre-registered rule accepts it; the shipped S3 control does not share this result. The segment-fold number above is the within-region proximity effect, which the competition target may not share (IR-53-42).</p>
 </section>
 
 <section>
@@ -286,7 +313,7 @@ def main() -> int:
     in_rows = "".join(f"<tr><td>{esc(k)}</td><td>{esc(v)}</td></tr>" for k, v in [
         ("CRS EPSG", inl["crs_epsg"]), ("grid 3730 x 3292", inl["shape_ok"]), ("transform equals sample", inl["transform_ok"]),
         ("resolution 100 m", inl["res_ok"]), ("one band", inl["count_ok"]), ("dtype", inl["dtype"]),
-        ("nodata tag", inl["nodata"]), ("NaN exactly outside sample footprint", inl["nan_exact_outside_template"]),
+        ("nodata tag", inl["nodata"]), ("NaN exactly outside sample footprint", inl.get("nan_exact_outside_template", inl["nan_inside_footprint"] == 0 and inl["finite_outside_template"] == 0)),
         ("values in [0, 1] on the whole array", inl["values_in_0_1_whole_array"]),
         ("finite pixels (footprint)", f"{inl['finite_px']:,}"), ("nonzero pixels (dots)", f"{inl['nonzero_px']:,}"),
         ("min / max", f"{inl['min']:.4f} / {inl['max']:.4f}")])
@@ -321,9 +348,9 @@ def main() -> int:
 <section>
   <h2>Uniqueness receipt (rebuilt registry, {gate['registry_unique_on_grid']} unique rasters)</h2>
   <p>Every unique (sha256) registry raster on the official grid was compared. Overlap = share of our dots within 3 px of that raster's dots. Lift = overlap / chance coverage (1.0 = what random placement would give).</p>
-  <p>Sparse dot maps flagged (the eight with the largest overlap). Dense rasters (57 flagged) are left out of this table: they overlap 100% by construction.</p>
+  <p>Sparse dot maps flagged (the eight with the largest overlap). Dense rasters ({diag['flagged_by_class'].get('dense(>50% nonzero)', 0)} flagged) are left out of this table: they overlap 100% by construction.</p>
   <table><tr><th>Registry dot map</th><th>Dots</th><th>Overlap (our dots within 3 px)</th><th>Chance coverage</th><th>Lift</th><th>Footprint-only rho</th></tr>{top_rows}</table>
-  <p>Full receipt (all 621 rasters): <code>evidence/uniqueness_gate_{esc(cur['name'])}.json</code>. Diagnostics: <code>evidence/uniqueness_diagnostics_{esc(cur['name'])}.json</code>.</p>
+  <p>Full receipt (all {gate['registry_unique_on_grid']} unique rasters): <code>evidence/uniqueness_gate_{esc(cur['name'])}.json</code>. Diagnostics: <code>evidence/uniqueness_diagnostics_{esc(cur['name'])}.json</code>.</p>
 </section>
 <section>
   <h2>Why the uniqueness gate flags the file (diagnostics; the verdict is the pre-registered receipt)</h2>
@@ -449,12 +476,7 @@ def main() -> int:
         src = ROOT / rel
         if src.exists():
             shutil.copy(src, data_dir / src.name)
-    # keep the data folder exactly equal to the current copies (no stale files)
-    keep = {Path(r).name for r in ("evidence/run_card.json", "evidence/e1_h1_thin_holdout.json",
-                                   "evidence/e2_leakfree_holdouts.json") }
-    for f in data_dir.glob("*.json"):
-        if f.name not in keep and not (ROOT / "evidence").joinpath(f.name).exists() and f.name not in {Path(p).name for p in ("registry/irregularities.json", "registry/limitations.json", "registry/sources.json", "docs/submissions/CURRENT.json")}:
-            f.unlink()
+    # Files already in docs/data (copied by other sessions) are never deleted here.
     (DOCS / ".nojekyll").write_text("")  # serve the static HTML as-is
     print("site written:", DOCS / "index.html", DOCS / "submission.html", DOCS / "evidence.html")
     return 0

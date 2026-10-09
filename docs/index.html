@@ -23,6 +23,27 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
 <header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
 <nav><a href="index.html" class="on">Executive summary</a><a href="submission.html" class="">The file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
 <main>
+<section id="s3-download" style="border:2px solid #fca5a5">
+  <div class="label no">S3 FILE: RESEARCH-ONLY / DO NOT SUBMIT. DO NOT SUBMIT.</div>
+  <p><b>Is it OK to download?</b> Yes, for research and review only. <a class="btn dis" href="submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif">Download gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</a> (828,867 bytes, sha256 <code>e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c</code>).</p>
+  <p><b>Is it OK to submit?</b> <b>NO.</b> The pre-registered uniqueness gate fails for this file, so the protocol does not allow it into a submission slot.</p>
+  <table>
+    <tr><th>Name field (unique)</th><td><code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code></td></tr>
+    <tr><th>Comment field (≤140 characters, 107 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored</code></td></tr>
+  </table>
+  <p><b>What this file is.</b> A pre-registered control: the E2 bands top-q 0.02 candidate, with an S3 receipt. It is <b>not</b> the best holdout candidate.
+  HOLDOUT-DTI (proxy, evaluator gems53.core.dti v1.0.0, not organizer-scored): this control 0.0001; H1 thin_bin_q0p1 0.0040; H8 gravity-gradient 0.0040.
+  H8 minus H1, paired mean +0.000424, 95% CI -0.003746 to +0.004594. Pooled values differ by only 0.00003, and the five paired fold differences change sign, so the H1 comparison is not decided. Verdict: <b>NEGATIVE</b> under pre-registration section 4 (the lower bound is not above 0).</p>
+  <p><b>Gates in this receipt:</b></p><ul><li>holdout_beats_current_best: <b>FAIL</b></li><li>format_validators_all: <b>PASS</b></li><li>uniqueness_no_drift_flag: <b>FAIL</b></li></ul>
+  <p><b>Decisions needed from you</b> (nothing below was done without your approval):</p>
+  <ol>
+    <li>Gate definition. The pre-registered rule flags 172 of 628 registry rasters. Of the overlap flags, the sparse lattice dot maps reach 99.87% chance coverage, so no placement can pass the raw 70% rule (IR-53-46). The surface rho flags depend on whole-grid NaN handling (IR-53-47). Approve or reject a footprint-only, chance-corrected rule (<a href="evidence.html#irregularities">evidence page</a>), then a fresh gate run.</li>
+    <li>Candidate choice. H1 thin_bin_q0p1 has the higher holdout proxy (0.0040), but its own receipt also fails the uniqueness gate. Decide whether H1 or another candidate should be the one tested under a changed rule.</li>
+    <li>Next experiment. H12 (potential-field edge coincidence) is recommended for spatially blocked validation. It has not been run (the three-experiment cap for this session is used up: S3-A, S3-B, S3-C).</li>
+    <li>Submission slots. None has been used. organizer_score is null. Public leaderboard figures are the repository snapshot (IR-53-01, IR-53-51), not verified organizer receipts.</li>
+  </ol>
+</section>
+
 <section>
   <div class="label no">RESEARCH-ONLY / DO NOT SUBMIT</div>
   <p><b>Is it OK to download?</b> Download is allowed for research and review. It is <b>not</b> cleared for submission.<br>
@@ -30,7 +51,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <h1>Executive summary</h1>
   <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
   Short answer: the file below passes every format check, but it is <b>not cleared by the uniqueness gate</b>, so it is labelled
-  <b>Research-only / DO NOT SUBMIT</b>. The uniqueness gate flags 103 registry rasters, and on this registry the raw 70% overlap rule cannot be satisfied by any placement (IR-53-46).
+  <b>Research-only / DO NOT SUBMIT</b>. The uniqueness gate flags 172 registry rasters, and on this registry the raw 70% overlap rule cannot be satisfied by any placement (IR-53-46).
   The holdout evidence is also a proxy, and our first holdout had a design error (IR-53-37).</p>
   <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
   Nothing has been submitted, and no submission slot was used.</div>
@@ -39,12 +60,12 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
 <section>
   <h2>The file</h2>
   <table>
-    <tr><th>Download</th><td><a class="btn dis" href="submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif">Download gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif</a> (443,170 bytes)</td></tr>
-    <tr><th>Name (unique)</th><td><code>gems53-h1-thin_bin_q0p1-20261008-aefc7582</code></td></tr>
-    <tr><th>Comment (≤140 characters, 95 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53 h1 thin_bin_q0p1 | proxy DTI 0.0040 | not organizer-scored</code></td></tr>
-    <tr><th>sha256 (container)</th><td><code>a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b</code></td></tr>
-    <tr><th>sha256 (pixels, float32 little-endian)</th><td><code>aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda</code></td></tr>
-    <tr><th>Candidate</th><td>h1 thin_bin_q0p1, trained on all known faults, emission zeroed on known faults</td></tr>
+    <tr><th>Download</th><td><a class="btn dis" href="submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif">Download gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</a> (828,867 bytes)</td></tr>
+    <tr><th>Name (unique)</th><td><code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code></td></tr>
+    <tr><th>Comment (≤140 characters, 107 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored</code></td></tr>
+    <tr><th>sha256 (container)</th><td><code>e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c</code></td></tr>
+    <tr><th>sha256 (pixels, float32 little-endian)</th><td><code>e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd</code></td></tr>
+    <tr><th>Candidate</th><td>bands top_q0p02, trained on all known faults, emission zeroed on known faults</td></tr>
     <tr><th>Format</th><td>single-band float32 GeoTIFF, EPSG:32611, 100 m, same transform and shape as the sample, NaN exactly outside the footprint, values in [0, 1]</td></tr>
   </table>
   <p class="note">Status words in the file's metadata match the label above. Re-run <code>python scripts/e3_build_candidate.py</code> to regenerate.</p>
@@ -65,7 +86,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <ol>
     <li>Read the label above first. If it says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
     <li>Open the competition submission page on DrivenData and log in to your own account. No data download is needed.</li>
-    <li>Upload the file. In the name field enter <code>gems53-h1-thin_bin_q0p1-20261008-aefc7582</code>. In the comment field enter the comment above (≤140 characters).</li>
+    <li>Upload the file. In the name field enter <code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code>. In the comment field enter the comment above (≤140 characters).</li>
     <li>Check the upload result. Record the portal's exact message. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
     <li>The portal limit is 3 feedback submissions per week and one final choice (<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules §3.4</a>).
     Choosing a slot is a separate decision and was not made here.</li>
@@ -77,7 +98,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <h2>Answers (each labelled)</h2>
   <table>
     <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
-    <tr><td>Is the file unique and valid?</td><td>Valid: yes (format and conformance checks pass). Unique under the pre-registered gate: <b>no</b>. The gate flags 103 of 621 unique GEMSDOE registry rasters. Of those flags, 57 are dense rasters (feature grids, probability surfaces) that overlap 100% by construction, and the other 46 are dot maps. For those the median chance-corrected lift is 1.23 (1.0 = random placement), so most of their overlap is what footprint coverage predicts (IR-53-46, IR-53-48).</td>
+    <tr><td>Is the file unique and valid?</td><td>Valid: yes (format and conformance checks pass). Unique under the pre-registered gate: <b>no</b>. The gate flags 172 of 628 unique GEMSDOE registry rasters. Of those flags, 56 are dense rasters (feature grids, probability surfaces) that overlap 100% by construction, and the other 116 are dot maps. For those the median chance-corrected lift is 3.15 (1.0 = random placement), so most of their overlap is what footprint coverage predicts (IR-53-46, IR-53-48).</td>
       <td><span class="pill">gates in submission.html</span></td></tr>
     <tr><td>What would make the file OK to submit?</td><td>A change to the gate's definition (registry scope, a chance-corrected overlap rule, and a footprint-only rank correlation), approved by you (IR-53-16, IR-53-46, IR-53-47), followed by a fresh pre-registered gate run. Nothing of that kind has been applied here.</td>
       <td><span class="pill">decision for the user</span></td></tr>
@@ -95,7 +116,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
     <tr><td>Can a higher-scoring file be built?</td><td>Not shown. We have a proxy that rises with thinning and proximity, which is not the competition target (IR-53-42). No file here is shown to beat any leaderboard row.</td>
       <td><span class="pill">not established</span></td></tr>
   </table>
-  <p class="note">The spatial numbers are small in absolute terms: on unseen super-regions the candidate recovers very few withheld faults. The paired gain is positive on all five folds, and the pre-registered rule accepts it. The segment-fold number above is the within-region proximity effect, which the competition target may not share (IR-53-42).</p>
+  <p class="note">The spatial numbers are small in absolute terms: on unseen super-regions the candidate recovers very few withheld faults. For the H1 candidate (E2 design B), the paired gain is positive on all five folds and the pre-registered rule accepts it; the shipped S3 control does not share this result. The segment-fold number above is the within-region proximity effect, which the competition target may not share (IR-53-42).</p>
 </section>
 
 <section>

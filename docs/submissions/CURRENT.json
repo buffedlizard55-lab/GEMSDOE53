@@ -1,24 +1,23 @@
 {
-  "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
-  "file": "docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
-  "sha256": "a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b",
-  "pixel_sha256": "aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda",
+  "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+  "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+  "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
+  "pixel_sha256": "e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd",
   "label": "Research-only / DO NOT SUBMIT",
-  "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53 h1 thin_bin_q0p1 | proxy DTI 0.0040 | not organizer-scored",
+  "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored",
   "gates": {
-    "holdout_gate_E2_paired_accept": true,
+    "holdout_beats_current_best": false,
     "format_validators_all": true,
-    "uniqueness_no_drift_flag": false,
-    "canary_clean_for_features_in_model": true
+    "uniqueness_no_drift_flag": false
   },
   "spec": {
-    "arm": "h1",
-    "variant": "thin_bin_q0p1",
-    "q": 0.1,
-    "kind": "thin_bin"
+    "arm": "bands",
+    "variant": "top_q0p02",
+    "kind": "top",
+    "q": 0.02
   },
-  "decision": "design-B selection (E2 stage 1) confirmed on spatial blocks (E2 stage 2, paired lower bound > 0)",
-  "receipt": "evidence/candidate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
+  "decision": "H8 did not beat the current holdout best (pre-registered negative). The file is the pre-registered frozen control (E2 design-B baseline, bands top-q 0.02): a unique control, not a recommendation",
+  "receipt": "evidence/candidate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
   "organizer_score": null,
   "submitted": false
 }

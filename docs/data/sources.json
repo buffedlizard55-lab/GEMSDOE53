@@ -207,6 +207,83 @@
       "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2/2m_temperature_probe_INGENIOUS_regional_data",
       "access": "README read 2026-10-08; licence not stated (IR-53-44)",
       "used_for": "H5 candidate layer (not validated)"
+    },
+    {
+      "id": "S29",
+      "title": "Blakely, R. J. and Simpson, R. W. (1986), Approximating edges of source bodies from magnetic or gravity anomalies, Geophysics 51(7), 1494-1498, doi 10.1190/1.1442197",
+      "url": "https://doi.org/10.1190/1.1442197",
+      "access": "DOI and citation confirmed by two search results on 2026-10-08 (academia.edu reference list; Mayhew 1987 Rev. Geophys. reference list). Full text not opened.",
+      "used_for": "H8 method (horizontal-gradient maxima, Blakely-Simpson). Citation only; the implementation is ours (src/gems53/h8.py)."
+    },
+    {
+      "id": "S30",
+      "title": "Kaufman, S., Rosset, S., Perlich, C., Stitelman, O. (2012), Leakage in data mining: Formulation, detection, and avoidance, ACM TKDD 6(4), Article 15, doi 10.1145/2382577.2382579",
+      "url": "https://doi.org/10.1145/2382577.2382579",
+      "access": "Title, venue, DOI and the 'learn-predict separation' wording confirmed by search results on 2026-10-08 (dl.acm.org and scispace abstract). Full text not opened.",
+      "used_for": "Leakage definition and learn-predict separation (leakage-review, S3-A)."
+    },
+    {
+      "id": "S31",
+      "title": "DrivenData competition 306 problem description (submission format, metric, labels)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "access": "Fetched 2026-10-08 (session date): both chunks read. Quoted: 'data outside the bounds is null or nan', 'values between 0 and 1', the DTI formula with alpha 0.2 and beta 0.8, and R = 300 m.",
+      "used_for": "Submission format and metric (S1 is the same page; this entry records the 2026-10-08 session read)."
+    },
+    {
+      "id": "S32",
+      "title": "DrivenData Terms of Use",
+      "url": "https://www.drivendata.org/termsofuse/",
+      "access": "Fetched 2026-10-08 (session date): 'Prohibited Uses' items 2 and 3 quoted in IR-53-51. Page states 'Last Modified: August 7, 2014'.",
+      "used_for": "Whether the leaderboard may be read automatically (it may not, IR-53-51)."
+    },
+    {
+      "id": "S33",
+      "title": "GEMSDOE public template repository (shared evaluator, writer, validators), commit dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE",
+      "access": "Cloned 2026-10-08 (git clone --depth to /tmp/gems-template). The competition rasters used here came from its data/bridge with sha256 checks (scripts/fetch_data.py).",
+      "used_for": "Shared src/submission_io.py (conform_to_template, write_submission), src/blocks.py (spatial partition), validate_submission.py. Not copied; imported by path."
+    },
+    {
+      "id": "S34",
+      "title": "GEMS Prize Official Rules (NLR, September 2026), fetched and checked line by line",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "access": "fetched 2026-10-08 (7 chunks)",
+      "used_for": "Verified this session: §3.2 'three submissions per week'; §3.4 'up to three per week' and 'select only one set of predictions' as final; §3.5 'choose only one submission across both prize rounds'; Appendix A.1 deadline '5:00 p.m. ET on the prize submission deadline date' (IR-53-55)."
+    },
+    {
+      "id": "S35",
+      "title": "USGS ComCat FDSN event service (documentation and version endpoint)",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "access": "NOT reachable from the sandbox (curl exit 35, 2026-10-08); documentation page fetched earlier",
+      "used_for": "Candidate source for H11 (seismicity alignments). Blocked (L-31)."
+    },
+    {
+      "id": "S36",
+      "title": "DrivenData GEMS problem page, metric and submission format (re-read 2026-10-08)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "access": "fetched 2026-10-08 (2 chunks)",
+      "used_for": "Verified: DTI alpha 0.2, beta 0.8, triangular kernel 300 m; TP uses max p(x)k(d); FP_w = sum p(x)[1 - max_g k]; submission EPSG 32611, 100 m, same bounds, NaN outside, one float32 layer, values in [0,1]. Checked against src/gems53/core.py dti (match)."
+    },
+    {
+      "id": "S37",
+      "title": "Blakely, R.J. and Simpson, R.W. (1986), 'Approximating edges of source bodies from magnetic or gravity anomalies', Geophysics 51(7), 1494",
+      "url": "https://doi.org/10.1190/1.1442197",
+      "access": "DOI resolved and checked via Crossref metadata (SEG, published 1 July 1986), 2026-10-08; full text not opened",
+      "used_for": "H8 method citation (maxima of the horizontal gradient magnitude). The method is cited, not reproduced from the paper text."
+    },
+    {
+      "id": "S38",
+      "title": "Kaufman, Rosset, Perlich, Stitelman, 'Leakage in data mining', Proc. 17th ACM SIGKDD (KDD 2011)",
+      "url": "https://dl.acm.org/doi/10.1145/2020408.2020496",
+      "access": "DOI resolved 2026-10-08 (abstract shown; full text behind login in the Basic Edition)",
+      "used_for": "Learn-predict separation definition. Closes IR-53-53: the KDD 2011 DOI resolves to this paper. The TKDD 2012 version is S30."
+    },
+    {
+      "id": "S39",
+      "title": "GEMS Prize reference solution (drivendataorg/gems-prize-reference-solution), README and file list",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "access": "fetched 2026-10-08 (one commit, aebe92f, Jun 16 2026)",
+      "used_for": "The official baseline: a U-Net notebook ('unet-mc-cv', Monte Carlo cross-validation), author Prof. John Lipor per the README. Our method is not that notebook; the notebook was not read cell by cell."
     }
   ]
 }

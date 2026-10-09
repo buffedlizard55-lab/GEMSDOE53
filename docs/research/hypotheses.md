@@ -89,3 +89,34 @@ or as an external layer with its pinned source.
 - Mirror contents and commit: `S26` (`jklinck/geothermal_research@56d78de7`), read through the GitHub API on 2026-10-08.
 - Rules and metric: S1 (problem page) and S3 (NLR rules PDF), as recorded in `registry/sources.json`.
 - No hypothesis has an organiser score. None is ORGANIZER-CONFIRMED.
+
+---
+
+# S3 update (2026-10-08): H8 tested (negative); ranking of the untested hypotheses
+
+This section supersedes the ranking table above for the untested items. Band names are read from `training_features.tif` (verified, 19 bands). Every number is HOLDOUT-DTI (proxy; `gems53.core.dti` v1.0.0), not an organizer score.
+
+## H8 - gravity horizontal-gradient maxima on band 13 (tested S3-B, NEGATIVE)
+
+- Layer: band 13 `iso_grav_anom` (isostatic gravity anomaly, label-free). Transform: Blakely and Simpson (1986) maxima of |grad g|, 100 m cells, 90th percentile threshold, 3 px border (`src/gems53/h8.py`).
+- Result (design B, pre-registration S3 section 4): stage 1 selected `thin_bin_q0p1` (pooled 0.091362 on the segment folds, selected on those folds). Stage 2 spatial: H8 pooled **0.00402**; bands baseline 0.000102; the E2 H1 `thin_bin_q0p1` best 0.004049.
+- Paired H8 minus H1, fold mean +0.000424, 95% CI [-0.003746, +0.004594]. The lower bound is not above 0, so the pre-registered rule gives **NEGATIVE**. Note: the pooled values are nearly equal (0.00402 vs 0.00405), but the paired fold differences are not one-signed.
+- Paired H8 minus bands: +0.003957, CI [0.000129, 0.007785]. H8 adds information over the bands baseline on the proxy, but not over H1.
+- Canary (single feature, design B, fold maxima): R 0.502, S 0.502, log1pD 0.572. All below the 0.90 gate.
+- Receipt: `evidence/s3b_h8_holdout.json`. Run card: `evidence/run_card.json` (`s3_lane`).
+
+## Untested, ranked by expected DTI gain divided by cost (judgement)
+
+| Rank | ID | Hypothesis | Layer(s) (verified names) | Named non-fault mimic (to be tested as negative control) | Expected gain / cost (judgement) | Status |
+|---|---|---|---|---|---|---|
+| 1 | **H12** | Coincidence of H8 gravity-gradient ridges and magnetic horizontal-gradient maxima within 2 px. Two independent potential-field edges at one location are more likely a fault than either alone. | band 13 (H8 ridge) and band 3 `tmi_hg` (TMI horizontal gradient) | Lithological contacts that produce a gravity edge without a magnetic edge (and the reverse) | moderate / low (in-stack) | **proposed, not run**. Next experiment; validate on a spatially blocked holdout before any slot. |
+| 2 | **H10** | Blakely and Simpson gradient maxima on band 15 `depth_to_base_surf` (sedimentary cover thickness). Basin-margin faults show as steps in cover thickness. | band 15 | Stratigraphic onlap and depositional thickness changes without faulting | moderate / low (in-stack). Caveat: the origin of band 15 is not documented here; if it derives from the same gravity field as band 13, it partly duplicates H8. | proposed, not run |
+| 3 | **H9** | Hessian or curvature ridges on band 12 `det_elev` (100 m detrended elevation). Fault scarps appear as linear ridges in curvature. | band 12 (and band 19 slope) | Erosional escarpments, landslide scarps, and river terraces (USGS OFR 89-365 notes stream courses confound lineament interpretation) | low to moderate / low. Limit: scarps smaller than 100 m are unresolved at this grid. | proposed, not run |
+| 4 | H5 | Off-catalogue thermal and paleo-geothermal evidence (INGENIOUS temperature probes, wells, springs) | external | Hot springs not on faults | unknown / medium. Licence to verify (IR-53-44). | not tested (earlier budget) |
+| 5 | H2 | Magnetic lineament ridges (Hessian) on band 2 `rtp` native grids | band 2 (native GeoDAWN grid) | Dike and intrusive edges | moderate / medium | not tested |
+| 6 | H7 | Regional trend prior (dominant orientation of visible faults) | catalogue-derived | Any trend-aligned feature | small to moderate / low | not tested. Caution: catalogue-derived, so it must use visible faults only. |
+| - | H11 | Seismicity epicentre alignments (USGS ComCat) | bands 10 `deq_n100a15` and 16 `ieq_n100a15` already provide earthquake-derived features in the stack | Aftershock clusters along non-fault structures | potentially high / high | **BLOCKED**: the sandbox cannot reach ComCat (L-31). Also possibly redundant with bands 10 and 16 (not checked). |
+| - | H3 | Fault-parallel strain | bands 7 and 8 are scalars | - | none | BLOCKED (IR-53-40) |
+| - | H4 | USGS quaternary fault maps as extra labels | - | - | none | rejected (labels) |
+
+Notes on the table: the gain and cost columns are judgements, not measurements. Nothing in the table is a score. Any of ranks 1 to 3 needs the spatially blocked holdout (design B, stage 2) before a submission slot is considered, and a named mimic run as a negative control.

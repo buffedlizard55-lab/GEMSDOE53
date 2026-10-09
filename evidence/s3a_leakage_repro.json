@@ -1,0 +1,38 @@
+{
+  "experiment": "S3-A leakage reproduction (pre-registration S3, section 5)",
+  "label_type": "CANARY SENSITIVITY (not HOLDOUT-DTI, not ORGANIZER-CONFIRMED)",
+  "fold": 0,
+  "seed": 53,
+  "leaky_construction": {
+    "definition": "log1p(min(dist to FULL catalogue, 60)); positives = full catalogue",
+    "fraction_zero_on_training_positives": 1.0,
+    "training_sample_AUC_GEMSDOE29_sampling": 0.0,
+    "training_sample_separability": 1.0,
+    "n_train_pos": 60988,
+    "n_train_neg": 200000,
+    "min_retained_negative_distance_px": 2.0,
+    "design_B_canary_on_fold0": {
+      "AUC": 0.0,
+      "separability": 1.0,
+      "n_pos": 11370,
+      "n_neg": 200000
+    }
+  },
+  "h1_legitimate": {
+    "definition": "H1 segment-exact distance from visible faults only",
+    "design_B_canary_on_fold0": {
+      "AUC": 0.232385,
+      "separability": 0.767615,
+      "n_pos": 11370,
+      "n_neg": 200000
+    },
+    "E2_fold0_reference": 0.767983
+  },
+  "verdict": {
+    "canary_detects_leaky_feature": true,
+    "h1_passes_canary": true,
+    "note": "A canary that does not flag LEAKY would be insensitive; it flags it, so the canary is sensitive."
+  },
+  "runtime_s": 8.6,
+  "started_utc_epoch": 1791503192
+}

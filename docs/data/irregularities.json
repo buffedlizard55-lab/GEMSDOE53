@@ -6,7 +6,7 @@
       "severity": "high",
       "status": "open",
       "subject": "Target score in the request is not the leaderboard top",
-      "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page.",
+      "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page. The verbatim prompt itself contradicts itself: its leaderboard line says 'GEMSDOE high score: 0.3774' and a later line says '0.3195 is the highest score right now'.",
       "action": "Use 0.3774 as the public bar. Re-check S2 before any slot decision."
     },
     {
@@ -212,7 +212,7 @@
     {
       "id": "IR-53-27",
       "severity": "high",
-      "status": "open",
+      "status": "partly resolved: docs/prompt/verbatim.md now holds a transcription (28,683 bytes). Its provenance is not in this session's log; the user must confirm it against the original message.",
       "subject": "The verbatim prompt is not in the workspace",
       "detail": "The session record holds only a summary of the user's request. The README's prompt section is a reconstruction in the user's terms, not the verbatim text. The verbatim text was not found in the workspace, git history or cache.",
       "action": "Paste the verbatim prompt into docs/prompt/verbatim.md. The README links there. Until then the reconstruction is labelled as such."
@@ -300,7 +300,7 @@
     {
       "id": "IR-53-38",
       "severity": "high",
-      "status": "open",
+      "status": "partly resolved: the transcription is embedded in README.md; provenance to confirm (see IR-53-27).",
       "subject": "Verbatim user prompt is not stored in the workspace",
       "detail": "README.md states that the verbatim user message is not stored. This session has only a condensed record of the requirements. The README requirements block is therefore recorded in the user's terms and is not a verbatim copy.",
       "action": "Not fabricated. The user should paste the verbatim prompt into README.md (section 'Verbatim prompt'). Until then the README says so explicitly."
@@ -384,6 +384,118 @@
       "subject": "57 of the 103 flags come from dense rasters that are not dot maps",
       "detail": "Registry rasters with more than 50% of the footprint nonzero (feature grids such as geodawn_rad_u8, probability surfaces such as context_detector_prob_*, and ID rasters such as acquisition_block_id_100m) have nonzero values almost everywhere. Their dot overlap is 100% by construction. The mid-density class adds 4 more flags.",
       "action": "Registry scope is a decision for the user (IR-53-46). This session reports the classes separately and drops no file from the verdict."
+    },
+    {
+      "id": "IR-53-49",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Band 18 is labelled 'horizontal gradient' but takes negative values",
+      "detail": "training_features.tif band 18 ('Isostatic gravity anomaly horizontal gradient - horizontal rate of change') has minimum -15.44 and median 0.038 on the footprint. A gradient magnitude cannot be negative, so the layer is a signed component or a mislabelled field. The official problem page lists 'the slope of the isostatic gravity anomaly' among the layers (S1, 'Provided features'). H8 therefore computes its own gradient from band 13, not from band 18. Measured 2026-10-08 with src/gems53/core.py load_inputs.",
+      "action": "Ask the data owner (DrivenData forum or the USGS/GeoDAWN metadata) what band 18 is. Until then do not treat it as a magnitude."
+    },
+    {
+      "id": "IR-53-50",
+      "severity": "high",
+      "status": "open",
+      "subject": "The uniqueness gate counts any value > 0 as a dot, so dense probability surfaces make the overlap rule unsatisfiable",
+      "detail": "In the rebuilt registry (2026-10-08, 1,212 files, 635 unique sha256, 1,189 on the official grid) several rasters are probability surfaces with reg_dots = 5,167,373, the full footprint (for example 17GEMSDOE E-proba-multiscale and 5GEMSDOE context_detector_prob_*). For them within-3-px overlap is 1.0 for any candidate, by construction. scripts/uniqueness_gate.py: 'rd = arr > 0'. The gate therefore flags every candidate on this registry (IR-53-46 and IR-53-48 already describe the lattice and dense classes). This is a defect in the gate definition, not a property of any candidate. It was not changed, because a change needs the user's approval (README, Decisions needed).",
+      "action": "Decision for the user: define dot maps (for example, sparse rasters only, or a 'top-k dots' definition) and re-run the gate under a new pre-registration. Until then every file is labelled RESEARCH-ONLY."
+    },
+    {
+      "id": "IR-53-51",
+      "severity": "high",
+      "status": "open",
+      "subject": "Live leaderboard cannot be fed automatically; DrivenData Terms of Use prohibit automated access and manual copying",
+      "detail": "The DrivenData Terms of Use (fetched 2026-10-08 (session date), https://www.drivendata.org/termsofuse/, 'Prohibited Uses' item 2 and item 3) say: 'Use any robot, spider or other automatic device, process or means to access the Website for any purpose, including monitoring or copying any of the material on the Website' and 'Use any manual process to monitor or copy any of the material on the Website ... without our prior written consent.' The leaderboard values in the request are therefore user-supplied, not fetched. The same page says 'Last Modified: August 7, 2014'; that date should be checked against the current site. A current-score feed needs written permission from DrivenData, or an official API if one is offered.",
+      "action": "User decision: request written permission from DrivenData for a feed, or accept user-supplied leaderboard values with their date. Do not scrape."
+    },
+    {
+      "id": "IR-53-52",
+      "severity": "high",
+      "status": "resolved-in-template-and-this-repo",
+      "subject": "Cause of the 'Predicted values must be in range [0, 1]' rejection",
+      "detail": "The shared template src/submission_io.py documents the rejection (2026-09-24): NaN inside the scored footprint (3,061 px in the earlier shipped raster), finite values outside the template mask (1,540 px), and no GDAL nodata tag. NaN is not in [0, 1]. The fix is conform_to_template(): template finite -> finite in [0,1]; template NaN -> NaN. The S3 candidate passes this (nan_inside_footprint = 0, finite_outside_template = 0). The rejection itself was seen by the user; the rule was taken from the official page ('values between 0 and 1', 'data outside the bounds is null or nan', S1).",
+      "action": "Re-run the organizer's validator on the file before upload. We have no organizer validator output for the new file (organizer_score = null)."
+    },
+    {
+      "id": "IR-53-53",
+      "severity": "low",
+      "status": "resolved",
+      "subject": "KDD 2011 DOI of the Kaufman et al. paper not verified in this session",
+      "detail": "The TKDD 2012 DOI 10.1145/2382577.2382579 and the learn-predict separation wording were verified in this session (search results, S30). The KDD 2011 DOI 10.1145/2020408.2020496 used in docs/leakage-review.md was not opened. Treat it as unverified until checked. Resolved 2026-10-08: the DOI 10.1145/2020408.2020496 resolves to 'Leakage in data mining' (Proc. 17th ACM SIGKDD, S38).",
+      "action": "Closed. The TKDD 2012 DOI (S30) is also kept."
+    },
+    {
+      "id": "IR-53-54",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Sandbox UTC clock is one day ahead of the session date",
+      "detail": "S3-B started 2026-10-08T23:47Z and S3-C started 2026-10-09T00:04Z (receipts). The session date in the system prompt is 2026-10-08. The S3 file name therefore carries 20261009, and some timestamps read 10-09.",
+      "action": "Name kept: renaming would break the receipts and the sha256 pins. Timestamps are reported as read from the receipts. Confirm the session date for the record."
+    },
+    {
+      "id": "IR-53-55",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Submission deadline time differs between two sources",
+      "detail": "NLR Official Rules Appendix A.1 (fetched 2026-10-08, S3): the submission must be posted or uploaded by 5:00 p.m. ET on the deadline date. The template SUBMISSION_GUIDE.md (S7 / S25 / S33 template repository) gives Dec 3, 2026 11:59 pm UTC. The DrivenData page fetched this session did not show key dates, so the competition page was not verified for dates.",
+      "action": "Check the competition page for the exact deadline before any submission. Treat the earlier of the two times as binding."
+    },
+    {
+      "id": "IR-53-56",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Registry counts differ from the S3 pre-registration",
+      "detail": "The S3 pre-registration (section 6) expects 1212 files, 635 unique sha256 and 1189 unique on the official grid. The gate receipt for the S3 file reports 628 unique rasters on the grid and 584 skipped. The difference is not reconciled. The registry lives in /tmp and in GitHub repositories and is not committed.",
+      "action": "Reconcile the counts (which files are skipped and why) and commit a manifest with the gate run. Until then, state the gate's registry as 628 unique rasters, as in the receipt."
+    },
+    {
+      "id": "IR-53-57",
+      "severity": "low",
+      "status": "open",
+      "subject": "NaN correlation can hide a surface flag in max() (no effect in this run)",
+      "detail": "uniqueness_gate.py computes the worst case with max(rho_final, rho_surface). When rho_final is NaN (constant input) and rho_surface is numeric, Python max() can return NaN, and NaN > 0.90 is False. In the S3 run two registry rasters are all-zero (0 dots, both rho NaN), so no drift was possible and no flag was missed. The code path is fragile.",
+      "action": "Guard NaN explicitly in the gate code (not a rule change) and re-run. Report in the template if the shared function is reused."
+    },
+    {
+      "id": "IR-53-58",
+      "severity": "medium",
+      "status": "open",
+      "subject": "S3 pre-registration names no non-fault mimic",
+      "detail": "The run card requires a named non-fault mimic for each hypothesis. The S3 pre-registration (section 1) gives a targeted signature (density contrast with a fault-parallel trend) but no mimic. The run card names one for H8 post hoc (basin-margin and lithological density contacts), and it is not tested.",
+      "action": "Name the mimic before any future run, and test it as a negative control (a non-fault population with the same gravity-gradient signature)."
+    },
+    {
+      "id": "IR-53-59",
+      "severity": "low",
+      "status": "open",
+      "subject": "Two pixel-hash conventions in the receipts",
+      "detail": "The gate's final_sha256 hashes the in-memory array with NaN bytes (receipt label 'pixel sha256 8e73fcfe203ab2c6'). The candidate receipt's pixel_sha256 hashes the array after nan_to_num(nan=-1). The two values do not match for the same file. The S3 pixel_sha256 e67cda00... was recomputed from the shipped bytes with the nan=-1 convention and matches.",
+      "action": "Use one convention (nan=-1, as in e3_build_candidate.pixel_sha256) in the gate receipt. Record which convention each hash uses."
+    },
+    {
+      "id": "IR-53-60",
+      "severity": "high",
+      "status": "open",
+      "subject": "The S3 file is a control with a much lower holdout proxy than H1",
+      "detail": "The shipped S3 file (bands top-q 0.02, RESEARCH-ONLY) has HOLDOUT-DTI proxy 0.000102 pooled. H1 thin_bin_q0p1 has 0.004049 on the same proxy, and it is 40 times higher. The S3 file was built as the pre-registered frozen control, not as the best candidate. Its download is useful for research. As a candidate it is far weaker than H1 on our own proxy.",
+      "action": "Do not treat the S3 file as the submission candidate. Decide between H1 and a new candidate under a changed gate (Decisions needed, item 2)."
+    },
+    {
+      "id": "IR-53-61",
+      "severity": "low",
+      "status": "resolved",
+      "subject": "run_card.json carried another session's branch name",
+      "detail": "scripts/build_run_card.py hardcoded session_branch 'arena/0efb644e-gemsdoe53' (another session's branch).",
+      "action": "Fixed in this session: session_branch now reads arena/7b60bcc7-gemsdoe53 and the run card is regenerated."
+    },
+    {
+      "id": "IR-53-62",
+      "severity": "low",
+      "status": "open",
+      "subject": "The prompt names data scripts that do not exist in this repository",
+      "detail": "The verbatim prompt mentions 'scripts/download_competition_data.sh' and 'scripts/prepare_data.py' and says the data step is the single blocker. Neither file exists here. The competition rasters came from the GEMSDOE template repository (GitHub mirror), verified by sha256 with scripts/fetch_data.py. The DrivenData data tab needs login (verbatim prompt, 'No DrivenData auth').",
+      "action": "Do not add the named scripts as copies of anything. Document fetch_data.py as the data path. Confirm with the user whether the named scripts belong to another repository."
     }
   ]
 }

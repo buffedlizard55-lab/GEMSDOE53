@@ -131,3 +131,13 @@ When the shared, authorized data/tools are available, the next lane-compliant ru
 - **Pass one — review:** inventoried the local checkout; read the official problem/metric/submission pages and leakage paper; inspected the upstream artifact, feature, holdout, and test sources.
 - **Pass two — adversarial check:** distinguished prediction-time legitimate catalogue distance from target-derived training distance; checked the numerical `log1p` statement; found the negative-pool dependence on full labels and the fold-wise score aggregation mismatch; checked H33 evidence provenance.
 - **Pass three — acceptance check:** confirmed no local data, evaluator, writer, registry raster, TIFF, or test suite exists; did not invent a score, validator result, uniqueness pass, or competition-ready file. Run card records the negative outcome.
+
+## S3-A reproduction (2026-10-08, no selection)
+
+Source: `scripts/s3a_leakage_repro.py`, receipt `evidence/s3a_leakage_repro.json`. Label: CANARY SENSITIVITY (not HOLDOUT-DTI, not organizer-scored). Pre-registration S3 section 5.
+
+- The GEMSDOE29 construction, reproduced: D_leaky = log1p(min(distance to the FULL catalogue, 60)), positives = the full catalogue.
+- On the training positives, D_leaky is 0 on 100% of pixels (defect confirmed).
+- Single-feature separability on the design-B fold 0 canary: **1.0** (AUC 0.0). The canary flags it: `canary_detects_leaky_feature = true`.
+- The legitimate H1 distance (visible faults only) on the same fold: separability **0.768** (E2 reference 0.768). It passes the 0.90 gate.
+- Conclusion: the leaky construction is caught by the canary. Any model that uses it would be flagged LEAK_SUSPECT. The GEMSDOE29 distance feature must not be used as a training input.
