@@ -315,21 +315,70 @@
     },
     {
       "id": "S44",
+      "title": "Gallardo & Meju (2003) Characterization of heterogeneous near-surface materials by joint 2D inversion of dc resistivity and seismic data, GRL 30(13) \u2014 cross-gradients",
+      "url": "https://doi.org/10.1029/2003GL017370",
+      "access": "fetched",
+      "used_for": "Structural-similarity (cross-gradient) concept; HWVC uses gradient co-direction instead. Rationale only."
+    },
+    {
+      "id": "S45",
+      "title": "USGS 3D Elevation Program (3DEP) home page",
+      "url": "https://www.usgs.gov/3d-elevation-program",
+      "access": "fetched",
+      "used_for": "Quote fetched 2026-10-09: 'All 3DEP products are available free of charge and without use restrictions.' Licence basis for candidate H53-DEM1M; tiles NOT downloaded (sandbox egress)."
+    },
+    {
+      "id": "S46",
+      "title": "GEMS Prize Official Rules (HeroX resource 2274, links the NLR PDF S3)",
+      "url": "https://www.herox.com/GEMSPrize/resource/2274",
+      "access": "fetched",
+      "used_for": "DrivenData rules page points here; rules document is S3."
+    },
+    {
+      "id": "S47",
+      "title": "GEMSDOE41 README (basin-margin H42 surface)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE41",
+      "access": "fetched",
+      "used_for": "Read via GitHub API 2026-10-09 to differentiate HWVC from the existing basin-margin surface (3DEP scarp + RTP corroboration)."
+    },
+    {
+      "id": "S48",
+      "title": "19GEMSDOE README (H19-4/H19-5 multi-line synthesis, base of the d2.8 lineage)",
+      "url": "https://github.com/buffedlizard55-lab/19GEMSDOE",
+      "access": "fetched",
+      "used_for": "Owner description of H19-5 (OWNER-CLAIM); includes 1 m/10 m 3DEP openness obtained via GitHub Actions (claimed CI run 36768672276, not re-checked)."
+    },
+    {
+      "id": "S49",
+      "title": "GEMSDOE25 d2.8 dot file (USER-REPORTED 0.2600)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE25",
+      "access": "cloned",
+      "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json."
+    },
+    {
+      "id": "S50",
+      "title": "GEMSDOE28 r1-solo d2.8 file (USER-REPORTED 0.2708)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE28",
+      "access": "cloned",
+      "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json (subset of S49 minus dots <= 1 px from catalogue)."
+    },
+    {
+      "id": "S90",
       "title": "Kaufman, S., Rosset, S., Perlich, C., Stitelman, O. (2012), 'Leakage in Data Mining: Formulation, Detection, and Avoidance', ACM TKDD 6(4): 15 (KDD 2011 paper) - this session's leakage template (also on record as S38/S41)",
       "url": "https://researchr.org/publication/KaufmanRPS12",
       "type": "document",
-      "session-added": "2026-10-08 (re-checked 2026-10-08; was S29 in this lane before the merge renumbering)",
+      "session-added": "2026-10-08 (re-checked 2026-10-08)",
       "check": "Publication record lists KDD'11: 556-563 + TKDD 6(4): 15, 2012.",
       "refs": [
         "docs/research/gemsdoe32.md"
       ]
     },
     {
-      "id": "S45",
+      "id": "S91",
       "title": "Faulds 2013, 'Structural Inventory of Great Basin Geothermal Systems...' (proceedings, OSTI dataset 1148722, GDR contract EE0002748) - geological basis for the H8 tip/relay corridor hypothesis",
       "url": "https://www.osti.gov/dataexplorer/biblio/dataset/1148722",
       "type": "document",
-      "session-added": "2026-10-08 (was S30 in this lane before the merge renumbering)",
+      "session-added": "2026-10-08",
       "check": "OSTI record; abstract states step-overs/relay ramps host ~32% of the ~250 known Great Basin geothermal fields; fault terminations/intersections ~22%.",
       "refs": [
         "docs/research/preregistration-h8-2026-10-09.md",
@@ -337,11 +386,11 @@
       ]
     },
     {
-      "id": "S46",
+      "id": "S92",
       "title": "Faulds, Hinz, Coolbaugh, Cashman (GRC 2013), 'Assessment of Favorable Structural Settings of Geothermal Systems in the Great Basin, Western USA' (OpenEI wiki) - same 32%/22% statistics",
       "url": "https://openei.org/wiki/Assessment_of_Favorable_Structural_Settings_of_Geothermal_Systems_in_the_Great_Basin%2C_Western_USA",
       "type": "document",
-      "session-added": "2026-10-08 (was S31 in this lane before the merge renumbering)",
+      "session-added": "2026-10-08",
       "check": "OpenEI wiki record of the GRC Transactions 2013 paper.",
       "refs": [
         "docs/research/preregistration-h8-2026-10-09.md"

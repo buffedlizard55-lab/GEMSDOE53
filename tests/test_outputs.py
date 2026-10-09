@@ -3,7 +3,7 @@
 Checks that the label, the receipts (X6 build + X9 verification), the run card, the site and the bytes on
 disk all agree, and that BOTH shipped GeoTIFFs meet their container contracts:
   primary (…-zeros.tif)       every pixel finite in [0,1]; 0 outside the footprint; nodata None
-                              (the portal-safe container, IR-53-65; organiser-scored zeros pattern)
+                              (the portal-safe container, IR-53-91; organiser-scored zeros pattern)
   twin   (…-nan-outside.tif)  NaN exactly outside the template footprint; nodata nan (template-conformant)
 Format checks against the official sample run only when the competition rasters are present
 (scripts/fetch_data.py); otherwise they are skipped with a reason.
@@ -84,7 +84,7 @@ def test_run_card_and_site_agree_with_the_label():
 
 
 def test_primary_file_meets_the_portal_safe_contract():
-    """Primary = zeros-outside container: finite in [0,1] everywhere (IR-53-65)."""
+    """Primary = zeros-outside container: finite in [0,1] everywhere (IR-53-91)."""
     cur, rec, _ = _verify()
     rasterio = pytest.importorskip("rasterio")
     if not SAMPLE.exists():
@@ -127,6 +127,27 @@ def test_emission_prune_and_spacing():
     assert e["prune_check"]["dots_within_2px_of_catalogue"] == 0
     assert e["prune_check"]["min_dist_dot_to_catalogue_px"] > 2.0
     assert e["spacing"]["min_nearest_dot_px"] >= 2.8 - 1e-9
+
+
+def test_file_meets_the_official_grid_and_value_rules():
+    """Adapted at the merge from the S3 session's sample-conformance test: checks the
+    shipped primary against the official sample grid (skipped when rasters absent)."""
+    rasterio = pytest.importorskip("rasterio")
+    if not SAMPLE.exists():
+        pytest.skip("competition rasters not present")
+    cur = _load("docs/submissions/CURRENT.json")
+    with rasterio.open(ROOT / cur["file"]) as s, rasterio.open(SAMPLE) as t:
+        arr = s.read(1)
+        assert s.count == 1 and s.dtypes[0] == "float32"
+        assert s.crs.to_epsg() == 32611
+        assert (s.height, s.width) == (t.height, t.width) == (3730, 3292)
+        assert tuple(s.transform) == tuple(t.transform)
+        assert s.res == (100.0, 100.0)
+        assert np.isfinite(arr).all(), "primary container has no NaN anywhere"
+        assert float(arr.min()) >= 0.0 and float(arr.max()) <= 1.0
+        tmpl = t.read(1)
+        outside = ~np.isfinite(tmpl)
+        assert (arr[outside] == 0).all(), "primary is 0 outside the template footprint"
 
 
 def test_every_irregularity_reference_resolves():

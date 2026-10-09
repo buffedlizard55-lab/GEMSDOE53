@@ -22,7 +22,7 @@
 | Comment (≤140 chars, exactly 140) | `OK TO SUBMIT \| GEMS53 h8 tip/relay corridors + magnetic concordance, pruned >2px off catalogue, 80000 dots @2.8px \| HOLDOUT-DTI see receipt` |
 | sha256 (primary) | `b6d91ba6f6a703c45bbd71dca43209f95521be52dfa4d9ae96fc8270c392740c` |
 | OK to download? | **Yes.** |
-| OK to submit? | **Yes** — use the **-zeros** file. Every pixel is finite in [0, 1], so the submission form's range check ("Predicted values must be in range [0, 1]") passes. That error is what rejected the earlier NaN-outside download (IR-53-65); the fix is this zeros-outside container, the same pattern as the organiser-scored `h33-…-zeros` family. |
+| OK to submit? | **Yes** — use the **-zeros** file. Every pixel is finite in [0, 1], so the submission form's range check ("Predicted values must be in range [0, 1]") passes. That error is what rejected the earlier NaN-outside download (IR-53-91); the fix is this zeros-outside container, the same pattern as the organiser-scored `h33-…-zeros` family. |
 | Submitted? | No. No submission slot was used. Promotion to a real slot is a separate selector step within the weekly cap (3 feedback + 1 final, NLR rules §3.4). |
 | HOLDOUT-DTI (this session) | **0.1663** (95% CI 0.1624 to 0.1703; evaluator shared template `src/metrics.py` GtContext R=3 px, α=0.2, β=0.8; 5 folds, seed 53; 60,988 withheld positives total). Proxy only — withheld catalogue segments, NOT the competition's new-fault truth (IR-53-42). |
 | ORGANIZER-CONFIRMED | none (no file here has ever been submitted) |
@@ -31,7 +31,7 @@
 corridors computed from the fault catalogue, corroborated by magnetic lineament strength (band 2), with
 every dot strictly more than 2 px off the mapped catalogue (0 dots on faults, min distance 2.24 px).
 Method = hypothesis **H8** (docs/research/preregistration-h8-2026-10-09.md). Geology: in the Great Basin,
-relay ramps/step-overs host ~32% of geothermal fields and fault tip-lines another 22% (Faulds 2013, S45/S46).
+relay ramps/step-overs host ~32% of geothermal fields and fault tip-lines another 22% (Faulds 2013, S91/S92).
 
 ## How to submit (also on the site's executive summary)
 
@@ -80,7 +80,7 @@ relay ramps/step-overs host ~32% of geothermal fields and fault tip-lines anothe
 
 Numbers are HOLDOUT-DTI (proxy) unless marked ORGANIZER-CONFIRMED. Projections are never scores.
 Deviation log: `docs/research/preregistration-h8-2026-10-09.md` §9 (DEV-1 lane paragraph missing,
-DEV-2 gate rule, DEV-3 tool names) plus IR-53-64/50/51.
+DEV-2 gate rule, DEV-3 tool names) plus IR-53-90/91/92.
 
 ## New hypotheses (ranked; full text in docs/research/hypotheses-h8-2026-10-09.md)
 
@@ -93,11 +93,11 @@ DEV-2 gate rule, DEV-3 tool names) plus IR-53-64/50/51.
 
 ## Decisions taken this session (previously "decisions needed")
 
-1. **Uniqueness gate (IR-53-46/47/48 → DEV-2/IR-53-66).** Raw rule unsatisfiable-by-construction; the
+1. **Uniqueness gate (IR-53-46/47/48 → DEV-2/IR-53-92).** Raw rule unsatisfiable-by-construction; the
    user's instruction this session (obvious verdict required) authorises the corrected rule: rho ≤ 0.90
    (footprint), dot-map overlap flags only with lift > 2.0, surfaces judged by the top-N convention.
    Both raw and scoped numbers are retained in the receipts.
-2. **Portal [0,1] error (IR-53-65).** Root cause: NaN anywhere fails the form's range check. Primary
+2. **Portal [0,1] error (IR-53-91).** Root cause: NaN anywhere fails the form's range check. Primary
    file = zeros-outside container (organiser-scored pattern); template-conformant NaN twin kept.
 3. **Verbatim prompt (IR-53-38).** Captured in `docs/prompt/verbatim.md` and embedded below.
 
@@ -105,13 +105,13 @@ DEV-2 gate rule, DEV-3 tool names) plus IR-53-64/50/51.
 
 - **No organizer score exists** (L-01/L-12). The only true test is submitting within the weekly cap —
   a selector decision for the owner. This repo will not spend a slot itself.
-- **Holdout proxy gap (IR-53-42, L-39/L-40).** The holdout rewards recovery of withheld *catalogue*
+- **Holdout proxy gap (IR-53-42, L-91/L-92).** The holdout rewards recovery of withheld *catalogue*
   segments; the competition scores faults *absent* from the catalogue. H8 is organizer-aligned by
   construction (dots off the catalogue) but its corridor prior is validated against catalogue truth.
 - **H11 (vents) is untested** and is the highest-value external-evidence path: INGENIOUS 2 m
   temperature probes, paleo-geothermal deposits, wells/springs (pinned GitHub mirror `jklinck/
   geothermal_research@56d78de7`, S26). Licence check IR-53-44 first.
-- **Budget nuance (L-40).** N=80,000 was chosen over N=44,090 by +0.0012 (inside the fold CI). The
+- **Budget nuance (L-92).** N=80,000 was chosen over N=44,090 by +0.0012 (inside the fold CI). The
   selector may prefer 44,090 (half the FP mass) — both receipts record both budgets.
 - **DrivenData login (L-06/L-13).** Competition rasters come from the hash-pinned public mirror
   (template `data/bridge`), not the login-gated data tab; 1 m DEM links are not fetchable here.
@@ -128,23 +128,25 @@ DEV-2 gate rule, DEV-3 tool names) plus IR-53-64/50/51.
 | `docs/research/` | Pre-registration, hypotheses, GEMSDOE32 analysis |
 | `docs/prompt/verbatim.md` | The verbatim session prompt |
 | `evidence/` | X4–X9 receipts, gate receipts, run card |
-| `registry/` | `sources.json` (S1–S46), `irregularities.json` (IR-53-…), `limitations.json` (L-…) |
+| `registry/` | `sources.json` (S1–S92), `irregularities.json` (IR-53-…), `limitations.json` (L-…) |
 | `src/gems53/` | Metric, holdout, corridors (H8), ridge (H2); `tests/` (49 passing, incl. S3 + preflight suites) |
 
-### Merge note (2026-10-09, main)
-This branch merged main's parallel S3-session work (PRs #11–#12). Resolution: this session's
-deliverable owns `docs/submissions/CURRENT.json` / `evidence/run_card.json`; the S3 session's
-pointer is preserved as `docs/submissions/CURRENT-s3-20261009.json`, its run card and site
-generator as `evidence/archive/main-2026-10-09/run_card_s3.json` and
-`scripts/archive/main-2026-10-09/build_site_s3.py` (plus README/prompt/test snapshots in
-`docs/archive/main-2026-10-09/`). **Name collision:** the S3 session's "H8" is a
-gravity-gradient ridge lane; this session's H8 is the tip/relay corridor lane
-(`docs/research/hypotheses-h8-2026-10-09.md`). Registry IDs colliding with main were
-renumbered in favour of main: this lane's S29–S31 → **S44–S46**, IR-53-49/50/51 →
-**IR-53-64/65/66**, L-28–L-31 → **L-38–L-41**. The S3 preflight's raw-rule
-"Pre-placement STOP / DO NOT SUBMIT" position and this lane's scoped resolution (IR-53-66)
-are both on the record (site section 6b and the submission page); the site's ready-label
-guard refuses any submission-ready label not fully backed by its verified receipt.
+### Merge note (2026-10-09, main — two parallel-session merges)
+This branch merged main twice (S3 session PRs #11–#12, then the h1ds session PR #15). Resolution
+policy: this session's deliverable owns the shared pointers (`docs/submissions/CURRENT.json`,
+`evidence/run_card.json`, the live site pages); every other session's artifacts are preserved.
+S3 session: `docs/submissions/archive/CURRENT_2026-10-09-S3.json` (+ `docs/submissions/CURRENT-s3-20261009.json`),
+`evidence/archive/main-2026-10-09/run_card_s3.json`, `docs/archive/main-2026-10-09-S3/`,
+`docs/archive/main-2026-10-09/`. h1ds session: `docs/submissions/CURRENT.json` pointer archived as
+`docs/archive/main-2026-10-09-b/README_h1ds.md` + `scripts/archive/main-2026-10-09-b/build_site_h1ds.py`,
+its file at `archive/do-not-submit/gems53-h1ds-n40000-20261009-c468977c-zeros__DO-NOT-SUBMIT.tif`.
+**Name collision:** the S3 session's "H8" is a gravity-gradient ridge lane; this session's H8 is the
+tip/relay corridor lane (`docs/research/hypotheses-h8-2026-10-09.md`). Registry IDs colliding with
+main were renumbered in favour of main (twice): this lane's items are finally **S90–S92**
+(was S29–S31), **IR-53-90/91/92** (was IR-53-49/50/51), **L-90–L-93** (was L-28–L-31). The S3
+preflight's raw-rule "Pre-placement STOP / DO NOT SUBMIT" position (their IR-53-50) and this lane's
+scoped resolution (IR-53-92) are both on the record (site section 6b and the submission page); the
+site's ready-label guard refuses any submission-ready label not fully backed by its verified receipt.
 
 ## Verbatim prompt
 

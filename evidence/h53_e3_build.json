@@ -1,0 +1,12 @@
+{
+  "experiment": "E3 (2026-10-09) build",
+  "arm": "A",
+  "finished_utc": "2026-10-09T01:15:36Z",
+  "train_pos": 60988,
+  "train_neg": 300000,
+  "dots": 40000,
+  "min_dist_to_catalogue_px": 2.8284271247461903,
+  "pixel_sha256": "c468977c39cd56926abcff356f43fd55d16a6b0ebb688142b6fbc02ad28b2d79",
+  "runtime_s": 63.8,
+  "surface_cache": "/tmp/h53/surface_armA.npy"
+}

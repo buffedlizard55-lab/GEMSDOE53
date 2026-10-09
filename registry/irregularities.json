@@ -6,7 +6,7 @@
       "severity": "high",
       "status": "open",
       "subject": "Target score in the request is not the leaderboard top",
-      "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page.",
+      "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page. [Session 4f95697f update] Re-checked 2026-10-09 on the live board: #1 xiaofanhu 0.3774, #2 alexoktaba 0.3345, #7 DARD 0.3195, #13 extradr19 0.2778 (S2, fetched this session).",
       "action": "Use 0.3774 as the public bar. Re-check S2 before any slot decision."
     },
     {
@@ -14,7 +14,7 @@
       "severity": "high",
       "status": "open",
       "subject": "The 0.2778 file is not mapped to a leaderboard receipt",
-      "detail": "S2 lists 0.2778 for extradr19 (#13). S9/S10 say the 0.2778-scoring file is GEMSDOE32 H33-2-B2 and that the file's note is 'UNSCORED'. Nothing in the repositories ties the file to the leaderboard row.",
+      "detail": "S2 lists 0.2778 for extradr19 (#13). S9/S10 say the 0.2778-scoring file is GEMSDOE32 H33-2-B2 and that the file's note is 'UNSCORED'. Nothing in the repositories ties the file to the leaderboard row. [Session 4f95697f update] 2026-10-09: the live board still shows extradr19 0.2778 (#13); no submission receipt links it to the H33-2-B2 file. The file itself is measured in evidence/h53_lineage_algebra.json.",
       "action": "Label 0.2778 as ORGANIZER-CONFIRMED only when a receipt is seen; until then it is user-reported."
     },
     {
@@ -507,6 +507,87 @@
     },
     {
       "id": "IR-53-64",
+      "severity": "medium",
+      "status": "open",
+      "subject": "HWVC field shows a rectangular grid artefact in the north of the footprint",
+      "detail": "Visible in docs/assets/h53_hwvc_R_s5.png (rows ~0-800). Most likely survey-block seams in one of the four input bands (cond_surf or depth_to_base_surf); not traced to a band in this session. It can create false straight ridges.",
+      "action": "Trace per band before any HWVC reuse; mask or detrend seams.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-65",
+      "severity": "high",
+      "status": "open",
+      "subject": "Template conformance rule (NaN outside) conflicts with organizer-accepted all-finite files",
+      "detail": "The shared template's validate-conformant requires NaN outside the footprint. The organizer-scored 0.2778 file (GEMSDOE32, zeros) has 0 NaN and nodata unset, and the user reports the portal error 'Predicted values must be in range [0, 1]' for a NaN-outside file from this repo. The problem page says outside data 'is null or nan'. Our file follows the empirically accepted all-finite layout; the template check is run and reported (expected non-conformant) together with the same check on the 0.2778 control.",
+      "action": "Fix the template rule once (accept all-finite zeros outside) in the template repository; not done here because this session may push only to its own branch.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-66",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Submission decoder D-S scores below M1 on our proxy",
+      "detail": "Stage 1 HOLDOUT-DTI arm A: M1 thin q0.10 0.141319 vs D-S (flank 2 px, sep 2.8, 40,000 dots) 0.116626. D-S was pre-registered from USER-REPORTED organizer evidence (dot budget/spacing/flank of the scored GEMSDOE lineage), not tuned on the proxy. Proxy and organizer evidence disagree on the dot budget; the proxy truth is the catalogue (IR-53-42).",
+      "action": "Resolve only with an organizer score of this file.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-67",
+      "severity": "high",
+      "status": "closed",
+      "subject": "E3 dots concentrate 3-10 px from the catalogue (catalogue-proximity bet)",
+      "detail": "evidence/h53_e3_geometry_vs_b2.json: 52.2% of our dots are within 5 px and 89.6% within 10 px of a catalogue fault (median 5.0 px); the 0.2778 file has 15.0% within 5 px (median 19.65 px). The H1 feature drives this, and the hide-and-recover proxy rewards it because withheld catalogue segments lie near visible ones. Whether expert-mapped NEW faults lie 300 m-1 km from mapped faults is unknown; dots <= 2 px were FP-only by the lineage algebra (INFERENCE). RESOLVED 2026-10-09: the bet was never placed. The same near-catalogue sleeves are shared with 27 public registry rows, so the E3 file is DUPLICATE under gate v2 (evidence/h53_gate_v2_e3_armA_ds40000.json) and not OK to submit. No organizer score exists.",
+      "action": "State it on the site; treat the organizer score of this file as an information probe for the near-catalogue band.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-68",
+      "severity": "low",
+      "status": "closed",
+      "subject": "Pre-registration wording fix committed after the first pre-registration commit",
+      "detail": "Commit 7ba7778 contained an unfinished fallback sentence; the next commit replaced it with the fallback rule (arm A + D-S). Both commits precede every experiment (E1 receipt is later).",
+      "action": "None; recorded for transparency.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-69",
+      "severity": "medium",
+      "status": "open",
+      "subject": "HWVC rejected by stage 1 but favoured on spatial blocks",
+      "detail": "Stage 2 (spatial super-regions) B-A +0.000344, 95% CI [-0.000216, +0.000903], B wins 4/5; stage 1 (segment folds) B-A -0.001587, CI [-0.003732, +0.000559], B wins 1/5. The rule requires both, so HWVC is negative. HWVC may help where the catalogue is absent (unseen regions).",
+      "action": "Next session: pre-register HWVC as a catalogue-free arm (no H1), test on spatial blocks only.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-70",
+      "severity": "medium",
+      "status": "open",
+      "subject": "Uniqueness gate v2 was defined by this session, not by a human decision",
+      "detail": "The user instructed 'no manual input'. Gate D-1 (chance-corrected overlap with kappa > 0.40, top-K matching for dense rasters, Spearman on 500k footprint pixels) was pre-registered before any run. The raw-rule numbers are reported next to it for every registry raster. Outcome: gate v2 was applied as pre-registered and flagged the E3 file (27 rows, kappa up to 1.00). The raw rule flags 97 rasters. Both rules agree on DO NOT SUBMIT.",
+      "action": "Owner may override; the receipt allows recomputation under any rule.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-71",
+      "severity": "high",
+      "status": "open",
+      "subject": "Catalogue-distance models converge on shared consensus sleeves; uniqueness fails without a regime change",
+      "detail": "E3 (H1 HGB + D-S) overlaps, within 3 px, earlier public rasters whose file names indicate different methods (receipts not read): GEMSDOE37 physics-dotted-80k 0.892 (kappa 0.852), 12GEMSDOE r5-nms3-trace 0.872 (0.816), GEMSDOE43 sup01-hgb21-n40000 0.812 (0.769), GEMSDOE44 0.733 (0.683), and our 2026-10-08 file 1.000 (1.000). Dense 40k-dot files placed near mapped structure are mutually redundant. Only the B2 regime (median 19.65 px from the catalogue) is clearly distinct; E3 vs B2 overlap is 28.9%.",
+      "action": "Next session: gate the score surface top-K against the 27 flagged rows BEFORE placement (minutes, not 20 min), and target the far-from-catalogue regime.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-72",
+      "severity": "low",
+      "status": "open",
+      "subject": "Gate v2 kappa is degenerate when overlap = 1.0",
+      "detail": "kappa = (ov - ch)/(1 - ch) equals 1 whenever every dot is covered, whatever the coverage. With 40,000 dots that needs coverage near 100% (P ~ ch^40000), so the real gate is unaffected; a small-sample unit test exposed it (tests/test_h53.py docstring). The r13 lattice has ov 0.9945, ch 0.9987, kappa -3.25.",
+      "action": "If gate v3 is written, use a binomial z-score of ov vs ch instead of kappa.",
+      "session": "arena/4f95697f (2026-10-09, HWVC lane)"
+    },
+    {
+      "id": "IR-53-90",
       "status": "open",
       "type": "prompt gap",
       "subject": "Competition Prompt, 'Context', section 'Method': the sentence 'The method paragraph is below:' refers to text that is not in the prompt (no method paragraph follows)",
@@ -518,7 +599,7 @@
       ]
     },
     {
-      "id": "IR-53-65",
+      "id": "IR-53-91",
       "status": "resolved",
       "type": "data/portal",
       "subject": "Root cause of the portal error 'Predicted values must be in range [0, 1]': the form counts non-finite values as out of range, so NaN outside the map (even in nodata) is rejected",
@@ -527,14 +608,14 @@
       "action": "Two containers shipped: primary with zeros outside and no NaN anywhere (the exact container of the organizer-scored h33-...-zeros family), twin with NaN outside (template-conformant); cross-refs IR-53-52",
       "refs": [
         "docs/research/preregistration-h8-2026-10-09.md",
-        "evidence/x6_h8_build_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json"
+        "evidence/candidate_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json"
       ]
     },
     {
-      "id": "IR-53-66",
+      "id": "IR-53-92",
       "status": "resolved",
       "type": "method",
-      "subject": "The registry uniqueness gate compared final dots to every registry raster's ANY-VALUE-GT-ZERO pixels (raw rule), so dense/surface rasters over-flag (88 raw flags incl. the 2 DEV-2 row; raw >70% rule unsatisfiable-by-construction, see IR-53-46 and IR-53-50)",
+      "subject": "The registry uniqueness gate compared final dots to every registry raster's ANY-VALUE-GT-ZERO pixels (raw rule), so dense/surface rasters over-flag (88 raw flags incl. the 2 DEV-2 rows; raw >70% rule unsatisfiable-by-construction, see IR-53-46 and IR-53-50)",
       "affected": "evidence/uniqueness_gate_*.json, scripts/x9_verify.py",
       "impact": "Raw rule mis-scopes surfaces as dot maps; used literally it would stop every nonempty submission",
       "action": "x9 scope check: each flagged row judged under its kind (binary dot maps -> dot rule, lift < 2.0; surfaces -> top-N dot convention N=80k, overlap < 0.70): 88 raw flags -> 0 scoped flags; raw and scoped both retained; cross-refs IR-53-50",

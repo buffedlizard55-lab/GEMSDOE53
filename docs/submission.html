@@ -83,7 +83,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   &gt; 0. Under the <em>raw</em> protocol reading ("any value &gt; 0 is a dot") any nonempty dot placement would be a
   duplicate of it — a literal <b>Pre-placement STOP</b> and <b>DO NOT SUBMIT</b>. Their irregularity IR-53-50 records the
   same flaw: the raw &gt;0 rule makes the overlap test unsatisfiable for dense surfaces. This lane's resolution
-  (IR-53-66, x9 scope check) judges each raster under its kind — binary dot maps by the dot rule (max lift 1.42 &lt; 2.0),
+  (IR-53-92, x9 scope check) judges each raster under its kind — binary dot maps by the dot rule (max lift 1.42 &lt; 2.0),
   surfaces by the top-N dot convention (N=80,000; overlap 0.29–0.36 &lt; 0.70) — and finds the H8 dot map unique under the
   rule the prompt actually writes ("registry raster's <em>dots</em>"). Both readings and both receipts are on the record;
   the raw-reading STOP applies to surfaces-as-dots and is not a claim about this binary dot map.</p>
@@ -101,7 +101,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   &quot;preregistration&quot;: &quot;docs/research/preregistration-h8-2026-10-09.md&quot;,
   &quot;lane_paragraph_missing_in_prompt&quot;: true
  },
- &quot;mechanism&quot;: &quot;Displacement-controlled propagation means the mapped trace ends where displacement dies, not where the structure ends (tips); interacting sub-parallel segments link through relay ramps with dense fracture permeability. Faulds (2013, S45/S46): ~32% of Great Basin geothermal fields sit in relay ramps/step-overs, 22% at normal-fault tip-lines. The DW-Tversky metric (alpha 0.2, beta 0.8, 300 m kernel) pays per distinct covered pixel and charges FP by area, so Poisson dots at 2.8 px in those corridors maximize credit per dot; the &gt;2 px catalogue prune removes pure FP on faults the organizers already mapped.&quot;,
+ &quot;mechanism&quot;: &quot;Displacement-controlled propagation means the mapped trace ends where displacement dies, not where the structure ends (tips); interacting sub-parallel segments link through relay ramps with dense fracture permeability. Faulds (2013, S91/S92): ~32% of Great Basin geothermal fields sit in relay ramps/step-overs, 22% at normal-fault tip-lines. The DW-Tversky metric (alpha 0.2, beta 0.8, 300 m kernel) pays per distinct covered pixel and charges FP by area, so Poisson dots at 2.8 px in those corridors maximize credit per dot; the &gt;2 px catalogue prune removes pure FP on faults the organizers already mapped.&quot;,
  &quot;named_non_fault_process&quot;: &quot;Mafic dyke swarms and buried lithologic contacts generate linear magnetic lineaments parallel to regional trend without any Quaternary fault; alluvial-fan berm/terrace edges mimic scarps near basin margins. Both can fill corridors with false positives (dots where no hidden fault exists) and pull the magnetic concordance term toward mapped-but-inactive structure.&quot;,
  &quot;holdout&quot;: {
   &quot;label&quot;: &quot;HOLDOUT-DTI (proxy: withheld catalogue segments; NOT the competition&#x27;s new-fault truth)&quot;,
@@ -277,7 +277,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
    }
   ],
   &quot;scopecheck_x9&quot;: {
-   &quot;judged_by&quot;: &quot;binary dot maps: pre-registration dot rule; surfaces: top-N convention (IR-53-66)&quot;,
+   &quot;judged_by&quot;: &quot;binary dot maps: pre-registration dot rule; surfaces: top-N convention (IR-53-92)&quot;,
    &quot;binary_dot_maps_judged&quot;: 28,
    &quot;max_scoped_lift_binary_dot_maps&quot;: 1.4232,
    &quot;scoped_flags&quot;: [],
@@ -385,7 +385,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   &quot;expected_exits&quot;: {
    &quot;validate_conformant_zeros&quot;: {
     &quot;exit&quot;: 1,
-    &quot;why&quot;: &quot;zeros container is finite outside and nodata-none BY DESIGN (IR-53-65 portal fix); exit 1 findings are the two documented divergences&quot;
+    &quot;why&quot;: &quot;zeros container is finite outside and nodata-none BY DESIGN (IR-53-91 portal fix); exit 1 findings are the two documented divergences&quot;
    },
    &quot;validate_conformant_nan&quot;: {
     &quot;exit&quot;: 0,
@@ -418,7 +418,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
  &quot;verdict_rule&quot;: &quot;promote iff canary clean AND paired CI lower &gt; 0 vs ridge_pr AND pooled &gt; design-B stage-1 best (0.141319, selection-optimistic) AND uniqueness gate (DEV-2) passes AND all validators pass; else negative&quot;,
  &quot;caveats&quot;: [
   &quot;IR-53-42: holdout truth is withheld catalogue segments; the competition scores faults absent from the catalogue.&quot;,
-  &quot;L-40: budget rule chose N=80,000 over N=44,090 by +0.0012 (inside the fold CI); both are recorded.&quot;,
+  &quot;L-92: budget rule chose N=80,000 over N=44,090 by +0.0012 (inside the fold CI); both are recorded.&quot;,
   &quot;IR-53-02: no organizer receipt exists for any file here; no score is ORGANIZER-CONFIRMED.&quot;
  ]
 }</pre>

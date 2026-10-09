@@ -210,7 +210,7 @@ def main() -> int:
     inl_nan = inlane(nan_path)
 
     # Pre-registration section 5/6: validate-conformant governs the NaN-outside twin; the zeros primary
-    # deliberately has no NaN (the [0,1] form fix, IR-53-65) so its nonzero exit there is EXPECTED.
+    # deliberately has no NaN (the [0,1] form fix, IR-53-91) so its nonzero exit there is EXPECTED.
     expected_fail = {"validate_conformant_zeros": "expected non-zero: this validator enforces NaN outside"}
     format_ok = (inl_zeros["all_checks_passed"] and inl_nan["all_checks_passed"]
                  and validators["validate_conformant_nan"]["exit"] == 0

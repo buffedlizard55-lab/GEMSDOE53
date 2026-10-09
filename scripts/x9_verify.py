@@ -7,7 +7,7 @@ Two corrections to the way X6 applied shared tools, both implementation bugs rat
    `--sample` path, so the CLI exited 2 ("MISSING template /tmp/gems-template/data/sample_submission.tif")
    - an environment error, not a verdict on the files. Re-run with --sample and record the true exits.
 
-2. UNIQUENESS GATE SCOPE (IR-53-66). The DEV-2 overlap rule is scoped to "a registry DOT MAP"
+2. UNIQUENESS GATE SCOPE (IR-53-92). The DEV-2 overlap rule is scoped to "a registry DOT MAP"
    (pre-registration section 5, calibrated on binary dot files: GEMSDOE13 lattice 0.997 = chance,
    GEMSDOE46/GEMSDOE40 dotted files 3.6-5.6 = drift). The gate code treats `value > 0` of ANY raster as
    "dots", so two continuous probability surfaces (644 and 73,087 distinct values) produced overlap
@@ -90,7 +90,7 @@ def main() -> int:
     }
     expected = {
         "validate_conformant_zeros": (1, "zeros container is finite outside and nodata-none BY DESIGN "
-                                        "(IR-53-65 portal fix); exit 1 findings are the two documented divergences"),
+                                        "(IR-53-91 portal fix); exit 1 findings are the two documented divergences"),
         "validate_conformant_nan": (0, "twin must be fully conformant"),
         "validate_submission_zeros": (1, "same two by-design divergences (finite outside, nodata tag)"),
         "validate_submission_nan": (0, "template validator must pass the twin"),

@@ -4,10 +4,10 @@
 Every number produced later is labelled HOLDOUT-DTI (evaluator version, withheld positives, 95% CI)
 or ORGANIZER-CONFIRMED. Projections are never written as scores.
 
-## 0. Lane assignment (irregularity IR-53-64)
+## 0. Lane assignment (irregularity IR-53-90)
 
 The parallel-run protocol says "Your lane is the single method paragraph below", but the message
-arriving in this session contains **no method paragraph** (IR-53-64). To keep the session inside one
+arriving in this session contains **no method paragraph** (IR-53-90). To keep the session inside one
 lane, the lane is fixed here as:
 
 > **H8 — tip/relay continuation corridors with magnetic-lineament concordance.** Build a hidden-fault
@@ -106,7 +106,7 @@ per fold; the reported value is the max over folds. Above 0.90 ⇒ leakage until
 ## 9. Deviations
 
 - DEV-1 (this file, before the runs): lane paragraph missing from the prompt; lane fixed in §0
-  (IR-53-64).
+  (IR-53-90).
 - DEV-2 (this file, before the runs): uniqueness gate corrected per §5 (user-directed decision;
   IR-53-46/47/48).
 - DEV-3 (this file, before the runs): protocol tool names `evaluate_holdout.py` / `submission_writer.py`

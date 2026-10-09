@@ -70,7 +70,7 @@ def test_site_refuses_fake_ready_label(monkeypatch):
     original = build_site.J
     def forged(rel):
         result = original(rel)
-        if rel == "docs/submissions/CURRENT.json":
+        if rel == "docs/submissions/archive/CURRENT_2026-10-09-S3.json":
             result["label"] = "Validated / OK to submit"
         return result
     monkeypatch.setattr(build_site, "J", forged)
@@ -88,7 +88,7 @@ def test_real_receipt_and_download_match():
     r = Path("/tmp/g53-17/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif")
     if s.exists() and r.exists():
         assert measure(s, r) == receipt
-    index = (ROOT / "docs/index.html").read_text()
+    index = (ROOT / "docs/archive/main-2026-10-09-S3/index.html").read_text()
     assert "Pre-placement STOP" in index and "DO NOT SUBMIT" in index
     assert "data/protocol_preflight_20261009.json" in index
     assert (ROOT / "docs/data/protocol_preflight_20261009.json").exists()

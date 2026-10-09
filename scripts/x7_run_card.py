@@ -67,7 +67,7 @@ def main() -> int:
         },
         "mechanism": ("Displacement-controlled propagation means the mapped trace ends where displacement dies, not "
                       "where the structure ends (tips); interacting sub-parallel segments link through relay ramps "
-                      "with dense fracture permeability. Faulds (2013, S45/S46): ~32% of Great Basin geothermal fields "
+                      "with dense fracture permeability. Faulds (2013, S91/S92): ~32% of Great Basin geothermal fields "
                       "sit in relay ramps/step-overs, 22% at normal-fault tip-lines. The DW-Tversky metric (alpha 0.2, "
                       "beta 0.8, 300 m kernel) pays per distinct covered pixel and charges FP by area, so Poisson "
                       "dots at 2.8 px in those corridors maximize credit per dot; the >2 px catalogue prune removes "
@@ -105,7 +105,7 @@ def main() -> int:
             "raw_flagged_rows": rec["uniqueness"]["flagged_raw_rule_0p70_overlap_or_0p90_rho"],
             "raw_flagged_DEV2_unscoped": rec["uniqueness"]["flagged_DEV2_rule"],
             "scopecheck_x9": (None if x9 is None else {
-                "judged_by": "binary dot maps: pre-registration dot rule; surfaces: top-N convention (IR-53-66)",
+                "judged_by": "binary dot maps: pre-registration dot rule; surfaces: top-N convention (IR-53-92)",
                 "binary_dot_maps_judged": sum(1 for r in x9["uniqueness_scopecheck"]["details"]
                                               if r["class"] == "binary_dot_map"),
                 "max_scoped_lift_binary_dot_maps": max((r["scoped_lift"] for r in x9["uniqueness_scopecheck"]["details"]
@@ -150,7 +150,7 @@ def main() -> int:
                          "AND all validators pass; else negative"),
         "caveats": [
             "IR-53-42: holdout truth is withheld catalogue segments; the competition scores faults absent from the catalogue.",
-            "L-40: budget rule chose N=80,000 over N=44,090 by +0.0012 (inside the fold CI); both are recorded.",
+            "L-92: budget rule chose N=80,000 over N=44,090 by +0.0012 (inside the fold CI); both are recorded.",
             "IR-53-02: no organizer receipt exists for any file here; no score is ORGANIZER-CONFIRMED.",
         ],
     }

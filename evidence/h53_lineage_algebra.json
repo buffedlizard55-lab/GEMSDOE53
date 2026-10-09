@@ -1,0 +1,84 @@
+{
+  "label": "MEASURED geometry + INFERENCE algebra from USER-REPORTED scores",
+  "files": {
+    "d2.8": {
+      "file": "GEMSDOE25__docs__downloads__gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "user_reported_score": 0.26,
+      "dots": 44090,
+      "values": [
+        1.0
+      ],
+      "nan_px": 0,
+      "nodata": null,
+      "within_1px_catalogue": 3891,
+      "within_2px_catalogue": 6436,
+      "within_3px_catalogue": 8607,
+      "median_dist_catalogue_px": 15.0
+    },
+    "r1": {
+      "file": "GEMSDOE28__docs__downloads__gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif",
+      "user_reported_score": 0.2708,
+      "dots": 40199,
+      "values": [
+        1.0
+      ],
+      "nan_px": 0,
+      "nodata": null,
+      "within_1px_catalogue": 0,
+      "within_2px_catalogue": 2545,
+      "within_3px_catalogue": 4716,
+      "median_dist_catalogue_px": 17.69180601295413
+    },
+    "B2": {
+      "file": "GEMSDOE32__docs__downloads__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "user_reported_score": 0.2778,
+      "dots": 37654,
+      "values": [
+        1.0
+      ],
+      "nan_px": 0,
+      "nodata": null,
+      "within_1px_catalogue": 0,
+      "within_2px_catalogue": 0,
+      "within_3px_catalogue": 2171,
+      "median_dist_catalogue_px": 19.6468827043885
+    }
+  },
+  "set_relations": {
+    "r1_subset_of_d2.8": true,
+    "d2.8_minus_r1": 3891,
+    "r1_minus_d2.8": 0,
+    "removed_d2.8_to_r1_max_dist_catalogue_px": 1.0,
+    "B2_subset_of_r1": true,
+    "r1_minus_B2": 2545,
+    "B2_minus_r1": 0,
+    "removed_r1_to_B2_max_dist_catalogue_px": 2.0,
+    "B2_subset_of_d2.8": true,
+    "d2.8_minus_B2": 6436,
+    "B2_minus_d2.8": 0,
+    "removed_d2.8_to_B2_max_dist_catalogue_px": 2.0
+  },
+  "inference": {
+    "steps": [
+      {
+        "step": "d2.8->r1",
+        "removed_dots": 3891,
+        "delta_inv_dti": 0.15339,
+        "implied_TP_w_per_f": 5073.3
+      },
+      {
+        "step": "r1->B2",
+        "removed_dots": 2545,
+        "delta_inv_dti": 0.09305,
+        "implied_TP_w_per_f": 5470.2
+      }
+    ],
+    "note": "If the removed dots were pure FP and TP_w unchanged, TP_w = 0.2*n*f/Delta(1/DTI). Two independent steps giving similar TP_w per f supports (does not prove) the pure-FP reading: dots on/adjacent to the catalogue earn ~no credit against the expert 'new faults' test set.",
+    "B2_decomposition_per_f": {
+      "TP_w": 5271.8,
+      "0.2FP_w+0.8G": 17922.4,
+      "marginal_rule": "adding a dot with expected credit c and FP cost f_c raises DTI iff c/f_c > 0.2*DTI/(1-0.2*DTI)",
+      "marginal_threshold_at_B2": 0.0588
+    }
+  }
+}

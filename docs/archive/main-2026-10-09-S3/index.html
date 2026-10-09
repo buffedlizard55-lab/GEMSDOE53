@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Executive summary · GEMSDOE53</title>
+<style>
+:root{--ink:#17202a;--muted:#5b6673;--line:#dfe5ec;--bg:#f7f9fb;--card:#fff;--accent:#0b6e4f;--warn:#9a3412;--warnbg:#fff7ed;--ok:#14532d;--okbg:#f0fdf4;--red:#7f1d1d;--redbg:#fef2f2}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700;font-size:17px}
+nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
+main{max-width:1000px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
+.label{font-size:20px;font-weight:800;border-radius:10px;padding:14px 16px;margin:4px 0 10px}
+.label.no{background:var(--redbg);border:2px solid #fca5a5;color:var(--red)}
+.label.yes{background:var(--okbg);border:2px solid #86efac;color:var(--ok)}
+.banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
+.warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
+.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:12px 14px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
+.note{color:var(--muted);font-size:14px}footer{max-width:1000px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
+a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inline-block;background:#0b6e4f;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
+.btn.dis{background:#94a3b8}
+</style></head><body>
+<header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
+<nav><a href="index.html" class="on">Executive summary</a><a href="submission.html" class="">The file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
+<main>
+<section id="s3-download" style="border:2px solid #fca5a5">
+  <div class="label no">S3 FILE: RESEARCH-ONLY / DO NOT SUBMIT. DO NOT SUBMIT.</div>
+  <p><b>Is it OK to download?</b> Yes, for research and review only. <a class="btn dis" href="submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif">Download gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</a> (828,867 bytes, sha256 <code>e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c</code>).</p>
+  <p><b>Is it OK to submit?</b> <b>NO.</b> The pre-registered uniqueness gate fails for this file, so the protocol does not allow it into a submission slot.</p>
+  <table>
+    <tr><th>Name field (unique)</th><td><code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code></td></tr>
+    <tr><th>Note (optional comment field, ≤140 characters; 107 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored</code></td></tr>
+  </table>
+  <p><b>What this file is.</b> A pre-registered control: the E2 bands top-q 0.02 candidate, with an S3 receipt. It is <b>not</b> the best holdout candidate.
+  HOLDOUT-DTI (proxy, evaluator gems53.core.dti v1.0.0, not organizer-scored): this control 0.0001; H1 thin_bin_q0p1 0.0040; H8 gravity-gradient 0.0040.
+  H8 minus H1, paired mean +0.000424, 95% CI -0.003746 to +0.004594. Pooled values differ by only 0.00003, and the five paired fold differences change sign, so the H1 comparison is not decided. Verdict: <b>NEGATIVE</b> under pre-registration section 4 (the lower bound is not above 0).</p>
+  <p><b>Gates in this receipt:</b></p><ul><li>holdout_beats_current_best: <b>FAIL</b></li><li>format_validators_all: <b>PASS</b></li><li>uniqueness_no_drift_flag: <b>FAIL</b></li></ul>
+  <p><b>Decisions needed from you</b> (nothing below was done without your approval):</p>
+  <ol>
+    <li>Gate definition. The pre-registered rule flags 172 of 628 registry rasters. Of the overlap flags, the sparse lattice dot maps reach 99.87% chance coverage, so no placement can pass the raw 70% rule (IR-53-46). The surface rho flags depend on whole-grid NaN handling (IR-53-47). Approve or reject a footprint-only, chance-corrected rule (<a href="evidence.html#irregularities">evidence page</a>), then a fresh gate run.</li>
+    <li>Candidate choice. H1 thin_bin_q0p1 has the higher holdout proxy (0.0040), but its own receipt also fails the uniqueness gate. Decide whether H1 or another candidate should be the one tested under a changed rule.</li>
+    <li>Next experiment. H12 (potential-field edge coincidence) is recommended for spatially blocked validation. It has not been run (the three-experiment cap for this session is used up: S3-A, S3-B, S3-C).</li>
+    <li>Submission slots. None has been used. organizer_score is null. Public leaderboard figures are the repository snapshot (IR-53-01, IR-53-51), not verified organizer receipts.</li>
+  </ol>
+</section>
+<section id="checklist">
+  <h2>Checklist against the request</h2>
+  <table>
+    <tr><th>Requirement</th><th>Status</th><th>Where</th></tr>
+    <tr><td>Obvious answer on arrival: download and submit</td><td>Given in the top block. Download: yes, for research and review only. Submit: <b>NO</b>.</td><td>top of this page; README Status</td></tr>
+    <tr><td>Unique name; optional Note (≤140 characters)</td><td>Name and Note are shown above. The Note is optional. It is an identifier-level comment, not a uniqueness claim.</td><td>top block</td></tr>
+    <tr><td>Unique raster under the pre-registered gate</td><td><b>Not met</b>: 172 of 628 registry rasters flagged (protocol duplicate / stop).</td><td><a href="submission.html">submission.html</a></td></tr>
+    <tr><td>Free official sources for hypotheses that need new data</td><td>Named: USGS ComCat (C2, H11) and USGS Landsat Collection 2 Level-2 (C3); INGENIOUS for H5 (licence not yet verified, IR-53-44). <b>Not verified</b>: the sandbox cannot reach USGS, so availability, licence and coverage remain open (L-31).</td><td><a href="evidence.html">evidence.html</a> (hypotheses); registry/sources.json</td></tr>
+    <tr><td>Three-pass review: implement, review for bugs, re-check against the request</td><td>Done for this merge: implemented; reviewed (fixed S3 canary labels, branch links, pointer hashes and the missing S3 evidence section); re-checked against the request (this table). Open gaps are listed under Decisions and the evidence page.</td><td>this table; <a href="evidence.html">evidence.html</a></td></tr>
+    <tr><td>Prompt in the README; read at every session start</td><td>Yes. README section "Prompt" holds the capture, which is <b>normalized, not verbatim</b> (IR-53-27, IR-53-38 open).</td><td>README.md; docs/prompt/verbatim.md</td></tr>
+  </table>
+</section>
+<section>
+  <div class="label no">RESEARCH-ONLY / DO NOT SUBMIT</div>
+  <p><b>Is it OK to download?</b> Download is allowed for research and review. It is <b>not</b> cleared for submission.<br>
+  <b>Is it OK to submit?</b> <b>NO.</b> Do not upload this file.</p>
+  <h1>Executive summary</h1>
+  <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
+  Short answer: the S3 file in the download block above passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>Research-only / DO NOT SUBMIT</b> and must not be uploaded. The full registry gate flags 172 rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by 99.615% within 3 px (limit 70%; chance coverage 99.87%, lift 0.9974); whole-grid pre-placement surface rho max is 0.978311 (limit 0.90). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
+  <div class="warn"><b>Pre-placement STOP (verified 2026-10-09):</b> The public <a href="https://github.com/buffedlizard55-lab/17GEMSDOE/blob/main/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif">GEMSDOE17 reference raster</a> is positive at every one of the 5,167,373 competition-footprint pixels (its SHA256: <code>ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be</code>; <a href="data/protocol_preflight_20261009.json">pixel-level preflight receipt</a>). Any nonempty conformant prediction therefore overlaps its dots by 100% at distance zero. That exceeds the literal 70% limit before model fitting or dot placement; <b>no new submission TIFF can honestly be cleared under this rule.</b> Zero predictions evade the overlap test but cannot beat a positive holdout. No new candidate was generated in this lane after this preflight. This is a rule/registry conflict, not proof that every new prediction is a copy.</div>
+  <p class="note">Read the <a href="data/run_card_20261009.json">2026-10-09 negative run card</a> and the <a href="research/hypotheses.md">ranked untested geological hypotheses (H12, C1–C3)</a>. No claim of a better holdout or organizer score is made.</p>
+  <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
+  Nothing has been submitted, and no submission slot was used.</div>
+</section>
+
+<section>
+  <h2>The file</h2>
+  <table>
+    <tr><th>Download</th><td><a class="btn dis" href="submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif">Download gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</a> (828,867 bytes)</td></tr>
+    <tr><th>Submission name (identifier)</th><td><code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code></td></tr>
+    <tr><th>Note (optional comment field, ≤140 characters; 107 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored</code></td></tr>
+    <tr><th>sha256 (container)</th><td><code>e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c</code></td></tr>
+    <tr><th>sha256 (pixels, float32 little-endian)</th><td><code>e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd</code></td></tr>
+    <tr><th>Candidate</th><td>bands top_q0p02, trained on all known faults, emission zeroed on known faults</td></tr>
+    <tr><th>Format</th><td>single-band float32 GeoTIFF, EPSG:32611, 100 m, same transform and shape as the sample, NaN exactly outside the footprint, values in [0, 1]</td></tr>
+  </table>
+  <p class="note">Status words in the file's metadata match the label above. Do not rerun E3 in this lane: the three-experiment budget is exhausted and the uniqueness gate failed.</p>
+</section>
+
+<section>
+  <h2>Other files in this repository (from other sessions, not ours)</h2>
+  <div class="warn">Other sessions merged their files into this repository while this session ran. They are listed here so that the
+  labels are not confused. Each label is quoted from its own receipt. Our gate is run on the same registry as ours (final dots, overlap and rho).
+  <b>None of them is cleared by the pre-registered raw overlap gate (IR-53-46).</b></div>
+  <table><tr><th>File</th><th>Session</th><th>Label stated in its receipt</th><th>Our gate (same registry)</th><th>Caveat</th></tr>
+  <tr><td><code>docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif</code></td><td>H1 relay prune (PR #6, another session)</td><td><b>READY_TO_SUBMIT</b><br><span class='note'>evidence/archive/pr6/run_card_pr6_h1.json (its archived run card)</span></td><td>FLAGGED · 623 unique rasters, 82 flagged, max overlap 100.0%, max rho 0.1166</td><td>The same session&#x27;s README on main says that under the literal dot rule this file is NOT CLEARED. Its archived run card still says READY_TO_SUBMIT.</td></tr><tr><td><code>submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif</code></td><td>H2 ridge-packed (PR #7, another session)</td><td><b>DO-NOT-SUBMIT</b><br><span class='note'>evidence/x3_candidate_receipt.json</span></td><td>FLAGGED · 623 unique rasters, 86 flagged, max overlap 100.0%, max rho 0.1025</td><td>Its own gate G5 (uniqueness) fails, so the label is DO-NOT-SUBMIT.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>How to submit (only if the label says OK)</h2>
+  <ol>
+    <li>Read the label above first. If it says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
+    <li>Open the competition submission page on DrivenData and log in to your own account. No data download is needed.</li>
+    <li>Upload the file. In the name field enter <code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code>. Optional: in the Note (comment) field enter the note above (≤140 characters).</li>
+    <li>Check the upload result. Record the portal's exact message. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
+    <li>The portal limit is 3 feedback submissions per week and one final choice (<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules §3.4</a>).
+    Choosing a slot is a separate decision and was not made here.</li>
+  </ol>
+  <p class="note">Sources: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page (S1)</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard snapshot (S2)</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules (S3)</a>.</p>
+</section>
+
+<section>
+  <h2>Answers (each labelled)</h2>
+  <table>
+    <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
+    <tr><td>Is the file unique and valid?</td><td>Valid: yes (format and conformance checks pass). <b>Protocol duplicate / stop: yes</b>; unique under the pre-registered raw gate: <b>no</b>. The full gate flags 172 of 628 unique GEMSDOE registry rasters. Final-dot overlap with the GEMSDOE13 r13 lattice is 99.615% within 3 px (strict limit 70%); chance coverage is 99.87%, lift 0.9974. The candidate is not claimed to be byte-identical; the raw protocol still says stop. 56 flags come from dense rasters and 116 from sparse/mid rasters; the diagnostics explain the confounding, but do not override the gate (IR-53-46 to IR-53-49).</td>
+      <td><span class="pill">gates in submission.html</span></td></tr>
+    <tr><td>What would make the file OK to submit?</td><td>A change to the gate's definition (registry scope, a chance-corrected overlap rule, and a footprint-only rank correlation), approved by you (IR-53-16, IR-53-46, IR-53-47), followed by a fresh pre-registered gate run. Nothing of that kind has been applied here.</td>
+      <td><span class="pill">decision for the user</span></td></tr>
+    <tr><td>Does it beat public-board row 0.3774 (#1, S2)?</td><td>Unknown. Nothing here is an organizer-confirmed score for this file.</td><td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
+    <tr><td>Stage 1 (design B) HOLDOUT-DTI</td><td>Evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments. Bands top-q 0.02 baseline: pooled 0.0106, 95% t CI (df 4) 0.0083 to 0.0128.
+      Selected variant (h1 thin_bin_q0p1): pooled HOLDOUT-DTI 0.1413, CI [0.13378, 0.148921]; selected on these folds, so optimistic.</td>
+      <td><span class="pill">HOLDOUT-DTI proxy</span></td></tr>
+    <tr><td>Spatial confirmation (HOLDOUT-DTI; contiguous super-regions)</td><td>pooled baseline 0.0001 vs h1 thin_bin_q0p1 0.0040; withheld positives 60,988 in 3,199 segments</td><td>evaluator gems53.core.dti v1.0.0; paired mean Δ +0.0035, 95% paired t CI +0.0006 to +0.0064 (df 4); accepted = True</td></tr>
+    <tr><td>Why GEMSDOE29 leaks</td><td>Its distance feature is built from the full catalogue, so it is exactly 0 on every known-fault pixel (separability 1.0). Mechanism and audit in <a href="evidence.html#gemsdoe29">evidence</a> and <code>docs/leakage-review.md</code>.</td>
+      <td><span class="pill">measured</span></td></tr>
+    <tr><td>Our own holdout had a leak (IR-53-37)</td><td>The first HOLDOUT-DTI design A depended on withheld labels: bands top-q 0.02 = 0.0352 (95% t CI [0.02817, 0.042229]); design B gives 0.0106 (95% CI [0.008337, 0.012812]). Both use evaluator gems53.core.dti v1.0.0 and 60,988 withheld positives; design A is reference only.</td>
+      <td><span class="pill">HOLDOUT-DTI proxy; design A invalid</span></td></tr>
+    <tr><td>Why GEMSDOE32 H33-2-B2 may explain public row 0.2778 (#13, S2)</td><td>Registry-copy structure: 37,654 dots (0.73% of footprint), 0.0% within 2 px of known faults, and median spacing 3 px. Metric-aware pruning/packing is plausible, but the row-to-file link is <b>not established</b> (IR-53-02); 0.2778 is not attributed to this file.</td>
+      <td><span class="pill">public-board snapshot; attribution unknown</span></td></tr>
+    <tr><td>Can a higher-scoring file be built?</td><td>Not shown. We have a proxy that rises with thinning and proximity, which is not the competition target (IR-53-42). No file here is shown to beat any leaderboard row.</td>
+      <td><span class="pill">not established</span></td></tr>
+  </table>
+  <p class="note">Stage-2 numbers are HOLDOUT-DTI proxies (evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments). The absolute scores are small; for the H1 candidate (E2 design B) the paired gain is positive on all five spatial folds, and the preregistered rule accepts it. The shipped S3 control does not share this result (S3-B: H8 negative; IR-53-60). Stage-1 DTI is selected on its own segment folds and is optimistic. Neither measures the competition's unseen-fault truth (IR-53-42).</p>
+</section>
+
+<section>
+  <h2>Bars to beat (repository snapshot, not re-read this session)</h2>
+  <table><tr><th>Rank</th><th>Team</th><th>Score</th><th>Label</th></tr>
+  <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td><td>leaderboard snapshot (S2)</td></tr>
+  <tr><td>7</td><td>DARD</td><td>0.3195</td><td>leaderboard snapshot (S2)</td></tr>
+  <tr><td>13</td><td>extradr19</td><td>0.2778</td><td>leaderboard snapshot (S2); the file link is NOT established (IR-53-02)</td></tr></table>
+  <p class="note">The request named 0.3195 as the top score. The snapshot shows 0.3774 at #1 (IR-53-01). The snapshot time is not shown on the page.</p>
+</section>
+
+<section>
+  <h2>Flagged for review</h2>
+  <ul><li><b>IR-53-01</b> (high): Target score in the request is not the leaderboard top</li><li><b>IR-53-02</b> (high): The 0.2778 file is not mapped to a leaderboard receipt</li><li><b>IR-53-37</b> (high): Negative-pool side channel in the design-A holdouts (E1, prior exp2, and H2 X2)</li><li><b>IR-53-38</b> (high): Verbatim user prompt is not stored in the workspace</li><li><b>IR-53-40</b> (high): H3 (fault-parallel strain orientation) is not testable with the public strain data</li><li><b>IR-53-42</b> (high): The holdout rewards proximity to visible catalogue faults; the target is new faults</li><li><b>IR-53-46</b> (high): The raw 70% overlap gate cannot be satisfied by any placement on this registry</li><li><b>IR-53-49</b> (medium): A later uniqueness refresh covers only three rasters and is not the canonical full-registry gate</li></ul>
+  <p class="note">Full list with severities: <a href="evidence.html#irregularities">evidence page</a>. Limitations: <a href="evidence.html#limitations">evidence page</a>.</p>
+</section>
+</main>
+<footer>Numbers on these pages are read from JSON in <code>evidence/</code>, <code>registry/</code> and <code>docs/submissions/</code>.
+HOLDOUT-DTI = our proxy (withheld known-fault segments or spatial super-regions). ORGANIZER-CONFIRMED = receipt only (none exists).
+Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>
