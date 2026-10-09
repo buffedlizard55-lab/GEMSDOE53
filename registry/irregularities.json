@@ -6,7 +6,7 @@
       "severity": "high",
       "status": "open",
       "subject": "Target score in the request is not the leaderboard top",
-      "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page. The verbatim prompt itself contradicts itself: its leaderboard line says 'GEMSDOE high score: 0.3774' and a later line says '0.3195 is the highest score right now'.",
+      "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page.",
       "action": "Use 0.3774 as the public bar. Re-check S2 before any slot decision."
     },
     {
@@ -212,7 +212,7 @@
     {
       "id": "IR-53-27",
       "severity": "high",
-      "status": "partly resolved: docs/prompt/verbatim.md now holds a transcription (28,683 bytes). Its provenance is not in this session's log; the user must confirm it against the original message.",
+      "status": "open",
       "subject": "The verbatim prompt is not in the workspace",
       "detail": "The session record holds only a summary of the user's request. The README's prompt section is a reconstruction in the user's terms, not the verbatim text. The verbatim text was not found in the workspace, git history or cache.",
       "action": "Paste the verbatim prompt into docs/prompt/verbatim.md. The README links there. Until then the reconstruction is labelled as such."
@@ -222,8 +222,8 @@
       "severity": "medium",
       "status": "open",
       "subject": "Holdout proxy and user-reported board disagree on emission volume",
-      "detail": "Pooled HOLDOUT-DTI rises with dot budget up to 2% of the footprint (bands arm 0.0352 at 103k dots). User-reported board receipts in S20 show dense emissions scoring lower: GEMSDOE22 6% = 0.1002 and 10% = 0.0748, against 0.2600 for a 44,090-dot file (conflicting owner page). The catalogue proxy is therefore not calibrated to the competition's truth on volume. Our pre-registered N (44,090) follows the dot count of the d2.8 family, not the holdout optimum.",
-      "action": "Report N-dependence on every holdout number (done in X2 grid). Do not select N from the holdout alone."
+      "detail": "Earlier H1/H2 lane reports show HOLDOUT-DTI rising with dot budget (bands q=0.02 design-A value 0.035233 at about 103k dots), while owner-reported board entries suggest sparse emissions can score higher. These early holdout comparisons use the hidden-buffer negative pool now identified in IR-53-37, so they are diagnostic only, not valid volume calibration or promotion evidence. The corrected design-B baseline is 0.010562; board-row and file attributions remain unverified (S20/S2).",
+      "action": "Retain the records as historical diagnostics only; do not use them as leaderboard calibration. Any volume claim requires a corrected design-B holdout and a submission-page receipt."
     },
     {
       "id": "IR-53-29",
@@ -293,14 +293,14 @@
       "id": "IR-53-37",
       "severity": "high",
       "status": "open-corrected",
-      "subject": "Negative-pool side channel in the design-A holdout (exp2 and E1)",
-      "detail": "The design-A training pool was fp & ~cat & ~buf, and the 10 px buffer is defined from the WITHHELD faults. The buffer removed 371,176 to 390,883 negative pixels per fold (7.3% to 7.6% of the pool), all within 10 px of a withheld fault. Measured effect on fold 0 of the bands top-q 0.02 arm: 0.0266 (design A) vs 0.0106 (design B). The design-A H1 canary used the same buffered background, so its separability is also inflated. This is the pattern the GEMSDOE29 audit flagged (docs/leakage-review.md).",
-      "action": "Corrected to design B (negatives = every footprint pixel that is not a visible fault). Pre-registration amendment DEV-1 (docs/research/preregistration-2026-10-08.md section 8) is committed before the design-B run. Design-A numbers (evidence/exp2_holdout_arms.json, evidence/e1_h1_thin_holdout.json) are kept as reference only and are not used for any decision."
+      "subject": "Negative-pool side channel in the design-A holdouts (E1, prior exp2, and H2 X2)",
+      "detail": "The design-A training pool was fp & ~cat & ~buf, and the 10 px buffer is defined from the WITHHELD faults. The buffer removed 371,176 to 390,883 negative pixels per fold (7.3% to 7.6% of the pool), all within 10 px of a withheld fault. Measured effect on fold 0 of the bands top-q 0.02 arm: 0.0266 (design A) vs 0.0106 (design B). The design-A H1 canary used the same buffered background, so its separability is also inflated. The same hidden-buffer negative sampling appears in scripts/x2_ridge_holdout.py; therefore the H2 X2 HOLDOUT-DTI comparison also inherits this design defect and cannot validate its preregistered promotion gate. This is the pattern the GEMSDOE29 audit flagged (docs/leakage-review.md).",
+      "action": "E1 and the prior H1 exp2 design-A numbers (evidence/exp2_holdout_arms.json, evidence/e1_h1_thin_holdout.json) are reference only; design B in E2 is used for the H1/M1 decision. The H2 X2 run was not repeated under design B because the experiment budget was exhausted; its values remain historical/diagnostic only. The corrected design-B sampler uses every footprint pixel that is not a visible fault."
     },
     {
       "id": "IR-53-38",
       "severity": "high",
-      "status": "partly resolved: the transcription is embedded in README.md; provenance to confirm (see IR-53-27).",
+      "status": "open",
       "subject": "Verbatim user prompt is not stored in the workspace",
       "detail": "README.md states that the verbatim user message is not stored. This session has only a condensed record of the requirements. The README requirements block is therefore recorded in the user's terms and is not a verbatim copy.",
       "action": "Not fabricated. The user should paste the verbatim prompt into README.md (section 'Verbatim prompt'). Until then the README says so explicitly."
@@ -389,6 +389,14 @@
       "id": "IR-53-49",
       "severity": "medium",
       "status": "open",
+      "subject": "A later uniqueness refresh covers only three rasters and is not the canonical full-registry gate",
+      "detail": "evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582_refresh.json reports no flag but includes only 3 local/nearby rasters. It is not comparable to the canonical 621-unique-raster receipt evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json, which flags the candidate. The smaller refresh cannot clear the candidate.",
+      "action": "Keep the full-registry receipt as the verdict source; label the refresh partial in any future UI or remove it from clearance paths. No threshold or registry scope was changed."
+    },
+    {
+      "id": "IR-53-63",
+      "severity": "medium",
+      "status": "open",
       "subject": "Band 18 is labelled 'horizontal gradient' but takes negative values",
       "detail": "training_features.tif band 18 ('Isostatic gravity anomaly horizontal gradient - horizontal rate of change') has minimum -15.44 and median 0.038 on the footprint. A gradient magnitude cannot be negative, so the layer is a signed component or a mislabelled field. The official problem page lists 'the slope of the isostatic gravity anomaly' among the layers (S1, 'Provided features'). H8 therefore computes its own gradient from band 13, not from band 18. Measured 2026-10-08 with src/gems53/core.py load_inputs.",
       "action": "Ask the data owner (DrivenData forum or the USGS/GeoDAWN metadata) what band 18 is. Until then do not treat it as a magnitude."
@@ -422,8 +430,8 @@
       "severity": "low",
       "status": "resolved",
       "subject": "KDD 2011 DOI of the Kaufman et al. paper not verified in this session",
-      "detail": "The TKDD 2012 DOI 10.1145/2382577.2382579 and the learn-predict separation wording were verified in this session (search results, S30). The KDD 2011 DOI 10.1145/2020408.2020496 used in docs/leakage-review.md was not opened. Treat it as unverified until checked. Resolved 2026-10-08: the DOI 10.1145/2020408.2020496 resolves to 'Leakage in data mining' (Proc. 17th ACM SIGKDD, S38).",
-      "action": "Closed. The TKDD 2012 DOI (S30) is also kept."
+      "detail": "The TKDD 2012 DOI 10.1145/2382577.2382579 and the learn-predict separation wording were verified in this session (search results, S41). The KDD 2011 DOI 10.1145/2020408.2020496 used in docs/leakage-review.md was not opened. Treat it as unverified until checked. Resolved 2026-10-08: the DOI 10.1145/2020408.2020496 resolves to 'Leakage in data mining' (Proc. 17th ACM SIGKDD, S38).",
+      "action": "Closed. The TKDD 2012 DOI (S41) is also kept."
     },
     {
       "id": "IR-53-54",

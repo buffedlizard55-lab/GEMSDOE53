@@ -210,27 +210,55 @@
     },
     {
       "id": "S29",
+      "title": "USGS ANSS Comprehensive Earthquake Catalog (ComCat), FDSN event service (candidate source; not used)",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "access": "not fetched in this session; usgs.gov host is outside the session egress allow-list",
+      "used_for": "Possible future C2 raw earthquake time/depth geometry. Endpoint, current downloadability and applicable terms were not checked; not a validated input."
+    },
+    {
+      "id": "S30",
+      "title": "USGS Landsat Collection 2 Level-2 science products (candidate source; not used)",
+      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+      "access": "not fetched in this session; usgs.gov host is outside the session egress allow-list",
+      "used_for": "Possible future C3 multitemporal surface-temperature evidence. Product coverage, access and licence were not checked; not a validated input."
+    },
+    {
+      "id": "S31",
+      "title": "High-Resolution Aeromagnetic Survey To Image Shallow Faults, Poncha Springs and Vicinity, Chaffee County, Colorado (USGS OFR 2009-1156)",
+      "url": "https://www.usgs.gov/publications/high-resolution-aeromagnetic-survey-image-shallow-faults-poncha-springs-and-vicinity",
+      "access": "fetched",
+      "used_for": "Official USGS analogue: concealed faults interpreted from linear aeromagnetic anomalies and breaks; also warns that many linear features track drainages. Different region; rationale only, not validation for GEMS."
+    },
+    {
+      "id": "S32",
+      "title": "Finn et al. (2022), Geophysical imaging of the Yellowstone hydrothermal plumbing system (USGS Publications Warehouse; Nature)",
+      "url": "https://pubs.usgs.gov/publication/70230158",
+      "access": "fetched",
+      "used_for": "Official USGS abstract describes fault-controlled thermal conduits and low-resistivity/low-susceptibility signatures from airborne geophysical imaging. Yellowstone analogue only; does not validate band 17 or the Great Basin candidate."
+    },
+    {
+      "id": "S40",
       "title": "Blakely, R. J. and Simpson, R. W. (1986), Approximating edges of source bodies from magnetic or gravity anomalies, Geophysics 51(7), 1494-1498, doi 10.1190/1.1442197",
       "url": "https://doi.org/10.1190/1.1442197",
       "access": "DOI and citation confirmed by two search results on 2026-10-08 (academia.edu reference list; Mayhew 1987 Rev. Geophys. reference list). Full text not opened.",
       "used_for": "H8 method (horizontal-gradient maxima, Blakely-Simpson). Citation only; the implementation is ours (src/gems53/h8.py)."
     },
     {
-      "id": "S30",
+      "id": "S41",
       "title": "Kaufman, S., Rosset, S., Perlich, C., Stitelman, O. (2012), Leakage in data mining: Formulation, detection, and avoidance, ACM TKDD 6(4), Article 15, doi 10.1145/2382577.2382579",
       "url": "https://doi.org/10.1145/2382577.2382579",
       "access": "Title, venue, DOI and the 'learn-predict separation' wording confirmed by search results on 2026-10-08 (dl.acm.org and scispace abstract). Full text not opened.",
       "used_for": "Leakage definition and learn-predict separation (leakage-review, S3-A)."
     },
     {
-      "id": "S31",
+      "id": "S42",
       "title": "DrivenData competition 306 problem description (submission format, metric, labels)",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
       "access": "Fetched 2026-10-08 (session date): both chunks read. Quoted: 'data outside the bounds is null or nan', 'values between 0 and 1', the DTI formula with alpha 0.2 and beta 0.8, and R = 300 m.",
       "used_for": "Submission format and metric (S1 is the same page; this entry records the 2026-10-08 session read)."
     },
     {
-      "id": "S32",
+      "id": "S43",
       "title": "DrivenData Terms of Use",
       "url": "https://www.drivendata.org/termsofuse/",
       "access": "Fetched 2026-10-08 (session date): 'Prohibited Uses' items 2 and 3 quoted in IR-53-51. Page states 'Last Modified: August 7, 2014'.",
@@ -276,7 +304,7 @@
       "title": "Kaufman, Rosset, Perlich, Stitelman, 'Leakage in data mining', Proc. 17th ACM SIGKDD (KDD 2011)",
       "url": "https://dl.acm.org/doi/10.1145/2020408.2020496",
       "access": "DOI resolved 2026-10-08 (abstract shown; full text behind login in the Basic Edition)",
-      "used_for": "Learn-predict separation definition. Closes IR-53-53: the KDD 2011 DOI resolves to this paper. The TKDD 2012 version is S30."
+      "used_for": "Learn-predict separation definition. Closes IR-53-53: the KDD 2011 DOI resolves to this paper. The TKDD 2012 version is S41."
     },
     {
       "id": "S39",

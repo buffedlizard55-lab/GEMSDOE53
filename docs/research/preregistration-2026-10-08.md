@@ -48,9 +48,8 @@ files with those names. The mapping above is the nearest shared tool and is an i
 - Leakage canary: each feature alone (19 bands, H1 distance, and the leak-free cross-fit distance from the
   previous session) on the withheld fold positives against the buffered background. Gate: separability above 0.90
   means leakage until proven otherwise.
-- **Selection rule for E2:** among the variants whose E1 pooled DTI is above the current holdout best (`bands`,
-  top-q, q = 0.02, pooled DTI 0.035233), pick the one with the highest pooled DTI. If none qualifies, the result is
-  negative and E2 does not run for a new variant. The `bands` baseline is then retained for E2.
+- **Original selection rule for E2 (pre-DEV-1):** among variants whose E1 pooled DTI exceeded the then-current reference (`bands`,
+  top-q, q = 0.02, 0.035233), pick the highest. This comparison used design-A HOLDOUT-DTI and was later found to have a withheld-buffer side channel (IR-53-37); it is preserved as historical preregistration, not as the valid comparator. DEV-1 re-established the baseline under design B before the decision run.
 
 ## 5. Experiment E2: confirmatory spatially blocked holdout (contiguous super-regions)
 
@@ -132,9 +131,8 @@ negative-pool side channel that the GEMSDOE29 audit flagged (docs/leakage-review
 ## 10. Outcome record (written after E3, from the receipts)
 
 - **E1** (design A, reference): completed. Reproduction of exp2: PASS. Metric parity with the template: PASS. Not used.
-- **E2** (design B): stage 1 selected H1 with binary thinning at q 0.10 (pooled HOLDOUT-DTI 0.141319, 24 variants).
-  Stage 2 (spatial contiguous super-regions): paired mean difference +0.003533, 95% CI +0.000619 to +0.006447. **Accepted** by the rule.
-  The absolute level on unseen super-regions is small (selected 0.004049, baseline 0.000102).
+- **E2** (design B; HOLDOUT-DTI, evaluator `gems53.core.dti` v1.0.0, 60,988 withheld positives in 3,199 segments): stage 1 selected H1 with binary thinning at q 0.10 (pooled 0.141319, 95% t CI 0.133780–0.148921, df 4; selected among 24 variants, so optimistic).
+  Stage 2 (spatial contiguous super-regions): pooled baseline 0.000102 and selected 0.004049; paired mean difference +0.003533, 95% paired t CI +0.000619 to +0.006447 (df 4). **Accepted** by the rule. The absolute HOLDOUT-DTI level on unseen super-regions is small.
 - **E3** (build): candidate `gems53-h1-thin_bin_q0p1-20261008-aefc7582`, 56,605 dots. Format validators: PASS.
   Canary (design B): bands 0.591151 and H1 0.767983, both below 0.90. **Uniqueness gate: flagged** (103 of 621 registry rasters).
 - **Label:** Research-only / DO NOT SUBMIT, from the pre-registered rule (section 7).

@@ -19,5 +19,12 @@
   "decision": "H8 did not beat the current holdout best (pre-registered negative). The file is the pre-registered frozen control (E2 design-B baseline, bands top-q 0.02): a unique control, not a recommendation",
   "receipt": "evidence/candidate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
   "organizer_score": null,
-  "submitted": false
+  "submitted": false,
+  "uniqueness_verdict": "PROTOCOL DUPLICATE / STOP (raw rule: more than 70% of dots within 3 px of registry dot maps, including dense and lattice rasters; not a byte-identity claim)",
+  "previous_pointer": {
+    "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
+    "file": "docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
+    "note": "H1 file as regenerated on main (PR #9). Its own verdict is PROTOCOL DUPLICATE / STOP. Superseded as the current pointer by the pre-registered S3 control; not cleared.",
+    "sha256": "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60"
+  }
 }

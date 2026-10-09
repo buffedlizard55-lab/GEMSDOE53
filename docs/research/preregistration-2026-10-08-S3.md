@@ -14,7 +14,7 @@ Lane: one method (H8) plus the GEMSDOE29 leakage reproduction. Budget: 3 experim
 - **Targeted signature:** a density contrast with a linear, fault-parallel trend, which can show a fault under cover where
   the catalogue has no trace.
 - **Differs from the repo:** band 13 is in the stack only as raw anomaly; band 11 is the vertical derivative, band 18 is a
-  signed field labelled "horizontal gradient" (min -15.44, so not a magnitude; IR-53-49). No maxima or ridge transform
+  signed field labelled "horizontal gradient" (min -15.44, so not a magnitude; IR-53-63). No maxima or ridge transform
   exists here. H2 (magnetic Hessian ridges) is a different physical layer and a second-derivative operator.
 
 ## 2. Arms and holdout (design B, DEV-1 inherited, unchanged)

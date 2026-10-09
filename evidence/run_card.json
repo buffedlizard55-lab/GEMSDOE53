@@ -2,7 +2,14 @@
   "schema": "gems53.run_card.v2",
   "session_branch": "arena/7b60bcc7-gemsdoe53",
   "date_utc": "2026-10-09",
-  "lane": "GEMSDOE29 leakage diagnosis; H1 (E2/E3) and S3 (H8 gravity-gradient ridges, negative; S3 control file, research-only). Parallel-run protocol: 3 experiments.",
+  "lane": "GEMSDOE29 leakage diagnosis; H1 (E2/E3) failed the raw registry duplicate gate; S3 (H8 gravity-gradient ridges, negative; S3 control file, research-only). Parallel-run protocol: 3 experiments.",
+  "hypothesis": {
+    "id": "H1 + M1",
+    "statement": "Visible-fault distance, recomputed with learn-predict separation, can rank off-trace continuation; metric-aware thinning packs predictions at the DTI support scale.",
+    "mechanism": "For each training segment, H1 measures distance to visible faults excluding that segment; at prediction it uses the supplied visible catalogue. M1 thins high-scoring pixels into a sparse dominating set to reduce redundant false-positive mass.",
+    "named_non_fault_process_that_could_mimic_it": "Catalogue compilation / mapping-effort bias: better-mapped structural corridors can have denser recorded faults and nearby training positives without a higher density of truly unmapped faults.",
+    "scope_note": "The holdout labels are known catalogue faults; this does not establish performance on the competition's unmapped targets (IR-53-42)."
+  },
   "pre_registration": {
     "file": "docs/research/preregistration-2026-10-08.md",
     "amendment": "DEV-1 (section 8), written before the design-B run"
@@ -38,7 +45,33 @@
     "decision": "H8 did not beat the current holdout best (pre-registered negative). The file is the pre-registered frozen control (E2 design-B baseline, bands top-q 0.02): a unique control, not a recommendation",
     "submitted": false,
     "submission_slot_used": false,
-    "organizer_score": null
+    "organizer_score": null,
+    "download_allowed_for_research": true,
+    "submit_allowed": false,
+    "uniqueness_verdict": "PROTOCOL DUPLICATE / STOP (raw rule; not a claim of byte-identical pixels)"
+  },
+  "review": {
+    "review_passes": 3,
+    "new_experiments_this_review": 0,
+    "experiment_budget_status": "EXHAUSTED (3 of 3 used in the pre-registered E1/E2/E3 sequence)",
+    "metadata_only_file_review": null,
+    "data_fetch": {
+      "tool": "scripts/fetch_data.py",
+      "destination": "/tmp/gems53-data (not committed)",
+      "training_features_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "sample_submission_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "provenance_caveat": "GitHub mirror matched its pinned manifest; this does not independently establish a direct DrivenData download."
+    },
+    "pytest": {
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0,
+      "shared_template_metric_parity_test_ran": true
+    },
+    "shared_template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+    "official_template_validator_exit": 0,
+    "shared_conformant_validator_exit": 0
   },
   "gates": {
     "holdout_beats_current_best": false,
@@ -285,6 +318,17 @@
         "drift_flag": true
       }
     ],
+    "protocol_verdict": "PROTOCOL DUPLICATE / STOP",
+    "surface_max_rho_whole_grid": 0.978311,
+    "r13_lattice_final_dot_comparison": {
+      "registry_file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "overlap_final_within_3px": 0.996149,
+      "threshold": 0.7,
+      "chance_coverage": 0.9987,
+      "lift_over_chance": 0.9974,
+      "interpretation": "Raw threshold is a protocol duplicate even though the lattice's footprint coverage explains the overlap; not an exact-pixel-copy claim."
+    },
+    "partial_refresh_warning": "The *_refresh receipt compares only three rasters; it is not a full-registry clearance (IR-53-49).",
     "receipt": "evidence/uniqueness_gate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
     "diagnostics": {
       "file": "evidence/uniqueness_diagnostics_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
@@ -318,7 +362,7 @@
         }
       ],
       "raw_overlap_gate_satisfiable_by_any_placement": false,
-      "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the gate receipt (IR-53-46, IR-53-47, IR-53-48)"
+      "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the canonical full-registry gate receipt (IR-53-46, IR-53-47, IR-53-48, IR-53-49)"
     }
   },
   "gemsdoe32": {
@@ -348,14 +392,18 @@
     "file": "docs/research/hypotheses.md",
     "H1": "tested (design B, stage 1 and stage 2)",
     "M1": "thinning tested (design B)",
-    "H2": "not tested (budget)",
+    "H2": "attempted in X1/X2/X3; X2 is design A with hidden-buffer negatives (IR-53-37), invalid for promotion; no design-B rerun",
     "H3": "BLOCKED: strain orientation not in public data (IR-53-40)",
-    "H4": "rejected (labels)",
-    "H5": "not tested (budget); data present in pinned mirror (S26, S28)",
-    "H7": "not tested (budget)"
+    "H4": "rejected (label-source re-expression)",
+    "H5": "related thermal/geothermal analogues exist across the public portfolio; not globally novel",
+    "H7": "related strike/trend analogues exist across the public portfolio; not globally novel",
+    "C1": "untested future candidate; current feature stack only; budget exhausted",
+    "C2": "candidate only; USGS ComCat access/terms not checked (S29)",
+    "C3": "candidate only; USGS Landsat access/terms not checked (S30)"
   },
   "verdict_reasons": [
     "uniqueness gate (pre-registered rule) flags 172 registry rasters",
+    "protocol duplicate / stop: final-dot overlap with the GEMSDOE13 r13 lattice is 99.61% within 3 px (threshold 70%; IR-53-46)",
     "the raw 70% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers 99.87% of the footprint within 3 px (IR-53-46)",
     "rho flags are method-sensitive: surface rho (whole grid) flags 52 rasters; footprint-only surface rho flags 0 (IR-53-47)"
   ],
@@ -382,6 +430,7 @@
     "IR-53-24",
     "IR-53-25",
     "IR-53-26",
+    "IR-53-27",
     "IR-53-28",
     "IR-53-29",
     "IR-53-30",
@@ -392,6 +441,7 @@
     "IR-53-35",
     "IR-53-36",
     "IR-53-37",
+    "IR-53-38",
     "IR-53-39",
     "IR-53-40",
     "IR-53-41",
@@ -401,6 +451,7 @@
     "IR-53-47",
     "IR-53-48",
     "IR-53-49",
+    "IR-53-63",
     "IR-53-50",
     "IR-53-51",
     "IR-53-54",
@@ -412,7 +463,7 @@
     "IR-53-60",
     "IR-53-62"
   ],
-  "irregularities_total": 62,
+  "irregularities_total": 63,
   "limitations": [
     "L-01",
     "L-02",
@@ -443,6 +494,8 @@
     "L-27",
     "L-28",
     "L-29",
+    "L-36",
+    "L-37",
     "L-30",
     "L-31",
     "L-32",
@@ -460,7 +513,9 @@
     "uniqueness_receipt": "evidence/uniqueness_gate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
     "measured_gemsdoe32": "evidence/gemsdoe32_measured.json",
     "current_submission": "docs/submissions/CURRENT.json",
-    "tests": "tests/test_h1_thin.py, tests/test_metric.py, tests/test_submission.py"
+    "hypotheses": "docs/research/hypotheses.md",
+    "review_prompt_capture": "docs/prompt/verbatim.md",
+    "tests": "tests/ (30 passed, 0 skipped with the pinned shared template)"
   },
   "environment": {
     "python": "3.11.2 (venv: numpy 2.4.6, scipy 1.17.1, scikit-learn 1.9.1, rasterio 1.4.4, pyproj 3.7.2)",
@@ -480,10 +535,15 @@
     "leakage_canary": {
       "S3A_leaky_distance_separability_fold0": 1.0,
       "S3A_verdict": true,
-      "H8_features_separability": {
+      "H8_features_separability_fold0": {
         "R": 0.500388,
         "S": 0.50054,
         "log1pD": 0.510827
+      },
+      "H8_features_separability_max_over_folds": {
+        "log1pD": 0.572409,
+        "R": 0.501985,
+        "S": 0.50193
       },
       "gate": 0.9
     },
