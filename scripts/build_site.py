@@ -11,6 +11,10 @@ Usage: python scripts/build_site.py
 """
 from __future__ import annotations
 
+import os as _os, sys as _sys
+if _os.environ.get("GEMS53_LEGACY_SITE") != "1":
+    _sys.exit("SUPERSEDED (2026-10-09): run scripts/build_site_h53.py. The 2026-10-08 page is archived at docs/archive/2026-10-08/index.html.")
+
 import hashlib
 import html
 import json

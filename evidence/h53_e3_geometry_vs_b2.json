@@ -1,0 +1,23 @@
+{
+  "gems53_e3": {
+    "dots": 40000,
+    "pct_le3": 0.1221,
+    "pct_le5": 0.5222,
+    "pct_le10": 0.8956,
+    "pct_le20": 0.9844,
+    "median": 5.0,
+    "p90": 10.2,
+    "median_nn_spacing_px": 3.0
+  },
+  "gemsdoe32_B2": {
+    "dots": 37654,
+    "pct_le3": 0.0577,
+    "pct_le5": 0.1497,
+    "pct_le10": 0.3017,
+    "pct_le20": 0.508,
+    "median": 19.65,
+    "p90": 68.01,
+    "median_nn_spacing_px": 3.0
+  },
+  "share_of_e3_dots_within_3px_of_B2": 0.2887
+}

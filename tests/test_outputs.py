@@ -29,7 +29,7 @@ def _sha(p):
 
 
 def test_current_pointer_matches_receipt_and_file():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-08.json")
     rec = _load(cur["receipt"])
     assert cur["label"] == rec["label"]
     assert cur["note"] == rec["note"]
@@ -50,7 +50,7 @@ def test_current_pointer_matches_receipt_and_file():
 
 
 def test_label_follows_the_pre_registered_rule():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-08.json")
     g = cur["gates"]
     all_pass = all(bool(v) for v in g.values())
     if cur["label"].startswith("Validated"):
@@ -61,7 +61,7 @@ def test_label_follows_the_pre_registered_rule():
 
 
 def test_run_card_and_site_agree_with_the_label():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-08.json")
     card = _load("evidence/run_card.json")
     assert card["label"] == cur["label"] == card["verdict"]
     assert card["submission"]["submitted"] is False
@@ -71,7 +71,7 @@ def test_run_card_and_site_agree_with_the_label():
     assert card["submission"]["sha256"] == cur["sha256"]
     assert card["session_branch"] == "arena/5c479bba-gemsdoe53"
     assert card["organizer_score"] is None
-    idx = (ROOT / "docs/index.html").read_text()
+    idx = (ROOT / "docs/archive/2026-10-08/index.html").read_text()
     sub = (ROOT / "docs/submission.html").read_text()
     assert cur["label"].upper() in idx.upper()
     assert cur["label"].upper() in sub.upper()
@@ -80,7 +80,7 @@ def test_run_card_and_site_agree_with_the_label():
 
 
 def test_submitted_file_meets_the_format_rules():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-08.json")
     rasterio = pytest.importorskip("rasterio")
     if not SAMPLE.exists():
         pytest.skip("competition rasters not present (run scripts/fetch_data.py)")
@@ -109,7 +109,7 @@ def test_every_irregularity_reference_resolves():
 
 
 def test_raw_uniqueness_gate_is_explicitly_a_stop_not_a_false_clearance():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-08.json")
     assert cur["uniqueness_verdict"].startswith("PROTOCOL DUPLICATE / STOP")
     assert cur["gates"]["uniqueness_no_drift_flag"] is False
     assert cur["label"].startswith("Research-only")
@@ -127,7 +127,7 @@ def test_raw_uniqueness_gate_is_explicitly_a_stop_not_a_false_clearance():
 
 
 def test_site_and_prompt_capture_do_not_claim_raster_uniqueness_or_verbatim_text():
-    idx = (ROOT / "docs/index.html").read_text()
+    idx = (ROOT / "docs/archive/2026-10-08/index.html").read_text()
     prompt = (ROOT / "docs/prompt/verbatim.md").read_text()
     readme = (ROOT / "README.md").read_text()
     assert "Submission name (identifier)" in idx or "Submission name" in idx

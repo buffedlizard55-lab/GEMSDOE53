@@ -1,6 +1,6 @@
 {
   "schema": "gems53.sources.v1",
-  "checked_utc": "2026-10-08",
+  "checked_utc": "2026-10-09",
   "legend": {
     "fetched": "page text retrieved in this session with the fetch tool",
     "cloned": "git clone of the public repository in this session; commit recorded",
@@ -235,6 +235,55 @@
       "url": "https://pubs.usgs.gov/publication/70230158",
       "access": "fetched",
       "used_for": "Official USGS abstract describes fault-controlled thermal conduits and low-resistivity/low-susceptibility signatures from airborne geophysical imaging. Yellowstone analogue only; does not validate band 17 or the Great Basin candidate."
+    },
+    {
+      "id": "S33",
+      "title": "Gallardo & Meju (2003) Characterization of heterogeneous near-surface materials by joint 2D inversion of dc resistivity and seismic data, GRL 30(13) \u2014 cross-gradients",
+      "url": "https://doi.org/10.1029/2003GL017370",
+      "access": "fetched",
+      "used_for": "Structural-similarity (cross-gradient) concept; HWVC uses gradient co-direction instead. Rationale only."
+    },
+    {
+      "id": "S34",
+      "title": "USGS 3D Elevation Program (3DEP) home page",
+      "url": "https://www.usgs.gov/3d-elevation-program",
+      "access": "fetched",
+      "used_for": "Quote fetched 2026-10-09: 'All 3DEP products are available free of charge and without use restrictions.' Licence basis for candidate H53-DEM1M; tiles NOT downloaded (sandbox egress)."
+    },
+    {
+      "id": "S35",
+      "title": "GEMS Prize Official Rules (HeroX resource 2274, links the NLR PDF S3)",
+      "url": "https://www.herox.com/GEMSPrize/resource/2274",
+      "access": "fetched",
+      "used_for": "DrivenData rules page points here; rules document is S3."
+    },
+    {
+      "id": "S36",
+      "title": "GEMSDOE41 README (basin-margin H42 surface)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE41",
+      "access": "fetched",
+      "used_for": "Read via GitHub API 2026-10-09 to differentiate HWVC from the existing basin-margin surface (3DEP scarp + RTP corroboration)."
+    },
+    {
+      "id": "S37",
+      "title": "19GEMSDOE README (H19-4/H19-5 multi-line synthesis, base of the d2.8 lineage)",
+      "url": "https://github.com/buffedlizard55-lab/19GEMSDOE",
+      "access": "fetched",
+      "used_for": "Owner description of H19-5 (OWNER-CLAIM); includes 1 m/10 m 3DEP openness obtained via GitHub Actions (claimed CI run 36768672276, not re-checked)."
+    },
+    {
+      "id": "S38",
+      "title": "GEMSDOE25 d2.8 dot file (USER-REPORTED 0.2600)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE25",
+      "access": "cloned",
+      "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json."
+    },
+    {
+      "id": "S39",
+      "title": "GEMSDOE28 r1-solo d2.8 file (USER-REPORTED 0.2708)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE28",
+      "access": "cloned",
+      "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json (subset of S38 minus dots <= 1 px from catalogue)."
     }
   ]
 }

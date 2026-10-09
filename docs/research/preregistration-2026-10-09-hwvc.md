@@ -88,3 +88,10 @@ Gaussian scales (σ = 2 px and 5 px), plus a Canny-style non-maximum-suppressed 
 
 Arm B not beating arm A under the promotion rule; any HWVC channel above the canary threshold; the final raster
 flagged by gate D-1. A negative result is reported as a deliverable and no file is labelled OK to submit.
+
+## Outcome (appended after the runs; nothing above was edited except the logged wording fix IR-53-54)
+
+- E1 canary: no feature above 0.90 (max HWVC 0.5997, H1 0.7683).
+- E2: promote B = **False** (stage-1 paired M1 lower bound −0.003732; stage-2 mean +0.000344). HWVC is negative as an add-on feature.
+- E3: arm A + D-S built (40,000 dots). Gate v2 verdict: **DUPLICATE** (27 rows), so **DO NOT SUBMIT** (IR-53-57). No slot used.
+- Receipts: `evidence/h53_e1_canary.json`, `evidence/h53_e2_holdout.json`, `evidence/h53_e3_build.json`, `evidence/h53_gate_v2_e3_armA_ds40000.json`, `evidence/h53_run_card.json`.

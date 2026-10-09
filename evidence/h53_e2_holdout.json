@@ -1,0 +1,423 @@
+{
+  "experiment": "E2 (2026-10-09) hide-and-recover, arm A (bands+H1, current holdout best) vs arm B (+HWVC)",
+  "started_utc": "2026-10-09T00:48:39Z",
+  "finished_utc": "2026-10-09T01:14:17Z",
+  "runtime_s": 1537.5,
+  "label_type": "HOLDOUT-DTI (proxy truth = withheld catalogue segments; NOT organizer-scored)",
+  "evaluator": {
+    "name": "gems53.core.dti",
+    "version": "1.0.0",
+    "alpha": 0.2,
+    "beta": 0.8,
+    "R_px": 3
+  },
+  "design": "B: positives = visible outside 10 px buffer of withheld; negatives = footprint & ~visible; visible faults zeroed in prediction (pixel-exact mask); H1 from visible only",
+  "segment_folds": {
+    "K": 5,
+    "seed": 53,
+    "buffer_px": 10,
+    "segments": 3199,
+    "withheld_positives_total": 60988
+  },
+  "stage1": {
+    "M1_thin_bin_q0p10": {
+      "A": {
+        "pooled_DTI": 0.141319,
+        "per_fold_DTI": [
+          0.146428,
+          0.143636,
+          0.144197,
+          0.130883,
+          0.141608
+        ],
+        "fold_mean": 0.14135,
+        "CI95_t_df4": [
+          0.13378,
+          0.148921
+        ],
+        "pooled_TP_w": 15226.507,
+        "pooled_FP_w": 279551.093,
+        "pooled_FN_w": 45761.493,
+        "mean_dots": 57275.6
+      },
+      "B": {
+        "pooled_DTI": 0.139727,
+        "per_fold_DTI": [
+          0.144842,
+          0.14281,
+          0.144832,
+          0.1288,
+          0.137534
+        ],
+        "fold_mean": 0.139764,
+        "CI95_t_df4": [
+          0.1313,
+          0.148228
+        ],
+        "pooled_TP_w": 14998.984,
+        "pooled_FP_w": 277772.187,
+        "pooled_FN_w": 45989.016,
+        "mean_dots": 56901.2
+      },
+      "paired_B_minus_A": {
+        "per_fold": [
+          -0.001586,
+          -0.000826,
+          0.000635,
+          -0.002082,
+          -0.004074
+        ],
+        "mean": -0.001587,
+        "CI95_t_df4": [
+          -0.003732,
+          0.000559
+        ],
+        "folds_B_wins": 1
+      }
+    },
+    "DS_flank2_sep2p8_n40000": {
+      "A": {
+        "pooled_DTI": 0.116626,
+        "per_fold_DTI": [
+          0.120815,
+          0.115711,
+          0.124897,
+          0.106478,
+          0.115606
+        ],
+        "fold_mean": 0.116701,
+        "CI95_t_df4": [
+          0.108127,
+          0.125275
+        ],
+        "pooled_TP_w": 10483.94,
+        "pooled_FP_w": 195031.078,
+        "pooled_FN_w": 50504.06,
+        "mean_dots": 40000.0
+      },
+      "B": {
+        "pooled_DTI": 0.117022,
+        "per_fold_DTI": [
+          0.121416,
+          0.119067,
+          0.12466,
+          0.103242,
+          0.117122
+        ],
+        "fold_mean": 0.117101,
+        "CI95_t_df4": [
+          0.10687,
+          0.127333
+        ],
+        "pooled_TP_w": 10518.882,
+        "pooled_FP_w": 194970.001,
+        "pooled_FN_w": 50469.118,
+        "mean_dots": 40000.0
+      },
+      "paired_B_minus_A": {
+        "per_fold": [
+          0.000601,
+          0.003356,
+          -0.000237,
+          -0.003236,
+          0.001517
+        ],
+        "mean": 0.0004,
+        "CI95_t_df4": [
+          -0.002619,
+          0.003419
+        ],
+        "folds_B_wins": 3
+      }
+    }
+  },
+  "stage2": {
+    "M1_thin_bin_q0p10": {
+      "A": {
+        "pooled_DTI": 0.004049,
+        "per_fold_DTI": [
+          0.003308,
+          0.007447,
+          0.003813,
+          0.002388,
+          0.001232
+        ],
+        "fold_mean": 0.003638,
+        "CI95_t_df4": [
+          0.000726,
+          0.006549
+        ],
+        "pooled_TP_w": 418.179,
+        "pooled_FP_w": 272084.945,
+        "pooled_FN_w": 60569.821,
+        "mean_dots": 54453.2
+      },
+      "B": {
+        "pooled_DTI": 0.004456,
+        "per_fold_DTI": [
+          0.003674,
+          0.008169,
+          0.004543,
+          0.002014,
+          0.001508
+        ],
+        "fold_mean": 0.003982,
+        "CI95_t_df4": [
+          0.000701,
+          0.007262
+        ],
+        "pooled_TP_w": 459.842,
+        "pooled_FP_w": 271612.415,
+        "pooled_FN_w": 60528.158,
+        "mean_dots": 54362.6
+      },
+      "paired_B_minus_A": {
+        "per_fold": [
+          0.000366,
+          0.000722,
+          0.00073,
+          -0.000374,
+          0.000276
+        ],
+        "mean": 0.000344,
+        "CI95_t_df4": [
+          -0.000216,
+          0.000903
+        ],
+        "folds_B_wins": 4
+      }
+    }
+  },
+  "meta": [
+    {
+      "stage": "stage1-segment",
+      "arm": "A",
+      "fold": 0,
+      "withheld_px": 11370,
+      "withheld_segments": 640,
+      "train_pos": 39887,
+      "train_neg": 300000,
+      "seconds": 73.2
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "A",
+      "fold": 1,
+      "withheld_px": 12598,
+      "withheld_segments": 640,
+      "train_pos": 37578,
+      "train_neg": 300000,
+      "seconds": 70.5
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "A",
+      "fold": 2,
+      "withheld_px": 12169,
+      "withheld_segments": 640,
+      "train_pos": 38563,
+      "train_neg": 300000,
+      "seconds": 79.1
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "A",
+      "fold": 3,
+      "withheld_px": 12671,
+      "withheld_segments": 640,
+      "train_pos": 38468,
+      "train_neg": 300000,
+      "seconds": 73.2
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "A",
+      "fold": 4,
+      "withheld_px": 12180,
+      "withheld_segments": 639,
+      "train_pos": 39154,
+      "train_neg": 300000,
+      "seconds": 77.3
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "B",
+      "fold": 0,
+      "withheld_px": 11370,
+      "withheld_segments": 640,
+      "train_pos": 39887,
+      "train_neg": 300000,
+      "seconds": 81.5
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "B",
+      "fold": 1,
+      "withheld_px": 12598,
+      "withheld_segments": 640,
+      "train_pos": 37578,
+      "train_neg": 300000,
+      "seconds": 81.0
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "B",
+      "fold": 2,
+      "withheld_px": 12169,
+      "withheld_segments": 640,
+      "train_pos": 38563,
+      "train_neg": 300000,
+      "seconds": 83.5
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "B",
+      "fold": 3,
+      "withheld_px": 12671,
+      "withheld_segments": 640,
+      "train_pos": 38468,
+      "train_neg": 300000,
+      "seconds": 87.7
+    },
+    {
+      "stage": "stage1-segment",
+      "arm": "B",
+      "fold": 4,
+      "withheld_px": 12180,
+      "withheld_segments": 639,
+      "train_pos": 39154,
+      "train_neg": 300000,
+      "seconds": 88.6
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "A",
+      "fold": 0,
+      "withheld_px": 25025,
+      "withheld_segments": 1486,
+      "train_pos": 35675,
+      "train_neg": 300000,
+      "seconds": 67.0
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "A",
+      "fold": 1,
+      "withheld_px": 18668,
+      "withheld_segments": 1097,
+      "train_pos": 41999,
+      "train_neg": 300000,
+      "seconds": 67.1
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "A",
+      "fold": 2,
+      "withheld_px": 11587,
+      "withheld_segments": 444,
+      "train_pos": 49272,
+      "train_neg": 300000,
+      "seconds": 69.6
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "A",
+      "fold": 3,
+      "withheld_px": 5207,
+      "withheld_segments": 144,
+      "train_pos": 55726,
+      "train_neg": 300000,
+      "seconds": 72.2
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "A",
+      "fold": 4,
+      "withheld_px": 501,
+      "withheld_segments": 28,
+      "train_pos": 60457,
+      "train_neg": 300000,
+      "seconds": 72.9
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "B",
+      "fold": 0,
+      "withheld_px": 25025,
+      "withheld_segments": 1486,
+      "train_pos": 35675,
+      "train_neg": 300000,
+      "seconds": 79.3
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "B",
+      "fold": 1,
+      "withheld_px": 18668,
+      "withheld_segments": 1097,
+      "train_pos": 41999,
+      "train_neg": 300000,
+      "seconds": 82.6
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "B",
+      "fold": 2,
+      "withheld_px": 11587,
+      "withheld_segments": 444,
+      "train_pos": 49272,
+      "train_neg": 300000,
+      "seconds": 75.1
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "B",
+      "fold": 3,
+      "withheld_px": 5207,
+      "withheld_segments": 144,
+      "train_pos": 55726,
+      "train_neg": 300000,
+      "seconds": 73.2
+    },
+    {
+      "stage": "stage2-spatial",
+      "arm": "B",
+      "fold": 4,
+      "withheld_px": 501,
+      "withheld_segments": 28,
+      "train_pos": 60457,
+      "train_neg": 300000,
+      "seconds": 77.0
+    }
+  ],
+  "reproduction_check": {
+    "previous_session_h1_thin_bin_q0p1_pooled": 0.141319,
+    "this_run_arm_A": 0.141319
+  },
+  "promotion_rule": "promote B iff stage-1 paired (B-A, M1) 95% lower bound > 0 AND stage-2 paired mean > 0",
+  "stage1_lower_bound": -0.003732,
+  "stage2_mean": 0.000344,
+  "promote_B": false,
+  "log": [
+    "[stage1-segment] arm A fold 0: M1_thin_bin_q0p10 0.146428, DS_flank2_sep2p8_n40000 0.120815 (73.2s)",
+    "[stage1-segment] arm A fold 1: M1_thin_bin_q0p10 0.143636, DS_flank2_sep2p8_n40000 0.115711 (70.5s)",
+    "[stage1-segment] arm A fold 2: M1_thin_bin_q0p10 0.144197, DS_flank2_sep2p8_n40000 0.124897 (79.1s)",
+    "[stage1-segment] arm A fold 3: M1_thin_bin_q0p10 0.130883, DS_flank2_sep2p8_n40000 0.106478 (73.2s)",
+    "[stage1-segment] arm A fold 4: M1_thin_bin_q0p10 0.141608, DS_flank2_sep2p8_n40000 0.115606 (77.3s)",
+    "[stage1-segment] arm B fold 0: M1_thin_bin_q0p10 0.144842, DS_flank2_sep2p8_n40000 0.121416 (81.5s)",
+    "[stage1-segment] arm B fold 1: M1_thin_bin_q0p10 0.142810, DS_flank2_sep2p8_n40000 0.119067 (81.0s)",
+    "[stage1-segment] arm B fold 2: M1_thin_bin_q0p10 0.144832, DS_flank2_sep2p8_n40000 0.124660 (83.5s)",
+    "[stage1-segment] arm B fold 3: M1_thin_bin_q0p10 0.128800, DS_flank2_sep2p8_n40000 0.103242 (87.7s)",
+    "[stage1-segment] arm B fold 4: M1_thin_bin_q0p10 0.137534, DS_flank2_sep2p8_n40000 0.117122 (88.6s)",
+    "[stage2-spatial] arm A fold 0: M1_thin_bin_q0p10 0.003308 (67.0s)",
+    "[stage2-spatial] arm A fold 1: M1_thin_bin_q0p10 0.007447 (67.1s)",
+    "[stage2-spatial] arm A fold 2: M1_thin_bin_q0p10 0.003813 (69.6s)",
+    "[stage2-spatial] arm A fold 3: M1_thin_bin_q0p10 0.002388 (72.2s)",
+    "[stage2-spatial] arm A fold 4: M1_thin_bin_q0p10 0.001232 (72.9s)",
+    "[stage2-spatial] arm B fold 0: M1_thin_bin_q0p10 0.003674 (79.3s)",
+    "[stage2-spatial] arm B fold 1: M1_thin_bin_q0p10 0.008169 (82.6s)",
+    "[stage2-spatial] arm B fold 2: M1_thin_bin_q0p10 0.004543 (75.1s)",
+    "[stage2-spatial] arm B fold 3: M1_thin_bin_q0p10 0.002014 (73.2s)",
+    "[stage2-spatial] arm B fold 4: M1_thin_bin_q0p10 0.001508 (77.0s)"
+  ]
+}
