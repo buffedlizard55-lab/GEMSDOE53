@@ -58,8 +58,20 @@ HOLDOUT-DTI = our proxy (withheld known-fault segments or spatial super-regions;
 Regenerate with <code>python scripts/build_site_s2.py</code>.</footer></body></html>"""
 
 
+def _fixlinks(html: str) -> str:
+    # session-2 pages are archived two levels deep (docs/archive/s2-2026-10-09/); fix docs/-relative links
+    for a, b in (('href="submissions/', 'href="../../submissions/'),
+                 ('href="data/', 'href="../../data/'),
+                 ('href="research/', 'href="../../research/'),
+                 ('href="leakage-review.md"', 'href="../../leakage-review.md"')):
+        html = html.replace(a, b)
+    return html
+
+
 def main() -> int:
-    cur = J("docs/submissions/CURRENT.json")
+    # LEGACY (session-2 lane, merged 2026-10-09): the live site is owned by scripts/build_site_h53.py;
+    # these pages render the archived session-2 pointer into docs/archive/s2-2026-10-09/.
+    cur = J("docs/submissions/archive/CURRENT_2026-10-09-S2.json")
     s2 = J("evidence/s2_c1_holdout.json")
     s3 = J("evidence/s3_c1_build_receipt.json")
     gate = J("evidence/uniqueness_gate_v2_session2.json")
@@ -137,7 +149,7 @@ def main() -> int:
   <div class="banner">Pre-placement STOP (universal, pixel-verified): the public GEMSDOE17 E-proba-multiscale registry raster is positive on
   all {preflight.get('reference_positive_footprint_px', 5167373):,} sample-footprint pixels, so ANY nonempty dot map overlaps it within 3 px
   at 100% under the literal 70% rule (IR-53-46/IR-53-50). Receipt: <a href="data/protocol_preflight_20261009.json">data/protocol_preflight_20261009.json</a>.
-  Session 2 therefore applies the pre-registered corrected gate (GD-1, IR-53-64) and reports both readings.</div>
+  Session 2 therefore applies the pre-registered corrected gate (GD-1, IR-53-73) and reports both readings.</div>
 </section>"""
 
     # ------------------------------------------------------------------ index
@@ -187,8 +199,8 @@ def main() -> int:
     <li>Paste the comment from the box above into the optional Note field.</li>
     <li>Submit, and record the portal's exact response text and any score it returns — only that receipt makes a number ORGANIZER-CONFIRMED. Weekly slot cap applies (NLR rules §3.4).</li>
   </ol>
-  <p class="note">Format requirement verified against the official problem page (S46): EPSG:32611, 100 m, same bounds, outside the bounds null/NaN,
-  single-band float32, values in [0,1]. If the platform ever returns "Predicted values must be in range [0, 1]", see IR-53-65: no GEMSDOE53 file
+  <p class="note">Format requirement verified against the official problem page (S53): EPSG:32611, 100 m, same bounds, outside the bounds null/NaN,
+  single-band float32, values in [0,1]. If the platform ever returns "Predicted values must be in range [0, 1]", see IR-53-74: no GEMSDOE53 file
   shipped to date contains NaN inside the scored region, the only known cause of that exact error.</p>
 </section>
 
@@ -217,7 +229,9 @@ def main() -> int:
   </table>
 </section>
 """
-    (DOCS / "index.html").write_text(page("Executive summary", body, "index.html"))
+    OUT = DOCS / "archive" / "s2-2026-10-09"
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "index.html").write_text(_fixlinks(page("Executive summary", body, "index.html")))
 
     # ------------------------------------------------------------------ submission.html
     body = f"""
@@ -266,7 +280,7 @@ def main() -> int:
   <h2>Uniqueness gate v2 (GD-1)</h2>
   {uhtml}
   <p class="note">Receipt: <code>evidence/uniqueness_gate_v2_session2.json</code>. The RAW literal rule values are archived inside;
-  the corrected reading is pre-registered in <code>docs/research/preregistration-2026-10-09-session2.md</code> §1 (IR-53-64).</p>
+  the corrected reading is pre-registered in <code>docs/research/preregistration-2026-10-09-session2.md</code> §1 (IR-53-73).</p>
 </section>
 
 <section>
@@ -274,7 +288,7 @@ def main() -> int:
   <table><tr><th>Check</th><th>Result</th></tr>{valhtml}</table>
 </section>
 """
-    (DOCS / "submission.html").write_text(page("The file", body, "submission.html"))
+    (OUT / "submission.html").write_text(_fixlinks(page("The file", body, "submission.html")))
 
     # ------------------------------------------------------------------ evidence.html
     irr = (J("registry/irregularities.json") or {}).get("items", [])
@@ -317,8 +331,8 @@ def main() -> int:
 <section><h2>Sources (all {len(srcs)})</h2>
 <table><tr><th>ID</th><th>Source</th><th>Used for</th></tr>{srows}</table></section>
 """
-    (DOCS / "evidence.html").write_text(page("Evidence", body, "evidence.html"))
-    print("wrote docs/index.html, docs/submission.html, docs/evidence.html")
+    (OUT / "evidence.html").write_text(_fixlinks(page("Evidence", body, "evidence.html")))
+    print("wrote docs/archive/s2-2026-10-09/index.html, submission.html, evidence.html")
     return 0
 
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Apply the pre-registered verdict matrix to the session-2 gates and update docs/submissions/CURRENT.json.
+"""Apply the pre-registered verdict matrix to the session-2 gates and update the ARCHIVED session-2 pointer
+(docs/submissions/archive/CURRENT_2026-10-09-S2.json). The live docs/submissions/CURRENT.json belongs to the later
+HWVC session and must never be overwritten by this script.
 
 Also writes the ≤140-char note into the GeoTIFF's metadata tags (re-hashing the file afterwards),
 so the downloaded file self-describes its status. This script makes NO submission decision beyond
@@ -42,7 +44,7 @@ def main() -> int:
     pooled = (sp.get("selected_result") or {}).get("pooled_DTI") if sp.get("status") == "COMPLETED" else None
 
     if submit_ok:
-        label = "OK TO DOWNLOAD AND SUBMIT (CLEARED-UNDER-CORRECTED-GATE; GD-1 banner, IR-53-64)"
+        label = "OK TO DOWNLOAD AND SUBMIT (CLEARED-UNDER-CORRECTED-GATE; GD-1 banner, IR-53-73)"
         note = (f"SUBMIT-CANDIDATE | C1 cond-mag {sel.get('variant','')} | HOLDOUT-DTI stage2 pooled "
                 f"{pooled:.4f}, pair-d CI [{d.get('CI95', [0, 0])[0]:+.4f},{d.get('CI95', [0, 0])[1]:+.4f}] "
                 f"| not organizer-scored")
@@ -139,7 +141,7 @@ def main() -> int:
             }),
         },
     }
-    (ROOT / "docs/submissions/CURRENT.json").write_text(json.dumps(cur, indent=1))
+    (ROOT / "docs/submissions/archive/CURRENT_2026-10-09-S2.json").write_text(json.dumps(cur, indent=1))
     print(json.dumps({"label": label, "submit_allowed": submit_ok, "sha256": sha_file,
                       "note": note, "note_chars": len(note)}, indent=1))
     return 0

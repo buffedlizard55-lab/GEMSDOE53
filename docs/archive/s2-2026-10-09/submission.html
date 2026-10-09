@@ -1,0 +1,95 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>The file · GEMSDOE53</title>
+<style>
+:root{--ink:#17202a;--muted:#5b6673;--line:#dfe5ec;--bg:#f7f9fb;--card:#fff;--accent:#0b6e4f;--warn:#9a3412;--warnbg:#fff7ed;--ok:#14532d;--okbg:#f0fdf4;--red:#7f1d1d;--redbg:#fef2f2}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#0f2a24;color:#fff;padding:16px 24px}header .t{font-weight:700;font-size:17px}
+nav{margin-top:6px;font-size:14px}nav a{margin-right:16px;color:#bfe9dc;text-decoration:none}nav a.on{font-weight:700;text-decoration:underline}
+main{max-width:1000px;margin:0 auto;padding:20px}section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+h1{font-size:25px;margin:2px 0 8px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
+.label{font-size:20px;font-weight:800;border-radius:10px;padding:14px 16px;margin:4px 0 10px}
+.label.no{background:var(--redbg);border:2px solid #fca5a5;color:var(--red)}
+.label.yes{background:var(--okbg);border:2px solid #86efac;color:var(--ok)}
+.banner{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px;font-weight:600}
+.warn{background:var(--warnbg);border:1px solid #fed7aa;color:var(--warn);border-radius:10px;padding:12px 14px}
+.ok{background:var(--okbg);border:1px solid #bbf7d0;color:var(--ok);border-radius:10px;padding:12px 14px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
+.note{color:var(--muted);font-size:14px}footer{max-width:1000px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
+a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inline-block;background:#0b6e4f;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
+.btn.dis{background:#94a3b8}
+</style></head><body>
+<header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306 · session 2 (2026-10-09)</div>
+<nav><a href="index.html" class="">Executive summary</a><a href="submission.html" class="on">The file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
+<main>
+<section>
+  <div class="label no">RESEARCH-ONLY / DO NOT SUBMIT</div>
+  <h1>The file: gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b</h1>
+  <table>
+    <tr><th>Download</th><td><a class="btn dis" href="../../submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif">⬇ gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif</a> (1,655,200 bytes)</td></tr>
+    <tr><th>OK to download?</th><td>Yes.</td></tr>
+    <tr><th>OK to submit?</th><td><b>No.</b> See gates below.</td></tr>
+    <tr><th>sha256 (file)</th><td><code>ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398</code></td></tr>
+    <tr><th>sha256 (pixels)</th><td><code>8cb3456b78c3189300d8715958af736b3cf5fb399ab68982ca420154eeaf6146</code></td></tr>
+    <tr><th>Comment (≤140 chars)</th><td><code>RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT</code></td></tr>
+    <tr><th>Arm / variant</th><td>bc1 / thin_bin_q0p1 (q=0.1), trained on the full visible catalogue; catalogue pixels masked pixel-exactly in the emission</td></tr>
+    <tr><th>Format</th><td>single-band float32 GeoTIFF, EPSG:32611, 100 m, official transform/shape, NaN exactly where the official sample is NaN, finite values in [0,1], nodata=nan, LZW (GD-2 revised, template-conformant)</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Pre-registered gates</h2>
+  <table><tr><th>Gate</th><th>Result</th></tr><tr><td>canary_clean_for_c1_features</td><td><b>PASS</b></td></tr><tr><td>holdout_gate_stage2_spatial_accept</td><td><b>PASS</b></td></tr><tr><td>format_validators_all</td><td><b>PASS</b></td></tr><tr><td>uniqueness_corrected_gate_GD1</td><td><b>FAIL</b></td></tr></table>
+</section>
+
+<section>
+  <h2>Leakage canary (S2-E1)</h2>
+  <p>Each of the 14 C1 features alone, design B: withheld fold positives vs the full non-fault footprint. Gate: separability ≥ 0.90 = leakage until proven otherwise.</p>
+  <table><tr><th>Feature</th><th>Max separability over folds</th></tr>
+  <tr><td>c1_agree_s1</td><td>0.5114</td></tr><tr><td>c1_agree_s2</td><td>0.5123</td></tr><tr><td>c1_agree_s4</td><td>0.5230</td></tr><tr><td>c1_condE_s1</td><td>0.5154</td></tr><tr><td>c1_condE_s2</td><td>0.5195</td></tr><tr><td>c1_condE_s4</td><td>0.5221</td></tr><tr><td>c1_fin17</td><td>0.5006</td></tr><tr><td>c1_fin2</td><td>0.5006</td></tr><tr><td>c1_joint_s1</td><td>0.5228</td></tr><tr><td>c1_joint_s2</td><td>0.5237</td></tr><tr><td>c1_joint_s4</td><td>0.5333</td></tr><tr><td>c1_rtpE_s1</td><td>0.5686</td></tr><tr><td>c1_rtpE_s2</td><td>0.5700</td></tr><tr><td>c1_rtpE_s4</td><td>0.5726</td></tr>
+  </table>
+  <p><b>Overall flag: pass</b> (max 0.5726).</p>
+</section>
+
+<section>
+  <h2>Holdout (S2-E2) — stage 1 variants</h2>
+  <table><tr><th>Arm:variant</th><th>Pooled DTI</th><th>95% CI (fold mean, df 4)</th><th>Mean emitted px</th></tr>
+  <tr><td>bands:thin_bin_q0p02</td><td><b>0.0226</b></td><td>[0.018143, 0.027103]</td><td>13,180</td></tr><tr><td>bands:thin_bin_q0p05</td><td><b>0.0577</b></td><td>[0.049589, 0.065694]</td><td>29,751</td></tr><tr><td>bands:thin_bin_q0p1</td><td><b>0.0912</b></td><td>[0.081535, 0.100805]</td><td>54,814</td></tr><tr><td>bands:thin_p_q0p02</td><td><b>0.0118</b></td><td>[0.00927, 0.014373]</td><td>13,180</td></tr><tr><td>bands:thin_p_q0p05</td><td><b>0.0273</b></td><td>[0.023586, 0.031149]</td><td>29,751</td></tr><tr><td>bands:thin_p_q0p1</td><td><b>0.0423</b></td><td>[0.037953, 0.046752]</td><td>54,814</td></tr><tr><td>bands:top_q0p005</td><td><b>0.0034</b></td><td>[0.001919, 0.004876]</td><td>25,838</td></tr><tr><td>bands:top_q0p01</td><td><b>0.0063</b></td><td>[0.004065, 0.008452]</td><td>51,674</td></tr><tr><td>bands:top_q0p02</td><td><b>0.0106</b></td><td>[0.008337, 0.012812]</td><td>103,347</td></tr><tr><td>bands:top_q0p03</td><td><b>0.0140</b></td><td>[0.012008, 0.016005]</td><td>155,021</td></tr><tr><td>bands:top_q0p05</td><td><b>0.0183</b></td><td>[0.015904, 0.020748]</td><td>258,369</td></tr><tr><td>bc1:thin_bin_q0p02</td><td><b>0.0249</b></td><td>[0.019282, 0.030522]</td><td>13,209</td></tr><tr><td>bc1:thin_bin_q0p05</td><td><b>0.0606</b></td><td>[0.05225, 0.069005]</td><td>29,862</td></tr><tr><td>bc1:thin_bin_q0p1 ← selected</td><td><b>0.0922</b></td><td>[0.080924, 0.103406]</td><td>54,773</td></tr><tr><td>bc1:thin_p_q0p02</td><td><b>0.0129</b></td><td>[0.009778, 0.016152]</td><td>13,209</td></tr><tr><td>bc1:thin_p_q0p05</td><td><b>0.0287</b></td><td>[0.024474, 0.033041]</td><td>29,862</td></tr><tr><td>bc1:thin_p_q0p1</td><td><b>0.0428</b></td><td>[0.037283, 0.048339]</td><td>54,773</td></tr><tr><td>bc1:top_q0p005</td><td><b>0.0034</b></td><td>[0.001178, 0.005736]</td><td>25,837</td></tr><tr><td>bc1:top_q0p01</td><td><b>0.0070</b></td><td>[0.004071, 0.009859]</td><td>51,674</td></tr><tr><td>bc1:top_q0p02</td><td><b>0.0116</b></td><td>[0.008928, 0.014374]</td><td>103,347</td></tr><tr><td>bc1:top_q0p03</td><td><b>0.0149</b></td><td>[0.01204, 0.017885]</td><td>155,021</td></tr><tr><td>bc1:top_q0p05</td><td><b>0.0190</b></td><td>[0.016431, 0.021683]</td><td>258,369</td></tr></table>
+  <p>Selection rule: highest pooled DTI among bc1 variants above the same-run baseline → <b>thin_bin_q0p1</b>.</p>
+</section>
+
+<section>
+  <h2>Holdout (S2-E2) — stage 2 spatial confirmation</h2>
+  <table>
+<tr><th>Pooled baseline (bands top_q0p02, spatial)</th><td>0.0001 (TP 11, FP 293,670, FN 60,977)</td></tr>
+<tr><th>Pooled selected (bc1 thin_bin_q0p1, spatial)</th><td>0.0042 (TP 424, FP 262,391, FN 60,564)</td></tr>
+<tr><th>Paired difference (5 spatial folds)</th><td>mean Δ +0.004085; 95% paired t CI [+0.000336, +0.007834] (df 4)</td></tr>
+<tr><th>Acceptance rule</th><td>accept iff the 95% t-interval lower bound of the paired fold difference is above 0 → <b>ACCEPTED</b></td></tr>
+<tr><th>Withheld</th><td>60,988 positives in 3,199 segments</td></tr>
+</table>
+</section>
+
+<section>
+  <h2>Uniqueness gate v2 (GD-1)</h2>
+  <table>
+<tr><th>Registry</th><td>631 unique rasters on grid (592 skipped)</td></tr>
+<tr><th>CORRECTED (GD-1) verdict</th><td><b>PROTOCOL DUPLICATE / STOP</b> — flagged: 25</td></tr>
+<tr><th>max footprint-only Spearman rho (surface)</th><td>0.8857 (gate 0.90)</td></tr>
+<tr><th>max whole-grid Spearman rho (surface, raw reading)</th><td>0.9771 (reported only)</td></tr>
+<tr><th>max final-dot overlap within 3 px</th><td>100.00% (raw gate 70%)</td></tr>
+<tr><th>max lift over chance</th><td>5.9924 (corrected gate flags only if overlap &gt; 70% AND lift &gt; 1.5)</td></tr>
+<tr><th>RAW literal-rule flags (archived for transparency)</th><td>111 rasters (IR-53-46: rule provably unsatisfiable on this registry)</td></tr>
+</table>
+  <p class="note">Receipt: <code>evidence/uniqueness_gate_v2_session2.json</code>. The RAW literal rule values are archived inside;
+  the corrected reading is pre-registered in <code>docs/research/preregistration-2026-10-09-session2.md</code> §1 (IR-53-73).</p>
+</section>
+
+<section>
+  <h2>Validators</h2>
+  <table><tr><th>Check</th><th>Result</th></tr><tr><td>template_validate_submission_exit</td><td><b>0</b></td></tr><tr><td>template_validate_conformant_exit</td><td><b>0</b></td></tr><tr><td>template_validate_submission_tail</td><td><b>[&#x27;  i NaN fraction 57.92% (NaN is expected outside the GeoDAWN footprint)&#x27;, &#x27;✅ Validation PASSED - Ready for submission!&#x27;, &quot;Next: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via &#x27;Submit&#x27; button&quot;]</b></td></tr><tr><td>template_validate_conformant_tail</td><td><b>[&#x27;conformant: true; nan_inside_px=0; finite_outside_px=0; out_of_range_px=0; nodata_ok=true (exit 0)&#x27;]</b></td></tr><tr><td>conformant_findings</td><td><b>{&#x27;pixels&#x27;: 12279160, &#x27;template_valid_px&#x27;: 5167373, &#x27;nan_inside_px&#x27;: 0, &#x27;finite_outside_px&#x27;: 0, &#x27;out_of_range_px&#x27;: 0, &#x27;conformant&#x27;: True, &#x27;nodata&#x27;: &#x27;nan&#x27;, &#x27;nodata_ok&#x27;: True}</b></td></tr><tr><td>note</td><td><b>The postbuild chain first invoked validate-conformant without --sample (exit 2 usage) and wrote all_ok=false; the script was fixed and the conformant validator re-run with the official sample: exit 0. This receipt records the corrected run.</b></td></tr><tr><td>all_ok</td><td><b>True</b></td></tr></table>
+</section>
+</main>
+<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> and <code>docs/submissions/</code>.
+HOLDOUT-DTI = our proxy (withheld known-fault segments or spatial super-regions; never an organizer score). ORGANIZER-CONFIRMED = portal receipt only (none exists).
+Regenerate with <code>python scripts/build_site_s2.py</code>.</footer></body></html>

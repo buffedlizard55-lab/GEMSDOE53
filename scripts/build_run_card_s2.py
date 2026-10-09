@@ -20,7 +20,7 @@ def J(rel):
 
 
 def main() -> int:
-    cur = J("docs/submissions/CURRENT.json")
+    cur = J("docs/submissions/archive/CURRENT_2026-10-09-S2.json")
     s2 = J("evidence/s2_c1_holdout.json")
     s3 = J("evidence/s3_c1_build_receipt.json")
     gate = J("evidence/uniqueness_gate_v2_session2.json")
@@ -53,7 +53,7 @@ def main() -> int:
             "named_non_fault_mimic": "Volcanic dikes/sills and lithologic contacts produce co-located magnetic + conductivity "
                                      "edges; pluvial-lake paleoshorelines can align conductivity gradients. A catalogue holdout "
                                      "cannot distinguish these; the mimics are named here as required.",
-            "scope_note": "Holdout truth is the withheld known-fault catalogue (IR-53-42, L-39): catalogue recovery is an upper "
+            "scope_note": "Holdout truth is the withheld known-fault catalogue (IR-53-42, L-44): catalogue recovery is an upper "
                           "bound for performance on the competition's unmapped targets.",
         },
         "budget": {"experiments_limit": 3, "experiments_used": 3,
@@ -113,9 +113,9 @@ def main() -> int:
             f"uniqueness_corrected_gate={gate_ok}", f"validators={validators_ok}",
             "no organizer score exists for any GEMSDOE53 file; nothing submitted",
         ],
-        "irregularities_session2": ["IR-53-64 (GD-1 gate interpretation, open)",
-                                    "IR-53-65 (user-reported rejection unreproducible from shipped files, open)",
-                                    "IR-53-66 (prompt-injection content observed in fetched web page, logged)"],
+        "irregularities_session2": ["IR-53-73 (GD-1 gate interpretation, open)",
+                                    "IR-53-74 (user-reported rejection unreproducible from shipped files, open)",
+                                    "IR-53-75 (prompt-injection content observed in fetched web page, logged)"],
     }
     out = ROOT / "evidence" / "run_card_session2.json"
     out.write_text(json.dumps(card, indent=1))

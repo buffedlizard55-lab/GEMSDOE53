@@ -34,7 +34,7 @@ The protocol sentence: *"If your raster's rank-correlation with any registry ras
 | FAIL (any) | — | — | — | RESEARCH-ONLY / DO NOT SUBMIT |
 | PASS | FAIL | — | — | RESEARCH-ONLY / DO NOT SUBMIT |
 
-If the corrected gate passes while the raw rule flags, the file is labelled OK-to-submit **with an explicit GD-1 banner and irregularity IR-53-64** so the user can overrule; the literal-rule numbers remain in the receipt. This deviation is flagged for review in `registry/irregularities.json`.
+If the corrected gate passes while the raw rule flags, the file is labelled OK-to-submit **with an explicit GD-1 banner and irregularity IR-53-73** so the user can overrule; the literal-rule numbers remain in the receipt. This deviation is flagged for review in `registry/irregularities.json`.
 
 ## 2. Governance decision GD-2 — submission conformance target (REVISED after evidence check, flagged for review)
 
@@ -44,7 +44,7 @@ If the corrected gate passes while the raw rule flags, the file is labelled OK-t
 - The shared template validator (`/tmp/gems-template/scripts/validate_submission.py`, commit dcbbb19) records a REAL platform rejection with exactly this message, and its root cause was NaN **inside the sample's valid (scored) region** — not NaN outside it. The platform evidently tolerates NaN wherever the official sample itself is NaN (the sample predicts total absence and is the organizer's own template).
 - All three files ever shipped from GEMSDOE53 (`docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif`, `docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif`, `submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif`) were re-audited pixel-exactly against `sample_submission.tif`: **0** NaN inside the sample-valid region, **0** finite outside, nodata=nan, finite values in [0,1]. None of them can reproduce the reported error as they stand.
 
-**Revised decision GD-2:** the primary session-2 file is written **template-conformant**: finite values in [0,1] at every pixel where the official sample is finite; NaN exactly where the sample is NaN; GDAL nodata=nan; LZW compression. Both shared validators must exit 0. No zeros-outside variant is shipped as a candidate (it would violate the template's conformance rule and its platform behaviour is unproven; the portfolio's `-zeros` files' outside values will still be measured from the registry for the record). **IR-53-65 opened:** the user-reported rejection cannot be reproduced from any shipped GEMSDOE53 file; the exact file/step that produced it needs user confirmation (possibly a file from another repo, an extracted zip member, or a stale download).
+**Revised decision GD-2:** the primary session-2 file is written **template-conformant**: finite values in [0,1] at every pixel where the official sample is finite; NaN exactly where the sample is NaN; GDAL nodata=nan; LZW compression. Both shared validators must exit 0. No zeros-outside variant is shipped as a candidate (it would violate the template's conformance rule and its platform behaviour is unproven; the portfolio's `-zeros` files' outside values will still be measured from the registry for the record). **IR-53-74 opened:** the user-reported rejection cannot be reproduced from any shipped GEMSDOE53 file; the exact file/step that produced it needs user confirmation (possibly a file from another repo, an extracted zip member, or a stale download).
 
 ## 3. Method (lane): C1 — conductivity–magnetic cross-scale edge coherence
 

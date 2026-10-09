@@ -9,7 +9,7 @@
 **Citations now verified line-by-line from official/authoritative bibliographic sources (IR-53-12 resolved):**
 
 - **KDD '11 (three authors):** Kaufman, S., Rosset, S., Perlich, C. "Leakage in data mining: formulation, detection, and avoidance." *Proceedings of the 17th ACM SIGKDD (KDD '11)*, pp. 556–563, 2011. DOI [10.1145/2020408.2020496](https://doi.org/10.1145/2020408.2020496). Verified via [dblp record conf/kdd/KaufmanRP11](https://dblp.org/rec/conf/kdd/KaufmanRP11.html) and [Tel Aviv University CRIS](https://cris.tau.ac.il/en/publications/leakage-in-data-mining-formulation-detection-and-avoidance-2/) (both list exactly these three authors, these pages, this DOI).
-- **ACM TKDD 2012 (four authors, the version the standing prompt quotes):** Kaufman, Rosset, Perlich **and Stitelman**, *ACM TKDD* 6(4):15, 2012 (S45). The prompt's four-author attribution is correct for the journal version; Stitelman does not appear on the KDD '11 conference paper.
+- **ACM TKDD 2012 (four authors, the version the standing prompt quotes):** Kaufman, Rosset, Perlich **and Stitelman**, *ACM TKDD* 6(4):15, 2012 (S52). The prompt's four-author attribution is correct for the journal version; Stitelman does not appear on the KDD '11 conference paper.
 
 **The KRS(-S) formulation applied to GEMSDOE29, step by step:**
 

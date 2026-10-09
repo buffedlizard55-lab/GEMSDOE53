@@ -16,7 +16,7 @@ on the surface BEFORE placement AND on the final dots:
     corrected flag: rho_footprint > 0.90  OR  (overlap > 0.70 AND lift > 1.5)
 
 Verdict: corrected_pass = no corrected flag anywhere. Raw flags are counted and listed for
-transparency; a corrected pass with raw flags is labelled CLEARED-UNDER-CORRECTED-GATE and carries IR-53-64.
+transparency; a corrected pass with raw flags is labelled CLEARED-UNDER-CORRECTED-GATE and carries IR-53-73.
 
 Usage:
   python scripts/uniqueness_gate_v2.py --surface /tmp/surface.npz --surface-q 0.05 \\

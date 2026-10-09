@@ -11,6 +11,10 @@ Usage: python scripts/build_site.py
 """
 from __future__ import annotations
 
+# LEGACY (S3 session, merged 2026-10-09): reads the archived S3 pointer and writes its summary to the archive path, so it can never
+# overwrite docs/index.html, which scripts/build_site_h53.py owns. submission.html and evidence.html stay S3 pages.
+LEGACY_PTR = "docs/submissions/archive/CURRENT_2026-10-09-S3.json"
+
 import hashlib
 import html
 import json
@@ -130,7 +134,7 @@ def f4(x):
 
 
 def main() -> int:
-    cur = J("docs/submissions/CURRENT.json")
+    cur = J(LEGACY_PTR)
     e1 = J("evidence/e1_h1_thin_holdout.json")
     e2 = J("evidence/e2_leakfree_holdouts.json")
     legacy_e2 = J("evidence/exp2_holdout_arms.json")
@@ -336,7 +340,7 @@ def main() -> int:
   <p class="note">Full list with severities: <a href="evidence.html#irregularities">evidence page</a>. Limitations: <a href="evidence.html#limitations">evidence page</a>.</p>
 </section>
 """
-    (DOCS / "index.html").write_text(page("Executive summary", body, "index.html"))
+    (DOCS / "archive" / "main-2026-10-09-S3" / "index.html").write_text(page("Executive summary (S3 archive)", body, "index.html"))
 
     # ---------------------------------------------------------------- submission.html
     inl = e3["inlane"]
@@ -523,7 +527,7 @@ def main() -> int:
     for rel in ("evidence/protocol_preflight_20261009.json", "evidence/run_card_20261009.json", "evidence/run_card.json", "evidence/e1_h1_thin_holdout.json", "evidence/e2_leakfree_holdouts.json",
                 "evidence/exp2_holdout_arms.json", f"evidence/uniqueness_gate_{cur['name']}.json", f"evidence/uniqueness_diagnostics_{cur['name']}.json",
                 cur["receipt"], "evidence/gemsdoe32_measured.json", "registry/irregularities.json",
-                "registry/limitations.json", "registry/sources.json", "docs/submissions/CURRENT.json"):
+                "registry/limitations.json", "registry/sources.json", LEGACY_PTR):
         src = ROOT / rel
         if src.exists():
             shutil.copy(src, data_dir / src.name)
@@ -531,7 +535,7 @@ def main() -> int:
     keep = {Path(r).name for r in ("evidence/run_card.json", "evidence/e1_h1_thin_holdout.json",
                                    "evidence/e2_leakfree_holdouts.json")} | {"inventory.json", "parallel-run-card.json"}
     for f in data_dir.glob("*.json"):
-        if f.name not in keep and not (ROOT / "evidence").joinpath(f.name).exists() and f.name not in {Path(p).name for p in ("registry/irregularities.json", "registry/limitations.json", "registry/sources.json", "docs/submissions/CURRENT.json")}:
+        if f.name not in keep and not (ROOT / "evidence").joinpath(f.name).exists() and f.name not in {Path(p).name for p in ("registry/irregularities.json", "registry/limitations.json", "registry/sources.json", LEGACY_PTR)}:
             f.unlink()
     (DOCS / ".nojekyll").write_text("")  # serve the static HTML as-is
     print("site written:", DOCS / "index.html", DOCS / "submission.html", DOCS / "evidence.html")

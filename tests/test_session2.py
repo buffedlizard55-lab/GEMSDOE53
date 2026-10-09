@@ -11,6 +11,8 @@ import numpy as np
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
+# live CURRENT.json now carries the later HWVC-session pointer; the session-2 C1 pointer is archived here:
+S2_POINTER = "docs/submissions/archive/CURRENT_2026-10-09-S2.json"
 SAMPLE = Path("/tmp/gems53-data/sample_submission.tif")
 
 
@@ -27,7 +29,7 @@ def _sha(p):
 
 
 def test_current_pointer_matches_build_receipt_and_file():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S2_POINTER)
     rec = _load("evidence/s3_c1_build_receipt.json")
     assert cur["name"] == rec["name"]
     assert cur["file"] == rec["file"]
@@ -44,7 +46,7 @@ def test_current_pointer_matches_build_receipt_and_file():
 
 
 def test_label_follows_the_session2_verdict_matrix():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S2_POINTER)
     s2 = _load("evidence/s2_c1_holdout.json")
     gate = _load("evidence/uniqueness_gate_v2_session2.json")
     val = _load("evidence/s2_validator_receipt.json")
@@ -65,7 +67,7 @@ def test_label_follows_the_session2_verdict_matrix():
 
 
 def test_session2_file_meets_the_official_format():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S2_POINTER)
     rasterio = pytest.importorskip("rasterio")
     if not SAMPLE.exists():
         pytest.skip("competition rasters not present")
@@ -78,7 +80,7 @@ def test_session2_file_meets_the_official_format():
         assert s.res == (100.0, 100.0)
         assert s.nodata is not None and np.isnan(s.nodata)
         tmpl = t.read(1)
-        # no NaN inside the scored region (the exact failure mode of the platform range error, IR-53-65)
+        # no NaN inside the scored region (the exact failure mode of the platform range error, IR-53-74)
         assert np.isfinite(arr[np.isfinite(tmpl)]).all()
         assert np.isnan(arr[~np.isfinite(tmpl)]).all()
         fin = arr[np.isfinite(arr)]
@@ -121,7 +123,7 @@ def test_holdout_receipt_labels_and_evaluator():
 
 def test_run_card_session2_exists_and_matches():
     card = _load("evidence/run_card_session2.json")
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S2_POINTER)
     assert card["submission"]["name"] == cur["name"]
     assert card["submission"]["sha256_file"] == cur["sha256"]
     assert card["submission"]["organizer_score"] is None
@@ -134,13 +136,18 @@ def test_run_card_session2_exists_and_matches():
 
 
 def test_site_shows_the_label_and_download_up_front():
-    idx = (ROOT / "docs/index.html").read_text()
-    cur = _load("docs/submissions/CURRENT.json")
+    idx = (ROOT / "docs/archive/s2-2026-10-09/index.html").read_text()
+    cur = _load(S2_POINTER)
     assert cur["label"].upper() in idx.upper()
     assert Path(cur["file"]).name in idx
     assert cur["name"] in idx
     assert "Download" in idx
     # executive summary must explain how to submit
     assert "How to submit" in idx
-    sub = (ROOT / "docs/submission.html").read_text()
+    # the LIVE site (owned by the later HWVC-session builder) must list session 2 as a same-day sibling
+    live_idx = (ROOT / "docs/index.html").read_text()
+    live_cur = _load("docs/submissions/CURRENT.json")
+    assert any(o.get("file") == cur["file"] for o in live_cur.get("other_sessions_same_day", []))
+    assert cur["name"] in live_idx
+    sub = (ROOT / "docs/archive/s2-2026-10-09/submission.html").read_text()
     assert cur["label"].upper() in sub.upper()

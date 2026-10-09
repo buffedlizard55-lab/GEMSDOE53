@@ -1,338 +1,387 @@
 {
- "schema": "gems53.sources.v1",
- "checked_utc": "2026-10-09",
- "legend": {
-  "fetched": "page text retrieved in this session with the fetch tool",
-  "cloned": "git clone of the public repository in this session; commit recorded",
-  "computed": "value reproduced by a script in this repository",
-  "user_supplied": "link given in the request; NOT independently fetched here"
- },
- "sources": [
-  {
-   "id": "S1",
-   "title": "GEMS Prize problem description (metric, submission format, data description)",
-   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-   "access": "fetched",
-   "used_for": "Tversky alpha=0.2, beta=0.8, 300 m triangular kernel; EPSG 32611; 100 m; float32; values in [0,1]; one submission scored in two rounds"
+  "schema": "gems53.sources.v1",
+  "checked_utc": "2026-10-09",
+  "legend": {
+    "fetched": "page text retrieved in this session with the fetch tool",
+    "cloned": "git clone of the public repository in this session; commit recorded",
+    "computed": "value reproduced by a script in this repository",
+    "user_supplied": "link given in the request; NOT independently fetched here"
   },
-  {
-   "id": "S2",
-   "title": "GEMS Prize leaderboard (public DW-Tversky)",
-   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-   "access": "fetched",
-   "used_for": "Public board re-fetched 2026-10-08: #1 xiaofanhu 0.3774; #2 alexoktaba 0.3345; #3 nchuzhoy 0.3262; #4 joeyfezster 0.3260; #5 kinghorton42 0.3222; #6 Batik Shirt Brothers 0.3221; #7 DARD 0.3195; #13 extradr19 0.2778. Snapshot time not shown."
-  },
-  {
-   "id": "S3",
-   "title": "GEMS Prize Official Rules, NLR, September 2026 (PDF)",
-   "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
-   "access": "fetched",
-   "used_for": "Sections 3.3 (training data and labels; INGENIOUS source), 3.4 (up to three submissions per week; one final), 3.5, 3.6.2 (single submission chosen before private scores are known)"
-  },
-  {
-   "id": "S4",
-   "title": "DrivenData competition data tab (login required)",
-   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
-   "access": "user_supplied",
-   "used_for": "Official download location; login-gated, so the rasters were taken from the verified mirrors in S7"
-  },
-  {
-   "id": "S5",
-   "title": "Reference solution (U-Net, Tversky loss, Monte-Carlo CV)",
-   "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
-   "access": "cloned",
-   "commit": "aebe92f",
-   "used_for": "Band list (19 bands), label handling, patch recipe, output writer (rasterio GTiff, float32, template transform)"
-  },
-  {
-   "id": "S6",
-   "title": "EPSG:32611 WGS 84 / UTM zone 11N",
-   "url": "https://epsg.io/32611",
-   "access": "fetched 2026-10-08 (chunk 0 of 2)",
-   "used_for": "CRS definition, verified this session on the EPSG page: WGS 84 / UTM zone 11N; central meridian -117; scale factor 0.9996; false easting 500000; false northing 0; area of use 120\u00b0W to 114\u00b0W (covers the study region)."
-  },
-  {
-   "id": "S7",
-   "title": "Template repository GEMSDOE (competition rasters as split git blobs; manifest with sha256 pins)",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE",
-   "access": "cloned",
-   "commit": "dcbbb19",
-   "used_for": "data/bridge/manifest.json pins; scripts/fetch_data.py fetches from here. Pins were produced by the template owner, not by DrivenData."
-  },
-  {
-   "id": "S8",
-   "title": "GEMSDOE29 repository (leakage write-up IR-29-ARTIFACT-LEAK, IR-PORTAL-01)",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE29",
-   "access": "cloned",
-   "commit": "bbf6d0e",
-   "used_for": "Leakage mechanism and counts (60,988 positives; E_dist exactly 0; train AUC 1.0); portal [0,1] hypothesis"
-  },
-  {
-   "id": "S9",
-   "title": "GEMSDOE32 repository (H33-2-B2 0.2778 file and its audit receipt)",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE32",
-   "access": "cloned",
-   "commit": "0d6a624",
-   "used_for": "H33-2-B2 = 0.2708 base with dots within 2 px of the catalogue deleted (37,654 dots); holdout truth = visible catalogue (IR-32-PROXY-01)"
-  },
-  {
-   "id": "S10",
-   "title": "GEMSDOE32 site (landing page)",
-   "url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
-   "access": "fetched",
-   "used_for": "Confirms the 0.2778-file download, its unique name, and that no organizer score exists for it in that repo"
-  },
-  {
-   "id": "S11",
-   "title": "Kaufman, Rosset, Perlich, Stitelman (2012), Leakage in data mining: formulation, detection, and avoidance, ACM TKDD 6(4):15",
-   "url": "https://dl.acm.org/doi/10.1145/2382577.2382579",
-   "access": "fetched",
-   "used_for": "Definition of leakage; 'learn-predict separation' as the avoidance method (abstract text verified). The KDD 2011 version named in the request is NOT verified here."
-  },
-  {
-   "id": "S12",
-   "title": "USGS Quaternary Fault and Fold Database (Public domain)",
-   "url": "https://www.usgs.gov/programs/earthquake-hazards/faults",
-   "access": "fetched",
-   "used_for": "Candidate free official source for the next hypothesis (GIS download Qfaults_GIS.zip, 16 MB, listed on the page). Not yet ingested."
-  },
-  {
-   "id": "S13",
-   "title": "USGS Quaternary faults interactive map (DOI)",
-   "url": "https://doi.org/10.5066/F7S75FJM",
-   "access": "fetched_via_S12_link",
-   "used_for": "Linked from S12"
-  },
-  {
-   "id": "S14",
-   "title": "INGENIOUS - Great Basin Regional Dataset Compilation (DOI)",
-   "url": "https://doi.org/10.15121/1881483",
-   "access": "user_supplied (cited in S3 footnote 4)",
-   "used_for": "Source of the training labels per the rules; not fetched here"
-  },
-  {
-   "id": "S15",
-   "title": "GeoDAWN airborne magnetic and radiometric surveys (USGS)",
-   "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
-   "access": "fetched 2026-10-08 (chunk 0 of 2)",
-   "used_for": "Source of the magnetic/radiometric features (H2 native grids). Verified this session: DOI 10.5066/P93LGLVQ; page dated March 4, 2024; rights marked CC0 1.0 Universal; Area 1 flown rank 1 (lines 200 m apart, 100 to 150 m height); Area 2 lower resolution (lines 400 m apart); surveys flown Nov 2021 to Nov 2022. Data files were not downloaded."
-  },
-  {
-   "id": "S16",
-   "title": "INGENIOUS project page (GBCGE)",
-   "url": "https://gbcge.org/current-projects/ingenious/",
-   "access": "fetched 2026-10-08 (chunk 0 of 2); licence not stated on this page",
-   "used_for": "Project context for INGENIOUS. Verified this session: project 1 Feb 2021 to 30 Jun 2025; DOE Geothermal Technologies Office award DE-EE0009254; the regional dataset compilation DOI is 10.15121/1881483 (S14). The page does NOT state a data licence, so H5 licence and use rights remain unverified (IR-53-44)."
-  },
-  {
-   "id": "S17",
-   "title": "Tversky index (Wikipedia)",
-   "url": "https://en.wikipedia.org/wiki/Tversky_index",
-   "access": "user_supplied",
-   "used_for": "Background only; the metric used is the DrivenData definition (S1)"
-  },
-  {
-   "id": "S18",
-   "title": "Data mirrors (Dropbox): training_features.tif, existing_faults.tif, example_submission.tif",
-   "url": "https://www.dropbox.com/scl/fi/3vz9o0wwavi26xaeoxlwr/gems-geodawn-numerical-features.tif",
-   "access": "user_supplied",
-   "used_for": "Mirrors named in the S7 manifest. NOT downloaded here. The sha256 check in scripts/fetch_data.py only confirms that the S7 blobs match S7's own pins; it does not confirm the Dropbox originals."
-  },
-  {
-   "id": "S19",
-   "title": "Public GEMSDOE* registry repositories (buffedlizard55-lab), mirrored by shallow git clone; tif files flattened for the uniqueness gate",
-   "url": "https://github.com/buffedlizard55-lab?tab=repositories",
-   "access": "cloned",
-   "used_for": "Registry population for the uniqueness gate (613 single-band rasters on the competition grid; see evidence/registry_inventory/inventory.json)"
-  },
-  {
-   "id": "S20",
-   "title": "GEMSDOE32 README (owner repo): one-click file, 46,090-px h32d file, owner-reported incumbent 0.2600, emission-rule algebra",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE32",
-   "access": "fetched via api.github.com (README, 2026-10-08)",
-   "used_for": "Q2 owner-claim context. OWNER-CLAIM only; not an organizer receipt."
-  },
-  {
-   "id": "S21",
-   "title": "GEMSDOE32 docs/score-ledger.csv (owner ledger; leaderboard reads dated 2026-10-03)",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/score-ledger.csv",
-   "access": "fetched via api.github.com (2026-10-08)",
-   "used_for": "User-reported scores for GEMSDOE22 (0.1002 at 6%, 0.0748 at 10%) and GEMSDOE25 (0.2600). Leaderboard rows here conflict with the user brief (IR-53-19)."
-  },
-  {
-   "id": "S22",
-   "title": "GEMSDOE32 docs/research/why-d28-scored-026.md and score-ceiling-analysis.md (owner analysis, 2026-10-03)",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/tree/main/docs/research",
-   "access": "fetched via api.github.com (2026-10-08)",
-   "used_for": "Owner's account that the 0.2600 file is a distance-thinned (2.8 px) emission of 44,090 dots; score-to-file link explicitly unresolved there."
-  },
-  {
-   "id": "S23",
-   "title": "Shared template at commit dcbbb19: src/metrics.py (DTI), src/submission_io.py (writer, conformance), scripts/validate_submission.py",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb19",
-   "access": "cloned (depth 1) 2026-10-08",
-   "used_for": "Shared evaluator, writer and validators used for all new measurements and the final file (protocol: use shared tools, no private fork)."
-  },
-  {
-   "id": "S24",
-   "title": "Public GEMS registry: 63 repos whose names contain 'gems' (53 with rasters), 1,200 rasters, manifest with blob SHAs",
-   "url": "https://github.com/buffedlizard55-lab",
-   "access": "enumerated and downloaded via gh/api 2026-10-08 (evidence/registry_manifest.json)",
-   "used_for": "Uniqueness check against every public raster in the owner's GEMS repos (protocol item 2)."
-  },
-  {
-   "id": "S25",
-   "title": "GEMSDOE shared template, commit dcbbb192e56b2b32c0a131eba791dc363305d4a3 (src/metrics.py, src/blocks.py, src/submission_io.py, scripts/validate_submission.py)",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb192e56b2b32c0a131eba791dc363305d4a3",
-   "access": "fetched by git clone --depth 1 on 2026-10-08 (verified)",
-   "used_for": "shared metric parity check, spatial block folds, template writer and validators (E1 parity, E2 folds, E3 writer)"
-  },
-  {
-   "id": "S26",
-   "title": "jklinck/geothermal_research commit 56d78de7a989c12e2dce50cd65a4095df57030d2 (INGENIOUS and GeoDAWN mirror; NBMG strain README; 2 m temperature-probe README; paleo-geothermal CSV; wells and springs geodatabase)",
-   "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2",
-   "access": "GitHub API read on 2026-10-08 (verified: file listing, README text, strain CSV header from blob e7c2af0d)",
-   "used_for": "H3 feasibility (IR-53-40), H5 data availability (not validated), provenance of INGENIOUS layers"
-  },
-  {
-   "id": "S27",
-   "title": "buffedlizard55-lab GEMSDOE* repositories (63 repos; 907 .tif entries; 628 unique sha256; 621 unique on the official grid)",
-   "url": "https://github.com/buffedlizard55-lab?tab=repositories",
-   "access": "GitHub API listing and shallow clones on 2026-10-08 (verified)",
-   "used_for": "uniqueness registry (E3 gate), GEMSDOE32 measured structure"
-  },
-  {
-   "id": "S28",
-   "title": "INGENIOUS 2 m temperature-probe shapefile and README (in S26)",
-   "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2/2m_temperature_probe_INGENIOUS_regional_data",
-   "access": "README read 2026-10-08; licence not stated (IR-53-44)",
-   "used_for": "H5 candidate layer (not validated)"
-  },
-  {
-   "id": "S29",
-   "title": "USGS ANSS Comprehensive Earthquake Catalog (ComCat), FDSN event service (candidate source; not used)",
-   "url": "https://earthquake.usgs.gov/fdsnws/event/1/",
-   "access": "not fetched in this session; usgs.gov host is outside the session egress allow-list",
-   "used_for": "Possible future C2 raw earthquake time/depth geometry. Endpoint, current downloadability and applicable terms were not checked; not a validated input."
-  },
-  {
-   "id": "S30",
-   "title": "USGS Landsat Collection 2 Level-2 science products (candidate source; not used)",
-   "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
-   "access": "not fetched in this session; usgs.gov host is outside the session egress allow-list",
-   "used_for": "Possible future C3 multitemporal surface-temperature evidence. Product coverage, access and licence were not checked; not a validated input."
-  },
-  {
-   "id": "S31",
-   "title": "High-Resolution Aeromagnetic Survey To Image Shallow Faults, Poncha Springs and Vicinity, Chaffee County, Colorado (USGS OFR 2009-1156)",
-   "url": "https://www.usgs.gov/publications/high-resolution-aeromagnetic-survey-image-shallow-faults-poncha-springs-and-vicinity",
-   "access": "fetched",
-   "used_for": "Official USGS analogue: concealed faults interpreted from linear aeromagnetic anomalies and breaks; also warns that many linear features track drainages. Different region; rationale only, not validation for GEMS."
-  },
-  {
-   "id": "S32",
-   "title": "Finn et al. (2022), Geophysical imaging of the Yellowstone hydrothermal plumbing system (USGS Publications Warehouse; Nature)",
-   "url": "https://pubs.usgs.gov/publication/70230158",
-   "access": "fetched",
-   "used_for": "Official USGS abstract describes fault-controlled thermal conduits and low-resistivity/low-susceptibility signatures from airborne geophysical imaging. Yellowstone analogue only; does not validate band 17 or the Great Basin candidate."
-  },
-  {
-   "id": "S40",
-   "title": "Blakely, R. J. and Simpson, R. W. (1986), Approximating edges of source bodies from magnetic or gravity anomalies, Geophysics 51(7), 1494-1498, doi 10.1190/1.1442197",
-   "url": "https://doi.org/10.1190/1.1442197",
-   "access": "DOI and citation confirmed by two search results on 2026-10-08 (academia.edu reference list; Mayhew 1987 Rev. Geophys. reference list). Full text not opened.",
-   "used_for": "H8 method (horizontal-gradient maxima, Blakely-Simpson). Citation only; the implementation is ours (src/gems53/h8.py)."
-  },
-  {
-   "id": "S41",
-   "title": "Kaufman, S., Rosset, S., Perlich, C., Stitelman, O. (2012), Leakage in data mining: Formulation, detection, and avoidance, ACM TKDD 6(4), Article 15, doi 10.1145/2382577.2382579",
-   "url": "https://doi.org/10.1145/2382577.2382579",
-   "access": "Title, venue, DOI and the 'learn-predict separation' wording confirmed by search results on 2026-10-08 (dl.acm.org and scispace abstract). Full text not opened.",
-   "used_for": "Leakage definition and learn-predict separation (leakage-review, S3-A)."
-  },
-  {
-   "id": "S42",
-   "title": "DrivenData competition 306 problem description (submission format, metric, labels)",
-   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-   "access": "Fetched 2026-10-08 (session date): both chunks read. Quoted: 'data outside the bounds is null or nan', 'values between 0 and 1', the DTI formula with alpha 0.2 and beta 0.8, and R = 300 m.",
-   "used_for": "Submission format and metric (S1 is the same page; this entry records the 2026-10-08 session read)."
-  },
-  {
-   "id": "S43",
-   "title": "DrivenData Terms of Use",
-   "url": "https://www.drivendata.org/termsofuse/",
-   "access": "Fetched 2026-10-08, chunks 0 to 3 read. Page states 'Last Modified: August 7, 2014'.",
-   "used_for": "Whether the leaderboard may be read automatically. Verified in chunk 1, 'Prohibited Uses' items 2 and 3: no use of 'any robot, spider or other automatic device ... to access the Website ... including monitoring or copying', and no 'manual process to monitor or copy' without prior written consent. Chunks 2 to 3 cover linking, disclaimers and Massachusetts governing law. The 2014 date means the page may not match the current Competition Rules; confirm before relying on it (IR-53-51)."
-  },
-  {
-   "id": "S33",
-   "title": "GEMSDOE public template repository (shared evaluator, writer, validators), commit dcbbb192e56b2b32c0a131eba791dc363305d4a3",
-   "url": "https://github.com/buffedlizard55-lab/GEMSDOE",
-   "access": "Cloned 2026-10-08 (git clone --depth to /tmp/gems-template). The competition rasters used here came from its data/bridge with sha256 checks (scripts/fetch_data.py).",
-   "used_for": "Shared src/submission_io.py (conform_to_template, write_submission), src/blocks.py (spatial partition), validate_submission.py. Not copied; imported by path."
-  },
-  {
-   "id": "S34",
-   "title": "GEMS Prize Official Rules (NLR, September 2026), fetched and checked line by line",
-   "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
-   "access": "fetched 2026-10-08 (7 chunks; chunks 0 to 6 read)",
-   "used_for": "Verified this session: \u00a73.2 'three submissions per week'; \u00a73.4 'up to three per week' and 'select only one set of predictions' as final; \u00a73.5 'choose only one submission across both prize rounds'; Appendix A.1 deadline '5:00 p.m. ET on the prize submission deadline date' (IR-53-55). Appendix A.2 to A.17 (chunks 4 to 6) contain no clause that changes the label or submission rules. A.4: elements designated public become publicly available."
-  },
-  {
-   "id": "S35",
-   "title": "USGS ComCat FDSN event service (documentation and version endpoint)",
-   "url": "https://earthquake.usgs.gov/fdsnws/event/1/",
-   "access": "NOT reachable from the sandbox (curl exit 35, 2026-10-08); documentation page fetched earlier",
-   "used_for": "Candidate source for H11 (seismicity alignments). Blocked (L-31)."
-  },
-  {
-   "id": "S36",
-   "title": "DrivenData GEMS problem page, metric and submission format (re-read 2026-10-08)",
-   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-   "access": "fetched 2026-10-08 (2 chunks)",
-   "used_for": "Verified: DTI alpha 0.2, beta 0.8, triangular kernel 300 m; TP uses max p(x)k(d); FP_w = sum p(x)[1 - max_g k]; submission EPSG 32611, 100 m, same bounds, NaN outside, one float32 layer, values in [0,1]. Checked against src/gems53/core.py dti (match)."
-  },
-  {
-   "id": "S37",
-   "title": "Blakely, R.J. and Simpson, R.W. (1986), 'Approximating edges of source bodies from magnetic or gravity anomalies', Geophysics 51(7), 1494",
-   "url": "https://doi.org/10.1190/1.1442197",
-   "access": "DOI resolved and checked via Crossref metadata (SEG, published 1 July 1986), 2026-10-08; full text not opened",
-   "used_for": "H8 method citation (maxima of the horizontal gradient magnitude). The method is cited, not reproduced from the paper text."
-  },
-  {
-   "id": "S38",
-   "title": "Kaufman, Rosset, Perlich, Stitelman, 'Leakage in data mining', Proc. 17th ACM SIGKDD (KDD 2011)",
-   "url": "https://dl.acm.org/doi/10.1145/2020408.2020496",
-   "access": "DOI resolved 2026-10-08 (abstract shown; full text behind login in the Basic Edition)",
-   "used_for": "Learn-predict separation definition. Closes IR-53-53: the KDD 2011 DOI resolves to this paper. The TKDD 2012 version is S41."
-  },
-  {
-   "id": "S39",
-   "title": "GEMS Prize reference solution (drivendataorg/gems-prize-reference-solution), README and file list",
-   "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
-   "access": "fetched 2026-10-08 (one commit, aebe92f, Jun 16 2026)",
-   "used_for": "The official baseline: a U-Net notebook ('unet-mc-cv', Monte Carlo cross-validation), author Prof. John Lipor per the README. Our method is not that notebook; the notebook was not read cell by cell."
-  },
-  {
-   "id": "S44",
-   "title": "Kaufman, Rosset, Perlich (2011). Leakage in data mining: formulation, detection, and avoidance. KDD '11, pp. 556-563",
-   "url": "https://doi.org/10.1145/2020408.2020496",
-   "access": "verified 2026-10-09 via dblp (https://dblp.org/rec/conf/kdd/KaufmanRP11.html) and Tel Aviv University CRIS; DOI 10.1145/2020408.2020496 consistent across sources; ACM page itself is paywalled/closed access",
-   "used_for": "Canonical leakage definition and the learn-predict separation fix used for the GEMSDOE29 diagnosis. NOTE: the KDD'11 conference paper has THREE authors; Ori Stitelman joins only the 2012 TKDD journal version (S34)."
-  },
-  {
-   "id": "S45",
-   "title": "Kaufman, Rosset, Perlich, Stitelman (2012). Leakage in data mining: formulation, detection, and avoidance. ACM TKDD 6(4):15",
-   "url": "https://www.semanticscholar.org/paper/Leakage-in-data-mining:-formulation,-detection,-and-Kaufman-Rosset/381de4becac0910d1a74c905a3d579dda3571dbd",
-   "access": "verified 2026-10-09 via researchr alias page and Semantic Scholar; TKDD DOI not independently confirmed, so none is cited here",
-   "used_for": "The 4-author journal version the standing prompt references. Same formulation/detection methodology as S33; adds Stitelman."
-  },
-  {
-   "id": "S46",
-   "title": "DrivenData GEMS problem page 967 re-read 2026-10-09 (submission format and metric)",
-   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-   "access": "fetched 2026-10-09 via page tool",
-   "used_for": "Confirmed verbatim: 'data outside the bounds is null or nan'; single-band float32 in [0,1]; DTI alpha=0.2 beta=0.8 triangular kernel R=300m; two-round prize structure; external data allowed if licence permits."
-  }
- ]
+  "sources": [
+    {
+      "id": "S1",
+      "title": "GEMS Prize problem description (metric, submission format, data description)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "access": "fetched",
+      "used_for": "Tversky alpha=0.2, beta=0.8, 300 m triangular kernel; EPSG 32611; 100 m; float32; values in [0,1]; one submission scored in two rounds"
+    },
+    {
+      "id": "S2",
+      "title": "GEMS Prize leaderboard (public DW-Tversky)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "access": "fetched",
+      "used_for": "Public board re-fetched 2026-10-08: #1 xiaofanhu 0.3774; #2 alexoktaba 0.3345; #3 nchuzhoy 0.3262; #4 joeyfezster 0.3260; #5 kinghorton42 0.3222; #6 Batik Shirt Brothers 0.3221; #7 DARD 0.3195; #13 extradr19 0.2778. Snapshot time not shown."
+    },
+    {
+      "id": "S3",
+      "title": "GEMS Prize Official Rules, NLR, September 2026 (PDF)",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "access": "fetched",
+      "used_for": "Sections 3.3 (training data and labels; INGENIOUS source), 3.4 (up to three submissions per week; one final), 3.5, 3.6.2 (single submission chosen before private scores are known)"
+    },
+    {
+      "id": "S4",
+      "title": "DrivenData competition data tab (login required)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "access": "user_supplied",
+      "used_for": "Official download location; login-gated, so the rasters were taken from the verified mirrors in S7"
+    },
+    {
+      "id": "S5",
+      "title": "Reference solution (U-Net, Tversky loss, Monte-Carlo CV)",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "access": "cloned",
+      "commit": "aebe92f",
+      "used_for": "Band list (19 bands), label handling, patch recipe, output writer (rasterio GTiff, float32, template transform)"
+    },
+    {
+      "id": "S6",
+      "title": "EPSG:32611 WGS 84 / UTM zone 11N",
+      "url": "https://epsg.io/32611",
+      "access": "fetched 2026-10-08 (chunk 0 of 2)",
+      "used_for": "CRS definition, verified this session on the EPSG page: WGS 84 / UTM zone 11N; central meridian -117; scale factor 0.9996; false easting 500000; false northing 0; area of use 120\u00b0W to 114\u00b0W (covers the study region)."
+    },
+    {
+      "id": "S7",
+      "title": "Template repository GEMSDOE (competition rasters as split git blobs; manifest with sha256 pins)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE",
+      "access": "cloned",
+      "commit": "dcbbb19",
+      "used_for": "data/bridge/manifest.json pins; scripts/fetch_data.py fetches from here. Pins were produced by the template owner, not by DrivenData."
+    },
+    {
+      "id": "S8",
+      "title": "GEMSDOE29 repository (leakage write-up IR-29-ARTIFACT-LEAK, IR-PORTAL-01)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE29",
+      "access": "cloned",
+      "commit": "bbf6d0e",
+      "used_for": "Leakage mechanism and counts (60,988 positives; E_dist exactly 0; train AUC 1.0); portal [0,1] hypothesis"
+    },
+    {
+      "id": "S9",
+      "title": "GEMSDOE32 repository (H33-2-B2 0.2778 file and its audit receipt)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32",
+      "access": "cloned",
+      "commit": "0d6a624",
+      "used_for": "H33-2-B2 = 0.2708 base with dots within 2 px of the catalogue deleted (37,654 dots); holdout truth = visible catalogue (IR-32-PROXY-01)"
+    },
+    {
+      "id": "S10",
+      "title": "GEMSDOE32 site (landing page)",
+      "url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+      "access": "fetched",
+      "used_for": "Confirms the 0.2778-file download, its unique name, and that no organizer score exists for it in that repo"
+    },
+    {
+      "id": "S11",
+      "title": "Kaufman, Rosset, Perlich, Stitelman (2012), Leakage in data mining: formulation, detection, and avoidance, ACM TKDD 6(4):15",
+      "url": "https://dl.acm.org/doi/10.1145/2382577.2382579",
+      "access": "fetched",
+      "used_for": "Definition of leakage; 'learn-predict separation' as the avoidance method (abstract text verified). The KDD 2011 version named in the request is NOT verified here."
+    },
+    {
+      "id": "S12",
+      "title": "USGS Quaternary Fault and Fold Database (Public domain)",
+      "url": "https://www.usgs.gov/programs/earthquake-hazards/faults",
+      "access": "fetched",
+      "used_for": "Candidate free official source for the next hypothesis (GIS download Qfaults_GIS.zip, 16 MB, listed on the page). Not yet ingested."
+    },
+    {
+      "id": "S13",
+      "title": "USGS Quaternary faults interactive map (DOI)",
+      "url": "https://doi.org/10.5066/F7S75FJM",
+      "access": "fetched_via_S12_link",
+      "used_for": "Linked from S12"
+    },
+    {
+      "id": "S14",
+      "title": "INGENIOUS - Great Basin Regional Dataset Compilation (DOI)",
+      "url": "https://doi.org/10.15121/1881483",
+      "access": "user_supplied (cited in S3 footnote 4)",
+      "used_for": "Source of the training labels per the rules; not fetched here"
+    },
+    {
+      "id": "S15",
+      "title": "GeoDAWN airborne magnetic and radiometric surveys (USGS)",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "access": "fetched 2026-10-08 (chunk 0 of 2)",
+      "used_for": "Source of the magnetic/radiometric features (H2 native grids). Verified this session: DOI 10.5066/P93LGLVQ; page dated March 4, 2024; rights marked CC0 1.0 Universal; Area 1 flown rank 1 (lines 200 m apart, 100 to 150 m height); Area 2 lower resolution (lines 400 m apart); surveys flown Nov 2021 to Nov 2022. Data files were not downloaded."
+    },
+    {
+      "id": "S16",
+      "title": "INGENIOUS project page (GBCGE)",
+      "url": "https://gbcge.org/current-projects/ingenious/",
+      "access": "fetched 2026-10-08 (chunk 0 of 2); licence not stated on this page",
+      "used_for": "Project context for INGENIOUS. Verified this session: project 1 Feb 2021 to 30 Jun 2025; DOE Geothermal Technologies Office award DE-EE0009254; the regional dataset compilation DOI is 10.15121/1881483 (S14). The page does NOT state a data licence, so H5 licence and use rights remain unverified (IR-53-44)."
+    },
+    {
+      "id": "S17",
+      "title": "Tversky index (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Tversky_index",
+      "access": "user_supplied",
+      "used_for": "Background only; the metric used is the DrivenData definition (S1)"
+    },
+    {
+      "id": "S18",
+      "title": "Data mirrors (Dropbox): training_features.tif, existing_faults.tif, example_submission.tif",
+      "url": "https://www.dropbox.com/scl/fi/3vz9o0wwavi26xaeoxlwr/gems-geodawn-numerical-features.tif",
+      "access": "user_supplied",
+      "used_for": "Mirrors named in the S7 manifest. NOT downloaded here. The sha256 check in scripts/fetch_data.py only confirms that the S7 blobs match S7's own pins; it does not confirm the Dropbox originals."
+    },
+    {
+      "id": "S19",
+      "title": "Public GEMSDOE* registry repositories (buffedlizard55-lab), mirrored by shallow git clone; tif files flattened for the uniqueness gate",
+      "url": "https://github.com/buffedlizard55-lab?tab=repositories",
+      "access": "cloned",
+      "used_for": "Registry population for the uniqueness gate (613 single-band rasters on the competition grid; see evidence/registry_inventory/inventory.json)"
+    },
+    {
+      "id": "S20",
+      "title": "GEMSDOE32 README (owner repo): one-click file, 46,090-px h32d file, owner-reported incumbent 0.2600, emission-rule algebra",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32",
+      "access": "fetched via api.github.com (README, 2026-10-08)",
+      "used_for": "Q2 owner-claim context. OWNER-CLAIM only; not an organizer receipt."
+    },
+    {
+      "id": "S21",
+      "title": "GEMSDOE32 docs/score-ledger.csv (owner ledger; leaderboard reads dated 2026-10-03)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/score-ledger.csv",
+      "access": "fetched via api.github.com (2026-10-08)",
+      "used_for": "User-reported scores for GEMSDOE22 (0.1002 at 6%, 0.0748 at 10%) and GEMSDOE25 (0.2600). Leaderboard rows here conflict with the user brief (IR-53-19)."
+    },
+    {
+      "id": "S22",
+      "title": "GEMSDOE32 docs/research/why-d28-scored-026.md and score-ceiling-analysis.md (owner analysis, 2026-10-03)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/tree/main/docs/research",
+      "access": "fetched via api.github.com (2026-10-08)",
+      "used_for": "Owner's account that the 0.2600 file is a distance-thinned (2.8 px) emission of 44,090 dots; score-to-file link explicitly unresolved there."
+    },
+    {
+      "id": "S23",
+      "title": "Shared template at commit dcbbb19: src/metrics.py (DTI), src/submission_io.py (writer, conformance), scripts/validate_submission.py",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb19",
+      "access": "cloned (depth 1) 2026-10-08",
+      "used_for": "Shared evaluator, writer and validators used for all new measurements and the final file (protocol: use shared tools, no private fork)."
+    },
+    {
+      "id": "S24",
+      "title": "Public GEMS registry: 63 repos whose names contain 'gems' (53 with rasters), 1,200 rasters, manifest with blob SHAs",
+      "url": "https://github.com/buffedlizard55-lab",
+      "access": "enumerated and downloaded via gh/api 2026-10-08 (evidence/registry_manifest.json)",
+      "used_for": "Uniqueness check against every public raster in the owner's GEMS repos (protocol item 2)."
+    },
+    {
+      "id": "S25",
+      "title": "GEMSDOE shared template, commit dcbbb192e56b2b32c0a131eba791dc363305d4a3 (src/metrics.py, src/blocks.py, src/submission_io.py, scripts/validate_submission.py)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+      "access": "fetched by git clone --depth 1 on 2026-10-08 (verified)",
+      "used_for": "shared metric parity check, spatial block folds, template writer and validators (E1 parity, E2 folds, E3 writer)"
+    },
+    {
+      "id": "S26",
+      "title": "jklinck/geothermal_research commit 56d78de7a989c12e2dce50cd65a4095df57030d2 (INGENIOUS and GeoDAWN mirror; NBMG strain README; 2 m temperature-probe README; paleo-geothermal CSV; wells and springs geodatabase)",
+      "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2",
+      "access": "GitHub API read on 2026-10-08 (verified: file listing, README text, strain CSV header from blob e7c2af0d)",
+      "used_for": "H3 feasibility (IR-53-40), H5 data availability (not validated), provenance of INGENIOUS layers"
+    },
+    {
+      "id": "S27",
+      "title": "buffedlizard55-lab GEMSDOE* repositories (63 repos; 907 .tif entries; 628 unique sha256; 621 unique on the official grid)",
+      "url": "https://github.com/buffedlizard55-lab?tab=repositories",
+      "access": "GitHub API listing and shallow clones on 2026-10-08 (verified)",
+      "used_for": "uniqueness registry (E3 gate), GEMSDOE32 measured structure"
+    },
+    {
+      "id": "S28",
+      "title": "INGENIOUS 2 m temperature-probe shapefile and README (in S26)",
+      "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2/2m_temperature_probe_INGENIOUS_regional_data",
+      "access": "README read 2026-10-08; licence not stated (IR-53-44)",
+      "used_for": "H5 candidate layer (not validated)"
+    },
+    {
+      "id": "S29",
+      "title": "USGS ANSS Comprehensive Earthquake Catalog (ComCat), FDSN event service (candidate source; not used)",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "access": "not fetched in this session; usgs.gov host is outside the session egress allow-list",
+      "used_for": "Possible future C2 raw earthquake time/depth geometry. Endpoint, current downloadability and applicable terms were not checked; not a validated input."
+    },
+    {
+      "id": "S30",
+      "title": "USGS Landsat Collection 2 Level-2 science products (candidate source; not used)",
+      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+      "access": "not fetched in this session; usgs.gov host is outside the session egress allow-list",
+      "used_for": "Possible future C3 multitemporal surface-temperature evidence. Product coverage, access and licence were not checked; not a validated input."
+    },
+    {
+      "id": "S31",
+      "title": "High-Resolution Aeromagnetic Survey To Image Shallow Faults, Poncha Springs and Vicinity, Chaffee County, Colorado (USGS OFR 2009-1156)",
+      "url": "https://www.usgs.gov/publications/high-resolution-aeromagnetic-survey-image-shallow-faults-poncha-springs-and-vicinity",
+      "access": "fetched",
+      "used_for": "Official USGS analogue: concealed faults interpreted from linear aeromagnetic anomalies and breaks; also warns that many linear features track drainages. Different region; rationale only, not validation for GEMS."
+    },
+    {
+      "id": "S32",
+      "title": "Finn et al. (2022), Geophysical imaging of the Yellowstone hydrothermal plumbing system (USGS Publications Warehouse; Nature)",
+      "url": "https://pubs.usgs.gov/publication/70230158",
+      "access": "fetched",
+      "used_for": "Official USGS abstract describes fault-controlled thermal conduits and low-resistivity/low-susceptibility signatures from airborne geophysical imaging. Yellowstone analogue only; does not validate band 17 or the Great Basin candidate."
+    },
+    {
+      "id": "S40",
+      "title": "Blakely, R. J. and Simpson, R. W. (1986), Approximating edges of source bodies from magnetic or gravity anomalies, Geophysics 51(7), 1494-1498, doi 10.1190/1.1442197",
+      "url": "https://doi.org/10.1190/1.1442197",
+      "access": "DOI and citation confirmed by two search results on 2026-10-08 (academia.edu reference list; Mayhew 1987 Rev. Geophys. reference list). Full text not opened.",
+      "used_for": "H8 method (horizontal-gradient maxima, Blakely-Simpson). Citation only; the implementation is ours (src/gems53/h8.py)."
+    },
+    {
+      "id": "S41",
+      "title": "Kaufman, S., Rosset, S., Perlich, C., Stitelman, O. (2012), Leakage in data mining: Formulation, detection, and avoidance, ACM TKDD 6(4), Article 15, doi 10.1145/2382577.2382579",
+      "url": "https://doi.org/10.1145/2382577.2382579",
+      "access": "Title, venue, DOI and the 'learn-predict separation' wording confirmed by search results on 2026-10-08 (dl.acm.org and scispace abstract). Full text not opened.",
+      "used_for": "Leakage definition and learn-predict separation (leakage-review, S3-A)."
+    },
+    {
+      "id": "S42",
+      "title": "DrivenData competition 306 problem description (submission format, metric, labels)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "access": "Fetched 2026-10-08 (session date): both chunks read. Quoted: 'data outside the bounds is null or nan', 'values between 0 and 1', the DTI formula with alpha 0.2 and beta 0.8, and R = 300 m.",
+      "used_for": "Submission format and metric (S1 is the same page; this entry records the 2026-10-08 session read)."
+    },
+    {
+      "id": "S43",
+      "title": "DrivenData Terms of Use",
+      "url": "https://www.drivendata.org/termsofuse/",
+      "access": "Fetched 2026-10-08, chunks 0 to 3 read. Page states 'Last Modified: August 7, 2014'.",
+      "used_for": "Whether the leaderboard may be read automatically. Verified in chunk 1, 'Prohibited Uses' items 2 and 3: no use of 'any robot, spider or other automatic device ... to access the Website ... including monitoring or copying', and no 'manual process to monitor or copy' without prior written consent. Chunks 2 to 3 cover linking, disclaimers and Massachusetts governing law. The 2014 date means the page may not match the current Competition Rules; confirm before relying on it (IR-53-51)."
+    },
+    {
+      "id": "S33",
+      "title": "GEMSDOE public template repository (shared evaluator, writer, validators), commit dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE",
+      "access": "Cloned 2026-10-08 (git clone --depth to /tmp/gems-template). The competition rasters used here came from its data/bridge with sha256 checks (scripts/fetch_data.py).",
+      "used_for": "Shared src/submission_io.py (conform_to_template, write_submission), src/blocks.py (spatial partition), validate_submission.py. Not copied; imported by path."
+    },
+    {
+      "id": "S34",
+      "title": "GEMS Prize Official Rules (NLR, September 2026), fetched and checked line by line",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "access": "fetched 2026-10-08 (7 chunks; chunks 0 to 6 read)",
+      "used_for": "Verified this session: \u00a73.2 'three submissions per week'; \u00a73.4 'up to three per week' and 'select only one set of predictions' as final; \u00a73.5 'choose only one submission across both prize rounds'; Appendix A.1 deadline '5:00 p.m. ET on the prize submission deadline date' (IR-53-55). Appendix A.2 to A.17 (chunks 4 to 6) contain no clause that changes the label or submission rules. A.4: elements designated public become publicly available."
+    },
+    {
+      "id": "S35",
+      "title": "USGS ComCat FDSN event service (documentation and version endpoint)",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "access": "NOT reachable from the sandbox (curl exit 35, 2026-10-08); documentation page fetched earlier",
+      "used_for": "Candidate source for H11 (seismicity alignments). Blocked (L-31)."
+    },
+    {
+      "id": "S36",
+      "title": "DrivenData GEMS problem page, metric and submission format (re-read 2026-10-08)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "access": "fetched 2026-10-08 (2 chunks)",
+      "used_for": "Verified: DTI alpha 0.2, beta 0.8, triangular kernel 300 m; TP uses max p(x)k(d); FP_w = sum p(x)[1 - max_g k]; submission EPSG 32611, 100 m, same bounds, NaN outside, one float32 layer, values in [0,1]. Checked against src/gems53/core.py dti (match)."
+    },
+    {
+      "id": "S37",
+      "title": "Blakely, R.J. and Simpson, R.W. (1986), 'Approximating edges of source bodies from magnetic or gravity anomalies', Geophysics 51(7), 1494",
+      "url": "https://doi.org/10.1190/1.1442197",
+      "access": "DOI resolved and checked via Crossref metadata (SEG, published 1 July 1986), 2026-10-08; full text not opened",
+      "used_for": "H8 method citation (maxima of the horizontal gradient magnitude). The method is cited, not reproduced from the paper text."
+    },
+    {
+      "id": "S38",
+      "title": "Kaufman, Rosset, Perlich, Stitelman, 'Leakage in data mining', Proc. 17th ACM SIGKDD (KDD 2011)",
+      "url": "https://dl.acm.org/doi/10.1145/2020408.2020496",
+      "access": "DOI resolved 2026-10-08 (abstract shown; full text behind login in the Basic Edition)",
+      "used_for": "Learn-predict separation definition. Closes IR-53-53: the KDD 2011 DOI resolves to this paper. The TKDD 2012 version is S41."
+    },
+    {
+      "id": "S39",
+      "title": "GEMS Prize reference solution (drivendataorg/gems-prize-reference-solution), README and file list",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "access": "fetched 2026-10-08 (one commit, aebe92f, Jun 16 2026)",
+      "used_for": "The official baseline: a U-Net notebook ('unet-mc-cv', Monte Carlo cross-validation), author Prof. John Lipor per the README. Our method is not that notebook; the notebook was not read cell by cell."
+    },
+    {
+      "id": "S44",
+      "title": "Gallardo & Meju (2003) Characterization of heterogeneous near-surface materials by joint 2D inversion of dc resistivity and seismic data, GRL 30(13) \u2014 cross-gradients",
+      "url": "https://doi.org/10.1029/2003GL017370",
+      "access": "fetched",
+      "used_for": "Structural-similarity (cross-gradient) concept; HWVC uses gradient co-direction instead. Rationale only."
+    },
+    {
+      "id": "S45",
+      "title": "USGS 3D Elevation Program (3DEP) home page",
+      "url": "https://www.usgs.gov/3d-elevation-program",
+      "access": "fetched",
+      "used_for": "Quote fetched 2026-10-09: 'All 3DEP products are available free of charge and without use restrictions.' Licence basis for candidate H53-DEM1M; tiles NOT downloaded (sandbox egress)."
+    },
+    {
+      "id": "S46",
+      "title": "GEMS Prize Official Rules (HeroX resource 2274, links the NLR PDF S3)",
+      "url": "https://www.herox.com/GEMSPrize/resource/2274",
+      "access": "fetched",
+      "used_for": "DrivenData rules page points here; rules document is S3."
+    },
+    {
+      "id": "S47",
+      "title": "GEMSDOE41 README (basin-margin H42 surface)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE41",
+      "access": "fetched",
+      "used_for": "Read via GitHub API 2026-10-09 to differentiate HWVC from the existing basin-margin surface (3DEP scarp + RTP corroboration)."
+    },
+    {
+      "id": "S48",
+      "title": "19GEMSDOE README (H19-4/H19-5 multi-line synthesis, base of the d2.8 lineage)",
+      "url": "https://github.com/buffedlizard55-lab/19GEMSDOE",
+      "access": "fetched",
+      "used_for": "Owner description of H19-5 (OWNER-CLAIM); includes 1 m/10 m 3DEP openness obtained via GitHub Actions (claimed CI run 36768672276, not re-checked)."
+    },
+    {
+      "id": "S49",
+      "title": "GEMSDOE25 d2.8 dot file (USER-REPORTED 0.2600)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE25",
+      "access": "cloned",
+      "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json."
+    },
+    {
+      "id": "S50",
+      "title": "GEMSDOE28 r1-solo d2.8 file (USER-REPORTED 0.2708)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE28",
+      "access": "cloned",
+      "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json (subset of S49 minus dots <= 1 px from catalogue)."
+    },
+    {
+      "id": "S51",
+      "title": "Kaufman, Rosset, Perlich (2011). Leakage in data mining: formulation, detection, and avoidance. KDD '11, pp. 556-563",
+      "url": "https://doi.org/10.1145/2020408.2020496",
+      "access": "verified 2026-10-09 via dblp (https://dblp.org/rec/conf/kdd/KaufmanRP11.html) and Tel Aviv University CRIS; DOI 10.1145/2020408.2020496 consistent across sources; ACM page itself is paywalled/closed access",
+      "used_for": "Canonical leakage definition and the learn-predict separation fix used for the GEMSDOE29 diagnosis. NOTE: the KDD'11 conference paper has THREE authors; Ori Stitelman joins only the 2012 TKDD journal version (S34)."
+    },
+    {
+      "id": "S52",
+      "title": "Kaufman, Rosset, Perlich, Stitelman (2012). Leakage in data mining: formulation, detection, and avoidance. ACM TKDD 6(4):15",
+      "url": "https://www.semanticscholar.org/paper/Leakage-in-data-mining:-formulation,-detection,-and-Kaufman-Rosset/381de4becac0910d1a74c905a3d579dda3571dbd",
+      "access": "verified 2026-10-09 via researchr alias page and Semantic Scholar; TKDD DOI not independently confirmed, so none is cited here",
+      "used_for": "The 4-author journal version the standing prompt references. Same formulation/detection methodology as S33; adds Stitelman."
+    },
+    {
+      "id": "S53",
+      "title": "DrivenData GEMS problem page 967 re-read 2026-10-09 (submission format and metric)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "access": "fetched 2026-10-09 via page tool",
+      "used_for": "Confirmed verbatim: 'data outside the bounds is null or nan'; single-band float32 in [0,1]; DTI alpha=0.2 beta=0.8 triangular kernel R=300m; two-round prize structure; external data allowed if licence permits."
+    }
+  ]
 }

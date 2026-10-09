@@ -20,9 +20,6 @@ def _load(rel):
     return json.loads((ROOT / rel).read_text())
 
 
-S1_POINTER = "docs/submissions/CURRENT_session1_archived.json"
-
-
 def _sha(p):
     h = hashlib.sha256()
     with open(p, "rb") as f:
@@ -32,7 +29,7 @@ def _sha(p):
 
 
 def test_current_pointer_matches_receipt_and_file():
-    cur = _load(S1_POINTER)
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
     rec = _load(cur["receipt"])
     assert cur["label"] == rec["label"]
     assert cur["note"] == rec["note"]
@@ -43,19 +40,15 @@ def test_current_pointer_matches_receipt_and_file():
     assert tif.stat().st_size == rec["bytes"]
     assert cur["submitted"] is False and cur["organizer_score"] is None
     assert cur["note"].startswith("RESEARCH-ONLY") and "HOLDOUT-DTI" in cur["note"]
+    assert cur["previous_pointer"]["sha256"] == "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60"
+    assert cur["previous_pointer"]["sha256"] != cur["sha256"]
     rasterio = pytest.importorskip("rasterio")
     with rasterio.open(tif) as ds:
         assert ds.tags()["note"] == cur["note"]
-    # this archived session-1 pointer IS the H1 file; the live session-2 CURRENT chains
-    # current -> S3 control (previous_pointer) -> this H1 pointer (session1_archived_pointer)
-    assert cur["sha256"] == "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60"
-    live = _load("docs/submissions/CURRENT.json")
-    assert live["previous_pointer"]["name"] == "gems53-s3-bands-top_q0p02-20261009-e67cda00"
-    assert live["session1_archived_pointer"].endswith("CURRENT_session1_archived.json")
 
 
 def test_label_follows_the_pre_registered_rule():
-    cur = _load(S1_POINTER)
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
     g = cur["gates"]
     all_pass = all(bool(v) for v in g.values())
     if cur["label"].startswith("Validated"):
@@ -66,32 +59,26 @@ def test_label_follows_the_pre_registered_rule():
 
 
 def test_run_card_and_site_agree_with_the_label():
-    # evidence/run_card.json is the parallel S3 session's card; it must agree with the S3 pointer,
-    # which now lives in the live CURRENT.json's previous_pointer chain.
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
     card = _load("evidence/run_card.json")
-    live = _load("docs/submissions/CURRENT.json")
-    prev = live["previous_pointer"]
-    s3rec = _load(f"evidence/candidate_{prev['name']}.json")
-    assert card["label"] == s3rec["label"] == card["verdict"]
+    assert card["label"] == cur["label"] == card["verdict"]
     assert card["submission"]["submitted"] is False
     assert card["submission"]["submission_slot_used"] is False
     assert card["submission"]["submit_allowed"] is False
     assert card["submission"]["note_chars"] <= 140
-    assert card["submission"]["sha256"] == s3rec["sha256"] == prev["sha256"]
+    assert card["submission"]["sha256"] == cur["sha256"]
     assert card["session_branch"] == "arena/7b60bcc7-gemsdoe53"
     assert card["organizer_score"] is None
-    # the site shows the LIVE (session-2) label and lists the earlier files
-    idx = (ROOT / "docs/index.html").read_text()
+    idx = (ROOT / "docs/archive/main-2026-10-09-S3/index.html").read_text()
     sub = (ROOT / "docs/submission.html").read_text()
-    assert live["label"].upper() in idx.upper()
-    assert live["label"].upper() in sub.upper()
-    assert live["name"] in idx
-    assert Path(live["file"]).name in idx
-    assert prev["name"] in idx  # earlier files table
+    assert cur["label"].upper() in idx.upper()
+    assert cur["label"].upper() in sub.upper()
+    assert cur["name"] in idx
+    assert Path(cur["file"]).name in idx
 
 
 def test_submitted_file_meets_the_format_rules():
-    cur = _load(S1_POINTER)
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
     rasterio = pytest.importorskip("rasterio")
     if not SAMPLE.exists():
         pytest.skip("competition rasters not present (run scripts/fetch_data.py)")
@@ -120,14 +107,12 @@ def test_every_irregularity_reference_resolves():
 
 
 def test_raw_uniqueness_gate_is_explicitly_a_stop_not_a_false_clearance():
-    live = _load("docs/submissions/CURRENT.json")
-    prev = live["previous_pointer"]
-    s3rec = _load(f"evidence/candidate_{prev['name']}.json")
-    assert s3rec["uniqueness"]["any_drift_flag"] is True
-    assert s3rec["gates"]["uniqueness_no_drift_flag"] is False
-    assert s3rec["label"].lower().startswith("research-only")
-    assert live["submitted"] is False and live["organizer_score"] is None
-    full = _load(f"evidence/uniqueness_gate_{prev['name']}.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
+    assert cur["uniqueness_verdict"].startswith("PROTOCOL DUPLICATE / STOP")
+    assert cur["gates"]["uniqueness_no_drift_flag"] is False
+    assert cur["label"].startswith("Research-only")
+    assert cur["submitted"] is False and cur["organizer_score"] is None
+    full = _load(f"evidence/uniqueness_gate_{cur['name']}.json")
     assert full["registry_unique_on_grid"] == 628
     assert full["n_flagged"] == 172
     assert full["any_drift_flag"] is True
@@ -144,7 +129,7 @@ def test_raw_uniqueness_gate_is_explicitly_a_stop_not_a_false_clearance():
 
 
 def test_site_and_prompt_capture_do_not_claim_raster_uniqueness_or_verbatim_text():
-    idx = (ROOT / "docs/index.html").read_text()
+    idx = (ROOT / "docs/archive/main-2026-10-09-S3/index.html").read_text()
     prompt = (ROOT / "docs/prompt/verbatim.md").read_text()
     readme = (ROOT / "README.md").read_text()
     assert "Submission name (identifier)" in idx or "Submission name" in idx
@@ -160,3 +145,23 @@ def test_site_and_prompt_capture_do_not_claim_raster_uniqueness_or_verbatim_text
     assert "X2" in leakage and "design-A negatives" in leakage
     assert "H2 is not untried, but it is not cleanly validated" in hypotheses
     assert "S31" in hypotheses and "S32" in hypotheses
+
+
+def test_session2_archived_pointer_is_consistent_and_listed_as_sibling():
+    """Session 2 (branch arena/dc236d07) landed in parallel; its pointer is archived and listed as a same-day sibling."""
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S2.json")
+    rec = _load("evidence/s3_c1_build_receipt.json")
+    assert cur["name"] == rec["name"]
+    assert cur["sha256"] == rec["sha256_file"]
+    assert cur["pixel_sha256"] == rec["pixel_sha256"]
+    tif = ROOT / cur["file"]
+    assert tif.exists()
+    assert _sha(tif) == cur["sha256"]
+    assert cur["submit_allowed"] is False and cur["submitted"] is False
+    assert len(cur["note"]) <= 140
+    # chain: S2 C1 -> S3 control -> session-1 H1 archive
+    assert cur["previous_pointer"]["name"] == "gems53-s3-bands-top_q0p02-20261009-e67cda00"
+    assert cur["previous_pointer"]["sha256"] != cur["sha256"]
+    live = _load("docs/submissions/CURRENT.json")
+    assert any(o.get("pointer") == "docs/submissions/archive/CURRENT_2026-10-09-S2.json"
+               for o in live.get("other_sessions_same_day", []))

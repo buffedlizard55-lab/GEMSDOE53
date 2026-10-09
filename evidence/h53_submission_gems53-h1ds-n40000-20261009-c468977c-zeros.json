@@ -1,0 +1,139 @@
+{
+  "name": "gems53-h1ds-n40000-20261009-c468977c-zeros",
+  "file": "archive/do-not-submit/gems53-h1ds-n40000-20261009-c468977c-zeros__DO-NOT-SUBMIT.tif",
+  "bytes": 143771,
+  "sha256": "1101b655fbc3315250a6f9404fc3234a84f058726fb3e1a87c08b27eccae4236",
+  "pixel_sha256_8": "c468977c",
+  "note": "GEMSDOE53 E3: H1 HGB (19 bands+seg-exact fault dist), 40k dots sep2.8 px, >2 px off catalogue. HOLDOUT-DTI 0.117 (DS). Unscored.",
+  "note_chars": 128,
+  "status": "candidate; OK/DO-NOT-SUBMIT verdict lives in docs/submissions/CURRENT.json",
+  "writer": {
+    "template_module": "src/submission_io.py write_submission",
+    "info": {
+      "path": "/home/user/GEMSDOE53/docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif",
+      "bytes": 143771,
+      "sha256": "1101b655fbc3315250a6f9404fc3234a84f058726fb3e1a87c08b27eccae4236",
+      "width": 3292,
+      "height": 3730,
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "res": [
+        100.0,
+        100.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "nodata": null,
+      "tiled": true,
+      "block_shapes": [
+        [
+          256,
+          256
+        ]
+      ],
+      "finite_px": 12279160,
+      "total_px": 12279160,
+      "nan_px": 0,
+      "nonzero_px": 40000,
+      "prob_mass": 40000.0
+    }
+  },
+  "explicit_checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "crs_epsg_32611": true,
+    "shape_matches_sample": true,
+    "transform_matches_sample": true,
+    "resolution_100m": true,
+    "no_nan_anywhere": true,
+    "no_inf": true,
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "outside_footprint_all_zero": true,
+    "nodata_unset": true
+  },
+  "explicit_all_pass": true,
+  "stats": {
+    "min": 0.0,
+    "max": 1.0,
+    "dots": 40000,
+    "unique_values": [
+      0.0,
+      1.0
+    ],
+    "footprint_px": 5167373,
+    "dots_outside_footprint": 0
+  },
+  "template_validate_submission": {
+    "cmd": "/tmp/venv/bin/python scripts/validate_submission.py --pred /home/user/GEMSDOE53/docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif --sample /tmp/gems53-data/sample_submission.tif --train /tmp/gems53-data/training_features.tif",
+    "exit": 1,
+    "stdout_tail": "Validating /home/user/GEMSDOE53/docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif\n  Width: 3292, Height: 3730, Count: 1, Dtype: ('float32',), CRS: EPSG:32611, Res: (100.0, 100.0), Nodata: None\n  Data min: 0.0000, max: 1.0000, mean: 0.0033, nan%: 0.00%\n  \u2713 CRS EPSG:32611\n  \u2713 Resolution 100m\n  \u2713 Single band\n  \u2713 Dtype float32\n  \u2713 Values in [0,1] (min 0.0000 max 1.0000)\n  \u2713 Size matches sample 3292x3730\n  \u2713 Transform matches sample\n  \u2713 All 5,167,373 template-valid px are finite in [0,1]\n  \u2713 Size matches training_features\n  i NaN fraction 0.00% (NaN is expected outside the GeoDAWN footprint)\n\n\u274c Validation FAILED:\n  - 7111787 px outside the template's valid region are finite (spec: \"data outside the bounds is null or nan\"; fix: python scripts/sanitize_submission.py --pred /home/user/GEMSDOE53/docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif --write)\n  - Nodata tag None != template's 'nan' (masked readers rely on it; fix: python scripts/sanitize_submission.py --pred /home/user/GEMSDOE53/docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif --write)\n",
+    "stderr_tail": ""
+  },
+  "template_validate_conformant": {
+    "cmd": "/tmp/venv/bin/python -m src.submission_io validate-conformant /home/user/GEMSDOE53/docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif --sample /tmp/gems53-data/sample_submission.tif",
+    "exit": 1,
+    "stdout_tail": "{\n \"pixels\": 12279160,\n \"template_valid_px\": 5167373,\n \"nan_inside_px\": 0,\n \"finite_outside_px\": 7111787,\n \"out_of_range_px\": 0,\n \"conformant\": false,\n \"nodata\": null,\n \"nodata_ok\": false,\n \"path\": \"/home/user/GEMSDOE53/docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif\"\n}\n",
+    "stderr_tail": "NOT CONFORMANT: 0 NaN inside the valid region, 7111787 finite outside, 0 out of [0,1], nodata_ok=False \u2014 fix: python scripts/sanitize_submission.py --pred /home/user/GEMSDOE53/docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif --write\n"
+  },
+  "control_organizer_accepted_zeros_file": {
+    "file": "GEMSDOE32__docs__downloads__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+    "user_reported_score": 0.2778,
+    "explicit_checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "crs_epsg_32611": true,
+      "shape_matches_sample": true,
+      "transform_matches_sample": true,
+      "resolution_100m": true,
+      "no_nan_anywhere": true,
+      "no_inf": true,
+      "no_nan_inside_footprint": true,
+      "values_in_0_1": true,
+      "outside_footprint_all_zero": true,
+      "nodata_unset": true
+    },
+    "stats": {
+      "min": 0.0,
+      "max": 1.0,
+      "dots": 37654,
+      "unique_values": [
+        0.0,
+        1.0
+      ],
+      "footprint_px": 5167373,
+      "dots_outside_footprint": 0
+    },
+    "template_validate_conformant": {
+      "cmd": "/tmp/venv/bin/python -m src.submission_io validate-conformant /tmp/gems53-registry/GEMSDOE32__docs__downloads__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif --sample /tmp/gems53-data/sample_submission.tif",
+      "exit": 1,
+      "stdout_tail": "{\n \"pixels\": 12279160,\n \"template_valid_px\": 5167373,\n \"nan_inside_px\": 0,\n \"finite_outside_px\": 7111787,\n \"out_of_range_px\": 0,\n \"conformant\": false,\n \"nodata\": null,\n \"nodata_ok\": false,\n \"path\": \"/tmp/gems53-registry/GEMSDOE32__docs__downloads__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif\"\n}\n",
+      "stderr_tail": "NOT CONFORMANT: 0 NaN inside the valid region, 7111787 finite outside, 0 out of [0,1], nodata_ok=False \u2014 fix: python scripts/sanitize_submission.py --pred /tmp/gems53-registry/GEMSDOE32__docs__downloads__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif --write\n"
+    },
+    "template_validate_submission": {
+      "exit": 1,
+      "stdout_tail": "n: 0.0031, nan%: 0.00%\n  \u2713 CRS EPSG:32611\n  \u2713 Resolution 100m\n  \u2713 Single band\n  \u2713 Dtype float32\n  \u2713 Values in [0,1] (min 0.0000 max 1.0000)\n  \u2713 Size matches sample 3292x3730\n  \u2713 Transform matches sample\n  \u2713 All 5,167,373 template-valid px are finite in [0,1]\n  \u2713 Size matches training_features\n  i NaN fraction 0.00% (NaN is expected outside the GeoDAWN footprint)\n\n\u274c Validation FAILED:\n  - 7111787 px outside the template's valid region are finite (spec: \"data outside the bounds is null or nan\"; fix: python scripts/sanitize_submission.py --pred /tmp/gems53-registry/GEMSDOE32__docs__downloads__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif --write)\n  - Nodata tag None != template's 'nan' (masked readers rely on it; fix: python scripts/sanitize_submission.py --pred /tmp/gems53-registry/GEMSDOE32__docs__downloads__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif --write)\n"
+    }
+  },
+  "template_failures_ours": [
+    "- 7111787 px outside the template's valid region are finite",
+    "- Nodata tag None != template's 'nan'"
+  ],
+  "template_failures_control": [
+    "- 7111787 px outside the template's valid region are finite",
+    "- Nodata tag None != template's 'nan'"
+  ],
+  "template_failure_interpretation": "Both files fail only the template's NaN-outside and nodata-NaN rules (IR-53-65). The control scored 0.2778 on the organizer platform (user-reported), so these two rules are stricter than the platform. The NaN variant is not shipped because a NaN-outside file previously returned 'Predicted values must be in range [0, 1]' to the user.",
+  "file_as_written": "docs/submissions/gems53-h1ds-n40000-20261009-c468977c-zeros.tif",
+  "label": "DO NOT SUBMIT \u2014 valid format, but DUPLICATE under the pre-registered uniqueness gate v2 (27 registry rows, max kappa 1.00)."
+}

@@ -1,0 +1,1080 @@
+{
+  "experiment": "E1 (2026-10-09) leakage canary, design B",
+  "started_utc": "2026-10-09T00:48:30Z",
+  "rule": "separability = max(AUC, 1-AUC); a feature above 0.9 is leakage until proven otherwise",
+  "positives": "withheld catalogue pixels of fold k (segment folds seed 53)",
+  "negatives": "footprint pixels that are not catalogue faults (300k sample)",
+  "max_separability_by_feature": {
+    "h1_segment_exact_distance(visible only)": 0.768255,
+    "hwvc_nmsd_s2": 0.599728,
+    "hwvc_R_s2": 0.592723,
+    "hwvc_R_s5": 0.592688,
+    "band07:Geodetic shear rate": 0.592577,
+    "hwvc_nmsd_s5": 0.591106,
+    "band04:Geodetic second invariant": 0.589725,
+    "band16:Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)": 0.588523,
+    "band06:Tilt angle or total curvature": 0.572078,
+    "band19:Detrended elevation slope": 0.571034,
+    "band10:Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)": 0.569522,
+    "band05:Isostatic gravity anomaly slope": 0.565279,
+    "band03:Total magnetic intensity horizontal gradient": 0.559,
+    "hwvc_C_s5": 0.554287,
+    "band13:Isostatic gravity anomaly": 0.551382,
+    "band18:Isostatic gravity anomaly horizontal gradient": 0.546685,
+    "hwvc_C_s2": 0.546653,
+    "band11:Isostatic gravity anomaly vertical gradient": 0.546328,
+    "band08:Geodetic dilatation rate": 0.542977,
+    "band14:Total magnetic intensity": 0.540283,
+    "band17:Conductivity surface": 0.536963,
+    "band01:Magnetic anomaly": 0.536413,
+    "band15:Depth to basement surface": 0.530753,
+    "band09:Total magnetic intensity vertical gradient": 0.526001,
+    "band12:Detrended elevation": 0.525174,
+    "band02:Reduced to pole magnetic data": 0.521282
+  },
+  "flagged": [],
+  "per_fold": [
+    {
+      "fold": 0,
+      "feature": "band01:Magnetic anomaly",
+      "AUC": 0.509401,
+      "separability": 0.509401,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band02:Reduced to pole magnetic data",
+      "AUC": 0.503183,
+      "separability": 0.503183,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band03:Total magnetic intensity horizontal gradient",
+      "AUC": 0.526347,
+      "separability": 0.526347,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band04:Geodetic second invariant",
+      "AUC": 0.589508,
+      "separability": 0.589508,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band05:Isostatic gravity anomaly slope",
+      "AUC": 0.493802,
+      "separability": 0.506198,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band06:Tilt angle or total curvature",
+      "AUC": 0.431685,
+      "separability": 0.568315,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band07:Geodetic shear rate",
+      "AUC": 0.580797,
+      "separability": 0.580797,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band08:Geodetic dilatation rate",
+      "AUC": 0.540669,
+      "separability": 0.540669,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band09:Total magnetic intensity vertical gradient",
+      "AUC": 0.495092,
+      "separability": 0.504908,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band10:Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+      "AUC": 0.569522,
+      "separability": 0.569522,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band11:Isostatic gravity anomaly vertical gradient",
+      "AUC": 0.532713,
+      "separability": 0.532713,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band12:Detrended elevation",
+      "AUC": 0.490093,
+      "separability": 0.509907,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band13:Isostatic gravity anomaly",
+      "AUC": 0.448618,
+      "separability": 0.551382,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band14:Total magnetic intensity",
+      "AUC": 0.503696,
+      "separability": 0.503696,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band15:Depth to basement surface",
+      "AUC": 0.510282,
+      "separability": 0.510282,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band16:Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+      "AUC": 0.580939,
+      "separability": 0.580939,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band17:Conductivity surface",
+      "AUC": 0.46391,
+      "separability": 0.53609,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band18:Isostatic gravity anomaly horizontal gradient",
+      "AUC": 0.4674,
+      "separability": 0.5326,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "band19:Detrended elevation slope",
+      "AUC": 0.559351,
+      "separability": 0.559351,
+      "n_pos": 11354,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "hwvc_C_s2",
+      "AUC": 0.492604,
+      "separability": 0.507396,
+      "n_pos": 11370,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "hwvc_C_s5",
+      "AUC": 0.503463,
+      "separability": 0.503463,
+      "n_pos": 11370,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "hwvc_R_s2",
+      "AUC": 0.525183,
+      "separability": 0.525183,
+      "n_pos": 11370,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "hwvc_R_s5",
+      "AUC": 0.523245,
+      "separability": 0.523245,
+      "n_pos": 11370,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "hwvc_nmsd_s2",
+      "AUC": 0.460781,
+      "separability": 0.539219,
+      "n_pos": 11370,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "hwvc_nmsd_s5",
+      "AUC": 0.472964,
+      "separability": 0.527036,
+      "n_pos": 11370,
+      "n_neg": 200000
+    },
+    {
+      "fold": 0,
+      "feature": "h1_segment_exact_distance(visible only)",
+      "AUC": 0.231745,
+      "separability": 0.768255,
+      "n_pos": 11370,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band01:Magnetic anomaly",
+      "AUC": 0.504261,
+      "separability": 0.504261,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band02:Reduced to pole magnetic data",
+      "AUC": 0.504501,
+      "separability": 0.504501,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band03:Total magnetic intensity horizontal gradient",
+      "AUC": 0.521297,
+      "separability": 0.521297,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band04:Geodetic second invariant",
+      "AUC": 0.541716,
+      "separability": 0.541716,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band05:Isostatic gravity anomaly slope",
+      "AUC": 0.565279,
+      "separability": 0.565279,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band06:Tilt angle or total curvature",
+      "AUC": 0.427922,
+      "separability": 0.572078,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band07:Geodetic shear rate",
+      "AUC": 0.539472,
+      "separability": 0.539472,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band08:Geodetic dilatation rate",
+      "AUC": 0.530416,
+      "separability": 0.530416,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band09:Total magnetic intensity vertical gradient",
+      "AUC": 0.488102,
+      "separability": 0.511898,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band10:Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+      "AUC": 0.527331,
+      "separability": 0.527331,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band11:Isostatic gravity anomaly vertical gradient",
+      "AUC": 0.546328,
+      "separability": 0.546328,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band12:Detrended elevation",
+      "AUC": 0.476291,
+      "separability": 0.523709,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band13:Isostatic gravity anomaly",
+      "AUC": 0.458025,
+      "separability": 0.541975,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band14:Total magnetic intensity",
+      "AUC": 0.501926,
+      "separability": 0.501926,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band15:Depth to basement surface",
+      "AUC": 0.530753,
+      "separability": 0.530753,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band16:Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+      "AUC": 0.552022,
+      "separability": 0.552022,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band17:Conductivity surface",
+      "AUC": 0.522527,
+      "separability": 0.522527,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band18:Isostatic gravity anomaly horizontal gradient",
+      "AUC": 0.546685,
+      "separability": 0.546685,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "band19:Detrended elevation slope",
+      "AUC": 0.547023,
+      "separability": 0.547023,
+      "n_pos": 12584,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "hwvc_C_s2",
+      "AUC": 0.546653,
+      "separability": 0.546653,
+      "n_pos": 12598,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "hwvc_C_s5",
+      "AUC": 0.554287,
+      "separability": 0.554287,
+      "n_pos": 12598,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "hwvc_R_s2",
+      "AUC": 0.592723,
+      "separability": 0.592723,
+      "n_pos": 12598,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "hwvc_R_s5",
+      "AUC": 0.592688,
+      "separability": 0.592688,
+      "n_pos": 12598,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "hwvc_nmsd_s2",
+      "AUC": 0.400272,
+      "separability": 0.599728,
+      "n_pos": 12598,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "hwvc_nmsd_s5",
+      "AUC": 0.408894,
+      "separability": 0.591106,
+      "n_pos": 12598,
+      "n_neg": 200000
+    },
+    {
+      "fold": 1,
+      "feature": "h1_segment_exact_distance(visible only)",
+      "AUC": 0.256032,
+      "separability": 0.743968,
+      "n_pos": 12598,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band01:Magnetic anomaly",
+      "AUC": 0.463587,
+      "separability": 0.536413,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band02:Reduced to pole magnetic data",
+      "AUC": 0.484336,
+      "separability": 0.515664,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band03:Total magnetic intensity horizontal gradient",
+      "AUC": 0.531311,
+      "separability": 0.531311,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band04:Geodetic second invariant",
+      "AUC": 0.589725,
+      "separability": 0.589725,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band05:Isostatic gravity anomaly slope",
+      "AUC": 0.537806,
+      "separability": 0.537806,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band06:Tilt angle or total curvature",
+      "AUC": 0.448923,
+      "separability": 0.551077,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band07:Geodetic shear rate",
+      "AUC": 0.592577,
+      "separability": 0.592577,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band08:Geodetic dilatation rate",
+      "AUC": 0.519284,
+      "separability": 0.519284,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band09:Total magnetic intensity vertical gradient",
+      "AUC": 0.473999,
+      "separability": 0.526001,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band10:Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+      "AUC": 0.564089,
+      "separability": 0.564089,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band11:Isostatic gravity anomaly vertical gradient",
+      "AUC": 0.501125,
+      "separability": 0.501125,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band12:Detrended elevation",
+      "AUC": 0.481283,
+      "separability": 0.518717,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band13:Isostatic gravity anomaly",
+      "AUC": 0.453818,
+      "separability": 0.546182,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band14:Total magnetic intensity",
+      "AUC": 0.459717,
+      "separability": 0.540283,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band15:Depth to basement surface",
+      "AUC": 0.501881,
+      "separability": 0.501881,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band16:Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+      "AUC": 0.585413,
+      "separability": 0.585413,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band17:Conductivity surface",
+      "AUC": 0.481798,
+      "separability": 0.518202,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band18:Isostatic gravity anomaly horizontal gradient",
+      "AUC": 0.483216,
+      "separability": 0.516784,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "band19:Detrended elevation slope",
+      "AUC": 0.56662,
+      "separability": 0.56662,
+      "n_pos": 12146,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "hwvc_C_s2",
+      "AUC": 0.513528,
+      "separability": 0.513528,
+      "n_pos": 12169,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "hwvc_C_s5",
+      "AUC": 0.518411,
+      "separability": 0.518411,
+      "n_pos": 12169,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "hwvc_R_s2",
+      "AUC": 0.554107,
+      "separability": 0.554107,
+      "n_pos": 12169,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "hwvc_R_s5",
+      "AUC": 0.550635,
+      "separability": 0.550635,
+      "n_pos": 12169,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "hwvc_nmsd_s2",
+      "AUC": 0.442121,
+      "separability": 0.557879,
+      "n_pos": 12169,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "hwvc_nmsd_s5",
+      "AUC": 0.45216,
+      "separability": 0.54784,
+      "n_pos": 12169,
+      "n_neg": 200000
+    },
+    {
+      "fold": 2,
+      "feature": "h1_segment_exact_distance(visible only)",
+      "AUC": 0.235205,
+      "separability": 0.764795,
+      "n_pos": 12169,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band01:Magnetic anomaly",
+      "AUC": 0.479188,
+      "separability": 0.520812,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band02:Reduced to pole magnetic data",
+      "AUC": 0.478718,
+      "separability": 0.521282,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band03:Total magnetic intensity horizontal gradient",
+      "AUC": 0.497123,
+      "separability": 0.502877,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band04:Geodetic second invariant",
+      "AUC": 0.547147,
+      "separability": 0.547147,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band05:Isostatic gravity anomaly slope",
+      "AUC": 0.529738,
+      "separability": 0.529738,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band06:Tilt angle or total curvature",
+      "AUC": 0.475045,
+      "separability": 0.524955,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band07:Geodetic shear rate",
+      "AUC": 0.554847,
+      "separability": 0.554847,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band08:Geodetic dilatation rate",
+      "AUC": 0.494371,
+      "separability": 0.505629,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band09:Total magnetic intensity vertical gradient",
+      "AUC": 0.484662,
+      "separability": 0.515338,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band10:Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+      "AUC": 0.525962,
+      "separability": 0.525962,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band11:Isostatic gravity anomaly vertical gradient",
+      "AUC": 0.530694,
+      "separability": 0.530694,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band12:Detrended elevation",
+      "AUC": 0.474826,
+      "separability": 0.525174,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band13:Isostatic gravity anomaly",
+      "AUC": 0.454114,
+      "separability": 0.545886,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band14:Total magnetic intensity",
+      "AUC": 0.483142,
+      "separability": 0.516858,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band15:Depth to basement surface",
+      "AUC": 0.50654,
+      "separability": 0.50654,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band16:Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+      "AUC": 0.539097,
+      "separability": 0.539097,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band17:Conductivity surface",
+      "AUC": 0.463037,
+      "separability": 0.536963,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band18:Isostatic gravity anomaly horizontal gradient",
+      "AUC": 0.502513,
+      "separability": 0.502513,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "band19:Detrended elevation slope",
+      "AUC": 0.54613,
+      "separability": 0.54613,
+      "n_pos": 12650,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "hwvc_C_s2",
+      "AUC": 0.524471,
+      "separability": 0.524471,
+      "n_pos": 12671,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "hwvc_C_s5",
+      "AUC": 0.518939,
+      "separability": 0.518939,
+      "n_pos": 12671,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "hwvc_R_s2",
+      "AUC": 0.556249,
+      "separability": 0.556249,
+      "n_pos": 12671,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "hwvc_R_s5",
+      "AUC": 0.552681,
+      "separability": 0.552681,
+      "n_pos": 12671,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "hwvc_nmsd_s2",
+      "AUC": 0.456602,
+      "separability": 0.543398,
+      "n_pos": 12671,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "hwvc_nmsd_s5",
+      "AUC": 0.448497,
+      "separability": 0.551503,
+      "n_pos": 12671,
+      "n_neg": 200000
+    },
+    {
+      "fold": 3,
+      "feature": "h1_segment_exact_distance(visible only)",
+      "AUC": 0.265089,
+      "separability": 0.734911,
+      "n_pos": 12671,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band01:Magnetic anomaly",
+      "AUC": 0.499823,
+      "separability": 0.500177,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band02:Reduced to pole magnetic data",
+      "AUC": 0.517169,
+      "separability": 0.517169,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band03:Total magnetic intensity horizontal gradient",
+      "AUC": 0.559,
+      "separability": 0.559,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band04:Geodetic second invariant",
+      "AUC": 0.586593,
+      "separability": 0.586593,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band05:Isostatic gravity anomaly slope",
+      "AUC": 0.537268,
+      "separability": 0.537268,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band06:Tilt angle or total curvature",
+      "AUC": 0.455736,
+      "separability": 0.544264,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band07:Geodetic shear rate",
+      "AUC": 0.580714,
+      "separability": 0.580714,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band08:Geodetic dilatation rate",
+      "AUC": 0.542977,
+      "separability": 0.542977,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band09:Total magnetic intensity vertical gradient",
+      "AUC": 0.490778,
+      "separability": 0.509222,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band10:Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+      "AUC": 0.566118,
+      "separability": 0.566118,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band11:Isostatic gravity anomaly vertical gradient",
+      "AUC": 0.524549,
+      "separability": 0.524549,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band12:Detrended elevation",
+      "AUC": 0.502337,
+      "separability": 0.502337,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band13:Isostatic gravity anomaly",
+      "AUC": 0.484473,
+      "separability": 0.515527,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band14:Total magnetic intensity",
+      "AUC": 0.496446,
+      "separability": 0.503554,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band15:Depth to basement surface",
+      "AUC": 0.5095,
+      "separability": 0.5095,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band16:Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+      "AUC": 0.588523,
+      "separability": 0.588523,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band17:Conductivity surface",
+      "AUC": 0.485562,
+      "separability": 0.514438,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band18:Isostatic gravity anomaly horizontal gradient",
+      "AUC": 0.495354,
+      "separability": 0.504646,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "band19:Detrended elevation slope",
+      "AUC": 0.571034,
+      "separability": 0.571034,
+      "n_pos": 12160,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "hwvc_C_s2",
+      "AUC": 0.496386,
+      "separability": 0.503614,
+      "n_pos": 12180,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "hwvc_C_s5",
+      "AUC": 0.488629,
+      "separability": 0.511371,
+      "n_pos": 12180,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "hwvc_R_s2",
+      "AUC": 0.55077,
+      "separability": 0.55077,
+      "n_pos": 12180,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "hwvc_R_s5",
+      "AUC": 0.541421,
+      "separability": 0.541421,
+      "n_pos": 12180,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "hwvc_nmsd_s2",
+      "AUC": 0.433653,
+      "separability": 0.566347,
+      "n_pos": 12180,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "hwvc_nmsd_s5",
+      "AUC": 0.436861,
+      "separability": 0.563139,
+      "n_pos": 12180,
+      "n_neg": 200000
+    },
+    {
+      "fold": 4,
+      "feature": "h1_segment_exact_distance(visible only)",
+      "AUC": 0.247243,
+      "separability": 0.752757,
+      "n_pos": 12180,
+      "n_neg": 200000
+    }
+  ],
+  "runtime_s": 39.2,
+  "gemsdoe29_template_check": "the leaky full-catalogue distance would be 0 on every catalogue pixel (separability 1.0); H1 here is recomputed from visible faults only"
+}
