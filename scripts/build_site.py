@@ -133,6 +133,8 @@ def main() -> int:
     cur = J("docs/submissions/CURRENT.json")
     e1 = J("evidence/e1_h1_thin_holdout.json")
     e2 = J("evidence/e2_leakfree_holdouts.json")
+    legacy_e2 = J("evidence/exp2_holdout_arms.json")
+    leaky_holdout = legacy_e2["arms"]["leaky_ablate"]["pooled"]["0.02"]
     e3 = J(cur["receipt"])
     gate = J(f"evidence/uniqueness_gate_{cur['name']}.json")
     g32 = J("evidence/gemsdoe32_measured.json")
@@ -142,18 +144,24 @@ def main() -> int:
     card = J("evidence/run_card.json")
     diag = J(f"evidence/uniqueness_diagnostics_{cur['name']}.json")
     sp_rho = J(f"evidence/diagnostic_surface_rho_{cur['name']}.json")
+    lattice = next((r for r in diag.get("sparse_flagged_top", []) if "r13-lattice-s5_v2" in r.get("file", "")), None)
+    if lattice is None:
+        raise RuntimeError("canonical diagnostics do not contain the GEMSDOE13 lattice comparison")
+    overlap_limit_pct = 100 * gate["thresholds"]["dot_overlap_within_3px"]
+    rho_limit = gate["thresholds"]["spearman_rho"]
     label = cur["label"]
     ok = label.startswith("Validated")
     sp = e2.get("spatial_confirmation", {})
     stage1 = e2.get("segment_selection", {})
     base_B = e2["baseline_design_B"]
     cd = e2["canary_design_B"]
+    selected = stage1.get("selected")
     V = e2["segment_folds"]["variants"]
+    selected_variant_row = V.get(f"{selected['arm']}:{selected['variant']}") if selected else None
     fname = cur["file"].split("/")[-1]
     tif_path = ROOT / cur["file"]
     size_b = tif_path.stat().st_size if tif_path.exists() else e3["bytes"]
     accepted = bool(sp.get("acceptance", {}).get("accepted", False))
-    selected = stage1.get("selected")
     cand_desc = f"{cur['spec']['arm']} {cur['spec']['variant']}"
     cand_pooled = (sp.get("selected_result", {}).get("pooled_DTI") if (selected and cur["spec"]["variant"] == selected["variant"]
                                                                        and cur["spec"]["arm"] == selected["arm"])
@@ -174,15 +182,16 @@ def main() -> int:
     sp_rows = ""
     if sp.get("status") == "COMPLETED":
         d = sp["paired_difference"]
-        sp_rows = (f"<tr><td>Spatial confirmation (contiguous super-regions)</td><td>baseline {f4(sp['baseline']['pooled_DTI'])} vs "
-                   f"{esc(sp['selected']['arm'])} {esc(sp['selected']['variant'])} {f4(sp['selected_result']['pooled_DTI'])}</td>"
-                   f"<td>paired mean diff {d['mean_fold_diff']:+.4f}, 95% CI {d['CI95'][0]:+.4f} to {d['CI95'][1]:+.4f}; "
+        sp_rows = (f"<tr><td>Spatial confirmation (HOLDOUT-DTI; contiguous super-regions)</td><td>pooled baseline {f4(sp['baseline']['pooled_DTI'])} vs "
+                   f"{esc(sp['selected']['arm'])} {esc(sp['selected']['variant'])} {f4(sp['selected_result']['pooled_DTI'])}; "
+                   f"withheld positives {sp.get('withheld_positives_total', 0):,} in {sp.get('withheld_segments_total', 0):,} segments</td>"
+                   f"<td>evaluator gems53.core.dti v1.0.0; paired mean Δ {d['mean_fold_diff']:+.4f}, 95% paired t CI {d['CI95'][0]:+.4f} to {d['CI95'][1]:+.4f} (df 4); "
                    f"accepted = {accepted}</td></tr>")
     gate_pass = {k: bool(v) for k, v in e3["gates"].items()}
     gate_rows = "".join(f"<tr><td>{esc(k)}</td><td>{'PASS' if gate_pass[k] else 'FAIL'}</td></tr>" for k in gate_pass)
     open_irr = [i for i in irr if str(i.get("status", "")).startswith("open")]
     top_irr = "".join(f"<li><b>{esc(i['id'])}</b> ({esc(i['severity'])}): {esc(i['subject'])}</li>"
-                      for i in irr if i["id"] in ("IR-53-01", "IR-53-02", "IR-53-37", "IR-53-38", "IR-53-40", "IR-53-42"))
+                      for i in irr if i["id"] in ("IR-53-01", "IR-53-02", "IR-53-37", "IR-53-38", "IR-53-40", "IR-53-42", "IR-53-46", "IR-53-49"))
 
     body = f"""
 <section>
@@ -191,9 +200,7 @@ def main() -> int:
   <b>Is it OK to submit?</b> {sub_text}</p>
   <h1>Executive summary</h1>
   <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
-  Short answer: the file below passes every format check, but it is <b>not cleared by the uniqueness gate</b>, so it is labelled
-  <b>{esc(label)}</b>. The uniqueness gate flags {gate['n_flagged']} registry rasters, and on this registry the raw 70% overlap rule cannot be satisfied by any placement (IR-53-46).
-  The holdout evidence is also a proxy, and our first holdout had a design error (IR-53-37).</p>
+  Short answer: the file below passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>{esc(label)}</b> and must not be uploaded. The full registry gate flags {gate['n_flagged']} rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by {100*lattice['overlap_final']:.3f}% within 3 px (limit {overlap_limit_pct:.0f}%; chance coverage {100*lattice['chance_coverage']:.2f}%, lift {lattice['lift_over_chance']:.4f}); whole-grid pre-placement surface rho max is {gate['max']['max_rho_surface']:.6f} (limit {rho_limit:.2f}). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
   <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
   Nothing has been submitted, and no submission slot was used.</div>
 </section>
@@ -202,14 +209,14 @@ def main() -> int:
   <h2>The file</h2>
   <table>
     <tr><th>Download</th><td><a class="btn {'' if ok else 'dis'}" href="submissions/{esc(fname)}">Download {esc(fname)}</a> ({size_b:,} bytes)</td></tr>
-    <tr><th>Name (unique)</th><td><code>{esc(cur['name'])}</code></td></tr>
+    <tr><th>Submission name (identifier)</th><td><code>{esc(cur['name'])}</code></td></tr>
     <tr><th>Comment (≤140 characters, {len(cur['note'])} used)</th><td><code>{esc(cur['note'])}</code></td></tr>
     <tr><th>sha256 (container)</th><td><code>{esc(cur['sha256'])}</code></td></tr>
     <tr><th>sha256 (pixels, float32 little-endian)</th><td><code>{esc(cur['pixel_sha256'])}</code></td></tr>
     <tr><th>Candidate</th><td>{esc(cand_desc)}, trained on all known faults, emission zeroed on known faults</td></tr>
     <tr><th>Format</th><td>single-band float32 GeoTIFF, EPSG:32611, 100 m, same transform and shape as the sample, NaN exactly outside the footprint, values in [0, 1]</td></tr>
   </table>
-  <p class="note">Status words in the file's metadata match the label above. Re-run <code>python scripts/e3_build_candidate.py</code> to regenerate.</p>
+  <p class="note">Status words in the file's metadata match the label above. Do not rerun E3 in this lane: the three-experiment budget is exhausted and the uniqueness gate failed.</p>
 </section>
 
 <section>
@@ -239,25 +246,25 @@ def main() -> int:
   <h2>Answers (each labelled)</h2>
   <table>
     <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
-    <tr><td>Is the file unique and valid?</td><td>Valid: yes (format and conformance checks pass). Unique under the pre-registered gate: <b>no</b>. The gate flags {gate['n_flagged']} of {gate['registry_unique_on_grid']} unique GEMSDOE registry rasters. Of those flags, {diag['flagged_by_class'].get('dense(>50% nonzero)', 0)} are dense rasters (feature grids, probability surfaces) that overlap 100% by construction, and the other {diag['flagged_by_class'].get('sparse(<=25%)', 0) + diag['flagged_by_class'].get('mid(25-50%)', 0)} are dot maps. For those the median chance-corrected lift is {diag['sparse_flagged_median_lift']:.2f} (1.0 = random placement), so most of their overlap is what footprint coverage predicts (IR-53-46, IR-53-48).</td>
+    <tr><td>Is the file unique and valid?</td><td>Valid: yes (format and conformance checks pass). <b>Protocol duplicate / stop: yes</b>; unique under the pre-registered raw gate: <b>no</b>. The full gate flags {gate['n_flagged']} of {gate['registry_unique_on_grid']} unique GEMSDOE registry rasters. Final-dot overlap with the GEMSDOE13 r13 lattice is {100*lattice['overlap_final']:.3f}% within 3 px (strict limit {overlap_limit_pct:.0f}%); chance coverage is {100*lattice['chance_coverage']:.2f}%, lift {lattice['lift_over_chance']:.4f}. The candidate is not claimed to be byte-identical; the raw protocol still says stop. {diag['flagged_by_class'].get('dense(>50% nonzero)', 0)} flags come from dense rasters and {diag['flagged_by_class'].get('sparse(<=25%)', 0) + diag['flagged_by_class'].get('mid(25-50%)', 0)} from sparse/mid rasters; the diagnostics explain the confounding, but do not override the gate (IR-53-46 to IR-53-49).</td>
       <td><span class="pill">gates in submission.html</span></td></tr>
     <tr><td>What would make the file OK to submit?</td><td>A change to the gate's definition (registry scope, a chance-corrected overlap rule, and a footprint-only rank correlation), approved by you (IR-53-16, IR-53-46, IR-53-47), followed by a fresh pre-registered gate run. Nothing of that kind has been applied here.</td>
       <td><span class="pill">decision for the user</span></td></tr>
-    <tr><td>Does it beat 0.3774 (public #1)?</td><td>Unknown. Nothing here is an organizer score.</td><td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
-    <tr><td>Holdout proxy (stage 1, design B)</td><td>Bands top-q 0.02 baseline: pooled {f4(base_B['pooled_DTI'])}, 95% CI {base_B['CI95'][0]:.4f} to {base_B['CI95'][1]:.4f}, withheld positives {base_B['withheld_positives']:,}.
-      Selected variant ({esc(selected['arm'] + ' ' + selected['variant']) if selected else 'none'}): pooled {f4(selected['pooled_DTI']) if selected else 'n/a'}, chosen on these folds, so optimistic.</td>
-      <td><span class="pill">HOLDOUT-DTI</span></td></tr>
+    <tr><td>Does it beat public-board row 0.3774 (#1, S2)?</td><td>Unknown. Nothing here is an organizer-confirmed score for this file.</td><td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
+    <tr><td>Stage 1 (design B) HOLDOUT-DTI</td><td>Evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments. Bands top-q 0.02 baseline: pooled {f4(base_B['pooled_DTI'])}, 95% t CI (df 4) {base_B['CI95'][0]:.4f} to {base_B['CI95'][1]:.4f}.
+      Selected variant ({esc(selected['arm'] + ' ' + selected['variant']) if selected else 'none'}): pooled HOLDOUT-DTI {f4(selected['pooled_DTI']) if selected else 'n/a'}, CI {selected_variant_row['CI95_t_df4_on_fold_mean'] if selected_variant_row else 'n/a'}; selected on these folds, so optimistic.</td>
+      <td><span class="pill">HOLDOUT-DTI proxy</span></td></tr>
     {sp_rows}
     <tr><td>Why GEMSDOE29 leaks</td><td>Its distance feature is built from the full catalogue, so it is exactly 0 on every known-fault pixel (separability 1.0). Mechanism and audit in <a href="evidence.html#gemsdoe29">evidence</a> and <code>docs/leakage-review.md</code>.</td>
       <td><span class="pill">measured</span></td></tr>
-    <tr><td>Our own holdout had a leak (IR-53-37)</td><td>The first holdout (design A) built its negative pool from withheld labels. Its bands top-q 0.02 pooled DTI was {f4(e1['arms']['bands']['top_q0p02']['pooled_DTI'])}; corrected design B gives {f4(base_B['pooled_DTI'])}. Corrected to design B (DEV-1, pre-registered; the design-A numbers are not used).</td>
-      <td><span class="pill">measured</span></td></tr>
-    <tr><td>Why GEMSDOE32 H33-2-B2 (0.2778) may score high</td><td>Measured on the registry copy: 37,654 dots (0.73% of the footprint), no dot within 2 px of a mapped fault, and dot spacing centred on 3 px (the metric radius). Whether that produced 0.2778 is <b>not established</b>: no receipt links the row to the file (IR-53-02).</td>
-      <td><span class="pill">MEASURED structure; score link NOT established</span></td></tr>
+    <tr><td>Our own holdout had a leak (IR-53-37)</td><td>The first HOLDOUT-DTI design A depended on withheld labels: bands top-q 0.02 = {f4(e1['arms']['bands']['top_q0p02']['pooled_DTI'])} (95% t CI {e1['arms']['bands']['top_q0p02']['CI95_t_df4_on_fold_mean']}); design B gives {f4(base_B['pooled_DTI'])} (95% CI {base_B['CI95']}). Both use evaluator gems53.core.dti v1.0.0 and 60,988 withheld positives; design A is reference only.</td>
+      <td><span class="pill">HOLDOUT-DTI proxy; design A invalid</span></td></tr>
+    <tr><td>Why GEMSDOE32 H33-2-B2 may explain public row 0.2778 (#13, S2)</td><td>Registry-copy structure: 37,654 dots (0.73% of footprint), 0.0% within 2 px of known faults, and median spacing 3 px. Metric-aware pruning/packing is plausible, but the row-to-file link is <b>not established</b> (IR-53-02); 0.2778 is not attributed to this file.</td>
+      <td><span class="pill">public-board snapshot; attribution unknown</span></td></tr>
     <tr><td>Can a higher-scoring file be built?</td><td>Not shown. We have a proxy that rises with thinning and proximity, which is not the competition target (IR-53-42). No file here is shown to beat any leaderboard row.</td>
       <td><span class="pill">not established</span></td></tr>
   </table>
-  <p class="note">The spatial numbers are small in absolute terms: on unseen super-regions the candidate recovers very few withheld faults. The paired gain is positive on all five folds, and the pre-registered rule accepts it. The segment-fold number above is the within-region proximity effect, which the competition target may not share (IR-53-42).</p>
+  <p class="note">Stage-2 numbers are HOLDOUT-DTI proxies (evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments). The absolute scores are small; the paired gain is positive on all five spatial folds, and the preregistered rule accepts it. Stage-1 DTI is selected on its own segment folds and is optimistic. Neither measures the competition's unseen-fault truth (IR-53-42).</p>
 </section>
 
 <section>
@@ -309,7 +316,7 @@ def main() -> int:
 <section>
   <h2>Gates (pre-registered; all must pass for "OK to submit")</h2>
   <table><tr><th>Gate</th><th>Result</th></tr>{gate_rows}</table>
-  <p class="note">Holdout gate = stage-2 paired lower bound above 0 for the selected variant (design B, spatial super-regions). Uniqueness gate = no registry file with Spearman rho above 0.90 and no registry file with more than 70% of our dots within 3 px of its dots.</p>
+  <p class="note">Holdout gate = stage-2 paired lower bound above 0 for the selected variant (design B, spatial super-regions). Uniqueness gate = no registry file with Spearman rho above {rho_limit:.2f} and no registry file with more than {overlap_limit_pct:.0f}% of our dots within 3 px of its dots.</p>
 </section>
 <section>
   <h2>Validators (shared template tools, run on the shipped bytes)</h2>
@@ -321,16 +328,16 @@ def main() -> int:
 <section>
   <h2>Uniqueness receipt (rebuilt registry, {gate['registry_unique_on_grid']} unique rasters)</h2>
   <p>Every unique (sha256) registry raster on the official grid was compared. Overlap = share of our dots within 3 px of that raster's dots. Lift = overlap / chance coverage (1.0 = what random placement would give).</p>
-  <p>Sparse dot maps flagged (the eight with the largest overlap). Dense rasters (57 flagged) are left out of this table: they overlap 100% by construction.</p>
+  <p>Sparse dot maps flagged (the eight with the largest overlap). Dense rasters ({diag['flagged_by_class'].get('dense(>50% nonzero)', 0)} flagged) are left out of this table: they overlap 100% by construction.</p>
   <table><tr><th>Registry dot map</th><th>Dots</th><th>Overlap (our dots within 3 px)</th><th>Chance coverage</th><th>Lift</th><th>Footprint-only rho</th></tr>{top_rows}</table>
-  <p>Full receipt (all 621 rasters): <code>evidence/uniqueness_gate_{esc(cur['name'])}.json</code>. Diagnostics: <code>evidence/uniqueness_diagnostics_{esc(cur['name'])}.json</code>.</p>
+  <p>Canonical full receipt (621 rasters): <code>evidence/uniqueness_gate_{esc(cur['name'])}.json</code>. Diagnostics: <code>evidence/uniqueness_diagnostics_{esc(cur['name'])}.json</code>. The later <code>*_refresh.json</code> checks only three rasters and is not a clearance (IR-53-49).</p>
 </section>
 <section>
   <h2>Why the uniqueness gate flags the file (diagnostics; the verdict is the pre-registered receipt)</h2>
   <ul>
     <li><b>{diag['flagged_rows_analysed']}</b> registry rasters are flagged. By class: {esc(', '.join(f'{k}: {v}' for k, v in diag['flagged_by_class'].items()))}.</li>
-    <li>By overlap above 70%: {diag['flagged_by_overlap']}. By Spearman rho above 0.90 of the candidate surface: {sp_rho['flagged_by_surface_rho_whole_grid']} rasters on the whole grid (NaN counted as 0, which inflates rho through the zeros outside the footprint), and {sp_rho['flagged_by_surface_rho_footprint_only']} on the footprint only (IR-53-47). The final raster exceeds 0.90 for none of the rasters on either basis.</li>
-    <li>Chance coverage of the densest sparse dot map: <b>{100 * diag['densest_sparse_dot_maps_by_chance_coverage'][0]['chance_coverage']:.2f}%</b> of the footprint lies within 3 px of its dots (<code>{esc(diag['densest_sparse_dot_maps_by_chance_coverage'][0]['file'][:80])}</code>). Any candidate placed on this footprint therefore overlaps that file above 70%. The raw gate is <b>not satisfiable by placement</b> on this registry (IR-53-46).</li>
+    <li>By overlap above {overlap_limit_pct:.0f}%: {diag['flagged_by_overlap']}. By Spearman rho above {rho_limit:.2f} of the candidate surface: {sp_rho['flagged_by_surface_rho_whole_grid']} rasters on the whole grid (NaN counted as 0, which inflates rho through the zeros outside the footprint), and {sp_rho['flagged_by_surface_rho_footprint_only']} on the footprint only (IR-53-47). The final raster exceeds {rho_limit:.2f} for none of the rasters on either basis.</li>
+    <li>Chance coverage of the densest sparse dot map: <b>{100 * diag['densest_sparse_dot_maps_by_chance_coverage'][0]['chance_coverage']:.2f}%</b> of the footprint lies within 3 px of its dots (<code>{esc(diag['densest_sparse_dot_maps_by_chance_coverage'][0]['file'][:80])}</code>). Any candidate placed on this footprint therefore overlaps that file above {overlap_limit_pct:.0f}%. The raw gate is <b>not satisfiable by placement</b> on this registry (IR-53-46).</li>
     <li>Median chance-corrected lift for the sparse flagged files: {diag['sparse_flagged_median_lift']:.2f} (1.0 means the overlap is what random placement would give). This is a diagnostic only. Changing the gate needs your explicit approval.</li>
   </ul>
 </section>
@@ -366,35 +373,35 @@ def main() -> int:
     lim_rows = "".join(f"<tr><td>{esc(i['id'])}</td><td>{esc(i['item'])}</td></tr>" for i in lim)
     src_rows = "".join(f"<tr><td>{esc(k)}</td><td><a href=\"{esc(s['url'])}\">{esc(s['title'][:90])}</a></td><td>{esc(s['access'][:90])}</td></tr>"
                        for k, s in srcs.items())
-    hyp_rows = """<tr><td>H1</td><td>Segment-exact learn-predict separation (distance to visible faults excluding the pixel's own segment)</td><td>Tested in E2 (design B); see the stage-1 and stage-2 tables</td></tr>
-<tr><td>M1</td><td>Metric-aware thinning: greedy dominating set at radius 3 px, value p or 1</td><td>Tested in E2 (design B) as variants</td></tr>
-<tr><td>H2</td><td>Magnetic lineament ridges (Hessian) on band 2 and the native GeoDAWN grid (mirror S26)</td><td>Not tested (budget)</td></tr>
-<tr><td>H3</td><td>Fault-parallel strain from bands 7 and 8</td><td><b>BLOCKED</b>: the public strain data have scalars only (IR-53-40)</td></tr>
-<tr><td>H4</td><td>USGS Qfaults as an extra label source</td><td>Rejected: the rules name these maps as a label source</td></tr>
-<tr><td>H5</td><td>Off-catalogue thermal evidence: INGENIOUS 2 m temperature probes, paleo-geothermal deposits, wells and springs (mirror S26, S28)</td><td>Not tested (budget). Data present in the pinned mirror; licence to verify (IR-53-44)</td></tr>
-<tr><td>H7</td><td>Regional trend prior: dominant orientation of visible faults as a feature</td><td>Not tested (budget)</td></tr>"""
+    hyp_rows = """<tr><td>C1 (rank 1)</td><td>Band 17 conductivity + band 2 RTP multi-scale cross-wavelet phase/edge coherence</td><td>Untested. Uses the existing feature stack; medium cost, moderate/low-confidence prior. Budget exhausted; no DTI result. See docs/research/hypotheses.md.</td></tr>
+<tr><td>C2 (rank 2)</td><td>Raw USGS ComCat earthquake event depth/time planes</td><td>Candidate only. S29 host was not reachable from this session; not viable until access/terms are checked.</td></tr>
+<tr><td>C3 (rank 3)</td><td>Multi-date Landsat Level-2 surface-temperature residuals</td><td>Candidate only. S30 host was not reachable from this session; not viable until coverage/access/terms are checked.</td></tr>
+<tr><td>H1 + M1</td><td>Segment-exact learn-predict separation + metric-aware thinning</td><td>Already tested in E2; selected candidate fails the raw registry duplicate gate.</td></tr>
+<tr><td>H2</td><td>Band-2 magnetic Hessian ridges</td><td>Attempted in X1/X2/X3, but X2 used the invalid design-A negative pool (IR-53-37); not untried, not cleanly validated.</td></tr>
+<tr><td>H5 / H7</td><td>Thermal/geothermal and strike/trend priors</td><td>Related portfolio analogues exist; do not claim broad-family novelty.</td></tr>
+<tr><td>H3 / H4</td><td>Strain orientation / extra Qfault labels</td><td>H3 blocked (IR-53-40); H4 rejected as a label-source re-expression.</td></tr>"""
     g = g32["files"]["nan"]
     body = f"""
 <section>
   <h1>Evidence</h1>
-  <p class="note">Every number is read from JSON. HOLDOUT-DTI = proxy. Evaluator <code>gems53.core.dti</code> v1.0.0, parity with the template's <code>src/metrics.py</code>
-  (difference {e1['metric_parity_vs_template']['abs_diff']:.1e}).</p>
-  <p><a href="data/run_card.json">Run card (JSON)</a> · <a href="data/e1_h1_thin_holdout.json">E1 record</a> · <a href="data/e2_leakfree_holdouts.json">E2 record</a> ·
-  <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/arena/0efb644e-gemsdoe53/docs/research/preregistration-2026-10-08.md">pre-registration</a></p>
+  <p class="note">Evidence metrics are read from JSON. HOLDOUT-DTI = catalogue proxy, not organizer score. Evaluator <code>gems53.core.dti</code> v1.0.0, parity with the template's <code>src/metrics.py</code>
+  (difference {e1['metric_parity_vs_template']['abs_diff']:.1e}); individual sections name the withheld-positive count and CI basis.</p>
+  <p><a href="data/run_card.json">Run card (JSON)</a> · <a href="data/e1_h1_thin_holdout.json">E1 record</a> · <a href="data/e2_leakfree_holdouts.json">E2 record</a> · <a href="data/exp2_holdout_arms.json">design-A ablation reference</a> ·
+  <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/arena/5c479bba-gemsdoe53/docs/research/preregistration-2026-10-08.md">pre-registration</a></p>
 </section>
 <section>
   <h2>E1 (design A, reference only): exploration with the withheld-label negative pool</h2>
-  <div class="warn">Design A is <b>not used</b> for any decision (IR-53-37). It is shown to measure the side channel. Reproduction of the exp2 numbers: {'PASS' if e1['reproduction_check_vs_exp2']['pass'] else 'FAIL'}.</div>
-  <table><tr><th>Bands arm variant</th><th>Pooled DTI</th><th>95% CI</th><th>Emitted px</th></tr>{e1_rows}</table>
-  <p>H1 (design A) at top-q 0.02: <b>{f4(e1['arms']['h1']['top_q0p02']['pooled_DTI'])}</b>.
-  Canary, design A (buffered background, reference): H1 mean {f4(e1['canary_H1_feature_alone']['separability_mean'])}.</p>
+  <div class="warn">Design A is <b>not used</b> for any decision (IR-53-37); its withheld-derived negative buffer creates a side channel. The table reports reference-only HOLDOUT-DTI from evaluator gems53.core.dti v1.0.0: 60,988 withheld positives in 3,199 segments, with 95% t CIs (df 4). Reproduction of the earlier exp2 numbers: {'PASS' if e1['reproduction_check_vs_exp2']['pass'] else 'FAIL'}.</div>
+  <table><tr><th>Bands arm variant</th><th>Pooled HOLDOUT-DTI</th><th>95% t CI, df 4</th><th>Emitted px</th></tr>{e1_rows}</table>
+  <p>H1 design-A reference HOLDOUT-DTI at top-q 0.02: <b>{f4(e1['arms']['h1']['top_q0p02']['pooled_DTI'])}</b> (95% t CI {e1['arms']['h1']['top_q0p02']['CI95_t_df4_on_fold_mean']}). Canary, design A (buffered background; not DTI): H1 mean separability {f4(e1['canary_H1_feature_alone']['separability_mean'])}.</p>
 </section>
 <section>
   <h2>E2 (design B): stage 1, all 24 variants on segment folds (seed 53)</h2>
-  <p>Negatives are every footprint pixel that is not a visible fault (DEV-1). Baseline and selection rule as pre-registered.</p>
-  <table><tr><th>Arm</th><th>Variant</th><th>Pooled DTI</th><th>95% CI (t, df 4)</th><th>Emitted px</th><th>Kept dots</th></tr>{e2_rows}</table>
-  <h3>Fold detail, baseline vs selected (stage 2, spatial)</h3>
-  <table><tr><th>Fold</th><th>Withheld px</th><th>Withheld segments</th><th>Baseline DTI</th><th>Selected DTI</th></tr>{fold_rows}</table>
+  <p>Negatives are every footprint pixel that is not a visible fault (DEV-1). Values are HOLDOUT-DTI (proxy; evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments). Each row has a 95% t CI (df 4); the selected value is optimistic because selection occurs across the 24 variants on these folds.</p>
+  <table><tr><th>Arm</th><th>Variant</th><th>Pooled HOLDOUT-DTI</th><th>95% t CI (df 4)</th><th>Emitted px</th><th>Kept dots</th></tr>{e2_rows}</table>
+  <h3>Fold detail, baseline vs selected (stage 2, spatial HOLDOUT-DTI)</h3>
+  <table><tr><th>Fold</th><th>Withheld positive px</th><th>Withheld segments</th><th>Baseline HOLDOUT-DTI (per fold)</th><th>Selected HOLDOUT-DTI (per fold)</th></tr>{fold_rows}</table>
+  <p class="note">For spatial confirmation the reported primary uncertainty is the paired fold-difference interval (df 4); pooled absolute baseline and candidate HOLDOUT-DTI are 0.000102 and 0.004049, with 60,988 withheld positives across 3,199 segments.</p>
 </section>
 <section>
   <h2>Canary under design B (19 label-free bands; background = full non-fault footprint)</h2>
@@ -403,10 +410,10 @@ def main() -> int:
 </section>
 <section id="gemsdoe29">
   <h2>GEMSDOE29 leakage (formal diagnosis)</h2>
-  <p>Mechanism: the deprecated <code>scripts/build_repo_candidate.py</code> in GEMSDOE29 builds its distance-to-known-faults feature from the full label raster, so the feature is exactly 0 on every known-fault pixel. Separability is 1.0 in-sample and on withheld folds. On the holdout the leaky arm reaches DTI 0.99996 (design A, exp2 reference; a defect demo, not a candidate). The formal write-up, audit table and protocol gaps are in <code>docs/leakage-review.md</code>. Learn-predict separation (Kaufman et al., TKDD 2012; DOI 10.1145/2382577.2382579) is the avoidance method used here.</p>
+  <p>Mechanism: the deprecated <code>scripts/build_repo_candidate.py</code> in GEMSDOE29 builds its distance-to-known-faults feature from the full label raster, so that feature is exactly 0 on known-fault pixels. This is target-derived training information, not a valid accuracy result. In our separate historical design-A leaky ablation (not GEMSDOE29's organizer score), the pooled <b>HOLDOUT-DTI</b> was {f4(leaky_holdout['pooled_DTI'])}, 95% t CI (df 4) {leaky_holdout['CI95_t_df4_on_fold_mean']}; evaluator gems53.core.dti v1.0.0, 60,988 withheld positives in 3,199 segments. This near-perfect diagnostic is invalid for model-quality claims because the negative-pool buffer depended on withheld labels (IR-53-37). GEMSDOE29's upstream TRAIN-AUC and this reproduction are distinct evidence. See <code>docs/leakage-review.md</code>; learn-predict separation is the repair.</p>
 </section>
 <section id="gemsdoe32">
-  <h2>GEMSDOE32 H33-2-B2 (score 0.2778): measured structure and owner claims</h2>
+  <h2>GEMSDOE32 H33-2-B2: structure beside public leaderboard row 0.2778 (file attribution not established)</h2>
   <table>
     <tr><th>Measured (registry copy, NaN variant)</th><th>Value</th></tr>
     <tr><td>dots (value 1), share of footprint</td><td>{g['dots']:,} ({pct(g['dots_share_of_footprint'])})</td></tr>
@@ -420,9 +427,9 @@ def main() -> int:
   <b>NOT ESTABLISHED:</b> that this file produced the 0.2778 row (IR-53-02). <b>MEASURED:</b> the dots are spaced about the metric radius apart, the same structure that thinning produces (M1).</p>
 </section>
 <section id="hypotheses">
-  <h2>Hypotheses (ranked; cost and gain are judgements, not scores)</h2>
+  <h2>Hypotheses (next candidates; no untested score claimed)</h2>
+  <p class="warn">The three-experiment budget is exhausted. C1–C3 are hypotheses only; none has been validated or promoted. See the full layer/signature/rationale/novelty screen in <a href="research/hypotheses.md">docs/research/hypotheses.md</a>.</p>
   <table><tr><th>ID</th><th>Hypothesis</th><th>Status</th></tr>{hyp_rows}</table>
-  <p class="note">Full layers, signatures, off-catalogue rationale and cost: <code>docs/research/hypotheses.md</code>.</p>
 </section>
 <section id="irregularities">
   <h2>Irregularities (flagged for review)</h2>
@@ -443,15 +450,15 @@ def main() -> int:
     data_dir = DOCS / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
     for rel in ("evidence/run_card.json", "evidence/e1_h1_thin_holdout.json", "evidence/e2_leakfree_holdouts.json",
-                f"evidence/uniqueness_gate_{cur['name']}.json", f"evidence/uniqueness_diagnostics_{cur['name']}.json",
+                "evidence/exp2_holdout_arms.json", f"evidence/uniqueness_gate_{cur['name']}.json", f"evidence/uniqueness_diagnostics_{cur['name']}.json",
                 cur["receipt"], "evidence/gemsdoe32_measured.json", "registry/irregularities.json",
                 "registry/limitations.json", "registry/sources.json", "docs/submissions/CURRENT.json"):
         src = ROOT / rel
         if src.exists():
             shutil.copy(src, data_dir / src.name)
-    # keep the data folder exactly equal to the current copies (no stale files)
+    # Retain current evidence copies and the separate inventory/card consumed by the site.
     keep = {Path(r).name for r in ("evidence/run_card.json", "evidence/e1_h1_thin_holdout.json",
-                                   "evidence/e2_leakfree_holdouts.json") }
+                                   "evidence/e2_leakfree_holdouts.json")} | {"inventory.json", "parallel-run-card.json"}
     for f in data_dir.glob("*.json"):
         if f.name not in keep and not (ROOT / "evidence").joinpath(f.name).exists() and f.name not in {Path(p).name for p in ("registry/irregularities.json", "registry/limitations.json", "registry/sources.json", "docs/submissions/CURRENT.json")}:
             f.unlink()

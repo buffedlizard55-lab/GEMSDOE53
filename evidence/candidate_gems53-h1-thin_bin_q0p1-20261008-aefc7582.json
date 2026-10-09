@@ -18,11 +18,11 @@
     "canary_clean_for_features_in_model": true
   },
   "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
-  "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53 h1 thin_bin_q0p1 | proxy DTI 0.0040 | not organizer-scored",
-  "note_chars": 95,
+  "note": "RESEARCH-ONLY | HOLDOUT-DTI 0.0040; g53 DTI v1.0, withheld=60,988; \u0394+0.0035 CI95 +0.0006..+0.0064; NOT ORGANIZER-SCORED | DO NOT SUBMIT",
+  "note_chars": 135,
   "file": "docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
-  "bytes": 443170,
-  "sha256": "a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b",
+  "bytes": 445801,
+  "sha256": "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60",
   "pixel_sha256": "aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda",
   "finite_px": 5167373,
   "nonzero_px": 56605,
@@ -81,7 +81,7 @@
     "all_ok": true
   },
   "holdout": {
-    "evaluator": "gems53.core.dti v1.0.0 (parity with template src/metrics.py in E1)",
+    "evaluator": "gems53.core.dti v1.0.0 (parity with template src/metrics.py verified in E1)",
     "design": "B: positives = visible outside 10 px buffer; negatives = footprint and not visible",
     "stage1_selected": {
       "arm": "h1",
@@ -125,7 +125,19 @@
       "file": "evidence/e1_h1_thin_holdout.json",
       "bands_top_q0p02": 0.035233
     },
-    "label_type": "HOLDOUT-DTI (proxy; not organizer-scored)"
+    "label_type": "HOLDOUT-DTI (proxy; withheld known-fault segments and spatial super-regions; not organizer-scored)",
+    "withheld_positives_total": 60988,
+    "primary_spatial_confirmatory_statistic": {
+      "candidate_pooled_DTI": 0.004049,
+      "baseline_pooled_DTI": 0.000102,
+      "paired_mean_difference": 0.003533,
+      "paired_difference_CI95": [
+        0.000619,
+        0.006447
+      ],
+      "withheld_positives": 60988,
+      "withheld_segments": 3199
+    }
   },
   "canary": {
     "bands_max_separability": 0.591151,
@@ -209,5 +221,17 @@
     ]
   },
   "organizer_score": null,
-  "submitted": false
+  "submitted": false,
+  "post_build_metadata_review": {
+    "kind": "metadata-only note update after E3; no model, pixels, or experiment changed",
+    "previous_container_sha256": "a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b",
+    "current_container_sha256": "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60",
+    "pixel_sha256_unchanged": true,
+    "pixel_sha256": "aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda",
+    "template_validate_submission_exit_after_update": 0,
+    "template_validate_conformant_exit_after_update": 0,
+    "conformant_validation_note": "Passed from the pinned shared-template checkout after the metadata-only update.",
+    "previous_bytes": 443170,
+    "current_bytes": 445801
+  }
 }
