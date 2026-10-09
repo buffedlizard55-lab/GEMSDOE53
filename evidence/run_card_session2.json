@@ -8,7 +8,7 @@
   "statement": "Co-located, co-oriented linear edges in the conductivity surface (band 17) and reduced-to-pole magnetics (band 2), measured by energy-gated multi-scale structure-tensor agreement, rank buried/covered faults that are absent from the USGS/INGENIOUS catalogue.",
   "mechanism": "A concealed fault juxtaposes magnetic units (linear RTP edge) and hosts a conductive damage zone (linear conductivity edge). Requiring both fields to agree at the same place and orientation rejects single-field artifacts. Fourteen label-free features; HGB trained with design-B leak-free sampling.",
   "named_non_fault_mimic": "Volcanic dikes/sills and lithologic contacts produce co-located magnetic + conductivity edges; pluvial-lake paleoshorelines can align conductivity gradients. A catalogue holdout cannot distinguish these; the mimics are named here as required.",
-  "scope_note": "Holdout truth is the withheld known-fault catalogue (IR-53-42, L-31): catalogue recovery is an upper bound for performance on the competition's unmapped targets."
+  "scope_note": "Holdout truth is the withheld known-fault catalogue (IR-53-42, L-39): catalogue recovery is an upper bound for performance on the competition's unmapped targets."
  },
  "budget": {
   "experiments_limit": 3,
@@ -67,9 +67,9 @@
   "file": "docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif",
   "note": "RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT",
   "note_chars": 119,
-  "sha256_file": "57251042b8d2565a9085cb1a8dbb12129201884635789411f359ebccb69a5d09",
+  "sha256_file": "ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398",
   "sha256_pixels": "8cb3456b78c3189300d8715958af736b3cf5fb399ab68982ca420154eeaf6146",
-  "bytes": 1624720,
+  "bytes": 1655200,
   "label": "RESEARCH-ONLY / DO NOT SUBMIT",
   "download_ok": true,
   "submit_ok": false,
@@ -116,8 +116,8 @@
   "no organizer score exists for any GEMSDOE53 file; nothing submitted"
  ],
  "irregularities_session2": [
-  "IR-53-50 (GD-1 gate interpretation, open)",
-  "IR-53-51 (user-reported rejection unreproducible from shipped files, open)",
-  "IR-53-52 (prompt-injection content observed in fetched web page, logged)"
+  "IR-53-64 (GD-1 gate interpretation, open)",
+  "IR-53-65 (user-reported rejection unreproducible from shipped files, open)",
+  "IR-53-66 (prompt-injection content observed in fetched web page, logged)"
  ]
 }

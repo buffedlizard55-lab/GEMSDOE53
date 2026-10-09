@@ -9,7 +9,7 @@
 **Citations now verified line-by-line from official/authoritative bibliographic sources (IR-53-12 resolved):**
 
 - **KDD '11 (three authors):** Kaufman, S., Rosset, S., Perlich, C. "Leakage in data mining: formulation, detection, and avoidance." *Proceedings of the 17th ACM SIGKDD (KDD '11)*, pp. 556–563, 2011. DOI [10.1145/2020408.2020496](https://doi.org/10.1145/2020408.2020496). Verified via [dblp record conf/kdd/KaufmanRP11](https://dblp.org/rec/conf/kdd/KaufmanRP11.html) and [Tel Aviv University CRIS](https://cris.tau.ac.il/en/publications/leakage-in-data-mining-formulation-detection-and-avoidance-2/) (both list exactly these three authors, these pages, this DOI).
-- **ACM TKDD 2012 (four authors, the version the standing prompt quotes):** Kaufman, Rosset, Perlich **and Stitelman**, *ACM TKDD* 6(4):15, 2012 (S34). The prompt's four-author attribution is correct for the journal version; Stitelman does not appear on the KDD '11 conference paper.
+- **ACM TKDD 2012 (four authors, the version the standing prompt quotes):** Kaufman, Rosset, Perlich **and Stitelman**, *ACM TKDD* 6(4):15, 2012 (S45). The prompt's four-author attribution is correct for the journal version; Stitelman does not appear on the KDD '11 conference paper.
 
 **The KRS(-S) formulation applied to GEMSDOE29, step by step:**
 
@@ -151,3 +151,13 @@ The three ranked future hypotheses are in [`docs/research/hypotheses.md`](resear
 - **Pass 1 — source diagnosis:** inspected GEMSDOE29's feature and builder paths; separated legitimate prediction-time catalogue context from label-derived training features; checked the archived arithmetic and source claims.
 - **Pass 2 — holdout audit:** identified the design-A withheld-buffer side channel; confirmed the corrected E2 design B result, per-feature canaries, evaluator parity, and the separate H2 X2 design-A limitation.
 - **Pass 3 — release/uniqueness QA:** regenerated run card and site; verified JSON, shared-template format validators, 30 automated tests, current pointer/file hashes and note, full registry gate; confirmed download-only / no-submit status.
+
+## S3-A reproduction (2026-10-08, no selection)
+
+Source: `scripts/s3a_leakage_repro.py`, receipt `evidence/s3a_leakage_repro.json`. Label: CANARY SENSITIVITY (not HOLDOUT-DTI, not organizer-scored). Pre-registration S3 section 5.
+
+- The GEMSDOE29 construction, reproduced: D_leaky = log1p(min(distance to the FULL catalogue, 60)), positives = the full catalogue.
+- On the training positives, D_leaky is 0 on 100% of pixels (defect confirmed).
+- Single-feature separability on the design-B fold 0 canary: **1.0** (AUC 0.0). The canary flags it: `canary_detects_leaky_feature = true`.
+- The legitimate H1 distance (visible faults only) on the same fold: separability **0.768** (E2 reference 0.768). It passes the 0.90 gate.
+- Conclusion: the leaky construction is caught by the canary. Any model that uses it would be flagged LEAK_SUSPECT. The GEMSDOE29 distance feature must not be used as a training input.

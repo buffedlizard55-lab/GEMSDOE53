@@ -1367,7 +1367,7 @@
  "final_sha256_note": {
   "kind": "metadata-only note/status tag written after the gate ran (finalize_current_s2.py)",
   "gate_time_container_sha256": "ff2a42a5c12d7954444d663e136ce7e86e5a7b6b07cc7c1db7cffad6d7509243",
-  "current_container_sha256": "57251042b8d2565a9085cb1a8dbb12129201884635789411f359ebccb69a5d09",
+  "current_container_sha256": "ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398",
   "pixel_sha256": "8cb3456b78c3189300d8715958af736b3cf5fb399ab68982ca420154eeaf6146",
   "pixels_changed": false,
   "gate_applies_to_pixels": true

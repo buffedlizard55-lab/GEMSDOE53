@@ -1,11 +1,18 @@
 {
  "session": "2026-10-09 session 2",
  "session1_archived_pointer": "docs/submissions/CURRENT_session1_archived.json",
+ "previous_pointer": {
+  "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+  "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+  "label": "Research-only / DO NOT SUBMIT (parallel-session S3 pre-registered frozen control; H8 did not beat the holdout best)",
+  "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
+  "note": "superseded as current pointer by session-2 C1; not cleared"
+ },
  "name": "gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b",
  "file": "docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif",
- "sha256": "57251042b8d2565a9085cb1a8dbb12129201884635789411f359ebccb69a5d09",
+ "sha256": "ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398",
  "pixel_sha256": "8cb3456b78c3189300d8715958af736b3cf5fb399ab68982ca420154eeaf6146",
- "bytes": 1624720,
+ "bytes": 1655200,
  "label": "RESEARCH-ONLY / DO NOT SUBMIT",
  "note": "RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT",
  "note_chars": 119,

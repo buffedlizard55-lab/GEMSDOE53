@@ -129,6 +129,17 @@ def main() -> int:
     if val:
         valhtml = "".join(f"<tr><td>{esc(k)}</td><td><b>{esc(v)}</b></td></tr>" for k, v in val.items())
 
+    preflight = J("docs/data/protocol_preflight_20261009.json")
+    preflight_html = ""
+    if preflight:
+        preflight_html = f"""
+<section>
+  <div class="banner">Pre-placement STOP (universal, pixel-verified): the public GEMSDOE17 E-proba-multiscale registry raster is positive on
+  all {preflight.get('reference_positive_footprint_px', 5167373):,} sample-footprint pixels, so ANY nonempty dot map overlaps it within 3 px
+  at 100% under the literal 70% rule (IR-53-46/IR-53-50). Receipt: <a href="data/protocol_preflight_20261009.json">data/protocol_preflight_20261009.json</a>.
+  Session 2 therefore applies the pre-registered corrected gate (GD-1, IR-53-64) and reports both readings.</div>
+</section>"""
+
     # ------------------------------------------------------------------ index
     body = f"""
 <section>
@@ -164,6 +175,7 @@ def main() -> int:
   C1 is volcanic/lithologic contacts producing co-located magnetic + conductivity edges. GD-1 (corrected uniqueness gate) is a
   pre-registered interpretation of a literal rule that is provably unsatisfiable (IR-53-46/50) and is flagged for user ratification.</div>
 </section>
+{preflight_html}
 
 <section>
   <h2>How to submit (read the label first)</h2>
@@ -175,8 +187,8 @@ def main() -> int:
     <li>Paste the comment from the box above into the optional Note field.</li>
     <li>Submit, and record the portal's exact response text and any score it returns — only that receipt makes a number ORGANIZER-CONFIRMED. Weekly slot cap applies (NLR rules §3.4).</li>
   </ol>
-  <p class="note">Format requirement verified against the official problem page (S35): EPSG:32611, 100 m, same bounds, outside the bounds null/NaN,
-  single-band float32, values in [0,1]. If the platform ever returns "Predicted values must be in range [0, 1]", see IR-53-51: no GEMSDOE53 file
+  <p class="note">Format requirement verified against the official problem page (S46): EPSG:32611, 100 m, same bounds, outside the bounds null/NaN,
+  single-band float32, values in [0,1]. If the platform ever returns "Predicted values must be in range [0, 1]", see IR-53-65: no GEMSDOE53 file
   shipped to date contains NaN inside the scored region, the only known cause of that exact error.</p>
 </section>
 
@@ -189,6 +201,7 @@ def main() -> int:
 <section>
   <h2>Earlier files in this repository (other sessions; not session-2's)</h2>
   <table><tr><th>File</th><th>Label in its own receipt</th><th>Status</th></tr>
+  <tr><td><code>docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</code></td><td>RESEARCH-ONLY / DO NOT SUBMIT</td><td>Parallel-session S3 frozen control (bands top-q 0.02; H8 did not beat the holdout best). Previous pointer; not a recommendation.</td></tr>
   <tr><td><code>docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif</code></td><td>RESEARCH-ONLY / DO NOT SUBMIT</td><td>Session-1 H1/M1 candidate; failed the raw registry duplicate gate (protocol duplicate / stop). Superseded as current candidate but retained with all receipts.</td></tr>
   <tr><td><code>docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif</code></td><td>READY_TO_SUBMIT in its archived run card (PR #6), contradicted by its own session's README</td><td>Flagged by the full-registry gate (82 rasters). Do not upload on the strength of the archived label.</td></tr>
   <tr><td><code>submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif</code></td><td>DO-NOT-SUBMIT (PR #7)</td><td>Flagged by the full-registry gate (86 rasters); X2 holdout used the invalid design-A negative pool (IR-53-37).</td></tr>
@@ -198,7 +211,7 @@ def main() -> int:
 <section>
   <h2>Answers to the standing questions (each labelled)</h2>
   <table><tr><th>Question</th><th>Answer</th></tr>
-  <tr><td>GEMSDOE29 leakage bug?</td><td>Formally diagnosed per Kaufman–Rosset–Perlich (KDD'11, DOI 10.1145/2020408.2020496, verified S33) / Kaufman–Rosset–Perlich–Stitelman (TKDD 2012, S34): its distance feature equals 0 on every positive <i>by construction</i> — the feature can take its observed value only because the label is known. Fix = learn–predict separation (design B). Full write-up: <a href="leakage-review.md">docs/leakage-review.md</a>.</td></tr>
+  <tr><td>GEMSDOE29 leakage bug?</td><td>Formally diagnosed per Kaufman–Rosset–Perlich (KDD'11, DOI 10.1145/2020408.2020496, verified S44) / Kaufman–Rosset–Perlich–Stitelman (TKDD 2012, S45): its distance feature equals 0 on every positive <i>by construction</i> — the feature can take its observed value only because the label is known. Fix = learn–predict separation (design B). Full write-up: <a href="leakage-review.md">docs/leakage-review.md</a>.</td></tr>
   <tr><td>Why did GEMSDOE32 H33-2-B2 score 0.2778?</td><td>NOT ESTABLISHED (IR-53-02): no receipt links the row to the file. Measured geometry (37,654 dots, median 3 px spacing, 0% within 2 px of the catalogue) is compatible with metric-aware off-catalogue packing; that is a plausible mechanism, not proof.</td></tr>
   <tr><td>Can we beat 0.2778 / 0.3195 / 0.3774?</td><td>Unknown — no GEMSDOE53 file has an organizer score. Leaderboard values are the repo snapshot (IR-53-01). Session 2 ships the strongest leak-free candidate this repo has produced (stage-2 ACCEPTED); whether it scores is decided only by submitting through a slot, which is a separate selector decision.</td></tr>
   </table>
@@ -253,7 +266,7 @@ def main() -> int:
   <h2>Uniqueness gate v2 (GD-1)</h2>
   {uhtml}
   <p class="note">Receipt: <code>evidence/uniqueness_gate_v2_session2.json</code>. The RAW literal rule values are archived inside;
-  the corrected reading is pre-registered in <code>docs/research/preregistration-2026-10-09-session2.md</code> §1 (IR-53-50).</p>
+  the corrected reading is pre-registered in <code>docs/research/preregistration-2026-10-09-session2.md</code> §1 (IR-53-64).</p>
 </section>
 
 <section>
@@ -286,6 +299,7 @@ def main() -> int:
 <tr><td><code>docs/leakage-review.md</code></td><td>GEMSDOE29 formal leakage diagnosis (KRS/KRS-S methodology, verified citations)</td></tr>
 <tr><td><code>docs/research/hypotheses.md</code></td><td>Ranked hypothesis screen (session-2: C1, C5, C4, C7 + blocked C2/C3)</td></tr>
 <tr><td><code>evidence/e2_leakfree_holdouts.json</code> et al.</td><td>Session-1 records (branch arena/5c479bba-gemsdoe53; frozen, unchanged)</td></tr>
+<tr><td><code>evidence/s3b_h8_holdout.json</code>, <code>evidence/protocol_preflight_20261009.json</code> et al.</td><td>Parallel-session S3 records (branch arena/7b60bcc7-gemsdoe53; H8 control + universal-overlap preflight; frozen)</td></tr>
 </table></section>
 
 <section><h2>Candidate hypothesis screen (session 2)</h2>

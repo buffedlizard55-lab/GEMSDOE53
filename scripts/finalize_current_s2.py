@@ -42,7 +42,7 @@ def main() -> int:
     pooled = (sp.get("selected_result") or {}).get("pooled_DTI") if sp.get("status") == "COMPLETED" else None
 
     if submit_ok:
-        label = "OK TO DOWNLOAD AND SUBMIT (CLEARED-UNDER-CORRECTED-GATE; GD-1 banner, IR-53-50)"
+        label = "OK TO DOWNLOAD AND SUBMIT (CLEARED-UNDER-CORRECTED-GATE; GD-1 banner, IR-53-64)"
         note = (f"SUBMIT-CANDIDATE | C1 cond-mag {sel.get('variant','')} | HOLDOUT-DTI stage2 pooled "
                 f"{pooled:.4f}, pair-d CI [{d.get('CI95', [0, 0])[0]:+.4f},{d.get('CI95', [0, 0])[1]:+.4f}] "
                 f"| not organizer-scored")
@@ -85,6 +85,13 @@ def main() -> int:
     cur = {
         "session": "2026-10-09 session 2",
         "session1_archived_pointer": "docs/submissions/CURRENT_session1_archived.json",
+        "previous_pointer": {
+            "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+            "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+            "label": "Research-only / DO NOT SUBMIT (parallel-session S3 pre-registered frozen control; H8 did not beat the holdout best)",
+            "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
+            "note": "superseded as current pointer by session-2 C1; not cleared",
+        },
         "name": s3["name"],
         "file": s3["file"],
         "sha256": sha_file,

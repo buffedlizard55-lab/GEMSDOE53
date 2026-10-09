@@ -52,9 +52,9 @@
   "surface_npz": "/tmp/s2_c1_surface.npz",
   "file": "docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif",
   "name": "gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b",
-  "sha256_file": "57251042b8d2565a9085cb1a8dbb12129201884635789411f359ebccb69a5d09",
+  "sha256_file": "ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398",
   "pixel_sha256": "8cb3456b78c3189300d8715958af736b3cf5fb399ab68982ca420154eeaf6146",
-  "bytes": 1624720,
+  "bytes": 1655200,
   "inlane_checks": {
     "finite_all_sample_valid_px": true,
     "nan_exactly_outside_sample_valid": true,

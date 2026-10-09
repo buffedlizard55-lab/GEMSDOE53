@@ -30,7 +30,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <table>
     <tr><th style="width:220px">Download the submission TIF</th>
         <td><a class="btn dis" href="submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif">⬇ Download gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif</a>
-        <span class="note">(1,624,720 bytes, sha256 <code>57251042b8d2565a9085cb1a8dbb12129201884635789411f359ebccb69a5d09</code>)</span></td></tr>
+        <span class="note">(1,655,200 bytes, sha256 <code>ba1ef907a699a879135062235eae5acd43c2adc9b616653e1e609a9b59134398</code>)</span></td></tr>
     <tr><th>Submission name</th><td><code>gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b</code></td></tr>
     <tr><th>Comment (paste into the Note field, 119 / 140 chars)</th><td><code>RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT</code></td></tr>
   </table>
@@ -58,6 +58,13 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
 </section>
 
 <section>
+  <div class="banner">Pre-placement STOP (universal, pixel-verified): the public GEMSDOE17 E-proba-multiscale registry raster is positive on
+  all 5,167,373 sample-footprint pixels, so ANY nonempty dot map overlaps it within 3 px
+  at 100% under the literal 70% rule (IR-53-46/IR-53-50). Receipt: <a href="data/protocol_preflight_20261009.json">data/protocol_preflight_20261009.json</a>.
+  Session 2 therefore applies the pre-registered corrected gate (GD-1, IR-53-64) and reports both readings.</div>
+</section>
+
+<section>
   <h2>How to submit (read the label first)</h2>
   <ol>
     <li>If the label at the top says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
@@ -67,8 +74,8 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
     <li>Paste the comment from the box above into the optional Note field.</li>
     <li>Submit, and record the portal's exact response text and any score it returns — only that receipt makes a number ORGANIZER-CONFIRMED. Weekly slot cap applies (NLR rules §3.4).</li>
   </ol>
-  <p class="note">Format requirement verified against the official problem page (S35): EPSG:32611, 100 m, same bounds, outside the bounds null/NaN,
-  single-band float32, values in [0,1]. If the platform ever returns "Predicted values must be in range [0, 1]", see IR-53-51: no GEMSDOE53 file
+  <p class="note">Format requirement verified against the official problem page (S46): EPSG:32611, 100 m, same bounds, outside the bounds null/NaN,
+  single-band float32, values in [0,1]. If the platform ever returns "Predicted values must be in range [0, 1]", see IR-53-65: no GEMSDOE53 file
   shipped to date contains NaN inside the scored region, the only known cause of that exact error.</p>
 </section>
 
@@ -81,7 +88,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   &quot;statement&quot;: &quot;Co-located, co-oriented linear edges in the conductivity surface (band 17) and reduced-to-pole magnetics (band 2), measured by energy-gated multi-scale structure-tensor agreement, rank buried/covered faults that are absent from the USGS/INGENIOUS catalogue.&quot;,
   &quot;mechanism&quot;: &quot;A concealed fault juxtaposes magnetic units (linear RTP edge) and hosts a conductive damage zone (linear conductivity edge). Requiring both fields to agree at the same place and orientation rejects single-field artifacts. Fourteen label-free features; HGB trained with design-B leak-free sampling.&quot;,
   &quot;named_non_fault_mimic&quot;: &quot;Volcanic dikes/sills and lithologic contacts produce co-located magnetic + conductivity edges; pluvial-lake paleoshorelines can align conductivity gradients. A catalogue holdout cannot distinguish these; the mimics are named here as required.&quot;,
-  &quot;scope_note&quot;: &quot;Holdout truth is the withheld known-fault catalogue (IR-53-42, L-31): catalogue recovery is an upper bound for performance on the competition&#x27;s unmapped targets.&quot;
+  &quot;scope_note&quot;: &quot;Holdout truth is the withheld known-fault catalogue (IR-53-42, L-39): catalogue recovery is an upper bound for performance on the competition&#x27;s unmapped targets.&quot;
  },
  &quot;verdict&quot;: &quot;negative&quot;,
  &quot;holdout_headline&quot;: {
@@ -132,6 +139,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
 <section>
   <h2>Earlier files in this repository (other sessions; not session-2's)</h2>
   <table><tr><th>File</th><th>Label in its own receipt</th><th>Status</th></tr>
+  <tr><td><code>docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</code></td><td>RESEARCH-ONLY / DO NOT SUBMIT</td><td>Parallel-session S3 frozen control (bands top-q 0.02; H8 did not beat the holdout best). Previous pointer; not a recommendation.</td></tr>
   <tr><td><code>docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif</code></td><td>RESEARCH-ONLY / DO NOT SUBMIT</td><td>Session-1 H1/M1 candidate; failed the raw registry duplicate gate (protocol duplicate / stop). Superseded as current candidate but retained with all receipts.</td></tr>
   <tr><td><code>docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif</code></td><td>READY_TO_SUBMIT in its archived run card (PR #6), contradicted by its own session's README</td><td>Flagged by the full-registry gate (82 rasters). Do not upload on the strength of the archived label.</td></tr>
   <tr><td><code>submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif</code></td><td>DO-NOT-SUBMIT (PR #7)</td><td>Flagged by the full-registry gate (86 rasters); X2 holdout used the invalid design-A negative pool (IR-53-37).</td></tr>
@@ -141,7 +149,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
 <section>
   <h2>Answers to the standing questions (each labelled)</h2>
   <table><tr><th>Question</th><th>Answer</th></tr>
-  <tr><td>GEMSDOE29 leakage bug?</td><td>Formally diagnosed per Kaufman–Rosset–Perlich (KDD'11, DOI 10.1145/2020408.2020496, verified S33) / Kaufman–Rosset–Perlich–Stitelman (TKDD 2012, S34): its distance feature equals 0 on every positive <i>by construction</i> — the feature can take its observed value only because the label is known. Fix = learn–predict separation (design B). Full write-up: <a href="leakage-review.md">docs/leakage-review.md</a>.</td></tr>
+  <tr><td>GEMSDOE29 leakage bug?</td><td>Formally diagnosed per Kaufman–Rosset–Perlich (KDD'11, DOI 10.1145/2020408.2020496, verified S44) / Kaufman–Rosset–Perlich–Stitelman (TKDD 2012, S45): its distance feature equals 0 on every positive <i>by construction</i> — the feature can take its observed value only because the label is known. Fix = learn–predict separation (design B). Full write-up: <a href="leakage-review.md">docs/leakage-review.md</a>.</td></tr>
   <tr><td>Why did GEMSDOE32 H33-2-B2 score 0.2778?</td><td>NOT ESTABLISHED (IR-53-02): no receipt links the row to the file. Measured geometry (37,654 dots, median 3 px spacing, 0% within 2 px of the catalogue) is compatible with metric-aware off-catalogue packing; that is a plausible mechanism, not proof.</td></tr>
   <tr><td>Can we beat 0.2778 / 0.3195 / 0.3774?</td><td>Unknown — no GEMSDOE53 file has an organizer score. Leaderboard values are the repo snapshot (IR-53-01). Session 2 ships the strongest leak-free candidate this repo has produced (stage-2 ACCEPTED); whether it scores is decided only by submitting through a slot, which is a separate selector decision.</td></tr>
   </table>

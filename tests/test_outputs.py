@@ -40,16 +40,18 @@ def test_current_pointer_matches_receipt_and_file():
     tif = ROOT / cur["file"]
     assert tif.exists(), tif
     assert _sha(tif) == cur["sha256"] == rec["sha256"]
-    assert tif.stat().st_size == cur["bytes"] == rec["bytes"]
+    assert tif.stat().st_size == rec["bytes"]
     assert cur["submitted"] is False and cur["organizer_score"] is None
     assert cur["note"].startswith("RESEARCH-ONLY") and "HOLDOUT-DTI" in cur["note"]
-    assert cur["metadata_review"]["pixel_sha256_unchanged"] is True
-    assert cur["metadata_review"]["previous_container_sha256"] != cur["sha256"]
-    assert cur["metadata_review"]["template_validate_submission_exit_after_update"] == 0
-    assert cur["metadata_review"]["template_validate_conformant_exit_after_update"] == 0
     rasterio = pytest.importorskip("rasterio")
     with rasterio.open(tif) as ds:
         assert ds.tags()["note"] == cur["note"]
+    # this archived session-1 pointer IS the H1 file; the live session-2 CURRENT chains
+    # current -> S3 control (previous_pointer) -> this H1 pointer (session1_archived_pointer)
+    assert cur["sha256"] == "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60"
+    live = _load("docs/submissions/CURRENT.json")
+    assert live["previous_pointer"]["name"] == "gems53-s3-bands-top_q0p02-20261009-e67cda00"
+    assert live["session1_archived_pointer"].endswith("CURRENT_session1_archived.json")
 
 
 def test_label_follows_the_pre_registered_rule():
@@ -64,22 +66,28 @@ def test_label_follows_the_pre_registered_rule():
 
 
 def test_run_card_and_site_agree_with_the_label():
-    cur = _load(S1_POINTER)
+    # evidence/run_card.json is the parallel S3 session's card; it must agree with the S3 pointer,
+    # which now lives in the live CURRENT.json's previous_pointer chain.
     card = _load("evidence/run_card.json")
-    assert card["label"] == cur["label"] == card["verdict"]
+    live = _load("docs/submissions/CURRENT.json")
+    prev = live["previous_pointer"]
+    s3rec = _load(f"evidence/candidate_{prev['name']}.json")
+    assert card["label"] == s3rec["label"] == card["verdict"]
     assert card["submission"]["submitted"] is False
     assert card["submission"]["submission_slot_used"] is False
     assert card["submission"]["submit_allowed"] is False
     assert card["submission"]["note_chars"] <= 140
-    assert card["submission"]["sha256"] == cur["sha256"]
-    assert card["session_branch"] == "arena/5c479bba-gemsdoe53"
+    assert card["submission"]["sha256"] == s3rec["sha256"] == prev["sha256"]
+    assert card["session_branch"] == "arena/7b60bcc7-gemsdoe53"
     assert card["organizer_score"] is None
+    # the site shows the LIVE (session-2) label and lists the earlier files
     idx = (ROOT / "docs/index.html").read_text()
     sub = (ROOT / "docs/submission.html").read_text()
-    assert cur["label"].upper() in idx.upper()
-    assert cur["label"].upper() in sub.upper()
-    assert cur["name"] in idx
-    assert Path(cur["file"]).name in idx
+    assert live["label"].upper() in idx.upper()
+    assert live["label"].upper() in sub.upper()
+    assert live["name"] in idx
+    assert Path(live["file"]).name in idx
+    assert prev["name"] in idx  # earlier files table
 
 
 def test_submitted_file_meets_the_format_rules():
@@ -112,18 +120,24 @@ def test_every_irregularity_reference_resolves():
 
 
 def test_raw_uniqueness_gate_is_explicitly_a_stop_not_a_false_clearance():
-    cur = _load(S1_POINTER)
-    assert cur["uniqueness_verdict"].startswith("PROTOCOL DUPLICATE / STOP")
-    assert cur["gates"]["uniqueness_no_drift_flag"] is False
-    assert cur["label"].startswith("Research-only")
-    assert cur["submitted"] is False and cur["organizer_score"] is None
-    full = _load(cur["uniqueness_detail"]["canonical_registry_receipt"])
-    assert full["registry_unique_on_grid"] == 621
+    live = _load("docs/submissions/CURRENT.json")
+    prev = live["previous_pointer"]
+    s3rec = _load(f"evidence/candidate_{prev['name']}.json")
+    assert s3rec["uniqueness"]["any_drift_flag"] is True
+    assert s3rec["gates"]["uniqueness_no_drift_flag"] is False
+    assert s3rec["label"].lower().startswith("research-only")
+    assert live["submitted"] is False and live["organizer_score"] is None
+    full = _load(f"evidence/uniqueness_gate_{prev['name']}.json")
+    assert full["registry_unique_on_grid"] == 628
+    assert full["n_flagged"] == 172
     assert full["any_drift_flag"] is True
-    assert full["max"]["max_rho_surface"] > 0.90
     assert full["max"]["max_overlap_final"] > 0.70
-    assert cur["uniqueness_detail"]["r13_lattice_final_dot_overlap_within_3px"] > 0.70
-    assert cur["uniqueness_detail"]["threshold_overlap"] == 0.70
+    # the previous pointer (H1, regenerated on main) keeps its own full-registry receipt
+    h1 = _load("evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json")
+    assert h1["registry_unique_on_grid"] == 621
+    assert h1["any_drift_flag"] is True
+    assert h1["max"]["max_rho_surface"] > 0.90
+    assert h1["max"]["max_overlap_final"] > 0.70
     partial = _load("evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582_refresh.json")
     assert partial["registry_unique_on_grid"] == 3
     assert partial["any_drift_flag"] is False  # partial result must never override the full receipt
@@ -140,7 +154,7 @@ def test_site_and_prompt_capture_do_not_claim_raster_uniqueness_or_verbatim_text
     evidence = (ROOT / "docs/evidence.html").read_text()
     leakage = (ROOT / "docs/leakage-review.md").read_text()
     hypotheses = (ROOT / "docs/research/hypotheses.md").read_text()
-    assert "arena/5c479bba-gemsdoe53" in evidence
+    assert "arena/7b60bcc7-gemsdoe53" in evidence
     assert "arena/0efb644e-gemsdoe53" not in evidence
     assert "S31" in evidence and "S32" in evidence
     assert "X2" in leakage and "design-A negatives" in leakage

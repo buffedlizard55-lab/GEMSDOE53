@@ -78,7 +78,7 @@ def test_session2_file_meets_the_official_format():
         assert s.res == (100.0, 100.0)
         assert s.nodata is not None and np.isnan(s.nodata)
         tmpl = t.read(1)
-        # no NaN inside the scored region (the exact failure mode of the platform range error, IR-53-51)
+        # no NaN inside the scored region (the exact failure mode of the platform range error, IR-53-65)
         assert np.isfinite(arr[np.isfinite(tmpl)]).all()
         assert np.isnan(arr[~np.isfinite(tmpl)]).all()
         fin = arr[np.isfinite(arr)]
