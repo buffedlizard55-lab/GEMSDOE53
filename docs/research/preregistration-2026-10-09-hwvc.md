@@ -68,8 +68,9 @@ Gaussian scales (σ = 2 px and 5 px), plus a Canny-style non-maximum-suppressed 
   * Stage 2: spatial contiguous super-regions (template `src/blocks.py`, 5 folds, 512 px blocks), arm A vs arm B,
     decoder M1 q 0.10, paired t-interval.
   * **Promotion rule:** arm B is promoted only if the stage-1 paired mean difference (B − A, decoder M1) has a
-    95 % lower bound > 0 **and** the stage-2 paired mean difference is > 0. Otherwise E3 builds arm A's
-    successor? No — otherwise the session's result is **negative** and E3 builds no submission candidate from arm B.
+    95 % lower bound > 0 **and** the stage-2 paired mean difference is > 0. Otherwise HWVC is a **negative**
+    result (reported as such), and E3 builds the fallback: arm A (the current holdout best model, bands + H1)
+    with the new decoder D-S. The fallback is labelled as the H1 lane, never as HWVC.
 * **E3 — build + gates.** Train the promoted arm on all catalogue faults (H1 for training positives excludes the
   pixel's own segment; for prediction pixels it is the distance to all catalogue faults). Decoder D-S. Write with
   the shared template writer, validate, run gate D-1 against every registry raster, write the run card.
