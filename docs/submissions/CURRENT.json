@@ -1,50 +1,70 @@
 {
- "name": "gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522",
- "file": "docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif",
- "twin_file": "docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif",
- "sha256": "b6d91ba6f6a703c45bbd71dca43209f95521be52dfa4d9ae96fc8270c392740c",
- "twin_sha256": "388b31312ab1dc53d839a5a584970a8c9cd2f7dca6a286c36945b89a5ef07be0",
- "pixel_sha256": "49bec522517daebc6b240c39134413a92b499fc12b2eee466cedaa29f7eeb24e",
- "label": "OK TO SUBMIT",
- "note": "OK TO SUBMIT | GEMS53 h8 tip/relay corridors + magnetic concordance, pruned >2px off catalogue, 80000 dots @2.8px | HOLDOUT-DTI see receipt ",
- "gates": {
-  "holdout_gate_X5_paired_vs_ridge_CI_lower_gt_0": true,
-  "format_validators_all": true,
-  "uniqueness_DEV2_no_drift_flag": true,
-  "canary_clean_for_features_in_model": true
- },
- "spec": {
-  "arm": "h8_pr",
-  "variant": "pr2_n80000",
-  "N": 80000,
-  "kind": "poisson_dots_2.8px_pruned_gt2px_off_catalogue"
- },
- "decision": "X5 pre-registered rule: highest pooled DTI at N=44090 among ridge_pr/h8_pr/halo_pr, budget = that arm's better N; labelled by X6 gates (pre-registration-h8-2026-10-09.md)",
- "receipt": "evidence/x6_candidate_receipt_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json",
- "verify_receipt": "evidence/x9_verify_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json",
- "holdout": {
-  "label": "HOLDOUT-DTI (proxy: withheld catalogue segments; evaluator shared template GtContext R=3)",
-  "arm": "h8_pr",
-  "N": 80000,
-  "pooled_DTI": 0.166336,
-  "CI95_t_df4_on_fold_mean": [
-   0.162359,
-   0.170321
-  ],
-  "withheld_positives_total": 60988,
-  "folds": {
-   "K": 5,
-   "seed": 53,
-   "segments": 3199,
-   "withheld_px_per_fold": [
-    11370,
-    12598,
-    12169,
-    12671,
-    12180
-   ]
-  }
- },
- "organizer_score": null,
- "submitted": false
+  "name": "gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522",
+  "file": "docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif",
+  "twin_file": "docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif",
+  "sha256": "b6d91ba6f6a703c45bbd71dca43209f95521be52dfa4d9ae96fc8270c392740c",
+  "twin_sha256": "388b31312ab1dc53d839a5a584970a8c9cd2f7dca6a286c36945b89a5ef07be0",
+  "pixel_sha256": "49bec522517daebc6b240c39134413a92b499fc12b2eee466cedaa29f7eeb24e",
+  "label": "OK TO SUBMIT",
+  "note": "OK TO SUBMIT | GEMS53 h8 tip/relay corridors + magnetic concordance, pruned >2px off catalogue, 80000 dots @2.8px | HOLDOUT-DTI see receipt ",
+  "gates": {
+    "holdout_gate_X5_paired_vs_ridge_CI_lower_gt_0": true,
+    "format_validators_all": true,
+    "uniqueness_DEV2_no_drift_flag": true,
+    "canary_clean_for_features_in_model": true
+  },
+  "spec": {
+    "arm": "h8_pr",
+    "variant": "pr2_n80000",
+    "N": 80000,
+    "kind": "poisson_dots_2.8px_pruned_gt2px_off_catalogue"
+  },
+  "decision": "X5 pre-registered rule: highest pooled DTI at N=44090 among ridge_pr/h8_pr/halo_pr, budget = that arm's better N; labelled by X6 gates (pre-registration-h8-2026-10-09.md)",
+  "receipt": "evidence/x6_candidate_receipt_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json",
+  "verify_receipt": "evidence/x9_verify_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json",
+  "holdout": {
+    "label": "HOLDOUT-DTI (proxy: withheld catalogue segments; evaluator shared template GtContext R=3)",
+    "arm": "h8_pr",
+    "N": 80000,
+    "pooled_DTI": 0.166336,
+    "CI95_t_df4_on_fold_mean": [
+      0.162359,
+      0.170321
+    ],
+    "withheld_positives_total": 60988,
+    "folds": {
+      "K": 5,
+      "seed": 53,
+      "segments": 3199,
+      "withheld_px_per_fold": [
+        11370,
+        12598,
+        12169,
+        12671,
+        12180
+      ]
+    }
+  },
+  "organizer_score": null,
+  "submitted": false,
+  "other_sessions_same_day": [
+    {
+      "session": "S3 (PRs #11-#12)",
+      "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+      "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+      "label": "Research-only / DO NOT SUBMIT"
+    },
+    {
+      "session": "h1ds (PR #15)",
+      "name": "gems53-h1ds-n40000-20261009-c468977c-zeros",
+      "file": "archive/do-not-submit/gems53-h1ds-n40000-20261009-c468977c-zeros__DO-NOT-SUBMIT.tif",
+      "label": "DO NOT SUBMIT (uniqueness-gate duplicate)"
+    },
+    {
+      "session": "session-2 / C1 (PR #16)",
+      "name": "gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b",
+      "file": "docs/submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif",
+      "label": "RESEARCH-ONLY / DO NOT SUBMIT"
+    }
+  ]
 }

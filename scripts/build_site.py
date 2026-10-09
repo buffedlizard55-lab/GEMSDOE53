@@ -170,6 +170,10 @@ def main() -> int:
 
     flags = [i for i in irr if str(i.get("status", "")).startswith("open")][:10]
     flags_rows = "".join(f"<li><b>{esc(i['id'])}</b> ({esc(i['severity'])}): {esc(i['subject'])}</li>" for i in flags)
+    sibs = cur.get("other_sessions_same_day", [])
+    sib_rows = "".join(
+        f"<tr><td>{esc(s.get('session',''))}</td><td><code>{esc(s.get('name',''))}</code></td>"
+        f"<td><code>{esc(s.get('file',''))}</code></td><td>{esc(s.get('label',''))}</td></tr>" for s in sibs)
     lim_rows = "".join(f"<li><b>{esc(i['id'])}</b>: {esc(i['item'])}</li>" for i in lim[-8:])
     src_rows = "".join(
         f"<tr><td>{esc(i['id'])}</td><td>{esc(i['title'])}</td>"
@@ -317,6 +321,14 @@ def main() -> int:
   kind — binary dot maps by the dot rule (max lift 1.42 &lt; 2.0), surfaces by the top-N dot convention (N=80,000;
   overlap 0.29–0.36 &lt; 0.70) — and finds the H8 binary dot map unique under the rule the prompt writes
   ("registry raster's <em>dots</em>"). Both readings and receipts are on the record; full discussion on the submission page.</p>
+</section>
+
+<section>
+  <h2>6c. Same-day sibling sessions (parallel lanes)</h2>
+  <p>This repository hosts several parallel lanes; each keeps its own artifacts. The live shared pointers
+  (CURRENT.json, run card, this site) belong to the H8 tip/relay deliverable above; the sibling lanes'
+  candidates are preserved and listed here.</p>
+  <table><tr><th>session</th><th>name</th><th>file</th><th>label</th></tr>{sib_rows}</table>
 </section>
 
 <section>
