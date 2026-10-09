@@ -11,14 +11,18 @@ def read(p):
 def main():
     proof = read("evidence/protocol_preflight_20261009.json")
     cur = read("docs/submissions/CURRENT.json")
-    old = read(cur["receipt"])
-    gate = read(cur["uniqueness_detail"]["canonical_registry_receipt"])
+    old_path = "evidence/candidate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json"
+    old = read(old_path)
+    current = read(cur["receipt"])
+    gate_path = f"evidence/uniqueness_gate_{cur['name']}.json"
+    gate = read(gate_path)
     assert proof["universal_overlap_blocker"] and gate["any_drift_flag"]
     assert proof["reference_sha256"] in {r["sha256"] for r in gate["all_rows"]}
-    assert old["sha256"] == cur["sha256"]
+    assert current["sha256"] == cur["sha256"]
+    assert old["sha256"] == cur["previous_pointer"]["sha256"]
     card = {
         "session": "arena/2cc82f0e-gemsdoe53 (2026-10-09)",
-        "hypothesis": "C1: conductivity–magnetic cross-scale phase coherence (untried; screened only)",
+        "hypothesis": "Pre-placement registry feasibility of any nonempty stack-derived candidate (H12 and C1 remain untried)",
         "mechanism": "Matched, oriented cross-scale edges in conductivity band 17 and RTP magnetics band 2 could indicate buried fault damage/fluid pathways.",
         "named_non_fault_process_that_could_mimic_it": "Lithologic contact between units with different conductivity and magnetic susceptibility.",
         "experiment_status": "STOP at pixel-verified registry pre-placement feasibility gate; zero experiments this session; no new surface or dots placed",
@@ -30,7 +34,7 @@ def main():
             "legacy_paired_gain_CI95": old["holdout"]["stage2_paired_difference"]["CI95"],
             "evaluator": old["holdout"]["evaluator"],
             "withheld_positives": old["holdout"]["withheld_positives_total"],
-            "note": "HOLDOUT-DTI catalogue proxy from prior H1/M1 lane; the interval is for the paired fold-mean GAIN, not the pooled DTI or new C1.",
+            "note": "HOLDOUT-DTI catalogue proxy from prior H1/M1 lane; the interval is for the paired fold-mean GAIN, not the pooled DTI or a new candidate.",
         },
         "registry": {
             "reference_url": proof["reference_url"],
@@ -38,18 +42,27 @@ def main():
             "sample_sha256": proof["sample_sha256"],
             "footprint_px": proof["footprint_px"],
             "reference_positive_footprint_px": proof["reference_positive_footprint_px"],
-            "surface_correlation_C1": None,
-            "final_overlap_C1": None,
-            "overlap_for_any_nonempty_C1_prediction": proof["overlap_for_any_nonempty_conformant_dot_map"],
+            "surface_correlation_new_candidate": None,
+            "final_overlap_new_candidate": None,
+            "overlap_for_any_nonempty_prediction": proof["overlap_for_any_nonempty_conformant_dot_map"],
             "threshold": proof["limit_strictly_greater_than"],
             "legacy_max_surface_rho": gate["max"]["max_rho_surface"],
             "legacy_max_final_dot_overlap": gate["max"]["max_overlap_final"],
             "legacy_registry_rasters": gate["registry_unique_on_grid"],
             "scope": "Full positive-footprint reference proves universal stop for any nonempty dot map under this literal registry definition; no C1-specific correlation was computed.",
         },
-        "raster_sha256": {"new_C1": None, "existing_research_only_H1": cur["sha256"]},
+        "raster_sha256": {"new_candidate": None, "existing_research_only_H1": old["sha256"], "current_research_only_S3": cur["sha256"]},
         "validator_output": {
             "new_C1": "NOT RUN; no raster generated after stop",
+            "current_research_only_S3": {
+                "shared_template_submission_exit": current["validators"]["final_template_validate_submission"]["exit"],
+                "shared_template_conformant_exit": current["validators"]["final_validate_conformant"]["exit"],
+                "no_NaN_inside_footprint": current["inlane"]["nan_inside_footprint"] == 0,
+                "values_in_0_1": current["inlane"]["values_in_0_1_whole_array"],
+                "CRS_match": current["inlane"]["crs_ok"],
+                "shape_match": current["inlane"]["shape_ok"],
+                "transform_match": current["inlane"]["transform_ok"],
+            },
             "existing_research_only_H1": {
                 "shared_template_submission_exit": old["validators"]["final_template_validate_submission"]["exit"],
                 "shared_template_conformant_exit": old["validators"]["final_validate_conformant"]["exit"],
@@ -60,13 +73,13 @@ def main():
                 "transform_match": old["inlane"]["transform_ok"],
             },
         },
-        "submission_name": {"new_C1": None, "existing_research_only_H1": cur["name"]},
+        "submission_name": {"new_candidate": None, "existing_research_only_H1": old["name"], "current_research_only_S3": cur["name"]},
         "submission_note": "DO NOT SUBMIT: literal registry overlap=100%; no C1 candidate or organizer score.",
         "organizer_score": None,
         "weekly_submission_slot_used": False,
         "verdict": "negative",
-        "reasons": ["literal >70% registry rule cannot clear any nonempty conformant prediction", "C1 holdout not run; no score improvement established"],
-        "provenance": ["evidence/protocol_preflight_20261009.json", cur["receipt"], cur["uniqueness_detail"]["canonical_registry_receipt"]],
+        "reasons": ["literal >70% registry rule cannot clear any nonempty conformant prediction", "No new holdout run; no score improvement established"],
+        "provenance": ["evidence/protocol_preflight_20261009.json", cur["receipt"], old_path, gate_path],
     }
     assert len(card["submission_note"]) <= 140
     out = ROOT / "evidence/run_card_20261009.json"

@@ -1,0 +1,213 @@
+{
+  "experiment": "S3-C (pre-registration S3, section 6): candidate build, validation, uniqueness, label",
+  "started_utc": "2026-10-09T00:04:33Z",
+  "finished_utc": "2026-10-09T00:13:35Z",
+  "runtime_s": 542.9,
+  "decision": "H8 did not beat the current holdout best (pre-registered negative). The file is the pre-registered frozen control (E2 design-B baseline, bands top-q 0.02): a unique control, not a recommendation",
+  "candidate": {
+    "arm": "bands",
+    "variant": "top_q0p02",
+    "kind": "top",
+    "q": 0.02
+  },
+  "label": "Research-only / DO NOT SUBMIT",
+  "gates": {
+    "holdout_beats_current_best": false,
+    "format_validators_all": true,
+    "uniqueness_no_drift_flag": false
+  },
+  "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+  "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored",
+  "note_chars": 107,
+  "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+  "bytes": 828867,
+  "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
+  "pixel_sha256": "e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd",
+  "finite_px": 5167373,
+  "nonzero_px": 103348,
+  "final_dots": 103348,
+  "pre_placement_candidates": 103347,
+  "conformance": {
+    "pixels": 12279160,
+    "template_valid_px": 5167373,
+    "filled_inside": 0,
+    "masked_outside": 0,
+    "clipped": 0,
+    "unchanged": 12279160
+  },
+  "validators": {
+    "template_validate_submission": {
+      "exit": 0,
+      "tail": [
+        "",
+        "\u2705 Validation PASSED - Ready for submission!",
+        "Next: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via 'Submit' button"
+      ]
+    },
+    "validate_conformant": {
+      "exit": 0
+    },
+    "final_template_validate_submission": {
+      "exit": 0,
+      "tail": [
+        "",
+        "\u2705 Validation PASSED - Ready for submission!",
+        "Next: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via 'Submit' button"
+      ]
+    },
+    "final_validate_conformant": {
+      "exit": 0
+    }
+  },
+  "inlane": {
+    "crs_epsg": 32611,
+    "crs_ok": true,
+    "shape_ok": true,
+    "transform_ok": true,
+    "res_ok": true,
+    "count_ok": true,
+    "dtype": "float32",
+    "nodata": "nan",
+    "nodata_ok": true,
+    "nan_inside_footprint": 0,
+    "finite_outside_template": 0,
+    "values_in_0_1_whole_array": true,
+    "finite_px": 5167373,
+    "nonzero_px": 103348,
+    "min": 0.0,
+    "max": 0.8852052092552185,
+    "all_ok": true
+  },
+  "holdout": {
+    "evaluator": "gems53.core.dti v1.0.0",
+    "label_type": "HOLDOUT-DTI (proxy; not organizer-scored)",
+    "s3b_verdict": {
+      "rule": "accept as beating the holdout best iff the 95% lower bound of (b) > 0 (pre-registration section 4)",
+      "beats_holdout_best": false,
+      "label": "NEGATIVE (holdout)"
+    },
+    "s3b_stage2_pooled": {
+      "h8_selected": 0.00402,
+      "bands_baseline": 0.000102,
+      "E2_H1_thin_bin_q0p1_best": 0.004049,
+      "E2_bands_baseline": 0.000102
+    },
+    "s3b_paired_b": {
+      "mean_fold_diff": 0.000424,
+      "CI95": [
+        -0.003746,
+        0.004594
+      ],
+      "per_fold_diff": [
+        -0.002173,
+        -0.00279,
+        0.005677,
+        0.000312,
+        0.001093
+      ],
+      "lower_bound_above_0": false
+    },
+    "e2_spatial_baseline": {
+      "name": "bands top_q0p02 (design B, bands model)",
+      "pooled_DTI": 0.000102,
+      "pooled_TP_w": 10.9687,
+      "pooled_FP_w": 293670.2139,
+      "pooled_FN_w": 60977.0313
+    },
+    "e2_segment_baseline": {
+      "arm": "bands",
+      "variant": "top_q0p02",
+      "pooled_DTI": 0.010562,
+      "CI95": [
+        0.008337,
+        0.012812
+      ],
+      "withheld_positives": 60988
+    }
+  },
+  "canary": {
+    "s3a": "evidence/s3a_leakage_repro.json",
+    "s3b_h8": {
+      "R": 0.501985,
+      "S": 0.50193,
+      "log1pD": 0.572409
+    }
+  },
+  "uniqueness": {
+    "receipt": "evidence/uniqueness_gate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
+    "registry_dir": "/tmp/gems53-registry-now",
+    "registry_unique_on_grid": 628,
+    "any_drift_flag": true,
+    "n_flagged": 172,
+    "max": {
+      "max_rho_final": 0.516955,
+      "max_overlap_final": 1.0,
+      "max_rho_surface": 0.978311,
+      "max_overlap_pre": 1.0
+    },
+    "top": [
+      {
+        "file": "17GEMSDOE__docs__downloads__17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+        "sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+        "reg_dots": 5167373,
+        "rho_final": 0.16981,
+        "overlap_final": 1.0,
+        "rho_surface": 0.975204,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 1.0,
+        "lift_over_chance": 1.0,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__data__derived__context_detector_prob_4fold_base.tif",
+        "sha256": "2505ac5fa1db2ba142b1ecbe5c3fc221e88f2156cc6e5b8d36d0e75cb290f107",
+        "reg_dots": 5156176,
+        "rho_final": 0.172487,
+        "overlap_final": 1.0,
+        "rho_surface": 0.978182,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.999669,
+        "lift_over_chance": 1.0003,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__data__derived__context_detector_prob_topo.tif",
+        "sha256": "ffaeea106e6ae36a25bc26001e42444e541d147ab37f82777f99a8500af95f19",
+        "reg_dots": 5155443,
+        "rho_final": 0.17162,
+        "overlap_final": 1.0,
+        "rho_surface": 0.974554,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.998932,
+        "lift_over_chance": 1.0011,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__data__derived__context_detector_prob_topo_rad.tif",
+        "sha256": "8ce89331d404a15522a485c2511d81838854147ad27d4047a0b8abb2737b73c2",
+        "reg_dots": 5152246,
+        "rho_final": 0.171596,
+        "overlap_final": 1.0,
+        "rho_surface": 0.974332,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.998886,
+        "lift_over_chance": 1.0011,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__data__derived__context_detector_prob_u8.tif",
+        "sha256": "c9155f228cdca724ebaf4fa65984f37637a5b4a710595ca1928f6c896addaa47",
+        "reg_dots": 5165997,
+        "rho_final": 0.172185,
+        "overlap_final": 1.0,
+        "rho_surface": 0.978311,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.999989,
+        "lift_over_chance": 1.0,
+        "drift_flag": true
+      }
+    ]
+  },
+  "organizer_score": null,
+  "submitted": false
+}

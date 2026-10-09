@@ -207,7 +207,33 @@ def main() -> int:
     top_irr = "".join(f"<li><b>{esc(i['id'])}</b> ({esc(i['severity'])}): {esc(i['subject'])}</li>"
                       for i in irr if i["id"] in ("IR-53-01", "IR-53-02", "IR-53-37", "IR-53-38", "IR-53-40", "IR-53-42", "IR-53-46", "IR-53-49"))
 
+    s3c = J(cur["receipt"])
+    s3b = J("evidence/s3b_h8_holdout.json")
+    s3_hold = s3c["holdout"]
+    s3_pb = s3_hold["s3b_paired_b"]
+    s3_pooled = s3_hold["s3b_stage2_pooled"]
+    s3_gate_rows = "".join(f"<li>{esc(k)}: <b>{'PASS' if v else 'FAIL'}</b></li>" for k, v in s3c["gates"].items())
     body = f"""
+<section id="s3-download" style="border:2px solid #fca5a5">
+  <div class="label no">S3 FILE: {esc(label).upper()}. DO NOT SUBMIT.</div>
+  <p><b>Is it OK to download?</b> Yes, for research and review only. <a class="btn dis" href="submissions/{esc(fname)}">Download {esc(fname)}</a> ({size_b:,} bytes, sha256 <code>{esc(cur['sha256'])}</code>).</p>
+  <p><b>Is it OK to submit?</b> <b>NO.</b> The pre-registered uniqueness gate fails for this file, so the protocol does not allow it into a submission slot.</p>
+  <table>
+    <tr><th>Name field (unique)</th><td><code>{esc(cur['name'])}</code></td></tr>
+    <tr><th>Comment field (≤140 characters, {len(cur['note'])} used)</th><td><code>{esc(cur['note'])}</code></td></tr>
+  </table>
+  <p><b>What this file is.</b> A pre-registered control: the E2 bands top-q 0.02 candidate, with an S3 receipt. It is <b>not</b> the best holdout candidate.
+  HOLDOUT-DTI (proxy, evaluator {esc(s3_hold['evaluator'])}, not organizer-scored): this control {f4(s3_pooled['bands_baseline'])}; H1 thin_bin_q0p1 {f4(s3_pooled['E2_H1_thin_bin_q0p1_best'])}; H8 gravity-gradient {f4(s3_pooled['h8_selected'])}.
+  H8 minus H1, paired mean {s3_pb['mean_fold_diff']:+.6f}, 95% CI {s3_pb['CI95'][0]:+.6f} to {s3_pb['CI95'][1]:+.6f}. Pooled values differ by only 0.00003, and the five paired fold differences change sign, so the H1 comparison is not decided. Verdict: <b>NEGATIVE</b> under pre-registration section 4 (the lower bound is not above 0).</p>
+  <p><b>Gates in this receipt:</b></p><ul>{s3_gate_rows}</ul>
+  <p><b>Decisions needed from you</b> (nothing below was done without your approval):</p>
+  <ol>
+    <li>Gate definition. The pre-registered rule flags {s3c['uniqueness']['n_flagged']} of {s3c['uniqueness']['registry_unique_on_grid']} registry rasters. Of the overlap flags, the sparse lattice dot maps reach 99.87% chance coverage, so no placement can pass the raw 70% rule (IR-53-46). The surface rho flags depend on whole-grid NaN handling (IR-53-47). Approve or reject a footprint-only, chance-corrected rule (<a href="evidence.html#irregularities">evidence page</a>), then a fresh gate run.</li>
+    <li>Candidate choice. H1 thin_bin_q0p1 has the higher holdout proxy (0.0040), but its own receipt also fails the uniqueness gate. Decide whether H1 or another candidate should be the one tested under a changed rule.</li>
+    <li>Next experiment. H12 (potential-field edge coincidence) is recommended for spatially blocked validation. It has not been run (the three-experiment cap for this session is used up: S3-A, S3-B, S3-C).</li>
+    <li>Submission slots. None has been used. organizer_score is null. Public leaderboard figures are the repository snapshot (IR-53-01, IR-53-51), not verified organizer receipts.</li>
+  </ol>
+</section>
 <section>
   <div class="label {label_cls}">{esc(label).upper()}</div>
   <p><b>Is it OK to download?</b> {dl_text}<br>
@@ -215,8 +241,8 @@ def main() -> int:
   <h1>Executive summary</h1>
   <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
   Short answer: the file below passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>{esc(label)}</b> and must not be uploaded. The full registry gate flags {gate['n_flagged']} rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by {100*lattice['overlap_final']:.3f}% within 3 px (limit {overlap_limit_pct:.0f}%; chance coverage {100*lattice['chance_coverage']:.2f}%, lift {lattice['lift_over_chance']:.4f}); whole-grid pre-placement surface rho max is {gate['max']['max_rho_surface']:.6f} (limit {rho_limit:.2f}). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
-  <div class="warn"><b>Pre-placement STOP (verified 2026-10-09):</b> The public <a href="{esc(proof['reference_url'])}">GEMSDOE17 reference raster</a> is positive at every one of the {proof['footprint_px']:,} competition-footprint pixels (its SHA256: <code>{esc(proof['reference_sha256'])}</code>; <a href="data/protocol_preflight_20261009.json">pixel-level preflight receipt</a>). Any nonempty conformant prediction therefore overlaps its dots by 100% at distance zero. That exceeds the literal 70% limit before model fitting or dot placement; <b>no new submission TIFF can honestly be cleared under this rule.</b> Zero predictions evade the overlap test but cannot beat a positive holdout. No new candidate was generated after this stop. This is a rule/registry conflict, not proof that every new prediction is a copy.</div>
-  <p class="note">Read the <a href="data/run_card_20261009.json">2026-10-09 negative run card</a> and the three <a href="research/hypotheses.md">ranked untested geological hypotheses</a>. No claim of a better holdout or organizer score is made.</p>
+  <div class="warn"><b>Pre-placement STOP (verified 2026-10-09):</b> The public <a href="{esc(proof['reference_url'])}">GEMSDOE17 reference raster</a> is positive at every one of the {proof['footprint_px']:,} competition-footprint pixels (its SHA256: <code>{esc(proof['reference_sha256'])}</code>; <a href="data/protocol_preflight_20261009.json">pixel-level preflight receipt</a>). Any nonempty conformant prediction therefore overlaps its dots by 100% at distance zero. That exceeds the literal 70% limit before model fitting or dot placement; <b>no new submission TIFF can honestly be cleared under this rule.</b> Zero predictions evade the overlap test but cannot beat a positive holdout. No new candidate was generated in this lane after this preflight. This is a rule/registry conflict, not proof that every new prediction is a copy.</div>
+  <p class="note">Read the <a href="data/run_card_20261009.json">2026-10-09 negative run card</a> and the <a href="research/hypotheses.md">ranked untested geological hypotheses (H12, C1–C3)</a>. No claim of a better holdout or organizer score is made.</p>
   <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
   Nothing has been submitted, and no submission slot was used.</div>
 </section>
@@ -280,7 +306,7 @@ def main() -> int:
     <tr><td>Can a higher-scoring file be built?</td><td>Not shown. We have a proxy that rises with thinning and proximity, which is not the competition target (IR-53-42). No file here is shown to beat any leaderboard row.</td>
       <td><span class="pill">not established</span></td></tr>
   </table>
-  <p class="note">Stage-2 numbers are HOLDOUT-DTI proxies (evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments). The absolute scores are small; the paired gain is positive on all five spatial folds, and the preregistered rule accepts it. Stage-1 DTI is selected on its own segment folds and is optimistic. Neither measures the competition's unseen-fault truth (IR-53-42).</p>
+  <p class="note">Stage-2 numbers are HOLDOUT-DTI proxies (evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments). The absolute scores are small; for the H1 candidate (E2 design B) the paired gain is positive on all five spatial folds, and the preregistered rule accepts it. The shipped S3 control does not share this result (S3-B: H8 negative; IR-53-60). Stage-1 DTI is selected on its own segment folds and is optimistic. Neither measures the competition's unseen-fault truth (IR-53-42).</p>
 </section>
 
 <section>
@@ -309,7 +335,7 @@ def main() -> int:
     in_rows = "".join(f"<tr><td>{esc(k)}</td><td>{esc(v)}</td></tr>" for k, v in [
         ("CRS EPSG", inl["crs_epsg"]), ("grid 3730 x 3292", inl["shape_ok"]), ("transform equals sample", inl["transform_ok"]),
         ("resolution 100 m", inl["res_ok"]), ("one band", inl["count_ok"]), ("dtype", inl["dtype"]),
-        ("nodata tag", inl["nodata"]), ("NaN exactly outside sample footprint", inl["nan_exact_outside_template"]),
+        ("nodata tag", inl["nodata"]), ("NaN exactly outside sample footprint", inl.get("nan_exact_outside_template", inl["nan_inside_footprint"] == 0 and inl["finite_outside_template"] == 0)),
         ("values in [0, 1] on the whole array", inl["values_in_0_1_whole_array"]),
         ("finite pixels (footprint)", f"{inl['finite_px']:,}"), ("nonzero pixels (dots)", f"{inl['nonzero_px']:,}"),
         ("min / max", f"{inl['min']:.4f} / {inl['max']:.4f}")])
@@ -397,13 +423,29 @@ def main() -> int:
 <tr><td>H5 / H7</td><td>Thermal/geothermal and strike/trend priors</td><td>Related portfolio analogues exist; do not claim broad-family novelty.</td></tr>
 <tr><td>H3 / H4</td><td>Strain orientation / extra Qfault labels</td><td>H3 blocked (IR-53-40); H4 rejected as a label-source re-expression.</td></tr>"""
     g = g32["files"]["nan"]
+    # ---------------------------------------------------------------- S3 evidence (from the run card's s3_lane)
+    s3l = J("evidence/run_card.json")["s3_lane"]
+    s3_h = s3l["holdout"]; s3_cv = s3l["leakage_canary"]; s3_co = s3l["correlation_overlap"]
+    s3_ci = s3_h["paired_H8_minus_H1"]["CI95"]
+    s3_max = s3_cv["H8_features_separability_max_over_folds"]
+    s3_rec = J(s3l["submission_file"]["file"].replace(".tif", ".json").replace("docs/submissions/", "evidence/candidate_"))
+    s3_ev = f"""<section id="s3-evidence">
+  <h2>S3 (2026-10-08): GEMSDOE29 canary reproduction, H8 holdout, control build</h2>
+  <p class="note">Pre-registration: <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/arena/7b60bcc7-gemsdoe53/docs/research/preregistration-2026-10-08-S3.md">preregistration-2026-10-08-S3.md</a>. Holdout numbers are HOLDOUT-DTI (proxy, evaluator {esc(s3_h['evaluator'])}, not organizer-scored).</p>
+  <table><tr><th>Step</th><th>Result</th><th>Receipt</th></tr>
+  <tr><td>S3-A leakage reproduction (no selection)</td><td>Leaky GEMSDOE29 distance feature, separability on design-B fold 0: <b>{s3_cv['S3A_leaky_distance_separability_fold0']:.3f}</b>. Canary flags it: <b>{'yes' if s3_cv['S3A_verdict'] else 'no'}</b> (gate 0.90).</td><td><code>evidence/s3a_leakage_repro.json</code></td></tr>
+  <tr><td>S3-B H8 gravity-gradient ridges, design B</td><td>Canary, max over the five folds: R {s3_max['R']:.3f}, S {s3_max['S']:.3f}, log1pD {s3_max['log1pD']:.3f} (all below 0.90). Stage-2 pooled HOLDOUT-DTI: H8 <b>{f4(s3_h['H8_pooled_DTI'])}</b>; H1 thin_bin_q0p1 {f4(s3_h['H1_thin_bin_q0p1_pooled_DTI_same_proxy'])}; bands baseline {f4(s3_h['bands_baseline_pooled_DTI'])}. Paired H8 minus H1: {s3_h['paired_H8_minus_H1']['mean_fold_diff']:+.6f}, 95% CI {s3_ci[0]:+.6f} to {s3_ci[1]:+.6f}. Verdict: <b>{esc(s3_h['verdict']['label'])}</b> (withheld positives {s3_h['withheld_positives']:,}).</td><td><code>evidence/s3b_h8_holdout.json</code></td></tr>
+  <tr><td>S3-C control build and gate</td><td>Final dots {s3_rec['final_dots']:,}. Uniqueness: {s3_co['n_flagged']} of {s3_co['registry_unique_on_grid']} registry rasters flagged. Label: <b>Research-only / DO NOT SUBMIT</b>. Not submitted; no slot used.</td><td><code>{esc(s3_co['receipt'])}</code></td></tr>
+  </table>
+</section>
+"""
     body = f"""
 <section>
   <h1>Evidence</h1>
   <p class="note">Evidence metrics are read from JSON. HOLDOUT-DTI = catalogue proxy, not organizer score. Evaluator <code>gems53.core.dti</code> v1.0.0, parity with the template's <code>src/metrics.py</code>
   (difference {e1['metric_parity_vs_template']['abs_diff']:.1e}); individual sections name the withheld-positive count and CI basis.</p>
   <p><a href="data/run_card.json">Run card (JSON)</a> · <a href="data/e1_h1_thin_holdout.json">E1 record</a> · <a href="data/e2_leakfree_holdouts.json">E2 record</a> · <a href="data/exp2_holdout_arms.json">design-A ablation reference</a> ·
-  <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/arena/5c479bba-gemsdoe53/docs/research/preregistration-2026-10-08.md">pre-registration</a></p>
+  <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/arena/7b60bcc7-gemsdoe53/docs/research/preregistration-2026-10-08.md">pre-registration</a></p>
 </section>
 <section>
   <h2>E1 (design A, reference only): exploration with the withheld-label negative pool</h2>
@@ -424,6 +466,7 @@ def main() -> int:
   <table><tr><th>Band</th><th>Max separability over folds</th></tr>{canary_rows}</table>
   <p>H1 feature alone: max separability {f4(cd['h1_max_separability'])}. Gate 0.90. Flags: bands {esc(cd['bands_flag'])}, H1 {esc(cd['h1_flag'])}.</p>
 </section>
+{s3_ev}
 <section id="gemsdoe29">
   <h2>GEMSDOE29 leakage (formal diagnosis)</h2>
   <p>Mechanism: the deprecated <code>scripts/build_repo_candidate.py</code> in GEMSDOE29 builds its distance-to-known-faults feature from the full label raster, so that feature is exactly 0 on known-fault pixels. This is target-derived training information, not a valid accuracy result. In our separate historical design-A leaky ablation (not GEMSDOE29's organizer score), the pooled <b>HOLDOUT-DTI</b> was {f4(leaky_holdout['pooled_DTI'])}, 95% t CI (df 4) {leaky_holdout['CI95_t_df4_on_fold_mean']}; evaluator gems53.core.dti v1.0.0, 60,988 withheld positives in 3,199 segments. This near-perfect diagnostic is invalid for model-quality claims because the negative-pool buffer depended on withheld labels (IR-53-37). GEMSDOE29's upstream TRAIN-AUC and this reproduction are distinct evidence. See <code>docs/leakage-review.md</code>; learn-predict separation is the repair.</p>

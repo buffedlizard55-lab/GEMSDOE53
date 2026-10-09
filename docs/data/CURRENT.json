@@ -1,47 +1,30 @@
 {
-  "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
-  "file": "docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
-  "sha256": "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60",
-  "pixel_sha256": "aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda",
+  "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+  "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+  "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
+  "pixel_sha256": "e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd",
   "label": "Research-only / DO NOT SUBMIT",
-  "note": "RESEARCH-ONLY | HOLDOUT-DTI 0.0040; g53 DTI v1.0, withheld=60,988; \u0394+0.0035 CI95 +0.0006..+0.0064; NOT ORGANIZER-SCORED | DO NOT SUBMIT",
+  "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored",
   "gates": {
-    "holdout_gate_E2_paired_accept": true,
+    "holdout_beats_current_best": false,
     "format_validators_all": true,
-    "uniqueness_no_drift_flag": false,
-    "canary_clean_for_features_in_model": true
+    "uniqueness_no_drift_flag": false
   },
   "spec": {
-    "arm": "h1",
-    "variant": "thin_bin_q0p1",
-    "q": 0.1,
-    "kind": "thin_bin"
+    "arm": "bands",
+    "variant": "top_q0p02",
+    "kind": "top",
+    "q": 0.02
   },
-  "decision": "design-B selection (E2 stage 1) confirmed on spatial blocks (E2 stage 2, paired lower bound > 0)",
-  "receipt": "evidence/candidate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
+  "decision": "H8 did not beat the current holdout best (pre-registered negative). The file is the pre-registered frozen control (E2 design-B baseline, bands top-q 0.02): a unique control, not a recommendation",
+  "receipt": "evidence/candidate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
   "organizer_score": null,
   "submitted": false,
-  "uniqueness_verdict": "PROTOCOL DUPLICATE / STOP (raw registry threshold; not a byte-identity claim)",
-  "uniqueness_detail": {
-    "canonical_registry_receipt": "evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
-    "registry_unique_on_grid": 621,
-    "max_surface_rho_whole_grid": 0.953943,
-    "r13_lattice_final_dot_overlap_within_3px": 0.99599,
-    "threshold_overlap": 0.7,
-    "chance_coverage": 0.9987,
-    "lift_over_chance": 0.9973,
-    "partial_refresh_is_not_clearance": "evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582_refresh.json covers only three rasters (IR-53-49)"
-  },
-  "note_chars": 135,
-  "metadata_review": {
-    "kind": "metadata-only note update after E3; no model, pixels, or experiment changed",
-    "previous_container_sha256": "a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b",
-    "current_container_sha256": "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60",
-    "pixel_sha256_unchanged": true,
-    "pixel_sha256": "aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda",
-    "template_validate_submission_exit_after_update": 0,
-    "template_validate_conformant_exit_after_update": 0,
-    "conformant_validation_note": "Passed from the pinned shared-template checkout after the metadata-only update."
-  },
-  "bytes": 445801
+  "uniqueness_verdict": "PROTOCOL DUPLICATE / STOP (raw rule: more than 70% of dots within 3 px of registry dot maps, including dense and lattice rasters; not a byte-identity claim)",
+  "previous_pointer": {
+    "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
+    "file": "docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
+    "note": "H1 file as regenerated on main (PR #9). Its own verdict is PROTOCOL DUPLICATE / STOP. Superseded as the current pointer by the pre-registered S3 control; not cleared.",
+    "sha256": "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60"
+  }
 }
