@@ -20,7 +20,7 @@ hypothesis states how it differs — the parallel-run protocol forbids drifting 
 - **Physical signature:** displacement-controlled fault growth. The mapped trace ends where
   displacement dies (tip), not where the structure ends; interacting segments link through relay
   ramps / step-overs whose damage zones localize both seismic gaps and geothermal permeability
-  (Faulds & Hinz, Great Basin play-fairway literature; see `registry/sources.json` S31-S33).
+  (Faulds & Hinz, Great Basin play-fairway literature; see `registry/sources.json` S46-S33).
 - **Why it catches faults MISSING from the catalogue:** a continuation is by construction off the
   mapped trace; a relay corridor sits between mapped segments where mapping gaps are. Nothing in the
   feature equals a catalogue label (X4 separability max 0.79 vs the 0.90 gate; the leaky

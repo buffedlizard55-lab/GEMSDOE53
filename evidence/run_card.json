@@ -8,7 +8,7 @@
   "preregistration": "docs/research/preregistration-h8-2026-10-09.md",
   "lane_paragraph_missing_in_prompt": true
  },
- "mechanism": "Displacement-controlled propagation means the mapped trace ends where displacement dies, not where the structure ends (tips); interacting sub-parallel segments link through relay ramps with dense fracture permeability. Faulds (2013, S30/S31): ~32% of Great Basin geothermal fields sit in relay ramps/step-overs, 22% at normal-fault tip-lines. The DW-Tversky metric (alpha 0.2, beta 0.8, 300 m kernel) pays per distinct covered pixel and charges FP by area, so Poisson dots at 2.8 px in those corridors maximize credit per dot; the >2 px catalogue prune removes pure FP on faults the organizers already mapped.",
+ "mechanism": "Displacement-controlled propagation means the mapped trace ends where displacement dies, not where the structure ends (tips); interacting sub-parallel segments link through relay ramps with dense fracture permeability. Faulds (2013, S45/S46): ~32% of Great Basin geothermal fields sit in relay ramps/step-overs, 22% at normal-fault tip-lines. The DW-Tversky metric (alpha 0.2, beta 0.8, 300 m kernel) pays per distinct covered pixel and charges FP by area, so Poisson dots at 2.8 px in those corridors maximize credit per dot; the >2 px catalogue prune removes pure FP on faults the organizers already mapped.",
  "named_non_fault_process": "Mafic dyke swarms and buried lithologic contacts generate linear magnetic lineaments parallel to regional trend without any Quaternary fault; alluvial-fan berm/terrace edges mimic scarps near basin margins. Both can fill corridors with false positives (dots where no hidden fault exists) and pull the magnetic concordance term toward mapped-but-inactive structure.",
  "holdout": {
   "label": "HOLDOUT-DTI (proxy: withheld catalogue segments; NOT the competition's new-fault truth)",
@@ -184,7 +184,7 @@
    }
   ],
   "scopecheck_x9": {
-   "judged_by": "binary dot maps: pre-registration dot rule; surfaces: top-N convention (IR-53-51)",
+   "judged_by": "binary dot maps: pre-registration dot rule; surfaces: top-N convention (IR-53-66)",
    "binary_dot_maps_judged": 28,
    "max_scoped_lift_binary_dot_maps": 1.4232,
    "scoped_flags": [],
@@ -292,7 +292,7 @@
   "expected_exits": {
    "validate_conformant_zeros": {
     "exit": 1,
-    "why": "zeros container is finite outside and nodata-none BY DESIGN (IR-53-50 portal fix); exit 1 findings are the two documented divergences"
+    "why": "zeros container is finite outside and nodata-none BY DESIGN (IR-53-65 portal fix); exit 1 findings are the two documented divergences"
    },
    "validate_conformant_nan": {
     "exit": 0,
@@ -325,7 +325,7 @@
  "verdict_rule": "promote iff canary clean AND paired CI lower > 0 vs ridge_pr AND pooled > design-B stage-1 best (0.141319, selection-optimistic) AND uniqueness gate (DEV-2) passes AND all validators pass; else negative",
  "caveats": [
   "IR-53-42: holdout truth is withheld catalogue segments; the competition scores faults absent from the catalogue.",
-  "L-30: budget rule chose N=80,000 over N=44,090 by +0.0012 (inside the fold CI); both are recorded.",
+  "L-40: budget rule chose N=80,000 over N=44,090 by +0.0012 (inside the fold CI); both are recorded.",
   "IR-53-02: no organizer receipt exists for any file here; no score is ORGANIZER-CONFIRMED."
  ]
 }

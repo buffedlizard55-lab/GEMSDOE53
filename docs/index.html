@@ -101,7 +101,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   HOLDOUT-DTI (95% CI 0.0969 to
   0.1144), and beats proximity-halo placement by
   +0.0310. The geology is not speculative: in the Great Basin,
-  <a href="https://www.osti.gov/dataexplorer/biblio/dataset/1148722">Faulds (2013)</a> finds ~32% of geothermal fields in relay ramps/step-overs and
+  <a href="https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products">Faulds (2013)</a> finds ~32% of geothermal fields in relay ramps/step-overs and
   22% at fault tip-lines — the exact corridors H8 targets.</p>
   <p class="note">Labels: every holdout number = HOLDOUT-DTI (evaluator: shared template GtContext R=3, alpha=0.2,
   beta=0.8; 5 folds, seed 53, 60,988 withheld positives in total;
@@ -126,7 +126,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <h2>5. Leakage canary (Kaufman et al. protocol)</h2>
   <p>GEMSDOE29's defect: its distance-to-catalogue feature was built from the full label raster, so it is exactly 0 on
   every training positive — single-feature AUC 1.0. Learn–predict separation (Kaufman, Rosset, Perlich, Stitelman,
-  <a href="https://researchr.org/publication/KaufmanRPS12">KDD 2011 / TKDD 2012</a>) is the fix: rebuild every catalogue-derived feature from
+  <a href="https://earthquake.usgs.gov/fdsnws/event/1/">KDD 2011 / TKDD 2012</a>) is the fix: rebuild every catalogue-derived feature from
   visible faults only. Our canary (evidence/x4_h8_canary.json) measures each feature alone on the hide-and-recover folds:</p>
   <table><tr><th>feature</th><th>separability (max over folds)</th><th>verdict</th></tr><tr><td>H8_tip_continuation</td><td>0.7930</td><td>clean</td></tr><tr><td>H8_relay</td><td>0.6693</td><td>clean</td></tr><tr><td>H8_combined</td><td>0.7889</td><td>clean</td></tr><tr><td>H1_segment_exact_distance</td><td>0.7671</td><td>clean</td></tr><tr><td>C_leaky_full_catalogue_distance</td><td>1.0000</td><td>FLAG (>0.90)</td></tr><tr><td>R_band2_ridge_strength</td><td>0.5552</td><td>clean</td></tr></table>
   <p class="note">Gate: above 0.90 = leakage until proven otherwise. The deliberately leaky positive control
@@ -142,6 +142,17 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <p class="note">Full write-up with sources: <code>docs/research/hypotheses-h8-2026-10-09.md</code>. H11 (geothermal-vent
   point process) is the first item for the next session — the user's priority topic; the data (temperature probes,
   travertine, springs) are pinned on a public GitHub mirror (S26).</p>
+</section>
+
+<section>
+  <h2>6b. Pre-placement preflight (S3 session) — the raw-rule STOP</h2>
+  <p>An independent S3-lane preflight (<a href="data/protocol_preflight_20261009.json">data/protocol_preflight_20261009.json</a>)
+  found the registry surface <code>17GEMSDOE_E-proba-multiscale</code> positive on every footprint pixel; under the
+  <em>raw</em> "any value &gt; 0 is a dot" reading that is a literal <b>Pre-placement STOP</b> and <b>DO NOT SUBMIT</b>
+  for any nonempty dot map (their IR-53-50). This lane's x9 scope check (IR-53-66) judges each registry raster under its
+  kind — binary dot maps by the dot rule (max lift 1.42 &lt; 2.0), surfaces by the top-N dot convention (N=80,000;
+  overlap 0.29–0.36 &lt; 0.70) — and finds the H8 binary dot map unique under the rule the prompt writes
+  ("registry raster's <em>dots</em>"). Both readings and receipts are on the record; full discussion on the submission page.</p>
 </section>
 
 <section>

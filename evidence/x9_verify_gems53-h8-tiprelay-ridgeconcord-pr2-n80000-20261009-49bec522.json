@@ -31,7 +31,7 @@
  "validators_expected_exits": {
   "validate_conformant_zeros": {
    "exit": 1,
-   "why": "zeros container is finite outside and nodata-none BY DESIGN (IR-53-50 portal fix); exit 1 findings are the two documented divergences"
+   "why": "zeros container is finite outside and nodata-none BY DESIGN (IR-53-65 portal fix); exit 1 findings are the two documented divergences"
   },
   "validate_conformant_nan": {
    "exit": 0,

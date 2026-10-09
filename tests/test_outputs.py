@@ -3,7 +3,7 @@
 Checks that the label, the receipts (X6 build + X9 verification), the run card, the site and the bytes on
 disk all agree, and that BOTH shipped GeoTIFFs meet their container contracts:
   primary (…-zeros.tif)       every pixel finite in [0,1]; 0 outside the footprint; nodata None
-                              (the portal-safe container, IR-53-50; organiser-scored zeros pattern)
+                              (the portal-safe container, IR-53-65; organiser-scored zeros pattern)
   twin   (…-nan-outside.tif)  NaN exactly outside the template footprint; nodata nan (template-conformant)
 Format checks against the official sample run only when the competition rasters are present
 (scripts/fetch_data.py); otherwise they are skipped with a reason.
@@ -84,7 +84,7 @@ def test_run_card_and_site_agree_with_the_label():
 
 
 def test_primary_file_meets_the_portal_safe_contract():
-    """Primary = zeros-outside container: finite in [0,1] everywhere (IR-53-50)."""
+    """Primary = zeros-outside container: finite in [0,1] everywhere (IR-53-65)."""
     cur, rec, _ = _verify()
     rasterio = pytest.importorskip("rasterio")
     if not SAMPLE.exists():

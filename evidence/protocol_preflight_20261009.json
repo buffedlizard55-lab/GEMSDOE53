@@ -1,0 +1,31 @@
+{
+  "sample_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "reference_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+  "reference_url": "https://github.com/buffedlizard55-lab/17GEMSDOE/blob/main/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+  "sample_manifest_url": "https://github.com/buffedlizard55-lab/GEMSDOE/blob/main/data/bridge/manifest.json",
+  "crs": "EPSG:32611",
+  "shape": [
+    3730,
+    3292
+  ],
+  "transform": [
+    100.0,
+    0.0,
+    243350.0,
+    0.0,
+    -100.0,
+    4508550.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "grid_matches": true,
+  "footprint_px": 5167373,
+  "reference_positive_footprint_px": 5167373,
+  "reference_nonpositive_or_nonfinite_footprint_px": 0,
+  "universal_overlap_blocker": true,
+  "overlap_for_any_nonempty_conformant_dot_map": 1.0,
+  "limit_strictly_greater_than": 0.7,
+  "verdict": "STOP: literal registry rule impossible for nonempty prediction",
+  "scope": "one public registry raster; does not prove that all future registry rasters are checked"
+}

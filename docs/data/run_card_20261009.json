@@ -1,0 +1,82 @@
+{
+  "session": "arena/2cc82f0e-gemsdoe53 (2026-10-09)",
+  "hypothesis": "C1 preliminary screen: conductivity\u2013magnetic phase coherence (untried; S3 ranks H12 ahead of C1)",
+  "mechanism": "Matched, oriented cross-scale edges in conductivity band 17 and RTP magnetics band 2 could indicate buried fault damage/fluid pathways.",
+  "named_non_fault_process_that_could_mimic_it": "Lithologic contact between units with different conductivity and magnetic susceptibility.",
+  "experiment_status": "STOP at pixel-verified registry pre-placement feasibility gate; zero experiments this session; no new surface or dots placed",
+  "holdout_DTI": {
+    "new_candidate": null,
+    "current_S3_control_pooled": 0.000102,
+    "current_S3_pooled_CI95": null,
+    "legacy_candidate_pooled": 0.004049,
+    "legacy_pooled_CI95": null,
+    "legacy_paired_mean_gain_over_baseline": 0.003533,
+    "legacy_paired_gain_CI95": [
+      0.000619,
+      0.006447
+    ],
+    "evaluator": "gems53.core.dti v1.0.0 (parity with template src/metrics.py verified in E1)",
+    "withheld_positives": 60988,
+    "note": "HOLDOUT-DTI catalogue proxy: current S3 control and prior H1. The interval is for H1 paired fold-mean GAIN vs baseline, not either pooled DTI or a new candidate."
+  },
+  "registry": {
+    "reference_url": "https://github.com/buffedlizard55-lab/17GEMSDOE/blob/main/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+    "reference_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+    "sample_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "footprint_px": 5167373,
+    "reference_positive_footprint_px": 5167373,
+    "surface_correlation_new_candidate": null,
+    "final_overlap_new_candidate": null,
+    "overlap_for_any_nonempty_prediction": 1.0,
+    "threshold": 0.7,
+    "legacy_max_surface_rho": 0.978311,
+    "legacy_max_final_dot_overlap": 1.0,
+    "legacy_registry_rasters": 628,
+    "scope": "Full positive-footprint reference proves universal stop for any nonempty dot map under this literal registry definition; no C1-specific correlation was computed."
+  },
+  "raster_sha256": {
+    "new_candidate": null,
+    "existing_research_only_H1": "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60",
+    "current_research_only_S3": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c"
+  },
+  "validator_output": {
+    "new_C1": "NOT RUN; no raster generated after stop",
+    "current_research_only_S3": {
+      "shared_template_submission_exit": 0,
+      "shared_template_conformant_exit": 0,
+      "no_NaN_inside_footprint": true,
+      "values_in_0_1": true,
+      "CRS_match": true,
+      "shape_match": true,
+      "transform_match": true
+    },
+    "existing_research_only_H1": {
+      "shared_template_submission_exit": 0,
+      "shared_template_conformant_exit": 0,
+      "no_NaN_inside_footprint": true,
+      "values_in_0_1": true,
+      "CRS_match": true,
+      "shape_match": true,
+      "transform_match": true
+    }
+  },
+  "submission_name": {
+    "new_candidate": null,
+    "existing_research_only_H1": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
+    "current_research_only_S3": "gems53-s3-bands-top_q0p02-20261009-e67cda00"
+  },
+  "submission_note": "DO NOT SUBMIT: literal registry overlap=100%; no C1 candidate or organizer score.",
+  "organizer_score": null,
+  "weekly_submission_slot_used": false,
+  "verdict": "negative",
+  "reasons": [
+    "literal >70% registry rule cannot clear any nonempty conformant prediction",
+    "No new holdout run; no score improvement established"
+  ],
+  "provenance": [
+    "evidence/protocol_preflight_20261009.json",
+    "evidence/candidate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
+    "evidence/candidate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
+    "evidence/uniqueness_gate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json"
+  ]
+}

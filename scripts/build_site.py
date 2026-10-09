@@ -99,6 +99,18 @@ def main() -> int:
 
     label = cur["label"]
     ok = label.startswith("OK")
+    # Merged safety guard (from the S3 session's preflight, refined by IR-53-66): a
+    # submission-ready label must be fully backed — every gate true AND exactly the
+    # verified label recorded in the candidate's verify receipt. Anything else is a
+    # fake ready label and the site refuses to build.
+    ready = ("OK TO SUBMIT" in label.upper()) or ("VALIDATED" in label.upper())
+    if ready:
+        vrec = J(cur["verify_receipt"]) if cur.get("verify_receipt") else {}
+        verified = (vrec.get("final_label") or (rec.get("label") if isinstance(rec, dict) else None) or "")
+        gates_ok = all(bool(v) for v in cur.get("gates", {}).values()) if cur.get("gates") else False
+        if label != verified or not gates_ok:
+            raise ValueError(f"refusing a submission-ready label: {label!r} is not fully backed "
+                             f"(verified={verified!r}, gates_ok={gates_ok})")
     label_cls = "yes" if ok else "no"
     fname = cur["file"].split("/")[-1]
     twin = cur.get("twin_file", "")
@@ -286,6 +298,17 @@ def main() -> int:
 </section>
 
 <section>
+  <h2>6b. Pre-placement preflight (S3 session) — the raw-rule STOP</h2>
+  <p>An independent S3-lane preflight (<a href="data/protocol_preflight_20261009.json">data/protocol_preflight_20261009.json</a>)
+  found the registry surface <code>17GEMSDOE_E-proba-multiscale</code> positive on every footprint pixel; under the
+  <em>raw</em> "any value &gt; 0 is a dot" reading that is a literal <b>Pre-placement STOP</b> and <b>DO NOT SUBMIT</b>
+  for any nonempty dot map (their IR-53-50). This lane's x9 scope check (IR-53-66) judges each registry raster under its
+  kind — binary dot maps by the dot rule (max lift 1.42 &lt; 2.0), surfaces by the top-N dot convention (N=80,000;
+  overlap 0.29–0.36 &lt; 0.70) — and finds the H8 binary dot map unique under the rule the prompt writes
+  ("registry raster's <em>dots</em>"). Both readings and receipts are on the record; full discussion on the submission page.</p>
+</section>
+
+<section>
   <h2>7. Flags for review (open irregularities)</h2>
   <ul>{flags_rows}</ul>
   <p class="note">Full list: <code>registry/irregularities.json</code> (also on the evidence page).</p>
@@ -345,6 +368,19 @@ def main() -> int:
   <p class="note">Lift = overlap ÷ that raster's own chance coverage (fraction of the footprint within 3 px of its dots).
   A full-footprint lattice (GEMSDOE13, 206,895 dots) makes the raw 70% rule unsatisfiable at lift 0.997 (= chance);
   true method drift measured 3.6–5.6 on the prior session's ridge file. IR-53-46/47/48, DEV-2.</p>
+</section>
+
+<section>
+  <h2>Pre-placement preflight (S3 session, 2026-10-09) — the raw-rule STOP and why this lane is not stopped</h2>
+  <p>An independent S3-lane preflight (<a href="data/protocol_preflight_20261009.json">data/protocol_preflight_20261009.json</a>)
+  measured the registry surface <code>17GEMSDOE_E-proba-multiscale</code>: all 5,167,373 footprint pixels are
+  &gt; 0. Under the <em>raw</em> protocol reading ("any value &gt; 0 is a dot") any nonempty dot placement would be a
+  duplicate of it — a literal <b>Pre-placement STOP</b> and <b>DO NOT SUBMIT</b>. Their irregularity IR-53-50 records the
+  same flaw: the raw &gt;0 rule makes the overlap test unsatisfiable for dense surfaces. This lane's resolution
+  (IR-53-66, x9 scope check) judges each raster under its kind — binary dot maps by the dot rule (max lift 1.42 &lt; 2.0),
+  surfaces by the top-N dot convention (N=80,000; overlap 0.29–0.36 &lt; 0.70) — and finds the H8 dot map unique under the
+  rule the prompt actually writes ("registry raster's <em>dots</em>"). Both readings and both receipts are on the record;
+  the raw-reading STOP applies to surfaces-as-dots and is not a claim about this binary dot map.</p>
 </section>
 
 <section>

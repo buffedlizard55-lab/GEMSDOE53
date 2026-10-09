@@ -34,15 +34,25 @@ def main() -> int:
     base_B = e2["baseline_design_B"]
     cd = e2["canary_design_B"]
     variants = e2["segment_folds"]["variants"]
+    lattice = next((r for r in diag.get("sparse_flagged_top", []) if "r13-lattice-s5_v2" in r.get("file", "")), None)
+    if lattice is None:
+        raise RuntimeError("canonical uniqueness diagnostics do not contain the GEMSDOE13 lattice comparison")
 
     def v(name):
         return variants.get(name)
 
     card = {
         "schema": "gems53.run_card.v2",
-        "session_branch": "arena/0efb644e-gemsdoe53",
+        "session_branch": "arena/7b60bcc7-gemsdoe53",
         "date_utc": e3["finished_utc"][:10],
-        "lane": "Formal diagnosis of GEMSDOE29 catalogue-distance leakage; one unique candidate under the parallel-run protocol",
+        "lane": "GEMSDOE29 leakage diagnosis; H1 (E2/E3) failed the raw registry duplicate gate; S3 (H8 gravity-gradient ridges, negative; S3 control file, research-only). Parallel-run protocol: 3 experiments.",
+        "hypothesis": {
+            "id": "H1 + M1",
+            "statement": "Visible-fault distance, recomputed with learn-predict separation, can rank off-trace continuation; metric-aware thinning packs predictions at the DTI support scale.",
+            "mechanism": "For each training segment, H1 measures distance to visible faults excluding that segment; at prediction it uses the supplied visible catalogue. M1 thins high-scoring pixels into a sparse dominating set to reduce redundant false-positive mass.",
+            "named_non_fault_process_that_could_mimic_it": "Catalogue compilation / mapping-effort bias: better-mapped structural corridors can have denser recorded faults and nearby training positives without a higher density of truly unmapped faults.",
+            "scope_note": "The holdout labels are known catalogue faults; this does not establish performance on the competition's unmapped targets (IR-53-42)."
+        },
         "pre_registration": {"file": "docs/research/preregistration-2026-10-08.md",
                              "amendment": "DEV-1 (section 8), written before the design-B run"},
         "budget": {
@@ -62,6 +72,26 @@ def main() -> int:
             "bytes": e3["bytes"], "note": cur["note"], "note_chars": len(cur["note"]),
             "candidate": cur["spec"], "decision": cur["decision"],
             "submitted": False, "submission_slot_used": False, "organizer_score": None,
+            "download_allowed_for_research": True, "submit_allowed": False,
+            "uniqueness_verdict": "PROTOCOL DUPLICATE / STOP (raw rule; not a claim of byte-identical pixels)",
+        },
+        "review": {
+            "review_passes": 3,
+            "new_experiments_this_review": 0,
+            "experiment_budget_status": "EXHAUSTED (3 of 3 used in the pre-registered E1/E2/E3 sequence)",
+            "metadata_only_file_review": cur.get("metadata_review"),
+            "data_fetch": {
+                "tool": "scripts/fetch_data.py",
+                "destination": "/tmp/gems53-data (not committed)",
+                "training_features_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+                "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+                "sample_submission_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+                "provenance_caveat": "GitHub mirror matched its pinned manifest; this does not independently establish a direct DrivenData download."
+            },
+            "pytest": {"passed": 30, "failed": 0, "skipped": 0, "shared_template_metric_parity_test_ran": True},
+            "shared_template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+            "official_template_validator_exit": 0,
+            "shared_conformant_validator_exit": 0
         },
         "gates": e3["gates"],
         "validators": {
@@ -115,6 +145,17 @@ def main() -> int:
                                                                  "rho_surface", "lift_over_chance", "chance_coverage_footprint",
                                                                  "reg_dots", "drift_flag")}
                                      for r in gate["top_by_overlap_final"][:8]],
+            "protocol_verdict": "PROTOCOL DUPLICATE / STOP",
+            "surface_max_rho_whole_grid": gate["max"].get("max_rho_surface"),
+            "r13_lattice_final_dot_comparison": {
+                "registry_file": lattice["file"],
+                "overlap_final_within_3px": lattice["overlap_final"],
+                "threshold": gate["thresholds"]["dot_overlap_within_3px"],
+                "chance_coverage": lattice["chance_coverage"],
+                "lift_over_chance": lattice["lift_over_chance"],
+                "interpretation": "Raw threshold is a protocol duplicate even though the lattice's footprint coverage explains the overlap; not an exact-pixel-copy claim."
+            },
+            "partial_refresh_warning": "The *_refresh receipt compares only three rasters; it is not a full-registry clearance (IR-53-49).",
             "receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
             "diagnostics": {
                 "file": f"evidence/uniqueness_diagnostics_{cur['name']}.json",
@@ -127,7 +168,7 @@ def main() -> int:
                 "sparse_flagged_median_lift": diag["sparse_flagged_median_lift"],
                 "densest_sparse_dot_maps_by_chance_coverage": diag["densest_sparse_dot_maps_by_chance_coverage"],
                 "raw_overlap_gate_satisfiable_by_any_placement": diag["raw_overlap_gate_satisfiable_by_any_placement"],
-                "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the gate receipt (IR-53-46, IR-53-47, IR-53-48)",
+                "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the canonical full-registry gate receipt (IR-53-46, IR-53-47, IR-53-48, IR-53-49)",
             },
         },
         "gemsdoe32": {"measured_file": "evidence/gemsdoe32_measured.json",
@@ -140,11 +181,17 @@ def main() -> int:
                                       "note": "from the repository's earlier snapshot (S2); not re-read this session (IR-53-01)"},
         "hypotheses": {"file": "docs/research/hypotheses.md",
                        "H1": "tested (design B, stage 1 and stage 2)", "M1": "thinning tested (design B)",
-                       "H2": "not tested (budget)", "H3": "BLOCKED: strain orientation not in public data (IR-53-40)",
-                       "H4": "rejected (labels)", "H5": "not tested (budget); data present in pinned mirror (S26, S28)",
-                       "H7": "not tested (budget)"},
+                       "H2": "attempted in X1/X2/X3; X2 is design A with hidden-buffer negatives (IR-53-37), invalid for promotion; no design-B rerun",
+                       "H3": "BLOCKED: strain orientation not in public data (IR-53-40)",
+                       "H4": "rejected (label-source re-expression)",
+                       "H5": "related thermal/geothermal analogues exist across the public portfolio; not globally novel",
+                       "H7": "related strike/trend analogues exist across the public portfolio; not globally novel",
+                       "C1": "untested future candidate; current feature stack only; budget exhausted",
+                       "C2": "candidate only; USGS ComCat access/terms not checked (S29)",
+                       "C3": "candidate only; USGS Landsat access/terms not checked (S30)"},
         "verdict_reasons": [
             "uniqueness gate (pre-registered rule) flags %d registry rasters" % gate["n_flagged"],
+            "protocol duplicate / stop: final-dot overlap with the GEMSDOE13 r13 lattice is %.2f%% within 3 px (threshold 70%%; IR-53-46)" % (100 * lattice["overlap_final"]),
             "the raw 70%% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers %.2f%% of the footprint within 3 px (IR-53-46)" % (100 * diag["densest_sparse_dot_maps_by_chance_coverage"][0]["chance_coverage"]),
             "rho flags are method-sensitive: surface rho (whole grid) flags %d rasters; footprint-only surface rho flags %d (IR-53-47)" % (sp_rho["flagged_by_surface_rho_whole_grid"], sp_rho["flagged_by_surface_rho_footprint_only"]),
         ] if not e3["gates"]["uniqueness_no_drift_flag"] else [],
@@ -157,11 +204,60 @@ def main() -> int:
                   "e1": "evidence/e1_h1_thin_holdout.json", "e2": "evidence/e2_leakfree_holdouts.json",
                   "e3_receipt": cur["receipt"], "uniqueness_receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
                   "measured_gemsdoe32": "evidence/gemsdoe32_measured.json", "current_submission": "docs/submissions/CURRENT.json",
-                  "tests": "tests/test_h1_thin.py, tests/test_metric.py, tests/test_submission.py"},
+                  "hypotheses": "docs/research/hypotheses.md", "review_prompt_capture": "docs/prompt/verbatim.md",
+                  "tests": "tests/ (30 passed, 0 skipped with the pinned shared template)"},
         "environment": {"python": "3.11.2 (venv: numpy 2.4.6, scipy 1.17.1, scikit-learn 1.9.1, rasterio 1.4.4, pyproj 3.7.2)",
                         "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
                         "jklinck_mirror_commit": "56d78de7a989c12e2dce50cd65a4095df57030d2",
                         "fetch": "scripts/fetch_data.py (sha256 pins from the template manifest, verified)"},
+    }
+    # ---- S3 lane: hypothesis-level run card (one hypothesis per run card; numbers read from the S3 receipts)
+    from scipy import stats as _st
+    s3b = J("evidence/s3b_h8_holdout.json")
+    s3a = J("evidence/s3a_leakage_repro.json")
+    s3c = J(cur["receipt"])
+    st2 = s3b["stage2"]
+    fold_h8 = [f["selected"]["DTI"] for f in st2["folds"]]
+    n = len(fold_h8); m = sum(fold_h8) / n
+    sd = (sum((x - m) ** 2 for x in fold_h8) / (n - 1)) ** 0.5
+    tq = _st.t.ppf(0.975, n - 1)
+    h8_ci = [m - tq * sd / n ** 0.5, m + tq * sd / n ** 0.5]
+    card["s3_lane"] = {
+        "pre_registration": "docs/research/preregistration-2026-10-08-S3.md",
+        "hypothesis": {"id": "H8", "name": "gravity horizontal-gradient maxima (Blakely & Simpson 1986 method) as ridge features",
+                       "layer": "band 13 (isostatic gravity anomaly), label-free",
+                       "mechanism": "a density contrast with a linear, fault-parallel trend can show a fault under cover where the catalogue has no trace (pre-registration section 1)",
+                       "named_non_fault_mimic": "basin-margin and lithological density contacts without faulting. NOT named in the pre-registration (IR-53-58); named here post hoc and not tested"},
+        "leakage_canary": {"S3A_leaky_distance_separability_fold0": s3a["leaky_construction"]["design_B_canary_on_fold0"]["separability"],
+                           "S3A_verdict": s3a["verdict"]["canary_detects_leaky_feature"],
+                           "H8_features_separability_fold0": {r["feature"]: r["separability"] for r in s3b["canary_h8_design_B"]["rows"] if r["fold"] == 0},
+                           "H8_features_separability_max_over_folds": {f: max(r["separability"] for r in s3b["canary_h8_design_B"]["rows"] if r["feature"] == f) for f in {r["feature"] for r in s3b["canary_h8_design_B"]["rows"]}},
+                           "gate": 0.90},
+        "holdout": {"label_type": "HOLDOUT-DTI (proxy; NOT organizer-scored)", "evaluator": "gems53.core.dti v1.0.0",
+                    "design": s3b["design"],
+                    "H8_selected_variant": s3b["stage1"]["selected"],
+                    "H8_pooled_DTI": st2["pooled_DTI"]["h8_selected"],
+                    "H8_fold_DTI_CI95_t_df4": h8_ci,
+                    "H1_thin_bin_q0p1_pooled_DTI_same_proxy": st2["pooled_DTI"]["E2_H1_thin_bin_q0p1_best"],
+                    "bands_baseline_pooled_DTI": st2["pooled_DTI"]["bands_baseline"],
+                    "withheld_positives": st2["withheld_positives_total"],
+                    "paired_H8_minus_H1": st2["b_selected_minus_current_best_H1"],
+                    "paired_H8_minus_bands": st2["a_selected_minus_bands_baseline"],
+                    "verdict": s3b["verdict"]},
+        "correlation_overlap": {"registry_unique_on_grid": s3c["uniqueness"]["registry_unique_on_grid"],
+                                "n_flagged": s3c["uniqueness"]["n_flagged"],
+                                "max_rho_final": s3c["uniqueness"]["max"]["max_rho_final"],
+                                "max_rho_surface_whole_grid": s3c["uniqueness"]["max"]["max_rho_surface"],
+                                "max_overlap_final": s3c["uniqueness"]["max"]["max_overlap_final"],
+                                "receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
+                                "diagnostics": f"evidence/uniqueness_diagnostics_{cur['name']}.json"},
+        "submission_file": {"name": cur["name"], "note": cur["note"], "note_chars": len(cur["note"]),
+                            "file": cur["file"], "sha256": cur["sha256"], "pixel_sha256_nan_to_-1": cur["pixel_sha256"],
+                            "validators": {"template_validate_submission_exit": s3c["validators"]["final_template_validate_submission"]["exit"],
+                                           "validate_conformant_exit": s3c["validators"]["final_validate_conformant"]["exit"]}},
+        "verdict": "H8: NEGATIVE (holdout, pre-registration section 4). The S3 file is a research-only control: not promoted, not a submission candidate, no slot recommended.",
+        "verdict_code": "negative",
+        "organizer_score": None,
     }
     out = ROOT / "evidence" / "run_card.json"
     out.write_text(json.dumps(card, indent=2, default=str))

@@ -64,7 +64,7 @@ Labels used below. **MEASURED** = computed in this repo from files (`evidence/`,
   float32, deflate, tiled 256×256, **nodata none**, all 12,279,160 pixels finite, 37,654 nonzero dots at 1.0,
   min 0.0 max 1.0, CRS EPSG:32611, transform (100, 0, 243350, 0, -100, 4508550). The `-nan` twin of the same
   emission has nodata nan and NaN exactly outside the footprint. Both carry the same 37,654 dots.
-- **Why this matters (IR-53-50).** The user's submission form rejected a download from our own site with
+- **Why this matters (IR-53-65).** The user's submission form rejected a download from our own site with
   "Predicted values must be in range [0, 1]". The shared template records the same platform rejection
   (2026-09-24): NaN is not in [0,1] and the form's range check counts it. The GEMSDOE32 **zeros** variant has
   no NaN anywhere; several organiser-scored ledger rows are `...-zeros` files (including the 0.2778 row). The
