@@ -1,7 +1,6 @@
-# Verbatim prompt (placeholder)
+# Prompt (verbatim)
 
-The user's original message was **not** available in the workspace when this was written. It was not found in the
-repository, its git history or the local cache. The README holds a reconstruction in the user's terms, labelled as such.
-
-**To replace the reconstruction:** paste the full, unedited prompt into `docs/prompt/verbatim.md`, then delete this
-placeholder. The README links to that file. Until then, IR-53-27 stays open.
+The full, unedited session prompt is stored in [`verbatim.md`](verbatim.md) (captured 2026-10-09; closes
+IR-53-38). The same text is embedded in the repository README inside the `<details>` block
+"Verbatim prompt", as the prompt itself instructs ("Put this prompt into the repo readme and read it
+everytime we work on the project").

@@ -57,3 +57,24 @@ Labels used below. **MEASURED** = computed in this repo from files (`evidence/`,
 
 - No submission slot is selected in this session.
 - Keep every GEMSDOE32 number labelled USER-REPORTED or OWNER-CLAIM until a dated official read or receipt exists.
+
+## Update 2026-10-09 (session H8): container measurement and the [0,1] form error
+
+- **MEASURED (registry copy, this session).** `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`:
+  float32, deflate, tiled 256×256, **nodata none**, all 12,279,160 pixels finite, 37,654 nonzero dots at 1.0,
+  min 0.0 max 1.0, CRS EPSG:32611, transform (100, 0, 243350, 0, -100, 4508550). The `-nan` twin of the same
+  emission has nodata nan and NaN exactly outside the footprint. Both carry the same 37,654 dots.
+- **Why this matters (IR-53-50).** The user's submission form rejected a download from our own site with
+  "Predicted values must be in range [0, 1]". The shared template records the same platform rejection
+  (2026-09-24): NaN is not in [0,1] and the form's range check counts it. The GEMSDOE32 **zeros** variant has
+  no NaN anywhere; several organiser-scored ledger rows are `...-zeros` files (including the 0.2778 row). The
+  safest primary container is therefore all-finite zeros-outside, with the NaN-outside twin kept for template
+  conformance. DTI scores of the two are identical (outside-fill contributes nothing to TP/FP/FN).
+- **Mechanism answer (unchanged, now with the prune step pinned).** The file is the owner's model emission
+  thinned by a 2.8 px Poisson rule to 44k-family dot counts, with every dot within 2 px of the mapped
+  catalogue deleted ("b2"), then written in the zeros container. Credit is per-distinct-kernel-coverage
+  (max, not sum), FP is area-summed at alpha 0.2, and mapped faults are not the scored target — so spaced
+  off-catalogue dots near corridors are exactly the DTI-optimal shape. Our H8 lane adds tip/relay corridor
+  priors to that recipe and measures the gain on the hide-and-recover holdout (X5).
+- **Labels.** The 0.2778 remains USER-REPORTED in the brief / ORGANIZER-CONFIRMED only as a leaderboard row;
+  the row→file link is still not established (IR-53-02). All H8 numbers are HOLDOUT-DTI.

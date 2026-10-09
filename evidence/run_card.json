@@ -1,454 +1,331 @@
 {
-  "schema": "gems53.run_card.v2",
-  "session_branch": "arena/0efb644e-gemsdoe53",
-  "date_utc": "2026-10-08",
-  "lane": "Formal diagnosis of GEMSDOE29 catalogue-distance leakage; one unique candidate under the parallel-run protocol",
-  "pre_registration": {
-    "file": "docs/research/preregistration-2026-10-08.md",
-    "amendment": "DEV-1 (section 8), written before the design-B run"
+ "schema": "gems53.run_card.v1",
+ "session": "arena/26b23232-gemsdoe53",
+ "date_utc": "2026-10-09",
+ "hypothesis": {
+  "id": "H8",
+  "text": "Hidden fault segments continue beyond mapped segment tips and inside relay/step-over zones between overlapping segments (fault growth + linkage). Emission of metric-spaced dots in those corridors, corroborated by magnetic lineaments and pruned >2 px off the catalogue, recovers hidden faults at higher DTI per dot than uniform, proximity-halo, or magnetic-ridge placement.",
+  "preregistration": "docs/research/preregistration-h8-2026-10-09.md",
+  "lane_paragraph_missing_in_prompt": true
+ },
+ "mechanism": "Displacement-controlled propagation means the mapped trace ends where displacement dies, not where the structure ends (tips); interacting sub-parallel segments link through relay ramps with dense fracture permeability. Faulds (2013, S30/S31): ~32% of Great Basin geothermal fields sit in relay ramps/step-overs, 22% at normal-fault tip-lines. The DW-Tversky metric (alpha 0.2, beta 0.8, 300 m kernel) pays per distinct covered pixel and charges FP by area, so Poisson dots at 2.8 px in those corridors maximize credit per dot; the >2 px catalogue prune removes pure FP on faults the organizers already mapped.",
+ "named_non_fault_process": "Mafic dyke swarms and buried lithologic contacts generate linear magnetic lineaments parallel to regional trend without any Quaternary fault; alluvial-fan berm/terrace edges mimic scarps near basin margins. Both can fill corridors with false positives (dots where no hidden fault exists) and pull the magnetic concordance term toward mapped-but-inactive structure.",
+ "holdout": {
+  "label": "HOLDOUT-DTI (proxy: withheld catalogue segments; NOT the competition's new-fault truth)",
+  "evaluator": "shared template src/metrics.py GtContext (pinned commit dcbbb19), R=3 px, alpha=0.2, beta=0.8; gems53.core.dti parity 1.3e-13 (tests/test_metric.py)",
+  "design": "whole-segment hide-and-recover, K=5, seed 53, withheld positives 60,988 px total ([11370, 12598, 12169, 12671, 12180] per fold)",
+  "selected": {
+   "arm": "h8_pr",
+   "N": 80000,
+   "pooled_DTI": 0.166336,
+   "CI95_t_df4_on_fold_mean": [
+    0.162359,
+    0.170321
+   ],
+   "per_fold_DTI": [
+    0.166672,
+    0.161705,
+    0.164791,
+    0.169365,
+    0.169165
+   ]
   },
-  "budget": {
-    "experiments_limit": 3,
-    "experiments_used": 3,
-    "experiments": [
-      "E1 design A (exploration, stopped as a design error)",
-      "E2 design B (stage 1 selection on segment folds; stage 2 spatial confirmation)",
-      "E3 build, validation, uniqueness and label (not a holdout experiment)"
-    ],
-    "wall_clock_limit_hours": 2,
-    "experiment_start_utc": "2026-10-08T22:04:10Z",
-    "experiment_end_utc": "2026-10-08T22:53:36Z",
-    "note": "wall clock is read from the experiment receipts (started_utc, finished_utc), not estimated"
+  "paired_vs_ridge_pr_at_44090": {
+   "mean": 0.114121,
+   "CI95_t_df4": [
+    0.102601,
+    0.12564
+   ],
+   "per_fold": [
+    0.123618,
+    0.110181,
+    0.108304,
+    0.12437,
+    0.10413
+   ]
   },
-  "label": "Research-only / DO NOT SUBMIT",
-  "submission": {
-    "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
-    "file": "docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
-    "sha256": "a20fad19d19f62317721cb0819d4e5a7d0960a4c9bac2b1d3094563c693aeb1b",
-    "pixel_sha256": "aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda",
-    "bytes": 443170,
-    "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53 h1 thin_bin_q0p1 | proxy DTI 0.0040 | not organizer-scored",
-    "note_chars": 95,
-    "candidate": {
-      "arm": "h1",
-      "variant": "thin_bin_q0p1",
-      "q": 0.1,
-      "kind": "thin_bin"
+  "reproduction_check_vs_frozen_x2": {
+   "x2_reference_pooled_DTI": 0.050097,
+   "this_run_pooled_DTI": 0.050097,
+   "delta": 0.0,
+   "pass_abs_delta_lt_1e-3": true
+  },
+  "all_arms": {
+   "null_pr": {
+    "44090": {
+     "pooled_DTI": 0.051437,
+     "CI95": [
+      0.049828,
+      0.053004
+     ]
     },
-    "decision": "design-B selection (E2 stage 1) confirmed on spatial blocks (E2 stage 2, paired lower bound > 0)",
-    "submitted": false,
-    "submission_slot_used": false,
-    "organizer_score": null
-  },
-  "gates": {
-    "holdout_gate_E2_paired_accept": true,
-    "format_validators_all": true,
-    "uniqueness_no_drift_flag": false,
-    "canary_clean_for_features_in_model": true
-  },
-  "validators": {
-    "template_validate_submission_exit": 0,
-    "template_validate_conformant_exit": 0,
-    "inlane": {
-      "crs_epsg": 32611,
-      "crs_ok": true,
-      "shape_ok": true,
-      "transform_ok": true,
-      "res_ok": true,
-      "count_ok": true,
-      "dtype": "float32",
-      "nodata": "nan",
-      "nodata_ok": true,
-      "nan_exact_outside_template": true,
-      "values_in_0_1_whole_array": true,
-      "finite_px": 5167373,
-      "nonzero_px": 56605,
-      "min": 0.0,
-      "max": 1.0,
-      "all_ok": true
+    "80000": {
+     "pooled_DTI": 0.06635,
+     "CI95": [
+      0.064001,
+      0.068653
+     ]
     }
-  },
-  "holdout": {
-    "label_type": "HOLDOUT-DTI (proxy: withheld known-fault segments and spatial super-regions; NOT organizer-scored)",
-    "evaluator": {
-      "name": "gems53.core.dti",
-      "version": "1.0.0",
-      "parity_with_template_src_metrics_py": {
-        "template_file": "src/metrics.py",
-        "fold": 0,
-        "core_dti": 0.026646145,
-        "template_dti": 0.026646145,
-        "abs_diff": 1.3200551762793111e-13,
-        "pass": true
-      }
+   },
+   "halo_pr": {
+    "44090": {
+     "pooled_DTI": 0.112051,
+     "CI95": [
+      0.105668,
+      0.118447
+     ]
     },
-    "design_B": {
-      "definition": "B: positives = visible outside 10 px buffer; negatives = footprint and not visible",
-      "baseline_bands_top_q0p02": {
-        "pooled_DTI": 0.010562,
-        "CI95_t_df4": [
-          0.008337,
-          0.012812
-        ],
-        "withheld_positives": 60988
-      },
-      "stage1_selected": {
-        "arm": "h1",
-        "variant": "thin_bin_q0p1",
-        "pooled_DTI": 0.141319
-      },
-      "stage1_selection_rule": "highest pooled DTI among variants above the design-B baseline (bands top_q0p02)",
-      "stage1_qualifying_count": 20,
-      "stage2": {
-        "status": "COMPLETED",
-        "baseline": {
-          "name": "bands top_q0p02 (design B, bands model)",
-          "pooled_DTI": 0.000102,
-          "pooled_TP_w": 10.9687,
-          "pooled_FP_w": 293670.2139,
-          "pooled_FN_w": 60977.0313
-        },
-        "selected": {
-          "name": "h1 thin_bin_q0p1",
-          "pooled_DTI": 0.004049,
-          "pooled_TP_w": 418.1791,
-          "pooled_FP_w": 272084.9449,
-          "pooled_FN_w": 60569.8209
-        },
-        "paired_difference": {
-          "mean_fold_diff": 0.003533,
-          "half_width_t_df4": 0.002914,
-          "CI95": [
-            0.000619,
-            0.006447
-          ]
-        },
-        "acceptance": {
-          "rule": "accept iff the 95% t-interval lower bound of the paired fold difference is above 0",
-          "accepted": true
-        },
-        "withheld_positives_total": 60988,
-        "withheld_segments_total": 3199
-      },
-      "selected_variant_segment_folds": {
-        "arm": "h1",
-        "variant": "thin_bin_q0p1",
-        "pooled_DTI": 0.141319,
-        "per_fold_DTI": [
-          0.146428,
-          0.143636,
-          0.144197,
-          0.130883,
-          0.141608
-        ],
-        "CI95_t_df4_on_fold_mean": [
-          0.13378,
-          0.148921
-        ],
-        "half_width": 0.007571,
-        "pooled_TP_w": 15226.5067,
-        "pooled_FP_w": 279551.0927,
-        "pooled_FN_w": 45761.4933,
-        "mean_emitted_px": 57275,
-        "mean_kept_dots": 57275
-      }
-    },
-    "design_A_reference_not_used_for_decisions": {
-      "reason": "negative pool depended on withheld labels (IR-53-37)",
-      "bands_top_q0p02_pooled_DTI": 0.035233,
-      "bands_top_q0p02_CI95": [
-        0.02817,
-        0.042229
-      ],
-      "h1_top_q0p02_pooled_DTI": 0.067515,
-      "reproduction_of_exp2": true
+    "80000": {
+     "pooled_DTI": 0.135315,
+     "CI95": [
+      0.130439,
+      0.140169
+     ]
     }
-  },
-  "leakage": {
-    "canary_design_B": {
-      "bands_max_separability": 0.591151,
-      "bands_flag": "pass",
-      "h1_max_separability": 0.767983,
-      "h1_flag": "pass",
-      "gate": 0.9,
-      "background": "full non-fault footprint (fp and not any known fault)"
+   },
+   "ridge_pr": {
+    "44090": {
+     "pooled_DTI": 0.051051,
+     "CI95": [
+      0.043028,
+      0.059085
+     ]
     },
-    "canary_design_A_reference": {
-      "h1_mean": 0.774439,
-      "h1_max": 0.789515,
-      "note": "buffered background (withheld-derived), inflated"
-    },
-    "gemsdoe29": "docs/leakage-review.md (negative verdict; mechanism = full-label distance feature in build_repo_candidate.py)"
-  },
-  "uniqueness": {
-    "thresholds": {
-      "spearman_rho": 0.9,
-      "dot_overlap_within_3px": 0.7
-    },
-    "registry_unique_on_grid": 621,
-    "registry_skipped": 286,
-    "any_drift_flag": true,
-    "n_flagged": 103,
-    "max": {
-      "max_rho_final": 0.155967,
-      "max_overlap_final": 1.0,
-      "max_rho_surface": 0.953943,
-      "max_overlap_pre": 1.0
-    },
-    "top_by_overlap_final": [
-      {
-        "file": "17GEMSDOE__docs__downloads__17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
-        "reg_dots": 5167373,
-        "rho_final": 0.111809,
-        "overlap_final": 1.0,
-        "rho_surface": 0.950138,
-        "overlap_pre": 1.0,
-        "chance_coverage_footprint": 1.0,
-        "lift_over_chance": 1.0,
-        "drift_flag": true
-      },
-      {
-        "file": "5GEMSDOE__data__derived__context_detector_prob_4fold_base.tif",
-        "reg_dots": 5156176,
-        "rho_final": 0.11428,
-        "overlap_final": 1.0,
-        "rho_surface": 0.949646,
-        "overlap_pre": 1.0,
-        "chance_coverage_footprint": 0.999669,
-        "lift_over_chance": 1.0003,
-        "drift_flag": true
-      },
-      {
-        "file": "5GEMSDOE__data__derived__context_detector_prob_topo.tif",
-        "reg_dots": 5155443,
-        "rho_final": 0.113554,
-        "overlap_final": 1.0,
-        "rho_surface": 0.948732,
-        "overlap_pre": 1.0,
-        "chance_coverage_footprint": 0.998932,
-        "lift_over_chance": 1.0011,
-        "drift_flag": true
-      },
-      {
-        "file": "5GEMSDOE__data__derived__context_detector_prob_topo_rad.tif",
-        "reg_dots": 5152246,
-        "rho_final": 0.113348,
-        "overlap_final": 1.0,
-        "rho_surface": 0.948337,
-        "overlap_pre": 1.0,
-        "chance_coverage_footprint": 0.998886,
-        "lift_over_chance": 1.0011,
-        "drift_flag": true
-      },
-      {
-        "file": "5GEMSDOE__data__derived__context_detector_prob_u8.tif",
-        "reg_dots": 5165997,
-        "rho_final": 0.113873,
-        "overlap_final": 1.0,
-        "rho_surface": 0.94984,
-        "overlap_pre": 1.0,
-        "chance_coverage_footprint": 0.999989,
-        "lift_over_chance": 1.0,
-        "drift_flag": true
-      },
-      {
-        "file": "5GEMSDOE__docs__downloads__gems-density-probe-20260925T184215Z-9cdae9b4.tif",
-        "reg_dots": 5106385,
-        "rho_final": 0.080251,
-        "overlap_final": 1.0,
-        "rho_surface": 0.953943,
-        "overlap_pre": 1.0,
-        "chance_coverage_footprint": 1.0,
-        "lift_over_chance": 1.0,
-        "drift_flag": true
-      },
-      {
-        "file": "7GEMSDOE__external__geodawn_extensions__geodawn_extensions_u8.tif",
-        "reg_dots": 5166085,
-        "rho_final": 0.06969,
-        "overlap_final": 1.0,
-        "rho_surface": 0.891626,
-        "overlap_pre": 1.0,
-        "chance_coverage_footprint": 0.999979,
-        "lift_over_chance": 1.0,
-        "drift_flag": true
-      },
-      {
-        "file": "7GEMSDOE__external__geodawn_rad__geodawn_rad_u8.tif",
-        "reg_dots": 5166085,
-        "rho_final": 0.067712,
-        "overlap_final": 1.0,
-        "rho_surface": 0.890004,
-        "overlap_pre": 1.0,
-        "chance_coverage_footprint": 0.999979,
-        "lift_over_chance": 1.0,
-        "drift_flag": true
-      }
-    ],
-    "receipt": "evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
-    "diagnostics": {
-      "file": "evidence/uniqueness_diagnostics_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
-      "flagged_rows": 103,
-      "flagged_by_class": {
-        "sparse(<=25%)": 42,
-        "dense(>50% nonzero)": 57,
-        "mid(25-50%)": 4
-      },
-      "flagged_by_overlap": 100,
-      "flagged_by_rho_final_raster_whole_grid": 0,
-      "flagged_by_rho_final_raster_footprint_only": 0,
-      "flagged_by_rho_surface_whole_grid": 52,
-      "flagged_by_rho_surface_footprint_only": 0,
-      "sparse_flagged_median_lift": 1.2250999999999999,
-      "densest_sparse_dot_maps_by_chance_coverage": [
-        {
-          "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.tif",
-          "reg_dots": 206895,
-          "chance_coverage": 0.9987
-        },
-        {
-          "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
-          "reg_dots": 206895,
-          "chance_coverage": 0.9987
-        },
-        {
-          "file": "15GEMSDOE__docs__downloads__gems-cleanup-a-20260928T195952Z-curv_scarp.tif",
-          "reg_dots": 362327,
-          "chance_coverage": 0.8886
-        }
-      ],
-      "raw_overlap_gate_satisfiable_by_any_placement": false,
-      "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the gate receipt (IR-53-46, IR-53-47, IR-53-48)"
+    "80000": {
+     "pooled_DTI": 0.060684,
+     "CI95": [
+      0.053695,
+      0.06766
+     ]
     }
-  },
-  "gemsdoe32": {
-    "measured_file": "evidence/gemsdoe32_measured.json",
-    "nan_variant": {
-      "dots": 37654,
-      "dots_within_2px_of_catalogue": 0.0,
-      "dots_within_3px_of_catalogue": 0.057657,
-      "nearest_dot_distance_quantiles_px": {
-        "0.05": 2.828,
-        "0.25": 2.828,
-        "0.5": 3.0,
-        "0.75": 3.606
-      },
-      "in_catalogue_DTI_diagnostic": 0.006709
+   },
+   "h8_pr": {
+    "44090": {
+     "pooled_DTI": 0.165133,
+     "CI95": [
+      0.159406,
+      0.170948
+     ]
     },
-    "zeros_variant_finite_px": 12279160,
-    "score_link": "NOT ESTABLISHED (IR-53-02): no receipt links the 0.2778 row to this file"
-  },
-  "leaderboard_snapshot_repo": {
-    "1": 0.3774,
-    "7": 0.3195,
-    "13": 0.2778,
-    "note": "from the repository's earlier snapshot (S2); not re-read this session (IR-53-01)"
-  },
-  "hypotheses": {
-    "file": "docs/research/hypotheses.md",
-    "H1": "tested (design B, stage 1 and stage 2)",
-    "M1": "thinning tested (design B)",
-    "H2": "not tested (budget)",
-    "H3": "BLOCKED: strain orientation not in public data (IR-53-40)",
-    "H4": "rejected (labels)",
-    "H5": "not tested (budget); data present in pinned mirror (S26, S28)",
-    "H7": "not tested (budget)"
-  },
-  "verdict_reasons": [
-    "uniqueness gate (pre-registered rule) flags 103 registry rasters",
-    "the raw 70% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers 99.87% of the footprint within 3 px (IR-53-46)",
-    "rho flags are method-sensitive: surface rho (whole grid) flags 52 rasters; footprint-only surface rho flags 0 (IR-53-47)"
-  ],
-  "irregularities_open": [
-    "IR-53-01",
-    "IR-53-02",
-    "IR-53-03",
-    "IR-53-04",
-    "IR-53-05",
-    "IR-53-06",
-    "IR-53-07",
-    "IR-53-08",
-    "IR-53-09",
-    "IR-53-10",
-    "IR-53-11",
-    "IR-53-12",
-    "IR-53-13",
-    "IR-53-16",
-    "IR-53-17",
-    "IR-53-19",
-    "IR-53-20",
-    "IR-53-21",
-    "IR-53-23",
-    "IR-53-24",
-    "IR-53-25",
-    "IR-53-26",
-    "IR-53-27",
-    "IR-53-28",
-    "IR-53-29",
-    "IR-53-30",
-    "IR-53-31",
-    "IR-53-32",
-    "IR-53-33",
-    "IR-53-34",
-    "IR-53-35",
-    "IR-53-36",
-    "IR-53-37",
-    "IR-53-38",
-    "IR-53-39",
-    "IR-53-40",
-    "IR-53-41",
-    "IR-53-42",
-    "IR-53-44",
-    "IR-53-46",
-    "IR-53-47",
-    "IR-53-48"
-  ],
-  "irregularities_total": 48,
-  "limitations": [
-    "L-01",
-    "L-02",
-    "L-03",
-    "L-04",
-    "L-05",
-    "L-06",
-    "L-07",
-    "L-08",
-    "L-09",
-    "L-10",
-    "L-11",
-    "L-12",
-    "L-13",
-    "L-14",
-    "L-15",
-    "L-16",
-    "L-17",
-    "L-18",
-    "L-19",
-    "L-20",
-    "L-21",
-    "L-22",
-    "L-23",
-    "L-24",
-    "L-25",
-    "L-26",
-    "L-27"
-  ],
-  "verdict": "Research-only / DO NOT SUBMIT",
-  "organizer_score": null,
-  "files": {
-    "preregistration": "docs/research/preregistration-2026-10-08.md",
-    "e1": "evidence/e1_h1_thin_holdout.json",
-    "e2": "evidence/e2_leakfree_holdouts.json",
-    "e3_receipt": "evidence/candidate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
-    "uniqueness_receipt": "evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json",
-    "measured_gemsdoe32": "evidence/gemsdoe32_measured.json",
-    "current_submission": "docs/submissions/CURRENT.json",
-    "tests": "tests/test_h1_thin.py, tests/test_metric.py, tests/test_submission.py"
-  },
-  "environment": {
-    "python": "3.11.2 (venv: numpy 2.4.6, scipy 1.17.1, scikit-learn 1.9.1, rasterio 1.4.4, pyproj 3.7.2)",
-    "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
-    "jklinck_mirror_commit": "56d78de7a989c12e2dce50cd65a4095df57030d2",
-    "fetch": "scripts/fetch_data.py (sha256 pins from the template manifest, verified)"
+    "80000": {
+     "pooled_DTI": 0.166336,
+     "CI95": [
+      0.162359,
+      0.170321
+     ]
+    }
+   },
+   "ridge_nopr": {
+    "44090": {
+     "pooled_DTI": 0.050097,
+     "CI95": [
+      0.042504,
+      0.057716
+     ]
+    }
+   }
   }
+ },
+ "leakage_canary": {
+  "label": "single-feature separability on the same folds (not DTI)",
+  "gate": 0.9,
+  "summary": {
+   "H8_tip_continuation": {
+    "separability_max_over_folds": 0.793025,
+    "separability_mean_over_folds": 0.7796094,
+    "gate_flag_above_0p90": false
+   },
+   "H8_relay": {
+    "separability_max_over_folds": 0.669274,
+    "separability_mean_over_folds": 0.662261,
+    "gate_flag_above_0p90": false
+   },
+   "H8_combined": {
+    "separability_max_over_folds": 0.78887,
+    "separability_mean_over_folds": 0.7746798,
+    "gate_flag_above_0p90": false
+   },
+   "H1_segment_exact_distance": {
+    "separability_max_over_folds": 0.767093,
+    "separability_mean_over_folds": 0.7525836,
+    "gate_flag_above_0p90": false
+   },
+   "C_leaky_full_catalogue_distance": {
+    "separability_max_over_folds": 1.0,
+    "separability_mean_over_folds": 1.0,
+    "gate_flag_above_0p90": true
+   },
+   "R_band2_ridge_strength": {
+    "separability_max_over_folds": 0.555163,
+    "separability_mean_over_folds": 0.5279288,
+    "gate_flag_above_0p90": false
+   }
+  },
+  "positive_control_leaky_full_catalogue_distance": "1.000 (GEMSDOE29 defect reproduced)"
+ },
+ "correlation_overlap_vs_registry": {
+  "registry_unique_on_grid": 630,
+  "rule_DEV2": "byte/pixel identity differs; rho_final <= 0.90; NOT(overlap>0.70 AND lift>2.0)",
+  "raw_flagged_rows": 88,
+  "raw_flagged_DEV2_unscoped": [
+   {
+    "file": "7GEMSDOE__downloads__gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+    "overlap_final": 0.954762,
+    "lift_over_chance": 2.3353,
+    "rho_final": 0.179289,
+    "rho_footprint_only": 0.152055
+   },
+   {
+    "file": "7GEMSDOE__downloads__gems7-strike30x3-v2-2b06d45c5b57.tif",
+    "overlap_final": 0.7437,
+    "lift_over_chance": 3.6103,
+    "rho_final": 0.13836,
+    "rho_footprint_only": null
+   }
+  ],
+  "scopecheck_x9": {
+   "judged_by": "binary dot maps: pre-registration dot rule; surfaces: top-N convention (IR-53-51)",
+   "binary_dot_maps_judged": 28,
+   "max_scoped_lift_binary_dot_maps": 1.4232,
+   "scoped_flags": [],
+   "pass": true
+  },
+  "max_rho_final": 0.179289,
+  "max_overlap_final": 1.0,
+  "pass": true
+ },
+ "raster": {
+  "name": "gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522",
+  "file": "docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif",
+  "twin_file": "docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif",
+  "sha256": "b6d91ba6f6a703c45bbd71dca43209f95521be52dfa4d9ae96fc8270c392740c",
+  "pixel_sha256": "49bec522517daebc6b240c39134413a92b499fc12b2eee466cedaa29f7eeb24e",
+  "dots": 80000,
+  "spacing_px": {
+   "median_nearest_dot_px": 2.8284271247461903,
+   "min_nearest_dot_px": 2.8284271247461903,
+   "r_pack_px": 2.8
+  },
+  "prune_check": {
+   "dots_on_catalogue": 0,
+   "dots_within_2px_of_catalogue": 0,
+   "min_dist_dot_to_catalogue_px": 2.2360680103302
+  }
+ },
+ "validator_output": {
+  "in_lane_primary": {
+   "checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "shape_matches_template": true,
+    "crs_is_EPSG_32611": true,
+    "transform_matches_template": true,
+    "no_nan_or_inf_inside_footprint": true,
+    "inside_footprint_in_0_1": true,
+    "all_finite_values_in_0_1": true
+   },
+   "counts": {
+    "finite_px": 12279160,
+    "nan_px": 0,
+    "nonzero_px": 80000,
+    "min": 0.0,
+    "max": 1.0
+   },
+   "all_checks_passed": true
+  },
+  "in_lane_twin": {
+   "checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "shape_matches_template": true,
+    "crs_is_EPSG_32611": true,
+    "transform_matches_template": true,
+    "no_nan_or_inf_inside_footprint": true,
+    "inside_footprint_in_0_1": true,
+    "all_finite_values_in_0_1": true
+   },
+   "counts": {
+    "finite_px": 5167373,
+    "nan_px": 7111787,
+    "nonzero_px": 80000,
+    "min": 0.0,
+    "max": 1.0
+   },
+   "all_checks_passed": true
+  },
+  "shared_validators_x6_call_site_buggy": {
+   "validate_conformant_zeros": {
+    "exit": 2,
+    "tail": "MISSING template /tmp/gems-template/data/sample_submission.tif"
+   },
+   "validate_conformant_nan": {
+    "exit": 2,
+    "tail": "MISSING template /tmp/gems-template/data/sample_submission.tif"
+   },
+   "validate_submission_zeros": {
+    "exit": 1,
+    "tail": " 'nan' (masked readers rely on it; fix: python scripts/sanitize_submission.py --pred /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif --write)"
+   },
+   "validate_submission_nan": {
+    "exit": 0,
+    "tail": "7.92% (NaN is expected outside the GeoDAWN footprint)\n\n\u2705 Validation PASSED - Ready for submission!\nNext: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via 'Submit' button"
+   }
+  },
+  "shared_validators_recheck_x9": {
+   "validate_conformant_zeros": {
+    "exit": 1,
+    "tail": "ls\": 12279160,\n \"template_valid_px\": 5167373,\n \"nan_inside_px\": 0,\n \"finite_outside_px\": 7111787,\n \"out_of_range_px\": 0,\n \"conformant\": false,\n \"nodata\": null,\n \"nodata_ok\": false,\n \"path\": \"/home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif\"\n}"
+   },
+   "validate_conformant_nan": {
+    "exit": 0,
+    "tail": "els\": 12279160,\n \"template_valid_px\": 5167373,\n \"nan_inside_px\": 0,\n \"finite_outside_px\": 0,\n \"out_of_range_px\": 0,\n \"conformant\": true,\n \"nodata\": \"nan\",\n \"nodata_ok\": true,\n \"path\": \"/home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif\"\n}"
+   },
+   "validate_submission_zeros": {
+    "exit": 1,
+    "tail": "relay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif --write)\n  - Nodata tag None != template's 'nan' (masked readers rely on it; fix: python scripts/sanitize_submission.py --pred /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif --write)"
+   },
+   "validate_submission_nan": {
+    "exit": 0,
+    "tail": "n\n  \u2713 GDAL_NODATA matches the template ('nan')\n  \u2713 Size matches training_features\n  i NaN fraction 57.92% (NaN is expected outside the GeoDAWN footprint)\n\n\u2705 Validation PASSED - Ready for submission!\nNext: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via 'Submit' button"
+   }
+  },
+  "expected_exits": {
+   "validate_conformant_zeros": {
+    "exit": 1,
+    "why": "zeros container is finite outside and nodata-none BY DESIGN (IR-53-50 portal fix); exit 1 findings are the two documented divergences"
+   },
+   "validate_conformant_nan": {
+    "exit": 0,
+    "why": "twin must be fully conformant"
+   },
+   "validate_submission_zeros": {
+    "exit": 1,
+    "why": "same two by-design divergences (finite outside, nodata tag)"
+   },
+   "validate_submission_nan": {
+    "exit": 0,
+    "why": "template validator must pass the twin"
+   }
+  },
+  "no_nan_inside_footprint": true,
+  "values_in_0_1": true,
+  "crs_shape_transform_match_template": true
+ },
+ "submission_name": "gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522",
+ "note_max_140_chars": "OK TO SUBMIT | GEMS53 h8 tip/relay corridors + magnetic concordance, pruned >2px off catalogue, 80000 dots @2.8px | HOLDOUT-DTI see receipt ",
+ "note_length": 140,
+ "gates": {
+  "canary_clean_all_lane_features": true,
+  "paired_CI_lower_vs_ridge_pr_gt_0": true,
+  "pooled_exceeds_repo_designB_stage1_best": true,
+  "uniqueness_gate_DEV2_pass": true,
+  "validators_pass": true
+ },
+ "verdict": "promote",
+ "verdict_rule": "promote iff canary clean AND paired CI lower > 0 vs ridge_pr AND pooled > design-B stage-1 best (0.141319, selection-optimistic) AND uniqueness gate (DEV-2) passes AND all validators pass; else negative",
+ "caveats": [
+  "IR-53-42: holdout truth is withheld catalogue segments; the competition scores faults absent from the catalogue.",
+  "L-30: budget rule chose N=80,000 over N=44,090 by +0.0012 (inside the fold CI); both are recorded.",
+  "IR-53-02: no organizer receipt exists for any file here; no score is ORGANIZER-CONFIRMED."
+ ]
 }

@@ -1,0 +1,66 @@
+{
+ "schema": "gems53.hypotheses_h8.v1",
+ "note": "see docs/research/hypotheses-h8-2026-10-09.md for full text and sources",
+ "rows": [
+  {
+   "rank": 1,
+   "id": "H8",
+   "hypothesis": "Hidden faults continue beyond mapped segment tips and inside relay/step-over zones; metric-spaced dots in those corridors, pruned off the catalogue",
+   "layers": "labels.tif skeleton + band 2 (RTP magnetics)",
+   "signature": "tip extrapolation + relay-lozenge corridors + magnetic Hessian/NMS lineament concordance",
+   "off_catalogue": "a continuation/relay corridor is off the mapped trace by construction; prune >2 px",
+   "differs": "no tip/relay geometry in the repo; registry GEMSDOE33 h33d is analog-based (unique-ness gated)",
+   "expected": "high",
+   "cost": "low (rules only)",
+   "status": "TESTED THIS SESSION (X4 clean, X5 best arm)"
+  },
+  {
+   "rank": 2,
+   "id": "H11",
+   "hypothesis": "Geothermal-vent point process: springs, shallow temperature anomalies and travertine mark present-day permeable fault zones",
+   "layers": "INGENIOUS 2m probes, paleo_geothermal_regional, wellspringdata.gdb (pinned mirror S26)",
+   "signature": "point-density/KDE of vents and deposits",
+   "off_catalogue": "vents are measurements of upflow on the structure, not catalogue traces",
+   "differs": "no point-process layer in the repo or (as a vent KDE) the registry",
+   "expected": "high",
+   "cost": "medium (georeference + licence IR-53-44)",
+   "status": "not tested (budget) \u2014 next session"
+  },
+  {
+   "rank": 3,
+   "id": "H12",
+   "hypothesis": "Concealed basin-bounding faults as edges of the depth-to-basement and conductivity surfaces under cover",
+   "layers": "band 15 (depth to basement), band 17 (conductivity)",
+   "signature": "structure-tensor/Sobel edge + lineament transform",
+   "off_catalogue": "basin-floor faults are unmapped by definition (covered)",
+   "differs": "gradient bands used raw as ML features only; no edge extraction in repo",
+   "expected": "moderate-high",
+   "cost": "low (label-free)",
+   "status": "not tested (budget)"
+  },
+  {
+   "rank": 4,
+   "id": "H10",
+   "hypothesis": "Alteration-halo concordance: radiometric K/Th anomalies co-located with magnetic edges mark altered fault cores",
+   "layers": "GeoDAWN radiometrics (bridge) + band 2",
+   "signature": "edge detection + co-location of K/Th anomaly and magnetic low/edge",
+   "off_catalogue": "alteration halo is a hydrothermal measurement, independent of the label source",
+   "differs": "registry GEMSDOE46 r11f/r12 fuse scarps+radiometrics; H10 is halo-concordance without scarps (gated against them)",
+   "expected": "moderate",
+   "cost": "medium (fetch native grids)",
+   "status": "not tested (budget)"
+  },
+  {
+   "rank": 5,
+   "id": "H7",
+   "hypothesis": "Regional trend prior: new faults run sub-parallel to the dominant visible strike",
+   "layers": "labels.tif orientation histogram",
+   "signature": "orientation-matched weighting (no proximity channel)",
+   "off_catalogue": "a regional orientation is not any catalogue location",
+   "differs": "cheap filler; small gain expected",
+   "expected": "small-moderate",
+   "cost": "very low",
+   "status": "not tested (budget)"
+  }
+ ]
+}

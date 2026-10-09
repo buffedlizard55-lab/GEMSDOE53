@@ -1,0 +1,238 @@
+{
+ "experiment": "X6 build + gates (pre-registration-h8-2026-10-09.md)",
+ "selection_used": {
+  "arm": "h8_pr",
+  "N": 80000,
+  "from": {
+   "rule": "highest pooled DTI at N=44090 among ridge_pr/h8_pr/halo_pr; budget = that arm's better N",
+   "best_arm": "h8_pr",
+   "best_budget": 80000,
+   "best_pooled_DTI": 0.166336,
+   "gate_paired_vs_ridge_pr": {
+    "mean": 0.114121,
+    "CI95_t_df4": [
+     0.102601,
+     0.12564
+    ],
+    "per_fold": [
+     0.123618,
+     0.110181,
+     0.108304,
+     0.12437,
+     0.10413
+    ]
+   }
+  }
+ },
+ "name": "gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522",
+ "note": "OK TO SUBMIT | GEMS53 h8 tip/relay corridors + magnetic concordance, pruned >2px off catalogue, 80000 dots @2.8px | HOLDOUT-DTI see receipt ",
+ "label": "DO NOT SUBMIT",
+ "files": {
+  "primary_zeros": {
+   "path": "/home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif",
+   "sha256": "b6d91ba6f6a703c45bbd71dca43209f95521be52dfa4d9ae96fc8270c392740c",
+   "pixel_sha256": "49bec522517daebc6b240c39134413a92b499fc12b2eee466cedaa29f7eeb24e",
+   "writer": "template src/submission_io.write_submission",
+   "info": {
+    "path": "/home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif",
+    "bytes": 209478,
+    "sha256": "b6d91ba6f6a703c45bbd71dca43209f95521be52dfa4d9ae96fc8270c392740c",
+    "width": 3292,
+    "height": 3730,
+    "count": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "res": [
+     100.0,
+     100.0
+    ],
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "nodata": null,
+    "tiled": true,
+    "block_shapes": [
+     [
+      256,
+      256
+     ]
+    ],
+    "finite_px": 12279160,
+    "total_px": 12279160,
+    "nan_px": 0,
+    "nonzero_px": 80000,
+    "prob_mass": 80000.0
+   },
+   "in_lane": {
+    "checks": {
+     "single_band": true,
+     "dtype_float32": true,
+     "shape_matches_template": true,
+     "crs_is_EPSG_32611": true,
+     "transform_matches_template": true,
+     "no_nan_or_inf_inside_footprint": true,
+     "inside_footprint_in_0_1": true,
+     "all_finite_values_in_0_1": true
+    },
+    "counts": {
+     "finite_px": 12279160,
+     "nan_px": 0,
+     "nonzero_px": 80000,
+     "min": 0.0,
+     "max": 1.0
+    },
+    "all_checks_passed": true
+   }
+  },
+  "twin_nan_outside": {
+   "path": "/home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif",
+   "sha256": "388b31312ab1dc53d839a5a584970a8c9cd2f7dca6a286c36945b89a5ef07be0",
+   "pixel_sha256": "ed9ec899f664be943894d3548a2eba74a7d8851cbb450d48004eeade5695eee4",
+   "conform_stats": {
+    "pixels": 12279160,
+    "template_valid_px": 5167373,
+    "filled_inside": 0,
+    "masked_outside": 7111787,
+    "clipped": 0,
+    "unchanged": 5167373
+   },
+   "info": {
+    "path": "/home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif",
+    "bytes": 253360,
+    "sha256": "388b31312ab1dc53d839a5a584970a8c9cd2f7dca6a286c36945b89a5ef07be0",
+    "width": 3292,
+    "height": 3730,
+    "count": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "res": [
+     100.0,
+     100.0
+    ],
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "nodata": NaN,
+    "tiled": true,
+    "block_shapes": [
+     [
+      256,
+      256
+     ]
+    ],
+    "finite_px": 5167373,
+    "total_px": 12279160,
+    "nan_px": 7111787,
+    "nonzero_px": 80000,
+    "prob_mass": 80000.0
+   },
+   "in_lane": {
+    "checks": {
+     "single_band": true,
+     "dtype_float32": true,
+     "shape_matches_template": true,
+     "crs_is_EPSG_32611": true,
+     "transform_matches_template": true,
+     "no_nan_or_inf_inside_footprint": true,
+     "inside_footprint_in_0_1": true,
+     "all_finite_values_in_0_1": true
+    },
+    "counts": {
+     "finite_px": 5167373,
+     "nan_px": 7111787,
+     "nonzero_px": 80000,
+     "min": 0.0,
+     "max": 1.0
+    },
+    "all_checks_passed": true
+   }
+  }
+ },
+ "emission": {
+  "dots": 80000,
+  "budget": 80000,
+  "arm": "h8_pr",
+  "spacing": {
+   "median_nearest_dot_px": 2.8284271247461903,
+   "min_nearest_dot_px": 2.8284271247461903,
+   "r_pack_px": 2.8
+  },
+  "prune_check": {
+   "dots_on_catalogue": 0,
+   "dots_within_2px_of_catalogue": 0,
+   "min_dist_dot_to_catalogue_px": 2.2360680103302
+  },
+  "footprint_px": 5167373,
+  "catalogue_px": 60988
+ },
+ "validators": {
+  "validate_conformant_zeros": {
+   "cmd": "/home/user/.venv-gems53/bin/python -m src.submission_io validate-conformant /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif",
+   "exit": 2,
+   "stdout": "",
+   "stderr": "MISSING template /tmp/gems-template/data/sample_submission.tif\n"
+  },
+  "validate_conformant_nan": {
+   "cmd": "/home/user/.venv-gems53/bin/python -m src.submission_io validate-conformant /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif",
+   "exit": 2,
+   "stdout": "",
+   "stderr": "MISSING template /tmp/gems-template/data/sample_submission.tif\n"
+  },
+  "validate_submission_zeros": {
+   "cmd": "/home/user/.venv-gems53/bin/python /tmp/gems-template/scripts/validate_submission.py --pred /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif --sample /tmp/gems53-data/sample_submission.tif --train /tmp/gems53-data/training_features.tif",
+   "exit": 1,
+   "stdout": "Validating /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif\n  Width: 3292, Height: 3730, Count: 1, Dtype: ('float32',), CRS: EPSG:32611, Res: (100.0, 100.0), Nodata: None\n  Data min: 0.0000, max: 1.0000, mean: 0.0065, nan%: 0.00%\n  \u2713 CRS EPSG:32611\n  \u2713 Resolution 100m\n  \u2713 Single band\n  \u2713 Dtype float32\n  \u2713 Values in [0,1] (min 0.0000 max 1.0000)\n  \u2713 Size matches sample 3292x3730\n  \u2713 Transform matches sample\n  \u2713 All 5,167,373 template-valid px are finite in [0,1]\n  \u2713 Size matches training_features\n  i NaN fraction 0.00% (NaN is expected outside the GeoDAWN footprint)\n\n\u274c Validation FAILED:\n  - 7111787 px outside the template's valid region are finite (spec: \"data outside the bounds is null or nan\"; fix: python scripts/sanitize_submission.py --pred /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif --write)\n  - Nodata tag None != template's 'nan' (masked readers rely on it; fix: python scripts/sanitize_submission.py --pred /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif --write)\n",
+   "stderr": ""
+  },
+  "validate_submission_nan": {
+   "cmd": "/home/user/.venv-gems53/bin/python /tmp/gems-template/scripts/validate_submission.py --pred /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif --sample /tmp/gems53-data/sample_submission.tif --train /tmp/gems53-data/training_features.tif",
+   "exit": 0,
+   "stdout": "Validating /home/user/GEMSDOE53/docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif\n  Width: 3292, Height: 3730, Count: 1, Dtype: ('float32',), CRS: EPSG:32611, Res: (100.0, 100.0), Nodata: nan\n  Data min: 0.0000, max: 1.0000, mean: 0.0155, nan%: 57.92%\n  \u2713 CRS EPSG:32611\n  \u2713 Resolution 100m\n  \u2713 Single band\n  \u2713 Dtype float32\n  \u2713 Values in [0,1] (min 0.0000 max 1.0000)\n  \u2713 Size matches sample 3292x3730\n  \u2713 Transform matches sample\n  \u2713 All 5,167,373 template-valid px are finite in [0,1]\n  \u2713 NaN exactly outside the template's valid region\n  \u2713 GDAL_NODATA matches the template ('nan')\n  \u2713 Size matches training_features\n  i NaN fraction 57.92% (NaN is expected outside the GeoDAWN footprint)\n\n\u2705 Validation PASSED - Ready for submission!\nNext: Upload to https://www.drivendata.org/competitions/306/competition-doe-gems/ via 'Submit' button\n",
+   "stderr": ""
+  }
+ },
+ "validators_expected_failures": {
+  "validate_conformant_zeros": "expected non-zero: this validator enforces NaN outside"
+ },
+ "format_validators_ok": false,
+ "uniqueness": {
+  "receipt": "/home/user/GEMSDOE53/evidence/uniqueness_gate_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json",
+  "n_registry_rows": 630,
+  "flagged_raw_rule_0p70_overlap_or_0p90_rho": 88,
+  "flagged_DEV2_rule": [
+   {
+    "file": "7GEMSDOE__downloads__gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+    "overlap_final": 0.954762,
+    "lift_over_chance": 2.3353,
+    "rho_final": 0.179289,
+    "rho_footprint_only": 0.152055
+   },
+   {
+    "file": "7GEMSDOE__downloads__gems7-strike30x3-v2-2b06d45c5b57.tif",
+    "overlap_final": 0.7437,
+    "lift_over_chance": 3.6103,
+    "rho_final": 0.13836,
+    "rho_footprint_only": null
+   }
+  ],
+  "DEV2_rule": "byte/pixel identity differs; rho_final <= 0.90; NOT(overlap>0.70 AND lift>2.0)",
+  "pass": false
+ },
+ "runtime_s": 2726.3
+}
