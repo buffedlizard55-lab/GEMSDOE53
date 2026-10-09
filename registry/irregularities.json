@@ -1,397 +1,425 @@
 {
-  "schema": "gems53.irregularities.v1",
-  "items": [
-    {
-      "id": "IR-53-01",
-      "severity": "high",
-      "status": "open",
-      "subject": "Target score in the request is not the leaderboard top",
-      "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page.",
-      "action": "Use 0.3774 as the public bar. Re-check S2 before any slot decision."
-    },
-    {
-      "id": "IR-53-02",
-      "severity": "high",
-      "status": "open",
-      "subject": "The 0.2778 file is not mapped to a leaderboard receipt",
-      "detail": "S2 lists 0.2778 for extradr19 (#13). S9/S10 say the 0.2778-scoring file is GEMSDOE32 H33-2-B2 and that the file's note is 'UNSCORED'. Nothing in the repositories ties the file to the leaderboard row.",
-      "action": "Label 0.2778 as ORGANIZER-CONFIRMED only when a receipt is seen; until then it is user-reported."
-    },
-    {
-      "id": "IR-53-03",
-      "severity": "high",
-      "status": "open",
-      "subject": "Holdout truth is the catalogue, the competition's truth is not",
-      "detail": "The competition labels new faults that are NOT in the public catalogue (S1, S3 section 3.3). Any holdout built from catalogue pixels rewards recovering mapped faults. S9 states the same limitation (IR-32-PROXY-01). The catalogue-flank prune behind the 0.2778 file is supported only by proxies and one user report.",
-      "action": "Treat every HOLDOUT-DTI as a proxy. Add an off-catalogue check before trusting any prune or flank rule."
-    },
-    {
-      "id": "IR-53-04",
-      "severity": "high",
-      "status": "open",
-      "subject": "Portal error '[0, 1]': cause documented by the template, not independently confirmed",
-      "detail": "The template validator docstring (S7) records a real platform rejection caused by 3,061 NaN px inside the sample's valid region. Owner-documented, not independently verified here.",
-      "action": "Keep NaN exactly outside the official footprint and finite [0,1] inside it (done). Confirm with one scored upload only when a submission is approved. Do not use zeros outside (breaks 'outside bounds null or nan')."
-    },
-    {
-      "id": "IR-53-05",
-      "severity": "high",
-      "status": "open",
-      "subject": "Footprint definition: all-bands-finite is wrong",
-      "detail": "Defining the footprint as 'all 19 feature bands finite' gives 5,165,840 px. The official sample's finite mask gives 5,167,373 px. They differ on 4,613 px. This repo first used the wrong definition; it was caught and fixed before any submission was built (the discarded run is not reported as a result).",
-      "action": "Footprint = finite mask of sample_submission.tif. Test assertions on the count (5,167,373) are in the run receipts."
-    },
-    {
-      "id": "IR-53-06",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Redistribution of competition rasters",
-      "detail": "The competition rasters are login-gated on DrivenData (S4). The public template repo (S7) commits them as split git blobs. This repository does NOT commit them: fetch_data.py writes them to /tmp, outside the repository.",
-      "action": "Human/legal review of whether the rasters may be redistributed. Until resolved, do not add them to this repo."
-    },
-    {
-      "id": "IR-53-07",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Pins are the template owner's, not DrivenData's",
-      "detail": "The sha256 values in S7 were produced by the template owner's inventory on a GitHub-hosted runner. They are internally consistent but not checked against DrivenData.",
-      "action": "Compare the three hashes to a receipt from DrivenData when one is available."
-    },
-    {
-      "id": "IR-53-08",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Leakage diagnosis: the framing needs one correction",
-      "detail": "The request says the catalogue 'is the thing this competition's target is defined against'. The competition target is new faults, and the catalogue is a legitimate input at prediction time (S1, S3). The leak is a training/evaluation defect: a feature built from the training labels themselves (GEMSDOE29 IR-29-ARTIFACT-LEAK, which says the same thing). Exp 1 reproduces it: separability 1.0 in-sample and on withheld folds.",
-      "action": "Use learn-predict separation for training and hide-and-recover for evaluation. Do not reject distance-to-catalogue as a feature."
-    },
-    {
-      "id": "IR-53-09",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Leak-free distance feature is weak under block cross-fitting",
-      "detail": "Exp 1 leak-free separability is 0.52 on average across the 5 folds. The 4x4-block cross-fit removes the nearest visible faults for every pixel in the same block, which discards most local information. Segment-exact exclusion (exclude only the pixel's own fault segment) keeps it and is not yet implemented.",
-      "action": "Next experiment: segment-exact learn-predict separation, pre-registered before running (see docs/research/hypotheses.md H1)."
-    },
-    {
-      "id": "IR-53-10",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Compute limits",
-      "detail": "This sandbox has 2 CPUs, 3 GB RAM and no GPU. The reference notebook (S5) is a GPU U-Net. It was not run. The model here is a histogram gradient-boosting classifier.",
-      "action": "Run the reference U-Net on a GPU host with the same holdout before claiming it is worse or better."
-    },
-    {
-      "id": "IR-53-11",
-      "severity": "low",
-      "status": "open",
-      "subject": "Minor reference-notebook and file inconsistencies",
-      "detail": "The notebook prints labels as int32 and reports the loop index 'Band 19' in the label-metadata print (a leftover variable). The file labels.tif is int8 with values -1/0/1 (verified here).",
-      "action": "Read dtypes from the file, not from the notebook output."
-    },
-    {
-      "id": "IR-53-12",
-      "severity": "low",
-      "status": "open",
-      "subject": "Kaufman et al. KDD 2011 citation not verified",
-      "detail": "The request cites a KDD 2011 and a TKDD 2012 version. The TKDD 2012 article is verified (S11). The KDD 2011 version is not verified here.",
-      "action": "Cite only the verified TKDD 2012 article."
-    },
-    {
-      "id": "IR-53-13",
-      "severity": "low",
-      "status": "open",
-      "subject": "Repository started empty",
-      "detail": "At the start of this session the repository contained only a one-line README. The mission text, evidence and tools described in the request were not in it. They were rebuilt from the public template (S7) and the public repos, and only the parts verified here are included.",
-      "action": "Treat the GEMSDOE/GEMSDOE29/GEMSDOE32 files as external references, not as code of this repo."
-    },
-    {
-      "id": "IR-53-14",
-      "severity": "high",
-      "status": "fixed",
-      "subject": "Written raster had nodata=None; the template sample tag is 'nan'",
-      "detail": "The shared template validator failed the first build on the nodata tag. The writer now sets nodata=NaN for the NaN variant. Regression test added (tests/test_submission.py).",
-      "action": "Fixed in src/gems53/core.py. Re-checked with the template validator (PASSED)."
-    },
-    {
-      "id": "IR-53-15",
-      "severity": "high",
-      "status": "fixed",
-      "subject": "Zeros-outside fallback is not compliant with the official rule",
-      "detail": "The official rule text (S1) says outside the bounds must be null or NaN. The template validator rejects a zeros-outside file. The fallback was removed.",
-      "action": "Removed from scripts/exp3_build_submission.py and from the plan. Do not offer a zeros file."
-    },
-    {
-      "id": "IR-53-16",
-      "severity": "high",
-      "status": "open",
-      "subject": "3-px overlap flag fires on placement, not density alone",
-      "detail": "Max overlap 79.5% (GEMSDOE22). Chance baseline (evidence/overlap_baseline.json): lift up to 4.2x for GEMSDOE27/28. The flag is therefore not explained by density.",
-      "action": "Candidate blocked under the current protocol. Any change to the 70% rule (for example, a chance-corrected rule) needs the user's explicit approval."
-    },
-    {
-      "id": "IR-53-17",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Protocol deviation: private validator and writer in this lane",
-      "detail": "This lane first wrote its own validator (scripts/validate_submission.py) and kept its own writer and metric (src/gems53/core.py). The protocol forbids a private fork.",
-      "action": "Own validator deleted; the template's scripts/validate_submission.py is now the official check. core.py is not yet reconciled with the template's src/submission_io.py (remaining work)."
-    },
-    {
-      "id": "IR-53-18",
-      "severity": "medium",
-      "status": "closed",
-      "subject": "H1 (segment-exact learn-predict separation) was run as a canary and rejected",
-      "detail": "Run as Experiment 4 (evidence/exp4_hypothesis_canary.json). Pixel-level paired canary AUC = 1.000 (fault pixel vs adjacent non-fault pixel): the H1 feature is a function of the label, because a positive's own segment is removed and a negative's is not. Rejected by design. No holdout run was needed.",
-      "action": "Do not use H1 in any candidate. Keep the paired (pixel-neighbour) canary in every future feature audit."
-    },
-    {
-      "id": "IR-53-19",
-      "severity": "high",
-      "status": "open",
-      "subject": "Mirrored example_submission.tif is pixel-identical to the known-fault labels, not the 'total fault absence' template the rules describe",
-      "detail": "Pixels equal to 1.0 in the mirror: 60,988; labels.tif pixels equal to 1: 60,988; identical mask (verified by np.array_equal). The official problem page says the sample 'predicts total fault absence' (S1, Submission format). The shared template validator also warns that an all-zero file is the 'total-fault-absence template'. Either the Dropbox mirror (S18) is not the official sample, or the official sample is not what the text says.",
-      "action": "Manual check on the DrivenData data tab (login needed; not done here). Until resolved, do not treat the mirrored sample as an official reference for the 'empty prediction' format."
-    },
-    {
-      "id": "IR-53-20",
-      "severity": "high",
-      "status": "open",
-      "subject": "The 70% overlap gate is confounded for dense registry rasters and includes non-submission files",
-      "detail": "Of 163 flagged registry rasters, 80 cover at least half the footprint, so 'our dots within 3 px' approaches 100% for any candidate (max observed 1.000). The mirror also contains feature and diagnostic rasters (for example acquisition block IDs, TIGER road distance, a context-detector probability map) that are not submissions. The lift (observed/expected) baseline (evidence/overlap_baseline.json) separates density from placement: median lift 1.77, 62 files at lift 1.2 or lower, and 17GEMSDOE F-ensemble-2pct at lift 15.2.",
-      "action": "Protocol owner to decide: restrict the registry to submission rasters and/or gate on lift. This session did not change the gate. It was applied as written."
-    },
-    {
-      "id": "IR-53-21",
-      "severity": "high",
-      "status": "open",
-      "subject": "Our 2%-of-footprint HGB candidate duplicates an existing registry submission's placement",
-      "detail": "17GEMSDOE F-ensemble-2pct (GEMSDOE17 repo, docs/downloads) has 103,347 dots against our 103,348; 75.8% of our dots are within 3 px of its dots (expected 5.0% by chance, lift 15.2), and the sample rank correlation is 0.507. The registry maximum rank correlation is 0.517 (12GEMSDOE multiphysics_submission, 97.2% overlap). Method attribution is an inference from the dot count and placement, not a verified fact about how those files were built.",
-      "action": "Do not release this recipe. Any future candidate needs a different method family, not a different quota, and must pass the uniqueness gate again."
-    },
-    {
-      "id": "IR-53-22",
-      "severity": "medium",
-      "status": "fixed",
-      "subject": "Repository validator accepted zeros outside the footprint",
-      "detail": "src/gems53/core.py validate_submission allowed zero outside the footprint ('nan OR zero'). The official text says null or NaN. Fixed in this session: the check is now NaN-only, with tests (tests/test_submission.py: test_zero_outside_footprint_is_rejected). The shared template validator already requires NaN exactly outside the template's valid region.",
-      "action": "Tests pass (13). Port the same rule to the shared template as a cross-check if it does not already exist there."
-    },
-    {
-      "id": "IR-53-23",
-      "severity": "medium",
-      "status": "open",
-      "subject": "The 138-raster registry in the earlier receipt cannot be reproduced",
-      "detail": "The earlier receipt used 138 registry rasters from /tmp/g53/uniq, which no longer exists. This session mirrored the public GEMSDOE* repositories by shallow git clone: 53 repositories contain tif files, giving 907 tif files. Inventory: 628 unique sha256; 613 single-band rasters on the competition grid (evidence/registry_inventory/inventory.json). The earlier receipt is kept as evidence/uniqueness_check_prior138.json and is not comparable.",
-      "action": "Use the 613-file inventory as the population. Document any change to the population."
-    },
-    {
-      "id": "IR-53-24",
-      "severity": "medium",
-      "status": "open",
-      "subject": "NLR rules section 3.2 requires a narrative disclosure of generative-AI use",
-      "detail": "The rules (S3, section 3.2, 'Indication of use of generative AI technology') require the extent and purpose of generative-AI use to be stated in the submission narrative. This work used AI-agent tooling for code, analysis and drafting. The disclosure is not yet written into a narrative.",
-      "action": "Draft the disclosure before any final submission. It is not a competition score issue, but it can disqualify a submission if missing."
-    },
-    {
-      "id": "IR-53-25",
-      "severity": "low",
-      "status": "open",
-      "subject": "Leaderboard snapshot time is not shown",
-      "detail": "The leaderboard page (S2) gives relative times only. Re-fetched this session: #1 xiaofanhu 0.3774, #2 alexoktaba 0.3345, #7 DARD 0.3195, #13 extradr19 0.2778. The 'highest score' 0.3195 in the request is therefore #7, not #1.",
-      "action": "Re-fetch before any slot decision."
-    },
-    {
-      "id": "IR-53-26",
-      "severity": "high",
-      "status": "open",
-      "subject": "Leaderboard values disagree across sources and cannot be re-read here",
-      "detail": "The brief gives #1 0.3774, #7 0.3195, #13 0.2778 (extradr19). The owner's ledger (GEMSDOE32, reads dated 2026-10-03) gives ranks 1-5 as 0.3195/0.3128/0.3042/0.2998/0.2941 and extradr19 at 0.2449 (rank 19). Our static fetch of the DrivenData leaderboard returned 'Loading...' (client-side), so we did NOT read any leaderboard number ourselves. The README's earlier 'fetched 2026-10-08' wording was wrong and is corrected.",
-      "action": "Treat every leaderboard number as user-reported until a dated official read is recorded. Do not compare HOLDOUT-DTI with leaderboard values."
-    },
-    {
-      "id": "IR-53-27",
-      "severity": "high",
-      "status": "open",
-      "subject": "The verbatim prompt is not in the workspace",
-      "detail": "The session record holds only a summary of the user's request. The README's prompt section is a reconstruction in the user's terms, not the verbatim text. The verbatim text was not found in the workspace, git history or cache.",
-      "action": "Paste the verbatim prompt into docs/prompt/verbatim.md. The README links there. Until then the reconstruction is labelled as such."
-    },
-    {
-      "id": "IR-53-28",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Holdout proxy and user-reported board disagree on emission volume",
-      "detail": "Earlier H1/H2 lane reports show HOLDOUT-DTI rising with dot budget (bands q=0.02 design-A value 0.035233 at about 103k dots), while owner-reported board entries suggest sparse emissions can score higher. These early holdout comparisons use the hidden-buffer negative pool now identified in IR-53-37, so they are diagnostic only, not valid volume calibration or promotion evidence. The corrected design-B baseline is 0.010562; board-row and file attributions remain unverified (S20/S2).",
-      "action": "Retain the records as historical diagnostics only; do not use them as leaderboard calibration. Any volume claim requires a corrected design-B holdout and a submission-page receipt."
-    },
-    {
-      "id": "IR-53-29",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Ridge valley arm picks up band-pass side-lobes",
-      "detail": "Subtracting the 1.5 km normalised-convolution trend leaves dark side-lobes about 5 px either side of a sharp ridge. The valley arm turns them into extra centrelines (unit test on a synthetic line: centrelines at columns 55, 60 and 65). About half of the RTP centrelines are valley-polarity (ridge fraction 0.489). Side-lobes are not separated from true valleys.",
-      "action": "Ridge-only ablation and a DoG/halo-free filter are the first follow-ups. Not run here: the candidate is pre-registered and the experiment budget is spent."
-    },
-    {
-      "id": "IR-53-30",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Radiometric grids are not in the 19-band stack and cannot be fetched from this sandbox",
-      "detail": "The 19 bands of training_features.tif (see X1 band list) contain no radiometric channel. The sandbox allow-list is github.com, api.github.com, codeload.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org, so USGS/ScienceBase downloads are impossible from bash.",
-      "action": "H6 (radiometric alteration lineaments) stays data-blocked until the user supplies the grids or allows the host. Not claimed as tested."
-    },
-    {
-      "id": "IR-53-31",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Uniqueness method v2 choices are ours and must be reviewed",
-      "detail": "Dense registry probability maps (more than 20% of footprint pixels > 0) cannot be compared by nonzero pixels. We compare their top-N pixels (N = our dot count) and record both numbers. Constant rasters have undefined rho (recorded as null). The method is documented in scripts/uniqueness_check.py. The v1 receipt (138 files) is superseded.",
-      "action": "Reviewer to confirm the dense rule. Both numbers are in evidence/uniqueness_v2.json."
-    },
-    {
-      "id": "IR-53-32",
-      "severity": "medium",
-      "status": "open",
-      "subject": "GEMSDOE32 'primary' file changed between reads",
-      "detail": "The landing page read in a prior session named gemsdoe32-h33-h33-2-b2 (the file behind the 0.2778 claim) as primary and UNSCORED. The README read on 2026-10-08 names gemsdoe32-h32d-submodular-multipysics-46090 as the one-click file (owner-reported incumbent 0.2600 for d2.8). The 0.2778 link to H33-2-B2 is still not in the owner's ledger.",
-      "action": "Keep the H33-2-B2 / 0.2778 association labelled OWNER-CLAIM or user-reported. Do not state it as organizer-confirmed."
-    },
-    {
-      "id": "IR-53-33",
-      "severity": "low",
-      "status": "open",
-      "subject": "RTP sentinel cells inside the footprint",
-      "detail": "3,061 band-2 (RTP) cells inside the official footprint are no-data. They are excluded as candidates and are not treated as zero evidence. The same count appears in the template's documented portal-rejection case (IR-53-04).",
-      "action": "None beyond keeping the exclusion rule documented."
-    },
-    {
-      "id": "IR-53-34",
-      "severity": "high",
-      "status": "open",
-      "subject": "Candidate's pre-placement surface shares its strongest pixels with two team files, far above chance",
-      "detail": "Top-N surface pixels of H2 fall within 3 px of the top-N pixels of GEMSDOE46 dfa-corroborated (sparse, 37.7k dots) at 72.9% (chance 20.1%, lift 3.6) and of GEMSDOE40 eulerdepth-si0 (sparse) at 70.5% (chance 12.6%, lift 5.6). Their dots overlap ours at 50.7% and 56.9%. The continuous surface correlates at 0.73 with the dense GEMSDOE40 Euler depth-cluster map (below the 0.90 rule). These are measured in evidence/uniqueness_v2.json and evidence/overlap_baseline_v2.json. The signal is therefore not untried in this registry at its strongest structures.",
-      "action": "Do not treat H2 as an untried signal. A unique file needs a different top tail (a new pre-registered variant, which exceeds this session's budget). Also compare emission rules file by file."
-    },
-    {
-      "id": "IR-53-35",
-      "severity": "high",
-      "status": "open",
-      "subject": "Hypothesis label H2 is used for two different hypotheses across sessions",
-      "detail": "In this repository's docs/research/archive/hypotheses_pr6.md, H2 is 'multi-physics structural corroboration' (IMPLEMENTED). In this session's docs/research/hypotheses.md, H2 is the band-2 ridge/valley candidate (tested, DO-NOT-SUBMIT). The PR #5 summary's 'H2 negative on holdout' does not say which H2 it means.",
-      "action": "Rename one of them before the next session. Until then, quote the file path with every H2 result."
-    },
-    {
-      "id": "IR-53-36",
-      "severity": "high",
-      "status": "open",
-      "subject": "Uniqueness scope gap: the 166-raster check missed the 5-px lattice family",
-      "detail": "The other session's check (166 GeoTIFFs in 12 repos) reports max overlap 61.79%. This session's check (1,200 rasters in 63 repos) finds 60 rows above 70% for the same file (chance lift 0.996 to 1.31; the 13GEMSDOE r13-lattice family). The earlier result was therefore a scope limit, not a clean bill of health.",
-      "action": "Use the full manifest (evidence/registry_manifest.json) for every label decision. Re-check any file labelled OK-TO-SUBMIT against it."
-    },
-    {
-      "id": "IR-53-37",
-      "severity": "high",
-      "status": "open-corrected",
-      "subject": "Negative-pool side channel in the design-A holdouts (E1, prior exp2, and H2 X2)",
-      "detail": "The design-A training pool was fp & ~cat & ~buf, and the 10 px buffer is defined from the WITHHELD faults. The buffer removed 371,176 to 390,883 negative pixels per fold (7.3% to 7.6% of the pool), all within 10 px of a withheld fault. Measured effect on fold 0 of the bands top-q 0.02 arm: 0.0266 (design A) vs 0.0106 (design B). The design-A H1 canary used the same buffered background, so its separability is also inflated. The same hidden-buffer negative sampling appears in scripts/x2_ridge_holdout.py; therefore the H2 X2 HOLDOUT-DTI comparison also inherits this design defect and cannot validate its preregistered promotion gate. This is the pattern the GEMSDOE29 audit flagged (docs/leakage-review.md).",
-      "action": "E1 and the prior H1 exp2 design-A numbers (evidence/exp2_holdout_arms.json, evidence/e1_h1_thin_holdout.json) are reference only; design B in E2 is used for the H1/M1 decision. The H2 X2 run was not repeated under design B because the experiment budget was exhausted; its values remain historical/diagnostic only. The corrected design-B sampler uses every footprint pixel that is not a visible fault."
-    },
-    {
-      "id": "IR-53-38",
-      "severity": "high",
-      "status": "open",
-      "subject": "Verbatim user prompt is not stored in the workspace",
-      "detail": "README.md states that the verbatim user message is not stored. This session has only a condensed record of the requirements. The README requirements block is therefore recorded in the user's terms and is not a verbatim copy.",
-      "action": "Not fabricated. The user should paste the verbatim prompt into README.md (section 'Verbatim prompt'). Until then the README says so explicitly."
-    },
-    {
-      "id": "IR-53-39",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Protocol names two shared tools that do not exist in the template",
-      "detail": "The parallel-run protocol names evaluate_holdout.py and submission_writer.py. At template commit dcbbb19 (fetched 2026-10-08) neither file exists. The nearest shared tools are src/blocks.py with scripts/block_holdout_eval.py (holdout), src/submission_io.py (writer), scripts/validate_submission.py and python -m src.submission_io validate-conformant (validators), and src/metrics.py (DTI).",
-      "action": "Mapping recorded in the pre-registration section 3. This session imports the template modules by file path and does not copy them. Any fix belongs in the template, not in a fork."
-    },
-    {
-      "id": "IR-53-40",
-      "severity": "high",
-      "status": "open",
-      "subject": "H3 (fault-parallel strain orientation) is not testable with the public strain data",
-      "detail": "The geodetic strain CSV in the INGENIOUS mirror (jklinck/geothermal_research commit 56d78de7, geodetics_INGENIOUS_regional_data/geodetic_strain_rate_csv.csv) has only the columns long_wgs84, lat_wgs84, second_inv_strainrate_10e-9, dilationrate_10e-9, shearrate_10e-9. The NBMG README gives the principal rates and derived scalars only. Orientation needs the full tensor or the principal azimuths, which are not in the stack or in this CSV.",
-      "action": "H3 is marked BLOCKED in docs/research/hypotheses.md. Retrieving the tensor would need the NBMG or GDR submission 1391, which the sandbox cannot reach (egress allow-list)."
-    },
-    {
-      "id": "IR-53-41",
-      "severity": "medium",
-      "status": "open",
-      "subject": "GEMSDOE32 'zeros' variant fills the whole grid with 0 (not NaN outside the footprint)",
-      "detail": "Measured on the registry copy of gemsdoe32-h33-h33-2-b2 (zeros variant): 12,279,160 finite pixels, the whole 3730 x 3292 grid. The rules say outside the bounds must be null or NaN. The NaN variant of the same file has 5,167,373 finite pixels (the footprint). Which variant the owner submitted is unknown (no receipt, IR-53-02).",
-      "action": "Recorded as a fact about the registry file. No claim is made about the portal outcome of the zeros variant."
-    },
-    {
-      "id": "IR-53-42",
-      "severity": "high",
-      "status": "open",
-      "subject": "The holdout rewards proximity to visible catalogue faults; the target is new faults",
-      "detail": "Withheld faults are catalogue faults. The H1 feature (distance to visible faults) has single-feature separability 0.77 under design B (fold 0 = 0.768), so the holdout rewards proximity to known faults. The competition scores faults absent from the public catalogue (problem page; IR-53-03, IR-53-08). Gains on this proxy may not carry over, and the competition's new faults may be systematically farther from known faults.",
-      "action": "Flagged in every holdout number. No leaderboard or organizer claim is made. A non-catalogue validation population is listed as remaining work (docs/research/hypotheses.md, L-21)."
-    },
-    {
-      "id": "IR-53-43",
-      "severity": "medium",
-      "status": "resolved-by-rebuild",
-      "subject": "The uniqueness registry used by the previous receipt is not on disk and was incomplete",
-      "detail": "The earlier receipt compared 138 files from /tmp, which no longer exists. This session rebuilt the registry from the GEMSDOE* repositories at their default-branch tips (63 repositories, 907 .tif entries, 628 unique sha256, 621 unique on the official grid). Per-file sha256 values are recorded in evidence/uniqueness_gate_*.json.",
-      "action": "The earlier 138-file receipt is superseded for the new candidate. The rebuilt registry is not committed (it is about 1.3 GB). The fetch script is in the run card."
-    },
-    {
-      "id": "IR-53-44",
-      "severity": "low",
-      "status": "open",
-      "subject": "INGENIOUS 2 m temperature-probe data licence is not stated in its README",
-      "detail": "The mirror README for 2m_temperature_probe_INGENIOUS_regional_data describes the columns and the survey groups but gives no licence. The INGENIOUS dataset is listed as CC BY 4.0 by the template data catalogue (GDR submission 1391), but that licence was not verified for this sub-file.",
-      "action": "Verify the licence before any use beyond internal analysis (rules: data must permit use and sharing with the sponsor)."
-    },
-    {
-      "id": "IR-53-45",
-      "severity": "high",
-      "status": "resolved-with-superseded-record",
-      "subject": "E2 stage-2 baseline computed from the selected arm's model (code bug, first design-B run)",
-      "detail": "When the stage-1 selection is the h1 arm, the first design-B run computed the stage-2 'baseline' (pre-registered: bands top-q 0.02 from the bands model) from the h1 model. The run's stage-2 acceptance was therefore a comparison of two h1 variants, not the pre-registered comparison. Stage 1 of that run is valid. The bug was found by reading the code before any stage-2 result was used.",
-      "action": "Fixed in scripts/e2_leakfree_holdouts.py (run_stage2 / fit_predict_fold). Stage 2 re-run with --stage2-only. The buggy stage-2 output is kept as evidence/superseded/e2_stage2_BUGGY_baseline_from_h1_model.json and is not used for any label. Logged as DEV-1b (pre-registration section 9)."
-    },
-    {
-      "id": "IR-53-46",
-      "severity": "high",
-      "status": "open",
-      "subject": "The raw 70% overlap gate cannot be satisfied by any placement on this registry",
-      "detail": "The rebuilt registry includes GEMSDOE13 r13-lattice-s5_v2 (206,895 dots). Its dots lie within 3 px of 99.87% of the footprint (chance coverage). Any candidate's dots therefore fall within 3 px of it at about 99%, above the 70% stop threshold. The current candidate is flagged, and no placement on this registry can clear the raw rule. Receipt: evidence/uniqueness_gate_<name>.json. Diagnostics: evidence/uniqueness_diagnostics_<name>.json.",
-      "action": "Not changed here (thresholds are the user's). Decision needed: a registry scope that counts only submission-type dot maps, and a chance-corrected overlap rule (lift over chance). Either change needs explicit approval and a fresh pre-registered gate run (IR-53-16)."
-    },
-    {
-      "id": "IR-53-47",
-      "severity": "medium",
-      "status": "open",
-      "subject": "Whole-grid Spearman rho (NaN read as 0) flags 52 rasters on the surface; footprint-only rho flags none",
-      "detail": "The pre-registered rho check uses the whole grid with NaN read as 0. About 7.1 million pixels outside the footprint are zeros in both rasters, which are ties that inflate the rank correlation. Whole-grid rho of the candidate SURFACE (continuous probability) exceeds 0.90 for 52 registry rasters (receipt, column rho_surface). Footprint-only surface rho exceeds 0.90 for none of those 52 (evidence/diagnostic_surface_rho_<name>.json). Whole-grid and footprint-only rho of the FINAL raster exceed 0.90 for none of the 621 rasters.",
-      "action": "Receipts keep the pre-registered whole-grid value. Footprint-only rho is recommended in the decision of IR-53-46. The surface rho flags are reported as method-sensitive, not as duplicates."
-    },
-    {
-      "id": "IR-53-48",
-      "severity": "medium",
-      "status": "open",
-      "subject": "57 of the 103 flags come from dense rasters that are not dot maps",
-      "detail": "Registry rasters with more than 50% of the footprint nonzero (feature grids such as geodawn_rad_u8, probability surfaces such as context_detector_prob_*, and ID rasters such as acquisition_block_id_100m) have nonzero values almost everywhere. Their dot overlap is 100% by construction. The mid-density class adds 4 more flags.",
-      "action": "Registry scope is a decision for the user (IR-53-46). This session reports the classes separately and drops no file from the verdict."
-    },
-    {
-      "id": "IR-53-49",
-      "severity": "medium",
-      "status": "open",
-      "subject": "A later uniqueness refresh covers only three rasters and is not the canonical full-registry gate",
-      "detail": "evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582_refresh.json reports no flag but includes only 3 local/nearby rasters. It is not comparable to the canonical 621-unique-raster receipt evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json, which flags the candidate. The smaller refresh cannot clear the candidate.",
-      "action": "Keep the full-registry receipt as the verdict source; label the refresh partial in any future UI or remove it from clearance paths. No threshold or registry scope was changed."
-    }
-  ]
+ "schema": "gems53.irregularities.v1",
+ "items": [
+  {
+   "id": "IR-53-01",
+   "severity": "high",
+   "status": "open",
+   "subject": "Target score in the request is not the leaderboard top",
+   "detail": "The request says 0.3195 is the highest public score. The public leaderboard page (S2) lists #1 xiaofanhu at 0.3774; 0.3195 is #7 (DARD). The snapshot time is not shown on the page.",
+   "action": "Use 0.3774 as the public bar. Re-check S2 before any slot decision."
+  },
+  {
+   "id": "IR-53-02",
+   "severity": "high",
+   "status": "open",
+   "subject": "The 0.2778 file is not mapped to a leaderboard receipt",
+   "detail": "S2 lists 0.2778 for extradr19 (#13). S9/S10 say the 0.2778-scoring file is GEMSDOE32 H33-2-B2 and that the file's note is 'UNSCORED'. Nothing in the repositories ties the file to the leaderboard row.",
+   "action": "Label 0.2778 as ORGANIZER-CONFIRMED only when a receipt is seen; until then it is user-reported."
+  },
+  {
+   "id": "IR-53-03",
+   "severity": "high",
+   "status": "open",
+   "subject": "Holdout truth is the catalogue, the competition's truth is not",
+   "detail": "The competition labels new faults that are NOT in the public catalogue (S1, S3 section 3.3). Any holdout built from catalogue pixels rewards recovering mapped faults. S9 states the same limitation (IR-32-PROXY-01). The catalogue-flank prune behind the 0.2778 file is supported only by proxies and one user report.",
+   "action": "Treat every HOLDOUT-DTI as a proxy. Add an off-catalogue check before trusting any prune or flank rule."
+  },
+  {
+   "id": "IR-53-04",
+   "severity": "high",
+   "status": "open",
+   "subject": "Portal error '[0, 1]': cause documented by the template, not independently confirmed",
+   "detail": "The template validator docstring (S7) records a real platform rejection caused by 3,061 NaN px inside the sample's valid region. Owner-documented, not independently verified here.",
+   "action": "Keep NaN exactly outside the official footprint and finite [0,1] inside it (done). Confirm with one scored upload only when a submission is approved. Do not use zeros outside (breaks 'outside bounds null or nan')."
+  },
+  {
+   "id": "IR-53-05",
+   "severity": "high",
+   "status": "open",
+   "subject": "Footprint definition: all-bands-finite is wrong",
+   "detail": "Defining the footprint as 'all 19 feature bands finite' gives 5,165,840 px. The official sample's finite mask gives 5,167,373 px. They differ on 4,613 px. This repo first used the wrong definition; it was caught and fixed before any submission was built (the discarded run is not reported as a result).",
+   "action": "Footprint = finite mask of sample_submission.tif. Test assertions on the count (5,167,373) are in the run receipts."
+  },
+  {
+   "id": "IR-53-06",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Redistribution of competition rasters",
+   "detail": "The competition rasters are login-gated on DrivenData (S4). The public template repo (S7) commits them as split git blobs. This repository does NOT commit them: fetch_data.py writes them to /tmp, outside the repository.",
+   "action": "Human/legal review of whether the rasters may be redistributed. Until resolved, do not add them to this repo."
+  },
+  {
+   "id": "IR-53-07",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Pins are the template owner's, not DrivenData's",
+   "detail": "The sha256 values in S7 were produced by the template owner's inventory on a GitHub-hosted runner. They are internally consistent but not checked against DrivenData.",
+   "action": "Compare the three hashes to a receipt from DrivenData when one is available."
+  },
+  {
+   "id": "IR-53-08",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Leakage diagnosis: the framing needs one correction",
+   "detail": "The request says the catalogue 'is the thing this competition's target is defined against'. The competition target is new faults, and the catalogue is a legitimate input at prediction time (S1, S3). The leak is a training/evaluation defect: a feature built from the training labels themselves (GEMSDOE29 IR-29-ARTIFACT-LEAK, which says the same thing). Exp 1 reproduces it: separability 1.0 in-sample and on withheld folds.",
+   "action": "Use learn-predict separation for training and hide-and-recover for evaluation. Do not reject distance-to-catalogue as a feature."
+  },
+  {
+   "id": "IR-53-09",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Leak-free distance feature is weak under block cross-fitting",
+   "detail": "Exp 1 leak-free separability is 0.52 on average across the 5 folds. The 4x4-block cross-fit removes the nearest visible faults for every pixel in the same block, which discards most local information. Segment-exact exclusion (exclude only the pixel's own fault segment) keeps it and is not yet implemented.",
+   "action": "Next experiment: segment-exact learn-predict separation, pre-registered before running (see docs/research/hypotheses.md H1)."
+  },
+  {
+   "id": "IR-53-10",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Compute limits",
+   "detail": "This sandbox has 2 CPUs, 3 GB RAM and no GPU. The reference notebook (S5) is a GPU U-Net. It was not run. The model here is a histogram gradient-boosting classifier.",
+   "action": "Run the reference U-Net on a GPU host with the same holdout before claiming it is worse or better."
+  },
+  {
+   "id": "IR-53-11",
+   "severity": "low",
+   "status": "open",
+   "subject": "Minor reference-notebook and file inconsistencies",
+   "detail": "The notebook prints labels as int32 and reports the loop index 'Band 19' in the label-metadata print (a leftover variable). The file labels.tif is int8 with values -1/0/1 (verified here).",
+   "action": "Read dtypes from the file, not from the notebook output."
+  },
+  {
+   "id": "IR-53-12",
+   "severity": "low",
+   "status": "verified-2026-10-09",
+   "subject": "Kaufman et al. KDD 2011 citation not verified",
+   "detail": "The request cites a KDD 2011 and a TKDD 2012 version. The TKDD 2012 article is verified (S11). The KDD 2011 version is not verified here. RESOLVED 2026-10-09: KDD'11 version verified via dblp/TAU CRIS/DOI 10.1145/2020408.2020496 (S33). Authorship nuance: KDD'11 has three authors; Stitelman appears only in the TKDD'12 journal version (S34).",
+   "action": "Cite only the verified TKDD 2012 article."
+  },
+  {
+   "id": "IR-53-13",
+   "severity": "low",
+   "status": "open",
+   "subject": "Repository started empty",
+   "detail": "At the start of this session the repository contained only a one-line README. The mission text, evidence and tools described in the request were not in it. They were rebuilt from the public template (S7) and the public repos, and only the parts verified here are included.",
+   "action": "Treat the GEMSDOE/GEMSDOE29/GEMSDOE32 files as external references, not as code of this repo."
+  },
+  {
+   "id": "IR-53-14",
+   "severity": "high",
+   "status": "fixed",
+   "subject": "Written raster had nodata=None; the template sample tag is 'nan'",
+   "detail": "The shared template validator failed the first build on the nodata tag. The writer now sets nodata=NaN for the NaN variant. Regression test added (tests/test_submission.py).",
+   "action": "Fixed in src/gems53/core.py. Re-checked with the template validator (PASSED)."
+  },
+  {
+   "id": "IR-53-15",
+   "severity": "high",
+   "status": "fixed",
+   "subject": "Zeros-outside fallback is not compliant with the official rule",
+   "detail": "The official rule text (S1) says outside the bounds must be null or NaN. The template validator rejects a zeros-outside file. The fallback was removed.",
+   "action": "Removed from scripts/exp3_build_submission.py and from the plan. Do not offer a zeros file."
+  },
+  {
+   "id": "IR-53-16",
+   "severity": "high",
+   "status": "open",
+   "subject": "3-px overlap flag fires on placement, not density alone",
+   "detail": "Max overlap 79.5% (GEMSDOE22). Chance baseline (evidence/overlap_baseline.json): lift up to 4.2x for GEMSDOE27/28. The flag is therefore not explained by density.",
+   "action": "Candidate blocked under the current protocol. Any change to the 70% rule (for example, a chance-corrected rule) needs the user's explicit approval."
+  },
+  {
+   "id": "IR-53-17",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Protocol deviation: private validator and writer in this lane",
+   "detail": "This lane first wrote its own validator (scripts/validate_submission.py) and kept its own writer and metric (src/gems53/core.py). The protocol forbids a private fork.",
+   "action": "Own validator deleted; the template's scripts/validate_submission.py is now the official check. core.py is not yet reconciled with the template's src/submission_io.py (remaining work)."
+  },
+  {
+   "id": "IR-53-18",
+   "severity": "medium",
+   "status": "closed",
+   "subject": "H1 (segment-exact learn-predict separation) was run as a canary and rejected",
+   "detail": "Run as Experiment 4 (evidence/exp4_hypothesis_canary.json). Pixel-level paired canary AUC = 1.000 (fault pixel vs adjacent non-fault pixel): the H1 feature is a function of the label, because a positive's own segment is removed and a negative's is not. Rejected by design. No holdout run was needed.",
+   "action": "Do not use H1 in any candidate. Keep the paired (pixel-neighbour) canary in every future feature audit."
+  },
+  {
+   "id": "IR-53-19",
+   "severity": "high",
+   "status": "open",
+   "subject": "Mirrored example_submission.tif is pixel-identical to the known-fault labels, not the 'total fault absence' template the rules describe",
+   "detail": "Pixels equal to 1.0 in the mirror: 60,988; labels.tif pixels equal to 1: 60,988; identical mask (verified by np.array_equal). The official problem page says the sample 'predicts total fault absence' (S1, Submission format). The shared template validator also warns that an all-zero file is the 'total-fault-absence template'. Either the Dropbox mirror (S18) is not the official sample, or the official sample is not what the text says.",
+   "action": "Manual check on the DrivenData data tab (login needed; not done here). Until resolved, do not treat the mirrored sample as an official reference for the 'empty prediction' format."
+  },
+  {
+   "id": "IR-53-20",
+   "severity": "high",
+   "status": "open",
+   "subject": "The 70% overlap gate is confounded for dense registry rasters and includes non-submission files",
+   "detail": "Of 163 flagged registry rasters, 80 cover at least half the footprint, so 'our dots within 3 px' approaches 100% for any candidate (max observed 1.000). The mirror also contains feature and diagnostic rasters (for example acquisition block IDs, TIGER road distance, a context-detector probability map) that are not submissions. The lift (observed/expected) baseline (evidence/overlap_baseline.json) separates density from placement: median lift 1.77, 62 files at lift 1.2 or lower, and 17GEMSDOE F-ensemble-2pct at lift 15.2.",
+   "action": "Protocol owner to decide: restrict the registry to submission rasters and/or gate on lift. This session did not change the gate. It was applied as written."
+  },
+  {
+   "id": "IR-53-21",
+   "severity": "high",
+   "status": "open",
+   "subject": "Our 2%-of-footprint HGB candidate duplicates an existing registry submission's placement",
+   "detail": "17GEMSDOE F-ensemble-2pct (GEMSDOE17 repo, docs/downloads) has 103,347 dots against our 103,348; 75.8% of our dots are within 3 px of its dots (expected 5.0% by chance, lift 15.2), and the sample rank correlation is 0.507. The registry maximum rank correlation is 0.517 (12GEMSDOE multiphysics_submission, 97.2% overlap). Method attribution is an inference from the dot count and placement, not a verified fact about how those files were built.",
+   "action": "Do not release this recipe. Any future candidate needs a different method family, not a different quota, and must pass the uniqueness gate again."
+  },
+  {
+   "id": "IR-53-22",
+   "severity": "medium",
+   "status": "fixed",
+   "subject": "Repository validator accepted zeros outside the footprint",
+   "detail": "src/gems53/core.py validate_submission allowed zero outside the footprint ('nan OR zero'). The official text says null or NaN. Fixed in this session: the check is now NaN-only, with tests (tests/test_submission.py: test_zero_outside_footprint_is_rejected). The shared template validator already requires NaN exactly outside the template's valid region.",
+   "action": "Tests pass (13). Port the same rule to the shared template as a cross-check if it does not already exist there."
+  },
+  {
+   "id": "IR-53-23",
+   "severity": "medium",
+   "status": "open",
+   "subject": "The 138-raster registry in the earlier receipt cannot be reproduced",
+   "detail": "The earlier receipt used 138 registry rasters from /tmp/g53/uniq, which no longer exists. This session mirrored the public GEMSDOE* repositories by shallow git clone: 53 repositories contain tif files, giving 907 tif files. Inventory: 628 unique sha256; 613 single-band rasters on the competition grid (evidence/registry_inventory/inventory.json). The earlier receipt is kept as evidence/uniqueness_check_prior138.json and is not comparable.",
+   "action": "Use the 613-file inventory as the population. Document any change to the population."
+  },
+  {
+   "id": "IR-53-24",
+   "severity": "medium",
+   "status": "open",
+   "subject": "NLR rules section 3.2 requires a narrative disclosure of generative-AI use",
+   "detail": "The rules (S3, section 3.2, 'Indication of use of generative AI technology') require the extent and purpose of generative-AI use to be stated in the submission narrative. This work used AI-agent tooling for code, analysis and drafting. The disclosure is not yet written into a narrative.",
+   "action": "Draft the disclosure before any final submission. It is not a competition score issue, but it can disqualify a submission if missing."
+  },
+  {
+   "id": "IR-53-25",
+   "severity": "low",
+   "status": "open",
+   "subject": "Leaderboard snapshot time is not shown",
+   "detail": "The leaderboard page (S2) gives relative times only. Re-fetched this session: #1 xiaofanhu 0.3774, #2 alexoktaba 0.3345, #7 DARD 0.3195, #13 extradr19 0.2778. The 'highest score' 0.3195 in the request is therefore #7, not #1.",
+   "action": "Re-fetch before any slot decision."
+  },
+  {
+   "id": "IR-53-26",
+   "severity": "high",
+   "status": "open",
+   "subject": "Leaderboard values disagree across sources and cannot be re-read here",
+   "detail": "The brief gives #1 0.3774, #7 0.3195, #13 0.2778 (extradr19). The owner's ledger (GEMSDOE32, reads dated 2026-10-03) gives ranks 1-5 as 0.3195/0.3128/0.3042/0.2998/0.2941 and extradr19 at 0.2449 (rank 19). Our static fetch of the DrivenData leaderboard returned 'Loading...' (client-side), so we did NOT read any leaderboard number ourselves. The README's earlier 'fetched 2026-10-08' wording was wrong and is corrected.",
+   "action": "Treat every leaderboard number as user-reported until a dated official read is recorded. Do not compare HOLDOUT-DTI with leaderboard values."
+  },
+  {
+   "id": "IR-53-27",
+   "severity": "high",
+   "status": "open",
+   "subject": "The verbatim prompt is not in the workspace",
+   "detail": "The session record holds only a summary of the user's request. The README's prompt section is a reconstruction in the user's terms, not the verbatim text. The verbatim text was not found in the workspace, git history or cache.",
+   "action": "Paste the verbatim prompt into docs/prompt/verbatim.md. The README links there. Until then the reconstruction is labelled as such."
+  },
+  {
+   "id": "IR-53-28",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Holdout proxy and user-reported board disagree on emission volume",
+   "detail": "Earlier H1/H2 lane reports show HOLDOUT-DTI rising with dot budget (bands q=0.02 design-A value 0.035233 at about 103k dots), while owner-reported board entries suggest sparse emissions can score higher. These early holdout comparisons use the hidden-buffer negative pool now identified in IR-53-37, so they are diagnostic only, not valid volume calibration or promotion evidence. The corrected design-B baseline is 0.010562; board-row and file attributions remain unverified (S20/S2).",
+   "action": "Retain the records as historical diagnostics only; do not use them as leaderboard calibration. Any volume claim requires a corrected design-B holdout and a submission-page receipt."
+  },
+  {
+   "id": "IR-53-29",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Ridge valley arm picks up band-pass side-lobes",
+   "detail": "Subtracting the 1.5 km normalised-convolution trend leaves dark side-lobes about 5 px either side of a sharp ridge. The valley arm turns them into extra centrelines (unit test on a synthetic line: centrelines at columns 55, 60 and 65). About half of the RTP centrelines are valley-polarity (ridge fraction 0.489). Side-lobes are not separated from true valleys.",
+   "action": "Ridge-only ablation and a DoG/halo-free filter are the first follow-ups. Not run here: the candidate is pre-registered and the experiment budget is spent."
+  },
+  {
+   "id": "IR-53-30",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Radiometric grids are not in the 19-band stack and cannot be fetched from this sandbox",
+   "detail": "The 19 bands of training_features.tif (see X1 band list) contain no radiometric channel. The sandbox allow-list is github.com, api.github.com, codeload.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org, so USGS/ScienceBase downloads are impossible from bash.",
+   "action": "H6 (radiometric alteration lineaments) stays data-blocked until the user supplies the grids or allows the host. Not claimed as tested."
+  },
+  {
+   "id": "IR-53-31",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Uniqueness method v2 choices are ours and must be reviewed",
+   "detail": "Dense registry probability maps (more than 20% of footprint pixels > 0) cannot be compared by nonzero pixels. We compare their top-N pixels (N = our dot count) and record both numbers. Constant rasters have undefined rho (recorded as null). The method is documented in scripts/uniqueness_check.py. The v1 receipt (138 files) is superseded.",
+   "action": "Reviewer to confirm the dense rule. Both numbers are in evidence/uniqueness_v2.json."
+  },
+  {
+   "id": "IR-53-32",
+   "severity": "medium",
+   "status": "open",
+   "subject": "GEMSDOE32 'primary' file changed between reads",
+   "detail": "The landing page read in a prior session named gemsdoe32-h33-h33-2-b2 (the file behind the 0.2778 claim) as primary and UNSCORED. The README read on 2026-10-08 names gemsdoe32-h32d-submodular-multipysics-46090 as the one-click file (owner-reported incumbent 0.2600 for d2.8). The 0.2778 link to H33-2-B2 is still not in the owner's ledger.",
+   "action": "Keep the H33-2-B2 / 0.2778 association labelled OWNER-CLAIM or user-reported. Do not state it as organizer-confirmed."
+  },
+  {
+   "id": "IR-53-33",
+   "severity": "low",
+   "status": "open",
+   "subject": "RTP sentinel cells inside the footprint",
+   "detail": "3,061 band-2 (RTP) cells inside the official footprint are no-data. They are excluded as candidates and are not treated as zero evidence. The same count appears in the template's documented portal-rejection case (IR-53-04).",
+   "action": "None beyond keeping the exclusion rule documented."
+  },
+  {
+   "id": "IR-53-34",
+   "severity": "high",
+   "status": "open",
+   "subject": "Candidate's pre-placement surface shares its strongest pixels with two team files, far above chance",
+   "detail": "Top-N surface pixels of H2 fall within 3 px of the top-N pixels of GEMSDOE46 dfa-corroborated (sparse, 37.7k dots) at 72.9% (chance 20.1%, lift 3.6) and of GEMSDOE40 eulerdepth-si0 (sparse) at 70.5% (chance 12.6%, lift 5.6). Their dots overlap ours at 50.7% and 56.9%. The continuous surface correlates at 0.73 with the dense GEMSDOE40 Euler depth-cluster map (below the 0.90 rule). These are measured in evidence/uniqueness_v2.json and evidence/overlap_baseline_v2.json. The signal is therefore not untried in this registry at its strongest structures.",
+   "action": "Do not treat H2 as an untried signal. A unique file needs a different top tail (a new pre-registered variant, which exceeds this session's budget). Also compare emission rules file by file."
+  },
+  {
+   "id": "IR-53-35",
+   "severity": "high",
+   "status": "open",
+   "subject": "Hypothesis label H2 is used for two different hypotheses across sessions",
+   "detail": "In this repository's docs/research/archive/hypotheses_pr6.md, H2 is 'multi-physics structural corroboration' (IMPLEMENTED). In this session's docs/research/hypotheses.md, H2 is the band-2 ridge/valley candidate (tested, DO-NOT-SUBMIT). The PR #5 summary's 'H2 negative on holdout' does not say which H2 it means.",
+   "action": "Rename one of them before the next session. Until then, quote the file path with every H2 result."
+  },
+  {
+   "id": "IR-53-36",
+   "severity": "high",
+   "status": "open",
+   "subject": "Uniqueness scope gap: the 166-raster check missed the 5-px lattice family",
+   "detail": "The other session's check (166 GeoTIFFs in 12 repos) reports max overlap 61.79%. This session's check (1,200 rasters in 63 repos) finds 60 rows above 70% for the same file (chance lift 0.996 to 1.31; the 13GEMSDOE r13-lattice family). The earlier result was therefore a scope limit, not a clean bill of health.",
+   "action": "Use the full manifest (evidence/registry_manifest.json) for every label decision. Re-check any file labelled OK-TO-SUBMIT against it."
+  },
+  {
+   "id": "IR-53-37",
+   "severity": "high",
+   "status": "open-corrected",
+   "subject": "Negative-pool side channel in the design-A holdouts (E1, prior exp2, and H2 X2)",
+   "detail": "The design-A training pool was fp & ~cat & ~buf, and the 10 px buffer is defined from the WITHHELD faults. The buffer removed 371,176 to 390,883 negative pixels per fold (7.3% to 7.6% of the pool), all within 10 px of a withheld fault. Measured effect on fold 0 of the bands top-q 0.02 arm: 0.0266 (design A) vs 0.0106 (design B). The design-A H1 canary used the same buffered background, so its separability is also inflated. The same hidden-buffer negative sampling appears in scripts/x2_ridge_holdout.py; therefore the H2 X2 HOLDOUT-DTI comparison also inherits this design defect and cannot validate its preregistered promotion gate. This is the pattern the GEMSDOE29 audit flagged (docs/leakage-review.md).",
+   "action": "E1 and the prior H1 exp2 design-A numbers (evidence/exp2_holdout_arms.json, evidence/e1_h1_thin_holdout.json) are reference only; design B in E2 is used for the H1/M1 decision. The H2 X2 run was not repeated under design B because the experiment budget was exhausted; its values remain historical/diagnostic only. The corrected design-B sampler uses every footprint pixel that is not a visible fault."
+  },
+  {
+   "id": "IR-53-38",
+   "severity": "high",
+   "status": "open",
+   "subject": "Verbatim user prompt is not stored in the workspace",
+   "detail": "README.md states that the verbatim user message is not stored. This session has only a condensed record of the requirements. The README requirements block is therefore recorded in the user's terms and is not a verbatim copy.",
+   "action": "Not fabricated. The user should paste the verbatim prompt into README.md (section 'Verbatim prompt'). Until then the README says so explicitly."
+  },
+  {
+   "id": "IR-53-39",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Protocol names two shared tools that do not exist in the template",
+   "detail": "The parallel-run protocol names evaluate_holdout.py and submission_writer.py. At template commit dcbbb19 (fetched 2026-10-08) neither file exists. The nearest shared tools are src/blocks.py with scripts/block_holdout_eval.py (holdout), src/submission_io.py (writer), scripts/validate_submission.py and python -m src.submission_io validate-conformant (validators), and src/metrics.py (DTI).",
+   "action": "Mapping recorded in the pre-registration section 3. This session imports the template modules by file path and does not copy them. Any fix belongs in the template, not in a fork."
+  },
+  {
+   "id": "IR-53-40",
+   "severity": "high",
+   "status": "open",
+   "subject": "H3 (fault-parallel strain orientation) is not testable with the public strain data",
+   "detail": "The geodetic strain CSV in the INGENIOUS mirror (jklinck/geothermal_research commit 56d78de7, geodetics_INGENIOUS_regional_data/geodetic_strain_rate_csv.csv) has only the columns long_wgs84, lat_wgs84, second_inv_strainrate_10e-9, dilationrate_10e-9, shearrate_10e-9. The NBMG README gives the principal rates and derived scalars only. Orientation needs the full tensor or the principal azimuths, which are not in the stack or in this CSV.",
+   "action": "H3 is marked BLOCKED in docs/research/hypotheses.md. Retrieving the tensor would need the NBMG or GDR submission 1391, which the sandbox cannot reach (egress allow-list)."
+  },
+  {
+   "id": "IR-53-41",
+   "severity": "medium",
+   "status": "open",
+   "subject": "GEMSDOE32 'zeros' variant fills the whole grid with 0 (not NaN outside the footprint)",
+   "detail": "Measured on the registry copy of gemsdoe32-h33-h33-2-b2 (zeros variant): 12,279,160 finite pixels, the whole 3730 x 3292 grid. The rules say outside the bounds must be null or NaN. The NaN variant of the same file has 5,167,373 finite pixels (the footprint). Which variant the owner submitted is unknown (no receipt, IR-53-02).",
+   "action": "Recorded as a fact about the registry file. No claim is made about the portal outcome of the zeros variant."
+  },
+  {
+   "id": "IR-53-42",
+   "severity": "high",
+   "status": "open",
+   "subject": "The holdout rewards proximity to visible catalogue faults; the target is new faults",
+   "detail": "Withheld faults are catalogue faults. The H1 feature (distance to visible faults) has single-feature separability 0.77 under design B (fold 0 = 0.768), so the holdout rewards proximity to known faults. The competition scores faults absent from the public catalogue (problem page; IR-53-03, IR-53-08). Gains on this proxy may not carry over, and the competition's new faults may be systematically farther from known faults.",
+   "action": "Flagged in every holdout number. No leaderboard or organizer claim is made. A non-catalogue validation population is listed as remaining work (docs/research/hypotheses.md, L-21)."
+  },
+  {
+   "id": "IR-53-43",
+   "severity": "medium",
+   "status": "resolved-by-rebuild",
+   "subject": "The uniqueness registry used by the previous receipt is not on disk and was incomplete",
+   "detail": "The earlier receipt compared 138 files from /tmp, which no longer exists. This session rebuilt the registry from the GEMSDOE* repositories at their default-branch tips (63 repositories, 907 .tif entries, 628 unique sha256, 621 unique on the official grid). Per-file sha256 values are recorded in evidence/uniqueness_gate_*.json.",
+   "action": "The earlier 138-file receipt is superseded for the new candidate. The rebuilt registry is not committed (it is about 1.3 GB). The fetch script is in the run card."
+  },
+  {
+   "id": "IR-53-44",
+   "severity": "low",
+   "status": "open",
+   "subject": "INGENIOUS 2 m temperature-probe data licence is not stated in its README",
+   "detail": "The mirror README for 2m_temperature_probe_INGENIOUS_regional_data describes the columns and the survey groups but gives no licence. The INGENIOUS dataset is listed as CC BY 4.0 by the template data catalogue (GDR submission 1391), but that licence was not verified for this sub-file.",
+   "action": "Verify the licence before any use beyond internal analysis (rules: data must permit use and sharing with the sponsor)."
+  },
+  {
+   "id": "IR-53-45",
+   "severity": "high",
+   "status": "resolved-with-superseded-record",
+   "subject": "E2 stage-2 baseline computed from the selected arm's model (code bug, first design-B run)",
+   "detail": "When the stage-1 selection is the h1 arm, the first design-B run computed the stage-2 'baseline' (pre-registered: bands top-q 0.02 from the bands model) from the h1 model. The run's stage-2 acceptance was therefore a comparison of two h1 variants, not the pre-registered comparison. Stage 1 of that run is valid. The bug was found by reading the code before any stage-2 result was used.",
+   "action": "Fixed in scripts/e2_leakfree_holdouts.py (run_stage2 / fit_predict_fold). Stage 2 re-run with --stage2-only. The buggy stage-2 output is kept as evidence/superseded/e2_stage2_BUGGY_baseline_from_h1_model.json and is not used for any label. Logged as DEV-1b (pre-registration section 9)."
+  },
+  {
+   "id": "IR-53-46",
+   "severity": "high",
+   "status": "open",
+   "subject": "The raw 70% overlap gate cannot be satisfied by any placement on this registry",
+   "detail": "The rebuilt registry includes GEMSDOE13 r13-lattice-s5_v2 (206,895 dots). Its dots lie within 3 px of 99.87% of the footprint (chance coverage). Any candidate's dots therefore fall within 3 px of it at about 99%, above the 70% stop threshold. The current candidate is flagged, and no placement on this registry can clear the raw rule. Receipt: evidence/uniqueness_gate_<name>.json. Diagnostics: evidence/uniqueness_diagnostics_<name>.json.",
+   "action": "Not changed here (thresholds are the user's). Decision needed: a registry scope that counts only submission-type dot maps, and a chance-corrected overlap rule (lift over chance). Either change needs explicit approval and a fresh pre-registered gate run (IR-53-16)."
+  },
+  {
+   "id": "IR-53-47",
+   "severity": "medium",
+   "status": "open",
+   "subject": "Whole-grid Spearman rho (NaN read as 0) flags 52 rasters on the surface; footprint-only rho flags none",
+   "detail": "The pre-registered rho check uses the whole grid with NaN read as 0. About 7.1 million pixels outside the footprint are zeros in both rasters, which are ties that inflate the rank correlation. Whole-grid rho of the candidate SURFACE (continuous probability) exceeds 0.90 for 52 registry rasters (receipt, column rho_surface). Footprint-only surface rho exceeds 0.90 for none of those 52 (evidence/diagnostic_surface_rho_<name>.json). Whole-grid and footprint-only rho of the FINAL raster exceed 0.90 for none of the 621 rasters.",
+   "action": "Receipts keep the pre-registered whole-grid value. Footprint-only rho is recommended in the decision of IR-53-46. The surface rho flags are reported as method-sensitive, not as duplicates."
+  },
+  {
+   "id": "IR-53-48",
+   "severity": "medium",
+   "status": "open",
+   "subject": "57 of the 103 flags come from dense rasters that are not dot maps",
+   "detail": "Registry rasters with more than 50% of the footprint nonzero (feature grids such as geodawn_rad_u8, probability surfaces such as context_detector_prob_*, and ID rasters such as acquisition_block_id_100m) have nonzero values almost everywhere. Their dot overlap is 100% by construction. The mid-density class adds 4 more flags.",
+   "action": "Registry scope is a decision for the user (IR-53-46). This session reports the classes separately and drops no file from the verdict."
+  },
+  {
+   "id": "IR-53-49",
+   "severity": "medium",
+   "status": "open",
+   "subject": "A later uniqueness refresh covers only three rasters and is not the canonical full-registry gate",
+   "detail": "evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582_refresh.json reports no flag but includes only 3 local/nearby rasters. It is not comparable to the canonical 621-unique-raster receipt evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json, which flags the candidate. The smaller refresh cannot clear the candidate.",
+   "action": "Keep the full-registry receipt as the verdict source; label the refresh partial in any future UI or remove it from clearance paths. No threshold or registry scope was changed."
+  },
+  {
+   "id": "IR-53-50",
+   "severity": "high",
+   "status": "open",
+   "subject": "GD-1: the literal 70% dot-overlap rule is provably unsatisfiable; session 2 applies a pre-registered corrected reading",
+   "detail": "The GEMSDOE13 lattice covers 99.87% of the footprint within 3 px, so ANY dot set exceeds 70% overlap against it (session-1 IR-53-46). Session 2 pre-registration section 1 therefore scores both readings: raw values archived unchanged; the decision uses footprint-only Spearman rho (<=0.90) plus chance-corrected overlap (flag iff overlap>0.70 AND lift>1.5). A file cleared only under the corrected reading carries this banner and needs explicit user ratification before any slot is spent. This is an interpretation of the standing prompt's duplicate rule, flagged for review, not a silent rule change."
+  },
+  {
+   "id": "IR-53-51",
+   "severity": "high",
+   "status": "open",
+   "subject": "User-reported platform rejection 'Predicted values must be in range [0, 1]' cannot be reproduced from any shipped GEMSDOE53 file",
+   "detail": "Measured 2026-10-09: all three shipped files have 0 NaN inside the sample-valid region, 0 finite outside, nodata=nan, values in [0,1]. The shared template validator records the same platform error caused by NaN INSIDE the scored region, which none of our files has. The file/step that produced the user's error is unidentified (possibly a file from another repo or an extracted zip member). Session-2 primary file is written strictly template-conformant (GD-2 revised)."
+  },
+  {
+   "id": "IR-53-52",
+   "severity": "medium",
+   "status": "logged",
+   "subject": "Prompt-injection attempt observed inside fetched web content (2026-10-09)",
+   "detail": "A web-search result page contained text styled as a fake 'SYSTEM MESSAGE' trying to impose citation-restriction instructions. Web content is untrusted input; the instruction was disregarded and only the platform's real system prompt is followed. Logged so future sessions treat fetched content as data, not commands."
+  },
+  {
+   "id": "IR-53-53",
+   "severity": "high",
+   "status": "open",
+   "subject": "Chance-corrected dot overlap still flags convergent fault geography, not method drift",
+   "detail": "Session-2 gate v2 flagged 25 registry rasters with overlap>0.70 and lift 1.5-4.2 even though the maximum footprint-only Spearman rho of the C1 surface is 0.8857 (below 0.90, against 5GEMSDOE's bands-only context-detector probability surfaces). The flagged set spans many unrelated methods (NMS traces, dotted ridges, DTI-optimal emissions, physics dots, our own session-1 file). Reading: at ~55k dots, any fault-targeting method concentrates dots in structural corridors, so dot-overlap measures shared GEOGRAPHY, not shared METHOD; the low rho proves the surface ranking differs. Under the pre-registered rule the verdict is still negative and was applied. A future gate revision needs a geography-stratified null (e.g., lift computed within structural-corridor strata) or an explicit governance decision; until then, no dot-based candidate from any session can clear an overlap rule on this registry."
+  }
+ ]
 }

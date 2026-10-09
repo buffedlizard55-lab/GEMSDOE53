@@ -1,0 +1,91 @@
+{
+ "measured_utc": "2026-10-09",
+ "finding": "registry '-zerofill/-zeros' files carry 0.0 outside the sample footprint with nodata=None and zero NaN anywhere; the portfolio also contains organizer-scored '-nan-outside' files (e.g. 13GEMSDOE r13-lattice nan-outside scored 0.0904 per the prompt's score list). Both outside-value conventions are demonstrably accepted by the platform; session 2 writes the template-conformant NaN-outside convention (GD-2 revised) because the shared validator's documented platform rejection tied the range error to NaN INSIDE the scored region, which our files never contain.",
+ "files": [
+  {
+   "file": "13GEMSDOE__docs__downloads__13gems_20261001_r11-greedy-mp_v2_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__13gems_20261001_r11-greedy-mp_v2_zerofill.zip__13gems_20261001_r11-greedy-mp_v2_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.zip__13gems_20261001_r13-lattice-s5_v2_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__13gems_20261001_r14-union-tips10-lat6_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__13gems_20261001_r14-union-tips10-lat6_zerofill.zip__13gems_20261001_r14-union-tips10-lat6_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r11-greedy-mp_A_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r11-greedy-mp_A_zerofill.zip__13gems_20261001_r11-greedy-mp_A_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_A_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__archive__session7-superseded-13gems_20261001_r13-lattice-s5_A_zerofill.zip__13gems_20261001_r13-lattice-s5_A_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__latest_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  },
+  {
+   "file": "13GEMSDOE__docs__downloads__latest_zerofill.zip__13gems_20261001_r13-lattice-s5_v2_zerofill.tif",
+   "outside_finite": 7111787,
+   "outside_nan": 0,
+   "outside_total": 7111787,
+   "nodata": "None"
+  }
+ ],
+ "n_files_measured": 196
+}

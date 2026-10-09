@@ -20,97 +20,133 @@ th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace
 a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inline-block;background:#0b6e4f;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
 .btn.dis{background:#94a3b8}
 </style></head><body>
-<header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
+<header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306 · session 2 (2026-10-09)</div>
 <nav><a href="index.html" class="on">Executive summary</a><a href="submission.html" class="">The file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
 <main>
 <section>
   <div class="label no">RESEARCH-ONLY / DO NOT SUBMIT</div>
-  <p><b>Is it OK to download?</b> Download is allowed for research and review. It is <b>not</b> cleared for submission.<br>
-  <b>Is it OK to submit?</b> <b>NO.</b> Do not upload this file.</p>
+  <p style="font-size:17px"><b>Is it OK to download?</b> Download is allowed. If the label below says OK TO SUBMIT, this file may be uploaded to the competition as described in 'How to submit'.<br>
+  <b>Is it OK to submit?</b> <b>NO.</b> At least one pre-registered gate did not pass. Do not upload this file.</p>
+  <table>
+    <tr><th style="width:220px">Download the submission TIF</th>
+        <td><a class="btn dis" href="submissions/gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif">⬇ Download gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b.tif</a>
+        <span class="note">(1,624,720 bytes, sha256 <code>57251042b8d2565a9085cb1a8dbb12129201884635789411f359ebccb69a5d09</code>)</span></td></tr>
+    <tr><th>Submission name</th><td><code>gems53-c1-condmag-thin_bin_q0p1-20261009T011720Z-8cb3456b</code></td></tr>
+    <tr><th>Comment (paste into the Note field, 119 / 140 chars)</th><td><code>RESEARCH-ONLY | C1 cond-mag thin_bin_q0p1 | HOLDOUT-DTI stage2 pooled 0.0042 | failed gates: uniqueness | DO NOT SUBMIT</code></td></tr>
+  </table>
+</section>
+
+<section>
   <h1>Executive summary</h1>
-  <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
-  Short answer: the file below passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>Research-only / DO NOT SUBMIT</b> and must not be uploaded. The full registry gate flags 103 rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by 99.599% within 3 px (limit 70%; chance coverage 99.87%, lift 0.9973); whole-grid pre-placement surface rho max is 0.953943 (limit 0.90). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
-  <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
-  Nothing has been submitted, and no submission slot was used.</div>
+  <p><b>What this is.</b> Session 2 validated the pre-registered lane C1 (conductivity–magnetic cross-scale edge
+  coherence, <code>bc1</code> arm = the 19 stack bands + 14 label-free C1 features, no catalogue feature) on the leak-free
+  design-B holdout, built the candidate GeoTIFF, and ran every gate. The file above is the result.</p>
+  <p><b>Headline numbers</b> (all HOLDOUT-DTI, evaluator <code>gems53.core.dti</code> v1.0.0, parity with the shared template
+  metric; withheld positives 60,988):</p>
+  <ul>
+    <li>Leakage canary (S2-E1): max single-feature separability of the 14 C1 features = <b>0.5726</b> — gate 0.90 → <b>pass</b>.</li>
+    <li>Stage-1 segment folds (S2-E2): baseline <code>bands:top_q0p02</code> pooled = <b>0.0106</b>;
+        selected <code>bc1 thin_bin_q0p1</code> pooled = <b>0.0922</b>.</li>
+    <li>Stage-2 spatial confirmation: paired Δ +0.0041, 95% CI [+0.0003, +0.0078] → ACCEPTED.</li>
+    <li>Uniqueness (GD-1 corrected gate): <b>PROTOCOL DUPLICATE / STOP</b>; raw literal-rule values archived.</li>
+    <li>Organizer score: <b>none</b>. Nothing was submitted; no slot was used. No number here is ORGANIZER-CONFIRMED.</li>
+  </ul>
+  <div class="warn"><b>Honesty box.</b> The holdout truth is the withheld known-fault catalogue — catalogue recovery is an
+  upper bound for performance on the competition's unmapped targets (IR-53-42). The named non-fault process that could mimic
+  C1 is volcanic/lithologic contacts producing co-located magnetic + conductivity edges. GD-1 (corrected uniqueness gate) is a
+  pre-registered interpretation of a literal rule that is provably unsatisfiable (IR-53-46/50) and is flagged for user ratification.</div>
 </section>
 
 <section>
-  <h2>The file</h2>
-  <table>
-    <tr><th>Download</th><td><a class="btn dis" href="submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif">Download gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif</a> (445,801 bytes)</td></tr>
-    <tr><th>Submission name (identifier)</th><td><code>gems53-h1-thin_bin_q0p1-20261008-aefc7582</code></td></tr>
-    <tr><th>Comment (≤140 characters, 135 used)</th><td><code>RESEARCH-ONLY | HOLDOUT-DTI 0.0040; g53 DTI v1.0, withheld=60,988; Δ+0.0035 CI95 +0.0006..+0.0064; NOT ORGANIZER-SCORED | DO NOT SUBMIT</code></td></tr>
-    <tr><th>sha256 (container)</th><td><code>aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60</code></td></tr>
-    <tr><th>sha256 (pixels, float32 little-endian)</th><td><code>aefc7582021fc1f4b4c69cb3b4916ff8e5e9e6655a2268e5f147f68d1fcc9dda</code></td></tr>
-    <tr><th>Candidate</th><td>h1 thin_bin_q0p1, trained on all known faults, emission zeroed on known faults</td></tr>
-    <tr><th>Format</th><td>single-band float32 GeoTIFF, EPSG:32611, 100 m, same transform and shape as the sample, NaN exactly outside the footprint, values in [0, 1]</td></tr>
-  </table>
-  <p class="note">Status words in the file's metadata match the label above. Do not rerun E3 in this lane: the three-experiment budget is exhausted and the uniqueness gate failed.</p>
-</section>
-
-<section>
-  <h2>Other files in this repository (from other sessions, not ours)</h2>
-  <div class="warn">Other sessions merged their files into this repository while this session ran. They are listed here so that the
-  labels are not confused. Each label is quoted from its own receipt. Our gate is run on the same registry as ours (final dots, overlap and rho).
-  <b>None of them is cleared by the pre-registered raw overlap gate (IR-53-46).</b></div>
-  <table><tr><th>File</th><th>Session</th><th>Label stated in its receipt</th><th>Our gate (same registry)</th><th>Caveat</th></tr>
-  <tr><td><code>docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif</code></td><td>H1 relay prune (PR #6, another session)</td><td><b>READY_TO_SUBMIT</b><br><span class='note'>evidence/archive/pr6/run_card_pr6_h1.json (its archived run card)</span></td><td>FLAGGED · 623 unique rasters, 82 flagged, max overlap 100.0%, max rho 0.1166</td><td>The same session&#x27;s README on main says that under the literal dot rule this file is NOT CLEARED. Its archived run card still says READY_TO_SUBMIT.</td></tr><tr><td><code>submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif</code></td><td>H2 ridge-packed (PR #7, another session)</td><td><b>DO-NOT-SUBMIT</b><br><span class='note'>evidence/x3_candidate_receipt.json</span></td><td>FLAGGED · 623 unique rasters, 86 flagged, max overlap 100.0%, max rho 0.1025</td><td>Its own gate G5 (uniqueness) fails, so the label is DO-NOT-SUBMIT.</td></tr>
-  </table>
-</section>
-
-<section>
-  <h2>How to submit (only if the label says OK)</h2>
+  <h2>How to submit (read the label first)</h2>
   <ol>
-    <li>Read the label above first. If it says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
-    <li>Open the competition submission page on DrivenData and log in to your own account. No data download is needed.</li>
-    <li>Upload the file. In the name field enter <code>gems53-h1-thin_bin_q0p1-20261008-aefc7582</code>. In the comment field enter the comment above (≤140 characters).</li>
-    <li>Check the upload result. Record the portal's exact message. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
-    <li>The portal limit is 3 feedback submissions per week and one final choice (<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules §3.4</a>).
-    Choosing a slot is a separate decision and was not made here.</li>
+    <li>If the label at the top says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
+    <li>Download the TIF above directly (do not edit it; sha256 is listed so you can verify integrity).</li>
+    <li>Open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition submission page</a> and log in with your own account.</li>
+    <li>Choose the <code>.tif</code> file as the file to submit (a zip containing exactly this one TIF is also accepted by the platform).</li>
+    <li>Paste the comment from the box above into the optional Note field.</li>
+    <li>Submit, and record the portal's exact response text and any score it returns — only that receipt makes a number ORGANIZER-CONFIRMED. Weekly slot cap applies (NLR rules §3.4).</li>
   </ol>
-  <p class="note">Sources: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page (S1)</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard snapshot (S2)</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules (S3)</a>.</p>
+  <p class="note">Format requirement verified against the official problem page (S35): EPSG:32611, 100 m, same bounds, outside the bounds null/NaN,
+  single-band float32, values in [0,1]. If the platform ever returns "Predicted values must be in range [0, 1]", see IR-53-51: no GEMSDOE53 file
+  shipped to date contains NaN inside the scored region, the only known cause of that exact error.</p>
 </section>
 
 <section>
-  <h2>Answers (each labelled)</h2>
-  <table>
-    <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
-    <tr><td>Is the file unique and valid?</td><td>Valid: yes (format and conformance checks pass). <b>Protocol duplicate / stop: yes</b>; unique under the pre-registered raw gate: <b>no</b>. The full gate flags 103 of 621 unique GEMSDOE registry rasters. Final-dot overlap with the GEMSDOE13 r13 lattice is 99.599% within 3 px (strict limit 70%); chance coverage is 99.87%, lift 0.9973. The candidate is not claimed to be byte-identical; the raw protocol still says stop. 57 flags come from dense rasters and 46 from sparse/mid rasters; the diagnostics explain the confounding, but do not override the gate (IR-53-46 to IR-53-49).</td>
-      <td><span class="pill">gates in submission.html</span></td></tr>
-    <tr><td>What would make the file OK to submit?</td><td>A change to the gate's definition (registry scope, a chance-corrected overlap rule, and a footprint-only rank correlation), approved by you (IR-53-16, IR-53-46, IR-53-47), followed by a fresh pre-registered gate run. Nothing of that kind has been applied here.</td>
-      <td><span class="pill">decision for the user</span></td></tr>
-    <tr><td>Does it beat public-board row 0.3774 (#1, S2)?</td><td>Unknown. Nothing here is an organizer-confirmed score for this file.</td><td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
-    <tr><td>Stage 1 (design B) HOLDOUT-DTI</td><td>Evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments. Bands top-q 0.02 baseline: pooled 0.0106, 95% t CI (df 4) 0.0083 to 0.0128.
-      Selected variant (h1 thin_bin_q0p1): pooled HOLDOUT-DTI 0.1413, CI [0.13378, 0.148921]; selected on these folds, so optimistic.</td>
-      <td><span class="pill">HOLDOUT-DTI proxy</span></td></tr>
-    <tr><td>Spatial confirmation (HOLDOUT-DTI; contiguous super-regions)</td><td>pooled baseline 0.0001 vs h1 thin_bin_q0p1 0.0040; withheld positives 60,988 in 3,199 segments</td><td>evaluator gems53.core.dti v1.0.0; paired mean Δ +0.0035, 95% paired t CI +0.0006 to +0.0064 (df 4); accepted = True</td></tr>
-    <tr><td>Why GEMSDOE29 leaks</td><td>Its distance feature is built from the full catalogue, so it is exactly 0 on every known-fault pixel (separability 1.0). Mechanism and audit in <a href="evidence.html#gemsdoe29">evidence</a> and <code>docs/leakage-review.md</code>.</td>
-      <td><span class="pill">measured</span></td></tr>
-    <tr><td>Our own holdout had a leak (IR-53-37)</td><td>The first HOLDOUT-DTI design A depended on withheld labels: bands top-q 0.02 = 0.0352 (95% t CI [0.02817, 0.042229]); design B gives 0.0106 (95% CI [0.008337, 0.012812]). Both use evaluator gems53.core.dti v1.0.0 and 60,988 withheld positives; design A is reference only.</td>
-      <td><span class="pill">HOLDOUT-DTI proxy; design A invalid</span></td></tr>
-    <tr><td>Why GEMSDOE32 H33-2-B2 may explain public row 0.2778 (#13, S2)</td><td>Registry-copy structure: 37,654 dots (0.73% of footprint), 0.0% within 2 px of known faults, and median spacing 3 px. Metric-aware pruning/packing is plausible, but the row-to-file link is <b>not established</b> (IR-53-02); 0.2778 is not attributed to this file.</td>
-      <td><span class="pill">public-board snapshot; attribution unknown</span></td></tr>
-    <tr><td>Can a higher-scoring file be built?</td><td>Not shown. We have a proxy that rises with thinning and proximity, which is not the competition target (IR-53-42). No file here is shown to beat any leaderboard row.</td>
-      <td><span class="pill">not established</span></td></tr>
+  <h2>Session-2 run card (one JSON)</h2>
+  <p class="note">Full machine-readable card in the repository: <code>evidence/run_card_session2.json</code></p>
+  <pre>{
+ &quot;hypothesis&quot;: {
+  &quot;id&quot;: &quot;C1&quot;,
+  &quot;statement&quot;: &quot;Co-located, co-oriented linear edges in the conductivity surface (band 17) and reduced-to-pole magnetics (band 2), measured by energy-gated multi-scale structure-tensor agreement, rank buried/covered faults that are absent from the USGS/INGENIOUS catalogue.&quot;,
+  &quot;mechanism&quot;: &quot;A concealed fault juxtaposes magnetic units (linear RTP edge) and hosts a conductive damage zone (linear conductivity edge). Requiring both fields to agree at the same place and orientation rejects single-field artifacts. Fourteen label-free features; HGB trained with design-B leak-free sampling.&quot;,
+  &quot;named_non_fault_mimic&quot;: &quot;Volcanic dikes/sills and lithologic contacts produce co-located magnetic + conductivity edges; pluvial-lake paleoshorelines can align conductivity gradients. A catalogue holdout cannot distinguish these; the mimics are named here as required.&quot;,
+  &quot;scope_note&quot;: &quot;Holdout truth is the withheld known-fault catalogue (IR-53-42, L-31): catalogue recovery is an upper bound for performance on the competition&#x27;s unmapped targets.&quot;
+ },
+ &quot;verdict&quot;: &quot;negative&quot;,
+ &quot;holdout_headline&quot;: {
+  &quot;label_type&quot;: &quot;HOLDOUT-DTI (proxy; NOT organizer-scored)&quot;,
+  &quot;evaluator&quot;: &quot;gems53.core.dti v1.0.0 (template-metric parity abs diff 1.3e-13, session-1 E1)&quot;,
+  &quot;canary_max_separability&quot;: 0.57262,
+  &quot;canary_flag&quot;: &quot;pass&quot;,
+  &quot;withheld_positives&quot;: 60988,
+  &quot;baseline_same_run_bands_top_q0p02&quot;: {
+   &quot;pooled_DTI&quot;: 0.010562,
+   &quot;CI95&quot;: [
+    0.008337,
+    0.012812
+   ]
+  },
+  &quot;selected_stage1&quot;: {
+   &quot;arm&quot;: &quot;bc1&quot;,
+   &quot;variant&quot;: &quot;thin_bin_q0p1&quot;,
+   &quot;pooled_DTI&quot;: 0.092172
+  },
+  &quot;stage2&quot;: {
+   &quot;baseline_pooled_DTI&quot;: 0.000102,
+   &quot;selected_pooled_DTI&quot;: 0.004182,
+   &quot;paired_mean_diff&quot;: 0.004085,
+   &quot;paired_CI95&quot;: [
+    0.000336,
+    0.007834
+   ],
+   &quot;accepted&quot;: true,
+   &quot;withheld_positives_total&quot;: 60988,
+   &quot;withheld_segments_total&quot;: 3199
+  }
+ },
+ &quot;uniqueness_headline&quot;: {
+  &quot;gate_version&quot;: &quot;v2 (GD-1: raw literal values archived + corrected reading decides)&quot;,
+  &quot;verdict&quot;: &quot;PROTOCOL DUPLICATE / STOP&quot;,
+  &quot;registry_unique_on_grid&quot;: 631,
+  &quot;n_flagged_corrected&quot;: 25,
+  &quot;n_flagged_raw_archived&quot;: 111,
+  &quot;max_rho_surface_footprint&quot;: 0.885655,
+  &quot;max_rho_surface_whole_grid_raw&quot;: 0.977076,
+  &quot;max_overlap_final&quot;: 1.0,
+  &quot;max_lift_over_chance&quot;: 5.9924
+ }
+}</pre>
+</section>
+
+<section>
+  <h2>Earlier files in this repository (other sessions; not session-2's)</h2>
+  <table><tr><th>File</th><th>Label in its own receipt</th><th>Status</th></tr>
+  <tr><td><code>docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif</code></td><td>RESEARCH-ONLY / DO NOT SUBMIT</td><td>Session-1 H1/M1 candidate; failed the raw registry duplicate gate (protocol duplicate / stop). Superseded as current candidate but retained with all receipts.</td></tr>
+  <tr><td><code>docs/downloads/gems53-h1-relay-prune-q0p0073-nan.tif</code></td><td>READY_TO_SUBMIT in its archived run card (PR #6), contradicted by its own session's README</td><td>Flagged by the full-registry gate (82 rasters). Do not upload on the strength of the archived label.</td></tr>
+  <tr><td><code>submissions/GEMSDOE53_H2-ridge-packed-n44090__DO-NOT-SUBMIT.tif</code></td><td>DO-NOT-SUBMIT (PR #7)</td><td>Flagged by the full-registry gate (86 rasters); X2 holdout used the invalid design-A negative pool (IR-53-37).</td></tr>
   </table>
-  <p class="note">Stage-2 numbers are HOLDOUT-DTI proxies (evaluator gems53.core.dti v1.0.0; 60,988 withheld positives in 3,199 segments). The absolute scores are small; the paired gain is positive on all five spatial folds, and the preregistered rule accepts it. Stage-1 DTI is selected on its own segment folds and is optimistic. Neither measures the competition's unseen-fault truth (IR-53-42).</p>
 </section>
 
 <section>
-  <h2>Bars to beat (repository snapshot, not re-read this session)</h2>
-  <table><tr><th>Rank</th><th>Team</th><th>Score</th><th>Label</th></tr>
-  <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td><td>leaderboard snapshot (S2)</td></tr>
-  <tr><td>7</td><td>DARD</td><td>0.3195</td><td>leaderboard snapshot (S2)</td></tr>
-  <tr><td>13</td><td>extradr19</td><td>0.2778</td><td>leaderboard snapshot (S2); the file link is NOT established (IR-53-02)</td></tr></table>
-  <p class="note">The request named 0.3195 as the top score. The snapshot shows 0.3774 at #1 (IR-53-01). The snapshot time is not shown on the page.</p>
-</section>
-
-<section>
-  <h2>Flagged for review</h2>
-  <ul><li><b>IR-53-01</b> (high): Target score in the request is not the leaderboard top</li><li><b>IR-53-02</b> (high): The 0.2778 file is not mapped to a leaderboard receipt</li><li><b>IR-53-37</b> (high): Negative-pool side channel in the design-A holdouts (E1, prior exp2, and H2 X2)</li><li><b>IR-53-38</b> (high): Verbatim user prompt is not stored in the workspace</li><li><b>IR-53-40</b> (high): H3 (fault-parallel strain orientation) is not testable with the public strain data</li><li><b>IR-53-42</b> (high): The holdout rewards proximity to visible catalogue faults; the target is new faults</li><li><b>IR-53-46</b> (high): The raw 70% overlap gate cannot be satisfied by any placement on this registry</li><li><b>IR-53-49</b> (medium): A later uniqueness refresh covers only three rasters and is not the canonical full-registry gate</li></ul>
-  <p class="note">Full list with severities: <a href="evidence.html#irregularities">evidence page</a>. Limitations: <a href="evidence.html#limitations">evidence page</a>.</p>
+  <h2>Answers to the standing questions (each labelled)</h2>
+  <table><tr><th>Question</th><th>Answer</th></tr>
+  <tr><td>GEMSDOE29 leakage bug?</td><td>Formally diagnosed per Kaufman–Rosset–Perlich (KDD'11, DOI 10.1145/2020408.2020496, verified S33) / Kaufman–Rosset–Perlich–Stitelman (TKDD 2012, S34): its distance feature equals 0 on every positive <i>by construction</i> — the feature can take its observed value only because the label is known. Fix = learn–predict separation (design B). Full write-up: <a href="leakage-review.md">docs/leakage-review.md</a>.</td></tr>
+  <tr><td>Why did GEMSDOE32 H33-2-B2 score 0.2778?</td><td>NOT ESTABLISHED (IR-53-02): no receipt links the row to the file. Measured geometry (37,654 dots, median 3 px spacing, 0% within 2 px of the catalogue) is compatible with metric-aware off-catalogue packing; that is a plausible mechanism, not proof.</td></tr>
+  <tr><td>Can we beat 0.2778 / 0.3195 / 0.3774?</td><td>Unknown — no GEMSDOE53 file has an organizer score. Leaderboard values are the repo snapshot (IR-53-01). Session 2 ships the strongest leak-free candidate this repo has produced (stage-2 ACCEPTED); whether it scores is decided only by submitting through a slot, which is a separate selector decision.</td></tr>
+  </table>
 </section>
 </main>
-<footer>Numbers on these pages are read from JSON in <code>evidence/</code>, <code>registry/</code> and <code>docs/submissions/</code>.
-HOLDOUT-DTI = our proxy (withheld known-fault segments or spatial super-regions). ORGANIZER-CONFIRMED = receipt only (none exists).
-Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>
+<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> and <code>docs/submissions/</code>.
+HOLDOUT-DTI = our proxy (withheld known-fault segments or spatial super-regions; never an organizer score). ORGANIZER-CONFIRMED = portal receipt only (none exists).
+Regenerate with <code>python scripts/build_site_s2.py</code>.</footer></body></html>

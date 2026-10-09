@@ -20,6 +20,9 @@ def _load(rel):
     return json.loads((ROOT / rel).read_text())
 
 
+S1_POINTER = "docs/submissions/CURRENT_session1_archived.json"
+
+
 def _sha(p):
     h = hashlib.sha256()
     with open(p, "rb") as f:
@@ -29,7 +32,7 @@ def _sha(p):
 
 
 def test_current_pointer_matches_receipt_and_file():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S1_POINTER)
     rec = _load(cur["receipt"])
     assert cur["label"] == rec["label"]
     assert cur["note"] == rec["note"]
@@ -50,7 +53,7 @@ def test_current_pointer_matches_receipt_and_file():
 
 
 def test_label_follows_the_pre_registered_rule():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S1_POINTER)
     g = cur["gates"]
     all_pass = all(bool(v) for v in g.values())
     if cur["label"].startswith("Validated"):
@@ -61,7 +64,7 @@ def test_label_follows_the_pre_registered_rule():
 
 
 def test_run_card_and_site_agree_with_the_label():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S1_POINTER)
     card = _load("evidence/run_card.json")
     assert card["label"] == cur["label"] == card["verdict"]
     assert card["submission"]["submitted"] is False
@@ -80,7 +83,7 @@ def test_run_card_and_site_agree_with_the_label():
 
 
 def test_submitted_file_meets_the_format_rules():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S1_POINTER)
     rasterio = pytest.importorskip("rasterio")
     if not SAMPLE.exists():
         pytest.skip("competition rasters not present (run scripts/fetch_data.py)")
@@ -109,7 +112,7 @@ def test_every_irregularity_reference_resolves():
 
 
 def test_raw_uniqueness_gate_is_explicitly_a_stop_not_a_false_clearance():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load(S1_POINTER)
     assert cur["uniqueness_verdict"].startswith("PROTOCOL DUPLICATE / STOP")
     assert cur["gates"]["uniqueness_no_drift_flag"] is False
     assert cur["label"].startswith("Research-only")

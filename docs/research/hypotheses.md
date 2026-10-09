@@ -1,6 +1,24 @@
-# Hypotheses and next-candidate screen (reviewed 2026-10-08)
+# Hypotheses and next-candidate screen (session 2 update 2026-10-09)
 
-**No experiment was run during this review.** The three-experiment budget in `evidence/run_card.json` is already used. Ranks are qualitative expected-value-per-cost judgements (expected catalogue-proxy gain balanced against data and validation cost), not DTI projections or scores. Candidate HOLDOUT-DTI values and organizer scores are reported only when measured/receipted in the evidence files.
+## Session-2 screen (2026-10-09): five candidates, top candidate C1 in validation
+
+Pre-registration: [`preregistration-2026-10-09-session2.md`](preregistration-2026-10-09-session2.md) section 6. Ranks are qualitative expected-value-per-cost judgements, not DTI projections. Every number produced this session is labelled HOLDOUT-DTI in `evidence/s2_c1_holdout.json`; none is ORGANIZER-CONFIRMED.
+
+| Rank | ID | Layers involved | Physical signature (transform) | Why it could catch a fault MISSING from the USGS/INGENIOUS catalogue | Difference from anything implemented here or in the portfolio screen | Expected DTI improvement / cost |
+|---|---|---|---|---|---|---|
+| 1 | **C1** conductivity–magnetic cross-scale edge coherence | band 17 `cond_surf` + band 2 `rtp` (cached stack) | multi-scale structure-tensor line energy + energy-gated orientation agreement (σ = 1,2,4 px; DEV-C1-1) | covered/buried faults offset magnetic basement and host conductive damage zones; no surface trace exists for compilers to map | no cross-physics coherence transform in this repo or the 19-band stack; distinct from H1 (catalogue distance) and H2 (single-band ridges). USGS analogues S31/S32 are from other regions | moderate / LOW cost — validated this session on the design-B holdout (only candidate runnable from cached data) |
+| 2 | **C5** strain-budget residual | bands 4/7/8 (strain invariants) conditioned on visible-catalogue density | residual = observed strain − E[strain | catalogue density], fitted on visible data only (learn-predict separated) | high geodetic strain where the catalogue has no faults is slip deficit on unmapped ACTIVE structures — a direct measurement, not a mapping inference | bands were used raw as model inputs before, but never as a catalogue-conditioned residual; named mimic: interpolation smoothing of the strain-rate field | moderate / low cost (cached stack) |
+| 3 | **C4** gravity–basement collinearity | bands 13/11/18 (isostatic gravity + gradients) + band 15 (depth to basement) | directional collinearity of gravity-gradient vectors with basement-depth steps across scales | basement-involved faults under valley fill produce density/basement steps invisible at the surface | no joint gravity–basement collinearity detector in the repo; portfolio "structural-area" candidates are single-field; named mimic: regional isostatic flexure trends | moderate / medium cost (cached stack) |
+| 4 | **C7** seismic–conductive concurrence | band 16 (earthquake density) × band 17 (conductivity) | rank-concurrence with local permutation significance | actively deforming AND fluid-filled structures may be unmapped; concurrence suppresses each field's independent false alarms | no product/concurrence layer in the stack; portfolio "seisgeom-ridgesnap" exists, so only this specific transform is candidate-new; named mimic: catalogue-driven event-location bias | low-moderate / low cost (cached stack, sparse coverage risk) |
+| 5 | **C2/C3** raw ComCat event planes / Landsat thermal residuals (carried) | external USGS sources | 3-D hypocentral planes; persistent multi-date thermal residuals | direct activity/upflow observations independent of mapping | not in the stack | potential but **NOT viable in this environment**: official sources [USGS ANSS ComCat FDSN](https://earthquake.usgs.gov/fdsnws/event/1/) and [USGS Landsat C2 L2](https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products) are outside the egress allow-list; access, coverage and licence unchecked (L-32) |
+
+**Validation rule for the top candidate (C1):** per-feature leakage canary ≥ gate 0.90; design-B segment-fold holdout vs the same-run bands baseline; spatial-block confirmation (paired 95% t CI, accept iff lower bound > 0); GD-1 uniqueness gate on surface and final dots — all before any submission slot is touched (this is exactly the standing prompt's requirement).
+
+---
+
+# Historical screen (reviewed 2026-10-08)
+
+**No experiment was run during that review.** Ranks are qualitative expected-value-per-cost judgements (expected catalogue-proxy gain balanced against data and validation cost), not DTI projections or scores. Candidate HOLDOUT-DTI values and organizer scores are reported only when measured/receipted in the evidence files.
 
 ## What has already been tried (do not describe as new)
 
