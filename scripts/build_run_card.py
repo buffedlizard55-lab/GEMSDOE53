@@ -43,9 +43,9 @@ def main() -> int:
 
     card = {
         "schema": "gems53.run_card.v2",
-        "session_branch": "arena/5c479bba-gemsdoe53",
+        "session_branch": "arena/7b60bcc7-gemsdoe53",
         "date_utc": e3["finished_utc"][:10],
-        "lane": "Formal diagnosis of GEMSDOE29 catalogue-distance leakage; H1/M1 candidate failed the raw registry duplicate gate",
+        "lane": "GEMSDOE29 leakage diagnosis; H1 (E2/E3) failed the raw registry duplicate gate; S3 (H8 gravity-gradient ridges, negative; S3 control file, research-only). Parallel-run protocol: 3 experiments.",
         "hypothesis": {
             "id": "H1 + M1",
             "statement": "Visible-fault distance, recomputed with learn-predict separation, can rank off-trace continuation; metric-aware thinning packs predictions at the DTI support scale.",
@@ -210,6 +210,54 @@ def main() -> int:
                         "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
                         "jklinck_mirror_commit": "56d78de7a989c12e2dce50cd65a4095df57030d2",
                         "fetch": "scripts/fetch_data.py (sha256 pins from the template manifest, verified)"},
+    }
+    # ---- S3 lane: hypothesis-level run card (one hypothesis per run card; numbers read from the S3 receipts)
+    from scipy import stats as _st
+    s3b = J("evidence/s3b_h8_holdout.json")
+    s3a = J("evidence/s3a_leakage_repro.json")
+    s3c = J(cur["receipt"])
+    st2 = s3b["stage2"]
+    fold_h8 = [f["selected"]["DTI"] for f in st2["folds"]]
+    n = len(fold_h8); m = sum(fold_h8) / n
+    sd = (sum((x - m) ** 2 for x in fold_h8) / (n - 1)) ** 0.5
+    tq = _st.t.ppf(0.975, n - 1)
+    h8_ci = [m - tq * sd / n ** 0.5, m + tq * sd / n ** 0.5]
+    card["s3_lane"] = {
+        "pre_registration": "docs/research/preregistration-2026-10-08-S3.md",
+        "hypothesis": {"id": "H8", "name": "gravity horizontal-gradient maxima (Blakely & Simpson 1986 method) as ridge features",
+                       "layer": "band 13 (isostatic gravity anomaly), label-free",
+                       "mechanism": "a density contrast with a linear, fault-parallel trend can show a fault under cover where the catalogue has no trace (pre-registration section 1)",
+                       "named_non_fault_mimic": "basin-margin and lithological density contacts without faulting. NOT named in the pre-registration (IR-53-58); named here post hoc and not tested"},
+        "leakage_canary": {"S3A_leaky_distance_separability_fold0": s3a["leaky_construction"]["design_B_canary_on_fold0"]["separability"],
+                           "S3A_verdict": s3a["verdict"]["canary_detects_leaky_feature"],
+                           "H8_features_separability_fold0": {r["feature"]: r["separability"] for r in s3b["canary_h8_design_B"]["rows"] if r["fold"] == 0},
+                           "H8_features_separability_max_over_folds": {f: max(r["separability"] for r in s3b["canary_h8_design_B"]["rows"] if r["feature"] == f) for f in {r["feature"] for r in s3b["canary_h8_design_B"]["rows"]}},
+                           "gate": 0.90},
+        "holdout": {"label_type": "HOLDOUT-DTI (proxy; NOT organizer-scored)", "evaluator": "gems53.core.dti v1.0.0",
+                    "design": s3b["design"],
+                    "H8_selected_variant": s3b["stage1"]["selected"],
+                    "H8_pooled_DTI": st2["pooled_DTI"]["h8_selected"],
+                    "H8_fold_DTI_CI95_t_df4": h8_ci,
+                    "H1_thin_bin_q0p1_pooled_DTI_same_proxy": st2["pooled_DTI"]["E2_H1_thin_bin_q0p1_best"],
+                    "bands_baseline_pooled_DTI": st2["pooled_DTI"]["bands_baseline"],
+                    "withheld_positives": st2["withheld_positives_total"],
+                    "paired_H8_minus_H1": st2["b_selected_minus_current_best_H1"],
+                    "paired_H8_minus_bands": st2["a_selected_minus_bands_baseline"],
+                    "verdict": s3b["verdict"]},
+        "correlation_overlap": {"registry_unique_on_grid": s3c["uniqueness"]["registry_unique_on_grid"],
+                                "n_flagged": s3c["uniqueness"]["n_flagged"],
+                                "max_rho_final": s3c["uniqueness"]["max"]["max_rho_final"],
+                                "max_rho_surface_whole_grid": s3c["uniqueness"]["max"]["max_rho_surface"],
+                                "max_overlap_final": s3c["uniqueness"]["max"]["max_overlap_final"],
+                                "receipt": f"evidence/uniqueness_gate_{cur['name']}.json",
+                                "diagnostics": f"evidence/uniqueness_diagnostics_{cur['name']}.json"},
+        "submission_file": {"name": cur["name"], "note": cur["note"], "note_chars": len(cur["note"]),
+                            "file": cur["file"], "sha256": cur["sha256"], "pixel_sha256_nan_to_-1": cur["pixel_sha256"],
+                            "validators": {"template_validate_submission_exit": s3c["validators"]["final_template_validate_submission"]["exit"],
+                                           "validate_conformant_exit": s3c["validators"]["final_validate_conformant"]["exit"]}},
+        "verdict": "H8: NEGATIVE (holdout, pre-registration section 4). The S3 file is a research-only control: not promoted, not a submission candidate, no slot recommended.",
+        "verdict_code": "negative",
+        "organizer_score": None,
     }
     out = ROOT / "evidence" / "run_card.json"
     out.write_text(json.dumps(card, indent=2, default=str))
