@@ -80,6 +80,18 @@ Before project work, read this README (including the prompt in the section at th
 - Competition data were fetched to `/tmp/gems53-data` by `scripts/fetch_data.py` from the public GitHub mirror and matched its pinned hashes (S7). This verifies the mirror against its manifest, **not** against a direct DrivenData download. No data were added to Git.
 - Prior hypotheses H2 (magnetic Hessian ridges), H5 (thermal/paleo geothermal evidence), and H7 (strike/trend priors) are not all novel: H2 is already implemented in this repo and related H5/H7 methods occur in the public GEMSDOE inventory. H2 was tested only under the invalid design A (X2), not rerun (IR-53-37).
 
+### Source checks for manual review (2026-10-08)
+
+Each line was read from the source page this session. The registry entries (`registry/sources.json`) hold the details.
+
+- Competition problem page: https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/ (S1, S36).
+- Official rules (NLR, September 2026), chunks 0 to 6 read: https://docs.nlr.gov/docs/fy26osti/96647.pdf (S3, S34). §3.2, §3.4, §3.5 and Appendix A.1 verified. The later appendices do not change the submission or label rules.
+- DrivenData Terms of Use: https://www.drivendata.org/termsofuse/ (S43). Verified: no robots, spiders or automatic access, and no manual monitoring or copying without written consent. The page says "Last Modified: August 7, 2014", so confirm it against the current Competition Rules.
+- EPSG:32611 (WGS 84 / UTM zone 11N): https://epsg.io/32611 (S6). Central meridian -117, scale 0.9996, false easting 500000, false northing 0.
+- GeoDAWN (USGS), DOI 10.5066/P93LGLVQ: https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and (S15). The page marks the data CC0 1.0. Data files were not downloaded.
+- INGENIOUS project page: https://gbcge.org/current-projects/ingenious/ (S16). The page does **not** state a data licence, so H5 remains blocked on licence verification (IR-53-44).
+- USGS ComCat (C2, H11): https://earthquake.usgs.gov/fdsnws/event/1/ (S29). Not reachable from the sandbox (curl exit 35). Not verified.
+
 ## What was done in this session (three experiments, pre-registered)
 
 Pre-registrations: [`docs/research/preregistration-2026-10-08.md`](docs/research/preregistration-2026-10-08.md) (E1–E3, with deviations DEV-1 and DEV-1b in section 9) and [`docs/research/preregistration-2026-10-08-S3.md`](docs/research/preregistration-2026-10-08-S3.md) (S3-A to S3-C, H8).
