@@ -124,10 +124,36 @@ Unique name: <code>{e(cur['name'])}</code>. Note: <code>{e(cur['note'])}</code> 
 <p class="muted">The same-day S3 session&#39;s control file <code>docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</code> and every older file in <code>docs/downloads/</code>, <code>docs/submissions/</code> and <code>submissions/</code> are also <b>not</b> OK to submit. Reasons: NaN outside the footprint (the layout that returned
 “Predicted values must be in range [0, 1]”), a failed uniqueness gate (the 2026-10-08 candidate), or both.</p>
 </section>"""
+    # Same-day sibling sessions (merged parallel lanes): every entry is research-only like this one.
+    sib_rows = ""
+    for o in cur.get("other_sessions_same_day", []):
+        of = o.get("file", "")
+        o_rel = Path(of).relative_to("docs").as_posix() if of.startswith("docs/") else ("../" + of if of else "")
+        op = o.get("pointer", "")
+        op_rel = Path(op).relative_to("docs").as_posix() if op.startswith("docs/") else op
+        sib_rows += (f"<tr><td>{e(o.get('session',''))}</td>"
+                     f"<td class=mono><a href=\"{e(o_rel)}\">{e(Path(of).name)}</a>"
+                     + (f"<br><span class=mono>sha256 {e(str(o.get('sha256',''))[:16])}…</span>" if o.get('sha256') else "")
+                     + f"</td><td>{e(o.get('label',''))}"
+                     + (f"<br>Note: <code>{e(o.get('note',''))}</code>" if o.get('note') else "")
+                     + (f"<br>Holdout: {e(o.get('holdout',''))}" if o.get('holdout') else "")
+                     + (f"<br>Pointer: <a href=\"{e(op_rel)}\">{e(op)}</a>" if op else "")
+                     + "</td></tr>")
+    siblings = ""
+    if sib_rows:
+        siblings = f"""
+<section><h2>Same-day parallel sessions (merged into this repository)</h2>
+<p>These lanes ran concurrently on 2026-10-09 and were merged together. Each keeps its own archived pointer and receipts;
+none of their files is cleared for submission either. The live pointer above remains the single source of truth for
+&ldquo;may I upload?&rdquo;.</p>
+<table><tr><th>Session</th><th>File</th><th>Status</th></tr>{sib_rows}</table>
+</section>"""
+
     verdict_cls = "yes" if ok else "no"
     verdict_txt = ("YES — OK to download and submit this file." if ok else "NO — do not submit this file.")
     body = f"""
 {top}
+{siblings}
 
 <section><h2>Format validation (the bytes you download)</h2>
 <table><tr><th>Check</th><th>Result</th></tr>{chk_rows}

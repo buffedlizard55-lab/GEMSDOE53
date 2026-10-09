@@ -1,6 +1,6 @@
 {
   "schema": "gems53.sources.v1",
-  "checked_utc": "2026-10-08",
+  "checked_utc": "2026-10-09",
   "legend": {
     "fetched": "page text retrieved in this session with the fetch tool",
     "cloned": "git clone of the public repository in this session; commit recorded",
@@ -49,7 +49,7 @@
       "title": "EPSG:32611 WGS 84 / UTM zone 11N",
       "url": "https://epsg.io/32611",
       "access": "fetched 2026-10-08 (chunk 0 of 2)",
-      "used_for": "CRS definition, verified this session on the EPSG page: WGS 84 / UTM zone 11N; central meridian -117; scale factor 0.9996; false easting 500000; false northing 0; area of use 120°W to 114°W (covers the study region)."
+      "used_for": "CRS definition, verified this session on the EPSG page: WGS 84 / UTM zone 11N; central meridian -117; scale factor 0.9996; false easting 500000; false northing 0; area of use 120\u00b0W to 114\u00b0W (covers the study region)."
     },
     {
       "id": "S7",
@@ -276,7 +276,7 @@
       "title": "GEMS Prize Official Rules (NLR, September 2026), fetched and checked line by line",
       "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
       "access": "fetched 2026-10-08 (7 chunks; chunks 0 to 6 read)",
-      "used_for": "Verified this session: §3.2 'three submissions per week'; §3.4 'up to three per week' and 'select only one set of predictions' as final; §3.5 'choose only one submission across both prize rounds'; Appendix A.1 deadline '5:00 p.m. ET on the prize submission deadline date' (IR-53-55). Appendix A.2 to A.17 (chunks 4 to 6) contain no clause that changes the label or submission rules. A.4: elements designated public become publicly available."
+      "used_for": "Verified this session: \u00a73.2 'three submissions per week'; \u00a73.4 'up to three per week' and 'select only one set of predictions' as final; \u00a73.5 'choose only one submission across both prize rounds'; Appendix A.1 deadline '5:00 p.m. ET on the prize submission deadline date' (IR-53-55). Appendix A.2 to A.17 (chunks 4 to 6) contain no clause that changes the label or submission rules. A.4: elements designated public become publicly available."
     },
     {
       "id": "S35",
@@ -312,6 +312,76 @@
       "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
       "access": "fetched 2026-10-08 (one commit, aebe92f, Jun 16 2026)",
       "used_for": "The official baseline: a U-Net notebook ('unet-mc-cv', Monte Carlo cross-validation), author Prof. John Lipor per the README. Our method is not that notebook; the notebook was not read cell by cell."
+    },
+    {
+      "id": "S44",
+      "title": "Gallardo & Meju (2003) Characterization of heterogeneous near-surface materials by joint 2D inversion of dc resistivity and seismic data, GRL 30(13) \u2014 cross-gradients",
+      "url": "https://doi.org/10.1029/2003GL017370",
+      "access": "fetched",
+      "used_for": "Structural-similarity (cross-gradient) concept; HWVC uses gradient co-direction instead. Rationale only."
+    },
+    {
+      "id": "S45",
+      "title": "USGS 3D Elevation Program (3DEP) home page",
+      "url": "https://www.usgs.gov/3d-elevation-program",
+      "access": "fetched",
+      "used_for": "Quote fetched 2026-10-09: 'All 3DEP products are available free of charge and without use restrictions.' Licence basis for candidate H53-DEM1M; tiles NOT downloaded (sandbox egress)."
+    },
+    {
+      "id": "S46",
+      "title": "GEMS Prize Official Rules (HeroX resource 2274, links the NLR PDF S3)",
+      "url": "https://www.herox.com/GEMSPrize/resource/2274",
+      "access": "fetched",
+      "used_for": "DrivenData rules page points here; rules document is S3."
+    },
+    {
+      "id": "S47",
+      "title": "GEMSDOE41 README (basin-margin H42 surface)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE41",
+      "access": "fetched",
+      "used_for": "Read via GitHub API 2026-10-09 to differentiate HWVC from the existing basin-margin surface (3DEP scarp + RTP corroboration)."
+    },
+    {
+      "id": "S48",
+      "title": "19GEMSDOE README (H19-4/H19-5 multi-line synthesis, base of the d2.8 lineage)",
+      "url": "https://github.com/buffedlizard55-lab/19GEMSDOE",
+      "access": "fetched",
+      "used_for": "Owner description of H19-5 (OWNER-CLAIM); includes 1 m/10 m 3DEP openness obtained via GitHub Actions (claimed CI run 36768672276, not re-checked)."
+    },
+    {
+      "id": "S49",
+      "title": "GEMSDOE25 d2.8 dot file (USER-REPORTED 0.2600)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE25",
+      "access": "cloned",
+      "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json."
+    },
+    {
+      "id": "S50",
+      "title": "GEMSDOE28 r1-solo d2.8 file (USER-REPORTED 0.2708)",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE28",
+      "access": "cloned",
+      "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json (subset of S49 minus dots <= 1 px from catalogue)."
+    },
+    {
+      "id": "S51",
+      "title": "Kaufman, Rosset, Perlich (2011). Leakage in data mining: formulation, detection, and avoidance. KDD '11, pp. 556-563",
+      "url": "https://doi.org/10.1145/2020408.2020496",
+      "access": "verified 2026-10-09 via dblp (https://dblp.org/rec/conf/kdd/KaufmanRP11.html) and Tel Aviv University CRIS; DOI 10.1145/2020408.2020496 consistent across sources; ACM page itself is paywalled/closed access",
+      "used_for": "Canonical leakage definition and the learn-predict separation fix used for the GEMSDOE29 diagnosis. NOTE: the KDD'11 conference paper has THREE authors; Ori Stitelman joins only the 2012 TKDD journal version (S34)."
+    },
+    {
+      "id": "S52",
+      "title": "Kaufman, Rosset, Perlich, Stitelman (2012). Leakage in data mining: formulation, detection, and avoidance. ACM TKDD 6(4):15",
+      "url": "https://www.semanticscholar.org/paper/Leakage-in-data-mining:-formulation,-detection,-and-Kaufman-Rosset/381de4becac0910d1a74c905a3d579dda3571dbd",
+      "access": "verified 2026-10-09 via researchr alias page and Semantic Scholar; TKDD DOI not independently confirmed, so none is cited here",
+      "used_for": "The 4-author journal version the standing prompt references. Same formulation/detection methodology as S33; adds Stitelman."
+    },
+    {
+      "id": "S53",
+      "title": "DrivenData GEMS problem page 967 re-read 2026-10-09 (submission format and metric)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "access": "fetched 2026-10-09 via page tool",
+      "used_for": "Confirmed verbatim: 'data outside the bounds is null or nan'; single-band float32 in [0,1]; DTI alpha=0.2 beta=0.8 triangular kernel R=300m; two-round prize structure; external data allowed if licence permits."
     }
   ]
 }

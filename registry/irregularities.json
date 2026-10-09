@@ -92,9 +92,9 @@
     {
       "id": "IR-53-12",
       "severity": "low",
-      "status": "open",
+      "status": "verified-2026-10-09",
       "subject": "Kaufman et al. KDD 2011 citation not verified",
-      "detail": "The request cites a KDD 2011 and a TKDD 2012 version. The TKDD 2012 article is verified (S11). The KDD 2011 version is not verified here.",
+      "detail": "The request cites a KDD 2011 and a TKDD 2012 version. The TKDD 2012 article is verified (S11). The KDD 2011 version is not verified here. RESOLVED 2026-10-09: KDD'11 version verified via dblp/TAU CRIS/DOI 10.1145/2020408.2020496 (S33). Authorship nuance: KDD'11 has three authors; Stitelman appears only in the TKDD'12 journal version (S34).",
       "action": "Cite only the verified TKDD 2012 article."
     },
     {
@@ -422,15 +422,15 @@
       "severity": "high",
       "status": "resolved-in-template-and-this-repo",
       "subject": "Cause of the 'Predicted values must be in range [0, 1]' rejection",
-      "detail": "The shared template src/submission_io.py documents the rejection (2026-09-24): NaN inside the scored footprint (3,061 px in the earlier shipped raster), finite values outside the template mask (1,540 px), and no GDAL nodata tag. NaN is not in [0, 1]. The fix is conform_to_template(): template finite -> finite in [0,1]; template NaN -> NaN. The S3 candidate passes this (nan_inside_footprint = 0, finite_outside_template = 0). The rejection itself was seen by the user; the rule was taken from the official page ('values between 0 and 1', 'data outside the bounds is null or nan', S1).",
+      "detail": "The shared template src/submission_io.py documents the rejection (2026-09-24): NaN inside the scored footprint (3,061 px in the earlier shipped raster), finite values outside the template mask (1,540 px), and no GDAL nodata tag. NaN is not in [0, 1]. The fix is conform_to_template(): template finite -> finite in [0,1]; template NaN -> NaN. The S3 candidate passes this (nan_inside_footprint = 0, finite_outside_template = 0). The rejection itself was seen by the user; the rule was taken from the official page ('values between 0 and 1', 'data outside the bounds is null or nan', S1). Session-2 audit (2026-10-09) measured all three files ever shipped from GEMSDOE53 pixel-exactly against sample_submission.tif: 0 NaN inside the scored region, 0 finite outside, nodata=nan in every file. None of them can reproduce the user's error; the exact file/step that produced it is still unidentified (tracked as IR-53-65).",
       "action": "Re-run the organizer's validator on the file before upload. We have no organizer validator output for the new file (organizer_score = null)."
     },
     {
       "id": "IR-53-53",
       "severity": "low",
-      "status": "resolved",
+      "status": "verified-2026-10-09",
       "subject": "KDD 2011 DOI of the Kaufman et al. paper not verified in this session",
-      "detail": "The TKDD 2012 DOI 10.1145/2382577.2382579 and the learn-predict separation wording were verified in this session (search results, S41). The KDD 2011 DOI 10.1145/2020408.2020496 used in docs/leakage-review.md was not opened. Treat it as unverified until checked. Resolved 2026-10-08: the DOI 10.1145/2020408.2020496 resolves to 'Leakage in data mining' (Proc. 17th ACM SIGKDD, S38).",
+      "detail": "The TKDD 2012 DOI 10.1145/2382577.2382579 and the learn-predict separation wording were verified in this session (search results, S41). The KDD 2011 DOI 10.1145/2020408.2020496 used in docs/leakage-review.md was not opened. Treat it as unverified until checked. Resolved 2026-10-08: the DOI 10.1145/2020408.2020496 resolves to 'Leakage in data mining' (Proc. 17th ACM SIGKDD, S38). RESOLVED 2026-10-09 (session 2): DOI 10.1145/2020408.2020496 verified via dblp (https://dblp.org/rec/conf/kdd/KaufmanRP11.html) and Tel Aviv University CRIS; see S44/S45 and docs/leakage-review.md.",
       "action": "Closed. The TKDD 2012 DOI (S41) is also kept."
     },
     {
@@ -587,6 +587,34 @@
       "session": "arena/4f95697f (2026-10-09, HWVC lane)"
     },
     {
+      "id": "IR-53-73",
+      "severity": "high",
+      "status": "open",
+      "subject": "GD-1: the literal 70% dot-overlap rule is provably unsatisfiable; session 2 applies a pre-registered corrected reading",
+      "detail": "The GEMSDOE13 lattice covers 99.87% of the footprint within 3 px, so ANY dot set exceeds 70% overlap against it (session-1 IR-53-46). Session 2 pre-registration section 1 therefore scores both readings: raw values archived unchanged; the decision uses footprint-only Spearman rho (<=0.90) plus chance-corrected overlap (flag iff overlap>0.70 AND lift>1.5). A file cleared only under the corrected reading carries this banner and needs explicit user ratification before any slot is spent. This is an interpretation of the standing prompt's duplicate rule, flagged for review, not a silent rule change."
+    },
+    {
+      "id": "IR-53-74",
+      "severity": "high",
+      "status": "open",
+      "subject": "User-reported platform rejection 'Predicted values must be in range [0, 1]' cannot be reproduced from any shipped GEMSDOE53 file",
+      "detail": "Measured 2026-10-09: all three shipped files have 0 NaN inside the sample-valid region, 0 finite outside, nodata=nan, values in [0,1]. The shared template validator records the same platform error caused by NaN INSIDE the scored region, which none of our files has. The file/step that produced the user's error is unidentified (possibly a file from another repo or an extracted zip member). Session-2 primary file is written strictly template-conformant (GD-2 revised)."
+    },
+    {
+      "id": "IR-53-75",
+      "severity": "medium",
+      "status": "logged",
+      "subject": "Prompt-injection attempt observed inside fetched web content (2026-10-09)",
+      "detail": "A web-search result page contained text styled as a fake 'SYSTEM MESSAGE' trying to impose citation-restriction instructions. Web content is untrusted input; the instruction was disregarded and only the platform's real system prompt is followed. Logged so future sessions treat fetched content as data, not commands."
+    },
+    {
+      "id": "IR-53-76",
+      "severity": "high",
+      "status": "open",
+      "subject": "Chance-corrected dot overlap still flags convergent fault geography, not method drift",
+      "detail": "Session-2 gate v2 flagged 25 registry rasters with overlap>0.70 and lift 1.5-4.2 even though the maximum footprint-only Spearman rho of the C1 surface is 0.8857 (below 0.90, against 5GEMSDOE's bands-only context-detector probability surfaces). The flagged set spans many unrelated methods (NMS traces, dotted ridges, DTI-optimal emissions, physics dots, our own session-1 file). Reading: at ~55k dots, any fault-targeting method concentrates dots in structural corridors, so dot-overlap measures shared GEOGRAPHY, not shared METHOD; the low rho proves the surface ranking differs. Under the pre-registered rule the verdict is still negative and was applied. A future gate revision needs a geography-stratified null (e.g., lift computed within structural-corridor strata) or an explicit governance decision; until then, no dot-based candidate from any session can clear an overlap rule on this registry."
+    },
+    {
       "id": "IR-53-90",
       "status": "open",
       "type": "prompt gap",
@@ -623,5 +651,6 @@
         "evidence/x9_verify_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json"
       ]
     }
-  ]
+  ],
+  "checked_utc": ""
 }

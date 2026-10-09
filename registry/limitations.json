@@ -170,6 +170,18 @@
       "item": "Session 2026-10-09 produced no OK-to-submit file. The single E3 build was the only build the 3-experiment budget allowed."
     },
     {
+      "id": "L-43",
+      "item": "GD-1 corrected uniqueness gate is a pre-registered interpretation of the literal duplicate rule, not an organizer- or user-approved rule. Clearance under it is labelled CLEARED-UNDER-CORRECTED-GATE and requires explicit ratification before any submission slot is spent (IR-53-50)."
+    },
+    {
+      "id": "L-44",
+      "item": "Session-2 C1 holdout truth is still the withheld known-fault catalogue (design B). Catalogue recovery is an UPPER BOUND for performance on the competition's unmapped targets (IR-53-42); no HOLDOUT-DTI here is an estimate of organizer score."
+    },
+    {
+      "id": "L-45",
+      "item": "C2/C3 remain non-viable in this environment: their official sources (USGS ComCat FDSN; USGS Landsat C2 L2) are outside the egress allow-list; access, coverage and licence unchecked."
+    },
+    {
       "id": "L-90",
       "kind": "next-source",
       "item": "The proposed next-session H11 sources (INGENIOUS 2 m magnetics, paleo-geothermal surface-vent deposits, springs; S26) were not downloaded or licence-checked in this session; the pinned INGENIOUS mirror (S26) is the only verified holder of the data (irregularity IR-53-44). The spatially blocked holdout for H11 (posterior P(vent|paleo, spring)) is untested."
@@ -189,5 +201,6 @@
       "kind": "blocked",
       "item": "H10 (profile-curvature stratigraphy) was evaluated and cut (negatively) on fold 0 of the holdout. H12 (tectonic anisotropy) is proposed and untested; it needs a spatially blocked holdout before any use of a submission slot. H11 remains unrun (see L-90)."
     }
-  ]
+  ],
+  "checked_utc": ""
 }

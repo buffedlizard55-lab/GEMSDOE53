@@ -1,6 +1,6 @@
 {
   "schema": "gems53.sources.v1",
-  "checked_utc": "2026-10-08",
+  "checked_utc": "2026-10-09",
   "legend": {
     "fetched": "page text retrieved in this session with the fetch tool",
     "cloned": "git clone of the public repository in this session; commit recorded",
@@ -361,6 +361,27 @@
       "url": "https://github.com/buffedlizard55-lab/GEMSDOE28",
       "access": "cloned",
       "used_for": "Registry copy measured in evidence/h53_lineage_algebra.json (subset of S49 minus dots <= 1 px from catalogue)."
+    },
+    {
+      "id": "S51",
+      "title": "Kaufman, Rosset, Perlich (2011). Leakage in data mining: formulation, detection, and avoidance. KDD '11, pp. 556-563",
+      "url": "https://doi.org/10.1145/2020408.2020496",
+      "access": "verified 2026-10-09 via dblp (https://dblp.org/rec/conf/kdd/KaufmanRP11.html) and Tel Aviv University CRIS; DOI 10.1145/2020408.2020496 consistent across sources; ACM page itself is paywalled/closed access",
+      "used_for": "Canonical leakage definition and the learn-predict separation fix used for the GEMSDOE29 diagnosis. NOTE: the KDD'11 conference paper has THREE authors; Ori Stitelman joins only the 2012 TKDD journal version (S34)."
+    },
+    {
+      "id": "S52",
+      "title": "Kaufman, Rosset, Perlich, Stitelman (2012). Leakage in data mining: formulation, detection, and avoidance. ACM TKDD 6(4):15",
+      "url": "https://www.semanticscholar.org/paper/Leakage-in-data-mining:-formulation,-detection,-and-Kaufman-Rosset/381de4becac0910d1a74c905a3d579dda3571dbd",
+      "access": "verified 2026-10-09 via researchr alias page and Semantic Scholar; TKDD DOI not independently confirmed, so none is cited here",
+      "used_for": "The 4-author journal version the standing prompt references. Same formulation/detection methodology as S33; adds Stitelman."
+    },
+    {
+      "id": "S53",
+      "title": "DrivenData GEMS problem page 967 re-read 2026-10-09 (submission format and metric)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "access": "fetched 2026-10-09 via page tool",
+      "used_for": "Confirmed verbatim: 'data outside the bounds is null or nan'; single-band float32 in [0,1]; DTI alpha=0.2 beta=0.8 triangular kernel R=300m; two-round prize structure; external data allowed if licence permits."
     },
     {
       "id": "S90",
