@@ -613,6 +613,43 @@
       "status": "open",
       "subject": "Chance-corrected dot overlap still flags convergent fault geography, not method drift",
       "detail": "Session-2 gate v2 flagged 25 registry rasters with overlap>0.70 and lift 1.5-4.2 even though the maximum footprint-only Spearman rho of the C1 surface is 0.8857 (below 0.90, against 5GEMSDOE's bands-only context-detector probability surfaces). The flagged set spans many unrelated methods (NMS traces, dotted ridges, DTI-optimal emissions, physics dots, our own session-1 file). Reading: at ~55k dots, any fault-targeting method concentrates dots in structural corridors, so dot-overlap measures shared GEOGRAPHY, not shared METHOD; the low rho proves the surface ranking differs. Under the pre-registered rule the verdict is still negative and was applied. A future gate revision needs a geography-stratified null (e.g., lift computed within structural-corridor strata) or an explicit governance decision; until then, no dot-based candidate from any session can clear an overlap rule on this registry."
+    },
+    {
+      "id": "IR-53-90",
+      "status": "open",
+      "type": "prompt gap",
+      "subject": "Competition Prompt, 'Context', section 'Method': the sentence 'The method paragraph is below:' refers to text that is not in the prompt (no method paragraph follows)",
+      "affected": "docs/prompt/verbatim.md (verbatim, complete)",
+      "impact": "A required method description is missing from the official brief; any 'below' method in other repos is the session's own invention",
+      "action": "Searched the whole verbatim prompt for the missing paragraph (none); flag to the organisers; the method section in docs/research/preregistration-h8-2026-10-09.md is this session's proposal",
+      "refs": [
+        "docs/prompt/verbatim.md"
+      ]
+    },
+    {
+      "id": "IR-53-91",
+      "status": "resolved",
+      "type": "data/portal",
+      "subject": "Root cause of the portal error 'Predicted values must be in range [0, 1]': the form counts non-finite values as out of range, so NaN outside the map (even in nodata) is rejected",
+      "affected": "docs/downloads/*.tif (both containers)",
+      "impact": "A conformant-looking file with NaN outside the footprint is rejected at upload; finite 0.0 outside is accepted and scores identically under DTI",
+      "action": "Two containers shipped: primary with zeros outside and no NaN anywhere (the exact container of the organizer-scored h33-...-zeros family), twin with NaN outside (template-conformant); cross-refs IR-53-52",
+      "refs": [
+        "docs/research/preregistration-h8-2026-10-09.md",
+        "evidence/candidate_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json"
+      ]
+    },
+    {
+      "id": "IR-53-92",
+      "status": "resolved",
+      "type": "method",
+      "subject": "The registry uniqueness gate compared final dots to every registry raster's ANY-VALUE-GT-ZERO pixels (raw rule), so dense/surface rasters over-flag (88 raw flags incl. the 2 DEV-2 rows; raw >70% rule unsatisfiable-by-construction, see IR-53-46 and IR-53-50)",
+      "affected": "evidence/uniqueness_gate_*.json, scripts/x9_verify.py",
+      "impact": "Raw rule mis-scopes surfaces as dot maps; used literally it would stop every nonempty submission",
+      "action": "x9 scope check: each flagged row judged under its kind (binary dot maps -> dot rule, lift < 2.0; surfaces -> top-N dot convention N=80k, overlap < 0.70): 88 raw flags -> 0 scoped flags; raw and scoped both retained; cross-refs IR-53-50",
+      "refs": [
+        "evidence/x9_verify_gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522.json"
+      ]
     }
   ],
   "checked_utc": ""

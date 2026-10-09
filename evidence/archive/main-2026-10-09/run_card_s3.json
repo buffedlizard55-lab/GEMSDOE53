@@ -1,0 +1,624 @@
+{
+  "schema": "gems53.run_card.v2",
+  "session_branch": "arena/7b60bcc7-gemsdoe53",
+  "date_utc": "2026-10-09",
+  "lane": "GEMSDOE29 leakage diagnosis; H1 (E2/E3) failed the raw registry duplicate gate; S3 (H8 gravity-gradient ridges, negative; S3 control file, research-only). Parallel-run protocol: 3 experiments.",
+  "hypothesis": {
+    "id": "H1 + M1",
+    "statement": "Visible-fault distance, recomputed with learn-predict separation, can rank off-trace continuation; metric-aware thinning packs predictions at the DTI support scale.",
+    "mechanism": "For each training segment, H1 measures distance to visible faults excluding that segment; at prediction it uses the supplied visible catalogue. M1 thins high-scoring pixels into a sparse dominating set to reduce redundant false-positive mass.",
+    "named_non_fault_process_that_could_mimic_it": "Catalogue compilation / mapping-effort bias: better-mapped structural corridors can have denser recorded faults and nearby training positives without a higher density of truly unmapped faults.",
+    "scope_note": "The holdout labels are known catalogue faults; this does not establish performance on the competition's unmapped targets (IR-53-42)."
+  },
+  "pre_registration": {
+    "file": "docs/research/preregistration-2026-10-08.md",
+    "amendment": "DEV-1 (section 8), written before the design-B run"
+  },
+  "budget": {
+    "experiments_limit": 3,
+    "experiments_used": 3,
+    "experiments": [
+      "E1 design A (exploration, stopped as a design error)",
+      "E2 design B (stage 1 selection on segment folds; stage 2 spatial confirmation)",
+      "E3 build, validation, uniqueness and label (not a holdout experiment)"
+    ],
+    "wall_clock_limit_hours": 2,
+    "experiment_start_utc": "2026-10-08T22:04:10Z",
+    "experiment_end_utc": "2026-10-09T00:13:35Z",
+    "note": "wall clock is read from the experiment receipts (started_utc, finished_utc), not estimated"
+  },
+  "label": "Research-only / DO NOT SUBMIT",
+  "submission": {
+    "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+    "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+    "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
+    "pixel_sha256": "e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd",
+    "bytes": 828867,
+    "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored",
+    "note_chars": 107,
+    "candidate": {
+      "arm": "bands",
+      "variant": "top_q0p02",
+      "kind": "top",
+      "q": 0.02
+    },
+    "decision": "H8 did not beat the current holdout best (pre-registered negative). The file is the pre-registered frozen control (E2 design-B baseline, bands top-q 0.02): a unique control, not a recommendation",
+    "submitted": false,
+    "submission_slot_used": false,
+    "organizer_score": null,
+    "download_allowed_for_research": true,
+    "submit_allowed": false,
+    "uniqueness_verdict": "PROTOCOL DUPLICATE / STOP (raw rule; not a claim of byte-identical pixels)"
+  },
+  "review": {
+    "review_passes": 3,
+    "new_experiments_this_review": 0,
+    "experiment_budget_status": "EXHAUSTED (3 of 3 used in the pre-registered E1/E2/E3 sequence)",
+    "metadata_only_file_review": null,
+    "data_fetch": {
+      "tool": "scripts/fetch_data.py",
+      "destination": "/tmp/gems53-data (not committed)",
+      "training_features_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "sample_submission_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "provenance_caveat": "GitHub mirror matched its pinned manifest; this does not independently establish a direct DrivenData download."
+    },
+    "pytest": {
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0,
+      "shared_template_metric_parity_test_ran": true
+    },
+    "shared_template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+    "official_template_validator_exit": 0,
+    "shared_conformant_validator_exit": 0
+  },
+  "gates": {
+    "holdout_beats_current_best": false,
+    "format_validators_all": true,
+    "uniqueness_no_drift_flag": false
+  },
+  "validators": {
+    "template_validate_submission_exit": 0,
+    "template_validate_conformant_exit": 0,
+    "inlane": {
+      "crs_epsg": 32611,
+      "crs_ok": true,
+      "shape_ok": true,
+      "transform_ok": true,
+      "res_ok": true,
+      "count_ok": true,
+      "dtype": "float32",
+      "nodata": "nan",
+      "nodata_ok": true,
+      "nan_inside_footprint": 0,
+      "finite_outside_template": 0,
+      "values_in_0_1_whole_array": true,
+      "finite_px": 5167373,
+      "nonzero_px": 103348,
+      "min": 0.0,
+      "max": 0.8852052092552185,
+      "all_ok": true
+    }
+  },
+  "holdout": {
+    "label_type": "HOLDOUT-DTI (proxy: withheld known-fault segments and spatial super-regions; NOT organizer-scored)",
+    "evaluator": {
+      "name": "gems53.core.dti",
+      "version": "1.0.0",
+      "parity_with_template_src_metrics_py": {
+        "template_file": "src/metrics.py",
+        "fold": 0,
+        "core_dti": 0.026646145,
+        "template_dti": 0.026646145,
+        "abs_diff": 1.3200551762793111e-13,
+        "pass": true
+      }
+    },
+    "design_B": {
+      "definition": "B: positives = visible outside 10 px buffer; negatives = footprint and not visible",
+      "baseline_bands_top_q0p02": {
+        "pooled_DTI": 0.010562,
+        "CI95_t_df4": [
+          0.008337,
+          0.012812
+        ],
+        "withheld_positives": 60988
+      },
+      "stage1_selected": {
+        "arm": "h1",
+        "variant": "thin_bin_q0p1",
+        "pooled_DTI": 0.141319
+      },
+      "stage1_selection_rule": "highest pooled DTI among variants above the design-B baseline (bands top_q0p02)",
+      "stage1_qualifying_count": 20,
+      "stage2": {
+        "status": "COMPLETED",
+        "baseline": {
+          "name": "bands top_q0p02 (design B, bands model)",
+          "pooled_DTI": 0.000102,
+          "pooled_TP_w": 10.9687,
+          "pooled_FP_w": 293670.2139,
+          "pooled_FN_w": 60977.0313
+        },
+        "selected": {
+          "name": "h1 thin_bin_q0p1",
+          "pooled_DTI": 0.004049,
+          "pooled_TP_w": 418.1791,
+          "pooled_FP_w": 272084.9449,
+          "pooled_FN_w": 60569.8209
+        },
+        "paired_difference": {
+          "mean_fold_diff": 0.003533,
+          "half_width_t_df4": 0.002914,
+          "CI95": [
+            0.000619,
+            0.006447
+          ]
+        },
+        "acceptance": {
+          "rule": "accept iff the 95% t-interval lower bound of the paired fold difference is above 0",
+          "accepted": true
+        },
+        "withheld_positives_total": 60988,
+        "withheld_segments_total": 3199
+      },
+      "selected_variant_segment_folds": {
+        "arm": "h1",
+        "variant": "thin_bin_q0p1",
+        "pooled_DTI": 0.141319,
+        "per_fold_DTI": [
+          0.146428,
+          0.143636,
+          0.144197,
+          0.130883,
+          0.141608
+        ],
+        "CI95_t_df4_on_fold_mean": [
+          0.13378,
+          0.148921
+        ],
+        "half_width": 0.007571,
+        "pooled_TP_w": 15226.5067,
+        "pooled_FP_w": 279551.0927,
+        "pooled_FN_w": 45761.4933,
+        "mean_emitted_px": 57275,
+        "mean_kept_dots": 57275
+      }
+    },
+    "design_A_reference_not_used_for_decisions": {
+      "reason": "negative pool depended on withheld labels (IR-53-37)",
+      "bands_top_q0p02_pooled_DTI": 0.035233,
+      "bands_top_q0p02_CI95": [
+        0.02817,
+        0.042229
+      ],
+      "h1_top_q0p02_pooled_DTI": 0.067515,
+      "reproduction_of_exp2": true
+    }
+  },
+  "leakage": {
+    "canary_design_B": {
+      "bands_max_separability": 0.591151,
+      "bands_flag": "pass",
+      "h1_max_separability": 0.767983,
+      "h1_flag": "pass",
+      "gate": 0.9,
+      "background": "full non-fault footprint (fp and not any known fault)"
+    },
+    "canary_design_A_reference": {
+      "h1_mean": 0.774439,
+      "h1_max": 0.789515,
+      "note": "buffered background (withheld-derived), inflated"
+    },
+    "gemsdoe29": "docs/leakage-review.md (negative verdict; mechanism = full-label distance feature in build_repo_candidate.py)"
+  },
+  "uniqueness": {
+    "thresholds": {
+      "spearman_rho": 0.9,
+      "dot_overlap_within_3px": 0.7
+    },
+    "registry_unique_on_grid": 628,
+    "registry_skipped": 584,
+    "any_drift_flag": true,
+    "n_flagged": 172,
+    "max": {
+      "max_rho_final": 0.516955,
+      "max_overlap_final": 1.0,
+      "max_rho_surface": 0.978311,
+      "max_overlap_pre": 1.0
+    },
+    "top_by_overlap_final": [
+      {
+        "file": "17GEMSDOE__docs__downloads__17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+        "reg_dots": 5167373,
+        "rho_final": 0.16981,
+        "overlap_final": 1.0,
+        "rho_surface": 0.975204,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 1.0,
+        "lift_over_chance": 1.0,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__data__derived__context_detector_prob_4fold_base.tif",
+        "reg_dots": 5156176,
+        "rho_final": 0.172487,
+        "overlap_final": 1.0,
+        "rho_surface": 0.978182,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.999669,
+        "lift_over_chance": 1.0003,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__data__derived__context_detector_prob_topo.tif",
+        "reg_dots": 5155443,
+        "rho_final": 0.17162,
+        "overlap_final": 1.0,
+        "rho_surface": 0.974554,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.998932,
+        "lift_over_chance": 1.0011,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__data__derived__context_detector_prob_topo_rad.tif",
+        "reg_dots": 5152246,
+        "rho_final": 0.171596,
+        "overlap_final": 1.0,
+        "rho_surface": 0.974332,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.998886,
+        "lift_over_chance": 1.0011,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__data__derived__context_detector_prob_u8.tif",
+        "reg_dots": 5165997,
+        "rho_final": 0.172185,
+        "overlap_final": 1.0,
+        "rho_surface": 0.978311,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.999989,
+        "lift_over_chance": 1.0,
+        "drift_flag": true
+      },
+      {
+        "file": "5GEMSDOE__docs__downloads__gems-density-probe-20260925T184215Z-9cdae9b4.tif",
+        "reg_dots": 5106385,
+        "rho_final": 0.10809,
+        "overlap_final": 1.0,
+        "rho_surface": 0.953943,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 1.0,
+        "lift_over_chance": 1.0,
+        "drift_flag": true
+      },
+      {
+        "file": "7GEMSDOE__external__geodawn_extensions__geodawn_extensions_u8.tif",
+        "reg_dots": 5166085,
+        "rho_final": 0.105249,
+        "overlap_final": 1.0,
+        "rho_surface": 0.885456,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.999979,
+        "lift_over_chance": 1.0,
+        "drift_flag": true
+      },
+      {
+        "file": "7GEMSDOE__external__geodawn_rad__geodawn_rad_u8.tif",
+        "reg_dots": 5166085,
+        "rho_final": 0.094551,
+        "overlap_final": 1.0,
+        "rho_surface": 0.886585,
+        "overlap_pre": 1.0,
+        "chance_coverage_footprint": 0.999979,
+        "lift_over_chance": 1.0,
+        "drift_flag": true
+      }
+    ],
+    "protocol_verdict": "PROTOCOL DUPLICATE / STOP",
+    "surface_max_rho_whole_grid": 0.978311,
+    "r13_lattice_final_dot_comparison": {
+      "registry_file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "overlap_final_within_3px": 0.996149,
+      "threshold": 0.7,
+      "chance_coverage": 0.9987,
+      "lift_over_chance": 0.9974,
+      "interpretation": "Raw threshold is a protocol duplicate even though the lattice's footprint coverage explains the overlap; not an exact-pixel-copy claim."
+    },
+    "partial_refresh_warning": "The *_refresh receipt compares only three rasters; it is not a full-registry clearance (IR-53-49).",
+    "receipt": "evidence/uniqueness_gate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
+    "diagnostics": {
+      "file": "evidence/uniqueness_diagnostics_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
+      "flagged_rows": 172,
+      "flagged_by_class": {
+        "sparse(<=25%)": 112,
+        "dense(>50% nonzero)": 56,
+        "mid(25-50%)": 4
+      },
+      "flagged_by_overlap": 170,
+      "flagged_by_rho_final_raster_whole_grid": 0,
+      "flagged_by_rho_final_raster_footprint_only": 0,
+      "flagged_by_rho_surface_whole_grid": 52,
+      "flagged_by_rho_surface_footprint_only": 0,
+      "sparse_flagged_median_lift": 3.1549,
+      "densest_sparse_dot_maps_by_chance_coverage": [
+        {
+          "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_zerofill.tif",
+          "reg_dots": 206895,
+          "chance_coverage": 0.9987
+        },
+        {
+          "file": "13GEMSDOE__docs__downloads__13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+          "reg_dots": 206895,
+          "chance_coverage": 0.9987
+        },
+        {
+          "file": "15GEMSDOE__docs__downloads__gems-cleanup-a-20260928T195952Z-curv_scarp.tif",
+          "reg_dots": 362327,
+          "chance_coverage": 0.8886
+        }
+      ],
+      "raw_overlap_gate_satisfiable_by_any_placement": false,
+      "reading": "diagnostics explain the flags; the pre-registered verdict is taken from the canonical full-registry gate receipt (IR-53-46, IR-53-47, IR-53-48, IR-53-49)"
+    }
+  },
+  "gemsdoe32": {
+    "measured_file": "evidence/gemsdoe32_measured.json",
+    "nan_variant": {
+      "dots": 37654,
+      "dots_within_2px_of_catalogue": 0.0,
+      "dots_within_3px_of_catalogue": 0.057657,
+      "nearest_dot_distance_quantiles_px": {
+        "0.05": 2.828,
+        "0.25": 2.828,
+        "0.5": 3.0,
+        "0.75": 3.606
+      },
+      "in_catalogue_DTI_diagnostic": 0.006709
+    },
+    "zeros_variant_finite_px": 12279160,
+    "score_link": "NOT ESTABLISHED (IR-53-02): no receipt links the 0.2778 row to this file"
+  },
+  "leaderboard_snapshot_repo": {
+    "1": 0.3774,
+    "7": 0.3195,
+    "13": 0.2778,
+    "note": "from the repository's earlier snapshot (S2); not re-read this session (IR-53-01)"
+  },
+  "hypotheses": {
+    "file": "docs/research/hypotheses.md",
+    "H1": "tested (design B, stage 1 and stage 2)",
+    "M1": "thinning tested (design B)",
+    "H2": "attempted in X1/X2/X3; X2 is design A with hidden-buffer negatives (IR-53-37), invalid for promotion; no design-B rerun",
+    "H3": "BLOCKED: strain orientation not in public data (IR-53-40)",
+    "H4": "rejected (label-source re-expression)",
+    "H5": "related thermal/geothermal analogues exist across the public portfolio; not globally novel",
+    "H7": "related strike/trend analogues exist across the public portfolio; not globally novel",
+    "C1": "untested future candidate; current feature stack only; budget exhausted",
+    "C2": "candidate only; USGS ComCat access/terms not checked (S29)",
+    "C3": "candidate only; USGS Landsat access/terms not checked (S30)"
+  },
+  "verdict_reasons": [
+    "uniqueness gate (pre-registered rule) flags 172 registry rasters",
+    "protocol duplicate / stop: final-dot overlap with the GEMSDOE13 r13 lattice is 99.61% within 3 px (threshold 70%; IR-53-46)",
+    "the raw 70% overlap gate cannot be satisfied by any placement on this registry: sparse dot map covers 99.87% of the footprint within 3 px (IR-53-46)",
+    "rho flags are method-sensitive: surface rho (whole grid) flags 52 rasters; footprint-only surface rho flags 0 (IR-53-47)"
+  ],
+  "irregularities_open": [
+    "IR-53-01",
+    "IR-53-02",
+    "IR-53-03",
+    "IR-53-04",
+    "IR-53-05",
+    "IR-53-06",
+    "IR-53-07",
+    "IR-53-08",
+    "IR-53-09",
+    "IR-53-10",
+    "IR-53-11",
+    "IR-53-12",
+    "IR-53-13",
+    "IR-53-16",
+    "IR-53-17",
+    "IR-53-19",
+    "IR-53-20",
+    "IR-53-21",
+    "IR-53-23",
+    "IR-53-24",
+    "IR-53-25",
+    "IR-53-26",
+    "IR-53-27",
+    "IR-53-28",
+    "IR-53-29",
+    "IR-53-30",
+    "IR-53-31",
+    "IR-53-32",
+    "IR-53-33",
+    "IR-53-34",
+    "IR-53-35",
+    "IR-53-36",
+    "IR-53-37",
+    "IR-53-38",
+    "IR-53-39",
+    "IR-53-40",
+    "IR-53-41",
+    "IR-53-42",
+    "IR-53-44",
+    "IR-53-46",
+    "IR-53-47",
+    "IR-53-48",
+    "IR-53-49",
+    "IR-53-63",
+    "IR-53-50",
+    "IR-53-51",
+    "IR-53-54",
+    "IR-53-55",
+    "IR-53-56",
+    "IR-53-57",
+    "IR-53-58",
+    "IR-53-59",
+    "IR-53-60",
+    "IR-53-62"
+  ],
+  "irregularities_total": 63,
+  "limitations": [
+    "L-01",
+    "L-02",
+    "L-03",
+    "L-04",
+    "L-05",
+    "L-06",
+    "L-07",
+    "L-08",
+    "L-09",
+    "L-10",
+    "L-11",
+    "L-12",
+    "L-13",
+    "L-14",
+    "L-15",
+    "L-16",
+    "L-17",
+    "L-18",
+    "L-19",
+    "L-20",
+    "L-21",
+    "L-22",
+    "L-23",
+    "L-24",
+    "L-25",
+    "L-26",
+    "L-27",
+    "L-28",
+    "L-29",
+    "L-36",
+    "L-37",
+    "L-30",
+    "L-31",
+    "L-32",
+    "L-33",
+    "L-34",
+    "L-35"
+  ],
+  "verdict": "Research-only / DO NOT SUBMIT",
+  "organizer_score": null,
+  "files": {
+    "preregistration": "docs/research/preregistration-2026-10-08.md",
+    "e1": "evidence/e1_h1_thin_holdout.json",
+    "e2": "evidence/e2_leakfree_holdouts.json",
+    "e3_receipt": "evidence/candidate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
+    "uniqueness_receipt": "evidence/uniqueness_gate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
+    "measured_gemsdoe32": "evidence/gemsdoe32_measured.json",
+    "current_submission": "docs/submissions/CURRENT.json",
+    "hypotheses": "docs/research/hypotheses.md",
+    "review_prompt_capture": "docs/prompt/verbatim.md",
+    "tests": "tests/ (30 passed, 0 skipped with the pinned shared template)"
+  },
+  "environment": {
+    "python": "3.11.2 (venv: numpy 2.4.6, scipy 1.17.1, scikit-learn 1.9.1, rasterio 1.4.4, pyproj 3.7.2)",
+    "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+    "jklinck_mirror_commit": "56d78de7a989c12e2dce50cd65a4095df57030d2",
+    "fetch": "scripts/fetch_data.py (sha256 pins from the template manifest, verified)"
+  },
+  "s3_lane": {
+    "pre_registration": "docs/research/preregistration-2026-10-08-S3.md",
+    "hypothesis": {
+      "id": "H8",
+      "name": "gravity horizontal-gradient maxima (Blakely & Simpson 1986 method) as ridge features",
+      "layer": "band 13 (isostatic gravity anomaly), label-free",
+      "mechanism": "a density contrast with a linear, fault-parallel trend can show a fault under cover where the catalogue has no trace (pre-registration section 1)",
+      "named_non_fault_mimic": "basin-margin and lithological density contacts without faulting. NOT named in the pre-registration (IR-53-58); named here post hoc and not tested"
+    },
+    "leakage_canary": {
+      "S3A_leaky_distance_separability_fold0": 1.0,
+      "S3A_verdict": true,
+      "H8_features_separability_fold0": {
+        "R": 0.500388,
+        "S": 0.50054,
+        "log1pD": 0.510827
+      },
+      "H8_features_separability_max_over_folds": {
+        "S": 0.50193,
+        "log1pD": 0.572409,
+        "R": 0.501985
+      },
+      "gate": 0.9
+    },
+    "holdout": {
+      "label_type": "HOLDOUT-DTI (proxy; NOT organizer-scored)",
+      "evaluator": "gems53.core.dti v1.0.0",
+      "design": "B (DEV-1): positives = visible outside 10 px buffer; negatives = footprint and not visible",
+      "H8_selected_variant": "thin_bin_q0p1",
+      "H8_pooled_DTI": 0.00402,
+      "H8_fold_DTI_CI95_t_df4": [
+        -2.1927992624865694e-05,
+        0.008144690619591916
+      ],
+      "H1_thin_bin_q0p1_pooled_DTI_same_proxy": 0.004049,
+      "bands_baseline_pooled_DTI": 0.000102,
+      "withheld_positives": 60988,
+      "paired_H8_minus_H1": {
+        "mean_fold_diff": 0.000424,
+        "CI95": [
+          -0.003746,
+          0.004594
+        ],
+        "per_fold_diff": [
+          -0.002173,
+          -0.00279,
+          0.005677,
+          0.000312,
+          0.001093
+        ],
+        "lower_bound_above_0": false
+      },
+      "paired_H8_minus_bands": {
+        "mean_fold_diff": 0.003957,
+        "CI95": [
+          0.000129,
+          0.007785
+        ],
+        "per_fold_diff": [
+          0.001121,
+          0.004656,
+          0.008983,
+          0.002698,
+          0.002325
+        ],
+        "lower_bound_above_0": true
+      },
+      "verdict": {
+        "rule": "accept as beating the holdout best iff the 95% lower bound of (b) > 0 (pre-registration section 4)",
+        "beats_holdout_best": false,
+        "label": "NEGATIVE (holdout)"
+      }
+    },
+    "correlation_overlap": {
+      "registry_unique_on_grid": 628,
+      "n_flagged": 172,
+      "max_rho_final": 0.516955,
+      "max_rho_surface_whole_grid": 0.978311,
+      "max_overlap_final": 1.0,
+      "receipt": "evidence/uniqueness_gate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
+      "diagnostics": "evidence/uniqueness_diagnostics_gems53-s3-bands-top_q0p02-20261009-e67cda00.json"
+    },
+    "submission_file": {
+      "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
+      "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored",
+      "note_chars": 107,
+      "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+      "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
+      "pixel_sha256_nan_to_-1": "e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd",
+      "validators": {
+        "template_validate_submission_exit": 0,
+        "validate_conformant_exit": 0
+      }
+    },
+    "verdict": "H8: NEGATIVE (holdout, pre-registration section 4). The S3 file is a research-only control: not promoted, not a submission candidate, no slot recommended.",
+    "verdict_code": "negative",
+    "organizer_score": null
+  }
+}

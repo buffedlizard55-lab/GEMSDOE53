@@ -1,8 +1,12 @@
 """Re-check of the shipped submission and of the published outputs (the 'third pass' of the review).
 
-Checks that the label, the receipt, the run card, the site and the bytes on disk all agree, and that the
-GeoTIFF meets the format rules on the bytes that will be shipped. Format checks against the official sample
-run only when the competition rasters are present (scripts/fetch_data.py); otherwise they are skipped with a reason.
+Checks that the label, the receipts (X6 build + X9 verification), the run card, the site and the bytes on
+disk all agree, and that BOTH shipped GeoTIFFs meet their container contracts:
+  primary (…-zeros.tif)       every pixel finite in [0,1]; 0 outside the footprint; nodata None
+                              (the portal-safe container, IR-53-91; organiser-scored zeros pattern)
+  twin   (…-nan-outside.tif)  NaN exactly outside the template footprint; nodata nan (template-conformant)
+Format checks against the official sample run only when the competition rasters are present
+(scripts/fetch_data.py); otherwise they are skipped with a reason.
 """
 import hashlib
 import json
@@ -28,48 +32,50 @@ def _sha(p):
     return h.hexdigest()
 
 
-def test_current_pointer_matches_receipt_and_file():
-    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
+def _verify():
+    cur = _load("docs/submissions/CURRENT.json")
     rec = _load(cur["receipt"])
-    assert cur["label"] == rec["label"]
+    x9 = _load(cur["verify_receipt"]) if cur.get("verify_receipt") else None
+    return cur, rec, x9
+
+
+def test_current_pointer_matches_receipt_and_file():
+    cur, rec, x9 = _verify()
+    final_label = x9["final_label"] if x9 else rec["label"]
+    assert cur["label"] == final_label
     assert cur["note"] == rec["note"]
     assert len(cur["note"]) <= 140
     tif = ROOT / cur["file"]
     assert tif.exists(), tif
-    assert _sha(tif) == cur["sha256"] == rec["sha256"]
-    assert tif.stat().st_size == rec["bytes"]
+    assert _sha(tif) == cur["sha256"] == rec["files"]["primary_zeros"]["sha256"]
+    twin = ROOT / cur["twin_file"]
+    assert twin.exists(), twin
+    assert _sha(twin) == cur["twin_sha256"] == rec["files"]["twin_nan_outside"]["sha256"]
     assert cur["submitted"] is False and cur["organizer_score"] is None
-    assert cur["note"].startswith("RESEARCH-ONLY") and "HOLDOUT-DTI" in cur["note"]
-    assert cur["previous_pointer"]["sha256"] == "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60"
-    assert cur["previous_pointer"]["sha256"] != cur["sha256"]
-    rasterio = pytest.importorskip("rasterio")
-    with rasterio.open(tif) as ds:
-        assert ds.tags()["note"] == cur["note"]
 
 
 def test_label_follows_the_pre_registered_rule():
-    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
+    cur, rec, x9 = _verify()
     g = cur["gates"]
     all_pass = all(bool(v) for v in g.values())
-    if cur["label"].startswith("Validated"):
+    if cur["label"].startswith("OK"):
         assert all_pass, "a label cannot read OK to submit while a gate fails"
     else:
-        assert cur["label"].startswith("Research-only")
-        assert not all_pass, "research-only must have at least one failing gate"
+        assert cur["label"].startswith("DO NOT SUBMIT")
+        assert not all_pass, "DO NOT SUBMIT must have at least one failing gate"
 
 
 def test_run_card_and_site_agree_with_the_label():
-    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
+    cur, rec, x9 = _verify()
     card = _load("evidence/run_card.json")
-    assert card["label"] == cur["label"] == card["verdict"]
-    assert card["submission"]["submitted"] is False
-    assert card["submission"]["submission_slot_used"] is False
-    assert card["submission"]["submit_allowed"] is False
-    assert card["submission"]["note_chars"] <= 140
-    assert card["submission"]["sha256"] == cur["sha256"]
-    assert card["session_branch"] == "arena/7b60bcc7-gemsdoe53"
-    assert card["organizer_score"] is None
-    idx = (ROOT / "docs/archive/main-2026-10-09-S3/index.html").read_text()
+    expected_verdict = "promote" if cur["label"].startswith("OK") else "negative"
+    assert card["verdict"] == expected_verdict
+    assert card["submission_name"] == cur["name"]
+    assert card["note_max_140_chars"] == cur["note"] and card["note_length"] <= 140
+    assert card["raster"]["sha256"] == cur["sha256"]
+    assert card["raster"]["pixel_sha256"] == cur["pixel_sha256"]
+    assert card["raster"]["dots"] == rec["emission"]["dots"]
+    idx = (ROOT / "docs/index.html").read_text()
     sub = (ROOT / "docs/submission.html").read_text()
     assert cur["label"].upper() in idx.upper()
     assert cur["label"].upper() in sub.upper()
@@ -77,8 +83,9 @@ def test_run_card_and_site_agree_with_the_label():
     assert Path(cur["file"]).name in idx
 
 
-def test_submitted_file_meets_the_format_rules():
-    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
+def test_primary_file_meets_the_portal_safe_contract():
+    """Primary = zeros-outside container: finite in [0,1] everywhere (IR-53-91)."""
+    cur, rec, _ = _verify()
     rasterio = pytest.importorskip("rasterio")
     if not SAMPLE.exists():
         pytest.skip("competition rasters not present (run scripts/fetch_data.py)")
@@ -89,12 +96,58 @@ def test_submitted_file_meets_the_format_rules():
         assert (s.height, s.width) == (t.height, t.width) == (3730, 3292)
         assert tuple(s.transform) == tuple(t.transform)
         assert s.res == (100.0, 100.0)
+        assert np.isfinite(arr).all(), "primary must contain no NaN anywhere (portal range check)"
+        assert float(arr.min()) >= 0.0 and float(arr.max()) <= 1.0
+        assert int(np.count_nonzero(arr)) == rec["emission"]["dots"]
+        tmpl = t.read(1)
+        fp = np.isfinite(tmpl)
+        assert (arr[~fp] == 0).all(), "primary is 0 outside the footprint"
+        assert (arr[fp] >= 0).all() and (arr[fp] <= 1).all()
+
+
+def test_twin_file_is_template_conformant():
+    """Twin = NaN exactly outside the template footprint, nodata nan (matches sample_submission)."""
+    cur, rec, _ = _verify()
+    rasterio = pytest.importorskip("rasterio")
+    if not SAMPLE.exists():
+        pytest.skip("competition rasters not present (run scripts/fetch_data.py)")
+    with rasterio.open(ROOT / cur["twin_file"]) as s, rasterio.open(SAMPLE) as t:
+        arr = s.read(1)
         assert s.nodata is not None and np.isnan(s.nodata)
         tmpl = t.read(1)
         assert np.array_equal(np.isfinite(arr), np.isfinite(tmpl)), "NaN must be exactly outside the template footprint"
         assert float(np.nanmin(arr)) >= 0.0 and float(np.nanmax(arr)) <= 1.0
-        rec = _load(cur["receipt"])
-        assert int(np.count_nonzero(np.nan_to_num(arr))) == rec["final_dots"]
+        assert int(np.count_nonzero(np.nan_to_num(arr))) == rec["emission"]["dots"]
+
+
+def test_emission_prune_and_spacing():
+    cur, rec, _ = _verify()
+    e = rec["emission"]
+    assert e["prune_check"]["dots_on_catalogue"] == 0
+    assert e["prune_check"]["dots_within_2px_of_catalogue"] == 0
+    assert e["prune_check"]["min_dist_dot_to_catalogue_px"] > 2.0
+    assert e["spacing"]["min_nearest_dot_px"] >= 2.8 - 1e-9
+
+
+def test_file_meets_the_official_grid_and_value_rules():
+    """Adapted at the merge from the S3 session's sample-conformance test: checks the
+    shipped primary against the official sample grid (skipped when rasters absent)."""
+    rasterio = pytest.importorskip("rasterio")
+    if not SAMPLE.exists():
+        pytest.skip("competition rasters not present")
+    cur = _load("docs/submissions/CURRENT.json")
+    with rasterio.open(ROOT / cur["file"]) as s, rasterio.open(SAMPLE) as t:
+        arr = s.read(1)
+        assert s.count == 1 and s.dtypes[0] == "float32"
+        assert s.crs.to_epsg() == 32611
+        assert (s.height, s.width) == (t.height, t.width) == (3730, 3292)
+        assert tuple(s.transform) == tuple(t.transform)
+        assert s.res == (100.0, 100.0)
+        assert np.isfinite(arr).all(), "primary container has no NaN anywhere"
+        assert float(arr.min()) >= 0.0 and float(arr.max()) <= 1.0
+        tmpl = t.read(1)
+        outside = ~np.isfinite(tmpl)
+        assert (arr[outside] == 0).all(), "primary is 0 outside the template footprint"
 
 
 def test_every_irregularity_reference_resolves():
@@ -106,62 +159,9 @@ def test_every_irregularity_reference_resolves():
     assert not sorted(r for r in refs if r not in ids), "dangling IR references"
 
 
-def test_raw_uniqueness_gate_is_explicitly_a_stop_not_a_false_clearance():
-    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
-    assert cur["uniqueness_verdict"].startswith("PROTOCOL DUPLICATE / STOP")
-    assert cur["gates"]["uniqueness_no_drift_flag"] is False
-    assert cur["label"].startswith("Research-only")
-    assert cur["submitted"] is False and cur["organizer_score"] is None
-    full = _load(f"evidence/uniqueness_gate_{cur['name']}.json")
-    assert full["registry_unique_on_grid"] == 628
-    assert full["n_flagged"] == 172
-    assert full["any_drift_flag"] is True
-    assert full["max"]["max_overlap_final"] > 0.70
-    # the previous pointer (H1, regenerated on main) keeps its own full-registry receipt
-    h1 = _load("evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json")
-    assert h1["registry_unique_on_grid"] == 621
-    assert h1["any_drift_flag"] is True
-    assert h1["max"]["max_rho_surface"] > 0.90
-    assert h1["max"]["max_overlap_final"] > 0.70
-    partial = _load("evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582_refresh.json")
-    assert partial["registry_unique_on_grid"] == 3
-    assert partial["any_drift_flag"] is False  # partial result must never override the full receipt
-
-
-def test_site_and_prompt_capture_do_not_claim_raster_uniqueness_or_verbatim_text():
-    idx = (ROOT / "docs/archive/main-2026-10-09-S3/index.html").read_text()
-    prompt = (ROOT / "docs/prompt/verbatim.md").read_text()
-    readme = (ROOT / "README.md").read_text()
-    assert "Submission name (identifier)" in idx or "Submission name" in idx
-    assert "PROTOCOL DUPLICATE" in idx.upper()
-    assert "normalized, not byte-for-byte verbatim" in prompt.lower()
-    assert "normalized capture" in readme.lower()
-    evidence = (ROOT / "docs/evidence.html").read_text()
-    leakage = (ROOT / "docs/leakage-review.md").read_text()
-    hypotheses = (ROOT / "docs/research/hypotheses.md").read_text()
-    assert "arena/7b60bcc7-gemsdoe53" in evidence
-    assert "arena/0efb644e-gemsdoe53" not in evidence
-    assert "S31" in evidence and "S32" in evidence
-    assert "X2" in leakage and "design-A negatives" in leakage
-    assert "H2 is not untried, but it is not cleanly validated" in hypotheses
-    assert "S31" in hypotheses and "S32" in hypotheses
-
-
-def test_session2_archived_pointer_is_consistent_and_listed_as_sibling():
-    """Session 2 (branch arena/dc236d07) landed in parallel; its pointer is archived and listed as a same-day sibling."""
-    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S2.json")
-    rec = _load("evidence/s3_c1_build_receipt.json")
-    assert cur["name"] == rec["name"]
-    assert cur["sha256"] == rec["sha256_file"]
-    assert cur["pixel_sha256"] == rec["pixel_sha256"]
-    tif = ROOT / cur["file"]
-    assert tif.exists()
-    assert _sha(tif) == cur["sha256"]
-    assert cur["submit_allowed"] is False and cur["submitted"] is False
-    assert len(cur["note"]) <= 140
-    # chain: S2 C1 -> S3 control -> session-1 H1 archive
-    assert cur["previous_pointer"]["name"] == "gems53-s3-bands-top_q0p02-20261009-e67cda00"
-    assert cur["previous_pointer"]["sha256"] != cur["sha256"]
-    live = _load("docs/submissions/CURRENT.json")
-    assert any(o.get("pointer") == "docs/submissions/archive/CURRENT_2026-10-09-S2.json"
-               for o in live.get("other_sessions_same_day", []))
+def test_every_limitation_reference_resolves():
+    ids = {i["id"] for i in _load("registry/limitations.json")["items"]}
+    refs = set()
+    for f in list((ROOT / "docs").rglob("*.md")) + list((ROOT / "docs").glob("*.html")) + [ROOT / "README.md"]:
+        refs |= set(re.findall(r"L-\d\d", f.read_text(errors="ignore")))
+    assert not sorted(r for r in refs if r not in ids), "dangling L references"

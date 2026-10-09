@@ -382,6 +382,40 @@
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
       "access": "fetched 2026-10-09 via page tool",
       "used_for": "Confirmed verbatim: 'data outside the bounds is null or nan'; single-band float32 in [0,1]; DTI alpha=0.2 beta=0.8 triangular kernel R=300m; two-round prize structure; external data allowed if licence permits."
+    },
+    {
+      "id": "S90",
+      "title": "Kaufman, S., Rosset, S., Perlich, C., Stitelman, O. (2012), 'Leakage in Data Mining: Formulation, Detection, and Avoidance', ACM TKDD 6(4): 15 (KDD 2011 paper) - this session's leakage template (also on record as S38/S41)",
+      "url": "https://researchr.org/publication/KaufmanRPS12",
+      "type": "document",
+      "session-added": "2026-10-08 (re-checked 2026-10-08)",
+      "check": "Publication record lists KDD'11: 556-563 + TKDD 6(4): 15, 2012.",
+      "refs": [
+        "docs/research/gemsdoe32.md"
+      ]
+    },
+    {
+      "id": "S91",
+      "title": "Faulds 2013, 'Structural Inventory of Great Basin Geothermal Systems...' (proceedings, OSTI dataset 1148722, GDR contract EE0002748) - geological basis for the H8 tip/relay corridor hypothesis",
+      "url": "https://www.osti.gov/dataexplorer/biblio/dataset/1148722",
+      "type": "document",
+      "session-added": "2026-10-08",
+      "check": "OSTI record; abstract states step-overs/relay ramps host ~32% of the ~250 known Great Basin geothermal fields; fault terminations/intersections ~22%.",
+      "refs": [
+        "docs/research/preregistration-h8-2026-10-09.md",
+        "docs/research/hypotheses-h8-2026-10-09.md"
+      ]
+    },
+    {
+      "id": "S92",
+      "title": "Faulds, Hinz, Coolbaugh, Cashman (GRC 2013), 'Assessment of Favorable Structural Settings of Geothermal Systems in the Great Basin, Western USA' (OpenEI wiki) - same 32%/22% statistics",
+      "url": "https://openei.org/wiki/Assessment_of_Favorable_Structural_Settings_of_Geothermal_Systems_in_the_Great_Basin%2C_Western_USA",
+      "type": "document",
+      "session-added": "2026-10-08",
+      "check": "OpenEI wiki record of the GRC Transactions 2013 paper.",
+      "refs": [
+        "docs/research/preregistration-h8-2026-10-09.md"
+      ]
     }
   ]
 }

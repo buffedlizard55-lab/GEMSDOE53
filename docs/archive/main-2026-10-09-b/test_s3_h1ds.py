@@ -14,9 +14,7 @@ def _load(rel):
 
 
 def test_run_card_branch_is_this_session():
-    # Merge resolution 2026-10-09: the shared evidence/run_card.json belongs to the
-    # merged deliverable; the S3 session's card is archived beside it.
-    card = _load("evidence/archive/main-2026-10-09/run_card_s3.json")
+    card = _load("evidence/run_card.json")
     assert card["session_branch"] == "arena/7b60bcc7-gemsdoe53"
 
 

@@ -1,0 +1,273 @@
+{
+ "experiment": "X4 leakage canary for the H8 lane (pre-registration-h8-2026-10-09.md)",
+ "label_type": "single-feature separability on design-B hide-and-recover folds (not DTI)",
+ "inputs": {
+  "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+  "labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+  "sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+ },
+ "folds": {
+  "K": 5,
+  "seed": 53,
+  "segments": 3199
+ },
+ "negatives": "footprint pixels that are never a catalogue pixel (300k sample per fold)",
+ "positives": "withheld catalogue segments (fold k)",
+ "gate": {
+  "separability_flag_above": 0.9
+ },
+ "folds_detail": [
+  {
+   "fold": 0,
+   "n_withheld_px": 11370,
+   "n_withheld_segments": 1,
+   "features": {
+    "H8_tip_continuation": {
+     "AUC": 0.7896,
+     "separability": 0.7896,
+     "n_pos": 11370,
+     "n_neg": 300000
+    },
+    "H8_relay": {
+     "AUC": 0.669274,
+     "separability": 0.669274,
+     "n_pos": 11370,
+     "n_neg": 300000
+    },
+    "H8_combined": {
+     "AUC": 0.78734,
+     "separability": 0.78734,
+     "n_pos": 11370,
+     "n_neg": 300000
+    },
+    "H1_segment_exact_distance": {
+     "AUC": 0.232907,
+     "separability": 0.767093,
+     "n_pos": 11370,
+     "n_neg": 300000
+    },
+    "C_leaky_full_catalogue_distance": {
+     "AUC": 0.0,
+     "separability": 1.0,
+     "n_pos": 11370,
+     "n_neg": 300000
+    },
+    "R_band2_ridge_strength": {
+     "AUC": 0.523865,
+     "separability": 0.523865,
+     "n_pos": 11370,
+     "n_neg": 300000
+    }
+   }
+  },
+  {
+   "fold": 1,
+   "n_withheld_px": 12598,
+   "n_withheld_segments": 1,
+   "features": {
+    "H8_tip_continuation": {
+     "AUC": 0.768698,
+     "separability": 0.768698,
+     "n_pos": 12598,
+     "n_neg": 300000
+    },
+    "H8_relay": {
+     "AUC": 0.666445,
+     "separability": 0.666445,
+     "n_pos": 12598,
+     "n_neg": 300000
+    },
+    "H8_combined": {
+     "AUC": 0.760119,
+     "separability": 0.760119,
+     "n_pos": 12598,
+     "n_neg": 300000
+    },
+    "H1_segment_exact_distance": {
+     "AUC": 0.256345,
+     "separability": 0.743655,
+     "n_pos": 12598,
+     "n_neg": 300000
+    },
+    "C_leaky_full_catalogue_distance": {
+     "AUC": 0.0,
+     "separability": 1.0,
+     "n_pos": 12598,
+     "n_neg": 300000
+    },
+    "R_band2_ridge_strength": {
+     "AUC": 0.524094,
+     "separability": 0.524094,
+     "n_pos": 12598,
+     "n_neg": 300000
+    }
+   }
+  },
+  {
+   "fold": 2,
+   "n_withheld_px": 12169,
+   "n_withheld_segments": 1,
+   "features": {
+    "H8_tip_continuation": {
+     "AUC": 0.793025,
+     "separability": 0.793025,
+     "n_pos": 12169,
+     "n_neg": 300000
+    },
+    "H8_relay": {
+     "AUC": 0.660373,
+     "separability": 0.660373,
+     "n_pos": 12169,
+     "n_neg": 300000
+    },
+    "H8_combined": {
+     "AUC": 0.78887,
+     "separability": 0.78887,
+     "n_pos": 12169,
+     "n_neg": 300000
+    },
+    "H1_segment_exact_distance": {
+     "AUC": 0.235348,
+     "separability": 0.764652,
+     "n_pos": 12169,
+     "n_neg": 300000
+    },
+    "C_leaky_full_catalogue_distance": {
+     "AUC": 0.0,
+     "separability": 1.0,
+     "n_pos": 12169,
+     "n_neg": 300000
+    },
+    "R_band2_ridge_strength": {
+     "AUC": 0.531817,
+     "separability": 0.531817,
+     "n_pos": 12169,
+     "n_neg": 300000
+    }
+   }
+  },
+  {
+   "fold": 3,
+   "n_withheld_px": 12671,
+   "n_withheld_segments": 1,
+   "features": {
+    "H8_tip_continuation": {
+     "AUC": 0.77239,
+     "separability": 0.77239,
+     "n_pos": 12671,
+     "n_neg": 300000
+    },
+    "H8_relay": {
+     "AUC": 0.659247,
+     "separability": 0.659247,
+     "n_pos": 12671,
+     "n_neg": 300000
+    },
+    "H8_combined": {
+     "AUC": 0.765577,
+     "separability": 0.765577,
+     "n_pos": 12671,
+     "n_neg": 300000
+    },
+    "H1_segment_exact_distance": {
+     "AUC": 0.264725,
+     "separability": 0.735275,
+     "n_pos": 12671,
+     "n_neg": 300000
+    },
+    "C_leaky_full_catalogue_distance": {
+     "AUC": 0.0,
+     "separability": 1.0,
+     "n_pos": 12671,
+     "n_neg": 300000
+    },
+    "R_band2_ridge_strength": {
+     "AUC": 0.495295,
+     "separability": 0.504705,
+     "n_pos": 12671,
+     "n_neg": 300000
+    }
+   }
+  },
+  {
+   "fold": 4,
+   "n_withheld_px": 12180,
+   "n_withheld_segments": 1,
+   "features": {
+    "H8_tip_continuation": {
+     "AUC": 0.774334,
+     "separability": 0.774334,
+     "n_pos": 12180,
+     "n_neg": 300000
+    },
+    "H8_relay": {
+     "AUC": 0.655966,
+     "separability": 0.655966,
+     "n_pos": 12180,
+     "n_neg": 300000
+    },
+    "H8_combined": {
+     "AUC": 0.771493,
+     "separability": 0.771493,
+     "n_pos": 12180,
+     "n_neg": 300000
+    },
+    "H1_segment_exact_distance": {
+     "AUC": 0.247757,
+     "separability": 0.752243,
+     "n_pos": 12180,
+     "n_neg": 300000
+    },
+    "C_leaky_full_catalogue_distance": {
+     "AUC": 0.0,
+     "separability": 1.0,
+     "n_pos": 12180,
+     "n_neg": 300000
+    },
+    "R_band2_ridge_strength": {
+     "AUC": 0.555163,
+     "separability": 0.555163,
+     "n_pos": 12180,
+     "n_neg": 300000
+    }
+   }
+  }
+ ],
+ "summary": {
+  "H8_tip_continuation": {
+   "separability_max_over_folds": 0.793025,
+   "separability_mean_over_folds": 0.7796094,
+   "gate_flag_above_0p90": false
+  },
+  "H8_relay": {
+   "separability_max_over_folds": 0.669274,
+   "separability_mean_over_folds": 0.662261,
+   "gate_flag_above_0p90": false
+  },
+  "H8_combined": {
+   "separability_max_over_folds": 0.78887,
+   "separability_mean_over_folds": 0.7746798,
+   "gate_flag_above_0p90": false
+  },
+  "H1_segment_exact_distance": {
+   "separability_max_over_folds": 0.767093,
+   "separability_mean_over_folds": 0.7525836,
+   "gate_flag_above_0p90": false
+  },
+  "C_leaky_full_catalogue_distance": {
+   "separability_max_over_folds": 1.0,
+   "separability_mean_over_folds": 1.0,
+   "gate_flag_above_0p90": true
+  },
+  "R_band2_ridge_strength": {
+   "separability_max_over_folds": 0.555163,
+   "separability_mean_over_folds": 0.5279288,
+   "gate_flag_above_0p90": false
+  }
+ },
+ "controls_expected": {
+  "C_leaky_full_catalogue_distance": "about 1.0 (the GEMSDOE29 defect)",
+  "H1_segment_exact_distance": "about 0.77 (evidence/e2_leakfree_holdouts.json, design B)"
+ },
+ "runtime_s": 107.1
+}
