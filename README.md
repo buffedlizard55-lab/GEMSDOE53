@@ -16,7 +16,7 @@
 | Built file (research only) | [`archive/do-not-submit/gems53-h1ds-n40000-20261009-c468977c-zeros__DO-NOT-SUBMIT.tif`](archive/do-not-submit/gems53-h1ds-n40000-20261009-c468977c-zeros__DO-NOT-SUBMIT.tif) (143,771 bytes, sha256 `1101b655fbc3315250a6f9404fc3234a84f058726fb3e1a87c08b27eccae4236`) |
 | Unique name / note | `gems53-h1ds-n40000-20261009-c468977c-zeros` / `GEMSDOE53 E3: H1 HGB (19 bands+seg-exact fault dist), 40k dots sep2.8 px, >2 px off catalogue. HOLDOUT-DTI 0.117 (DS). Unscored.` (128 chars) |
 | Format | Valid: all-finite float32, 0 outside the footprint, nodata unset, the same layout as the organizer-scored 0.2778 file. The template validator fails it only on its NaN-outside rule, which fails the 0.2778 control identically (IR-53-51). |
-| Why not | Pre-registered uniqueness gate v2: 27 registry rows are duplicates (e.g. GEMSDOE43 HGB n40000 overlap 0.812 / kappa 0.769; GEMSDOE37 physics dots 0.892 / 0.852; our 2026-10-08 file 1.000 / 1.000). See IR-53-57. |
+| Why not | Pre-registered uniqueness gate v2: 27 registry rows are duplicates (e.g. GEMSDOE43 sup01-hgb21-n40000 overlap 0.812 / kappa 0.769; GEMSDOE37 physics-dotted-80k 0.892 / 0.852; our 2026-10-08 file 1.000 / 1.000). See IR-53-57. |
 | HWVC hypothesis | **Negative.** Stage-1 paired B−A (M1) = −0.0016, 95% CI [−0.0037, +0.0006], B wins 1/5 folds; HOLDOUT-DTI, dti v1.0.0, 60,988 withheld positives (`evidence/h53_e2_holdout.json`). |
 | Why 0.2778 scored | It is the 0.2600 dot file minus every dot ≤ 2 px from the catalogue (B2 ⊂ r1 ⊂ d2.8; `evidence/h53_lineage_algebra.json`). Catalogue-adjacent dots are false positives against a test set of NEW faults. |
 | Run card | [`evidence/h53_run_card.json`](evidence/h53_run_card.json) |

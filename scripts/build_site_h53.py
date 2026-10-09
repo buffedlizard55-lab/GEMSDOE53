@@ -142,7 +142,7 @@ Duplicate if more than 70% of our dots are within 3 px of a raster's dots <i>and
 Highest rho of our pre-placement surface: {fmt(rho_s['value'],4)} ({e(rho_s['file'][:60])}). Highest rho of the final raster: {fmt(rho_f['value'],4)}.
 The raw, uncorrected rule (more than 70% within 3 px, no chance correction) flags {gate['raw_rule_flag_count']} rasters. The chance-corrected rule flags the {len([r for r in gate['rows'] if r['duplicate_v2']])} rows below, so <b>verdict = {e(gate['verdict'])}</b>. Full receipt: <code>{e(cur['gate_receipt'])}</code>.</p>
 <table><tr><th>Duplicate under v2 (registry raster)</th><th>mode</th><th>overlap ≤3 px</th><th>chance</th><th>kappa</th></tr>{dup_rows}</table>
-<p class="muted">Reading: our dots hug the existing catalogue (median 5 px). Many earlier lanes put dots on the same structures, including supervised HGB (GEMSDOE43), NMS ridge traces (12GEMSDOE), physics-only dots (GEMSDOE37) and our own 2026-10-08 file. A model that uses catalogue distance as a feature lands on these consensus sleeves. The organizer-scored 0.2778 file avoids them (median 19.65 px).</p>
+<p class="muted">Reading: our dots hug the existing catalogue (median 5 px). Many earlier lanes put dots on the same structures, judging by file names: supervised HGB (GEMSDOE43 sup01-hgb21), NMS traces (12GEMSDOE r5-nms3-trace), "physics-dotted" (GEMSDOE37); plus our own 2026-10-08 file. A model that uses catalogue distance as a feature lands on these consensus sleeves. The organizer-scored 0.2778 file avoids them (median 19.65 px).</p>
 <img src="assets/h53_dots_vs_b2.png" alt="E3 dots vs the 0.2778 dots vs catalogue">
 </section>
 

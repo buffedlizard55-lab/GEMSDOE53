@@ -61,7 +61,7 @@ Promotion rule (pre-registered): stage-1 lower bound > 0 AND stage-2 mean > 0, s
 D-S scores below M1 on this proxy (IR-53-52). That was expected: the proxy rewards catalogue adjacency, and D-S removes it on purpose.
 
 **E3 build + uniqueness gate v2** (`evidence/h53_e3_build.json`, `evidence/h53_gate_v2_e3_armA_ds40000.json`):
-- The arm-A + D-S file (40,000 dots, ≥ 2.83 px from the catalogue, median 5 px) is **DUPLICATE** against 27 registry rows. Examples: our 2026-10-08 file (overlap 1.000, kappa 1.000), GEMSDOE37 physics-dotted (0.892 / 0.852), 12GEMSDOE NMS traces (0.872 / 0.816), GEMSDOE43 HGB n40000 (0.812 / 0.769).
+- The arm-A + D-S file (40,000 dots, ≥ 2.83 px from the catalogue, median 5 px) is **DUPLICATE** against 27 registry rows. Examples: our 2026-10-08 file (overlap 1.000, kappa 1.000), GEMSDOE37 physics-dotted-80k (0.892 / 0.852), 12GEMSDOE r5-nms3-trace (0.872 / 0.816), GEMSDOE43 sup01-hgb21-n40000 (0.812 / 0.769).
 - Verdict: **DO NOT SUBMIT** (IR-53-57).
 
 ## New candidate for the next session (ranked first)
