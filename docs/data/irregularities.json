@@ -222,8 +222,8 @@
       "severity": "medium",
       "status": "open",
       "subject": "Holdout proxy and user-reported board disagree on emission volume",
-      "detail": "Pooled HOLDOUT-DTI rises with dot budget up to 2% of the footprint (bands arm 0.0352 at 103k dots). User-reported board receipts in S20 show dense emissions scoring lower: GEMSDOE22 6% = 0.1002 and 10% = 0.0748, against 0.2600 for a 44,090-dot file (conflicting owner page). The catalogue proxy is therefore not calibrated to the competition's truth on volume. Our pre-registered N (44,090) follows the dot count of the d2.8 family, not the holdout optimum.",
-      "action": "Report N-dependence on every holdout number (done in X2 grid). Do not select N from the holdout alone."
+      "detail": "Earlier H1/H2 lane reports show HOLDOUT-DTI rising with dot budget (bands q=0.02 design-A value 0.035233 at about 103k dots), while owner-reported board entries suggest sparse emissions can score higher. These early holdout comparisons use the hidden-buffer negative pool now identified in IR-53-37, so they are diagnostic only, not valid volume calibration or promotion evidence. The corrected design-B baseline is 0.010562; board-row and file attributions remain unverified (S20/S2).",
+      "action": "Retain the records as historical diagnostics only; do not use them as leaderboard calibration. Any volume claim requires a corrected design-B holdout and a submission-page receipt."
     },
     {
       "id": "IR-53-29",
@@ -293,9 +293,9 @@
       "id": "IR-53-37",
       "severity": "high",
       "status": "open-corrected",
-      "subject": "Negative-pool side channel in the design-A holdout (exp2 and E1)",
-      "detail": "The design-A training pool was fp & ~cat & ~buf, and the 10 px buffer is defined from the WITHHELD faults. The buffer removed 371,176 to 390,883 negative pixels per fold (7.3% to 7.6% of the pool), all within 10 px of a withheld fault. Measured effect on fold 0 of the bands top-q 0.02 arm: 0.0266 (design A) vs 0.0106 (design B). The design-A H1 canary used the same buffered background, so its separability is also inflated. This is the pattern the GEMSDOE29 audit flagged (docs/leakage-review.md).",
-      "action": "Corrected to design B (negatives = every footprint pixel that is not a visible fault). Pre-registration amendment DEV-1 (docs/research/preregistration-2026-10-08.md section 8) is committed before the design-B run. Design-A numbers (evidence/exp2_holdout_arms.json, evidence/e1_h1_thin_holdout.json) are kept as reference only and are not used for any decision."
+      "subject": "Negative-pool side channel in the design-A holdouts (E1, prior exp2, and H2 X2)",
+      "detail": "The design-A training pool was fp & ~cat & ~buf, and the 10 px buffer is defined from the WITHHELD faults. The buffer removed 371,176 to 390,883 negative pixels per fold (7.3% to 7.6% of the pool), all within 10 px of a withheld fault. Measured effect on fold 0 of the bands top-q 0.02 arm: 0.0266 (design A) vs 0.0106 (design B). The design-A H1 canary used the same buffered background, so its separability is also inflated. The same hidden-buffer negative sampling appears in scripts/x2_ridge_holdout.py; therefore the H2 X2 HOLDOUT-DTI comparison also inherits this design defect and cannot validate its preregistered promotion gate. This is the pattern the GEMSDOE29 audit flagged (docs/leakage-review.md).",
+      "action": "E1 and the prior H1 exp2 design-A numbers (evidence/exp2_holdout_arms.json, evidence/e1_h1_thin_holdout.json) are reference only; design B in E2 is used for the H1/M1 decision. The H2 X2 run was not repeated under design B because the experiment budget was exhausted; its values remain historical/diagnostic only. The corrected design-B sampler uses every footprint pixel that is not a visible fault."
     },
     {
       "id": "IR-53-38",
@@ -384,6 +384,14 @@
       "subject": "57 of the 103 flags come from dense rasters that are not dot maps",
       "detail": "Registry rasters with more than 50% of the footprint nonzero (feature grids such as geodawn_rad_u8, probability surfaces such as context_detector_prob_*, and ID rasters such as acquisition_block_id_100m) have nonzero values almost everywhere. Their dot overlap is 100% by construction. The mid-density class adds 4 more flags.",
       "action": "Registry scope is a decision for the user (IR-53-46). This session reports the classes separately and drops no file from the verdict."
+    },
+    {
+      "id": "IR-53-49",
+      "severity": "medium",
+      "status": "open",
+      "subject": "A later uniqueness refresh covers only three rasters and is not the canonical full-registry gate",
+      "detail": "evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582_refresh.json reports no flag but includes only 3 local/nearby rasters. It is not comparable to the canonical 621-unique-raster receipt evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582.json, which flags the candidate. The smaller refresh cannot clear the candidate.",
+      "action": "Keep the full-registry receipt as the verdict source; label the refresh partial in any future UI or remove it from clearance paths. No threshold or registry scope was changed."
     }
   ]
 }

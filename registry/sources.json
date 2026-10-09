@@ -207,6 +207,34 @@
       "url": "https://github.com/jklinck/geothermal_research/tree/56d78de7a989c12e2dce50cd65a4095df57030d2/2m_temperature_probe_INGENIOUS_regional_data",
       "access": "README read 2026-10-08; licence not stated (IR-53-44)",
       "used_for": "H5 candidate layer (not validated)"
+    },
+    {
+      "id": "S29",
+      "title": "USGS ANSS Comprehensive Earthquake Catalog (ComCat), FDSN event service (candidate source; not used)",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "access": "not fetched in this session; usgs.gov host is outside the session egress allow-list",
+      "used_for": "Possible future C2 raw earthquake time/depth geometry. Endpoint, current downloadability and applicable terms were not checked; not a validated input."
+    },
+    {
+      "id": "S30",
+      "title": "USGS Landsat Collection 2 Level-2 science products (candidate source; not used)",
+      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+      "access": "not fetched in this session; usgs.gov host is outside the session egress allow-list",
+      "used_for": "Possible future C3 multitemporal surface-temperature evidence. Product coverage, access and licence were not checked; not a validated input."
+    },
+    {
+      "id": "S31",
+      "title": "High-Resolution Aeromagnetic Survey To Image Shallow Faults, Poncha Springs and Vicinity, Chaffee County, Colorado (USGS OFR 2009-1156)",
+      "url": "https://www.usgs.gov/publications/high-resolution-aeromagnetic-survey-image-shallow-faults-poncha-springs-and-vicinity",
+      "access": "fetched",
+      "used_for": "Official USGS analogue: concealed faults interpreted from linear aeromagnetic anomalies and breaks; also warns that many linear features track drainages. Different region; rationale only, not validation for GEMS."
+    },
+    {
+      "id": "S32",
+      "title": "Finn et al. (2022), Geophysical imaging of the Yellowstone hydrothermal plumbing system (USGS Publications Warehouse; Nature)",
+      "url": "https://pubs.usgs.gov/publication/70230158",
+      "access": "fetched",
+      "used_for": "Official USGS abstract describes fault-controlled thermal conduits and low-resistivity/low-susceptibility signatures from airborne geophysical imaging. Yellowstone analogue only; does not validate band 17 or the Great Basin candidate."
     }
   ]
 }

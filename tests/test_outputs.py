@@ -37,7 +37,16 @@ def test_current_pointer_matches_receipt_and_file():
     tif = ROOT / cur["file"]
     assert tif.exists(), tif
     assert _sha(tif) == cur["sha256"] == rec["sha256"]
+    assert tif.stat().st_size == cur["bytes"] == rec["bytes"]
     assert cur["submitted"] is False and cur["organizer_score"] is None
+    assert cur["note"].startswith("RESEARCH-ONLY") and "HOLDOUT-DTI" in cur["note"]
+    assert cur["metadata_review"]["pixel_sha256_unchanged"] is True
+    assert cur["metadata_review"]["previous_container_sha256"] != cur["sha256"]
+    assert cur["metadata_review"]["template_validate_submission_exit_after_update"] == 0
+    assert cur["metadata_review"]["template_validate_conformant_exit_after_update"] == 0
+    rasterio = pytest.importorskip("rasterio")
+    with rasterio.open(tif) as ds:
+        assert ds.tags()["note"] == cur["note"]
 
 
 def test_label_follows_the_pre_registered_rule():
@@ -57,6 +66,10 @@ def test_run_card_and_site_agree_with_the_label():
     assert card["label"] == cur["label"] == card["verdict"]
     assert card["submission"]["submitted"] is False
     assert card["submission"]["submission_slot_used"] is False
+    assert card["submission"]["submit_allowed"] is False
+    assert card["submission"]["note_chars"] <= 140
+    assert card["submission"]["sha256"] == cur["sha256"]
+    assert card["session_branch"] == "arena/5c479bba-gemsdoe53"
     assert card["organizer_score"] is None
     idx = (ROOT / "docs/index.html").read_text()
     sub = (ROOT / "docs/submission.html").read_text()
@@ -93,3 +106,40 @@ def test_every_irregularity_reference_resolves():
             list((ROOT / "scripts").glob("*.py")) + [ROOT / "README.md"]:
         refs |= set(re.findall(r"IR-53-\d\d", f.read_text(errors="ignore")))
     assert not sorted(r for r in refs if r not in ids), "dangling IR references"
+
+
+def test_raw_uniqueness_gate_is_explicitly_a_stop_not_a_false_clearance():
+    cur = _load("docs/submissions/CURRENT.json")
+    assert cur["uniqueness_verdict"].startswith("PROTOCOL DUPLICATE / STOP")
+    assert cur["gates"]["uniqueness_no_drift_flag"] is False
+    assert cur["label"].startswith("Research-only")
+    assert cur["submitted"] is False and cur["organizer_score"] is None
+    full = _load(cur["uniqueness_detail"]["canonical_registry_receipt"])
+    assert full["registry_unique_on_grid"] == 621
+    assert full["any_drift_flag"] is True
+    assert full["max"]["max_rho_surface"] > 0.90
+    assert full["max"]["max_overlap_final"] > 0.70
+    assert cur["uniqueness_detail"]["r13_lattice_final_dot_overlap_within_3px"] > 0.70
+    assert cur["uniqueness_detail"]["threshold_overlap"] == 0.70
+    partial = _load("evidence/uniqueness_gate_gems53-h1-thin_bin_q0p1-20261008-aefc7582_refresh.json")
+    assert partial["registry_unique_on_grid"] == 3
+    assert partial["any_drift_flag"] is False  # partial result must never override the full receipt
+
+
+def test_site_and_prompt_capture_do_not_claim_raster_uniqueness_or_verbatim_text():
+    idx = (ROOT / "docs/index.html").read_text()
+    prompt = (ROOT / "docs/prompt/verbatim.md").read_text()
+    readme = (ROOT / "README.md").read_text()
+    assert "Submission name (identifier)" in idx or "Submission name" in idx
+    assert "PROTOCOL DUPLICATE" in idx.upper()
+    assert "normalized, not byte-for-byte verbatim" in prompt.lower()
+    assert "normalized capture" in readme.lower()
+    evidence = (ROOT / "docs/evidence.html").read_text()
+    leakage = (ROOT / "docs/leakage-review.md").read_text()
+    hypotheses = (ROOT / "docs/research/hypotheses.md").read_text()
+    assert "arena/5c479bba-gemsdoe53" in evidence
+    assert "arena/0efb644e-gemsdoe53" not in evidence
+    assert "S31" in evidence and "S32" in evidence
+    assert "X2" in leakage and "design-A negatives" in leakage
+    assert "H2 is not untried, but it is not cleanly validated" in hypotheses
+    assert "S31" in hypotheses and "S32" in hypotheses
