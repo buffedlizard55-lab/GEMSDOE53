@@ -150,7 +150,21 @@ def main() -> int:
     overlap_limit_pct = 100 * gate["thresholds"]["dot_overlap_within_3px"]
     rho_limit = gate["thresholds"]["spearman_rho"]
     label = cur["label"]
-    ok = label.startswith("Validated")
+    proof = J("evidence/protocol_preflight_20261009.json")
+    # An archived receipt is not a live registry refresh. It does, however, prove
+    # that the literal overlap rule cannot clear a nonempty dot map while this
+    # confirmed public reference remains in the registry. Never turn a text
+    # label into a green upload button without checking the bytes and gates.
+    proof_ref = next((r for r in gate["all_rows"] if r["sha256"] == proof["reference_sha256"]), None)
+    if proof_ref is None or not proof["grid_matches"] or not proof["universal_overlap_blocker"]:
+        raise ValueError("preflight proof and canonical registry receipt disagree; fail closed")
+    file_verified = (ROOT / cur["file"]).exists() and sha(ROOT / cur["file"]) == cur["sha256"]
+    if not file_verified:
+        raise ValueError("refusing to publish a download with missing or hash-mismatched bytes")
+    gates_clear = all(cur["gates"].values()) and not gate["any_drift_flag"]
+    if label.startswith("Validated") and not (file_verified and gates_clear and not proof["universal_overlap_blocker"]):
+        raise ValueError("refusing a submission-ready label while the registry, bytes or gates fail")
+    ok = label.startswith("Validated") and file_verified and gates_clear
     sp = e2.get("spatial_confirmation", {})
     stage1 = e2.get("segment_selection", {})
     base_B = e2["baseline_design_B"]
@@ -239,6 +253,8 @@ def main() -> int:
   <h1>Executive summary</h1>
   <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
   Short answer: the S3 file in the download block above passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>{esc(label)}</b> and must not be uploaded. The full registry gate flags {gate['n_flagged']} rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by {100*lattice['overlap_final']:.3f}% within 3 px (limit {overlap_limit_pct:.0f}%; chance coverage {100*lattice['chance_coverage']:.2f}%, lift {lattice['lift_over_chance']:.4f}); whole-grid pre-placement surface rho max is {gate['max']['max_rho_surface']:.6f} (limit {rho_limit:.2f}). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
+  <div class="warn"><b>Pre-placement STOP (verified 2026-10-09):</b> The public <a href="{esc(proof['reference_url'])}">GEMSDOE17 reference raster</a> is positive at every one of the {proof['footprint_px']:,} competition-footprint pixels (its SHA256: <code>{esc(proof['reference_sha256'])}</code>; <a href="data/protocol_preflight_20261009.json">pixel-level preflight receipt</a>). Any nonempty conformant prediction therefore overlaps its dots by 100% at distance zero. That exceeds the literal 70% limit before model fitting or dot placement; <b>no new submission TIFF can honestly be cleared under this rule.</b> Zero predictions evade the overlap test but cannot beat a positive holdout. No new candidate was generated in this lane after this preflight. This is a rule/registry conflict, not proof that every new prediction is a copy.</div>
+  <p class="note">Read the <a href="data/run_card_20261009.json">2026-10-09 negative run card</a> and the <a href="research/hypotheses.md">ranked untested geological hypotheses (H12, C1–C3)</a>. No claim of a better holdout or organizer score is made.</p>
   <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
   Nothing has been submitted, and no submission slot was used.</div>
 </section>
@@ -504,7 +520,7 @@ def main() -> int:
     # ---------------------------------------------------------------- data copies for the links
     data_dir = DOCS / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
-    for rel in ("evidence/run_card.json", "evidence/e1_h1_thin_holdout.json", "evidence/e2_leakfree_holdouts.json",
+    for rel in ("evidence/protocol_preflight_20261009.json", "evidence/run_card_20261009.json", "evidence/run_card.json", "evidence/e1_h1_thin_holdout.json", "evidence/e2_leakfree_holdouts.json",
                 "evidence/exp2_holdout_arms.json", f"evidence/uniqueness_gate_{cur['name']}.json", f"evidence/uniqueness_diagnostics_{cur['name']}.json",
                 cur["receipt"], "evidence/gemsdoe32_measured.json", "registry/irregularities.json",
                 "registry/limitations.json", "registry/sources.json", "docs/submissions/CURRENT.json"):
