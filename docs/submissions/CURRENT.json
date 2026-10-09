@@ -1,30 +1,76 @@
 {
-  "name": "gems53-s3-bands-top_q0p02-20261009-e67cda00",
-  "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
-  "sha256": "e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c",
-  "pixel_sha256": "e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd",
-  "label": "Research-only / DO NOT SUBMIT",
-  "note": "RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored",
-  "gates": {
-    "holdout_beats_current_best": false,
-    "format_validators_all": true,
-    "uniqueness_no_drift_flag": false
-  },
-  "spec": {
-    "arm": "bands",
-    "variant": "top_q0p02",
-    "kind": "top",
-    "q": 0.02
-  },
-  "decision": "H8 did not beat the current holdout best (pre-registered negative). The file is the pre-registered frozen control (E2 design-B baseline, bands top-q 0.02): a unique control, not a recommendation",
-  "receipt": "evidence/candidate_gems53-s3-bands-top_q0p02-20261009-e67cda00.json",
-  "organizer_score": null,
+  "name": "gems53-h1ds-n40000-20261009-c468977c-zeros",
+  "file": "archive/do-not-submit/gems53-h1ds-n40000-20261009-c468977c-zeros__DO-NOT-SUBMIT.tif",
+  "receipt": "evidence/h53_submission_gems53-h1ds-n40000-20261009-c468977c-zeros.json",
+  "gate_receipt": "evidence/h53_gate_v2_e3_armA_ds40000.json",
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "label": "DO NOT SUBMIT \u2014 valid format, but DUPLICATE under the pre-registered uniqueness gate v2 (27 registry rows, max kappa 1.00).",
   "submitted": false,
-  "uniqueness_verdict": "PROTOCOL DUPLICATE / STOP (raw rule: more than 70% of dots within 3 px of registry dot maps, including dense and lattice rasters; not a byte-identity claim)",
-  "previous_pointer": {
-    "name": "gems53-h1-thin_bin_q0p1-20261008-aefc7582",
-    "file": "docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
-    "note": "H1 file as regenerated on main (PR #9). Its own verdict is PROTOCOL DUPLICATE / STOP. Superseded as the current pointer by the pre-registered S3 control; not cleared.",
-    "sha256": "aeaa9a46236a658d91a05be48d54f14b44804c967d590314caeb2c0a82511f60"
-  }
+  "organizer_score": null,
+  "note": "GEMSDOE53 E3: H1 HGB (19 bands+seg-exact fault dist), 40k dots sep2.8 px, >2 px off catalogue. HOLDOUT-DTI 0.117 (DS). Unscored.",
+  "dots": 40000,
+  "sha256": "1101b655fbc3315250a6f9404fc3234a84f058726fb3e1a87c08b27eccae4236",
+  "bytes": 143771,
+  "what_it_is": "E3 of 2026-10-09: the current holdout-best model (H1 lane: HGB on the 19 official bands plus the segment-exact distance to visible catalogue faults), decoded by D-S: 40,000 dots, minimum spacing 2.8 px, nothing within 2 px of a mapped fault. HOLDOUT-DTI (segment folds, dti v1.0.0, 60,988 withheld positives) of that pipeline: 0.1166, 95% CI [0.1081, 0.1253]. That number is a proxy, not an organizer score.",
+  "why_not": "Pre-registered gate v2 (overlap above 0.70 within 3 px AND kappa above 0.40) flags 27 registry rows. Examples: our own 2026-10-08 file (overlap 1.000, kappa 1.000), GEMSDOE37 physics-dotted-80k (0.892 / 0.852), 12GEMSDOE r5-nms3-trace (0.872 / 0.816), GEMSDOE43 sup01-hgb21-n40000 (0.812 / 0.769) and GEMSDOE44-primary (0.733 / 0.683). The raster is a fresh build and byte-unique, but its dot placement is not distinguishable from earlier public submissions under the user's protocol.",
+  "why_ok": null,
+  "expected_score_statement": "It was not expected to beat 0.2778: its dots sit near the catalogue (median 5 px versus 19.65 px for the 0.2778 file), and the lineage algebra says such dots earn little credit.",
+  "next_step": "Build a B2-regime file (median at least 15 px from the catalogue; flank of 3 px or more) from a model trained WITHOUT catalogue-distance features, for example catalogue-free HWVC on spatial blocks. Run the dot-overlap gate on the score surface's top-K BEFORE placement, using a fast subset of the 27 rasters above.",
+  "gate_summary": {
+    "verdict": "DUPLICATE under v2",
+    "unique_on_grid": 605,
+    "files_seen": 1222,
+    "skipped": 23,
+    "raw_rule_flag_count": 97,
+    "duplicate_rows_v2": 27,
+    "top": [
+      {
+        "file": "GEMSDOE53__docs__submissions__gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif",
+        "overlap": 1.0,
+        "chance": 0.2042,
+        "kappa": 1.0
+      },
+      {
+        "file": "GEMSDOE37__docs__downloads__gemsdoe37-h6-physics-dotted-80k-20261005T055000Z-0bef9211631c.tif",
+        "overlap": 0.8917,
+        "chance": 0.266,
+        "kappa": 0.8524
+      },
+      {
+        "file": "12GEMSDOE__docs__downloads__12GEMSDOE_r5-nms3-trace_055e9aac96b8.tif",
+        "overlap": 0.8722,
+        "chance": 0.3062,
+        "kappa": 0.8159
+      },
+      {
+        "file": "12GEMSDOE__docs__downloads__12GEMSDOE_r5-nms3-trace_055e9aac96b8_allfinite.tif",
+        "overlap": 0.8722,
+        "chance": 0.3062,
+        "kappa": 0.8159
+      },
+      {
+        "file": "12GEMSDOE__docs__downloads__12GEMSDOE_r6-nms3-h28-texture_8721329b55c7.tif",
+        "overlap": 0.8716,
+        "chance": 0.3069,
+        "kappa": 0.8147
+      },
+      {
+        "file": "12GEMSDOE__docs__downloads__12GEMSDOE_r6-nms3-h28-texture_8721329b55c7_allfinite.tif",
+        "overlap": 0.8716,
+        "chance": 0.3069,
+        "kappa": 0.8147
+      }
+    ]
+  },
+  "session_branch": "arena/4f95697f-gemsdoe53",
+  "previous_pointer": "docs/submissions/archive/CURRENT_2026-10-08.json",
+  "other_sessions_same_day": [
+    {
+      "session": "S3 (PRs #9-#12)",
+      "file": "docs/submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif",
+      "label": "Research-only / DO NOT SUBMIT",
+      "pointer": "docs/submissions/archive/CURRENT_2026-10-09-S3.json"
+    }
+  ]
 }

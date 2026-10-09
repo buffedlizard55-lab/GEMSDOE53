@@ -15,3 +15,6 @@ __pycache__/
 !docs/downloads/*.tif
 !submissions/
 !submissions/*.tif
+# Research-only build kept on purpose (session 2026-10-09): DO-NOT-SUBMIT copy, 144 KB
+!archive/do-not-submit/
+!archive/do-not-submit/*__DO-NOT-SUBMIT.tif

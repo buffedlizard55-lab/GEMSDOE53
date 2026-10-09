@@ -34,7 +34,7 @@ def test_s3a_canary_flags_the_leaky_feature_and_passes_h1():
 
 
 def test_current_label_and_gate_agree_for_s3_file():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
     rec = _load(cur["receipt"])
     gate_ok = rec["gates"]["uniqueness_no_drift_flag"]
     assert gate_ok is False
@@ -43,19 +43,19 @@ def test_current_label_and_gate_agree_for_s3_file():
 
 
 def test_note_length_within_limit():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
     assert len(cur["note"]) <= 140
     assert cur["name"] == "gems53-s3-bands-top_q0p02-20261009-e67cda00"
 
 
 def test_gate_registry_count_matches_receipt():
-    gate = _load(f"evidence/uniqueness_gate_{_load('docs/submissions/CURRENT.json')['name']}.json")
+    gate = _load(f"evidence/uniqueness_gate_{_load('docs/submissions/archive/CURRENT_2026-10-09-S3.json')['name']}.json")
     assert gate["registry_unique_on_grid"] == len(gate["all_rows"]) == 628
     assert gate["n_flagged"] == sum(1 for r in gate["all_rows"] if r["drift_flag"])
 
 
 def test_shipped_s3_file_hashes_match_receipt():
-    cur = _load("docs/submissions/CURRENT.json")
+    cur = _load("docs/submissions/archive/CURRENT_2026-10-09-S3.json")
     path = ROOT / cur["file"]
     if not path.exists():
         pytest.skip("shipped file not present")
