@@ -1,4 +1,7 @@
-# Hypotheses and next-candidate screen (reviewed 2026-10-08)
+# Hypotheses and next-candidate screen (reviewed 2026-10-09)
+
+**2026-10-09 pre-placement update (no new experiment):** C1 remains the top *untested* stack-only hypothesis; it was not implemented or scored because a pixel-verified public [GEMSDOE17 registry raster](https://github.com/buffedlizard55-lab/17GEMSDOE/blob/main/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif) is positive on all 5,167,373 sample-footprint pixels (`evidence/protocol_preflight_20261009.json`). A nonempty C1 dot map necessarily overlaps that raster at distance zero by 100%, violating the unchanged 70% rule **before** placement. C2 and C3 still need official data availability/rights checks. None has new HOLDOUT-DTI or ORGANIZER-CONFIRMED evidence; no submission slot was spent. The earlier budget sentence below concerns the 2026-10-08 E1/E2/E3 run, not this session.
+
 
 **No experiment was run during this review.** The three-experiment budget in `evidence/run_card.json` is already used. Ranks are qualitative expected-value-per-cost judgements (expected catalogue-proxy gain balanced against data and validation cost), not DTI projections or scores. Candidate HOLDOUT-DTI values and organizer scores are reported only when measured/receipted in the evidence files.
 
