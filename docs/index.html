@@ -29,7 +29,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <p><b>Is it OK to submit?</b> <b>NO.</b> The pre-registered uniqueness gate fails for this file, so the protocol does not allow it into a submission slot.</p>
   <table>
     <tr><th>Name field (unique)</th><td><code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code></td></tr>
-    <tr><th>Comment field (≤140 characters, 107 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored</code></td></tr>
+    <tr><th>Note (optional comment field, ≤140 characters; 107 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored</code></td></tr>
   </table>
   <p><b>What this file is.</b> A pre-registered control: the E2 bands top-q 0.02 candidate, with an S3 receipt. It is <b>not</b> the best holdout candidate.
   HOLDOUT-DTI (proxy, evaluator gems53.core.dti v1.0.0, not organizer-scored): this control 0.0001; H1 thin_bin_q0p1 0.0040; H8 gravity-gradient 0.0040.
@@ -43,13 +43,25 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
     <li>Submission slots. None has been used. organizer_score is null. Public leaderboard figures are the repository snapshot (IR-53-01, IR-53-51), not verified organizer receipts.</li>
   </ol>
 </section>
+<section id="checklist">
+  <h2>Checklist against the request</h2>
+  <table>
+    <tr><th>Requirement</th><th>Status</th><th>Where</th></tr>
+    <tr><td>Obvious answer on arrival: download and submit</td><td>Given in the top block. Download: yes, for research and review only. Submit: <b>NO</b>.</td><td>top of this page; README Status</td></tr>
+    <tr><td>Unique name; optional Note (≤140 characters)</td><td>Name and Note are shown above. The Note is optional. It is an identifier-level comment, not a uniqueness claim.</td><td>top block</td></tr>
+    <tr><td>Unique raster under the pre-registered gate</td><td><b>Not met</b>: 172 of 628 registry rasters flagged (protocol duplicate / stop).</td><td><a href="submission.html">submission.html</a></td></tr>
+    <tr><td>Free official sources for hypotheses that need new data</td><td>Named: USGS ComCat (C2, H11) and USGS Landsat Collection 2 Level-2 (C3); INGENIOUS for H5 (licence not yet verified, IR-53-44). <b>Not verified</b>: the sandbox cannot reach USGS, so availability, licence and coverage remain open (L-31).</td><td><a href="evidence.html">evidence.html</a> (hypotheses); registry/sources.json</td></tr>
+    <tr><td>Three-pass review: implement, review for bugs, re-check against the request</td><td>Done for this merge: implemented; reviewed (fixed S3 canary labels, branch links, pointer hashes and the missing S3 evidence section); re-checked against the request (this table). Open gaps are listed under Decisions and the evidence page.</td><td>this table; <a href="evidence.html">evidence.html</a></td></tr>
+    <tr><td>Prompt in the README; read at every session start</td><td>Yes. README section "Prompt" holds the capture, which is <b>normalized, not verbatim</b> (IR-53-27, IR-53-38 open).</td><td>README.md; docs/prompt/verbatim.md</td></tr>
+  </table>
+</section>
 <section>
   <div class="label no">RESEARCH-ONLY / DO NOT SUBMIT</div>
   <p><b>Is it OK to download?</b> Download is allowed for research and review. It is <b>not</b> cleared for submission.<br>
   <b>Is it OK to submit?</b> <b>NO.</b> Do not upload this file.</p>
   <h1>Executive summary</h1>
   <p>Question: can we ship one unique, valid GeoTIFF for DrivenData competition 306, and what do the evidence and the protocol allow us to claim?
-  Short answer: the file below passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>Research-only / DO NOT SUBMIT</b> and must not be uploaded. The full registry gate flags 172 rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by 99.615% within 3 px (limit 70%; chance coverage 99.87%, lift 0.9974); whole-grid pre-placement surface rho max is 0.978311 (limit 0.90). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
+  Short answer: the S3 file in the download block above passes format checks, but is a <b>protocol duplicate / STOP</b>, not a unique raster under the user's raw gate. It is labelled <b>Research-only / DO NOT SUBMIT</b> and must not be uploaded. The full registry gate flags 172 rasters. Final dots overlap GEMSDOE13 r13-lattice-s5_v2 by 99.615% within 3 px (limit 70%; chance coverage 99.87%, lift 0.9974); whole-grid pre-placement surface rho max is 0.978311 (limit 0.90). The overlap is not proof of byte identity; it is a literal threshold failure. The holdout is a catalogue proxy, and the first design-A holdout had a negative-pool side channel (IR-53-37).</p>
   <div class="warn">No organizer score exists for any file here. The leaderboard values quoted below are the repository's snapshot (IR-53-01).
   Nothing has been submitted, and no submission slot was used.</div>
 </section>
@@ -59,7 +71,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <table>
     <tr><th>Download</th><td><a class="btn dis" href="submissions/gems53-s3-bands-top_q0p02-20261009-e67cda00.tif">Download gems53-s3-bands-top_q0p02-20261009-e67cda00.tif</a> (828,867 bytes)</td></tr>
     <tr><th>Submission name (identifier)</th><td><code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code></td></tr>
-    <tr><th>Comment (≤140 characters, 107 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored</code></td></tr>
+    <tr><th>Note (optional comment field, ≤140 characters; 107 used)</th><td><code>RESEARCH-ONLY DO NOT SUBMIT | GEMS53-S3 bands top_q0p02 | HOLDOUT-DTI spatial 0.0001 | not organizer-scored</code></td></tr>
     <tr><th>sha256 (container)</th><td><code>e746ae6f8028f619bc7ab2a3f848afaf12953a2fa37fe09cb9b1f38060fdb79c</code></td></tr>
     <tr><th>sha256 (pixels, float32 little-endian)</th><td><code>e67cda00dd865299b1a7f6a8e635651a78923dc9ca09a78e6459f17b0b3edebd</code></td></tr>
     <tr><th>Candidate</th><td>bands top_q0p02, trained on all known faults, emission zeroed on known faults</td></tr>
@@ -83,7 +95,7 @@ a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}.btn{display:inlin
   <ol>
     <li>Read the label above first. If it says <b>RESEARCH-ONLY / DO NOT SUBMIT</b>, stop here.</li>
     <li>Open the competition submission page on DrivenData and log in to your own account. No data download is needed.</li>
-    <li>Upload the file. In the name field enter <code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code>. In the comment field enter the comment above (≤140 characters).</li>
+    <li>Upload the file. In the name field enter <code>gems53-s3-bands-top_q0p02-20261009-e67cda00</code>. Optional: in the Note (comment) field enter the note above (≤140 characters).</li>
     <li>Check the upload result. Record the portal's exact message. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
     <li>The portal limit is 3 feedback submissions per week and one final choice (<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules §3.4</a>).
     Choosing a slot is a separate decision and was not made here.</li>
