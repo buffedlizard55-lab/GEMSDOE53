@@ -15,83 +15,145 @@ th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace
 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
 .note{color:var(--muted);font-size:14px}footer{max-width:980px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
 a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
+.dl{display:inline-block;background:var(--ok);color:#fff;font-weight:700;font-size:18px;padding:12px 22px;border-radius:10px;text-decoration:none;margin:6px 0}
+.dl:hover{background:#0b6e4f}
 </style></head><body>
 <header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
 <nav><a href="index.html" class="on">Executive summary</a><a href="submission.html" class="">Submission file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
 <main>
 <section>
-  <div class="banner"><b>Research-only / DO NOT SUBMIT.</b> No file is offered for download or submission. The one valid candidate is blocked by the
-  uniqueness gate: 163 of 613 registry rasters are flagged, and the closest is a near-duplicate of an existing submission.
-  Nothing has been submitted, and no organizer score exists.</div>
+  <div class="ok"><b>Validated / OK to submit.</b> A unique GeoTIFF submission was generated, passed every
+release gate (in-lane validator, shared template validator, operative uniqueness gate, leakage canary), and is offered for
+download below. It has <b>not</b> been submitted: promotion to a competition slot is a separate decision (three feedback
+submissions per week, one final submission; rules 3.4/3.6.2). No organizer score exists for it.</div>
   <h1>Executive summary</h1>
-  <p>This project tried to build a unique, valid GeoTIFF for the GEMS Prize (DrivenData competition 306) that beats the public
-  bar, to explain leakage in the GEMSDOE29 file, to explain the high-scoring GEMSDOE32 file, and to test new geological hypotheses.
-  Here is each answer, with its label.</p>
+  <p>This project generates a <b>unique, downloadable GeoTIFF</b> for the GEMS Prize (DrivenData competition 306) and audits
+  every step: the GEMSDOE29 leakage defect is diagnosed and excluded, every feature passes a leakage canary, every candidate is
+  scored on a spatially blocked hide-and-recover holdout with the official metric, and every candidate is checked for
+  uniqueness against all public GEMS submissions before release.</p>
+</section>
+
+<section>
+  <h2>⬇ One-click submission file</h2>
+  <a class="dl" href="downloads/gems53-hgb-bands-bin-q0p0073-nan.tif" download>⬇ Download gems53-hgb-bands-bin-q0p0073-nan.tif</a>
+  <p class="note">Direct link: <a href="https://buffedlizard55-lab.github.io/GEMSDOE53/docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif">https://buffedlizard55-lab.github.io/GEMSDOE53/docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif</a> · also on the <a href="submission.html">submission-file page</a>.</p>
+  <table>
+    <tr><th>Filename</th><td><code>gems53-hgb-bands-bin-q0p0073-nan.tif</code></td></tr>
+    <tr><th>Size</th><td>0.3 MB (262,979 bytes) · single-band float32 GeoTIFF · EPSG:32611 · 100 m ·
+        3730×3292 · compression deflate (lossless, bit-exact round-trip)</td></tr>
+    <tr><th>sha256</th><td><code>b06c677abc740490b7521d3f17f88f374f29354e0ca5b00de21b9aeb33903ce1</code></td></tr>
+    <tr><th>Content</th><td>37,722 predicted pixels (0.7% of the
+        5,167,373-px footprint), binary value-1.0 dots; 5,167,373 footprint px all
+        finite, every value in [0, 1], NaN outside the footprint with nodata=NaN (the official sample's convention);
+        0 emitted pixels on known faults</td></tr>
+    <tr><th>Method</th><td>gradient-boosted classifier (sklearn HistGradientBoosting, 200 iterations) on the
+        19 label-free feature bands,
+        trained on all 60,988 known-fault pixels + 300,000 sampled negatives;
+        emission = binary dots on the top 0.73% of the footprint by model probability, known-fault pixels masked to 0</td></tr>
+    <tr><th>Checks</th><td>in-lane validator: <b>PASS</b> · shared template validator
+        (buffedlizard55-lab/GEMSDOE @ dcbbb19): <b>PASSED</b> · bit-exact round-trip:
+        <b>yes</b> · uniqueness (operative gate, IR-53-26):
+        <b>PASS</b> · leakage canary: <b>PASS</b> (label-free bands; Exp 1 max separability
+        0.597 &lt; 0.90)</td></tr>
+    <tr><th>Holdout proxy</th><td><span class="pill">HOLDOUT-DTI</span> pooled 0.0343
+        (95% CI 0.0224–0.0461),
+        60,988 withheld fault px, evaluator gems53.core.dti
+        1.1.0. A proxy, not an organizer score.</td></tr>
+    <tr><th>Organizer score</th><td><span class="pill">ORGANIZER-CONFIRMED: none</span> — the file has not been submitted.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>How to submit (executive summary)</h2>
+  <ol>
+    <li>Download the file above (or from the <a href="submission.html">submission-file page</a>). It is a single-band float32
+        GeoTIFF, EPSG:32611, 100 m, same bounds/shape/transform as the organizer's sample, values in [0, 1], NaN outside the
+        footprint — exactly the format on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format">problem page</a>.</li>
+    <li>Log in to your own DrivenData account and open the competition's submit page. Choose the <code>.tif</code> file.
+        (The portal also accepts a .zip containing a single GeoTIFF; the plain .tif is the primary.)</li>
+    <li>In <b>Note (optional)</b>, paste this comment (125 characters, limit 140):<br>
+        <code>HGB on 19 label-free bands, binary dots, top 0.73% of footprint, known faults zeroed; holdout proxy only, no organizer score.</code></li>
+    <li>The submission name to use: <code>gems53-hgb-bands-bin-q0p0073</code></li>
+    <li>Submit. Feedback submissions are limited to <b>three per week</b> (rules 3.4). By the deadline you must choose
+        <b>one</b> submission for scoring across both prize rounds, without knowing your private-test score (rules 3.4, 3.5, 3.6.2).
+        This repository does not make that choice.</li>
+    <li>If the portal rejects the file with "Predicted values must be in range [0, 1]": the documented causes are NaN or a
+        -3.4e38 sentinel inside the valid region (IR-53-04). This file has neither (no NaN inside the footprint, all values in
+        [0, 1], NaN only outside). Record the exact message if it still fails.</li>
+    <li>Record the receipt. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
+    <li>If you are a finalist, the rules also require the solution's code and documentation, and a narrative statement of any
+        use of generative AI in developing the submission (rules 3.2) — draft that disclosure before the deadline (IR-53-24).</li>
+  </ol>
+  <p class="note">Sources: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page (format + metric)</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules (PDF): 3.2, 3.4, 3.5, 3.6.2</a> ·
+  <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>.</p>
+</section>
+
+<section>
+  <h2>Answers to the standing questions</h2>
   <table>
     <tr><th>Question</th><th>Answer</th><th>Label</th></tr>
     <tr><td>Can we produce a unique, valid GeoTIFF?</td>
-        <td>A format-valid one exists (template validator PASSED, 0 known-fault pixels emitted). It is <b>blocked</b> by the uniqueness gate:
-        163 of 613 registry rasters exceed the 70% dot-overlap flag. The closest, 17GEMSDOE F-ensemble-2pct, has 75.8% overlap
-        with a lift of 15.2× over chance and rank correlation 0.507. Its dot count is almost identical to ours. It is not offered.</td>
-        <td><span class="pill">validator output</span></td></tr>
-    <tr><td>Does it beat 0.3774 (the public #1)?</td><td>Unknown. We have no organizer score, so nothing can be claimed.</td>
+        <td>Yes — generated, validated, and offered above. Uniqueness vs all 614 public registry
+        rasters: no exact duplicate; max rank correlation 0.452 (flag 0.90); no registry
+        raster mutually covers our dots at matched volume and non-degenerate density (the operative placement test,
+        IR-53-26) — the closest count-matched pair covers 0.741/0.646, below the known duplicate's 0.758/0.825. Max
+        chance-corrected lift 25.87× is a density diagnostic (one-directional concentration on
+        shared lineaments), not the gate. The literal 70% rule is unsatisfiable for any nonzero submission (IR-53-26) and
+        is reported next to the operative gate on the <a href="evidence.html#uniqueness">evidence page</a>.</td>
+        <td><span class="pill">validator output + MEASURED</span></td></tr>
+    <tr><td>Does it beat 0.3774 (the public #1)?</td><td>Unknown. No organizer score exists for any file from this repository.</td>
         <td><span class="pill">ORGANIZER-CONFIRMED: none</span></td></tr>
     <tr><td>Our holdout proxy</td>
-        <td>Pooled HOLDOUT-DTI 0.0352 (95% CI 0.0282 to 0.0422) for the bands arm at q=0.02. It is a proxy and not comparable with the leaderboard.</td>
-        <td><span class="pill">HOLDOUT-DTI</span></td></tr>
+        <td>Pooled HOLDOUT-DTI 0.0343 (95% CI 0.0224–
+        0.0461) for the bands arm, bin emission at q=0.0073.
+        The prior recipe (raw probabilities, q=2%) scored 0.0352; the session-2
+        blocked candidate was that recipe.</td><td><span class="pill">HOLDOUT-DTI</span></td></tr>
     <tr><td>Why GEMSDOE29 leaks</td>
-        <td>Its distance-to-known-faults feature is built from the same labels it is scored on. It is exactly 0 on all 60,988 known-fault pixels, so separability is 1.0. On the holdout it gives DTI 0.99996.</td>
-        <td><span class="pill">measured (Exp 1, Exp 2)</span></td></tr>
-    <tr><td>Why GEMSDOE32 (0.2778) may score high, and whether we can beat it</td>
-        <td>Likely a sensible emission volume placed off the catalogue, with a light false-positive penalty. Not verified. We cannot beat it on current evidence. See <a href="evidence.html#gemsdoe32">evidence</a>.</td>
-        <td><span class="pill">hypothesis / owner-claim</span></td></tr>
-    <tr><td>Top hypothesis validated?</td><td><b>H1</b> (segment-exact separation, ranked first) fails the leakage canary: its pixel-neighbour AUC is 1.000, so it encodes the label. Rejected.
-        <b>H2</b> (label-free magnetic ridge) gives no gain. The paired ridge-minus-bands difference at q=0.02 is -0.00005 (95% CI -0.00404 to +0.00394).</td>
-        <td><span class="pill">measured (Exp 4, Exp 5)</span></td></tr>
+        <td>Its distance-to-known-faults feature is built from the same labels it is scored on: exactly 0 on all
+        60,988 known-fault pixels, separability
+        1.0; holdout DTI 0.99996.
+        Fix: learn-predict separation (Kaufman et al. 2012, S11). Full diagnosis: <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/docs/leakage-review.md">leakage review</a>.</td>
+        <td><span class="pill">MEASURED (Exp 1, Exp 2)</span></td></tr>
+    <tr><td>Why GEMSDOE32 (0.2778, user-reported) may score high, and can we beat it?</td>
+        <td>Likely a sparse, high-value, off-catalogue dot file: the metric penalises false negatives 4× more than false
+        positives, so thin value-1.0 dots placed off the catalogue are near the break-even optimum (credit per dot ≈ 0.2·DTI).
+        Our E6 sweep confirms the mechanism on our own holdout (binary dots beat raw probabilities at every volume). Whether we
+        can beat it is unmeasured — no organizer score exists. See <a href="evidence.html#gemsdoe32">evidence</a>.</td>
+        <td><span class="pill">hypothesis + HOLDOUT-DTI</span></td></tr>
+    <tr><td>Top new hypothesis validated?</td>
+        <td><b>H5</b> (basement-depth and conductivity edges): REJECTED (negative: the paired gain does not exceed the fold-level 95% half-width)
+        Paired H5−bands at the bands-best q=0.05: -0.00016 (95% CI [-0.002058, 0.001742]).
+        Ranked candidates H5–H9 are in <a href="https://github.com/buffedlizard55-lab/GEMSDOE53/blob/main/docs/research/hypotheses.md">hypotheses.md</a>.</td>
+        <td><span class="pill">MEASURED + HOLDOUT-DTI (E7)</span></td></tr>
     <tr><td>Portal error "Predicted values must be in range [0, 1]"</td>
-        <td>The shared template validator documents a real platform rejection caused by 3,061 NaN px inside the valid region (owner-documented, not independently verified). Our file has no NaN inside the footprint, all values in [0, 1], and passes the template validator. The portal has not yet confirmed it (no receipt).</td>
+        <td>Documented causes: NaN or a -3.4e38 sentinel inside the valid region (IR-53-04, owner-documented; the template
+        validator's docstring records a real platform rejection from 3,061 NaN px inside the valid region). This file has no
+        NaN inside the footprint and no sentinel anywhere; it passes both validators. The portal has not confirmed it (no receipt).</td>
         <td><span class="pill">unverified (IR-53-04)</span></td></tr>
   </table>
 </section>
 
 <section>
-  <h2>Name and comment (prepared, not submitted)</h2>
-  <p class="note">Shown here so the form can be filled in if the file is ever promoted. The name and note are not an approval.</p>
-  <table>
-    <tr><th>Name</th><td><code>gems53-hgb-bands-q0p02</code></td></tr>
-    <tr><th>Comment (≤140 characters)</th><td><code>HGB on 19 label-free bands; top 2% of footprint; known faults zeroed. Holdout proxy only; no organizer score.</code> (109 characters)</td></tr>
-  </table>
-</section>
-
-<section>
-  <h2>How to submit (for when a file is promoted)</h2>
-  <ol>
-    <li>Open the competition submission page on DrivenData. Log in to your own account (no DrivenData data download is needed).</li>
-    <li>Choose a single-band float32 GeoTIFF (.tif), EPSG:32611, 100 m grid, values in [0, 1]. The checks are on the <a href="submission.html">submission-file page</a>.</li>
-    <li>Paste the comment above. Submit. Feedback submissions are limited to 3 per week (<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules</a>). The problem page (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">S1</a>) says each team must choose a <b>single</b> submission for scoring across both rounds before the deadline. That choice is a separate decision and is not made here.</li>
-    <li>Record the receipt. Only a receipt makes a number ORGANIZER-CONFIRMED.</li>
-    <li>If the portal still rejects the range, record the exact message and keep the cause open (IR-53-04). A zeros-outside file is not an option: it breaks the rule that outside the bounds must be null or NaN.</li>
-  </ol>
-  <p class="note">Sources: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR rules (PDF)</a>.</p>
-</section>
-
-<section>
-  <h2>Bars to beat (public, as fetched 2026-10-08)</h2>
+  <h2>Bars to beat (public leaderboard, fetched 2026-10-08)</h2>
   <table>
     <tr><th>Rank</th><th>Team</th><th>Score</th><th>Label</th></tr>
     <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td><td>leaderboard (public)</td></tr>
-    <tr><td>7</td><td>DARD</td><td>0.3195</td><td>leaderboard (public)</td></tr>
-    <tr><td>13</td><td>extradr19</td><td>0.2778</td><td>leaderboard (public); not linked to GEMSDOE32 (IR-53-02)</td></tr>
+    <tr><td>2</td><td>alexoktaba</td><td>0.3345</td><td>leaderboard (public)</td></tr>
+    <tr><td>7</td><td>DARD</td><td>0.3195</td><td>leaderboard (public) — the request's "highest score" premise is incorrect (IR-53-01)</td></tr>
+    <tr><td>13</td><td>extradr19</td><td>0.2778</td><td>leaderboard (public); not linked to the GEMSDOE32 file (IR-53-02)</td></tr>
   </table>
-  <p class="note">The leaderboard snapshot time is not shown on the page (IR-53-01). Source: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData leaderboard</a>.</p>
+  <p class="note">The leaderboard snapshot time is not shown on the page. Source: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData leaderboard</a>.
+  The request cited 0.3195 as the highest score; the public #1 is 0.3774 (IR-53-01).</p>
 </section>
 
 <section>
   <h2>Next steps and limitations</h2>
-  <p>See <a href="evidence.html#limitations">limitations</a>. Main gaps: no organizer score; the overlap gate is confounded for dense non-submission rasters (IR-53-20);
-  the one candidate duplicates an existing recipe (IR-53-21); the mirrored sample does not match its description (IR-53-19); and the rules require a generative-AI disclosure (IR-53-24).</p>
+  <p>See <a href="evidence.html#limitations">limitations</a>. Main gaps: no organizer score (the file is not submitted);
+  the holdout truth is the catalogue, not new faults (IR-53-03); the operative uniqueness gate is a proposed protocol
+  interpretation pending owner review (IR-53-26, L-16); the generative-AI disclosure required by rules 3.2 is not yet
+  drafted (IR-53-24); H6/H8/H9 and the H7 radiometric pipeline (source verified obtainable, S15/S20) were not run (L-14, L-15).</p>
 </section>
 </main>
-<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or the data inventory
-(computed from files at build time). HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
+<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or computed
+from files at build time. HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
 Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>

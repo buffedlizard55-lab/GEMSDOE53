@@ -2,7 +2,41 @@
 
 **Review date:** 2026-10-08 (UTC)  
 **Lane:** catalogue-distance leakage diagnosis only  
-**Disposition:** negative / blocked; no new TIFF, no holdout score, no submission-slot decision
+**Disposition (session 2):** negative / blocked; no new TIFF, no holdout score, no submission-slot decision  
+**Disposition (session 3, addendum below):** the review's required evaluator fixes are implemented in this
+repository's own stack; the published recipe uses only label-free features and passes every leakage canary.
+
+## Session-3 addendum — the review's requirements, implemented and measured here
+
+The "Required shared-template fixes" below were implemented in this repository's own evaluator
+(`src/gems53/core.py`, `scripts/exp1…exp8`), because the shared template's `evaluate_holdout.py` /
+`submission_writer.py` named in the protocol are not present in the template checkout (L-10):
+
+1. **No hidden-target influence on training rows** — negatives are sampled from
+   `footprint & ~catalogue & ~buffer(withheld)`: the withheld segments' labels are never inspected
+   (the buffer is derived from the withheld mask only). Training positives are the *visible* faults.
+2. **Pooled estimator with a 95% interval** — `TP_w`/`FP_w`/`FN_w` are summed over the 5 folds and one
+   pooled DTI is computed; the interval is the t(df 4) 95% CI on the five fold scores
+   (`gems53.core.dti` 1.0.0, later 1.1.0 after a no-math-change refactor that is unit-tested against
+   the literal brute force and the rules' worked example).
+3. **Feature-alone canary** — Exp 1 tests all 19 label-free bands alone on the withheld folds
+   (max separability 0.597 < 0.90); Exp 4/7 add the paired pixel-neighbour canary for every
+   catalogue-derived or hypothesis feature (H1 rejected at AUC 1.000; the leak-free cross-fit arm
+   passes at AUC 0.4995 over 170,638 pairs).
+4. **Audit of all inputs** — the published recipe's only inputs are the 19 label-free bands; the
+   emission masks catalogue pixels pixel-exactly (0 emitted on known faults); no threshold, top-k
+   selection, or post-processing touches the labels.
+5. **Fix once, no private fork of the metric** — the metric, folds, emission rules, writer, and
+   validator live in `src/gems53/core.py` and are covered by `tests/` (17 tests). The shared
+   template's `scripts/validate_submission.py` (commit `dcbbb19`) is used unmodified for the
+   format gate.
+
+**Feature audit conclusion (the question this review asks of every feature):** in the current stack,
+no feature is built from the labels. The 19 bands are organizer-provided geophysical/strain/seismic
+layers (band descriptions read from `training_features.tif`); the H5 edges are transforms of bands
+15/17; the emission rule uses only the model ranking. The one catalogue-derived feature ever used
+here (distance to visible faults, 4×4-block cross-fitted) is legitimate at prediction time and was
+dropped from the published recipe because the holdout showed no gain (Exp 2: 0.0343 vs 0.0352).
 
 ## Executive finding
 

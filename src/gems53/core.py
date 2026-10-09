@@ -198,6 +198,47 @@ def rtp_ridge_grid(features_path: str, footprint: np.ndarray, band: int = 2) -> 
 
 
 # ----------------------------------------------------------------------------------------------
+# H5 feature: multi-scale edge (scale-normalised gradient magnitude) on a label-free band.
+# ----------------------------------------------------------------------------------------------
+
+EDGE_SIGMAS_PX = (1.0, 2.0, 3.0)  # 100, 200, 300 m
+
+
+def edge_feature(band: np.ndarray, sigmas=EDGE_SIGMAS_PX) -> np.ndarray:
+    """Scale-normalised gradient magnitude, max over scales. No catalogue input.
+
+    For each scale s: response = s * |grad gaussian_filter(band, s)| (scale normalisation makes the
+    response comparable across scales, as in ridge detection). Output is max over scales, float32.
+    """
+    from scipy import ndimage
+
+    best = np.zeros(band.shape, dtype=np.float32)
+    for s in sigmas:
+        gx = ndimage.gaussian_filter(band, s, order=(0, 1))
+        gy = ndimage.gaussian_filter(band, s, order=(1, 0))
+        mag = np.hypot(gx, gy)
+        best = np.maximum(best, (s * mag).astype(np.float32))
+    return best
+
+
+def edge_grid(features_path: str, footprint: np.ndarray, band: int) -> np.ndarray:
+    """Edge feature on the full grid from band `band` (1-based). Same nodata handling as rtp_ridge_grid."""
+    import rasterio
+
+    with rasterio.open(features_path) as src:
+        x = src.read(band).astype(np.float64)
+        nod = src.nodata
+    bad = ~np.isfinite(x) | (x < FEATURE_NODATA_THRESHOLD)
+    if nod is not None and np.isfinite(nod):
+        bad |= x == nod
+    fill = float(np.nanmean(np.where(bad, np.nan, x)[footprint]))
+    x = np.where(bad, fill, x) - fill
+    out = edge_feature(x).astype(np.float32)
+    out[~footprint] = 0.0
+    return out
+
+
+# ----------------------------------------------------------------------------------------------
 # Metric: distance-weighted Tversky index (official definition)
 # ----------------------------------------------------------------------------------------------
 
@@ -212,6 +253,19 @@ def _kernel_offsets(R: int = R_PX):
     return out
 
 
+def kernel_to_gt(gt: np.ndarray, R: int = R_PX) -> np.ndarray:
+    """K(x) = max_{g in G} k(d(x,g)) = max(1 - d(x,G)/R, 0): the triangular-kernel credit of pixel x.
+
+    Shared by every scorer that needs the same ground truth (the EDT is the expensive part and does
+    not depend on the prediction), so holdout sweeps can precompute it once per fold.
+    """
+    gt = np.asarray(gt, dtype=bool)
+    if gt.any():
+        dgt = ndimage.distance_transform_edt(~gt)
+        return np.maximum(1.0 - dgt / R, 0.0)
+    return np.zeros(gt.shape, dtype=np.float64)
+
+
 def dti(p: np.ndarray, gt: np.ndarray, alpha: float = ALPHA, beta: float = BETA, R: int = R_PX) -> dict:
     """Distance-weighted Tversky index of prediction map p in [0,1] against boolean ground truth gt.
 
@@ -220,6 +274,15 @@ def dti(p: np.ndarray, gt: np.ndarray, alpha: float = ALPHA, beta: float = BETA,
     FN_w = sum_{g in G} [1 - max_{x: d(x,g)<=R} p(x) k(d(x,g))]
     DTI  = TP_w / (TP_w + alpha FP_w + beta FN_w + eps)
     """
+    p = np.asarray(p, dtype=np.float64)
+    gt = np.asarray(gt, dtype=bool)
+    K = kernel_to_gt(gt, R)
+    return dti_with_kernel(p, gt, K, alpha, beta, R)
+
+
+def dti_with_kernel(p: np.ndarray, gt: np.ndarray, K: np.ndarray,
+                    alpha: float = ALPHA, beta: float = BETA, R: int = R_PX) -> dict:
+    """Same metric as dti(), with the kernel-to-ground-truth map K precomputed (see kernel_to_gt)."""
     p = np.asarray(p, dtype=np.float64)
     gt = np.asarray(gt, dtype=bool)
     H, W = p.shape
@@ -233,11 +296,6 @@ def dti(p: np.ndarray, gt: np.ndarray, alpha: float = ALPHA, beta: float = BETA,
         np.maximum(M, w * shifted, out=M)
     tp = float(M[gt].sum())
     fn = float((1.0 - M[gt]).sum())
-    if gt.any():
-        dgt = ndimage.distance_transform_edt(~gt)
-        K = np.maximum(1.0 - dgt / R, 0.0)
-    else:
-        K = np.zeros_like(p)
     fp = float((p * (1.0 - K)).sum())
     value = tp / (tp + alpha * fp + beta * fn + EPS)
     return {"TP_w": tp, "FP_w": fp, "FN_w": fn, "DTI": value, "alpha": alpha, "beta": beta, "R_px": R}
@@ -274,16 +332,62 @@ def dti_bruteforce(p: np.ndarray, gt: np.ndarray, alpha: float = ALPHA, beta: fl
 
 
 # ----------------------------------------------------------------------------------------------
+# Emission rules (post-processing of a model probability map into a submission emission)
+# ----------------------------------------------------------------------------------------------
+
+
+def top_q_mask(p_full: np.ndarray, candidates: np.ndarray, q: float, footprint_px: int) -> np.ndarray:
+    """Boolean mask of the top-q*footprint_px candidate pixels by probability (ties kept)."""
+    vals = p_full[candidates]
+    n_keep = int(round(q * footprint_px))
+    if n_keep <= 0 or vals.size == 0:
+        return np.zeros_like(candidates)
+    n_keep = min(n_keep, vals.size)
+    thr = np.partition(vals, -n_keep)[-n_keep]
+    return candidates & (p_full >= thr)
+
+
+def emission_from_probability(p_full: np.ndarray, keep: np.ndarray, variant: str = "raw") -> np.ndarray:
+    """Emission map from a probability map and a keep mask. Variants (all values in [0, 1]):
+
+    raw  : keep the model probability as-is (the Exp 2 recipe);
+    bin  : binary dots, value 1.0 on every kept pixel (the registry's high-scoring dot files);
+    rank : rank-rescaled, kept pixels get (rank)/(n_kept) in (0, 1], preserving the model order;
+    sqrt : sqrt of the model probability (a midway compression of the value range).
+    """
+    out = np.zeros_like(p_full, dtype=np.float32)
+    if not keep.any():
+        return out
+    if variant == "raw":
+        out[keep] = p_full[keep]
+    elif variant == "bin":
+        out[keep] = 1.0
+    elif variant == "rank":
+        kept_vals = p_full[keep]
+        order = np.argsort(kept_vals, kind="stable")
+        ranks = np.empty(order.size, dtype=np.float64)
+        ranks[order] = np.arange(1, order.size + 1, dtype=np.float64)
+        out[keep] = (ranks / order.size).astype(np.float32)
+    elif variant == "sqrt":
+        out[keep] = np.sqrt(np.clip(p_full[keep], 0.0, 1.0))
+    else:
+        raise ValueError(f"unknown emission variant {variant!r}")
+    return out
+
+
+# ----------------------------------------------------------------------------------------------
 # Submission writing and validation
 # ----------------------------------------------------------------------------------------------
 
 
 def write_submission(path: str, emission: np.ndarray, transform, crs, outside_nan: bool,
-                     compress: str | None = "lzw") -> None:
+                     compress: str | None = "lzw", predictor: int | None = None) -> None:
     """Write a single-band float32 GeoTIFF. outside_nan=True matches the official sample_submission.tif.
 
     compress='lzw' matches the organizer's sample (compress=lzw, one strip per row, nodata NaN). Compression
-    is lossless: pixel values are unchanged, and tests/test_submission.py checks the round-trip.
+    is lossless: pixel values are unchanged, and tests/test_submission.py checks the round-trip. A floating
+    point predictor (predictor=2) is accepted for smaller files; the round-trip stays bit-exact (checked by
+    the caller and by tests/test_emission_and_gate.py).
     """
     import rasterio
 
@@ -292,6 +396,8 @@ def write_submission(path: str, emission: np.ndarray, transform, crs, outside_na
     if outside_nan:
         arr[np.isnan(arr)] = np.nan
     kwargs = {} if compress is None else {"compress": compress}
+    if predictor is not None:
+        kwargs["predictor"] = predictor
     with rasterio.open(
         path, "w", driver="GTiff", height=H, width=W, count=1, dtype="float32",
         crs=crs, transform=transform, nodata=(float("nan") if outside_nan else None), **kwargs,

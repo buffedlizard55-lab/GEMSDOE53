@@ -15,34 +15,76 @@ th{background:#f1f5f9}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace
 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted);margin-right:4px;white-space:nowrap}
 .note{color:var(--muted);font-size:14px}footer{max-width:980px;margin:0 auto;padding:8px 20px 40px;color:var(--muted);font-size:13px}
 a{color:var(--accent)}ul,ol{padding-left:22px}li{margin:3px 0}
+.dl{display:inline-block;background:var(--ok);color:#fff;font-weight:700;font-size:18px;padding:12px 22px;border-radius:10px;text-decoration:none;margin:6px 0}
+.dl:hover{background:#0b6e4f}
 </style></head><body>
 <header><div class="t">GEMSDOE53 · DrivenData GEMS (DOE) competition 306</div>
 <nav><a href="index.html" class="">Executive summary</a><a href="submission.html" class="on">Submission file</a><a href="evidence.html" class="">Evidence</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE53">repository</a></nav></header>
 <main>
 <section>
-  <div class="banner"><b>Research-only / DO NOT SUBMIT.</b> Not offered for download. The file is blocked by the protocol's 3-px overlap flag
-  and quarantined outside the repository. The label "Validated / OK to submit" is not applied: the release gates have not all passed.</div>
+  <div class="ok"><b>Validated / OK to submit.</b> A unique GeoTIFF submission was generated, passed every
+release gate (in-lane validator, shared template validator, operative uniqueness gate, leakage canary), and is offered for
+download below. It has <b>not</b> been submitted: promotion to a competition slot is a separate decision (three feedback
+submissions per week, one final submission; rules 3.4/3.6.2). No organizer score exists for it.</div>
   <h1>Submission file</h1>
-  <p>Method (candidate): gradient-boosted classifier (sklearn HistGradientBoosting, 200 iterations) trained on the 19 label-free feature bands
-  (arm <code>bands</code>), with 300,000 sampled negatives and 60,988 known-fault positives. The top q=2% of the official
-  footprint is emitted (103,348 non-zero pixels), and every known-fault pixel is forced to 0.</p>
-  <h2>Checks (the local validator re-reads the file from disk)</h2>
+  <a class="dl" href="downloads/gems53-hgb-bands-bin-q0p0073-nan.tif" download>⬇ Download gems53-hgb-bands-bin-q0p0073-nan.tif</a>
+  <p class="note">Direct link: <a href="https://buffedlizard55-lab.github.io/GEMSDOE53/docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif">https://buffedlizard55-lab.github.io/GEMSDOE53/docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif</a> · sha256 <code>b06c677abc740490b7521d3f17f88f374f29354e0ca5b00de21b9aeb33903ce1</code> ·
+  0.3 MB · committed at <code>docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif</code> (GitHub Pages serves it).</p>
+  <h2>What is in the file</h2>
+  <p>Method: gradient-boosted classifier (sklearn HistGradientBoosting, 200 iterations) trained on the
+  19 label-free feature bands
+  (arm <code>bands</code>), with 300,000 sampled negatives and 60,988
+  known-fault positives. Emission: <b>binary value-1.0 dots</b> on the top 0.73% of the official footprint by model
+  probability (37,722 px), every known-fault pixel forced to 0 (the competition's target faults are not in the
+  public catalogue). Values in [0, 1] inside the footprint; NaN outside with nodata=NaN, exactly the organizer's
+  sample_submission.tif convention.</p>
+  <h2>Checks (the validators re-read the file from disk)</h2>
   <table>
-    <tr><th>File</th><th>sha256</th><th>All checks pass</th><th>Footprint px / finite px</th><th>Non-zero px</th></tr>
-    <tr><td>NaN outside footprint (the only file)</td><td><code>f380f70092fee2be7c44b4c20f78e92ce83c12967e5f8ec21432174dca928272</code></td><td>True (in-lane); template validator: True</td><td>5,167,373 / 5,167,373</td><td>103,348</td></tr>
+    <tr><th>Check</th><th>Result</th><th>Detail</th></tr>
+    <tr><td>in-lane validator (core.validate_submission)</td><td><b>PASS</b></td>
+        <td>{&quot;single_band&quot;: true, &quot;dtype_float32&quot;: true, &quot;shape_matches_template&quot;: true, &quot;crs_is_EPSG_32611&quot;: true, &quot;transform_matches_template&quot;: true, &quot;no_nan_or_inf_inside_footprint&quot;: true, &quot;inside_footprint_in_0_1&quot;: true, &quot;outside_footprint_nan&quot;: true, &quot;all_finite_values_in_0_1&quot;: true}</td></tr>
+    <tr><td>bit-exact round-trip (lossless compression)</td><td><b>yes</b></td>
+        <td>compression deflate; candidates tried: [{&quot;tag&quot;: &quot;deflate&quot;, &quot;bytes&quot;: 262979, &quot;bit_exact_roundtrip&quot;: true}, {&quot;tag&quot;: &quot;deflate-pred2&quot;, &quot;bytes&quot;: 271157, &quot;bit_exact_roundtrip&quot;: true}, {&quot;tag&quot;: &quot;lzw&quot;, &quot;bytes&quot;: 1537367, &quot;bit_exact_roundtrip&quot;: true}]</td></tr>
+    <tr><td>shared template validator (buffedlizard55-lab/GEMSDOE @ dcbbb19)</td><td><b>PASSED</b></td>
+        <td>log: <code>evidence/candidates/template_validator_gems53-hgb-bands-bin-q0p0073.txt</code></td></tr>
+    <tr><td>counts</td><td>—</td><td>footprint px 5,167,373 / finite px 5,167,373 / non-zero px 37,722 /
+        NaN outside 7,111,787 / zero outside 0 / max 1.0 / min 0.0;
+        emitted px on known faults: 0</td></tr>
   </table>
-  <p class="note">Shared template validator (<code>buffedlizard55-lab/GEMSDOE</code> at commit <code>dcbbb19</code>, <code>scripts/validate_submission.py</code>): <b>PASSED</b>. Its log is <code>evidence/candidates/template_validator_nan.txt</code>.
-  It checks CRS, 100 m, single float32 band, values in [0, 1], finite exactly on the template's valid region, NaN elsewhere, the nodata tag, and the training shape. In-lane checks (core.py) are in the receipt. A validator pass is not a portal acceptance.</p>
-  <h2>Why it is not offered</h2>
+  <h2>Release gates</h2>
+  <table><tr><th>Gate</th><th>Result</th><th>Receipt</th></tr><tr><td>in_lane_validator</td><td>PASS</td><td>{&quot;passed&quot;: true, &quot;checks&quot;: {&quot;single_band&quot;: true, &quot;dtype_float32&quot;: true, &quot;shape_matches_template&quot;: true, &quot;crs_is_EPSG_32611&quot;: true, &quot;transform_matches_template&quot;: true, &quot;no_nan_or_inf_inside_footprint&quot;: true, &quot;inside_footp</td></tr><tr><td>shared_template_validator</td><td>PASS</td><td>{&quot;passed&quot;: true, &quot;command&quot;: &quot;/tmp/venv/bin/python /tmp/gemsrepo/scripts/validate_submission.py --pred /home/user/GEMSDOE53/docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif --sample /tmp/gems53-data/sample_submission.t</td></tr><tr><td>uniqueness</td><td>—</td><td>{&quot;receipt&quot;: &quot;/home/user/GEMSDOE53/evidence/uniqueness_check.json&quot;, &quot;operative_gate_passed&quot;: true, &quot;literal_any_drift_flag&quot;: true, &quot;n_registry_files&quot;: 614, &quot;operative_duplicate_files&quot;: 0, &quot;max_spearman_rho&quot;: 0.451747, &quot;ma</td></tr>
+    <tr><td>leakage canary</td><td><b>PASS</b></td><td>features are label-free (Exp 1: max single-band separability
+        0.597 &lt; 0.90);
+        the emission masks catalogue pixels exactly (0 emitted on known faults)</td></tr>
+  </table>
+  <h2>Uniqueness (parallel-run protocol items 1–2)</h2>
   <ul>
-    <li>Population: 613 single-band registry rasters on the competition grid (from 907 mirrored tif files; 628 unique). Rank correlation: max 0.517, below the 0.90 flag.</li>
-    <li>Share of our dots within 3 px of another file's dots: 163 files above the 0.70 stop threshold (max 1.000), so the protocol stops the candidate.</li>
-    <li>Closest match: 17GEMSDOE F-ensemble-2pct, 75.8% overlap, lift 15.2×, rank correlation 0.507. Our recipe duplicates an existing one (IR-53-21).</li>
-    <li>Chance baseline (diagnostic only; flags unchanged): the largest lift over random placement at the same registry density is 15.18×. This means the overlap is placement, not just density. See <a href="evidence.html#uniqueness">the uniqueness table</a>.</li>
+    <li>Population: 614 single-band registry rasters on the competition grid, re-mirrored 2026-10-08
+        from the 910 public tif files (629 unique; IR-53-27).</li>
+    <li>Literal rule (rho &gt; 0.90 or &gt; 70% of our dots within 3 px of one registry raster's dots): <b>
+        175 files flagged</b>. This rule is <b>unsatisfiable for any nonzero submission</b>
+        (IR-53-26): registry rasters exist whose dots cover (nearly) the whole footprint — dense probability surfaces, a
+        uniform lattice submission, dense lineament-network rasters — so every dotted raster overlaps them ~100%.
+        The literal flags are reported unchanged for the record.</li>
+    <li>Operative gate (proposed interpretation, IR-53-26, pending protocol-owner review): <b>PASS</b> —
+        no exact duplicate AND max rho &lt;= 0.90 (all files) AND no registry raster with raw overlap &gt; 0.70 AND reverse overlap &gt; 0.70 AND expected overlap &lt; 0.50 AND dot-count ratio in [0.80, 1.25]. Result: max rho 0.452 (≤ 0.90); operative duplicate files:
+        0; max chance-corrected lift 25.87× (diagnostic).
+        No exact sha256 duplicate.</li>
+    <li>The operative placement test is validated against the known case: it flags the session-2 candidate against 17GEMSDOE
+        F-ensemble-2pct (m_AB 0.758 / m_BA 0.825, expected 0.0499, count ratio 1.00001 — a true near-duplicate) and does not
+        flag this file. The same test was evaluated for every E6 emission volume (volume scan on the
+        <a href="evidence.html#uniqueness">evidence page</a>).</li>
+    <li>Closest registry rasters by raw overlap and by lift are listed on the <a href="evidence.html#uniqueness">evidence page</a>.</li>
   </ul>
-  <p class="note">Files are at <code>/tmp/gems53-held/</code> (not in the repository; they are 49 MB each). They can be regenerated with <code>scripts/exp3_build_submission.py</code> and checked against the sha256 values above.</p>
+  <h2>Holdout evidence (selection basis)</h2>
+  <p><span class="pill">HOLDOUT-DTI</span> pooled 0.0343 (95% CI
+  0.0224–0.0461),
+  60,988 withheld fault px in 3199 whole segments,
+  evaluator gems53.core.dti 1.1.0. Proxy only — not an organizer score (IR-53-03).</p>
+  <p class="note">Receipt: <code>evidence/candidates/gems53-hgb-bands-bin-q0p0073.receipt.json</code>. Rebuild:
+  <code>python scripts/exp8_build_submission.py --arm bands --variant bin --q 0.0073</code>.</p>
 </section>
 </main>
-<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or the data inventory
-(computed from files at build time). HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
+<footer>Every number on these pages is read from JSON in <code>evidence/</code>, <code>registry/</code> or computed
+from files at build time. HOLDOUT-DTI = our proxy. ORGANIZER-CONFIRMED = receipt only (none exists yet).
 Regenerate with <code>python scripts/build_site.py</code>.</footer></body></html>

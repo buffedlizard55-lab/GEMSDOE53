@@ -1,12 +1,12 @@
 {
  "summary": {
   "mirror": "/tmp/g53/uniq",
-  "files": 907,
-  "unique_sha256": 628,
-  "prediction_candidates": 613,
+  "files": 910,
+  "unique_sha256": 629,
+  "prediction_candidates": 614,
   "excluded_multiband": 18,
   "excluded_grid": 18,
-  "excluded_duplicate": 279,
+  "excluded_duplicate": 281,
   "errors": 0
  },
  "rows": [
@@ -10560,6 +10560,18 @@
    "prediction_candidate": true
   },
   {
+   "file": "GEMSDOE52__docs__downloads__gems52-h60d-dis_contrast-arm37654px.tif",
+   "bytes": 144504,
+   "count": 1,
+   "dtype": "float32",
+   "height": 3730,
+   "width": 3292,
+   "epsg": 32611,
+   "grid_match": true,
+   "sha256": "18bd0efd582f107ccb988fc20016203c323846bf63d3ecea1f75a0670e4586e8",
+   "prediction_candidate": true
+  },
+  {
    "file": "GEMSDOE52__docs__downloads__gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",
    "bytes": 136969,
    "count": 1,
@@ -10754,6 +10766,20 @@
    "duplicate_of": "GEMSDOE52__docs__downloads__gems52-h60c-core25517px-arm9668px.tif",
    "prediction_candidate": false,
    "excluded_reason": "exact duplicate of GEMSDOE52__docs__downloads__gems52-h60c-core25517px-arm9668px.tif"
+  },
+  {
+   "file": "GEMSDOE52__docs__downloads__h60d-candidate.tif",
+   "bytes": 144504,
+   "count": 1,
+   "dtype": "float32",
+   "height": 3730,
+   "width": 3292,
+   "epsg": 32611,
+   "grid_match": true,
+   "sha256": "18bd0efd582f107ccb988fc20016203c323846bf63d3ecea1f75a0670e4586e8",
+   "duplicate_of": "GEMSDOE52__docs__downloads__gems52-h60d-dis_contrast-arm37654px.tif",
+   "prediction_candidate": false,
+   "excluded_reason": "exact duplicate of GEMSDOE52__docs__downloads__gems52-h60d-dis_contrast-arm37654px.tif"
   },
   {
    "file": "GEMSDOE52__submission__gems52-ctd5-cover-disagreement-20261008-a24c35d1-b58bae0f0e.tif",
@@ -10992,6 +11018,20 @@
    "duplicate_of": "GEMSDOE52__docs__downloads__gems52-h60c-core25517px-arm9668px.tif",
    "prediction_candidate": false,
    "excluded_reason": "exact duplicate of GEMSDOE52__docs__downloads__gems52-h60c-core25517px-arm9668px.tif"
+  },
+  {
+   "file": "GEMSDOE52__submission__gems52-h60d-dis_contrast-arm37654px.tif",
+   "bytes": 144504,
+   "count": 1,
+   "dtype": "float32",
+   "height": 3730,
+   "width": 3292,
+   "epsg": 32611,
+   "grid_match": true,
+   "sha256": "18bd0efd582f107ccb988fc20016203c323846bf63d3ecea1f75a0670e4586e8",
+   "duplicate_of": "GEMSDOE52__docs__downloads__gems52-h60d-dis_contrast-arm37654px.tif",
+   "prediction_candidate": false,
+   "excluded_reason": "exact duplicate of GEMSDOE52__docs__downloads__gems52-h60d-dis_contrast-arm37654px.tif"
   },
   {
    "file": "GEMSDOE52__submission__gems52-r2-signednormal-37654-1f751ac9b6ee-zeros.tif",

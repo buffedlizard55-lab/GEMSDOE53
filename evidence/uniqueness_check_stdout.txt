@@ -1,0 +1,35 @@
+{
+  "ours": "/home/user/GEMSDOE53/docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif",
+  "ours_sha256": "b06c677abc740490b7521d3f17f88f374f29354e0ca5b00de21b9aeb33903ce1",
+  "ours_dots": 37722,
+  "footprint_px": 5167373,
+  "thresholds": {
+    "spearman_rho": 0.9,
+    "dot_overlap_within_3px": 0.7,
+    "coverage_limit_for_raw_rule": 0.5,
+    "count_ratio_window": [
+      0.8,
+      1.25
+    ]
+  },
+  "n_registry_files": 614,
+  "literal_gate": {
+    "any_drift_flag": true,
+    "flagged_files": 175,
+    "note": "literal protocol rule (rho > 0.90 or > 70% of our dots within 3 px of one registry raster's dots). UNSATISFIABLE for any nonzero submission: registry rasters whose dots cover (nearly) the whole footprint force overlap ~1.0 for every dotted raster (IR-53-26). Reported unchanged for the record."
+  },
+  "operative_gate": {
+    "rule": "no exact duplicate AND max rho <= 0.90 (all files) AND no registry raster with raw overlap > 0.70 AND reverse overlap > 0.70 AND expected overlap < 0.50 AND dot-count ratio in [0.80, 1.25]",
+    "passed": true,
+    "max_spearman_rho_all_files": 0.451747,
+    "max_raw_overlap_all_files": 1.0,
+    "max_lift_all_files": 25.8746,
+    "operative_duplicate_files": 0,
+    "validation_against_known_case": "session-2 candidate (103,348 dots) vs 17GEMSDOE F-ensemble-2pct (103,347 dots, obs 0.758, expected 0.0499, ratio 1.00001) IS flagged by this test - it was a duplicate",
+    "status": "PROPOSED protocol interpretation, flagged for owner review (IR-53-26); the literal rule is kept above and is not overridden silently"
+  },
+  "max_spearman_rho": 0.451747,
+  "max_dot_overlap_within_3px": 1.0
+}
+/home/user/GEMSDOE53/scripts/uniqueness_check.py:129: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  rho = float(stats.spearmanr(flat[idx], reg.ravel()[idx]).statistic)

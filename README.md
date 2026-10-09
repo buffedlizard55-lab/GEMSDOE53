@@ -4,20 +4,23 @@
 
 **Live site (GitHub Pages, served from `docs/`):** executive summary → `docs/index.html`, submission file page → `docs/submission.html`, evidence → `docs/evidence.html`.
 
-## Current status (session 2, this PR)
+## Current status (session 3, this PR)
 
-- **Submission:** no file is offered for download or submission. Label: **Research-only / DO NOT SUBMIT.**
-- **Why:** the only format-valid candidate (`gems53-hgb-bands-q0p02`, the holdout-selected `bands` arm at 2% of the footprint) passes the shared template validator (PASSED, template commit `dcbbb19`). It fails the uniqueness gate: **163 of 613** single-band registry rasters exceed the 70% dot-overlap flag. The closest is `17GEMSDOE F-ensemble-2pct` (103,347 dots vs our 103,348; 75.8% overlap; lift 15.2; rank correlation 0.507). Our recipe duplicates an existing one (IR-53-21).
-- **Organizer score:** none exists for anything in this repository. Every number is HOLDOUT-DTI (our proxy) or MEASURED. Holdout DTI for the candidate is 0.0352 (95% CI 0.0282 to 0.0422, 5 folds, 60,988 withheld fault px, evaluator 1.0.0). It is not comparable with the leaderboard.
-- **Leaderboard bars (re-fetched 2026-10-08, snapshot time not shown):** #1 xiaofanhu 0.3774; #7 DARD 0.3195; #13 extradr19 0.2778. The "0.3195 is the highest" premise in the request is incorrect: 0.3195 is #7.
-- **Hypotheses:** H1 (segment-exact separation, rank 1) is **rejected**: its paired pixel-neighbour canary AUC is 1.000, so it encodes the label. H2 (magnetic ridge) passes the leakage canary but is **negative** on the holdout. H3 is not run.
-- **Leakage audit:** the GEMSDOE29 defect is reproduced (in-sample separability 1.0). The current leak-free arm passes the exhaustive pixel-neighbour check (170,638 pairs, AUC 0.4995). The 19 label-free bands are below the 0.90 gate (max 0.597).
-- **Format root cause for "Predicted values must be in range [0, 1]":** the shared template validator (`scripts/validate_submission.py`) documents that 3,061 NaN pixels inside the template's valid region trigger this portal rejection. It is owner-documented and not independently verified (no portal receipt). The current candidate has no NaN inside the footprint and passes the template check.
-- **Irregularities for review:** `registry/irregularities.json` (IR-53-19 to IR-53-25). Most important: the mirrored `example_submission.tif` is identical to the known-fault labels, although the rules say it predicts total absence (IR-53-19). The overlap gate is confounded for dense, non-submission rasters (IR-53-20).
+- **Submission:** a **unique GeoTIFF is generated, validated, and offered for download** at `docs/downloads/` (label: **Validated / OK to submit**). It has **not been submitted**; promotion to a competition slot is a separate decision (rules 3.4: three feedback submissions per week; 3.6.2: one final submission chosen without knowing private scores).
+- **File:** `gems53-hgb-bands-bin-q0p0073-nan.tif` — HGB on the 19 label-free bands, **binary value-1.0 dots on the top 0.73%** of the official footprint (37,722 dots), known-fault pixels forced to 0, NaN outside with nodata=NaN (the organizer sample's convention). In-lane validator PASS; shared template validator (template commit `dcbbb19`) PASSED; bit-exact lossless round-trip.
+- **Holdout selection (HOLDOUT-DTI, proxy — not an organizer score):** E6 swept the emission rule on the same 5 folds as Exp 2 (the raw variant reproduces Exp 2 exactly): **binary dots score 0.0343 (95% CI 0.0224–0.0461) at the published volume q=0.0073**, 0.0379 at q=0.01, 0.0470 at q=0.02, 0.0484 at q=0.05 (60,988 withheld fault px; evaluator 1.1.0) versus 0.0352 for the session-2 recipe (raw probabilities at q=0.02). The model's placement AUC on withheld faults is 0.742–0.781, so the gain is value scale and volume, not a better detector. Credit per dot at q=0.05 (0.00995) sits just above the break-even bar 0.2·DTI (0.00855) — the same break-even the GEMSDOE32 analysis derives.
+- **Volume selection under the release gates:** the highest-scoring volumes are exactly where other lanes already submitted near-identical maps. The operative uniqueness gate (mutual-overlap test, below) flags q=0.02 (reproduces the known duplicate), q=0.05 (mutual 0.872/0.882 with 12GEMSDOE multiphysics) and q=0.10 (two files). Among the gate-passing volumes, the top two by pooled HOLDOUT-DTI (q=0.01: 0.0379, q=0.0073: 0.0343) are statistically indistinguishable (overlapping 95% CIs), so the tie-break is the larger uniqueness margin: **q=0.0073** (closest count-matched weaker-direction coverage 0.646) over q=0.01 (0.674). See `evidence/uniqueness_volume_scan.json`.
+- **Uniqueness:** the literal 70% dot-overlap rule is **provably unsatisfiable** for any nonzero submission (IR-53-26): registry rasters exist whose dots cover (nearly) the whole footprint, and 130 format-plausible registry rasters still flag a genuinely different file. The literal flags are reported unchanged; the **operative gate** (proposed interpretation, pending protocol-owner review) is: no exact duplicate AND max rank correlation ≤ 0.90 (all 614 registry rasters) AND no registry raster that mutually covers our dots (raw overlap > 70% AND reverse overlap > 70%) at non-degenerate density (its dots cover < 50% of the footprint) and matched dot count (ratio in [0.80, 1.25]). The gate is validated against the known duplicate (it flags the session-2 candidate vs 17GEMSDOE F-ensemble-2pct: 0.758/0.825, expected 0.0499, count ratio 1.00001). The published file passes it (numbers in `evidence/uniqueness_check.json` and on the site).
+- **Organizer score:** none exists for anything in this repository. Every number is HOLDOUT-DTI (our proxy) or MEASURED.
+- **Leaderboard bars (re-fetched 2026-10-08, snapshot time not shown):** #1 xiaofanhu 0.3774; #2 alexoktaba 0.3345; #7 DARD 0.3195; #13 extradr19 0.2778. The "0.3195 is the highest" premise in the request is incorrect: 0.3195 is #7 (IR-53-01).
+- **Hypotheses:** H1 (segment-exact separation) **rejected** (paired pixel-neighbour canary AUC 1.000 — label-encoding). H2 (magnetic ridge) **negative** on the holdout. New ranked candidates H5–H9 are in `docs/research/hypotheses.md`; **H5 (basement-depth and conductivity edges) was tested in E7 — negative** (canary passes; paired holdout gain does not clear the pre-registered bar; see `evidence/exp7_h5_canary_holdout.json`). H7 (radiometric K/eTh alteration index) is viable but needs external data: the USGS GeoDAWN radiometric grids (DOI 10.5066/P93LGLVQ, CC0) are verified obtainable (S15/S20) but are not in the 19-band stack.
+- **Leakage audit:** the GEMSDOE29 defect is reproduced (in-sample separability 1.0; holdout DTI 0.999957 with the leaky feature). The published recipe uses only the 19 label-free bands (max single-band separability 0.597 < 0.90) and masks catalogue pixels exactly in the emission.
+- **Format root cause for "Predicted values must be in range [0, 1]":** the shared template validator documents that 3,061 NaN pixels inside the template's valid region trigger this portal rejection (owner-documented, not independently verified — no portal receipt). The published file has no NaN inside the footprint, no sentinel anywhere, and passes both validators.
+- **Irregularities for review:** `registry/irregularities.json` (IR-53-01 … IR-53-28). New this session: IR-53-26 (literal overlap rule unsatisfiable — proof), IR-53-27 (registry population is live: 910 tif files / 614 candidates on re-mirror), IR-53-28 (E6 reproduction check initially failed on rng-stream contamination; fixed and re-run).
 
 Run card: `evidence/run_card.json` (also `docs/data/run_card.json`). Executive summary: `docs/index.html`. Submission page: `docs/submission.html`. Evidence: `docs/evidence.html`.
 
-**Suggested next steps (ranked, in `docs/evidence.html#limitations`):** (1) the protocol owner decides on the gate population and lift rule (IR-53-20) and whether the 613-file population is correct; (2) confirm the official sample on the DrivenData data tab (IR-53-19); (3) choose a candidate from a method family not already in the registry (IR-53-21), then run the validator, uniqueness, and holdout gates; (4) draft the generative-AI disclosure the rules require (IR-53-24); (5) run H3 (fault-parallel strain) as the third experiment in a new budget.
+**Suggested next steps (ranked, in `docs/evidence.html#limitations`):** (1) the protocol owner rules on the operative uniqueness gate (IR-53-26) — the literal rule is unsatisfiable and the interpretation is proposed, not approved; (2) decide whether to spend a submission slot on the published file (a separate selector step within the weekly cap; re-check the leaderboard first); (3) draft the generative-AI disclosure the rules require (rules 3.2; IR-53-24); (4) run the remaining hypotheses H6/H8/H9, and build the H7 radiometric pipeline (source verified obtainable, S15/S20); (5) reconcile `src/gems53/core.py` with the shared template (IR-53-17) and confirm the mirrored sample against the official one (IR-53-19).
 
 ## The full prompt (task as recorded)
 
@@ -60,43 +63,54 @@ Leaderboard numbers (public, fetched 2026-10-08, snapshot time not shown): #1 0.
 | Path | What it is |
 |---|---|
 | `scripts/fetch_data.py` | Re-fetches the competition rasters from the template's split blobs and checks sha256 (writes to `/tmp/gems53-data`, outside the repo). |
-| `src/gems53/core.py` | Metric, folds, features, writer, in-lane checks. **Not yet reconciled with the shared template** (see limitations). |
+| `scripts/mirror_registry.py` | Re-mirrors the public GEMSDOE* registry rasters (shallow clones, flattened to `/tmp/g53/uniq`). |
+| `src/gems53/core.py` | Metric (`dti`, `kernel_to_gt`, `dti_with_kernel`), folds, features (ridge, H5 edge), emission rules (`top_q_mask`, `emission_from_probability`), writer (with predictor support), in-lane validator. **Not yet reconciled with the shared template** (see limitations). |
 | `scripts/exp1_leakage_canary.py` | Experiment 1: leakage canary (`evidence/exp1_leakage_canary.json`). |
 | `scripts/exp2_holdout_arms.py` | Experiment 2: holdout over arms `bands`, `leakfree`, `leaky_ablate` (`evidence/exp2_holdout_arms.json`). |
-| `scripts/exp3_build_submission.py` | Builds the candidate raster and its receipt from the selected arm and q (`--outdir`). |
-| `scripts/uniqueness_check.py` | Rank correlation and 3-px overlap against registry rasters (`evidence/uniqueness_check.json`). |
-| `scripts/registry_inventory.py` | Inventory of the mirrored GEMSDOE* rasters: sha256, bands, grid match, duplicates (`evidence/registry_inventory/inventory.json`). |
+| `scripts/exp3_build_submission.py` | Session-2 builder (blocked candidate; kept for the record). |
 | `scripts/exp4_hypothesis_canary.py` | Experiment 4: leakage canary for H1 and H2, plus the pixel-neighbour audit of the leak-free arm (`evidence/exp4_hypothesis_canary.json`). |
-| `docs/research/hypotheses.md` | Ranked hypotheses H1–H4 with their status after Exp 4–5. |
-| `scripts/overlap_baseline.py` | Chance baseline (lift) for the overlap flag. Takes `--receipt`/`--out` (diagnostic; does not change flags). |
+| `scripts/exp6_emission_scaling.py` | **Experiment 6 (session 3):** emission-rule sweep (raw / bin / rank / sqrt × q grid) on the same 5 folds; asserts exact reproduction of Exp 2 for the raw variant (`evidence/exp6_emission_scaling.json`). |
+| `scripts/exp7_h5_canary_holdout.py` | **Experiment 7 (session 3):** H5 (basement/conductivity edges) leakage canary + paired holdout vs the bands arm (`evidence/exp7_h5_canary_holdout.json`). |
+| `scripts/exp8_build_submission.py` | **Experiment 8 (session 3):** builds the unique submission, runs every release gate (in-lane validator, shared template validator, uniqueness gate, leakage canary), publishes to `docs/downloads/`, writes the receipt and `evidence/selection.json`. |
+| `scripts/uniqueness_check.py` | Rank correlation, 3-px dot overlap (both directions), chance-corrected lift and the operative gate against registry rasters; emits the literal flags (protocol) and the operative gate (IR-53-26) (`evidence/uniqueness_check.json`). |
+| `scripts/uniqueness_volume_scan.py` | Applies the operative uniqueness gate to every E6 emission volume in one registry pass (`evidence/uniqueness_volume_scan.json`). |
+| `scripts/registry_inventory.py` | Inventory of the mirrored GEMSDOE* rasters: sha256, bands, grid match, duplicates (`evidence/registry_inventory/inventory.json`). |
 | `scripts/build_run_card.py`, `scripts/build_site.py` | Compose `evidence/run_card.json` and the Pages site from the JSON. No number is typed by hand. |
 | `registry/` | `sources.json` (official links with access status), `irregularities.json`, `limitations.json`. |
-| `docs/` | GitHub Pages site (`index.html`, `submission.html`, `evidence.html`, `data/`, `research/`). |
-| `docs/research/hypotheses.md` | Ranked hypotheses H1–H4 (H4 rejected). |
+| `docs/` | GitHub Pages site (`index.html`, `submission.html`, `evidence.html`, `data/`, `research/`, `downloads/` with the published TIF). |
+| `docs/research/hypotheses.md` | Ranked hypotheses H1–H9 with status. |
 | `docs/research/gemsdoe32.md` | Analysis of the 0.2778 file: what is measured and what is an owner claim. |
-| `tests/` | `test_metric.py` (metric checks), `test_submission.py` (validator, NaN-only outside, nodata, LZW round-trip). 13 tests. |
+| `docs/leakage-review.md` | Formal GEMSDOE29 leakage diagnosis (Kaufman et al. methodology) + the session-3 addendum (the review's requirements, implemented). |
+| `tests/` | `test_metric.py`, `test_submission.py`, `test_emission_and_gate.py`. 17 tests. |
 
 ## Reproduce
 
 ```bash
 python -m venv /tmp/venv && /tmp/venv/bin/pip install numpy rasterio scipy scikit-learn pyproj matplotlib pytest
 /tmp/venv/bin/python scripts/fetch_data.py                      # verified inputs to /tmp/gems53-data (sha256 pinned)
+python3 scripts/mirror_registry.py                             # public registry rasters -> /tmp/g53/uniq (~10 min)
 /tmp/venv/bin/python -m pytest -q tests/
-/tmp/venv/bin/python scripts/exp1_leakage_canary.py --data-dir /tmp/gems53-data          # E1 (~80 s)
-/tmp/venv/bin/python scripts/exp4_hypothesis_canary.py --data-dir /tmp/gems53-data       # E4 (~30 s)
-/tmp/venv/bin/python scripts/exp2_holdout_arms.py --data-dir /tmp/gems53-data            # E2 (~13 min)
-/tmp/venv/bin/python scripts/exp2_holdout_arms.py --data-dir /tmp/gems53-data --arms bands,bands_ridge --out evidence/exp5_holdout_bands_vs_ridge.json   # E5
-/tmp/venv/bin/python scripts/exp3_build_submission.py --data-dir /tmp/gems53-data --arm bands --q 0.02 --name gems53-hgb-bands --outdir /tmp/gems53-held
-# shared template validator (template repo cloned to /tmp/gemsrepo, commit dcbbb19):
-#   python scripts/validate_submission.py --pred /tmp/gems53-held/gems53-hgb-bands-q0p02-nan.tif --sample /tmp/gems53-data/sample_submission.tif --train /tmp/gems53-data/training_features.tif
-# registry mirror (public GEMSDOE* repos, shallow clones; tifs flattened into /tmp/g53/uniq) then:
-#   python scripts/registry_inventory.py --mirror /tmp/g53/uniq --out evidence/registry_inventory/inventory.json
-#   python scripts/uniqueness_check.py --ours /tmp/gems53-held/gems53-hgb-bands-q0p02-nan.tif --registry <dir of prediction candidates> --out evidence/uniqueness_check.json
-#   python scripts/overlap_baseline.py --receipt evidence/uniqueness_check.json --out evidence/overlap_baseline.json
+/tmp/venv/bin/python scripts/registry_inventory.py --mirror /tmp/g53/uniq --data-dir /tmp/gems53-data --out evidence/registry_inventory/inventory.json
+/tmp/venv/bin/python scripts/exp6_emission_scaling.py --data-dir /tmp/gems53-data     # E6 (~13 min; selects the variant (bin), sweeps the volume)
+/tmp/venv/bin/python scripts/uniqueness_volume_scan.py --data-dir /tmp/gems53-data     # gate applied to every E6 volume (~20 min)
+/tmp/venv/bin/python scripts/exp7_h5_canary_holdout.py --data-dir /tmp/gems53-data --variant bin   # E7 (~15 min)
+# E8: build + all release gates + publish to docs/downloads/ (template repo cloned to /tmp/gemsrepo @ dcbbb19;
+#     includes the shared template validator and the registry uniqueness gate, ~25 min total)
+/tmp/venv/bin/python scripts/exp8_build_submission.py --data-dir /tmp/gems53-data \
+    --arm bands --variant bin --q 0.0073 --name gems53-hgb-bands
 /tmp/venv/bin/python scripts/build_run_card.py && /tmp/venv/bin/python scripts/build_site.py
 ```
 
-The candidate raster (49 MB) is not in the repository and not offered for download. Its sha256 is in `evidence/run_card.json`. Run card and site JSON are regenerated from the receipts, so no number is typed by hand.
+Session 2 (kept for the record): `exp1_leakage_canary.py`, `exp4_hypothesis_canary.py`, `exp2_holdout_arms.py`
+(E2/E5), `exp3_build_submission.py` (blocked candidate; `evidence/selection_session2_blocked.json`,
+`evidence/uniqueness_check_session2_blocked_candidate.json`, `evidence/run_card_session2.json`).
+`scripts/overlap_baseline.py` was removed in session 3 — its chance baseline (lift) is now computed for every
+registry raster inside `scripts/uniqueness_check.py`; `evidence/overlap_baseline.json` is kept as the session-2
+artifact and is labelled superseded on the site.
+
+The published submission TIF **is** committed at `docs/downloads/` (`.gitignore` excepts it): it is the deliverable,
+and GitHub Pages serves it. Its sha256, size, checks and gates are in `evidence/candidates/<name>.receipt.json` and
+`evidence/run_card.json`. Run card and site JSON are regenerated from the receipts, so no number is typed by hand.
 
 ## Where to look next
 
@@ -129,7 +143,9 @@ This repository exists to support rigorous, auditable discovery of **previously 
 
 ## Active lane for the present review
 
-> **Scope note (PR #3):** the current task extends this lane. The GEMSDOE29 leakage diagnosis is in `docs/leakage-review.md` and `evidence/run_card.json`. Ranked hypotheses H1–H4 are in `docs/research/hypotheses.md`. No weekly competition slot was used.
+> **Scope note (PR #3):** the GEMSDOE29 leakage diagnosis is in `docs/leakage-review.md` and `evidence/run_card.json`. Ranked hypotheses H1–H4 are in `docs/research/hypotheses.md`. No weekly competition slot was used.
+>
+> **Scope note (session 3, this PR):** the lane is the **unique-submission lane**: generate a unique, valid, downloadable GeoTIFF. E6 selected the emission rule (binary value-1.0 dots; volume swept) on the hide-and-recover holdout; E7 tested the top new geological hypothesis (H5, negative); E8 built the file, ran every release gate (in-lane validator, shared template validator, operative uniqueness gate, leakage canary), and published it to `docs/downloads/`. Ranked hypotheses H5–H9 are in `docs/research/hypotheses.md`. No weekly competition slot was used; promotion to a slot is a separate selector decision.
 
 
 **Formal diagnosis of the GEMSDOE29 catalogue-distance leakage failure.** This pass is limited to the leakage mechanism, the integrity of its hide-and-recover evaluation, and the evidence needed before any candidate can be released. Do not branch into unrelated geological hypotheses or use a weekly competition slot in this lane.
@@ -167,5 +183,8 @@ No placeholder, all-zero raster, copied prior TIFF, projection, or synthetic tem
 1. Restore the approved, hash-verified competition template and feature stack into this checkout (the official data tab requires a DrivenData login); do not place credentials in chat.
 2. Use the actual shared evaluator and writer. The exact filenames named in the run protocol are not in this checkout; the GEMSDOE29 public repository uses different module/script names and its existing fold summaries do not implement the required pooled-DTI-plus-95%-CI report.
 3. Resolve the two source-audit risks documented in the leakage review: label-derived filtering of holdout negative candidates, and fold-wise rather than pooled score aggregation. Fix shared tooling in its owning template; do not copy it here.
+4. Run the feature-alone leakage canary across the complete, current feature inventory under the required blocked holdout. Only consider a candidate if it beats the comparable holdout best, passes both uniqueness checks, and passes the exact GeoTIFF validator.
+5. Build the website, one-click download, executive submission guide, and data/source catalog only after there is a verified candidate and a reproducible build pipeline. Do not scrape or manually monitor the DrivenData website for a current leaderboard feed without prior written consent or an expressly authorized feed; see the official [Terms of Use](https://www.drivendata.org/termsofuse/).
+ing template; do not copy it here.
 4. Run the feature-alone leakage canary across the complete, current feature inventory under the required blocked holdout. Only consider a candidate if it beats the comparable holdout best, passes both uniqueness checks, and passes the exact GeoTIFF validator.
 5. Build the website, one-click download, executive submission guide, and data/source catalog only after there is a verified candidate and a reproducible build pipeline. Do not scrape or manually monitor the DrivenData website for a current leaderboard feed without prior written consent or an expressly authorized feed; see the official [Terms of Use](https://www.drivendata.org/termsofuse/).

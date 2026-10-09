@@ -4,3 +4,7 @@ __pycache__/
 *.tif
 *.tiff
 *.zip
+# The published submission GeoTIFF is the deliverable of this repository and must be committed
+# (GitHub Pages serves docs/, so the download lives at docs/downloads/).
+!docs/downloads/
+!docs/downloads/*.tif

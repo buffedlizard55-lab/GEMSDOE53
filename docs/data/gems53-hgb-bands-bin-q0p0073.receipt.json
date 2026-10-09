@@ -1,0 +1,192 @@
+{
+  "submission_name": "gems53-hgb-bands-bin-q0p0073",
+  "built_utc": "2026-10-09T01:11:03Z",
+  "recipe": {
+    "model": "HistGradientBoostingClassifier(max_iter=200, learning_rate=0.1, max_leaf_nodes=31, l2_regularization=1.0, random_state=0)",
+    "features": "19 label-free bands",
+    "arm": "bands",
+    "positives": 60988,
+    "negatives": 300000,
+    "known_fault_mask": "emission forced to 0 on known-fault pixels (the target faults are not in the catalogue)",
+    "emission_variant": "bin",
+    "q_fraction_of_footprint": 0.0073
+  },
+  "holdout_selection_evidence": {
+    "arm": "bands",
+    "variant": "bin",
+    "q": 0.0073,
+    "label_type": "HOLDOUT-DTI (proxy, withheld known-fault segments, 5 folds; NOT organizer-scored)",
+    "E6_pooled_DTI": 0.034305,
+    "E6_CI95_t_df4_on_fold_mean": [
+      0.022368,
+      0.046107
+    ],
+    "E6_per_fold_DTI": [
+      0.021036,
+      0.032641,
+      0.046377,
+      0.031212,
+      0.039921
+    ],
+    "E6_withheld_fault_px_total": 60988,
+    "E6_evaluator": {
+      "name": "gems53.core.dti",
+      "version": "1.1.0",
+      "formula": "TI = TPw/(TPw + 0.2 FPw + 0.8 FNw + eps); triangular kernel R=3 px (300 m); dti() refactored into kernel_to_gt + dti_with_kernel (shared-tool change, tests pass)",
+      "unit_test": "tests/test_metric.py (matches literal brute force; rules worked example)"
+    },
+    "E6_model_AUC_on_withheld_faults_per_fold": [
+      0.780569,
+      0.775531,
+      0.777853,
+      0.741906,
+      0.770133
+    ],
+    "E6_reproduction_check_all_identical": true,
+    "E7_H5_canary_verdict": {
+      "f_basement": "pass",
+      "f_conductivity": "pass"
+    },
+    "E7_H5_paired_diff_at_bands_best_q": {
+      "mean_diff_h5_minus_bands": -0.000158,
+      "CI95_t_df4": [
+        -0.002058,
+        0.001742
+      ],
+      "per_fold_diff": [
+        0.001496,
+        -0.001224,
+        -0.001943,
+        -0.000453,
+        0.001333
+      ]
+    },
+    "E7_H5_bands_best_q": 0.05
+  },
+  "grid": {
+    "H": 3730,
+    "W": 3292,
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "footprint_px": 5167373
+  },
+  "gates": {
+    "in_lane_validator": {
+      "passed": true,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "shape_matches_template": true,
+        "crs_is_EPSG_32611": true,
+        "transform_matches_template": true,
+        "no_nan_or_inf_inside_footprint": true,
+        "inside_footprint_in_0_1": true,
+        "outside_footprint_nan": true,
+        "all_finite_values_in_0_1": true
+      },
+      "counts": {
+        "footprint_px": 5167373,
+        "finite_px": 5167373,
+        "nonzero_px": 37722,
+        "nan_outside_px": 7111787,
+        "zero_outside_px": 0,
+        "max": 1.0,
+        "min": 0.0
+      }
+    },
+    "shared_template_validator": {
+      "passed": true,
+      "command": "/tmp/venv/bin/python /tmp/gemsrepo/scripts/validate_submission.py --pred /home/user/GEMSDOE53/docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif --sample /tmp/gems53-data/sample_submission.tif --train /tmp/gems53-data/training_features.tif",
+      "template_repo": "buffedlizard55-lab/GEMSDOE",
+      "template_commit": "dcbbb192e56b2b32c0a131eba791dc363305d4a3",
+      "log": "/home/user/GEMSDOE53/evidence/candidates/template_validator_gems53-hgb-bands-bin-q0p0073.txt"
+    },
+    "uniqueness": {
+      "receipt": "/home/user/GEMSDOE53/evidence/uniqueness_check.json",
+      "operative_gate_passed": true,
+      "literal_any_drift_flag": true,
+      "n_registry_files": 614,
+      "operative_duplicate_files": 0,
+      "max_spearman_rho": 0.451747,
+      "max_lift": 25.8746,
+      "operative": {
+        "rule": "no exact duplicate AND max rho <= 0.90 (all files) AND no registry raster with raw overlap > 0.70 AND reverse overlap > 0.70 AND expected overlap < 0.50 AND dot-count ratio in [0.80, 1.25]",
+        "passed": true,
+        "max_spearman_rho_all_files": 0.451747,
+        "max_raw_overlap_all_files": 1.0,
+        "max_lift_all_files": 25.8746,
+        "operative_duplicate_files": 0,
+        "validation_against_known_case": "session-2 candidate (103,348 dots) vs 17GEMSDOE F-ensemble-2pct (103,347 dots, obs 0.758, expected 0.0499, ratio 1.00001) IS flagged by this test - it was a duplicate",
+        "status": "PROPOSED protocol interpretation, flagged for owner review (IR-53-26); the literal rule is kept above and is not overridden silently"
+      }
+    },
+    "leakage_canary": {
+      "features": "19 label-free bands (Exp 1: max single-band separability 0.597, gate 0.90)",
+      "emission_masks_catalogue_pixels": true,
+      "on_known_fault_px": 0
+    }
+  },
+  "released": true,
+  "files": {
+    "gems53-hgb-bands-bin-q0p0073-nan.tif": {
+      "sha256": "b06c677abc740490b7521d3f17f88f374f29354e0ca5b00de21b9aeb33903ce1",
+      "bytes": 262979,
+      "compression": "deflate",
+      "compression_candidates": [
+        {
+          "tag": "deflate",
+          "bytes": 262979,
+          "bit_exact_roundtrip": true
+        },
+        {
+          "tag": "deflate-pred2",
+          "bytes": 271157,
+          "bit_exact_roundtrip": true
+        },
+        {
+          "tag": "lzw",
+          "bytes": 1537367,
+          "bit_exact_roundtrip": true
+        }
+      ],
+      "all_checks_passed": true,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "shape_matches_template": true,
+        "crs_is_EPSG_32611": true,
+        "transform_matches_template": true,
+        "no_nan_or_inf_inside_footprint": true,
+        "inside_footprint_in_0_1": true,
+        "outside_footprint_nan": true,
+        "all_finite_values_in_0_1": true
+      },
+      "counts": {
+        "footprint_px": 5167373,
+        "finite_px": 5167373,
+        "nonzero_px": 37722,
+        "nan_outside_px": 7111787,
+        "zero_outside_px": 0,
+        "max": 1.0,
+        "min": 0.0
+      },
+      "on_known_fault_px": 0,
+      "bit_exact_roundtrip": true,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "nodata_tag": NaN,
+      "emitted_px": 37722,
+      "emitted_fraction_of_footprint": 0.0073,
+      "path": "docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif",
+      "present_in_repo": true
+    }
+  },
+  "runtime_s": 555.9
+}

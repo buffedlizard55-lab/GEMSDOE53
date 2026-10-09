@@ -1,0 +1,15 @@
+{
+  "status": "BLOCKED",
+  "submission_name": "gems53-hgb-bands-q0p02",
+  "arm": "bands",
+  "q": 0.02,
+  "selection_rule": "pre-stated: highest pooled HOLDOUT-DTI at its best tested q, over arms bands and leakfree only (leaky_ablate excluded)",
+  "note": "HGB on 19 label-free bands; top 2% of footprint; known faults zeroed. Holdout proxy only; no organizer score.",
+  "verdict": "negative",
+  "verdict_reason": "Blocked before any submission slot. Format checks pass (shared template validator PASSED), but the uniqueness gate fails: 163 of 613 single-band registry rasters on the competition grid exceed the 70% dot-overlap flag (evidence/uniqueness_check.json). Strongest match: 17GEMSDOE F-ensemble-2pct (103,347 dots vs our 103,348; 75.8% of our dots within 3 px of its dots; lift 15.2 over random placement; sample rank correlation 0.507). The highest rank correlation in the registry is 0.517 (12GEMSDOE multiphysics_submission, 97.2% dot overlap). Both are below the 0.90 correlation flag but well above the value-similarity level of a unique file. Holdout proxy 0.0352 (HOLDOUT-DTI) is not an organizer score.",
+  "files": [
+    "gems53-hgb-bands-q0p02-nan.tif"
+  ],
+  "location": "not in the repository and not offered for download (sha256 in evidence/run_card.json); regenerate with scripts/exp3_build_submission.py --outdir <dir> (about 1 minute)",
+  "selection_note": "The release decision is not a score: the same file was not promoted to a slot. No file was submitted."
+}

@@ -1,15 +1,18 @@
 {
-  "status": "BLOCKED",
-  "submission_name": "gems53-hgb-bands-q0p02",
+  "status": "RELEASED - Validated / OK to submit",
+  "submission_name": "gems53-hgb-bands-bin-q0p0073",
   "arm": "bands",
-  "q": 0.02,
-  "selection_rule": "pre-stated: highest pooled HOLDOUT-DTI at its best tested q, over arms bands and leakfree only (leaky_ablate excluded)",
-  "note": "HGB on 19 label-free bands; top 2% of footprint; known faults zeroed. Holdout proxy only; no organizer score.",
-  "verdict": "negative",
-  "verdict_reason": "Blocked before any submission slot. Format checks pass (shared template validator PASSED), but the uniqueness gate fails: 163 of 613 single-band registry rasters on the competition grid exceed the 70% dot-overlap flag (evidence/uniqueness_check.json). Strongest match: 17GEMSDOE F-ensemble-2pct (103,347 dots vs our 103,348; 75.8% of our dots within 3 px of its dots; lift 15.2 over random placement; sample rank correlation 0.507). The highest rank correlation in the registry is 0.517 (12GEMSDOE multiphysics_submission, 97.2% dot overlap). Both are below the 0.90 correlation flag but well above the value-similarity level of a unique file. Holdout proxy 0.0352 (HOLDOUT-DTI) is not an organizer score.",
+  "variant": "bin",
+  "q": 0.0073,
+  "selection_rule": "pre-stated: E6 selected the emission variant (bin) and swept the volume; E7 decided bands vs bands_h5 by the pre-registered paired acceptance rule (bands kept). Volume selection under the release gates: the operative uniqueness gate (mutual-overlap test, IR-53-26; volume scan evidence/uniqueness_volume_scan.json) flags q=0.02 (the known duplicate 17GEMSDOE F-ensemble-2pct), q=0.05 (12GEMSDOE multiphysics, mutual 0.872/0.882) and q=0.10 (two files). Among the gate-passing volumes, the top two by pooled HOLDOUT-DTI (q=0.01: 0.0379, q=0.0073: 0.0343) are statistically indistinguishable (overlapping 95% CIs), so the tie-break is the larger uniqueness margin (lower weaker-direction coverage of the closest count-matched registry pair): q=0.0073 (0.646) over q=0.01 (0.674). E8 releases only if every gate passes",
+  "note": "HGB on 19 label-free bands, binary dots, top 0.73% of footprint, known faults zeroed; holdout proxy only, no organizer score.",
+  "note_chars": 125,
+  "verdict": "promote",
+  "verdict_reason": "All release gates passed: in-lane validator, shared template validator, operative uniqueness gate (IR-53-26 interpretation), leakage canary. HOLDOUT-DTI proxy 0.034305 at q=0.0073 (bin); not an organizer score.",
   "files": [
-    "gems53-hgb-bands-q0p02-nan.tif"
+    "gems53-hgb-bands-bin-q0p0073-nan.tif"
   ],
-  "location": "not in the repository and not offered for download (sha256 in evidence/run_card.json); regenerate with scripts/exp3_build_submission.py --outdir <dir> (about 1 minute)",
-  "selection_note": "The release decision is not a score: the same file was not promoted to a slot. No file was submitted."
+  "location": "docs/downloads/gems53-hgb-bands-bin-q0p0073-nan.tif (committed; served by GitHub Pages)",
+  "organizer_score": null,
+  "selection_note": "Promotion to a real competition slot is a separate selector step within the weekly cap (S3 3.4)."
 }

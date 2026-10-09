@@ -1,57 +1,73 @@
 {
-  "schema": "gems53.limitations.v1",
-  "items": [
-    {
-      "id": "L-01",
-      "item": "No organizer score exists for any file from this repository. Every number is a HOLDOUT-DTI proxy with known faults as truth."
-    },
-    {
-      "id": "L-02",
-      "item": "The competition labels new faults that are not in the public catalogue. Our holdout rewards recovery of mapped faults only (IR-53-03)."
-    },
-    {
-      "id": "L-03",
-      "item": "Top-ranked hypothesis H1 (segment-exact learn-predict separation) was pre-registered but NOT run. The 3-experiment and 2-hour budget was exhausted first. The submitted-candidate lane therefore does not test H1."
-    },
-    {
-      "id": "L-04",
-      "item": "The candidate is blocked by the 3-px overlap flag (protocol threshold 70%). The flag cannot separate copying from shared geology. The chance baseline (evidence/overlap_baseline.json) shows the overlap is placement, not just density. The protocol threshold was not changed here."
-    },
-    {
-      "id": "L-05",
-      "item": "Portal [0,1] rejection: the template validator (S7, scripts/validate_submission.py docstring) records a real platform rejection caused by 3,061 NaN px inside the sample's valid region. That cause is owner-documented, not independently verified. Our primary file has no NaN inside the footprint and passes the template validator. A zeros-outside fallback was rejected as non-compliant with 'outside bounds null or nan' (S1)."
-    },
-    {
-      "id": "L-06",
-      "item": "Data was pulled from a mirror (Dropbox links in the template bridge). Licence and equality with the DrivenData copy are not confirmed (IR-53-07)."
-    },
-    {
-      "id": "L-07",
-      "item": "The 0.2778 file is not linked to a leaderboard receipt. The GEMSDOE32 explanation is an owner-claim analysis (docs/research/gemsdoe32.md), not a verified result."
-    },
-    {
-      "id": "L-08",
-      "item": "Wall-clock time was not logged precisely; the 2-hour guardrail was likely exceeded (disclosed). Exp 2 was re-run once on a corrected footprint (IR-53-05)."
-    },
-    {
-      "id": "L-09",
-      "item": "Fold CIs use five folds (t, df 4). They are wide (about \u00b10.007 at q=0.02), so differences of ~0.001 between arms are not resolved."
-    },
-    {
-      "id": "L-10",
-      "item": "Protocol deviation: this lane built its own copies of the validator (now deleted, replaced by the template's scripts/validate_submission.py) and of the writer and metric (src/gems53/core.py). The shared template's src/submission_io.py and scripts/validate_submission.py are the reference. Reconciliation of core.py to the template is not finished (remaining work)."
-    },
-    {
-      "id": "L-11",
-      "item": "Experiments this session: 2 of 3 budgeted (E4 canary of H1/H2 and the leaky-free audit; E5 holdout of H2 vs bands). E1 and E2 were re-run as reproduction checks. The third experiment (H3, fault-parallel strain) was not run."
-    },
-    {
-      "id": "L-12",
-      "item": "No organizer score exists for any file in this repository. Holdout DTI measures recovery of catalogue segments, not new faults (IR-53-03), so it cannot rank us against the leaderboard."
-    },
-    {
-      "id": "L-13",
-      "item": "The competition rasters come from a public GitHub mirror (buffedlizard55-lab/GEMSDOE, data/bridge), not from the login-gated DrivenData data tab. Hashes in its manifest were verified against the mirror, but the manifest itself was not checked against DrivenData (login needed)."
-    }
-  ]
+    "schema": "gems53.limitations.v1",
+    "items": [
+        {
+            "id": "L-01",
+            "item": "No organizer score exists for any file from this repository. Every number is a HOLDOUT-DTI proxy with known faults as truth."
+        },
+        {
+            "id": "L-02",
+            "item": "The competition labels new faults that are not in the public catalogue. Our holdout rewards recovery of mapped faults only (IR-53-03)."
+        },
+        {
+            "id": "L-03",
+            "item": "H1 (segment-exact learn-predict separation, session-2 rank 1) was pre-registered and REJECTED by its own leakage canary before any holdout run (Exp 4: paired pixel-neighbour AUC 1.000 \u2014 label-encoding by construction). It is excluded, not untested. The submitted-candidate lane therefore never used it."
+        },
+        {
+            "id": "L-04",
+            "item": "The session-2 candidate was blocked by the literal 3-px overlap flag. Session 3 proved the literal rule unsatisfiable for any nonzero submission (IR-53-26) and released a new candidate under the operative gate (mutual-overlap test, validated against the known duplicate; L-16). The literal flags are still reported unchanged, and the protocol owner has not yet ruled on the interpretation."
+        },
+        {
+            "id": "L-05",
+            "item": "Portal [0,1] rejection: the template validator (S7, scripts/validate_submission.py docstring) records a real platform rejection caused by 3,061 NaN px inside the sample's valid region. That cause is owner-documented, not independently verified. Our primary file has no NaN inside the footprint and passes the template validator. A zeros-outside fallback was rejected as non-compliant with 'outside bounds null or nan' (S1)."
+        },
+        {
+            "id": "L-06",
+            "item": "Data was pulled from a mirror (Dropbox links in the template bridge). Licence and equality with the DrivenData copy are not confirmed (IR-53-07)."
+        },
+        {
+            "id": "L-07",
+            "item": "The 0.2778 file is not linked to a leaderboard receipt. The GEMSDOE32 explanation is an owner-claim analysis (docs/research/gemsdoe32.md), not a verified result."
+        },
+        {
+            "id": "L-08",
+            "item": "Wall-clock time was not logged precisely; the 2-hour guardrail was likely exceeded (disclosed). Exp 2 was re-run once on a corrected footprint (IR-53-05)."
+        },
+        {
+            "id": "L-09",
+            "item": "Fold CIs use five folds (t, df 4). They are wide (about \u00b10.007 at q=0.02), so differences of ~0.001 between arms are not resolved."
+        },
+        {
+            "id": "L-10",
+            "item": "Protocol deviation: this lane built its own copies of the validator (now deleted, replaced by the template's scripts/validate_submission.py) and of the writer and metric (src/gems53/core.py). The shared template's src/submission_io.py and scripts/validate_submission.py are the reference. Reconciliation of core.py to the template is not finished (remaining work)."
+        },
+        {
+            "id": "L-11",
+            "item": "Session 2 used 2 of 3 budgeted experiments (E4 canary of H1/H2 and the leak-free audit; E5 holdout of H2 vs bands); E1 and E2 were re-run as reproduction checks; H3 was not run. Session 3 used 3 of 3 (L-14)."
+        },
+        {
+            "id": "L-12",
+            "item": "No organizer score exists for any file in this repository. Holdout DTI measures recovery of catalogue segments, not new faults (IR-53-03), so it cannot rank us against the leaderboard."
+        },
+        {
+            "id": "L-13",
+            "item": "The competition rasters come from a public GitHub mirror (buffedlizard55-lab/GEMSDOE, data/bridge), not from the login-gated DrivenData data tab. Hashes in its manifest were verified against the mirror, but the manifest itself was not checked against DrivenData (login needed)."
+        },
+        {
+            "id": "L-14",
+            "item": "Session 3 (2026-10-08) used 3 of 3 budgeted experiments: E6 emission-rule sweep, E7 H5 canary + paired holdout, E8 build + gates + publish. H6, H8, H9 and the H7 external-data pipeline were not run."
+        },
+        {
+            "id": "L-15",
+            "item": "H7 (radiometric K/eTh alteration index) needs the USGS GeoDAWN radiometric grids, which are NOT in the 19-band stack. Source verified obtainable (S15/S20, CC0) but the ingestion, mosaicking of the four acquisition blocks, and reprojection to the 100 m EPSG:32611 grid were not done (multi-hour task, outside this session's budget)."
+        },
+        {
+            "id": "L-16",
+            "item": "The operative uniqueness gate (IR-53-26) is a proposed protocol interpretation, not an owner-approved rule change. The literal rule is reported unchanged next to it. Until the owner rules, the 'OK to submit' label on the site rests on the operative gate."
+        },
+        {
+            "id": "L-17",
+            "item": "The E6 score-optimum volume q=0.05 (5% of the footprint, 258,369 dots) is REJECTED by the operative uniqueness gate: it is a mutual near-copy (0.872/0.882) of 12GEMSDOE multiphysics. The published volume q=0.0073 (0.73%, 37,722 dots) is chosen among gate-passing volumes; its pooled HOLDOUT-DTI (0.0343) is statistically tied with q=0.01 (0.0379). All volume choices are proxy-optimal only: the holdout truth is the catalogue (IR-53-03), and the registry's high-scoring files sit at 0.7-2% of the footprint."
+        }
+    ]
 }
